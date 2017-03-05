@@ -1,0 +1,121 @@
+---
+-- @type Quest
+Quest = Quest or class({
+    -- TODO: Defaults...
+    -- id = -1,
+    -- title = 'Missing',
+    -- objective = 'Missing',
+    -- current = 0,
+    -- required = 1,
+    -- npcs = {}
+})
+
+---
+-- @function [parent=#Quest] constructor
+-- @param #number PlayerID
+-- @param #table questData
+function Quest:constructor(PlayerID, questData)
+    self.PlayerID = PlayerID
+    TableMerge(self, questData)
+    for k,v in pairs(self.objectives) do
+        if v.current == nil then
+            v.current = 0
+        end
+    end
+end
+
+function Quest:GetName()
+    return self.name
+end
+
+function Quest:SetQuestGiver(questgiver)
+    self.questgiver = questgiver
+end
+
+function Quest:IsComplete()
+    for k,v in pairs(self.objectives) do
+        if v.current < v.required then
+            return false
+        end
+    end
+    return true
+end
+
+function Quest:ApplyReward(hero)
+    if self.rewards.experience then
+        hero:AddExperience(self.rewards.experience, 0, false, false)
+        SendOverheadEventMessage( hero:GetPlayerOwner(), OVERHEAD_ALERT_XP , hero, self.rewards.experience, nil )
+    end
+end
+
+-- Get reduced data set for client transmission.
+function Quest:GetData()
+    -- Just enough to present client side display.
+    
+    -- (icon) Title
+    -- [current] / [required] [description]
+    
+    local data = {
+        icon = self.icon,
+        title = self.title,
+        objectives = {}
+    }
+    for _,objective in pairs(self.objectives) do
+        local oData = {
+            current = objective.current,
+            required = objective.required,
+            description = objective.description,
+        }
+        table.insert(data.objectives, oData)
+    end
+    return data
+end
+
+-- Get reduced data set for client transmission.
+function Quest:GetStartData()
+    -- Just enough to present client side display.
+    
+    -- (icon) Title
+    -- [current] / [required] [description]
+    
+    local data = {
+        icon = self.icon,
+        title = self.title,
+        start_dialog = self.start.dialog,
+        objectives = {}
+    }
+    for _,objective in pairs(self.objectives) do
+        local oData = {
+            current = objective.current,
+            required = objective.required,
+            description = objective.description,
+            long_description = objective.long_description,
+        }
+        table.insert(data.objectives, oData)
+    end
+    Debug('Quest', inspect(data))
+    return data
+end
+
+function Quest:OnEntityKilled(npc_name)
+    -- Check each objective.
+    for _,objective in pairs(self.objectives) do
+        -- Do nothing if we alredy have required number.
+        if objective.current ~= objective.required then
+            local npcMatch = false
+            for _,npc in pairs(objective.npc) do
+                if npc == npc_name then
+                    npcMatch = true
+                    break
+                end
+            end
+            if npcMatch then
+                objective.current = objective.current + 1
+                QuestService:SendQuestUpdate(self)
+                if self:IsComplete() then
+                    QuestGiver:LightOnEnd(self)
+                end
+            end
+        end
+    end
+end
