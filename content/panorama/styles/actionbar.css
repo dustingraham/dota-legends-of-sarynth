@@ -1,0 +1,144 @@
+.action-bar-container {
+    align:center bottom;
+    width:823px;
+}
+
+.globe-full {
+    vertical-align:bottom;
+    background-position:0 100%;
+    background-repeat: no-repeat;
+    width:100%;
+    height:100%;
+    border-top:1px solid rgba(33,33,33,0.5);
+}
+.globe-health-empty {
+    align:left bottom;
+    border-radius:50%;
+    overflow:clip;
+}
+.globe-health-full {
+    background-image:url("file://{images}/actionbar1/globe_full_RED.png");
+    height:72%;
+}
+
+.globe-mana-empty {
+    align:right bottom;
+    border-radius:50%;
+    overflow:clip;
+}
+.globe-mana-full {
+    background-image:url("file://{images}/actionbar1/globe_full_BLUE.png");
+    height:50%;
+}
+.action-bar-sub-container {
+    align:center bottom;
+    flow-children:up;
+}
+.action-bar {
+    align:center bottom;
+}
+.action-bar-slot {
+    align:center center;
+}
+
+.default-bar-container {
+    margin-left:125px;
+    vertical-align:bottom;
+    transform:translateY(25px);
+}
+
+.default-buff-container {
+    transform:translateX(-250px) translateY(70px);
+}
+
+.default-stats-container {
+    align:left bottom;
+    margin-bottom:280px;
+    margin-left:20px;
+    
+    width:150px;
+    height:75px;
+    
+    border:1px solid #33333366;
+    border-bottom:0;
+    border-right:0;
+    background-color:#222222cc;
+}
+
+/** Experience Bar **/
+/** Three nested items in order to get percentage alignment to work fluidly. */
+.experience-bar-empty {
+    horizontal-align:center;
+}
+.experience-bar-full {
+    vertical-align:center;
+    margin-left:4px;
+    margin-top:2px;
+    background-image:url("file://{images}/actionbar1/experience_bar_full.png");
+    width:50%;
+    height:8px;
+    border-top-right-radius:2px;
+    border-bottom-right-radius:2px;
+    border-right:1px solid rgba(33,33,33,0.5);
+}
+
+
+/* Shifting Tooltip */
+.experience-bar-tooltip-container {
+    horizontal-align:center;
+    width:659px;
+    height:55px;
+    
+    transform:translateY(15px);
+}
+.experience-bar-tooltip {
+    flow-children:down;
+    
+    /* Panorama CSS makes it impossible to use 100%
+    so we get to use maths in javascript for 0 through 567px.
+    Also, to throw another variable, the tooltip will only
+    go to the edge of the top of the angled parts of the bar.
+    This means 0% of tooltip will need to apply to 0% through n%
+    of exp, then track evenly up to max.
+    0% exp = 0% tooltip
+    1.4% exp = 0% tooltip
+    97.6% exp = 100% tooltip
+    100% exp = 100% tooltip
+    */
+    margin-left:567px;
+    
+    /* Slight delay in, no delay out. Prevent flicker for bypass. */
+    transition:opacity 0.1s linear 0.5s;
+    opacity:0.0;
+}
+.experience-bar-tooltip-container:hover .experience-bar-tooltip {
+    transition:opacity 0.1s linear 0s;
+    opacity:1.0;
+}
+.percentage {
+    horizontal-align:center;
+    color:orange;
+    font-size:13px;
+    margin-top:6px;
+}
+.textvalue {
+    horizontal-align:center;
+    color:gray;
+    font-size:11px;
+}
+
+.actionbar-button {
+    align:right bottom;
+    wash-color:#eeeeee;
+}
+.actionbar-button:hover {
+    wash-color:#ffffff;
+}
+#ActionBarEquipment {
+    margin-right:95px;
+    margin-bottom:15px;
+}
+#ActionBarBackpack {
+    margin-right:60px;
+    margin-bottom:3px;
+}

@@ -1,0 +1,15 @@
+<root>
+    <styles>
+        <include src="file://{resources}/styles/boot.css" />
+    </styles>
+    <scripts>
+        <include src="file://{resources}/scripts/libraries/playertables.js" />
+        <include src="file://{resources}/scripts/boot.js" />
+    </scripts>
+    <Panel>
+        <CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/keybinds.xml" />
+        <CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/mainhud.xml" />
+        <CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/containers/container_base.xml" />
+        <CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/character_pick.xml" />
+    </Panel>
+</root>

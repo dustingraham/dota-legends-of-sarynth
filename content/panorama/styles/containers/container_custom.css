@@ -1,0 +1,52 @@
+
+#ItemImage {
+    border-radius:2px;
+}
+
+.item_rarity_junk #ItemImage
+{
+    border:1px solid #999999;
+    box-shadow: inset 0px 0px 5px 0px #99999944;
+}
+
+.item_rarity_quest #ItemImage
+{
+    border:1px solid #ffffb2;
+    box-shadow: inset 0px 0px 5px 0px #ffffb244;
+}
+
+.item_rarity_common #ItemImage
+{
+    border:1px solid #ffffff;
+    box-shadow: inset 0px 0px 5px 0px #ffffff44;
+}
+
+.item_rarity_uncommon #ItemImage
+{
+    border:1px solid #1eff00;
+    box-shadow: inset 0px 0px 5px 0px rgba(30,255,0,0.25);
+}
+
+.item_rarity_rare #ItemImage
+{
+    border:1px solid #0070ff;
+    box-shadow: inset 0px 0px 5px 0px #0070ff44;
+}
+
+.item_rarity_epic #ItemImage
+{
+    border:1px solid #a335ee;
+    box-shadow: inset 0px 0px 5px 0px #a335ee44;
+}
+
+.item_rarity_legendary #ItemImage
+{
+    border:1px solid #ff8000;
+    box-shadow: inset 0px 0px 5px 0px #ff800044;
+}
+
+.no_item #ItemImage
+{
+    border:0px solid #000000;
+    box-shadow:none;
+}

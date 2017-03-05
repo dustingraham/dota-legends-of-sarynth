@@ -1,0 +1,16 @@
+<root>
+    <styles>
+        <include src="s2r://panorama/styles/dotastyles.vcss_c" />
+        <include src="s2r://panorama/styles/hud/dota_hud_health_mana.vcss_c" />
+
+        <include src="file://{resources}/styles/experience_bar.css" />
+    </styles>
+    <scripts>
+        <include src="file://{resources}/scripts/experience_bar.js" />
+    </scripts>
+    <Panel class="progress-container" hittest="false" hittestchildren="false">
+        <Panel class="progress-bar">
+            <Panel class="progress" id="ExperienceCurrent"></Panel>
+        </Panel>
+    </Panel>
+</root>

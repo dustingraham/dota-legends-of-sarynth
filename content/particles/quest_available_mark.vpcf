@@ -1,0 +1,68 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+{
+	_class = "CParticleSystemDefinition"
+	m_Operators = 
+	[
+		{
+			_class = "C_OP_OscillateVectorSimple"
+			m_Rate = [ 0.0, 0.0, 10.0 ]
+			m_Frequency = [ 1.0, 1.0, 0.5 ]
+		},
+		{
+			_class = "C_OP_EndCapTimedDecay"
+			m_flDecayTime = 2.0
+		},
+		{
+			_class = "C_OP_FadeOutSimple"
+			m_nOpEndCapState = 1
+		},
+		{
+			_class = "C_OP_PositionLock"
+		},
+	]
+	m_Renderers = 
+	[
+		{
+			_class = "C_OP_RenderSprites"
+			m_hTexture = resource:"materials/particle/ping_world.vtex"
+			m_nOrientationType = 1
+			m_bOutline = true
+			m_OutlineColor = [ 255, 195, 0, 255 ]
+			m_nOutlineAlpha = 143
+			m_flOutlineStart0 = 0.7
+			m_flOutlineStart1 = 0.5
+			m_flOutlineEnd0 = 0.8
+			m_flOutlineEnd1 = 1.0
+			m_bAdditive = true
+		},
+	]
+	m_Initializers = 
+	[
+		{
+			_class = "C_INIT_PositionOffset"
+			m_OffsetMin = [ -10.0, -10.0, 300.0 ]
+			m_OffsetMax = [ -10.0, -10.0, 300.0 ]
+		},
+		{
+			_class = "C_INIT_RandomColor"
+			m_ColorMin = [ 255, 215, 0, 255 ]
+			m_ColorMax = [ 255, 215, 0, 255 ]
+		},
+		{
+			_class = "C_INIT_RandomScalar"
+			m_flMin = 33.0
+			m_flMax = 33.0
+		},
+		{
+			_class = "C_INIT_CreateWithinSphere"
+		},
+	]
+	m_Emitters = 
+	[
+		{
+			_class = "C_OP_InstantaneousEmitter"
+			m_nParticlesToEmit = 1
+			m_nScaleControlPointField = -1
+		},
+	]
+}

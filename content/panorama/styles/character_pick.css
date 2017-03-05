@@ -1,0 +1,135 @@
+/** CUSTOM CHARACTER SELECT SCREEN */
+
+.CharacterPickMainPanel
+{
+    width: 100%;
+    height: 100%;
+}
+
+#LoadingOverlay {
+    height:100%;
+    width:100%;
+    z-index:2;
+    
+    background-color:#000000;
+    
+    transition-property: opacity;
+    transition-duration: 0.2s;
+    opacity:1.0;
+}
+#CharacterPanelContainer
+{
+    height:100%;
+    width:100%;
+    
+    transition-property: opacity;
+    transition-duration: 0.45s;
+    opacity:1.0;
+}
+
+/** BACKGROUND **/
+
+#BackgroundScene
+{
+    width:100%;
+    height:100%;
+    
+    background-color: rgb(29, 39, 46);
+}
+
+#TopGradient
+{
+    width: 100%;
+    height: 150px;
+    
+    background-color: gradient( linear, 0% 0%, 0% 100%, from( #000000 ), to( #00000000 ) );
+}
+
+/** CHARACTER PANELS **/
+
+.CharacterPanel {
+    width: 50%;
+    height: 100%;
+    
+    wash-color: #333333;
+    saturation: 0.5;
+    blur: gaussian(1, 1, 1);
+}
+.CharacterPanel.Right {
+    align: right center;
+}
+.CharacterPanel:hover {
+    sound: "General.Buttonrollover";
+}
+
+.Ray
+{
+    width: 100%;
+    height: 100%;
+    
+    transition-property: opacity;
+    transition-duration: 0.1s;
+    opacity:0.0;
+}
+
+.TopText,
+.CharacterName
+{
+    width: 100%;
+    
+    transform: translateY(10px);
+    transition-property: transform;
+    transition-duration: 0.1s;
+    
+    horizontal-align: center;
+    vertical-align: bottom;
+    text-align: center;
+    
+    font-family: Radiance, FZLanTingHei-R-GBK, TH Sarabun New, Gulim,MingLiU;
+    font-size: 72px;
+    font-weight: bold;
+    letter-spacing: 6px;
+    color: white;
+    text-shadow: 1px 1px 4px 1.0 #444444;
+}
+.TopText {
+    vertical-align:top;
+}
+
+.Character
+{
+    width: 100%;
+    height: 100%;
+    
+    transform: translateY(10px);
+    transition-property: transform;
+    transition-duration: 0.1s;
+}
+
+/** ANIMATIONS **/
+
+.CharacterPanel:hover {
+    wash-color:none;
+    saturation: 1.0;
+    blur:none;
+}
+
+.CharacterPanel:hover .CharacterName {
+    transform: translateY(0px);
+}
+
+.CharacterPanel:hover .Character
+{
+    transform: translateY(0px);
+}
+.CharacterPanel:hover .Ray {
+    opacity: 1.0;
+    transform: translateY(0px);
+}
+
+/** MISC **/
+
+.PauseBackground
+{
+    saturation: 0.3;
+}

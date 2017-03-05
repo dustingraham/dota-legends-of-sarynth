@@ -1,0 +1,29 @@
+<root>
+    <styles>
+        <include src="file://{resources}/styles/character_pick.css" />
+    </styles>
+    <scripts>
+        <include src="file://{resources}/scripts/character_pick.js" />
+    </scripts>
+    <Panel class="CharacterPickMainPanel" hittest="false">
+        <Panel id="LoadingOverlay" />
+        <Panel id="CharacterPanelContainer" hittest="false">
+            <DOTAScenePanel id="BackgroundScene" map="maps/backgrounds/dashboard_test.vmap"
+                camera="shot_cameraC" always-cache-composition-layer="true"/>
+            <Panel id="TopGradient" hittest="false"/>
+            <Button class="CharacterPanel" onactivate="CharacterPick('dragon_knight')">
+                <DOTAScenePanel class="Ray" hittest="false" map="scenes/loadout_preview_rays" camera="camera_1" />
+                <DOTAScenePanel class="Character" unit="npc_dota_hero_dragon_knight"
+                    antialias="true" particleonly="false" always-cache-composition-layer="true"/>
+                <Label class="CharacterName" text="Knight" />
+            </Button>
+            <Button class="CharacterPanel Right" onactivate="CharacterPick('invoker')">
+                <DOTAScenePanel class="Ray" hittest="false" map="scenes/loadout_preview_rays" camera="camera_1" />
+                <DOTAScenePanel class="Character" unit="npc_dota_hero_invoker"
+                    antialias="true" particleonly="false" always-cache-composition-layer="true" />
+                <Label class="CharacterName" text="Mage" />
+            </Button>
+            <Label class="TopText" text="Choose your Character" />
+        </Panel>
+    </Panel>
+</root>

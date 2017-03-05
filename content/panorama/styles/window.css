@@ -1,0 +1,120 @@
+
+
+.quest-dialog {
+    align:center center;
+    width:447px;
+    height:480px;
+    
+    opacity:1.0;
+    transform:translateX(0px) translateY(0px);
+    
+    transition-property:transform,opacity;
+    transition-duration:0.05s;
+    transition-timing-function:ease-in;
+}
+.quest-dialog.hidden {
+    /* Arhowk didn't like... opacity is good, but consider removing xy translate. */
+    /*transform:translateX(15px) translateY(-10px);*/
+    opacity:0.0;
+}
+.quest-dialog-primary {
+    background-image:url("file://{images}/window/window.png");
+    height:375px;
+    width:427px;
+    margin-top:30px;
+    margin-left:20px;
+    padding-top:50px;
+    padding-left:25px;
+    padding-right:25px;
+    flow-children:down;
+}
+
+.quest-dialog-header {
+    transform:translateX(37px) translateY(3px);
+}
+.quest-dialog-header Label {
+    margin-left:60px;
+    margin-top:3px;
+    
+    color:#ffffff;
+    vertical-align: middle;
+    font-weight:bold;
+    font-size:20px;
+}
+
+.quest-dialog-primary .text {
+    color:#ffffff;
+    font-size:14px;
+}
+
+
+.objective {
+    margin-top:10px;
+    color:gold;
+    font-weight:bold;
+    font-size:18px;
+}
+.objectives {
+    margin-top:5px;
+    margin-left:5px;
+    color:#ffffff;
+    font-size:14px;
+}
+
+.reward-item {
+    background-image:url("file://{images}/window/window_note.png");
+    width:377px;
+    height:90px;
+    margin-top:10px;
+    margin-left:-4px;
+    margin-right:-4px;
+}
+.justifier { flow-children:right; align:center center; }
+.item-slot {
+    margin-left:5px;
+    vertical-align:center;
+    overflow:clip;
+}
+#myitem {
+    align:center center;
+    width:44px;
+}
+.quest-dialog-footer {
+    vertical-align:bottom;
+    background-image:url("file://{images}/window/window.png");
+    background-position: center bottom;
+    /*margin-bottom:-30px;*/
+    /*transform:translateY(120px);*/
+    margin-left:21px;
+    height:76px;
+    width:427px;
+    flow-children:right;
+}
+.AspectRatio16x10 .quest-dialog-footer,
+.AspectRatio4x3 .quest-dialog-footer {
+    margin-left:20px;
+    height:76px;
+}
+.button {
+    wash-color:#dddddd;
+}
+.button:hover {
+    wash-color:#ffffff;
+}
+.button:active {
+    wash-color:#aaaaaa;
+}
+.button-yes {
+    margin-left:55px;
+}
+.button-no {
+    margin-left:30px;
+}
+.button Label {
+    align:center center;
+    color:#eeeeee;
+    font-size:22px;
+}
+.button-yes Label {
+    transform:translateX(3px);
+}

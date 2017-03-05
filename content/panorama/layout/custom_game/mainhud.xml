@@ -1,0 +1,141 @@
+<root>
+    <styles>
+        <include src="file://{resources}/styles/mainhud.css" />
+        <include src="file://{resources}/styles/window.css" />
+        <include src="file://{resources}/styles/actionbar.css" />
+    </styles>
+    <scripts>
+        <include src="file://{resources}/scripts/mainhud.js" />
+        <include src="file://{resources}/scripts/actionbar.js" />
+        <include src="file://{resources}/scripts/right_button.js" />
+    </scripts>
+    <snippets>
+        <!-- Quest Progress -->
+        <snippet name="QuestProgress">
+            <Panel class="quest-progress-block">
+                <Panel class="quest-block-title">
+                    <Image class="quest-progress-icon progress" src="file://{images}/quest/quest_icon_progress.png" />
+                    <Image class="quest-progress-icon complete" src="file://{images}/quest/quest_icon_complete.png" />
+                    <Label id="Title" class="quest-block-description" />
+                </Panel>
+                <Label id="Progress" class="quest-block-text" html="true" />
+            </Panel>
+        </snippet>
+        <snippet name="ActionBarButton">
+            <Image class="action-bar-slot" src="file://{images}/actionbar1/action_bar_slot.png">
+                <DOTAAbilityImage class="action-bar-ability" abilityname="dragon_knight_custom_1" />
+            </Image>
+        </snippet>
+    </snippets>
+    <Panel class="mainhud" hittest="false">
+        
+        <Image style="opacity:0;" src="file://{images}/items/amulet.png" />
+        
+        <!-- Unit Frame -->
+        <Image id="HeroUnitFrame" class="unitframe" src="file://{images}/unitframes/big_empty.png" hittest="true">
+            <Panel class="hero">
+                <DOTAHeroMovie id="HeroPortrait"/>
+                <Image class="overlay" src="file://{images}/unitframes/big_overlay.png"/>
+            </Panel>
+            <Panel id="HealthBar" class="health" />
+            <Panel id="ManaBar" class="mana" />
+            <Image class="level" src="file://{images}/unitframes/big_level.png">
+                <Label id="HeroLevel" class="level-text" />
+            </Image>
+            <Image class="point" src="file://{images}/unitframes/big_point.png">
+                <Image class="point-inner" id="PointOne" src="file://{images}/unitframes/big_point_inner.png"/>
+            </Image>
+            <Image class="point point2" src="file://{images}/unitframes/big_point.png">
+                <Image class="point-inner" id="PointTwo" src="file://{images}/unitframes/big_point_inner.png"/>
+            </Image>
+            <Image class="point point3" src="file://{images}/unitframes/big_point.png">
+                <Image class="point-inner" id="PointThree" src="file://{images}/unitframes/big_point_inner.png"/>
+            </Image>
+        </Image>
+        
+        <Panel id="ActionBar" class="action-bar-container">
+            <!-- Health Globe -->
+            <Image class="globe-health-empty" src="file://{images}/actionbar1/globe_empty.png">
+                <Panel id="GlobeHealth" class="globe-full globe-health-full" />
+            </Image>
+            <!-- Mana Globe -->
+            <Image class="globe-mana-empty" src="file://{images}/actionbar1/globe_empty.png">
+                <Panel id="GlobeMana" class="globe-full globe-mana-full" />
+            </Image>
+            
+            <!-- Main Action Bar -->
+            <Panel class="action-bar-sub-container">
+                <!-- Action Bar Buttons are created via snippets. -->
+                <Image id="ActionBar" class="action-bar" src="file://{images}/actionbar1/action_bar_main.png" />
+                <!-- Experience Bar -->
+                <Image class="experience-bar-empty" src="file://{images}/actionbar1/experience_bar_empty.png">
+                    <Panel id="ExperienceBar" class="experience-bar-full" />
+                </Image>
+                <Panel class="experience-bar-tooltip-container">
+                    <Image id="ExperienceTooltip" class="experience-bar-tooltip" src="file://{images}/actionbar1/experience_bar_tooltip.png">
+                        <Label id="ExperiencePercent" class="percentage" text="62%"/>
+                        <Label id="ExperienceValue" class="textvalue" text="625 / 1000 XP"/>
+                    </Image>
+                </Panel>
+            </Panel>
+            <Button id="ActionBarEquipment" class="actionbar-button" onactivate="ActionBarButton('customEquipment')">
+                <Image src="file://{images}/actionbar1/action_bar_button_equipment.png" />
+            </Button>
+            <Button id="ActionBarBackpack" class="actionbar-button" onactivate="ActionBarButton('customInventory')">
+                <Image src="file://{images}/actionbar1/action_bar_button_backpack.png" />
+            </Button>
+            <Panel id="DefaultBuffBar" class="default-buff-container" hittest="false" />
+            <Panel id="DefaultBar" class="default-bar-container" hittest="false" />
+        </Panel>
+        
+        <!-- Default Stats Block -->
+        <Panel id="DefaultStatsBlock" class="default-stats-container" />
+        
+        <!-- Testing Quest Progress -->
+        <Panel id="QuestProgressContainer" class="quest-progress-container">
+            <Label class="quest-progress-title" text=" Quests " />
+            <Panel id="QuestBlocks" class="quest-progress-blocks" />
+        </Panel>
+        
+        <!-- To become a snippet -->
+        <!-- Quest Dialog -->
+        <Panel id="QuestDialog" class="quest-dialog hidden">
+            <Panel class="quest-dialog-primary">
+                <Label id="MainDialog" class="text" html="true" />
+                <Label class="objective" text="Objective:"/>
+                <Label id="MainObjectives" class="objectives" html="true" />
+                <Label class="objective" text="Reward:"/>
+                <Label id="MainRewards" class="objectives" html="true" />
+                <Panel class="reward-item" style="visibility:collapse;">
+                    <Panel class="justifier">
+                        <Image class="item-slot" src="file://{images}/window/item_slot_flat.png">
+                            <DOTAItemImage id="myitem" itemname="item_ring_of_health" />
+                        </Image>
+                        <Image class="item-slot" src="file://{images}/window/item_slot_flat.png">
+                            <DOTAItemImage id="myitem" itemname="item_poor_mans_shield" />
+                        </Image>
+                        <Image class="item-slot" src="file://{images}/window/item_slot_flat.png">
+                            <DOTAItemImage id="myitem" itemname="item_magic_stick" />
+                        </Image>
+                    </Panel>
+                </Panel>
+            </Panel>
+            <Image class="quest-dialog-header" src="file://{images}/window/header_PURPLE.png">
+                <Label id="QuestMainTitle" class="quest-title" text="QUEST"/>
+            </Image>
+            <Panel class="quest-dialog-footer">
+                <Button class="button button-yes" onactivate="QuestDialog(true)">
+                    <Image src="file://{images}/window/button_green.png">
+                        <Label class="yes" text="Accept"/>
+                    </Image>
+                </Button>
+                <Button class="button button-no" onactivate="QuestDialog(false)">
+                    <Image src="file://{images}/window/button_red.png">
+                        <Label class="yes" text="Decline"/>
+                    </Image>
+                </Button>
+            </Panel>
+            <Image class="quest-dialog-icon" src="file://{images}/window/window_icon_quest.png"/>
+        </Panel>
+    </Panel>
+</root>
