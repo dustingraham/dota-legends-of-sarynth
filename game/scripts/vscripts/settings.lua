@@ -19,7 +19,7 @@ DEBUG_PRINT_SECTIONS = {
     Http              = true,
     CharacterPick     = true,
     PlayerService     = true,
-    
+    CustomMap         = true,
     QuestService      = true,
     QuestGiver        = true,
     OrderFilter       = true,

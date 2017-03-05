@@ -37,6 +37,8 @@ function Boot:Activate()
     ListenToGameEvent('player_connect_full', Dynamic_Wrap(Boot, 'OnConnectFull'), self)
     ListenToGameEvent('game_rules_state_change', Dynamic_Wrap(Boot, 'OnGameRulesStateChange'), self)
     
+    CustomMap:Activate()
+    
     Boot:InitGameRules()
     Boot:InitGameModeEntity()
 end
@@ -168,59 +170,24 @@ function Boot:OnGameRulesStateChange()
 --        Filters:Activate()
 --        NpcInteraction:Activate()
         
-        local key = 'Setup_'..GetMapName()
-        if Boot[key] then
-            Boot[key](self)
-        else
-            Debug('Boot', 'Routine missing: ', key)
-        end
+        Event:Trigger('OnStateGameSetup')
+        
+--        local key = 'Setup_'..GetMapName()
+--        if Boot[key] then
+--            Boot[key](self)
+--        else
+--            Debug('Boot', 'Routine missing: ', key)
+--        end
     end
     
     if GameRules:State_Get() == DOTA_GAMERULES_STATE_GAME_IN_PROGRESS then
-        local key = 'InGame_'..GetMapName()
-        if Boot[key] then
-            Boot[key](self)
-        else
-            Debug('Boot', 'Routine missing: ', key)
-        end
-    end
-end
-
-function Boot:Setup_testmap()
-    Debug('Boot', 'Test Map Setup')
-end
-
-function Boot:Setup_introduction()
-    Debug('Boot', 'Introduction Setup')
-    
---    Reporter:Init()
-end
-
-function Boot:InGame_testmap()
-    Debug('Boot', 'Test Map In Game')
-    
-    -- So we can auto-pick...
-    ListenToGameEvent('npc_spawned', Dynamic_Wrap(Boot, 'OnNpcSpawned_testmap'), self)
-end
-
-function Boot:InGame_introduction()
-    Debug('Boot', 'Introduction In Game')
-    
-    -- All players have loaded. Play a noise, and start some spawning while they pick.
---    EmitGlobalSound('Hero_Omniknight.Pick')
-end
-
-function Boot:OnNpcSpawned_testmap(event)
-    local npc = EntIndexToHScript(event.entindex)
-    
-    if npc:IsRealHero() and npc.bFirstSpawned == nil then
-        Debug('Boot', 'OnNpcSpawned FirstSpawn', npc:GetUnitName())
-        npc.bFirstSpawned = true
-        
-        if not Boot.allPick then
-            Boot.allPick = true
---            CharacterPick:TestMapPickAll(npc)
-        end
+        Event:Trigger('OnStateInGame')
+--        local key = 'InGame_'..GetMapName()
+--        if Boot[key] then
+--            Boot[key](self)
+--        else
+--            Debug('Boot', 'Routine missing: ', key)
+--        end
     end
 end
 
