@@ -26,6 +26,7 @@
 *.vpk
 
 settings.kv
+private.kv
 
 # Map overviews
 content/materials/overviews/*

@@ -1,3 +1,20 @@
 "AddonInfo"
 {
+    "TeamCount"      "2"
+    "maps"           "beginnings"
+    "IsPlayable"     "1"
+    "introduction"
+    {
+        "MaxPlayers" "1"
+    }
+    
+    "Default_Keys"
+    {
+        "01"
+        {
+            "Key"       "N"
+            "Command"   "+CustomGameInventory"
+            "Name"      "Inventory"
+        }
+    }
 }
