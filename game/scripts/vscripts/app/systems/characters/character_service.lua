@@ -2,20 +2,23 @@
 --@type CharacterService
 CharacterService = CharacterService or class({})
 --[[
+
     This is probably a bad class, but for now, putting this here...
+
 ]]
-function CharacterService:Init()
+function CharacterService:Activate()
     ListenToGameEvent('npc_spawned', Dynamic_Wrap(CharacterService, 'OnNPCSpawned'), self)
     ListenToGameEvent('entity_killed', Dynamic_Wrap(CharacterService, 'OnEntityKilled'), self)
     ListenToGameEvent('dota_player_gained_level', Dynamic_Wrap(CharacterService, 'OnPlayerLevelUp'), self)
-    
-    Boot.mode:SetModifyExperienceFilter(Dynamic_Wrap(CharacterService, 'ExperienceFilter'), CharacterService)
-    ListenToGameEvent('entity_hurt', Dynamic_Wrap(CharacterService, 'OnEntityHurt'), CharacterService)
-    
+    ListenToGameEvent('entity_hurt', Dynamic_Wrap(CharacterService, 'OnEntityHurt'), self)
+
     CustomGameEventManager:RegisterListener('inventory_open', Dynamic_Wrap(CharacterService, 'OnInventoryOpen'))
     CustomGameEventManager:RegisterListener('inventory_close', Dynamic_Wrap(CharacterService, 'OnInventoryClose'))
     CustomGameEventManager:RegisterListener('inventory_toggle', Dynamic_Wrap(CharacterService, 'OnInventoryToggle'))
-    
+
+    -- Boot.mode:SetModifyExperienceFilter(Dynamic_Wrap(CharacterService, 'ExperienceFilter'), CharacterService)
+    Filters:OnModifyExperienceFilter(Dynamic_Wrap(CharacterService, 'ExperienceFilter'), CharacterService)
+
     Event:Listen('HeroItemAcquire', Dynamic_Wrap(CharacterService, 'OnHeroItemAcquire'), CharacterService)
     Event:Listen('HeroPick', Dynamic_Wrap(CharacterService, 'OnHeroPick'), CharacterService)
     Event:Listen('HeroDeath', Dynamic_Wrap(CharacterService, 'OnHeroDeath'), CharacterService)
@@ -23,7 +26,6 @@ end
 
 function CharacterService:OnNPCSpawned(event)
     local npc = EntIndexToHScript(event.entindex)
-    
     if npc:IsRealHero() and npc:GetName() == DUMMY_HERO then
         npc:AddNoDraw()
         npc:AddNewModifier(npc, nil, 'character_hidden', {})
@@ -34,50 +36,50 @@ end
 function CharacterService:OnEntityHurt(event)
     if not event.entindex_attacker then return end
     local attacker = EntIndexToHScript(event.entindex_attacker);
-    
+
     -- IsRealHero to ignore illusions.
     if not attacker:IsHero() then return end
-    
+
     local npc = EntIndexToHScript(event.entindex_killed);
-    
+
     if not npc.originalExp then
         npc.originalExp = npc:GetDeathXP()
         npc.expModifier = 1.00
     end
-    
+
     local scale = {
         [-3] = 1.50,
         [-2] = 1.25,
         [-1] = 1.10,
-         [0] = 1.00,
-         [1] = 0.50,
-         [2] = 0.25,
-         [3] = 0.10,
-         [4] = 0.00
+        [0] = 1.00,
+        [1] = 0.50,
+        [2] = 0.25,
+        [3] = 0.10,
+        [4] = 0.00
     }
     local modifier = scale[Clamp(attacker:GetLevel() - npc:GetLevel(), -3, 4)]
-    
+
     if npc.expModifier ~= modifier then
         -- Debug('CharacterService', 'Exp Modifier: ', modifier)
         npc.expModifier = modifier
         npc:SetDeathXP(npc.originalExp * modifier)
     end
-    
+
     -- This might be troublesome...
     attacker.lastAttacked = npc
 end
 function CharacterService:ExperienceFilter(params)
     -- Debug('CharacterService', 'OnExperienceFilter')
-    
+
     local player = PlayerResource:GetPlayer( params.player_id_const )
     local hero = PlayerResource:GetSelectedHeroEntity(params.player_id_const)
-    
+
     -- This might be troublesome...
     local npc = hero.lastAttacked
-    
+
     -- If Setting...
     SendOverheadEventMessage( player, OVERHEAD_ALERT_XP , npc, params.experience, nil )
-    
+
     return true
 end
 
@@ -88,7 +90,7 @@ function CharacterService:OnEntityKilled(event)
     if event.entindex_attacker ~= nil then
         attacker = EntIndexToHScript(event.entindex_attacker);
     end
-    
+
     if killed:IsRealHero() then
         -- Bug, neutral kill.
         killed:SetTimeUntilRespawn(5)
@@ -97,7 +99,7 @@ function CharacterService:OnEntityKilled(event)
             killer = attacker,
         })
     end
-    
+
     -- IsRealHero to ignore illusions.
     if attacker and attacker:IsHero() then
         Event:Trigger('HeroKilledCreature', {
@@ -114,7 +116,7 @@ end
 function CharacterService:OnPlayerLevelUp(event)
     local hero = HeroList:GetHero(event.player)
     hero:SetAbilityPoints(0)
-    
+
     for i = 0, 2 do
         -- Temp Spell Levels
         -- 0 : 1 4 7 10
@@ -124,9 +126,9 @@ function CharacterService:OnPlayerLevelUp(event)
             math.min(3, math.floor((event.level + 2- i) / 3))
         )
     end
-    
+
     if hero.isInitialLevel then return end
-    
+
     if not DEBUG_SKIP_HTTP_SAVE then
         Debug('CharacterService', 'Saving for: ', hero:GetName())
         Http:Save({
@@ -137,7 +139,7 @@ function CharacterService:OnPlayerLevelUp(event)
             Debug('CharacterService', 'Successfully saved!')
         end)
     end
-    
+
     Event:Trigger('HeroLevelUp', {
         hero = hero
     })
@@ -190,7 +192,7 @@ function CharacterService:OnHeroPick(e, event)
     })
     hero.customEquipment:Open(0)
     Containers:SetDefaultInventory(hero, hero.customInventory)
-    
+
     -- Items for testing.
     if IsInToolsMode() then TestTest(hero) end
 end
@@ -199,7 +201,7 @@ function CharacterService:ContainerItemFilter(item, slot)
     -- self == container
     if not item.alreadyKnown then
         item.alreadyKnown = true
-        
+
         Event:Trigger('HeroItemAcquire', {
             hero = self:GetEntity(),
             item = item,
@@ -247,6 +249,11 @@ function CharacterService:OnHeroItemAcquire(e, event)
         c:Open(event.hero:GetPlayerOwnerID())
         c.hasOpened = true
     end
+end
+
+if not CharacterService.initialized then
+    CharacterService.initialized = true
+    Event:Listen('Activate', Dynamic_Wrap(CharacterService, 'Activate'), CharacterService)
 end
 
 LinkLuaModifier('character_hidden', 'app/systems/characters/modifiers/character_hidden', LUA_MODIFIER_MOTION_NONE)

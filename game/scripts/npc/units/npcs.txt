@@ -1,0 +1,37 @@
+// Units File
+"DOTAUnits"
+{
+    "Version"    "1"
+    
+    "npc_quest_town"
+    {
+        "BaseClass"             "npc_dota_creature"
+        "Model"                 "models/props_gameplay/shopkeeper_fountain/shopkeeper_fountain.vmdl"
+        "ModelScale"            "0.9"
+        "Level"                 "0"
+        "HealthBarOffset"       "220"
+        "Ability1"               "passive_npc"
+    }
+    
+    "npc_quest_woodsman"
+    {
+        "BaseClass"             "npc_dota_creature"
+        "Model"                 "models/heroes/shopkeeper/shopkeeper.vmdl"
+        "ModelScale"            "0.9"
+        "Level"                 "0"
+        "HealthBarOffset"       "220"
+        "Ability1"               "passive_npc"
+        
+        "VisionDaytimeRange"        "0"
+        "VisionNighttimeRange"      "0"
+    }
+    "npc_questgiver_kobold"
+    {
+        "BaseClass"             "npc_dota_creature"
+        "Model"                 "models/props_gameplay/shopkeeper_fountain/shopkeeper_fountain.vmdl"
+        "ModelScale"            "0.9"
+        "Level"                 "0"
+        "HealthBarOffset"       "220"
+        "Ability1"               "passive_npc"
+    }
+}

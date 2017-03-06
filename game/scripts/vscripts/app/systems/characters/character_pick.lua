@@ -1,27 +1,32 @@
 CharacterPick = CharacterPick or class({})
 
 function CharacterPick:TestMapPickAll(heroReal)
-    print(heroReal:GetUnitName())
-    print(heroReal:GetPlayerOwnerID())
+    Debug('CharacterPick', 'Picking all for test map.')
     
     -- This gets purged after the first create...
     local id = heroReal:GetPlayerOwnerID()
     
+    -- PlayerResource Replace/Select is not available quite yet...
     Timers:CreateTimer(0.01, function()
         CharacterPick:CreateCustomHeroForPlayer({
             ['PlayerID'] = id,
             ['character'] = 'dragon_knight',
             ['create'] = false
         })
-        -- CharacterPick:CreateCustomHeroForPlayer({
-        --     ['PlayerID'] = id,
-        --     ['character'] = 'invoker',
-        --     ['create'] = true
-        -- })
+        for _,character in pairs({
+            'omniknight', -- Paladin
+            'bounty_hunter', -- Rogue
+            'windrunner', -- Ranger
+            'invoker', -- Mage
+            'warlock', -- Sorcerer     
+        }) do
+            CharacterPick:CreateCustomHeroForPlayer({
+                ['PlayerID'] = id,
+                ['character'] = character,
+                ['create'] = true
+            })
+        end
     end)
-    
-    Debug('CharacterPick', 'Picking all for test map.')
-    
 end
 
 function CharacterPick:OnCharacterPick(event)
@@ -39,11 +44,10 @@ function CharacterPick:CreateCustomHeroForPlayer(event)
     local hero
     local heroName = 'npc_dota_hero_'..event.character
     if event.create then
-        -- Not working...
         Debug('CharacterPick', 'Create Hero', heroName)
         local player = PlayerResource:GetPlayer(event.PlayerID)
         hero = CreateHeroForPlayer(heroName, player)
-        hero:SetControllableByPlayer(player)
+        hero:SetControllableByPlayer(event.PlayerID, false)
         -- hero:SetOwner(player)
     else
         Debug('CharacterPick', 'Replace Hero', heroName)
@@ -119,7 +123,7 @@ function CharacterPick:CreateCustomHeroForPlayer(event)
             steamId64 = tostring(PlayerResource:GetSteamID(event.PlayerID)),
             hero = hero:GetName(),
         }, function(data)
-            print('Player Loaded')
+            Debug('CharacterPick', 'Player Loaded')
             DeepPrintTable(data)
             if data.experience then
                 local hero = PlayerResource:GetSelectedHeroEntity(event.PlayerID)
@@ -131,11 +135,9 @@ function CharacterPick:CreateCustomHeroForPlayer(event)
     end
     
     Event:Trigger('HeroPick', {
-        hero = hero
+        hero = hero,
+        PlayerID = event.PlayerID
     })
-    
-    -- Initialize Quests
-    QuestService:CheckForQuestsAvailable(event.PlayerID)
 end
 
 function CharacterPick:AddCosmetic(hero, thing)

@@ -1,0 +1,234 @@
+---
+--@type QuestService
+QuestService = QuestService or class({}, {
+    playerQuests = {},
+    playerCompleted = {},
+})
+
+function QuestService:Activate()
+    ListenToGameEvent('entity_killed', Dynamic_Wrap(QuestService, 'OnEntityKilled'), QuestService)
+    Event:Listen('HeroPick', Dynamic_Wrap(QuestService, 'OnHeroPick'), QuestService)
+end
+
+function QuestService:OnHeroPick(e, event)
+    -- Initialize Quests
+    QuestService:CheckForQuestsAvailable(event.PlayerID)
+end
+
+function QuestService:OnQuestStart(QuestID, PlayerID)
+    local questData = QuestRepository:GetQuest(QuestID)
+    local quest = Quest(PlayerID, questData)
+    
+    local key = 'player_'..PlayerID..'_quests'
+    if QuestService.playerQuests[key] == nil then
+        QuestService.playerQuests[key] = {}
+    end
+    QuestService.playerQuests[key][QuestID] = quest
+    
+    PlayerTables:SetTableValue(key, QuestID, quest:GetData())
+    
+    Debug('QuestService', 'Quest Started: ', quest:GetName())
+    
+    local hero = PlayerResource:GetSelectedHeroEntity(PlayerID)
+    Event:Trigger('HeroStartedQuest', {
+        hero = hero,
+        quest = quest,
+    })
+end
+
+function QuestService:SendQuestUpdate(quest)
+    local key = 'player_'..quest.PlayerID..'_quests'
+    PlayerTables:SetTableValue(key, quest.id, quest:GetData())
+end
+
+function QuestService:CheckIfCompleted(QuestID, PlayerID)
+    local key = 'player_'..PlayerID..'_quests'
+    
+    if QuestService.playerCompleted[key] == nil then return false end
+    for id,name in pairs(QuestService.playerCompleted[key]) do
+        if QuestID == id or QuestID == name then return true end
+    end
+    
+    return false
+end
+
+function QuestService:OnQuestComplete(QuestID, PlayerID)
+    -- Reward and delete quest.
+    -- Track in history of some sort.
+    local key = 'player_'..PlayerID..'_quests'
+    PlayerTables:DeleteTableKey(key, QuestID)
+    
+    local quest = QuestService.playerQuests[key][QuestID]
+    -- local QuestName = QuestService.playerQuests[key][QuestID].name
+    QuestService.playerQuests[key][QuestID] = nil
+    
+    if QuestService.playerCompleted[key] == nil then
+        QuestService.playerCompleted[key] = {}
+    end
+    QuestService.playerCompleted[key][QuestID] = quest:GetName()
+    
+    Debug('QuestService', 'Quest Completed: ',quest:GetName())
+    Debug('QuestService', 'Completion Table: ', inspect(QuestService.playerCompleted))
+    
+    local hero = PlayerResource:GetSelectedHeroEntity(PlayerID)
+    
+    Event:Trigger('HeroCompletedQuest', {
+        hero = hero,
+        quest = quest,
+    })
+    
+    -- Light off
+    QuestGiver:LightOff(quest)
+    
+    -- Give Reward
+    quest:ApplyReward(hero)
+    
+    -- Check if any quests open up now.
+    QuestService:CheckForQuestsAvailable(PlayerID)
+end
+
+function QuestService:OnOpenQuestDialog(QuestID, PlayerID, questData, action)
+    if not questData then Debug('QuestService', 'No Quest Available') return end
+    
+    -- Lookup the quest
+    local quest = QuestService:GetPlayerQuest(PlayerID, QuestID)
+    
+    if quest == nil then
+        -- Attempting to start quest, check start entity.
+        if questData.start_entity ~= action.target:GetUnitName() then return end
+        
+        -- If we have no records of it, prompt player
+        local player = PlayerResource:GetPlayer(PlayerID)
+        -- Can't trust the client, so we have to remember what's open.
+        player.currentDialogForQuestID = QuestID
+        CustomGameEventManager:Send_ServerToPlayer(player, 'questgiver_open', questData)
+    elseif quest:IsComplete() then
+        -- Attempting to end quest, check start entity.
+        if quest.end_entity ~= action.target:GetUnitName() then return end
+        
+        -- They completed it!
+        QuestService:OnQuestComplete(QuestID, PlayerID)
+    else
+        -- In progress....
+        Debug('QuestService', 'Quest is in progress...')
+    end
+end
+
+function QuestService:GetPlayerQuest(PlayerID, QuestID)
+    local key = 'player_'..PlayerID..'_quests'
+    if QuestService.playerQuests[key] == nil then return nil end
+    return QuestService.playerQuests[key][QuestID]
+end
+
+function QuestService:OnEntityKilled(event)
+    if not event.entindex_attacker then return end
+    local attacker = EntIndexToHScript(event.entindex_attacker);
+    if not attacker:IsHero() then return end
+    
+    local killed = EntIndexToHScript(event.entindex_killed);
+    -- DeepPrintTable(killed)
+    local key = 'player_'..attacker:GetPlayerID()..'_quests'
+    local quests = QuestService.playerQuests[key]
+    if quests == nil then return end
+    
+    local killed_name = killed:GetUnitName();
+    Debug('QuestService', attacker:GetName()..' killed '..killed_name)
+    for _,quest in pairs(quests) do
+        quest:OnEntityKilled(killed_name)
+    end
+end
+
+function QuestService:OnRightClickQuestGiver(action)
+    --local targetEntity = action.target
+    local PlayerID = action.PlayerID
+    
+    -- HAC Only one quest at a time right now.... 
+    local QuestID = action.target.quest.id
+    
+    -- .questgiver:OpenQuestDialog(action.PlayerID)
+    -- local QuestID = QuestGiver.QuestID
+    QuestService:OnOpenQuestDialog(QuestID, PlayerID, QuestGiver.quest, action)
+end
+
+
+function QuestService:CheckForQuestsAvailable(PlayerID)
+    
+    Debug('QuestService', 'Check For Quest Available')
+    local key = 'player_'..PlayerID..'_quests'
+    local completedQuests = QuestService.playerCompleted[key] or {}
+    
+    Debug('QuestService', inspect(completedQuests))
+    
+    local hero = PlayerResource:GetSelectedHeroEntity(PlayerID)
+    
+    local function CheckRequirements(quest)
+        if completedQuests[quest.id] then
+            Debug('QuestService', '['..quest.name..'] Already Completed.')
+            return false
+        end
+        local reqs = quest.requirements
+        if reqs.level and hero:GetLevel() < reqs.level then
+            Debug('QuestService', '['..quest.name..'] Insufficient level.')
+            return false
+        end
+        if reqs.quest then
+            for _,preQuest in pairs(Split(reqs.quest)) do
+                local hasCompleted = false
+                for _,completedQuest in pairs(completedQuests) do
+                    if completedQuest == preQuest then
+                        hasCompleted = true
+                        break
+                    end
+                end
+                if hasCompleted == false then
+                    Debug('QuestService', '['..quest.name..'] Not yet completed pre-quest: '..preQuest)
+                    return false
+                end
+            end
+        end
+        
+        -- Passes all checks.
+        return true
+    end
+    
+    for _,quest in pairs(QuestRepository.data) do
+        if CheckRequirements(quest) then
+            Debug('QuestService', '['..quest.name..'] Available!')
+            QuestGiver:LightOn(quest)
+        end
+    end
+end
+
+-- QuestService:CheckForQuestsAvailable(0)
+
+
+if not QuestService.initialized then
+    QuestService.initialized = true
+    Event:Listen('Activate', Dynamic_Wrap(QuestService, 'Activate'), QuestService)
+end
+
+
+
+--[[
+    Eventually
+    
+    Track quests as numeric representations to minimize data transmission.
+    If quest is not started, or has been abandoned, there will be no record.
+    Thus in progress and completed values: 0, 1
+    {
+        QuestID
+        QuestState [0, 1] In Progress, Completed
+        CompletionCount
+        ObjectiveCounts
+        {
+            1, 2, 3 Matching the objectives defined in the quest.
+        }
+        QuestVersion ?? If quest is modified, reset objective counts?
+    }
+    
+]]
+
+-- Concept:
+-- CustomGameEventManager:RegisterListener( "LevelUpButtonPressed", function(...) return self:OnLevelUpButtonPressed( ... ) end )
+-- But do we really need it, perhaps this is just a generic thing. Or maybe we make our own event wrapper shuttle thing.
+

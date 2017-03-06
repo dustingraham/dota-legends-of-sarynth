@@ -18,7 +18,7 @@ function QuestGiver:LightOnAct(quest, npc_name)
     self.quest = quest
     
     -- TEMP HACK 2...
-    local entity = SpawnService:GetUnique(npc_name)
+    local entity = SpawnSystem:GetUnique(npc_name)
     entity.quest = quest
     self.entity = entity
     

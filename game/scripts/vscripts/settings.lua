@@ -34,15 +34,14 @@ DEBUG_PRINT_SECTIONS = {
     
     Spawn             = false,
     
-    SpawnService      = true, -- Make Repository
+    SpawnSystem       = true,
     NpcRepository     = true,
     QuestRepository   = true,
-    Drops             = true, -- Make Repository
+    Drops             = true,
     
     Event             = true,
-    
-    -- App
     Filters           = true,
     NpcInteraction    = false,
+    PrintTable        = true,
 }
 DEBUG_PRINT_ALL = false

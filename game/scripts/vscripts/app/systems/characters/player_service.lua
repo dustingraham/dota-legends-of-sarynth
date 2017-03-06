@@ -4,9 +4,9 @@ PlayerService = PlayerService or class({}, {
     players = {}
 })
 
-function PlayerService:Init()
-    -- ListenToGameEvent('player_connect_full', Dynamic_Wrap(PlayerService, 'OnConnectFull'), PlayerService)
-    -- Debug('PlayerService', 'Listening')
+function PlayerService:Activate()
+    ListenToGameEvent('player_connect_full', Dynamic_Wrap(PlayerService, 'OnConnectFull'), PlayerService)
+    Debug('PlayerService', 'Listening')
 end
 
 function PlayerService:OnConnectFull(event)
@@ -17,4 +17,9 @@ end
 function PlayerService:Set(pid, key, value)
     -- Not Currently Used/Implemented
     self.players[pid]:Set(key, value)
+end
+
+if not PlayerService.initialized then
+    PlayerService.initialized = true
+    Event:Listen('Activate', Dynamic_Wrap(PlayerService, 'Activate'), PlayerService)
 end

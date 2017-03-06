@@ -19,7 +19,7 @@ SpawnSystem = SpawnSystem or class({}, {
     - SpawnNode - Group of spawn locations with a single unit, and total units.
     - Spawn - Individual spawn instance, correlates with creature.
 ]]
-function SpawnSystem:Init()
+function SpawnSystem:Activate()
     local kvFileName = 'scripts/data/'..GetMapName()..'/spawns.kv'
     self.data = LoadKeyValues(kvFileName)
     
@@ -30,6 +30,9 @@ function SpawnSystem:Init()
     end
     
     self:BuildSpawns()
+end
+
+function SpawnSystem:OnStateGameSetup()
     self:FirstSpawn()
     self:StartThinker()
 end
@@ -77,3 +80,9 @@ end
 -- LoadKeyValues('scripts/data/quests/introduction.kv')
 -- function MergeTables( t1, t2 ) for name,info in pairs(t2) do t1[name] = info end end
 -- MergeTables(QuestService.data, LoadKeyValues(...))
+
+if not SpawnSystem.initialized then
+    SpawnSystem.initialized = true
+    Event:Listen('Activate', Dynamic_Wrap(SpawnSystem, 'Activate'), SpawnSystem)
+    Event:Listen('OnStateGameSetup', Dynamic_Wrap(SpawnSystem, 'OnStateGameSetup'), SpawnSystem)    
+end

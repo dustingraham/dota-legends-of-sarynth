@@ -7,7 +7,7 @@ QuestRepository = QuestRepository or class({})
 -- function MergeTables( t1, t2 ) for name,info in pairs(t2) do t1[name] = info end end
 -- MergeTables(QuestService.data, LoadKeyValues(...))
 
-function QuestRepository:Init()
+function QuestRepository:Activate()
     QuestRepository.nameCache = {}
     
     local kvFileName = 'scripts/data/'..GetMapName()..'/quests.kv'
@@ -40,4 +40,9 @@ end
 
 function QuestRepository:GetQuest(key)
     return QuestRepository.data[key] or QuestRepository.nameCache[key]
+end
+
+if not QuestRepository.initialized then
+    QuestRepository.initialized = true
+    Event:Listen('Activate', Dynamic_Wrap(QuestRepository, 'Activate'), QuestRepository)
 end

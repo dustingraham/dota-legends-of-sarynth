@@ -1,0 +1,83 @@
+"DOTAAbilities"
+{
+    "Version" "1"
+    
+    "ursa_earthshock"
+    {
+        "MaxLevel"                      "3"
+        
+        "AbilityManaCost"               "25 30 40"
+        "AbilityCooldown"               "6.0 3.0 1.0"
+        "AbilityDamage"                 "50 80 120"
+    }
+    "dragon_knight_breathe_fire"
+    {
+        "MaxLevel"                      "3"
+        
+        "AbilityManaCost"               "25 35 55"
+        "AbilityCooldown"               "8.0 6.0 3.0"
+        "AbilityCastRange"              "500"
+        "AbilityDamage"                 "45 65 90"
+    }
+    
+    "lina_dragon_slave"
+    {
+        "AbilityCastAnimation" "ACT_DOTA_ATTACK"
+        
+        "MaxLevel"                      "3"
+        
+        "AbilityManaCost"               "25 35 55"
+        "AbilityCooldown"               "6.0 3.0 1.0"
+        "AbilityCastRange"              "550 650 750"
+        "AbilityDamage"                 "40 85 150"
+    }
+    "lich_frost_nova"
+    {
+        "AbilityCastAnimation" "ACT_DOTA_ATTACK"
+        
+        "MaxLevel"                      "3"
+        
+        "AbilityManaCost"               "25 30 40"
+        "AbilityCooldown"               "4.0 3.0 1.0"
+        "AbilityCastRange"              "400 500 700"
+        "AbilityDamage"                 "10 30 80"
+        "AbilitySpecial"
+        {
+            "04"
+            {
+                "var_type"              "FIELD_INTEGER"
+                "aoe_damage"            "20 40 60"
+            }
+        }
+    }
+    "leshrac_split_earth"
+    {
+        "AbilityCastAnimation" "ACT_DOTA_ATTACK"
+        
+        "MaxLevel"                      "3"
+        
+        "AbilityManaCost"               "45 60 90"
+        "AbilityCooldown"               "8.0 7.0 5.0"
+        "AbilityCastRange"              "550 650 850"
+        "AbilityDamage"                 "20 40 75"
+    }
+    "filler_ability"
+    {
+        "AbilityCooldown" "20"
+        "AbilitySpecial"
+        {
+            "01"
+            {
+                "hp_heal" "200"
+            }
+            "02"
+            {
+                "mp_heal" "80"
+            }
+            "07"
+            {
+                "duration" "8"
+            }
+        }
+    }
+}

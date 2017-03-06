@@ -1,6 +1,8 @@
+---
+--@type Drops
 Drops = Drops or class({})
 
-function Drops:Init()
+function Drops:Activate()
     
     local kvFileName = 'scripts/data/'..GetMapName()..'/droptable.kv'
     self.DropTable = LoadKeyValues(kvFileName)
@@ -60,4 +62,9 @@ function Drops:RollForDrops(killedUnit)
             end
         end
     end
+end
+
+if not Drops.initialized then
+    Drops.initialized = true
+    Event:Listen('Activate', Dynamic_Wrap(Drops, 'Activate'), Drops)
 end

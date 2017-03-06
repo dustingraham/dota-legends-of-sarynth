@@ -1,7 +1,7 @@
 CONTAINERS_VERSION = "0.80"
 
-require('libraries/timers')
-require('libraries/playertables')
+require('vendor/barebones/timers')
+require('vendor/barebones/playertables')
 
 local ID_BASE = "cont_"
 FORCE_NIL = false

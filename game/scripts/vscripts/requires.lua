@@ -13,6 +13,7 @@ for _,file in ipairs({
     
     'app/systems/characters/character_pick',
     'app/systems/characters/character_service',
+    'app/systems/characters/player_service',
     'app/systems/characters/player',
     
     'app/systems/npcs/base_npc_creature',
@@ -24,6 +25,7 @@ for _,file in ipairs({
     
     'app/systems/quests/quest_giver',
     'app/systems/quests/quest_repository',
+    'app/systems/quests/quest_service',
     'app/systems/quests/quest_system',
     'app/systems/quests/quest',
     
@@ -33,6 +35,7 @@ for _,file in ipairs({
     
     'vendor/barebones/containers',
     'vendor/barebones/playertables',
+    'vendor/barebones/timers',
     'vendor/inspect',
     
     'settings',

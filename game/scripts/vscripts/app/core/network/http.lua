@@ -161,7 +161,8 @@ function Http:Init()
     end)
 end
 
-if not Http.initialized then
-    Http.initialized = true
-    Http:Init()
-end
+-- Move to boot sequence.
+--if not Http.initialized then
+--    Http.initialized = true
+--    Http:Init()
+--end

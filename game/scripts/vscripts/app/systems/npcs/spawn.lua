@@ -58,7 +58,7 @@ function Spawn:Spawn(data)
     end
     
     if data.Unique then
-        SpawnService:SetUnique(data.Unique, entity)
+        SpawnSystem:SetUnique(data.Unique, entity)
     end
     
     return entity

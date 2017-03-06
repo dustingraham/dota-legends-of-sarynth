@@ -10,6 +10,7 @@ FILTER_EXECUTION_CONTINUE = true
 --@param self
 function Filters:Activate()
     self:ActivateOrderFilter()
+    self:ActivateModifyExperienceFilter()
     Debug('Filters', 'Activated')
 end
 
@@ -26,13 +27,57 @@ function Filters:ActivateOrderFilter()
 end
 
 ---
+--@function [parent=#Filters] ActivateModifyExperienceFilter
+--@param self
+function Filters:ActivateModifyExperienceFilter()
+    local mode = GameRules:GetGameModeEntity()
+    mode:SetModifyExperienceFilter(Dynamic_Wrap(Filters, 'ModifyExperienceFilter'), Filters)
+    mode.SetModifyExperienceFilter = function(mode, callback, context)
+        Debug('Filters', '[NOTICE] SetModifyExperienceFilter should not be called directly')
+        Event:Listen('FilterModifyExperienceFilter', callback, context)
+    end
+end
+
+---
+--@function [parent=#Filters] OrderFilter
+--@param self
+--@param #table order
+function Filters:OrderFilter(order)
+    -- Debug('Filters', 'OrderFilter Fired')
+    return Event:Trigger('FilterOrderFilter', order)
+end
+
+---
+--@function [parent=#Filters] ModifyExperienceFilter
+--@param self
+--@param #table params
+function Filters:ModifyExperienceFilter(params)
+    Debug('Filters', 'ModifyExperienceFilter Fired')
+    return Event:Trigger('FilterModifyExperienceFilter', params)
+end
+
+---
 -- Convenience Wrapper
 --
---@function [parent=#Filters] Listen
+--@function [parent=#Filters] OnOrderFilter
 --@param self
+--@param #function callback
+--@param #table context
 function Filters:OnOrderFilter(callback, context)
     Debug('Filters', 'OnOrderFilter Callback Listening')
     self:Listen('OrderFilter', callback, context)
+end
+
+---
+-- Convenience Wrapper
+--
+--@function [parent=#Filters] OnModifyExperienceFilter
+--@param self
+--@param #function callback
+--@param #table context
+function Filters:OnModifyExperienceFilter(callback, context)
+    Debug('Filters', 'OnModifyExperienceFilter Callback Listening')
+    self:Listen('ModifyExperienceFilter', callback, context)
 end
 
 ---
@@ -45,14 +90,12 @@ function Filters:Listen(filterName, callback, context)
     Event:Listen('Filter'..filterName, callback, context)
 end
 
----
---@function [parent=#Filters] OrderFilter
---@param self
---@param #table order
-function Filters:OrderFilter(order)
-    -- Debug('Filters', 'OrderFilter Fired')
-    return Event:Trigger('FilterOrderFilter', order)
+
+if not Filters.initialized then
+    Filters.initialized = true
+    Event:Listen('Activate', Dynamic_Wrap(Filters, 'Activate'), Filters)
 end
+
 
 -- Order Filter Types
 ORDERS = {

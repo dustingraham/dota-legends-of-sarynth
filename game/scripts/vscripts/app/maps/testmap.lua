@@ -1,3 +1,5 @@
+---
+--@type CustomMap
 CustomMap = CustomMap or {}
 
 function CustomMap:Activate()
@@ -24,7 +26,12 @@ function CustomMap:OnNpcSpawned(event)
         npc.bFirstSpawned = true
         if not Boot.allPick then
             Boot.allPick = true
---            CharacterPick:TestMapPickAll(npc)
+            CharacterPick:TestMapPickAll(npc)
         end
     end
+end
+
+if not CustomMap.initialized then
+    CustomMap.initialized = true
+    Event:Listen('Activate', Dynamic_Wrap(CustomMap, 'Activate'), CustomMap)
 end

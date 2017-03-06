@@ -1,12 +1,12 @@
 ---
--- @type NpcInteraction
-NpcInteraction = NpcInteraction or class({}, {
+-- @type Interaction
+Interaction = Interaction or class({}, {
     rangedActions = {}
 })
 
-function NpcInteraction:Activate()
+function Interaction:Activate()
     Timers:CreateTimer(function()
-        for id, action in pairs(NpcInteraction.rangedActions) do
+        for id, action in pairs(Interaction.rangedActions) do
             -- Pythagorean
             local rangeSquared = 150 * 150
             local distance = action.unit:GetAbsOrigin() - action.targetPosition
@@ -15,26 +15,26 @@ function NpcInteraction:Activate()
                 -- Check if position is inside the range.
                 if rangeCurrent <= rangeSquared then
                     action.callback(action)
-                    NpcInteraction.rangedActions[id] = nil
+                    Interaction.rangedActions[id] = nil
                 end
             else
                 -- Check if position is beyond the range.
                 if rangeCurrent > rangeSquared then
                     action.callback(action)
-                    NpcInteraction.rangedActions[id] = nil
+                    Interaction.rangedActions[id] = nil
                 end
             end
         end
         return 0.03
     end)
-    Filters:OnOrderFilter(Dynamic_Wrap(NpcInteraction, 'OrderFilter'), NpcInteraction)
-    Debug('NpcInteraction', 'Activated')
+    Filters:OnOrderFilter(Dynamic_Wrap(Interaction, 'OrderFilter'), Interaction)
+    Debug('Interaction', 'Activated')
 end
 
 ---
---@function [parent=#NpcInteraction] RangedAction
+--@function [parent=#Interaction] RangedAction
 --@param self
-function NpcInteraction:RangedAction(action)
+function Interaction:RangedAction(action)
 --[[ action = {
           unit
           target
@@ -43,23 +43,23 @@ function NpcInteraction:RangedAction(action)
     } ]]
 end
 
-function NpcInteraction:StartInteraction(action)
+function Interaction:StartInteraction(action)
     QuestService:OnRightClickQuestGiver(action)
 end
 
-function NpcInteraction:OrderFilter(event, order)
+function Interaction:OrderFilter(event, order)
     
     -- TODO: Test Queue
     
     -- Clear out any current rangedActions by this character.
     -- TODO: Consider move-out-of-range watchers like quest dialogs.
     if order.units['0'] then
-        NpcInteraction.rangedActions[order.units['0']] = nil
+        Interaction.rangedActions[order.units['0']] = nil
     end
     
     -- The main order we're watching for.
     if order.order_type == DOTA_UNIT_ORDER_MOVE_TO_TARGET then
-        Debug('NpcInteraction', 'DOTA_UNIT_ORDER_MOVE_TO_TARGET')
+        Debug('Interaction', 'DOTA_UNIT_ORDER_MOVE_TO_TARGET')
         local target = EntIndexToHScript(order.entindex_target)
         
         -- TODO: IsNPC?
@@ -70,16 +70,21 @@ function NpcInteraction:OrderFilter(event, order)
                 target = target,
                 targetPosition = target:GetAbsOrigin(),
                 callback = function(action)
-                    Debug('NpcInteraction', 'Arrived at move target.')
+                    Debug('Interaction', 'Arrived at move target.')
                     action.unit:Stop()
-                    NpcInteraction:StartInteraction(action)
+                    Interaction:StartInteraction(action)
                 end
             }
-            NpcInteraction.rangedActions[order.units['0']] = action
+            Interaction.rangedActions[order.units['0']] = action
         end
         
         return FILTER_EXECUTION_CONTINUE
     end
     
     return FILTER_EXECUTION_CONTINUE
+end
+
+if not Interaction.initialized then
+    Interaction.initialized = true
+    Event:Listen('Activate', Dynamic_Wrap(Interaction, 'Activate'), Interaction)
 end

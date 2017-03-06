@@ -1,0 +1,214 @@
+"Quests"
+{
+    "1001"
+    {
+        "name" "intro_sheep_1"
+        "title" "Thinning the Flock"
+        "start_entity" "npc_quest_town"
+        "end_entity" "npc_quest_town"
+        "requirements"
+        {
+            "level" "1"
+        }
+        "start"
+        {
+            "dialog" "Oh, hey! Glad I caught you. Could you help me out real quick?<br><br>See those sheep over there? They have really been destroying my alchemy crops. You wouldn't mind thinning the flock a little, would you?"
+        }
+        "complete"
+        {
+            "dialog" "You did it!"
+        }
+        "objectives"
+        {
+            "01" {
+                "long_description" "Kill 10 sheep, and return."
+                "description" "Sheep Culled"
+                "action" "kill" // talk find gather
+                "npc" "sheep,sheep_big"
+                "required" "10"
+            }
+        }
+        "rewards"
+        {
+            "gold" "25"
+            "experience" "100"
+            "item_choose"
+            {
+                "01" "item_shield_basic"
+                "02" "item_armor_basic"
+                "03" "item_weapon_basic"
+            }
+        }
+    }
+    "1002"
+    {
+        "name" "intro_worg_2"
+        "title" "Subtle Aggressions"
+        "start_entity" "npc_quest_town"
+        "end_entity" "npc_quest_town"
+        "requirements"
+        {
+            "level" "2"
+            "quest" "intro_sheep_1"
+        }
+        "start"
+        {
+            "dialog" "You did such a great job, I've got another request for you. There is a pesky worg just north of the sheep. Sometimes when I am out there attempting to thin the flock myself, he comes down and attacks. Can you take care of him?<br><br>Oh, and while you're out there, if you wouldn't mind thinning out a few more. Might as well since it is on your way, no?"
+        }
+        "complete"
+        {
+            "dialog" "You did it!"
+        }
+        "objectives"
+        {
+            "01" {
+                "long_description" "Slay the worg."
+                "description" "Slay the Worg"
+                "action" "kill"
+                "npc" "quest_worg"
+                "required" "1"
+            }
+            "02" {
+                "long_description" "Kill 6 more sheep."
+                "description" "More Sheep"
+                "action" "kill"
+                "npc" "sheep,sheep_big"
+                "required" "6"
+            }
+        }
+        "rewards"
+        {
+            "gold" "50"
+            "experience" "150"
+            "item_choose"
+            {
+                "01" "item_shield_basic"
+                "02" "item_armor_basic"
+                "03" "item_weapon_basic"
+            }
+        }
+    }
+    "1003"
+    {
+        "name" "woodsman_1"
+        "title" "Clearing the Woods"
+        "start_entity" "npc_quest_woodsman"
+        "end_entity" "npc_quest_woodsman"
+        "requirements"
+        {
+            "level" "4"
+            "quest" "intro_worg_2"
+        }
+        "start"
+        {
+            "dialog" "These wolves are a daily menace. Any assistance you could give would be much appreciated."
+        }
+        "complete"
+        {
+            "dialog" "You did it!"
+        }
+        "objectives"
+        {
+            "01" {
+                "long_description" "Kill 8 wolves"
+                "description" "Wolves Slain"
+                "action" "kill"
+                "npc" "quest_boar"
+                "required" "8"
+            }
+        }
+        "rewards"
+        {
+            "experience" "200"
+            "gold" "150"
+            "item_choose"
+            {
+                "01" "item_shield_basic"
+                "02" "item_armor_basic"
+                "03" "item_weapon_basic"
+            }
+        }
+    }
+    "1004"
+    {
+        "name" "woodsman_2"
+        "title" "Savage Clensing"
+        "start_entity" "npc_quest_woodsman"
+        "end_entity" "npc_quest_woodsman"
+        "requirements"
+        {
+            "level" "6"
+            "quest" "woodsman_1"
+        }
+        "start"
+        {
+            "dialog" "I can feel things getting calmer around here already. Thank you. By the way, up on the plateau there are some Savage Beasts. Can you rid us of those? Stay away from the Great Bear though. He is too tough."
+        }
+        "complete"
+        {
+            "dialog" "You did it!"
+        }
+        "objectives"
+        {
+            "01" {
+                "long_description" "Kill 6 Savage Beasts"
+                "description" "Savage Beasts Slain"
+                "action" "kill"
+                "npc" "quest_wolf"
+                "required" "6"
+            }
+        }
+        "rewards"
+        {
+            "experience" "300"
+            "gold" "150"
+            "item_choose"
+            {
+                "01" "item_shield_basic"
+                "02" "item_armor_basic"
+                "03" "item_weapon_basic"
+            }
+        }
+    }
+    "1005"
+    {
+        "name" "woodsman_3"
+        "title" "Unbearable Burdens"
+        "start_entity" "npc_quest_woodsman"
+        "end_entity" "npc_quest_woodsman"
+        "requirements"
+        {
+            "level" "8"
+            "quest" "woodsman_2"
+        }
+        "start"
+        {
+            "dialog" "You have been a blessing to these woods. There is one final task I have for you. The Great Bear, tyrant of these woods, ruler of the plateau. Please find and destroy."
+        }
+        "complete"
+        {
+            "dialog" "You did it!"
+        }
+        "objectives"
+        {
+            "01" {
+                "long_description" "Kill the Great Bear"
+                "description" "Kill the Great Bear"
+                "action" "kill"
+                "npc" "quest_bear"
+                "required" "1"
+            }
+        }
+        "rewards"
+        {
+            "experience" "300"
+            "gold" "150"
+            "item_choose"
+            {
+                "01" "item_shield_basic"
+                "02" "item_armor_basic"
+                "03" "item_weapon_basic"
+            }
+        }
+    }
+}

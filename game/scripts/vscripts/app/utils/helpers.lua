@@ -43,3 +43,8 @@ function Split(str, delim, maxNb)
     end
     return result
 end
+
+-- Used by barebones libs.
+function PrintTable(table)
+    Debug('PrintTable', inspect(table))
+end
