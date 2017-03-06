@@ -16,3 +16,9 @@ function Area2_OnStartTouch(trigger)
         Debug('Triggers', 'Area 2 Gate Opened')
     end
 end
+
+function IceBarricadeTrigger(trigger)
+    Entities:FindByName(nil, 'ice_barricade_1_relay'):Trigger()
+    thisEntity:Destroy()
+    Debug('Triggers', 'Ice Barricade 1 Opened')
+end

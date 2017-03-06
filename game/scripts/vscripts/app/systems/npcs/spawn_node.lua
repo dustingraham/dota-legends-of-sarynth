@@ -11,7 +11,6 @@ SpawnNode = SpawnNode or class({
     OnInitSpawn = 1, -- How many to spawn on game init.
     --    InitialDelay = 0,
     --    RespawnDelay = 0,
-    IdleAcquire = false,
 })
 
 ---

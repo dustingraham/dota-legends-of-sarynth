@@ -37,7 +37,7 @@ end
 --@param #string eventName
 --@param #table params
 function Event:Trigger(eventName, params)
-    Debug('Event', 'Trigger', eventName)
+    -- Debug('Event', 'Trigger', eventName)
     if not self.events or not self.events[eventName] then return end
     
     local event = {

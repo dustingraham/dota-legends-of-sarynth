@@ -3,14 +3,24 @@
 {
     "Version"    "1"
     
+    "teleport_pad"
+    {
+        "BaseClass" "npc_dota_creature"
+        "Model" "models/teleport_base.vmdl"
+        "VisionDaytimeRange"        "0"
+        "VisionNighttimeRange"      "0"
+    }
+    
     "npc_quest_town"
     {
         "BaseClass"             "npc_dota_creature"
         "Model"                 "models/props_gameplay/shopkeeper_fountain/shopkeeper_fountain.vmdl"
         "ModelScale"            "0.9"
-        "Level"                 "0"
+        "Level"                 "11"
         "HealthBarOffset"       "220"
-        "Ability1"               "passive_npc"
+        
+        "VisionDaytimeRange"        "0"
+        "VisionNighttimeRange"      "0"
     }
     
     "npc_quest_woodsman"
@@ -18,9 +28,8 @@
         "BaseClass"             "npc_dota_creature"
         "Model"                 "models/heroes/shopkeeper/shopkeeper.vmdl"
         "ModelScale"            "0.9"
-        "Level"                 "0"
+        "Level"                 "11"
         "HealthBarOffset"       "220"
-        "Ability1"               "passive_npc"
         
         "VisionDaytimeRange"        "0"
         "VisionNighttimeRange"      "0"
@@ -30,8 +39,10 @@
         "BaseClass"             "npc_dota_creature"
         "Model"                 "models/props_gameplay/shopkeeper_fountain/shopkeeper_fountain.vmdl"
         "ModelScale"            "0.9"
-        "Level"                 "0"
+        "Level"                 "11"
         "HealthBarOffset"       "220"
-        "Ability1"               "passive_npc"
+        
+        "VisionDaytimeRange"        "0"
+        "VisionNighttimeRange"      "0"
     }
 }

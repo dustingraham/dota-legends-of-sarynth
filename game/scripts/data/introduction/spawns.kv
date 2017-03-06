@@ -9,6 +9,8 @@
         "Chance" "75" // TODO: Improve complexity.
         "OnInitSpawn" "1"
         "AI" "ai_basic_sheep"
+		"RandomScale" "1"
+		"SpawnPositionJitter" "1"
     }
     "spawn_sheep_2"
     {
@@ -19,6 +21,8 @@
         "Chance" "75"
         "OnInitSpawn" "1"
         "AI" "ai_basic_sheep"
+		"RandomScale" "1"
+		"SpawnPositionJitter" "1"
     }
     "spawn_sheep_3"
     {
@@ -31,6 +35,8 @@
         "Chance" "100"
         "OnInitSpawn" "1"
         "AI" "ai_basic_sheep"
+		"RandomScale" "1"
+		"SpawnPositionJitter" "1"
     }
     "spawn_worg_1"
     {
@@ -38,27 +44,25 @@
         "Creature" "quest_worg"
         "MaxCount" "1"
         "OnInitSpawn" "1"
-        "IdleAcquire" "0"
         "RespawnDelay" "30"
         "Chance" "10"
         "AI" "ai_aggro_leash"
         "AggroRange" "400"
         "LeashRange" "750"
+		"SpawnPositionJitter" "1"
     }
-    
     "spawn_boar_1"
     {
         "SpawnPoints" "spawn_boar_1,spawn_boar_2,spawn_boar_3,spawn_boar_4,spawn_boar_5,spawn_boar_6,spawn_boar_7,spawn_boar_8"
         "Creature" "quest_boar"
         "MaxCount" "5"
         "OnInitSpawn" "5"
-        "IdleAcquire" "0"
-        "AcquisitionRange" "550"
         "RespawnDelay" "20"
         "Chance" "40"
         "AI" "ai_aggro_leash"
         "AggroRange" "400"
         "LeashRange" "1000"
+		"SpawnPositionJitter" "1"
     }
     "spawn_wolf_1"
     {
@@ -66,13 +70,12 @@
         "Creature" "quest_wolf"
         "MaxCount" "4"
         "OnInitSpawn" "4"
-        "IdleAcquire" "0"
-        "AcquisitionRange" "350"
         "RespawnDelay" "20"
         "Chance" "20"
         "AI" "ai_aggro_leash"
         "AggroRange" "300"
         "LeashRange" "450"
+		"SpawnPositionJitter" "1"
     }
     "spawn_bear_1"
     {
@@ -80,13 +83,12 @@
         "Creature" "quest_bear"
         "MaxCount" "1"
         "OnInitSpawn" "1"
-        "IdleAcquire" "0"
-        "AcquisitionRange" "100"
         "RespawnDelay" "60"
         "Chance" "10"
         "AI" "ai_aggro_leash"
         "AggroRange" "250"
         "LeashRange" "350"
+		"SpawnPositionJitter" "1"
     }
     "npc_quest_town"
     {
@@ -94,8 +96,6 @@
         "Creature" "npc_quest_town"
         "MaxCount" "1"
         "OnInitSpawn" "1"
-        "IdleAcquire" "0"
-        "AcquisitionRange" "100"
         "RespawnDelay" "60"
         "Chance" "10"
         "AI" "ai_npc_basic"
@@ -109,8 +109,6 @@
         "Creature" "npc_quest_woodsman"
         "MaxCount" "1"
         "OnInitSpawn" "1"
-        "IdleAcquire" "0"
-        "AcquisitionRange" "100"
         "RespawnDelay" "60"
         "Chance" "10"
         "AI" "ai_npc_basic"

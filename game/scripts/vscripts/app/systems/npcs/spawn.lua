@@ -23,10 +23,13 @@ function Spawn:constructor(spawnNode)
 end
 
 function Spawn:Spawn(data)
-    -- Subtle non-static spawn point. TODO: Param to disable?
-    local targetPosition = self.spawnPoint + RandomVector(RandomInt(20, 60))
+    -- Subtle non-static spawn point.
+    local targetPosition = self.spawnPoint
+    if data.SpawnPositionJitter then
+        targetPosition = targetPosition + RandomVector(RandomInt(20, 80))
+    end
     
-    team = DOTA_TEAM_NEUTRALS
+    local team = DOTA_TEAM_NEUTRALS
     if data.IsNpc then
         team = DOTA_TEAM_GOODGUYS
     end
@@ -34,12 +37,6 @@ function Spawn:Spawn(data)
     -- TODO: Listen to events the entity fires, entity should not know about spawn.
     local entity = CreateUnitByName(data.Creature, targetPosition, true, nil, nil, team)
     entity.spawn = self
-    
-    -- print('['..entity:GetUnitName()..'] ',entity:ShouldIdleAcquire(),' default: ',data.IdleAcquire)
-    entity:SetIdleAcquire(data.IdleAcquire == 1)
-    if data.AcquisitionRange then
-        entity:SetAcquisitionRange(data.AcquisitionRange)
-    end
     
     if data.Gesture then
         entity:StartGesture(_G[data.Gesture])
@@ -49,8 +46,10 @@ function Spawn:Spawn(data)
         entity:SetAngles(0, data.SpawnAngle, 0)
     end
     
-    local scaleSet = entity:GetModelScale() + (math.random(-5, 10) / 100)
-    entity:SetModelScale(scaleSet)
+    if data.RandomScale then
+        local scaleSet = entity:GetModelScale() + (math.random(-5, 10) / 100)
+        entity:SetModelScale(scaleSet)
+    end
     
     -- TODO: Source from unit data, override with spawn data.
     if data.AI then
@@ -58,7 +57,8 @@ function Spawn:Spawn(data)
     end
     
     if data.Unique then
-        SpawnSystem:SetUnique(data.Unique, entity)
+        Debug('SpawnSystem', data.spawn_name)
+        SpawnSystem:SetUnique(data.spawn_name, entity)
     end
     
     return entity
