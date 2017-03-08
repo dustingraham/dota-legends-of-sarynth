@@ -68,9 +68,10 @@ function CharacterService:OnEntityHurt(event)
     -- This might be troublesome...
     attacker.lastAttacked = npc
 end
-function CharacterService:ExperienceFilter(params)
-    -- Debug('CharacterService', 'OnExperienceFilter')
-
+function CharacterService:ExperienceFilter(e, params)
+--    Debug('CharacterService', 'OnExperienceFilter')
+--    print(inspect(params))
+    
     local player = PlayerResource:GetPlayer( params.player_id_const )
     local hero = PlayerResource:GetSelectedHeroEntity(params.player_id_const)
 

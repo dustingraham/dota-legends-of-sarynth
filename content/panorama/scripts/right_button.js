@@ -17,6 +17,15 @@ function OnLeftButtonPressed()
         if (Entities.IsSelectable(entityIndex))
         {
             GameUI.customCurrentFocusId = entityIndex;
+            
+            var healthMax = Entities.GetMaxHealth(entityIndex);
+            var health = Entities.GetHealth(entityIndex);
+            var healthPercent = health / healthMax;
+            if (isNaN(healthPercent)) healthPercent = 0;
+            $.Msg('HP: '+(healthPercent*100) +'%');
+            
+            $.Msg(Entities.GetUnitName(entityIndex));
+            
             // This will help prevent flickering of ability controls by
             // avoiding selection of the units. Still todo target unit frame.
             return CONSUME_EVENT;

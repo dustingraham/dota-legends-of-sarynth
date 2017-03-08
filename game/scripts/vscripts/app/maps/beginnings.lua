@@ -14,6 +14,21 @@ end
 
 function CustomMap:OnStateInGame()
     Debug('CustomMap', 'Beginnings In Game')
+    
+    -- So we can auto-pick...
+    ListenToGameEvent('npc_spawned', Dynamic_Wrap(CustomMap, 'OnNpcSpawned'), self)
+end
+
+function CustomMap:OnNpcSpawned(event)
+    local npc = EntIndexToHScript(event.entindex)
+    if npc:IsRealHero() and npc.bFirstSpawned == nil then
+        Debug('CustomMap', 'OnNpcSpawned FirstSpawn', npc:GetUnitName())
+        npc.bFirstSpawned = true
+        if not Boot.allPick then
+            Boot.allPick = true
+            CharacterPick:TestMapPickGondar(npc)
+        end
+    end
 end
 
 if not CustomMap.initialized then

@@ -69,6 +69,8 @@ var playerId = Game.GetLocalPlayerID();
 var currentLevelXp = 200;
 var lastLevelXp = 0;
 
+// $.Msg(Entities.GetUnitName(entityId))
+
 function SetHeroUnitPanel(entityId)
 {
     // Set the movie portrait
@@ -93,9 +95,71 @@ function SetHeroUnitPanel(entityId)
     panel.FindChildTraverse('HeroUnitFrame').style.visibility = visibility;
 }
 
+function ChangeTargetUnitPanel(entityId)
+{
+    var panel = $.GetContextPanel();
+    
+    var heroEntId = Players.GetPlayerHeroEntityIndex(playerId);
+    var heroLevel = Entities.GetLevel(heroEntId);
+    var entityLevel = Entities.GetLevel(entityId);
+    var diff = entityLevel - heroLevel;
+    
+    if (heroEntId == entityId || Entities.GetLevel(entityId) == -1 || entityId == -1)
+    {
+        panel.FindChildTraverse('TargetFrame').style.visibility = 'collapse';
+    }
+    else
+    {
+        panel.FindChildTraverse('TargetFrame').style.visibility = 'visible';
+    }
+    
+    var entityName = Entities.GetUnitName(entityId);
+    panel.FindChildTraverse('TargetName').text = $.Localize('#'+entityName);
+    
+    var container = panel.FindChildTraverse('TargetLevelContainer');
+    
+    container.SetHasClass('hard', diff >= 2);
+    container.SetHasClass('normal', diff < 2 && diff >= -5);
+    container.SetHasClass('easy', diff < -5);
+    
+    // It is not a state secret.
+    panel.FindChildTraverse('TargetLevel').text = entityLevel;
+}
+
+function UpdateTargetUnitPanel()
+{
+    var panel = $.GetContextPanel();
+    
+    var entityId = GameUI.customCurrentFocusId;
+    if (entityId == undefined) return;
+    
+    if (!Entities.IsValidEntity(entityId))
+    {
+        GameUI.customCurrentFocusId = -1;
+        entityId = -1;
+    }
+    
+    if (panel.targetFocusId != entityId)
+    {
+        panel.targetFocusId = entityId;
+        ChangeTargetUnitPanel(entityId);
+    }
+    
+    var healthMax = Entities.GetMaxHealth(entityId);
+    var health = Entities.GetHealth(entityId);
+    var healthPercent = health / healthMax;
+    if (isNaN(healthPercent)) healthPercent = 0;
+    panel.FindChildTraverse('TargetHealthBar').style.width = (healthPercent * 246)+'px';
+    
+    // Toggle visibility based on whether we have a valid selection.
+    // Consider checking if entity is hero and hiding anyways.
+}
+
 function UpdateUnitPanel() {
     // Hack
     $.Schedule(0.1, UpdateUnitPanel);
+    
+    UpdateTargetUnitPanel()
     
     var panel = $.GetContextPanel();
     

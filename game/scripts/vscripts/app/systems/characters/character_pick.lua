@@ -29,6 +29,25 @@ function CharacterPick:TestMapPickAll(heroReal)
     end)
 end
 
+function CharacterPick:TestMapPickGondar(heroReal)
+    Debug('CharacterPick', 'Picking Gondar')
+    
+    
+    -- This gets purged after the first create...
+    local id = heroReal:GetPlayerOwnerID()
+    
+    CustomGameEventManager:Send_ServerToPlayer(PlayerResource:GetPlayer(id), 'character_picked', {})
+    
+    -- PlayerResource Replace/Select is not available quite yet...
+    Timers:CreateTimer(0.01, function()
+        CharacterPick:CreateCustomHeroForPlayer({
+            ['PlayerID'] = id,
+            ['character'] = 'bounty_hunter',
+            ['create'] = false
+        })
+    end)
+end
+
 function CharacterPick:OnCharacterPick(event)
     local hero = PlayerResource:GetSelectedHeroEntity(event.PlayerID)
     if hero:GetName() ~= DUMMY_HERO then Debug('CharacterPick', 'Already selected hero...') return end

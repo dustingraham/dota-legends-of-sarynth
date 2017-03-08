@@ -1,6 +1,7 @@
 <root>
     <styles>
         <include src="file://{resources}/styles/mainhud.css" />
+        <include src="file://{resources}/styles/mainhud/unitframes.css" />
         <include src="file://{resources}/styles/window.css" />
         <include src="file://{resources}/styles/actionbar.css" />
     </styles>
@@ -51,6 +52,16 @@
             <Image class="point point3" src="file://{images}/unitframes/big_point.png">
                 <Image class="point-inner" id="PointThree" src="file://{images}/unitframes/big_point_inner.png"/>
             </Image>
+        </Image>
+        
+        <!-- Target Unit Frame -->
+        <Image id="TargetFrame" class="targetframe" src="file://{images}/unitframes/targetframe/frame_empty.png" hittest="true">
+            <Panel id="TargetHealthBar" class="health" />
+            <Label id="TargetName" class="target-name" text="Skadi's Gollum" />
+            <Panel id="TargetLevelContainer" class="level">
+                <Label id="TargetLevel" class="level-text"/>
+                <Image id="TargetLevelSkull" src="file://{images}/unitframes/targetframe/skull_icon.png"/>
+            </Panel>
         </Image>
         
         <Panel id="ActionBar" class="action-bar-container">

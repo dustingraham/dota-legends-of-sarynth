@@ -18,7 +18,9 @@ function Area2_OnStartTouch(trigger)
 end
 
 function IceBarricadeTrigger(trigger)
-    Entities:FindByName(nil, 'ice_barricade_1_relay'):Trigger()
+    local relay = Entities:FindByName(nil, 'ice_barricade_1_relay')
+    relay:Trigger()
+    ScreenShake(relay:GetAbsOrigin(), 3, 100, 1.25, 4500, 0, true)
     thisEntity:Destroy()
     Debug('Triggers', 'Ice Barricade 1 Opened')
 end

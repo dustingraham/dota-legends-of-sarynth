@@ -37,6 +37,7 @@ for _,file in ipairs({
     'vendor/barebones/playertables',
     'vendor/barebones/timers',
     'vendor/inspect',
+    'vendor/popupnumbers',
     
     'settings',
     

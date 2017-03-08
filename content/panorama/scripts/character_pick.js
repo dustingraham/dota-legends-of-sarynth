@@ -15,6 +15,19 @@ function CharacterPick(name)
     });
 }
 
+function OnCharacterPicked(event)
+{
+    // Hide Pick Screen
+    var panel = $.GetContextPanel().FindChild('CharacterPanelContainer');
+    panel.style.opacity = '0.0';
+    $.Schedule(1, function()
+    {
+        // Collapse to prevent hittest.
+        panel.style.visibility = 'collapse';
+        panel.hittestchildren = false;
+    });	
+}
+
 // Game loads to black screen, remove once scenes are loaded.
 function CheckSceneLoad()
 {
@@ -72,3 +85,4 @@ function CheckSceneLoad()
 }
 CheckSceneLoad();
 
+GameEvents.Subscribe('character_picked', OnCharacterPicked);
