@@ -35,6 +35,7 @@ for _,file in ipairs({
     'app/utils/md5',
     
     'vendor/barebones/containers',
+    'vendor/barebones/notifications',
     'vendor/barebones/playertables',
     'vendor/barebones/timers',
     'vendor/inspect',

@@ -45,4 +45,15 @@
         "VisionDaytimeRange"        "0"
         "VisionNighttimeRange"      "0"
     }
+    "npc_questgiver_start"
+    {
+        "BaseClass"             "npc_dota_creature"
+        "Model"                 "models/heroes/lone_druid/lone_druid.vmdl"
+        "ModelScale"            "1.1"
+        "Level"                 "6"
+        "HealthBarOffset"       "220"
+        
+        "VisionDaytimeRange"        "0"
+        "VisionNighttimeRange"      "0"
+    }
 }

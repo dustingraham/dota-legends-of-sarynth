@@ -135,4 +135,37 @@
         "IsNpc" "1"
         "Unique" "1"
     }
+    "npc_quest_start"
+    {
+        "SpawnPoints" "npc_start_area"
+        "Creature" "npc_questgiver_start"
+        "MaxCount" "1"
+        "OnInitSpawn" "1"
+        "RespawnDelay" "60"
+        "Chance" "10"
+        "AI" "ai_npc_basic"
+        "SpawnAngle" "310"
+        "Gesture" "ACT_DOTA_IDLE"
+        "IsNpc" "1"
+        "Unique" "1"
+        "Cosmetics"
+        {
+            "01" "models/items/lone_druid/hair_of_the_wolf_hunter/hair_of_the_wolf_hunter.vmdl"
+            "02" "models/heroes/lone_druid/arms.vmdl"
+            "03" "models/items/lone_druid/shoulder_poor.vmdl"
+            "04" "models/items/lone_druid/dark_wood_back/dark_wood_back.vmdl"
+        }
+    }
+    "spawn_sheep_1"
+    {
+        "SpawnPoints" "area_start_spawn_1,area_start_spawn_2"
+        "Creature" "sheep"
+        "OnInitSpawn" "1"
+        "MaxCount" "2"
+        "RespawnDelay" "5"
+        "Chance" "75" // TODO: Improve complexity.
+        "AI" "ai_basic_sheep"
+        "RandomScale" "1"
+        "SpawnPositionJitter" "1"
+    }
 }

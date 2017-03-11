@@ -134,6 +134,12 @@ function CharacterService:OnPlayerLevelUp(event)
     local pIdx = ParticleManager:CreateParticle("particles/econ/events/ti6/hero_levelup_ti6.vpcf", PATTACH_ABSORIGIN_FOLLOW, hero)
     ParticleManager:SetParticleControl(pIdx, 0, hero:GetAbsOrigin())
     
+    Notifications:Top(hero:GetPlayerOwnerID(), {
+        text = "You just reached level "..event.level.."!",
+        duration = 6,
+        style = { color = "#ffcc00" }
+    })
+    
     if not DEBUG_SKIP_HTTP_SAVE then
         Debug('CharacterService', 'Saving for: ', hero:GetName())
         Http:Save({

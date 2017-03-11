@@ -1,3 +1,5 @@
+---
+--@type CharacterPick
 CharacterPick = CharacterPick or class({})
 
 function CharacterPick:TestMapPickAll(heroReal)

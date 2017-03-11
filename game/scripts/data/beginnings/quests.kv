@@ -1,0 +1,43 @@
+"Quests"
+{
+    "1001"
+    {
+        "name" "intro_sheep_1"
+        "title" "Thinning the Flock"
+        "start_entity" "npc_quest_start"
+        "end_entity" "npc_quest_start"
+        "requirements"
+        {
+            "level" "1"
+        }
+        "start"
+        {
+            "dialog" "Oh, hey! Glad I caught you. Could you help me out real quick?<br><br>See those sheep over there? They have really been destroying my alchemy crops. You wouldn't mind thinning the flock a little, would you?"
+        }
+        "complete"
+        {
+            "dialog" "You did it!"
+        }
+        "objectives"
+        {
+            "01" {
+                "long_description" "Kill 3 sheep, and return."
+                "description" "Sheep Culled"
+                "action" "kill"
+                "npc" "sheep,sheep_big"
+                "required" "3"
+            }
+        }
+        "rewards"
+        {
+            "gold" "25"
+            "experience" "100"
+            "item_choose"
+            {
+                "01" "item_shield_basic"
+                "02" "item_armor_basic"
+                "03" "item_weapon_basic"
+            }
+        }
+    }
+}

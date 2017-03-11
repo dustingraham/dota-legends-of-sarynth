@@ -58,6 +58,12 @@ function Spawn:Spawn(data)
         entity:AddNewModifier(nil, nil, data.AI, nil)
     end
     
+    if data.Cosmetics then
+        for _,name in pairs(data.Cosmetics) do
+            CharacterPick:AddCosmetic(entity, name)
+        end
+    end
+    
     if data.Unique then
         -- Debug('SpawnSystem', data.spawn_name)
         SpawnSystem:SetUnique(data.spawn_name, entity)

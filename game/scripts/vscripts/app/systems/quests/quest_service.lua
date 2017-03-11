@@ -228,7 +228,7 @@ function QuestService:GetQuestForNpc(character, npc)
     --Debug('QuestService', 'npc', inspect(npc))
     
     local npcName = npc.spawn_name
-    print('QuestService', 'Search for: ', npcName)
+    Debug('QuestService', 'Search for: ', npcName)
     
     for _,quest in pairs(QuestRepository.data) do
         if quest.start_entity == npcName then

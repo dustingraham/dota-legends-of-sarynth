@@ -24,3 +24,14 @@ function IceBarricadeTrigger(trigger)
     thisEntity:Destroy()
     Debug('Triggers', 'Ice Barricade 1 Opened')
 end
+
+function TownGateTrigger(trigger)
+    -- print(inspect(trigger))
+    local pid = trigger.activator:GetPlayerOwnerID()
+    Notifications:Top(pid, {
+        text = "#town_gate_trigger_fail",
+        duration = 5,
+        style = { color = "#ffcc00" }
+    })
+    Debug('Triggers', 'Player '..pid..' triggered town gate closed message.')
+end
