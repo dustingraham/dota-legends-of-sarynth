@@ -112,10 +112,12 @@
         <!-- To become a snippet -->
         <!-- Quest Dialog -->
         <Panel id="QuestDialog" class="quest-dialog hidden">
-            <Panel class="quest-dialog-primary">
+            <Panel id="QuestDialogPrimary" class="quest-dialog-primary">
                 <Label id="MainDialog" class="text" html="true" />
-                <Label class="objective" text="Objective:"/>
+                
+                <Label id="ObjectiveTitle" class="objective" text="Objective:"/>
                 <Label id="MainObjectives" class="objectives" html="true" />
+                
                 <Label class="objective" text="Reward:"/>
                 <Label id="MainRewards" class="objectives" html="true" />
                 <Panel class="reward-item" style="visibility:collapse;">
@@ -136,12 +138,12 @@
                 <Label id="QuestMainTitle" class="quest-title" text="QUEST"/>
             </Image>
             <Panel class="quest-dialog-footer">
-                <Button class="button button-yes" onactivate="QuestDialog(true)">
+                <Button id="QuestAccept" class="button button-yes" onactivate="QuestDialog(true)">
                     <Image src="file://{images}/window/button_green.png">
-                        <Label class="yes" text="Accept"/>
+                        <Label id="QuestAcceptText" class="yes" text="Accept"/>
                     </Image>
                 </Button>
-                <Button class="button button-no" onactivate="QuestDialog(false)">
+                <Button id="QuestDecline" class="button button-no" onactivate="QuestDialog(false)">
                     <Image src="file://{images}/window/button_red.png">
                         <Label class="yes" text="Decline"/>
                     </Image>

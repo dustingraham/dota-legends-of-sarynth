@@ -10,7 +10,7 @@ function Interaction:Activate()
             -- Pythagorean
             local rangeSquared = 150 * 150
             local distance = action.unit:GetAbsOrigin() - action.targetPosition
-            local rangeCurrent = distance.x * distance.x + distance.y + distance.y
+            local rangeCurrent = distance.x * distance.x + distance.y * distance.y
             if not action.inverseCheck then
                 -- Check if position is inside the range.
                 if rangeCurrent <= rangeSquared then

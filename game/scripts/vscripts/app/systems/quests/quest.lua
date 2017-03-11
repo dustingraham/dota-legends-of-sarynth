@@ -68,6 +68,12 @@ function Quest:Accept()
     self:GetStartNpc():ParticleOff(QuestService.questParticleName)
 end
 
+function Quest:Complete()
+    -- self.PlayerID
+    -- local player = PlayerResource:GetPlayer(event.PlayerID)
+    self:GetEndNpc():ParticleOff(QuestService.questParticleName)
+end
+
 -- Get reduced data set for client transmission.
 function Quest:GetData()
     -- Just enough to present client side display.
@@ -101,7 +107,7 @@ function Quest:GetStartData()
     local data = {
         icon = self.icon,
         title = self.title,
-        start_dialog = self.start.dialog,
+        dialog_text = self.start.dialog,
         objectives = {},
         rewards = self.rewards,
     }
@@ -114,6 +120,24 @@ function Quest:GetStartData()
         }
         table.insert(data.objectives, oData)
     end
+    
+    Debug('Quest', inspect(data))
+    return data
+end
+
+-- Get reduced data set for client transmission.
+function Quest:GetEndData()
+    -- Just enough to present client side display.
+    
+    -- (icon) Title
+    -- [current] / [required] [description]
+    
+    local data = {
+        icon = self.icon,
+        title = self.title,
+        dialog_text = self.complete.dialog,
+        rewards = self.rewards,
+    }
     
     Debug('Quest', inspect(data))
     return data

@@ -5,9 +5,13 @@ var dialog = $.GetContextPanel().FindChild('QuestDialog');
 function OnDialogStart(data) {
     //$.Msg('[JS] On Questgiver Open');
     
-    if (data.panelType == 'quest')
+    if (data.panelType == 'quest_start')
     {
-        UpdateQuestPanel(data);
+        UpdateQuestStartPanel(data);
+    }
+    else if (data.panelType == 'quest_complete')
+    {
+        UpdateQuestCompletePanel(data);
     }
     else
     {
@@ -21,23 +25,28 @@ function OnDialogStart(data) {
 GameEvents.Subscribe('dialog_start', OnDialogStart);
 
 
-function UpdateQuestPanel(data)
+function UpdateQuestStartPanel(data)
 {
     $.Msg('[JS] Need to populate...');
     $.Msg(data);
     
     var panel = $.GetContextPanel();
     panel.FindChildTraverse('QuestMainTitle').text = data.title;
-    panel.FindChildTraverse('MainDialog').text = data.start_dialog;
+    panel.FindChildTraverse('MainDialog').text = data.dialog_text;
+    
+    var hide = true;
     var objectives = '';
     $.Each(data.objectives, function(objective, i)
     {
+        hide = false;
         // $.Msg('ObjId: '+i);
         objectives += '• '+objective.long_description+'<br>';
     });
-    // • Choose an item below.
-    
     panel.FindChildTraverse('MainObjectives').text = objectives;
+    
+    var setVisible = hide ? 'collapse' : 'visible';
+    panel.FindChildTraverse('ObjectiveTitle').style.visibility = setVisible;
+    panel.FindChildTraverse('MainObjectives').style.visibility = setVisible;
     
     var rewards = '';
     if (data.rewards.gold)
@@ -55,7 +64,44 @@ function UpdateQuestPanel(data)
     }
     
     panel.FindChildTraverse('MainRewards').text = rewards;
+    
+    panel.FindChildTraverse('QuestAcceptText').text = 'Accept';
+    panel.FindChildTraverse('QuestDecline').style.visibility = 'visible';
 }
+
+function UpdateQuestCompletePanel(data)
+{
+    $.Msg('[JS] Need to populate...');
+    $.Msg(data);
+    
+    var panel = $.GetContextPanel();
+    panel.FindChildTraverse('QuestMainTitle').text = data.title;
+    panel.FindChildTraverse('MainDialog').text = data.dialog_text;
+    
+    panel.FindChildTraverse('ObjectiveTitle').style.visibility = 'collapse';
+    panel.FindChildTraverse('MainObjectives').style.visibility = 'collapse';
+    
+    var rewards = '';
+    if (data.rewards.gold)
+    {
+        rewards += '• '+data.rewards.gold + ' gold pieces<br>';
+    }
+    if (data.rewards.experience)
+    {
+        rewards += '• '+data.rewards.experience + ' experience<br>';
+    }
+    
+    if (data.rewards.item_choose)
+    {
+        // rewards += '• Maybe an item...<br>';
+    }
+    
+    panel.FindChildTraverse('MainRewards').text = rewards;
+    
+    panel.FindChildTraverse('QuestAcceptText').text = 'Complete';
+    panel.FindChildTraverse('QuestDecline').style.visibility = 'collapse';
+}
+
 function QuestDialog(response) {
     // $.Msg('Dialog Response: ' + response)
     GameEvents.SendCustomGameEventToServer('questgiver_dialog_event', { result: response });

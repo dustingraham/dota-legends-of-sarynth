@@ -52,39 +52,34 @@ function QuestService:CheckIfCompleted(QuestID, PlayerID)
     return false
 end
 
-function QuestService:OnQuestComplete(QuestID, PlayerID)
+function QuestService:OnQuestComplete(quest)
     -- Reward and delete quest.
     -- Track in history of some sort.
-    local key = 'player_'..PlayerID..'_quests'
-    PlayerTables:DeleteTableKey(key, QuestID)
+    local key = 'player_'..quest.PlayerID..'_quests'
+    PlayerTables:DeleteTableKey(key, quest.id)
     
-    local quest = QuestService.playerQuests[key][QuestID]
-    -- local QuestName = QuestService.playerQuests[key][QuestID].name
-    QuestService.playerQuests[key][QuestID] = nil
+    QuestService.playerQuests[key][quest.id] = nil
     
     if QuestService.playerCompleted[key] == nil then
         QuestService.playerCompleted[key] = {}
     end
-    QuestService.playerCompleted[key][QuestID] = quest:GetName()
+    QuestService.playerCompleted[key][quest.id] = quest:GetName()
     
     Debug('QuestService', 'Quest Completed: ',quest:GetName())
     Debug('QuestService', 'Completion Table: ', inspect(QuestService.playerCompleted))
     
-    local hero = PlayerResource:GetSelectedHeroEntity(PlayerID)
+    local hero = PlayerResource:GetSelectedHeroEntity(quest.PlayerID)
     
     Event:Trigger('HeroCompletedQuest', {
         hero = hero,
         quest = quest,
     })
     
-    -- Light off
-    QuestGiver:LightOff(quest)
-    
     -- Give Reward
     quest:ApplyReward(hero)
     
     -- Check if any quests open up now.
-    QuestService:CheckForQuestsAvailable(PlayerID)
+    QuestService:CheckForQuestsAvailable(quest.PlayerID)
 end
 
 ---
@@ -114,6 +109,19 @@ function QuestService:OnOpenQuestDialog(QuestID, PlayerID, questData, action)
         -- In progress....
         Debug('QuestService', 'Quest is in progress...')
     end
+end
+
+function QuestService:FindTurnIn(character, npc)
+    local key = 'player_'..character:GetPlayerOwnerID()..'_quests'
+    if QuestService.playerQuests[key] == nil then return nil end
+    for _,quest in pairs(QuestService.playerQuests[key]) do
+        if npc == quest:GetEndNpc() then
+            if quest:IsComplete() then
+                return quest
+            end
+        end
+    end
+    return nil
 end
 
 function QuestService:GetPlayerQuest(PlayerID, QuestID)
@@ -154,9 +162,13 @@ end
 --end
 
 
-local function CheckRequirements(completedQuests, hero, quest)
+local function CheckRequirements(completedQuests, inProgressQuests, hero, quest)
     if completedQuests[quest.id] then
         Debug('QuestService', '['..quest.name..'] Already Completed.')
+        return false
+    end
+    if inProgressQuests[quest.id] then
+        Debug('QuestService', '['..quest.name..'] Already in progress.')
         return false
     end
     
@@ -191,13 +203,14 @@ function QuestService:CheckForQuestsAvailable(PlayerID)
     Debug('QuestService', 'Check For Quest Available')
     local key = 'player_'..PlayerID..'_quests'
     local completedQuests = QuestService.playerCompleted[key] or {}
+    local inProgressQuests = QuestService.playerQuests[key] or {}
     
     Debug('QuestService', inspect(completedQuests))
     
     local hero = PlayerResource:GetSelectedHeroEntity(PlayerID)
     
     for _,quest in pairs(QuestRepository.data) do
-        if CheckRequirements(completedQuests, hero, quest) then
+        if CheckRequirements(completedQuests, inProgressQuests, hero, quest) then
             Debug('QuestService', '['..quest.name..'] Available!')
             local npc = SpawnSystem:GetUnique(quest.start_entity)
             if npc then npc:ParticleOn(QuestService.questParticleName) end
@@ -209,6 +222,7 @@ function QuestService:GetQuestForNpc(character, npc)
     Debug('QuestService', 'GetQuestForNpc')
     local key = 'player_'..character:GetPlayerOwnerID()..'_quests'
     local completedQuests = QuestService.playerCompleted[key] or {}
+    local inProgressQuests = QuestService.playerQuests[key] or {}
     
     --Debug('QuestService', 'completed', inspect(completedQuests))
     --Debug('QuestService', 'npc', inspect(npc))
@@ -218,7 +232,7 @@ function QuestService:GetQuestForNpc(character, npc)
     
     for _,quest in pairs(QuestRepository.data) do
         if quest.start_entity == npcName then
-            if CheckRequirements(completedQuests, hero, quest) then
+            if CheckRequirements(completedQuests, inProgressQuests, character, quest) then
                 Debug('QuestService', '['..quest.name..'] Available!')
                 return Quest(character:GetPlayerOwnerID(), quest)
             end
