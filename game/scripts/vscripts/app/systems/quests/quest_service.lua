@@ -213,7 +213,7 @@ function QuestService:CheckForQuestsAvailable(PlayerID)
         if CheckRequirements(completedQuests, inProgressQuests, hero, quest) then
             Debug('QuestService', '['..quest.name..'] Available!')
             local npc = SpawnSystem:GetUnique(quest.start_entity)
-            if npc then npc:ParticleOn(QuestService.questParticleName) end
+            if npc then npc:ParticleOnForPlayer(QuestService.questParticleName, PlayerID) end
         end
     end
 end

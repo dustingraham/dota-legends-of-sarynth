@@ -117,7 +117,7 @@ end
 function CharacterService:OnPlayerLevelUp(event)
     local hero = HeroList:GetHero(event.player)
     hero:SetAbilityPoints(0)
-
+    
     for i = 0, 2 do
         -- Temp Spell Levels
         -- 0 : 1 4 7 10
@@ -127,9 +127,13 @@ function CharacterService:OnPlayerLevelUp(event)
             math.min(3, math.floor((event.level + 2- i) / 3))
         )
     end
-
+    
     if hero.isInitialLevel then return end
-
+    
+    -- Slightly better level up particle...
+    local pIdx = ParticleManager:CreateParticle("particles/econ/events/ti6/hero_levelup_ti6.vpcf", PATTACH_ABSORIGIN_FOLLOW, hero)
+    ParticleManager:SetParticleControl(pIdx, 0, hero:GetAbsOrigin())
+    
     if not DEBUG_SKIP_HTTP_SAVE then
         Debug('CharacterService', 'Saving for: ', hero:GetName())
         Http:Save({

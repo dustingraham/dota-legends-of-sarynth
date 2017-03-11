@@ -65,13 +65,13 @@ end
 function Quest:Accept()
     -- self.PlayerID
     -- local player = PlayerResource:GetPlayer(event.PlayerID)
-    self:GetStartNpc():ParticleOff(QuestService.questParticleName)
+    self:GetStartNpc():ParticleOffForPlayer(QuestService.questParticleName, self.PlayerID)
 end
 
 function Quest:Complete()
     -- self.PlayerID
     -- local player = PlayerResource:GetPlayer(event.PlayerID)
-    self:GetEndNpc():ParticleOff(QuestService.questParticleName)
+    self:GetEndNpc():ParticleOffForPlayer(QuestService.questParticleName, self.PlayerID)
 end
 
 -- Get reduced data set for client transmission.
@@ -163,7 +163,7 @@ function Quest:OnEntityKilled(npc_name)
                 objective.current = objective.current + 1
                 QuestService:SendQuestUpdate(self)
                 if self:IsComplete() then
-                    self:GetEndNpc():ParticleOn(QuestService.questParticleName)
+                    self:GetEndNpc():ParticleOnForPlayer(QuestService.questParticleName, self.PlayerID)
                 end
             end
         end

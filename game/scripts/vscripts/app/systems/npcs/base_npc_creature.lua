@@ -45,3 +45,25 @@ function creature:ParticleOff(name)
     ParticleManager:ReleaseParticleIndex(self.particles[name])
     self.particles[name] = nil
 end
+
+function creature:ParticleOnForPlayer(name, pid)
+    if self.playerParticles == nil then self.playerParticles = {} end
+    if self.playerParticles[name] == nil then self.playerParticles[name] = {} end
+    if self.playerParticles[name][pid] then return end
+    self.playerParticles[name][pid] = ParticleManager:CreateParticleForPlayer(
+        name,
+        PATTACH_ABSORIGIN_FOLLOW,
+        self,
+        PlayerResource:GetPlayer(pid)
+    )
+end
+
+function creature:ParticleOffForPlayer(name, pid)
+    if self.playerParticles == nil then self.playerParticles = {} end
+    if not self.playerParticles[name] then return end
+    if not self.playerParticles[name][pid] then return end
+    
+    ParticleManager:DestroyParticle(self.playerParticles[name][pid], false)
+    ParticleManager:ReleaseParticleIndex(self.playerParticles[name][pid])
+    self.playerParticles[name][pid] = nil
+end

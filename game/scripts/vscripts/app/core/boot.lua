@@ -15,6 +15,9 @@ function Boot:Precache(context)
     PrecacheResource('particle', 'particles/units/heroes/hero_ursa/ursa_earthshock.vpcf', context)
     PrecacheResource('particle', 'particles/quest_available.vpcf', context)
     
+    -- Level Up
+    PrecacheResource('particle', 'particles/econ/events/ti6/hero_levelup_ti6.vpcf', context)
+        
     -- Ice Barricade
     PrecacheResource('particle', 'particles/units/heroes/hero_crystalmaiden/maiden_crystal_nova.vpcf', context)
     PrecacheResource('particle', 'particles/econ/items/ancient_apparition/aa_blast_ti_5/ancient_apparition_ice_blast_explode_ti5.vpcf', context)
