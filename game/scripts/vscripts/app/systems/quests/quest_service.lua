@@ -3,6 +3,7 @@
 QuestService = QuestService or class({}, {
     playerQuests = {},
     playerCompleted = {},
+    questParticleName = "particles/quest_indicator.vpcf",
 })
 
 function QuestService:Activate()
@@ -15,21 +16,20 @@ function QuestService:OnHeroPick(e, event)
     QuestService:CheckForQuestsAvailable(event.PlayerID)
 end
 
-function QuestService:OnQuestStart(QuestID, PlayerID)
-    local questData = QuestRepository:GetQuest(QuestID)
-    local quest = Quest(PlayerID, questData)
-    
-    local key = 'player_'..PlayerID..'_quests'
+function QuestService:OnQuestStart(quest)
+    print('QSPID', quest.PlayerID)
+    print('QSQID', quest.id)
+    local key = 'player_'..quest.PlayerID..'_quests'
     if QuestService.playerQuests[key] == nil then
         QuestService.playerQuests[key] = {}
     end
-    QuestService.playerQuests[key][QuestID] = quest
+    QuestService.playerQuests[key][quest.id] = quest
     
-    PlayerTables:SetTableValue(key, QuestID, quest:GetData())
+    PlayerTables:SetTableValue(key, quest.id, quest:GetData())
     
     Debug('QuestService', 'Quest Started: ', quest:GetName())
     
-    local hero = PlayerResource:GetSelectedHeroEntity(PlayerID)
+    local hero = PlayerResource:GetSelectedHeroEntity(quest.PlayerID)
     Event:Trigger('HeroStartedQuest', {
         hero = hero,
         quest = quest,
@@ -87,6 +87,8 @@ function QuestService:OnQuestComplete(QuestID, PlayerID)
     QuestService:CheckForQuestsAvailable(PlayerID)
 end
 
+---
+-- Deprecating
 function QuestService:OnOpenQuestDialog(QuestID, PlayerID, questData, action)
     if not questData then Debug('QuestService', 'No Quest Available') return end
     
@@ -138,21 +140,54 @@ function QuestService:OnEntityKilled(event)
     end
 end
 
-function QuestService:OnRightClickQuestGiver(action)
-    --local targetEntity = action.target
-    local PlayerID = action.PlayerID
+-- Deprecating
+--function QuestService:OnRightClickQuestGiver(action)
+--    --local targetEntity = action.target
+--    local PlayerID = action.PlayerID
+--    
+--    -- HAC Only one quest at a time right now.... 
+--    local QuestID = action.target.quest.id
+--    
+--    -- .questgiver:OpenQuestDialog(action.PlayerID)
+--    -- local QuestID = QuestGiver.QuestID
+--    QuestService:OnOpenQuestDialog(QuestID, PlayerID, QuestGiver.quest, action)
+--end
+
+
+local function CheckRequirements(completedQuests, hero, quest)
+    if completedQuests[quest.id] then
+        Debug('QuestService', '['..quest.name..'] Already Completed.')
+        return false
+    end
     
-    -- HAC Only one quest at a time right now.... 
-    local QuestID = action.target.quest.id
+    if not quest.requirements then return true end
     
-    -- .questgiver:OpenQuestDialog(action.PlayerID)
-    -- local QuestID = QuestGiver.QuestID
-    QuestService:OnOpenQuestDialog(QuestID, PlayerID, QuestGiver.quest, action)
+    local reqs = quest.requirements
+    if reqs.level and hero:GetLevel() < reqs.level then
+        Debug('QuestService', '['..quest.name..'] Insufficient level.')
+        return false
+    end
+    if reqs.quest then
+        for _,preQuest in pairs(Split(reqs.quest)) do
+            local hasCompleted = false
+            for _,completedQuest in pairs(completedQuests) do
+                if completedQuest == preQuest then
+                    hasCompleted = true
+                    break
+                end
+            end
+            if hasCompleted == false then
+                Debug('QuestService', '['..quest.name..'] Not yet completed pre-quest: '..preQuest)
+                return false
+            end
+        end
+    end
+    
+    -- Passes all checks.
+    return true
 end
 
-
 function QuestService:CheckForQuestsAvailable(PlayerID)
-    
     Debug('QuestService', 'Check For Quest Available')
     local key = 'player_'..PlayerID..'_quests'
     local completedQuests = QuestService.playerCompleted[key] or {}
@@ -161,40 +196,32 @@ function QuestService:CheckForQuestsAvailable(PlayerID)
     
     local hero = PlayerResource:GetSelectedHeroEntity(PlayerID)
     
-    local function CheckRequirements(quest)
-        if completedQuests[quest.id] then
-            Debug('QuestService', '['..quest.name..'] Already Completed.')
-            return false
+    for _,quest in pairs(QuestRepository.data) do
+        if CheckRequirements(completedQuests, hero, quest) then
+            Debug('QuestService', '['..quest.name..'] Available!')
+            local npc = SpawnSystem:GetUnique(quest.start_entity)
+            if npc then npc:ParticleOn(QuestService.questParticleName) end
         end
-        local reqs = quest.requirements
-        if reqs.level and hero:GetLevel() < reqs.level then
-            Debug('QuestService', '['..quest.name..'] Insufficient level.')
-            return false
-        end
-        if reqs.quest then
-            for _,preQuest in pairs(Split(reqs.quest)) do
-                local hasCompleted = false
-                for _,completedQuest in pairs(completedQuests) do
-                    if completedQuest == preQuest then
-                        hasCompleted = true
-                        break
-                    end
-                end
-                if hasCompleted == false then
-                    Debug('QuestService', '['..quest.name..'] Not yet completed pre-quest: '..preQuest)
-                    return false
-                end
-            end
-        end
-        
-        -- Passes all checks.
-        return true
     end
+end
+
+function QuestService:GetQuestForNpc(character, npc)
+    Debug('QuestService', 'GetQuestForNpc')
+    local key = 'player_'..character:GetPlayerOwnerID()..'_quests'
+    local completedQuests = QuestService.playerCompleted[key] or {}
+    
+    --Debug('QuestService', 'completed', inspect(completedQuests))
+    --Debug('QuestService', 'npc', inspect(npc))
+    
+    local npcName = npc.spawn_name
+    print('QuestService', 'Search for: ', npcName)
     
     for _,quest in pairs(QuestRepository.data) do
-        if CheckRequirements(quest) then
-            Debug('QuestService', '['..quest.name..'] Available!')
-            QuestGiver:LightOn(quest)
+        if quest.start_entity == npcName then
+            if CheckRequirements(completedQuests, hero, quest) then
+                Debug('QuestService', '['..quest.name..'] Available!')
+                return Quest(character:GetPlayerOwnerID(), quest)
+            end
         end
     end
 end

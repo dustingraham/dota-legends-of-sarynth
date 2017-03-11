@@ -17,6 +17,7 @@ for _,file in ipairs({
     'app/systems/characters/player',
     
     'app/systems/npcs/base_npc_creature',
+    'app/systems/npcs/dialog_system',
     'app/systems/npcs/drops',
     'app/systems/npcs/interaction',
     'app/systems/npcs/spawn_node',

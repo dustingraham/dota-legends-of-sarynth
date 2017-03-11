@@ -1,3 +1,5 @@
+---
+--@type SpawnSystem
 SpawnSystem = SpawnSystem or class({}, {
     spawnNodes = {},
     uniqueEntities = {},

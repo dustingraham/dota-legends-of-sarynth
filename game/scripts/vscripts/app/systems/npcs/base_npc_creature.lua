@@ -26,3 +26,22 @@ end
 --function hero:CheckNpc()
 --    print('Checked: Hero', self:GetName(), self:GetClassname(), self:GetUnitName())
 --end
+
+function creature:ParticleOn(name)
+    if self.particles == nil then self.particles = {} end
+    if self.particles[name] then return end
+    self.particles[name] = ParticleManager:CreateParticle(
+        name,
+        PATTACH_ABSORIGIN_FOLLOW,
+        self
+    )
+end
+
+function creature:ParticleOff(name)
+    if self.particles == nil then self.particles = {} end
+    if not self.particles[name] then return end
+    
+    ParticleManager:DestroyParticle(self.particles[name], false)
+    ParticleManager:ReleaseParticleIndex(self.particles[name])
+    self.particles[name] = nil
+end

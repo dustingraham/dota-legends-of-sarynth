@@ -1,7 +1,7 @@
 
 DEBUG_SETTINGS = IsInToolsMode()
 -- Override if necessary...
-DEBUG_SETTINGS = false
+-- DEBUG_SETTINGS = false
 
 DEBUG_SETTINGS_FOG = true
 if DEBUG_SETTINGS then
@@ -22,11 +22,13 @@ DEBUG_PRINT_SECTIONS = {
     CustomMap         = true,
     QuestService      = true,
     QuestGiver        = true,
+    Quest             = true,
     OrderFilter       = true,
     CharacterService  = true,
     Reporter          = false,
     Triggers          = true,
     
+    AiBasic           = true,
     AiBasicSheep      = false,
     AiBasicAggro      = false,
     AiAggroLeash      = false,
@@ -38,10 +40,13 @@ DEBUG_PRINT_SECTIONS = {
     NpcRepository     = true,
     QuestRepository   = true,
     Drops             = true,
-    
+    DialogSystem      = true,
     Event             = true,
     Filters           = true,
-    NpcInteraction    = false,
+    Interaction       = true,
     PrintTable        = true,
 }
 DEBUG_PRINT_ALL = false
+
+-- TEST MODE
+TEST_SPAWN_ITEMS = false

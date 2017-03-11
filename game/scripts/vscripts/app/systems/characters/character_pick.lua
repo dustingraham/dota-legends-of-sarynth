@@ -10,15 +10,16 @@ function CharacterPick:TestMapPickAll(heroReal)
     Timers:CreateTimer(0.01, function()
         CharacterPick:CreateCustomHeroForPlayer({
             ['PlayerID'] = id,
-            ['character'] = 'dragon_knight',
+            ['character'] = 'warlock',
             ['create'] = false
         })
         for _,character in pairs({
-            'omniknight', -- Paladin
-            'bounty_hunter', -- Rogue
-            'windrunner', -- Ranger
-            'invoker', -- Mage
-            'warlock', -- Sorcerer     
+--            'dragon_knight', -- Paladin
+--            'omniknight', -- Paladin
+--            'bounty_hunter', -- Rogue
+--            'windrunner', -- Ranger
+--            'invoker', -- Mage
+--            'warlock', -- Sorcerer     
         }) do
             CharacterPick:CreateCustomHeroForPlayer({
                 ['PlayerID'] = id,

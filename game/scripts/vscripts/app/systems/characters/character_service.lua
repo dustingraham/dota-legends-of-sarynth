@@ -193,9 +193,9 @@ function CharacterService:OnHeroPick(e, event)
     })
     hero.customEquipment:Open(0)
     Containers:SetDefaultInventory(hero, hero.customInventory)
-
+    
     -- Items for testing.
-    if IsInToolsMode() then TestTest(hero) end
+    if IsInToolsMode() and TEST_SPAWN_ITEMS then TestTest(hero) end
 end
 
 function CharacterService:ContainerItemFilter(item, slot)

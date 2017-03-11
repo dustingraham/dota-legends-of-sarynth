@@ -38,6 +38,8 @@ function Spawn:Spawn(data)
     local entity = CreateUnitByName(data.Creature, targetPosition, true, nil, nil, team)
     entity.spawn = self
     
+    entity:SetIdleAcquire(false)
+    
     if data.Gesture then
         entity:StartGesture(_G[data.Gesture])
     end
@@ -57,8 +59,9 @@ function Spawn:Spawn(data)
     end
     
     if data.Unique then
-        Debug('SpawnSystem', data.spawn_name)
+        -- Debug('SpawnSystem', data.spawn_name)
         SpawnSystem:SetUnique(data.spawn_name, entity)
+        entity.spawn_name = data.spawn_name
     end
     
     return entity

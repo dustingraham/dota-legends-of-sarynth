@@ -14,14 +14,22 @@ function Interaction:Activate()
             if not action.inverseCheck then
                 -- Check if position is inside the range.
                 if rangeCurrent <= rangeSquared then
-                    action.callback(action)
+                    local status, result = xpcall(
+                        function() return action.callback(action) end,
+                        function (msg) return msg..'\n'..debug.traceback()..'\n' end
+                    )
                     Interaction.rangedActions[id] = nil
+                    if not status then Debug('Interaction', '[ERROR]', result) end
                 end
             else
                 -- Check if position is beyond the range.
                 if rangeCurrent > rangeSquared then
-                    action.callback(action)
+                    local status, result = xpcall(
+                        function() return action.callback(action) end,
+                        function (msg) return msg..'\n'..debug.traceback()..'\n' end
+                    )
                     Interaction.rangedActions[id] = nil
+                    if not status then Debug('Interaction', '[ERROR]', result) end
                 end
             end
         end
@@ -44,7 +52,8 @@ function Interaction:RangedAction(action)
 end
 
 function Interaction:StartInteraction(action)
-    QuestService:OnRightClickQuestGiver(action)
+    DialogSystem:StartDialog(action.unit, action.target)
+    -- QuestService:OnRightClickQuestGiver(action)
 end
 
 function Interaction:OrderFilter(event, order)
@@ -62,21 +71,17 @@ function Interaction:OrderFilter(event, order)
         Debug('Interaction', 'DOTA_UNIT_ORDER_MOVE_TO_TARGET')
         local target = EntIndexToHScript(order.entindex_target)
         
-        -- TODO: IsNPC?
-        if target.quest then
-            local action = {
-                PlayerID = order.issuer_player_id_const,
-                unit = EntIndexToHScript(order.units['0']),
-                target = target,
-                targetPosition = target:GetAbsOrigin(),
-                callback = function(action)
-                    Debug('Interaction', 'Arrived at move target.')
-                    action.unit:Stop()
-                    Interaction:StartInteraction(action)
-                end
-            }
-            Interaction.rangedActions[order.units['0']] = action
-        end
+        Interaction.rangedActions[order.units['0']] = {
+            PlayerID = order.issuer_player_id_const,
+            unit = EntIndexToHScript(order.units['0']),
+            target = target,
+            targetPosition = target:GetAbsOrigin(),
+            callback = function(action)
+                Debug('Interaction', 'Arrived at move target.')
+                action.unit:Stop()
+                Interaction:StartInteraction(action)
+            end
+        }
         
         return FILTER_EXECUTION_CONTINUE
     end

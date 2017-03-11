@@ -8,6 +8,7 @@
     <scripts>
         <include src="file://{resources}/scripts/mainhud.js" />
         <include src="file://{resources}/scripts/actionbar.js" />
+        <include src="file://{resources}/scripts/dialog_system.js" />
         <include src="file://{resources}/scripts/right_button.js" />
     </scripts>
     <snippets>

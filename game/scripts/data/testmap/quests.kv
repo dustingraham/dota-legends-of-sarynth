@@ -1,3 +1,67 @@
 "Quests"
 {
+    "101"
+    {
+        "name" "test1"
+        "title" "Test 1"
+        "start_entity" "npc_quest_1"
+        "end_entity" "npc_quest_1"
+        "start" { "dialog" "Test 1" }
+        "complete" { "dialog" "You did it!" }
+        "objectives"
+        {
+            "01" {
+                "long_description" "Kill 10 sheep, and return."
+                "description" "Sheep Culled"
+                "action" "kill" // talk find gather
+                "npc" "sheep,sheep_big"
+                "required" "1"
+            }
+        }
+        "rewards" { "experience" "100" }
+    }
+    "102"
+    {
+        "name" "test2"
+        "title" "Test 1 Part 2"
+        "start_entity" "npc_quest_1"
+        "end_entity" "npc_quest_1"
+        "requirements"
+        {
+            "quest" "test1"
+        }
+        "start" { "dialog" "Test 1 Part 2" }
+        "complete" { "dialog" "You did it!" }
+        "objectives"
+        {
+            "01" {
+                "long_description" "Kill 10 sheep, and return."
+                "description" "Sheep Culled"
+                "action" "kill" // talk find gather
+                "npc" "sheep,sheep_big"
+                "required" "1"
+            }
+        }
+        "rewards" { "experience" "100" }
+    }
+    "103"
+    {
+        "name" "test3"
+        "title" "Test 2"
+        "start_entity" "npc_quest_2"
+        "end_entity" "npc_quest_2"
+        "start" { "dialog" "Test 2" }
+        "complete" { "dialog" "You did it!" }
+        "objectives"
+        {
+            "01" {
+                "long_description" "Kill 10 sheep, and return."
+                "description" "Sheep Culled"
+                "action" "kill" // talk find gather
+                "npc" "sheep,sheep_big"
+                "required" "2"
+            }
+        }
+        "rewards" { "experience" "100" }
+    }
 }

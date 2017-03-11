@@ -24,13 +24,27 @@ function Quest:constructor(PlayerID, questData)
     end
 end
 
+function Quest:GetStartNpc()
+    if not self.startNpc then
+        self.startNpc = SpawnSystem:GetUnique(self.start_entity)
+    end
+    return self.startNpc
+end
+
+function Quest:GetEndNpc()
+    if not self.endNpc then
+        self.endNpc = SpawnSystem:GetUnique(self.end_entity)
+    end
+    return self.endNpc
+end
+
 function Quest:GetName()
     return self.name
 end
 
-function Quest:SetQuestGiver(questgiver)
-    self.questgiver = questgiver
-end
+--function Quest:SetQuestGiver(questgiver)
+--    self.questgiver = questgiver
+--end
 
 function Quest:IsComplete()
     for k,v in pairs(self.objectives) do
@@ -48,6 +62,12 @@ function Quest:ApplyReward(hero)
     end
 end
 
+function Quest:Accept()
+    -- self.PlayerID
+    -- local player = PlayerResource:GetPlayer(event.PlayerID)
+    self:GetStartNpc():ParticleOff(QuestService.questParticleName)
+end
+
 -- Get reduced data set for client transmission.
 function Quest:GetData()
     -- Just enough to present client side display.
@@ -58,7 +78,7 @@ function Quest:GetData()
     local data = {
         icon = self.icon,
         title = self.title,
-        objectives = {}
+        objectives = {},
     }
     for _,objective in pairs(self.objectives) do
         local oData = {
@@ -82,7 +102,8 @@ function Quest:GetStartData()
         icon = self.icon,
         title = self.title,
         start_dialog = self.start.dialog,
-        objectives = {}
+        objectives = {},
+        rewards = self.rewards,
     }
     for _,objective in pairs(self.objectives) do
         local oData = {
@@ -93,10 +114,15 @@ function Quest:GetStartData()
         }
         table.insert(data.objectives, oData)
     end
+    
     Debug('Quest', inspect(data))
     return data
 end
 
+---
+--@function [parent=#Quest] OnEntityKilled
+--@param self
+--@param #string npc_name
 function Quest:OnEntityKilled(npc_name)
     -- Check each objective.
     for _,objective in pairs(self.objectives) do
@@ -113,7 +139,7 @@ function Quest:OnEntityKilled(npc_name)
                 objective.current = objective.current + 1
                 QuestService:SendQuestUpdate(self)
                 if self:IsComplete() then
-                    QuestGiver:LightOnEnd(self)
+                    self:GetEndNpc():ParticleOn(QuestService.questParticleName)
                 end
             end
         end
