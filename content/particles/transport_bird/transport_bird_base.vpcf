@@ -1,0 +1,71 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+{
+	_class = "CParticleSystemDefinition"
+	m_bShouldHitboxesFallbackToRenderBounds = false
+	m_nMaxParticles = 0
+	m_flConstantRadius = 2.0
+	m_bShouldSort = false
+	m_flMaxRecreationTime = -1.0
+	m_Children = 
+	[
+		{
+			m_ChildRef = resource:"particles/transport_bird/transport_bird_trail_g.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/transport_bird/transport_bird_trail.vpcf"
+		},
+		{
+			m_bEndCap = true
+			m_ChildRef = resource:"particles/transport_bird/transport_bird_destruction.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/transport_bird/transport_bird_trail_b.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/transport_bird/transport_bird_trail_d.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/transport_bird/transport_bird_trail_f.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/transport_bird/transport_bird_trail_c.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/transport_bird/transport_bird_trail_h.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/transport_bird/transport_bird_trail_light.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/transport_bird/transport_bird_cloud.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/transport_bird/transport_bird_fire.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/transport_bird/transport_bird_dust.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/transport_bird/transport_bird_spray.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/transport_bird/transport_bird_leading.vpcf"
+			m_bDisableChild = true
+		},
+		{
+			m_ChildRef = resource:"particles/transport_bird/transport_bird_arrow.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/transport_bird/transport_bird_model.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/transport_bird/transport_bird_arc.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/transport_bird/transport_bird_arc_b.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/transport_bird/transport_bird_leading_glow.vpcf"
+		},
+	]
+}

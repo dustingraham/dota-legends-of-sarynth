@@ -1,4 +1,5 @@
-local creature = CDOTA_BaseNPC_Creature
+-- local creature = CDOTA_BaseNPC_Creature
+local creature = CDOTA_BaseNPC
 
 function creature:CheckNpc()
     print('Checked: Creature', self:GetName(), self:GetClassname(), self:GetUnitName())

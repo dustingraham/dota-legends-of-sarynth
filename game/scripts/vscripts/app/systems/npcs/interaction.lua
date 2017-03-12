@@ -51,9 +51,22 @@ function Interaction:RangedAction(action)
     } ]]
 end
 
+LinkLuaModifier('character_teleporting', 'app/systems/characters/modifiers/character_teleporting', LUA_MODIFIER_MOTION_NONE)
+
 function Interaction:StartInteraction(action)
-    DialogSystem:StartDialog(action.unit, action.target)
-    -- QuestService:OnRightClickQuestGiver(action)
+    if action.target.spawn_name == 'teleport_town' then
+        action.unit:AddNewModifier(action.unit, nil, 'character_teleporting', {
+            from = 'teleport_town',
+            to = 'teleport_ice'
+        })
+    elseif action.target.spawn_name == 'teleport_ice' then
+        action.unit:AddNewModifier(action.unit, nil, 'character_teleporting', {
+            from = 'teleport_ice',
+            to = 'teleport_town'
+        })
+    else
+        DialogSystem:StartDialog(action.unit, action.target)
+    end
 end
 
 function Interaction:OrderFilter(event, order)
@@ -79,6 +92,10 @@ function Interaction:OrderFilter(event, order)
             callback = function(action)
                 Debug('Interaction', 'Arrived at move target.')
                 action.unit:Stop()
+                
+                action.unit:Hold()
+                action.unit:Interrupt()
+                
                 Interaction:StartInteraction(action)
             end
         }

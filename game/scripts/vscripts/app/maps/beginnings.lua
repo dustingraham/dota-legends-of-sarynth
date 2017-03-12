@@ -26,7 +26,9 @@ function CustomMap:OnNpcSpawned(event)
         npc.bFirstSpawned = true
         if not Boot.allPick then
             Boot.allPick = true
-            CharacterPick:TestMapPickGondar(npc)
+            if TEST_PICK_HERO then
+                CharacterPick:TestMapPickHero(npc, TEST_PICK_HERO)
+            end
         end
     end
 end

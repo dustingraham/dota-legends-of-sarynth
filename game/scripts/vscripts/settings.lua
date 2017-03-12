@@ -50,3 +50,9 @@ DEBUG_PRINT_ALL = false
 
 -- TEST MODE
 TEST_SPAWN_ITEMS = false
+--TEST_PICK_HERO = 'dragon_knight' -- Warrior
+--TEST_PICK_HERO = 'omniknight'    -- Paladin
+--TEST_PICK_HERO = 'bounty_hunter' -- Rogue
+--TEST_PICK_HERO = 'windrunner'    -- Ranger
+TEST_PICK_HERO = 'invoker'       -- Mage
+--TEST_PICK_HERO = 'warlock'       -- Sorcerer

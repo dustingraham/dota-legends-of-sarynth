@@ -16,7 +16,7 @@ function CharacterPick:TestMapPickAll(heroReal)
             ['create'] = false
         })
         for _,character in pairs({
---            'dragon_knight', -- Paladin
+--            'dragon_knight', -- Warrior
 --            'omniknight', -- Paladin
 --            'bounty_hunter', -- Rogue
 --            'windrunner', -- Ranger
@@ -32,9 +32,8 @@ function CharacterPick:TestMapPickAll(heroReal)
     end)
 end
 
-function CharacterPick:TestMapPickGondar(heroReal)
-    Debug('CharacterPick', 'Picking Gondar')
-    
+function CharacterPick:TestMapPickHero(heroReal, pickHero)
+    Debug('CharacterPick', 'Picking '..pickHero)
     
     -- This gets purged after the first create...
     local id = heroReal:GetPlayerOwnerID()
@@ -45,7 +44,7 @@ function CharacterPick:TestMapPickGondar(heroReal)
     Timers:CreateTimer(0.01, function()
         CharacterPick:CreateCustomHeroForPlayer({
             ['PlayerID'] = id,
-            ['character'] = 'bounty_hunter',
+            ['character'] = pickHero,
             ['create'] = false
         })
     end)
