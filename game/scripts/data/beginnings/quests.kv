@@ -2,7 +2,7 @@
 {
     "1001"
     {
-        "name" "intro_sheep_1"
+        "name" "start_area_sheep_1"
         "title" "Thinning the Flock"
         "start_entity" "npc_quest_start"
         "end_entity" "npc_quest_start"
@@ -12,7 +12,7 @@
         }
         "start"
         {
-            "dialog" "Oh, hey! Glad I caught you. Could you help me out real quick?<br><br>See those sheep over there? They have really been destroying my alchemy crops. You wouldn't mind thinning the flock a little, would you?"
+            "dialog" "Oh, hey! The name's Volgarth. Glad I caught you. Could you help me out real quick?<br><br>See those sheep over there? They have really been destroying my alchemy crops. You wouldn't mind thinning the flock a little, would you?"
         }
         "complete"
         {
@@ -26,6 +26,46 @@
                 "action" "kill"
                 "npc" "sheep,sheep_big"
                 "required" "3"
+            }
+        }
+        "rewards"
+        {
+            "gold" "25"
+            "experience" "100"
+            "item_choose"
+            {
+                "01" "item_shield_basic"
+                "02" "item_armor_basic"
+                "03" "item_weapon_basic"
+            }
+        }
+    }
+    "1005"
+    {
+        "name" "start_area_report_to_town"
+        "title" "Report to Town"
+        "start_entity" "npc_quest_start"
+        "end_entity" "npc_quest_start"
+        "requirements"
+        {
+            "level" "1"
+        }
+        "start"
+        {
+            "dialog" "I really appreciate the help around here. You best report to town now, they need you more than I do."
+        }
+        "complete"
+        {
+            "dialog" "Oh, hey. Glad that Volgarth sent you. We could really use your help."
+        }
+        "objectives"
+        {
+            "01" {
+                "long_description" "Report to town."
+                "description" "Report to Town"
+                "action" "kill"
+                "npc" "sheep,sheep_big"
+                "required" "1"
             }
         }
         "rewards"

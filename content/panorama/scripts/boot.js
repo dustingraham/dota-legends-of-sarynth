@@ -55,8 +55,9 @@ var upDownHide = function(up, down) {
     }
 };
 
+upDownHide('Hud', 'topbar'); // Day/Night glow.
 upDownHide('Hud', 'quickstats');
-upDownHide('Hud', 'GlyphScanContainer'); // May want this for a "recall" ?
+upDownHide('Hud', 'GlyphScanContainer');
 
 // CONCEPT
 

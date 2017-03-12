@@ -41,7 +41,7 @@ function QuestService:SendQuestUpdate(quest)
     PlayerTables:SetTableValue(key, quest.id, quest:GetData())
 end
 
-function QuestService:CheckIfCompleted(QuestID, PlayerID)
+function QuestService:CheckIfCompleted(PlayerID, QuestID)
     local key = 'player_'..PlayerID..'_quests'
     
     if QuestService.playerCompleted[key] == nil then return false end
@@ -127,7 +127,14 @@ end
 function QuestService:GetPlayerQuest(PlayerID, QuestID)
     local key = 'player_'..PlayerID..'_quests'
     if QuestService.playerQuests[key] == nil then return nil end
-    return QuestService.playerQuests[key][QuestID]
+    
+    -- Search Current Quests
+    for id,quest in pairs(QuestService.playerQuests[key]) do
+        if QuestID == id or QuestID == quest.name then return quest end
+    end
+    
+    -- Not Found
+    return nil
 end
 
 function QuestService:OnEntityKilled(event)

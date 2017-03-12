@@ -111,7 +111,7 @@ function CharacterService:OnEntityKilled(event)
 end
 
 function CharacterService:OnHeroDeath(e, event)
-    print(event.hero:GetName())
+    Debug('CharacterService', 'OnHeroDeath', event.hero:GetName())
 end
 
 function CharacterService:OnPlayerLevelUp(event)
