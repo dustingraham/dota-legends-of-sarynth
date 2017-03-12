@@ -35,7 +35,7 @@ DEBUG_PRINT_SECTIONS = {
     AiBasicNpc        = true,
     
     Spawn             = false,
-    
+    FocusTarget       = true,
     SpawnSystem       = true,
     NpcRepository     = true,
     QuestRepository   = true,

@@ -1,7 +1,19 @@
 "use strict";
-// Originally provided by Dreoh
 
 GameUI.customCurrentFocusId = -1;
+
+function GetFocusTarget()
+{
+    return GameUI.customCurrentFocusId;
+}
+
+function SetFocusTarget(entityIndex)
+{
+    GameUI.customCurrentFocusId = entityIndex;
+    GameEvents.SendCustomGameEventToServer('focus_target', {
+        target: entityIndex
+    });
+}
 
 function OnLeftButtonPressed()
 {
@@ -16,7 +28,7 @@ function OnLeftButtonPressed()
         var entityIndex = e.entityIndex
         if (Entities.IsSelectable(entityIndex))
         {
-            GameUI.customCurrentFocusId = entityIndex;
+            SetFocusTarget(entityIndex);
             
             var healthMax = Entities.GetMaxHealth(entityIndex);
             var health = Entities.GetHealth(entityIndex);
@@ -72,7 +84,7 @@ function OnRightButtonPressed()
         
         if (Entities.IsEnemy(entityIndex))
         {
-            GameUI.customCurrentFocusId = entityIndex;
+            SetFocusTarget(entityIndex);
             return false;
         }
         

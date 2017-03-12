@@ -11,8 +11,11 @@ for _,file in ipairs({
     
     'app/maps/'..GetMapName(),
     
+    'app/systems/characters/abilities/wrappers',
+    
     'app/systems/characters/character_pick',
     'app/systems/characters/character_service',
+    'app/systems/characters/focus_target',
     'app/systems/characters/player_service',
     'app/systems/characters/player',
     

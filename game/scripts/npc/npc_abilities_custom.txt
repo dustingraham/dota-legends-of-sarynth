@@ -59,6 +59,28 @@
         }
     }
     
+    "simple_projectile"
+    {
+        "BaseClass"                "ability_lua"
+        "ScriptFile"               "app/systems/characters/abilities/simple_projectile"
+        "AbilityBehavior"                "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+        "AbilityUnitTargetTeam"            "DOTA_UNIT_TARGET_TEAM_ENEMY"
+        "AbilityUnitTargetType"            "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+        "AbilityUnitDamageType"            "DAMAGE_TYPE_MAGICAL"
+        "AbilityTextureName"            "dragon_knight_dragon_tail"
+        
+        "AbilityCooldown"        "0.0"
+        "AbilityManaCost"        "1"
+        "AbilityCastAnimation" "ACT_DOTA_ATTACK"
+        "AbilityCastRange"                "250"
+        // Default speed...
+        //"AbilityCastPoint"                "0.50"
+        
+        "AbilityCastPoint"                "0.35"
+        "AnimationPlaybackRate" "0.73"
+        "AbilityDuration"                "2"
+    }
+    
     "rogue_crit_hit"
     {
         "BaseClass"                "ability_lua"

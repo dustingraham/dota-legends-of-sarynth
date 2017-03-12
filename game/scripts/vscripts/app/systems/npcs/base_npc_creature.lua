@@ -1,6 +1,8 @@
 -- local creature = CDOTA_BaseNPC_Creature
 local creature = CDOTA_BaseNPC
 
+-- Clientside may require : C_DOTA_BaseNPC
+
 function creature:CheckNpc()
     print('Checked: Creature', self:GetName(), self:GetClassname(), self:GetUnitName())
 end

@@ -20,6 +20,21 @@ of exp, then track evenly up to max.
 100% exp = 100% tooltip
 */
 
+
+function GetFocusTarget()
+{
+    return GameUI.customCurrentFocusId;
+}
+
+function SetFocusTarget(entityIndex)
+{
+    GameUI.customCurrentFocusId = entityIndex;
+    GameEvents.SendCustomGameEventToServer('focus_target', {
+        target: entityIndex
+    });
+}
+
+
 function clamp(val, min, max) {
     return Math.min(Math.max(val, min), max);
 }
@@ -130,12 +145,16 @@ function UpdateTargetUnitPanel()
 {
     var panel = $.GetContextPanel();
     
-    var entityId = GameUI.customCurrentFocusId;
+    var entityId = GetFocusTarget();
     if (entityId == undefined) return;
     
     if (!Entities.IsValidEntity(entityId))
     {
-        GameUI.customCurrentFocusId = -1;
+        // If it isn't already -1.
+        if (entityId != -1)
+        {
+            SetFocusTarget(-1)
+        }
         entityId = -1;
     }
     
@@ -167,7 +186,6 @@ function UpdateUnitPanel() {
     var heroId = Players.GetPlayerHeroEntityIndex(playerId);
     
     // For now let's remain on the hero, until we have a proper target frame.
-    //SetHeroUnitPanel(GameUI.customCurrentFocusId);
     SetHeroUnitPanel(heroId);
     
         // Action Bar

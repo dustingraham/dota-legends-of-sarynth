@@ -22,6 +22,8 @@ function Boot:Precache(context)
     PrecacheResource('particle', 'particles/units/heroes/hero_crystalmaiden/maiden_crystal_nova.vpcf', context)
     PrecacheResource('particle', 'particles/econ/items/ancient_apparition/aa_blast_ti_5/ancient_apparition_ice_blast_explode_ti5.vpcf', context)
     
+    -- Spell Testing
+    PrecacheResource('particle', 'particles/econ/items/abaddon/abaddon_alliance/abaddon_death_coil_alliance.vpcf', context)
     
     PrecacheResource('soundfile', 'soundevents/game_sounds_heroes/game_sounds_shadowshaman.vsndevts', context)
     PrecacheResource('soundfile', 'soundevents/game_sounds_heroes/game_sounds_ursa.vsndevts', context)
