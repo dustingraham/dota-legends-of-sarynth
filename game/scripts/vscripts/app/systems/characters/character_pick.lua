@@ -129,6 +129,19 @@ function CharacterPick:CreateCustomHeroForPlayer(event)
             -- But, weaker shield. (Maybe wyrm shield of uldorak)
             -- Shield
             'models/items/dragon_knight/shield_timedragon.vmdl',
+        },
+        warlock = {
+            -- Helm
+            'models/items/warlock/tevent_2_gatekeeper_head/tevent_2_gatekeeper_head.vmdl',
+            
+            -- Robes
+            'models/items/warlock/archivists_robe/archivists_robe.vmdl',
+            
+            -- Staff
+            'models/items/warlock/staff_of_infernal_chaos/staff_of_infernal_chaos.vmdl',
+            
+            -- Offhand
+            'models/heroes/warlock/warlock_lantern.vmdl',
         }
     }
     if cosmetics[event.character] then

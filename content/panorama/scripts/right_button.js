@@ -69,22 +69,24 @@ function OnRightButtonPressed()
     {
         var entityIndex = e.entityIndex
         if (Entities.IsInvulnerable( entityIndex )){
-            var order = {
+            Game.PrepareUnitOrders({
                 UnitIndex : hero,
                 TargetIndex : entityIndex,
-                OrderType : dotaunitorder_t.DOTA_UNIT_ORDER_MOVE_TO_TARGET,
-                QueueBehavior : OrderQueueBehavior_t.DOTA_ORDER_QUEUE_NEVER,
-                ShowEffects : false
-            };
-
-            Game.PrepareUnitOrders( order );
-            //$.Msg('Custom behavior');
+                OrderType : dotaunitorder_t.DOTA_UNIT_ORDER_MOVE_TO_TARGET
+                //QueueBehavior : OrderQueueBehavior_t.DOTA_ORDER_QUEUE_NEVER,
+                //ShowEffects : false
+            });
             return true;
         }
         
         if (Entities.IsEnemy(entityIndex))
         {
             SetFocusTarget(entityIndex);
+            Game.PrepareUnitOrders({
+                UnitIndex : hero,
+                OrderType : dotaunitorder_t.DOTA_UNIT_ORDER_STOP
+            });
+            return true; // Avoid walking up to it. Just target it.
             return false;
         }
         

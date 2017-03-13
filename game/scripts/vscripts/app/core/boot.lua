@@ -22,17 +22,23 @@ function Boot:Precache(context)
     PrecacheResource('particle', 'particles/units/heroes/hero_crystalmaiden/maiden_crystal_nova.vpcf', context)
     PrecacheResource('particle', 'particles/econ/items/ancient_apparition/aa_blast_ti_5/ancient_apparition_ice_blast_explode_ti5.vpcf', context)
     
+    -- Spells
+    PrecacheResource('particle', 'particles/units/heroes/hero_lina/lina_base_attack.vpcf', context)
+    
     -- Spell Testing
     PrecacheResource('particle', 'particles/econ/items/abaddon/abaddon_alliance/abaddon_death_coil_alliance.vpcf', context)
     
     PrecacheResource('soundfile', 'soundevents/game_sounds_heroes/game_sounds_shadowshaman.vsndevts', context)
     PrecacheResource('soundfile', 'soundevents/game_sounds_heroes/game_sounds_ursa.vsndevts', context)
     PrecacheResource("soundfile", "soundevents/music/jboberg_01/soundevents_music.vsndevts", context)
-
+    
     PrecacheUnitByNameSync("npc_dota_hero_dragon_knight", context)
+    PrecacheUnitByNameSync('npc_dota_hero_omniknight', context)
+    PrecacheUnitByNameSync('npc_dota_hero_bounty_hunter', context)
+    PrecacheUnitByNameSync("npc_dota_hero_windrunner", context)
     PrecacheUnitByNameSync("npc_dota_hero_invoker", context)
-
-    PrecacheUnitByNameSync('npc_dota_hero_omniknight', context) -- Intro Sound
+    PrecacheUnitByNameSync('npc_dota_hero_warlock', context)
+    
     PrecacheUnitByNameSync("npc_dota_hero_lina", context)
 
     PrecacheUnitByNameSync("sheep", context)

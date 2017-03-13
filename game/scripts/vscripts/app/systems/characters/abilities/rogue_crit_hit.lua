@@ -32,7 +32,12 @@ function spell:OnSpellStart()
     -- Test Damage Deal
     local target = self:GetCursorTarget()
     local damage = 3150
-    ApplyDamage({ victim = target, attacker = caster, damage = damage,  damage_type = DAMAGE_TYPE_MAGICAL })
+    ApplyDamage({
+        victim = target,
+        attacker = caster,
+        damage = damage,
+        damage_type = DAMAGE_TYPE_MAGICAL
+    })
     
     ScreenShake(caster:GetAbsOrigin(), 5, 150, 0.45, 3000, 0, true)
     
