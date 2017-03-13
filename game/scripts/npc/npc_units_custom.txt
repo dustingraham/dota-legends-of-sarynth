@@ -72,30 +72,27 @@
     
     "ice_dungeon_boss2"
     {
-        // CM as final boss, move hulk to second boss. IceForge spirits as support creeps.
-        "Model" "models/heroes/crystal_maiden/crystal_maiden_arcana.vmdl"
-        //"Model"                 "models/items/invoker/forge_spirit/iceforged_spirit/iceforged_spirit.vmdl"
+        "Model"                 "models/creeps/lane_creeps/creep_radiant_hulk/creep_radiant_ancient_hulk.vmdl"
         "BaseClass"             "npc_dota_creature"
         "Level"                 "17"
         "ModelScale"            "1.9"
-        "HealthBarOffset"       "400"
+        "HealthBarOffset"       "420"
         "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_GROUND"
         "MovementSpeed"             "360"
     }
     
     "ice_dungeon_boss3"
     {
-        "Model"                 "models/creeps/lane_creeps/creep_radiant_hulk/creep_radiant_ancient_hulk.vmdl"
+        // CM as final boss, move hulk to second boss. IceForge spirits as support creeps.
+        "Model" "models/heroes/crystal_maiden/crystal_maiden_arcana.vmdl"
+        //"Model"                 "models/items/invoker/forge_spirit/iceforged_spirit/iceforged_spirit.vmdl"
         "BaseClass"             "npc_dota_creature"
         "Level"                 "18"
         "ModelScale"            "1.4"
-        "HealthBarOffset"       "420"
+        "HealthBarOffset"       "400"
         "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_GROUND"
         "MovementSpeed"             "360"
     }
-    
-    
-    
     
     "quest_bear"
     {
