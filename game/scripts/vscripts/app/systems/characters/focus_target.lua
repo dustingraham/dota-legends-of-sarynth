@@ -12,51 +12,6 @@ function FocusTarget:OnFocusTarget(event)
     Wrappers.SetNetTable('focus_target', event.PlayerID, event.target)
 end
 
-function BindActivate(target)
-    if not target.initialized then
-        target.initialized = true
-        Event:Listen('Activate', Dynamic_Wrap(target, 'Activate'), target)
-    end
-end
-
-BindActivate(FocusTarget)
-
---function GetUnitTarget(entity)
---    if not IsValidEntity(entity.focusTarget) then return nil end
---    return EntIndexToHScript(entity.focusTarget)
---end
-
-
---function GetHeroID( player )
---    player = type( player ) == 'number' and PlayerResource:GetPlayer( player ) or player
---    local hHero = player:GetAssignedHero()
---    return hHero:GetEntityIndex()
---end
---function GetNetTable( table, key )
---    key = tostring( key )
---    return CustomNetTables:GetTableValue( table, key )
---end
---function SetNetTable( table, key, value )
---    key = tostring( key )
---    value = type( value ) ~= 'table' and { value = value } or value
---    print('Set', table, key, value)
---    DeepPrintTable(value)
---    CustomNetTables:SetTableValue( table, key, value )
---end
---
---function GetUnitTarget(unit)
---    -- local iUnit   = unit:GetEntityIndex()
---    local value = GetNetTable( 'focus_target', unit:GetPlayerOwnerID() )
---    if value and value.value then
---        local target = EntIndexToHScript( value.value )
---        if IsValidEntity( target ) then 
---            return target
---        end
---    end
---    
---    return nil
---end
-
 function FocusTarget:OrderFilter(event, order)
     -- We only care if the spell has no target.
     if order.order_type == DOTA_UNIT_ORDER_CAST_NO_TARGET then
@@ -85,3 +40,11 @@ function FocusTarget:OrderFilter(event, order)
     
     return FILTER_EXECUTION_CONTINUE
 end
+
+function BindActivate(target)
+    if not target.initialized then
+        target.initialized = true
+        Event:Listen('Activate', Dynamic_Wrap(target, 'Activate'), target)
+    end
+end
+BindActivate(FocusTarget)
