@@ -36,19 +36,6 @@ function Wrappers.GetFocusTarget(forHero)
 end
 
 function Wrappers.FocusTargetAbility(spell)
---    local castFilterResult = spell.CastFilterResult 
---    function spell:CastFilterResult()
---        
---    end
-    
---    function spell:Init()
-----        local tteam = self:GetAbilityTargetTeam()
-----        local ttype = self:GetAbilityTargetType()
-----        local tflag = self:GetAbilityTargetFlags()
---        local tteam = false
---        print('SpellInit', tteam)
---        self.initialized = true
---    end
     
     if spell.UnitFilter ~= nil then
         Debug('Wrappers', 'Found non-nil UnitFilter in ability wrap.')
@@ -67,15 +54,7 @@ function Wrappers.FocusTargetAbility(spell)
     
     -- Pre-wrapped GetBehavior call.
     local getBehavior = spell.GetBehavior
-    
-    local debugState = true
-    local debugValue = nil
-    
     function spell:GetBehavior()
---        if not self.initialized then
---            self:Init()
---        end
-        
         local caster  = self:GetCaster()
         local target = Wrappers.GetFocusTarget(caster)
         
@@ -88,29 +67,15 @@ function Wrappers.FocusTargetAbility(spell)
             behavior = self.BaseClass.GetBehavior(self)
         end
         
-        -- Debugging...
-        if target ~= debugValue then
-            print('New target')
-            debugValue = target
-            debugState = true
-        end
-        
+        -- If we have a focus target, and we're not here in the
+        -- special unit filter execution call, then set the
+        -- behavior to no target.
         if not self.customTargetCasting and target then
-            local filter = self:UnitFilter(target)
-            if filter == UF_SUCCESS then
-                if debugState then
-                    debugState = false
-                    print('[Behavior] Set Ability to NO_TARGET')
-                end
+            if self:UnitFilter(target) == UF_SUCCESS then
                 behavior = behavior 
                     - DOTA_ABILITY_BEHAVIOR_UNIT_TARGET
                     + DOTA_ABILITY_BEHAVIOR_NO_TARGET
             end
-        end
-        
-        if debugState then
-            debugState = false
-            print('Set To Unit Target')
         end
         
         return behavior
@@ -118,16 +83,12 @@ function Wrappers.FocusTargetAbility(spell)
     
     -- UNIT_TARGET Filter
     function spell:CastFilterResultTarget(target)
-        local caster = self:GetCaster()
         return self:UnitFilter(target)
     end
     
     -- NO_TARGET Filter
     function spell:CastFilterResult()
-        print('[SPELL] NO_TARGET Cast Filter Check')
-        
         local caster = self:GetCaster()
-        
         local target = Wrappers.GetFocusTarget(caster)
         if not target then
             return UF_FAIL_CUSTOM
@@ -136,20 +97,21 @@ function Wrappers.FocusTargetAbility(spell)
         return self:UnitFilter(target)
     end
     
-    local getCursorTarget = spell.GetCursorTarget
-    function spell:GetCursorTarget()
-        -- local goodTarget = getCursorTarget(self)
-        local goodTarget = self.BaseClass.GetCursorTarget(self)
-        
-        local testTarget =  Wrappers.GetFocusTarget(self:GetCaster())
-        if testTarget ~= goodTarget then
-            print('UNMATCHED TARGETS')
-            print('Actual: ', goodTarget)
-            print('Focus: ', testTarget)
-        end
-        
-        return goodTarget
-    end
+    -- This is expected behavior. Using default GetCursorTarget.
+--    local getCursorTarget = spell.GetCursorTarget
+--    function spell:GetCursorTarget()
+--        -- local goodTarget = getCursorTarget(self)
+--        local goodTarget = self.BaseClass.GetCursorTarget(self)
+--        
+--        local testTarget =  Wrappers.GetFocusTarget(self:GetCaster())
+--        if testTarget ~= goodTarget then
+--            print('UNMATCHED TARGETS')
+--            print('Actual: ', goodTarget)
+--            print('Focus: ', testTarget)
+--        end
+--        
+--        return goodTarget
+--    end
     
     function spell:UseCustomTarget()
         return true

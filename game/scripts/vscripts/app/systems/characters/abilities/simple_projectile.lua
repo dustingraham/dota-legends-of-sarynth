@@ -2,41 +2,10 @@ simple_projectile = simple_projectile or class({})
 
 local spell = simple_projectile
 
+-- Gah, load these via KV loads?
 spell.target_team = DOTA_UNIT_TARGET_TEAM_ENEMY
 spell.target_type = DOTA_UNIT_TARGET_ALL
 spell.target_flag = DOTA_UNIT_TARGET_FLAG_NONE
-
-
-function GetHeroID( player )
-    player = type( player ) == 'number' and PlayerResource:GetPlayer( player ) or player
-    local hHero = player:GetAssignedHero()
-    return hHero:GetEntityIndex()
-end
-function GetNetTable( table, key )
-    key = tostring( key )
-    local value = CustomNetTables:GetTableValue( table, key )
-    -- print('Get', table, key, value)
-    return CustomNetTables:GetTableValue( table, key )
-end
-function SetNetTable( table, key, value )
-    key = tostring( key )
-    value = type( value ) ~= 'table' and { value = value } or value
-    print('Set', table, key, value)
-    CustomNetTables:SetTableValue( table, key, value )
-end
-
-function GetUnitTarget(unit)
-    -- local iUnit   = unit:GetEntityIndex()
-    local value = GetNetTable( 'focus_target', unit:GetPlayerOwnerID() )
-    if value and value.value then
-        local target = EntIndexToHScript( value.value )
-        if IsValidEntity( target ) then 
-            return target
-        end
-    end
-    
-    return nil
-end
 
 function spell:OnAbilityPhaseStart()
     print('[SPELL] Pre-Check simple_projectile')
@@ -52,10 +21,9 @@ function spell:OnAbilityPhaseStart()
     end
     
     local vectorDiff = target:GetAbsOrigin() - caster:GetAbsOrigin()
-    print('Actual: ', vectorDiff:Length())
-    print('Allowed: ', self:GetCastRange())
-    
     if vectorDiff:Length() > self:GetCastRange() + 50 then
+        print('Actual: ', vectorDiff:Length())
+        print('Allowed: ', self:GetCastRange())
         print('[Distance] Too far fool')
         return false
     end
@@ -145,9 +113,6 @@ function spell:GetCastRange()
     return 600
 end
 
-
-
-
 function spell:GetAbilityCastPoint()
     print('Getting cast point...')
     return 1.0
@@ -195,9 +160,6 @@ function FX(path, attach, parent, options)
         return index
     end
 end
-
-
-
 
 if IsClient() then
     require('app/systems/characters/abilities/wrappers')

@@ -41,11 +41,11 @@
         "AttackDamageMin"       "4"
         "AttackDamageMax"       "9"
         
-        "Ability1" "simple_projectile"
-        "Ability2" "lich_frost_nova"
+        "Ability1" "fireball"
+        "Ability2" "simple_projectile"
         "Ability3" "leshrac_split_earth"
         "Ability4" "lina_dragon_slave"
-        "Ability5" ""
+        "Ability5" "lich_frost_nova"
         "Ability6" ""
         "Ability7" ""
         

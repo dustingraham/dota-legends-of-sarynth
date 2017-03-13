@@ -9,14 +9,6 @@ end
 
 function FocusTarget:OnFocusTarget(event)
     Debug('FocusTarget', 'Set '..event.PlayerID..' to '..event.target)
---    
---    local hero = PlayerResource:GetSelectedHeroEntity(event.PlayerID)
---    if hero then
---        hero.focusTarget = event.target
---    else
---        Debug('FocusTarget', 'Hero not available yet...')
---    end
---    
     Wrappers.SetNetTable('focus_target', event.PlayerID, event.target)
 end
 
@@ -77,13 +69,13 @@ function FocusTarget:OrderFilter(event, order)
             local target = Wrappers.GetFocusTarget(caster)
             if target then
                 ability.customTargetCasting = true
-                ExecuteOrderFromTable {
+                ExecuteOrderFromTable({
                     OrderType    = DOTA_UNIT_ORDER_CAST_TARGET,
                     UnitIndex    = caster:entindex(),
                     TargetIndex  = target:entindex(),
                     AbilityIndex = order.entindex_ability,
                     Queue        = false
-                }
+                })
                 ability.customTargetCasting = false
             end
             
