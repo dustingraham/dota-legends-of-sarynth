@@ -4,6 +4,24 @@
 {
     "Version"    "1"
     
+    "start_area_wolf_boss"
+    {
+        "Model" "models/items/lycan/wolves/ambry_summon/ambry_summon.vmdl"
+        "BaseClass"             "npc_dota_creature"
+        "Level"                 "6"
+        "ModelScale"            "1.6"
+        "HealthBarOffset"       "220"
+        "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_GROUND"
+        "MovementSpeed"             "560"
+        "AttackCapabilities"        "DOTA_UNIT_CAP_MELEE_ATTACK"
+        "AttackDamageMin"           "4"        // Damage range min.
+        "AttackDamageMax"           "8"        // Damage range max.    
+        "AttackRate"                "0.9"       // Speed of attack.
+        "AttackAnimationPoint"      "0.33"      // Normalized time in animation cycle to attack.
+        "AttackRange"               "160"        // Range within a target can be attacked.
+        "RingRadius"                "140"
+    }
+    
     "ice_dungeon_golem"
     {
         "Model"                 "models/creeps/neutral_creeps/n_creep_golem_a/neutral_creep_golem_a.vmdl"

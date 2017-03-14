@@ -177,4 +177,20 @@
         "RandomScale" "1"
         "SpawnPositionJitter" "1"
     }
+    "start_area_wolf_boss"
+    {
+        "SpawnPoints" "area_start_spawn_wolf"
+        "Creature" "start_area_wolf_boss"
+        "OnInitSpawn" "1"
+        "MaxCount" "1"
+        "RespawnDelay" "5"
+        "Chance" "75" // TODO: Improve complexity.
+        
+        "Unique" "1"
+        "SpawnPositionJitter" "1"
+        
+        "AI" "ai_aggro_leash"
+        "AggroRange" "400"
+        "LeashRange" "750"
+    }
 }

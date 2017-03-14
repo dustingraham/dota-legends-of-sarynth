@@ -86,7 +86,6 @@ function OnRightButtonPressed()
                 UnitIndex : hero,
                 OrderType : dotaunitorder_t.DOTA_UNIT_ORDER_STOP
             });
-            return true; // Avoid walking up to it. Just target it.
             return false;
         }
         

@@ -52,7 +52,7 @@
         "ModelScale"            "1.1"
         "Level"                 "6"
         "HealthBarOffset"       "220"
-        
+        "RingRadius"                "100"
         "VisionDaytimeRange"        "0"
         "VisionNighttimeRange"      "0"
     }
