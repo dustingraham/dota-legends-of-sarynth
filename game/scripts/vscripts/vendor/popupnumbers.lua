@@ -62,6 +62,11 @@ function PopupDamageOverTime(target, amount)
     PopupNumbers(target, "poison", Vector(215, 50, 248), 1.0, amount, nil, POPUP_SYMBOL_POST_EYE)
 end
 
+-- e.g. when taking damage over time from a poison type spell
+function PopupPoison(target, amount)
+    PopupNumbers(target, "poison", Vector(21, 165, 47), 0.8, amount, nil, POPUP_SYMBOL_POST_DROP)
+end
+
 -- e.g. when blocking damage with a stout shield
 function PopupDamageBlock(target, amount)
     PopupNumbers(target, "block", Vector(255, 255, 255), 1.0, amount, POPUP_SYMBOL_PRE_MINUS, nil)
