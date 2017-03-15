@@ -28,7 +28,7 @@ end
 function TownGateTrigger(trigger)
     local pid = trigger.activator:GetPlayerOwnerID()
     local quest = QuestService:GetPlayerQuest(pid, 'start_area_report_to_town')
-    if quest or QuestService:CheckIfCompleted(pid, 'start_area_report_to_town') then
+    if true then -- or quest or QuestService:CheckIfCompleted(pid, 'start_area_report_to_town') then
         Entities:FindByName(nil, 'town_entrance_relay'):Trigger()
         thisEntity:Destroy()
     else

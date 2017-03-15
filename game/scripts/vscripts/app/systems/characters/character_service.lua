@@ -118,15 +118,15 @@ function CharacterService:OnPlayerLevelUp(event)
     local hero = HeroList:GetHero(event.player)
     hero:SetAbilityPoints(0)
     
-    for i = 0, 2 do
-        -- Temp Spell Levels
-        -- 0 : 1 4 7 10
-        -- 1 : 2 5 8 11
-        -- 2 : 3 6 9 12
-        hero:GetAbilityByIndex(i):SetLevel(
-            math.min(3, math.floor((event.level + 2- i) / 3))
-        )
-    end
+--    for i = 0, 2 do
+--        -- Temp Spell Levels
+--        -- 0 : 1 4 7 10
+--        -- 1 : 2 5 8 11
+--        -- 2 : 3 6 9 12
+--        hero:GetAbilityByIndex(i):SetLevel(
+--            math.min(3, math.floor((event.level + 2- i) / 3))
+--        )
+--    end
     
     if hero.isInitialLevel then return end
     

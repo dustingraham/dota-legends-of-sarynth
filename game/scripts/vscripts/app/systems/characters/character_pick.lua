@@ -77,7 +77,11 @@ function CharacterPick:CreateCustomHeroForPlayer(event)
     end
     
     hero:SetAbilityPoints(0)
-    hero:GetAbilityByIndex(0):SetLevel(1)
+    -- hero:GetAbilityByIndex(0):SetLevel(1)
+    for i = 0, 4 do
+        hero:GetAbilityByIndex(i):SetLevel(1)
+    end
+    
     
     -- Standard vision past trees.
     hero:AddNewModifier(nil, nil, 'character_vision', nil)
@@ -130,6 +134,15 @@ function CharacterPick:CreateCustomHeroForPlayer(event)
             -- Shield
             'models/items/dragon_knight/shield_timedragon.vmdl',
         },
+        windrunner = {
+            'models/items/windrunner/ti6_windranger_back/ti6_windranger_back.vmdl',
+            --'models/items/windrunner/ti6_windranger_head/ti6_windranger_head.vmdl',
+            'models/items/windrunner/deadly_feather_swing_head/deadly_feather_swing_head.vmdl',
+            'models/items/windrunner/ti6_windranger_shoulder/ti6_windranger_shoulder.vmdl',
+            
+            'models/items/windrunner/the_swift_pathfinder_swift_pathfinders_bow/the_swift_pathfinder_swift_pathfinders_bow.vmdl',
+            'models/items/windrunner/ti6_windranger_offhand/ti6_windranger_offhand.vmdl',
+        },
         warlock = {
             -- Helm
             'models/items/warlock/tevent_2_gatekeeper_head/tevent_2_gatekeeper_head.vmdl',
@@ -149,6 +162,20 @@ function CharacterPick:CreateCustomHeroForPlayer(event)
         for _,name in pairs(cosmetics[event.character]) do
             CharacterPick:AddCosmetic(hero, name)
         end
+    end
+    
+    if event.character == 'windrunner' then
+        local particleName = 'particles/units/heroes/hero_windrunner/windrunner_bowstring.vpcf'
+        local idx = ParticleManager:CreateParticle(
+            particleName,
+            PATTACH_POINT_FOLLOW,
+            hero
+        )
+        ParticleManager:SetParticleControlEnt(idx, 0, hero, PATTACH_POINT_FOLLOW, 'bow_bot', hero:GetAbsOrigin(), true)
+        ParticleManager:SetParticleControlEnt(idx, 1, hero, PATTACH_POINT_FOLLOW, 'bow_mid', hero:GetAbsOrigin(), true)
+        ParticleManager:SetParticleControlEnt(idx, 2, hero, PATTACH_POINT_FOLLOW, 'bow_top', hero:GetAbsOrigin(), true)
+        
+        -- ParticleManager:ReleaseParticleIndex(idx)
     end
     
     -- Load Data

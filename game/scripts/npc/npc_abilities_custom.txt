@@ -1,3 +1,5 @@
+#base "abilities\ranger.txt"
+
 "DOTAAbilities"
 {
     "Version"        "1"

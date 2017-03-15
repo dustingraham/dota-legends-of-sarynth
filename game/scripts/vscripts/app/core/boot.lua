@@ -11,7 +11,24 @@ function Boot:Precache(context)
     -- PrecacheResource( "soundfile", "*.vsndevts", context )
     -- PrecacheResource( "particle", "*.vpcf", context )
     -- PrecacheResource( "particle_folder", "particles/folder", context )
-
+    
+    for _,name in ipairs({
+        -- Ranger
+        'particles/units/heroes/hero_windrunner/windrunner_bowstring.vpcf',
+        'particles/units/heroes/ranger/ice_arrow/ranger_ice_arrow.vpcf',
+        'particles/units/heroes/ranger/poison_arrow/ranger_poison_arrow.vpcf',
+        'particles/units/heroes/ranger/concussive_shot/ranger_concussive_shot.vpcf',
+        'particles/units/heroes/ranger/strong_shot/ranger_strong_shot.vpcf',
+        'particles/units/heroes/ranger/explosive_shot/ranger_explosive_shot.vpcf',
+        
+        -- Testing?
+        'particles/econ/items/drow/drow_bow_monarch/drow_frost_arrow_monarch.vpcf',
+        'particles/units/heroes/hero_drow/drow_frost_arrow.vpcf',
+        'particles/econ/items/mirana/mirana_crescent_arrow/mirana_spell_crescent_arrow.vpcf',
+        'particles/units/heroes/hero_legion_commander/legion_commander_odds_hero_arrow_parent.vpcf'
+    }) do PrecacheResource('particle', name, context) end
+    
+    
     PrecacheResource('particle', 'particles/units/heroes/hero_ursa/ursa_earthshock.vpcf', context)
     PrecacheResource('particle', 'particles/quest_available.vpcf', context)
     

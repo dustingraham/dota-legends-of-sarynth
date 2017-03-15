@@ -4,6 +4,25 @@
 {
     "Version"    "1"
     
+    "target_dummy"
+    {
+        "Model" "models/items/lycan/wolves/ambry_summon/ambry_summon.vmdl"
+        "BaseClass"             "npc_dota_creature"
+        "Level"                 "1"
+        "ModelScale"            "1.0"
+        "HealthBarOffset"       "220"
+        "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_GROUND"
+        "MovementSpeed"             "560"
+        "StatusHealth"                "99972" 
+        "AttackCapabilities"        "DOTA_UNIT_CAP_MELEE_ATTACK"
+        "AttackDamageMin"           "4"        // Damage range min.
+        "AttackDamageMax"           "8"        // Damage range max.    
+        "AttackRate"                "0.9"       // Speed of attack.
+        "AttackAnimationPoint"      "0.33"      // Normalized time in animation cycle to attack.
+        "AttackRange"               "160"        // Range within a target can be attacked.
+        "RingRadius"                "140"
+    }
+    
     "start_area_wolf_boss"
     {
         "Model" "models/items/lycan/wolves/ambry_summon/ambry_summon.vmdl"
