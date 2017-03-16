@@ -40,10 +40,7 @@ end
 
 function spell:OnProjectileHit(target, pos)
     local caster = self:GetCaster()
-    
-    local damage = math.floor(caster:GetAverageTrueAttackDamage(target) * 1.25)
-    
-    -- TODO: DOT damage over time modifier
+    local damage = math.floor(caster:GetAverageTrueAttackDamage(target) * 2.25)
     
     -- Damage Deal
     ApplyDamage({

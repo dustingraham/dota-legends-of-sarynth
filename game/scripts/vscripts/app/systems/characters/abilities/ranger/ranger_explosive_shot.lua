@@ -40,8 +40,8 @@ end
 
 function spell:OnProjectileHit(target, pos)
     local caster = self:GetCaster()
-    local damage = math.floor(caster:GetAverageTrueAttackDamage(target) * 1.25)
-
+    local damage = math.floor(caster:GetAverageTrueAttackDamage(target) * 0.75)
+    
     -- Damage Deal
     ApplyDamage({
         victim = target,
@@ -70,7 +70,7 @@ function spell:OnProjectileHit(target, pos)
         ApplyDamage({
             victim = coTarget,
             attacker = caster,
-            damage = damage*1000, 
+            damage = damage, 
             damage_type = DAMAGE_TYPE_MAGICAL
         })
     end        

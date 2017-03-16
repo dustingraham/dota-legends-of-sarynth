@@ -9,12 +9,11 @@ function mod:IsDebuff()
     return true
 end
 
-function mod:OnCreated()
-    local target = self:GetParent()
-    self.damage_per_tick = 33 -- self:GetAbility():GetSpecialValueFor("var_damage_per_tick")
-    self.tick_interval = 3 -- self:GetAbility():GetSpecialValueFor("var_tick_interval")
+function mod:OnCreated(params)
+    -- local target = self:GetParent()
     if IsServer() then
-        self:StartIntervalThink(self.tick_interval)
+        self.damage_per_tick = params.damage
+        self:StartIntervalThink(params.interval)
     end
 end
 
@@ -28,7 +27,7 @@ function mod:OnIntervalThink()
         attacker = self:GetCaster(),
         damage = self.damage_per_tick,
         damage_type = DAMAGE_TYPE_PHYSICAL,
-        damage_flags = DOTA_DAMAGE_FLAG_NON_LETHAL + DOTA_DAMAGE_FLAG_HPLOSS + DOTA_DAMAGE_FLAG_NO_DIRECTOR_EVENT,
+        damage_flags = DOTA_DAMAGE_FLAG_NON_LETHAL,
         ability = self:GetAbility(),
     })
     PopupPoison(self:GetParent(), self.damage_per_tick)

@@ -30,11 +30,12 @@
         "Level"                 "6"
         "ModelScale"            "1.6"
         "HealthBarOffset"       "220"
+        "StatusHealth"                "4142"
         "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_GROUND"
-        "MovementSpeed"             "560"
+        "MovementSpeed"             "360"
         "AttackCapabilities"        "DOTA_UNIT_CAP_MELEE_ATTACK"
-        "AttackDamageMin"           "4"        // Damage range min.
-        "AttackDamageMax"           "8"        // Damage range max.    
+        "AttackDamageMin"           "40"        // Damage range min.
+        "AttackDamageMax"           "60"        // Damage range max.    
         "AttackRate"                "0.9"       // Speed of attack.
         "AttackAnimationPoint"      "0.33"      // Normalized time in animation cycle to attack.
         "AttackRange"               "160"        // Range within a target can be attacked.

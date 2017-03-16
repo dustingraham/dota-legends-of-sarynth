@@ -40,7 +40,7 @@ end
 
 function spell:OnProjectileHit(target, pos)
     local caster = self:GetCaster()
-    local damage = math.floor(caster:GetAverageTrueAttackDamage(target) * 1.25)
+    local damage = math.floor(caster:GetAverageTrueAttackDamage(target) * 0.75)
     
     -- Damage Deal
     ApplyDamage({
@@ -49,7 +49,11 @@ function spell:OnProjectileHit(target, pos)
         damage = damage, 
         damage_type = DAMAGE_TYPE_MAGICAL
     })
-    target:AddNewModifier(caster, self, 'ranger_poison', { duration = 20 })
+    target:AddNewModifier(caster, self, 'ranger_poison', {
+        duration = 21,
+        damage = damage,
+        interval = 3,
+    })
 end
 
 if IsClient() then
