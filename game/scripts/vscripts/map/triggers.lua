@@ -41,3 +41,11 @@ function TownGateTrigger(trigger)
         Debug('Triggers', 'Player '..pid..' triggered town gate closed message.')
     end
 end
+
+function DungeonAreaStartTouch(trigger)
+    trigger.activator:FindModifierByName('character_vision'):ReduceVision()
+end
+
+function DungeonAreaEndTouch(trigger)
+    trigger.activator:FindModifierByName('character_vision'):RestoreVision()
+end
