@@ -92,7 +92,7 @@
         "Ability3" "ranger_ice_arrow"
         "Ability4" "ranger_strong_shot"
         "Ability5" "ranger_concussive_shot"
-        "Ability6" ""
+        "Ability6" "self_regen"
         "Ability7" ""
         
         "AttackRange"       "1000"

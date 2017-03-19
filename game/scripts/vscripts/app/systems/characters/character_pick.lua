@@ -78,7 +78,7 @@ function CharacterPick:CreateCustomHeroForPlayer(event)
     
     hero:SetAbilityPoints(0)
     -- hero:GetAbilityByIndex(0):SetLevel(1)
-    for i = 0, 4 do
+    for i = 0, 5 do
         hero:GetAbilityByIndex(i):SetLevel(1)
     end
     

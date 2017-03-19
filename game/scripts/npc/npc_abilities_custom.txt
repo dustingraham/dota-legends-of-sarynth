@@ -83,6 +83,25 @@
         "AbilityDuration"                "2"
     }
     
+    "self_regen"
+    {
+        "BaseClass"               "ability_lua"
+        "ScriptFile"              "app/systems/characters/abilities/self_regen"
+        "AbilityTextureName"      "custom/self_regen"
+        "AbilityBehavior"         "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_CHANNELLED"
+        "AbilityType"             "DOTA_ABILITY_TYPE_ULTIMATE"
+        "AbilityUnitTargetTeam"   "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+        "AbilityUnitTargetType"   "DOTA_UNIT_TARGET_HERO"
+        "AbilityCooldown"         "90.0"
+        "AbilityManaCost"         "0"
+        "AbilityCastAnimation"    "ACT_DOTA_TELEPORT"
+        "AbilityCastRange"        "0"
+        "AbilityChannelTime"      "5"
+        "AbilityCastPoint"        "0.50"
+        "AnimationPlaybackRate"   "0.73"
+        "AbilityDuration"         "2"
+    }
+    
     "fireball"
     {
         "BaseClass"                "ability_lua"
