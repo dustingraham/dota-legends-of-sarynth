@@ -9,7 +9,14 @@ function Spawn:constructor(spawnNode)
     
     local key = spawnNode.SpawnPoints[RandomInt(1,#spawnNode.SpawnPoints)]
     Debug('Spawn', key)
-    self.spawnPoint = Entities:FindByName(nil, key):GetAbsOrigin()
+    
+    local targetEntity = Entities:FindByName(nil, key)
+    if not targetEntity then
+        Debug('Spawn', '[ERROR] Could not find entity by name:', key)
+        return
+    end
+    
+    self.spawnPoint = targetEntity:GetAbsOrigin()
     
     -- Make one attempt to find a different node.
     for _,spawn in pairs(spawnNode.Spawns) do

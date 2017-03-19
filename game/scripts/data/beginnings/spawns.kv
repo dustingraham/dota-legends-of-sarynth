@@ -1,135 +1,13 @@
+#base "spawns\ice_cavern.kv"
+#base "spawns\start.kv"
+#base "spawns\kobold.kv"
+
+#base "spawns\teleports.kv"
+
 "Spawns"
 {
-    "ice_gnoll_1"
-    {
-        "SpawnPoints" "ice_gnoll_1"
-        "Creature" "ice_dungeon_gnoll"
-        "MaxCount" "1"
-        "OnInitSpawn" "1"
-        "AI" "ai_aggro_leash"
-        "AggroRange" "400"
-        "LeashRange" "750"
-    }
-    "ice_gnoll_2"
-    {
-        "SpawnPoints" "ice_gnoll_2"
-        "Creature" "ice_dungeon_gnoll"
-        "MaxCount" "1"
-        "OnInitSpawn" "1"
-        "AI" "ai_aggro_leash"
-        "AggroRange" "400"
-        "LeashRange" "750"
-    }
-    "ice_witch_1"
-    {
-        "SpawnPoints" "ice_witch_1"
-        "Creature" "ice_dungeon_witch"
-        "MaxCount" "1"
-        "OnInitSpawn" "1"
-        "AI" "ai_aggro_leash"
-        "AggroRange" "400"
-        "LeashRange" "750"
-    }
-    "ice_ghost_1"
-    {
-        "SpawnPoints" "ice_ghost_1"
-        "Creature" "ice_dungeon_ghost"
-        "MaxCount" "1"
-        "OnInitSpawn" "1"
-        "AI" "ai_aggro_leash"
-        "AggroRange" "400"
-        "LeashRange" "750"
-    }
-    "ice_centaur_1"
-    {
-        "SpawnPoints" "ice_centaur_1"
-        "Creature" "ice_dungeon_centaur"
-        "MaxCount" "1"
-        "OnInitSpawn" "1"
-        "AI" "ai_aggro_leash"
-        "AggroRange" "400"
-        "LeashRange" "750"
-    }
-    "ice_golem_1"
-    {
-        "SpawnPoints" "ice_golem_1"
-        "Creature" "ice_dungeon_golem"
-        "MaxCount" "1"
-        "OnInitSpawn" "1"
-        "AI" "ai_aggro_leash"
-        "AggroRange" "400"
-        "LeashRange" "750"
-    }
-    "ice_boss_1"
-    {
-        "SpawnPoints" "ice_boss_1"
-        "Creature" "ice_dungeon_boss1"
-        "MaxCount" "1"
-        "OnInitSpawn" "1"
-        "AI" "ai_aggro_leash"
-        "AggroRange" "400"
-        "LeashRange" "750"
-    }
-    "ice_boss2"
-    {
-        "SpawnPoints" "ice_boss_2"
-        "Creature" "ice_dungeon_boss2"
-        "MaxCount" "1"
-        "OnInitSpawn" "1"
-        "AI" "ai_aggro_leash"
-        "AggroRange" "400"
-        "LeashRange" "750"
-    }
-    "ice_boss_3"
-    {
-        "SpawnPoints" "ice_boss_3"
-        "Creature" "ice_dungeon_boss3"
-        "OnInitSpawn" "1"
-        "MaxCount" "1"
-        "AI" "ai_aggro_leash"
-        "AggroRange" "400"
-        "LeashRange" "750"
-        "Unique" "1"
-        "Cosmetics"
-        {
-            "01" "models/heroes/crystal_maiden/crystal_maiden_arcana_back.vmdl"
-            "02" "models/items/crystal_maiden/frozen_feather_bracers/frozen_feather_bracers.vmdl"
-            "03" "models/items/crystal_maiden/pw_cm_staff/crystal_maiden_weapon.vmdl"
-            "04" "models/items/crystal_maiden/frozen_feathers_head/frozen_feathers_head.vmdl"
-            "05" "models/items/crystal_maiden/frozen_feathers_shoulders/frozen_feathers_shoulders.vmdl"
-        }
-    }
+    // NPCs
     
-    "teleport_town"
-    {
-        "SpawnPoints" "teleport_tower_town"
-        "Creature" "teleport_pad"
-        "MaxCount" "1"
-        "OnInitSpawn" "1"
-        "AI" "ai_npc_basic"
-        "IsNpc" "1"
-        "Unique" "1"
-    }
-    "teleport_kobold"
-    {
-        "SpawnPoints" "teleport_tower_kobolds"
-        "Creature" "teleport_pad"
-        "MaxCount" "1"
-        "OnInitSpawn" "1"
-        "AI" "ai_npc_basic"
-        "IsNpc" "1"
-        "Unique" "1"
-    }
-    "teleport_ice"
-    {
-        "SpawnPoints" "teleport_tower_ice"
-        "Creature" "teleport_pad"
-        "MaxCount" "1"
-        "OnInitSpawn" "1"
-        "AI" "ai_npc_basic"
-        "IsNpc" "1"
-        "Unique" "1"
-    }
     "npc_quest_kobold"
     {
         "SpawnPoints" "kobold_questgiver"
@@ -164,33 +42,5 @@
             "03" "models/items/lone_druid/shoulder_poor.vmdl"
             "04" "models/items/lone_druid/dark_wood_back/dark_wood_back.vmdl"
         }
-    }
-    "spawn_sheep_1"
-    {
-        "SpawnPoints" "area_start_spawn_1,area_start_spawn_2"
-        "Creature" "sheep"
-        "OnInitSpawn" "1"
-        "MaxCount" "2"
-        "RespawnDelay" "5"
-        "Chance" "75" // TODO: Improve complexity.
-        "AI" "ai_basic_sheep"
-        "RandomScale" "1"
-        "SpawnPositionJitter" "1"
-    }
-    "start_area_wolf_boss"
-    {
-        "SpawnPoints" "area_start_spawn_wolf"
-        "Creature" "start_area_wolf_boss"
-        "OnInitSpawn" "1"
-        "MaxCount" "1"
-        "RespawnDelay" "5"
-        "Chance" "75" // TODO: Improve complexity.
-        
-        "Unique" "1"
-        "SpawnPositionJitter" "1"
-        
-        "AI" "ai_aggro_leash"
-        "AggroRange" "400"
-        "LeashRange" "750"
     }
 }
