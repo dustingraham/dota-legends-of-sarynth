@@ -57,3 +57,6 @@ for _,modifier in ipairs({
     'ai_basic',
     'ai_npc_basic',
 }) do LinkLuaModifier(modifier, 'app/systems/npcs/ai/'..modifier, LUA_MODIFIER_MOTION_NONE) end
+for _,modifier in ipairs({
+    'ice_dungeon_boss3',
+}) do LinkLuaModifier(modifier, 'app/systems/npcs/ai/units/'..modifier, LUA_MODIFIER_MOTION_NONE) end

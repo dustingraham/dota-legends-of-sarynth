@@ -1,0 +1,169 @@
+"Units"
+{
+    "ice_dungeon_golem"
+    {
+        "Model"                 "models/creeps/neutral_creeps/n_creep_golem_a/neutral_creep_golem_a.vmdl"
+        "BaseClass"             "npc_dota_creature"
+        "Level"                 "11"
+        "ModelScale"            "1.0"
+        "HealthBarOffset"       "220"
+        "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_GROUND"
+        "MovementSpeed"             "360"
+    }
+
+    "ice_dungeon_centaur"
+    {
+        "Model"                 "models/creeps/neutral_creeps/n_creep_centaur_lrg/n_creep_centaur_lrg.vmdl"
+        "BaseClass"             "npc_dota_creature"
+        "Level"                 "11"
+        "ModelScale"            "1.0"
+        "HealthBarOffset"       "220"
+        "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_GROUND"
+        "MovementSpeed"             "360"
+    }
+    "ice_dungeon_gnoll"
+    {
+        "Model"                 "models/creeps/neutral_creeps/n_creep_gnoll/n_creep_gnoll_frost.vmdl"
+        "BaseClass"             "npc_dota_creature"
+        "Level"                 "18"
+        "ModelScale"            "1.0"
+        "HealthBarOffset"       "170"
+        "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_GROUND"
+        "MovementSpeed"             "340"
+        "ArmorPhysical"             "5"
+        "AttackCapabilities"        "DOTA_UNIT_CAP_RANGED_ATTACK"
+
+        "AttackDamageMin"            "310"
+        "AttackDamageMax"            "336"
+        "AttackRate"                "1.6"
+        "AttackAnimationPoint"      "0.4"
+        "AttackRange"               "500"
+        "ProjectileModel"           "particles/neutral_fx/gnoll_base_attack.vpcf"
+        "ProjectileSpeed"           "1500"
+        "CombatClassAttack"         "DOTA_COMBAT_CLASS_ATTACK_BASIC"
+        "CombatClassDefend"         "DOTA_COMBAT_CLASS_DEFEND_BASIC"
+        "UnitRelationshipClass"     "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+
+        "StatusHealth"                "2772"
+        "StatusHealthRegen"           "25.0"
+
+        "BountyXP"                    "250"
+    }
+
+    "ice_dungeon_ghost"
+    {
+        "Model"                 "models/items/death_prophet/hecate_ghosts/hecate_ghosts.vmdl"
+        "BaseClass"             "npc_dota_creature"
+        "Level"                 "11"
+        "ModelScale"            "1.0"
+        "HealthBarOffset"       "170"
+        "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_GROUND"
+        "MovementSpeed"             "360"
+    }
+
+    "ice_dungeon_witch"
+    {
+        "Model"                 "models/creeps/neutral_creeps/n_creep_ghost_a/n_creep_ghost_a.vmdl"
+        "BaseClass"             "npc_dota_creature"
+        "Level"                 "15"
+        "ModelScale"            "1.0"
+        "HealthBarOffset"       "170"
+        "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_GROUND"
+        "MovementSpeed"             "360"
+    }
+
+    "ice_dungeon_boss1"
+    {
+        "Model"                 "models/creeps/lane_creeps/creep_radiant_melee_diretide/creep_radiant_melee_diretide.vmdl"
+        "BaseClass"             "npc_dota_creature"
+        "Level"                 "16"
+        "ModelScale"            "2.4"
+        "HealthBarOffset"       "450"
+        "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_GROUND"
+        "MovementSpeed"             "360"
+    }
+
+
+    "ice_dungeon_boss2"
+    {
+        "Model"                 "models/creeps/lane_creeps/creep_radiant_hulk/creep_radiant_ancient_hulk.vmdl"
+        "BaseClass"             "npc_dota_creature"
+        "Level"                 "17"
+        "ModelScale"            "1.9"
+        "HealthBarOffset"       "420"
+        "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_GROUND"
+        "MovementSpeed"             "360"
+    }
+
+    "ice_dungeon_boss3_summons"
+    {
+        "Model"                 "models/items/invoker/forge_spirit/iceforged_spirit/iceforged_spirit.vmdl"
+        "BaseClass"             "npc_dota_creature"
+        "Level"                 "20"
+        "ModelScale"            "1.10"
+        "HealthBarOffset"       "300"
+
+        "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_GROUND"
+        "MovementSpeed"             "360"
+        "ArmorPhysical"             "10"
+        "AttackCapabilities"        "DOTA_UNIT_CAP_RANGED_ATTACK"
+
+        "ProjectileModel"			"particles/neutral_fx/ghost_base_attack.vpcf"
+        "ProjectileSpeed"			"1000"
+
+        "AttackDamageMin"            "460"
+        "AttackDamageMax"            "496"
+        "AttackRate"                "1.50"
+        "AttackAnimationPoint"      "0.20"
+        "AttackRange"               "650"
+
+        "CombatClassAttack"         "DOTA_COMBAT_CLASS_ATTACK_BASIC"
+        "CombatClassDefend"         "DOTA_COMBAT_CLASS_DEFEND_BASIC"
+        "UnitRelationshipClass"     "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+
+        "StatusHealth"                "4472"
+        "StatusHealthRegen"           "25.0"
+    }
+
+    "ice_dungeon_boss3"
+    {
+        // CM as final boss, move hulk to second boss. IceForge spirits as support creeps.
+        "Model" "models/heroes/crystal_maiden/crystal_maiden_arcana.vmdl"
+        "BaseClass"             "npc_dota_creature"
+        "Level"                 "18"
+        "ModelScale"            "1.4"
+        "HealthBarOffset"       "400"
+        "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_GROUND"
+        "MovementSpeed"             "360"
+        "ArmorPhysical"             "10"
+        "AttackCapabilities"        "DOTA_UNIT_CAP_RANGED_ATTACK"
+
+        "ProjectileModel"		"particles/units/heroes/hero_crystalmaiden/maiden_base_attack.vpcf"
+        "ProjectileSpeed"		"900"
+
+        "AttackDamageMin"            "460"
+        "AttackDamageMax"            "496"
+        "AttackRate"                "1.40"
+        "AttackAnimationPoint"      "0.55"
+        "AttackRange"               "650"
+
+        "CombatClassAttack"         "DOTA_COMBAT_CLASS_ATTACK_BASIC"
+        "CombatClassDefend"         "DOTA_COMBAT_CLASS_DEFEND_BASIC"
+        "UnitRelationshipClass"     "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+
+        "StatusHealth"                "4472"
+        "StatusHealthRegen"           "25.0"
+        "Creature"
+        {
+            "AttachWearables"
+            {
+                "Wearable1" { "ItemDef" "7385" }
+                "Wearable2" { "ItemDef" "5734" }
+                "Wearable3" { "ItemDef" "6573" }
+                "Wearable4" { "ItemDef" "5738" }
+                "Wearable5" { "ItemDef" "5736" }
+            }
+        }
+        "BountyXP" "800"
+    }
+}

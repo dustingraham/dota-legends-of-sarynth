@@ -6,7 +6,7 @@
         "BaseClass"             "npc_dota_creature"
         "Level"                 "10"
         "ModelScale"            "0.9"
-        "HealthBarOffset"       "80"
+        "HealthBarOffset"       "150"
         
         "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_GROUND"
         "MovementSpeed"             "300"

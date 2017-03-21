@@ -6,12 +6,12 @@ DUMMY_HERO = 'npc_dota_hero_wisp'
 
 function Boot:Precache(context)
     Debug('Boot', 'Precache')
-    
+
     -- PrecacheResource( "model", "*.vmdl", context )
     -- PrecacheResource( "soundfile", "*.vsndevts", context )
     -- PrecacheResource( "particle", "*.vpcf", context )
     -- PrecacheResource( "particle_folder", "particles/folder", context )
-    
+
     for _,name in ipairs({
         -- Ranger
         'particles/units/heroes/hero_windrunner/windrunner_bowstring.vpcf',
@@ -21,56 +21,84 @@ function Boot:Precache(context)
         'particles/units/heroes/ranger/strong_shot/ranger_strong_shot.vpcf',
         'particles/units/heroes/ranger/explosive_shot/ranger_explosive_shot.vpcf',
         'particles/units/heroes/ranger/explosive_shot/ranger_explosive_shot_impact.vpcf',
-        
-        -- Dark Boss
-        'particles/units/heroes/hero_leshrac/leshrac_base_attack.vpcf',
-        
+
         -- Testing?
         'particles/econ/items/drow/drow_bow_monarch/drow_frost_arrow_monarch.vpcf',
         'particles/units/heroes/hero_drow/drow_frost_arrow.vpcf',
         'particles/econ/items/mirana/mirana_crescent_arrow/mirana_spell_crescent_arrow.vpcf',
         'particles/units/heroes/hero_legion_commander/legion_commander_odds_hero_arrow_parent.vpcf'
     }) do PrecacheResource('particle', name, context) end
-    
-    
+
+
     PrecacheResource('particle', 'particles/units/heroes/hero_ursa/ursa_earthshock.vpcf', context)
     PrecacheResource('particle', 'particles/quest_available.vpcf', context)
-    
+
     -- Level Up
     PrecacheResource('particle', 'particles/econ/events/ti6/hero_levelup_ti6.vpcf', context)
-        
+
     -- Ice Barricade
     PrecacheResource('particle', 'particles/units/heroes/hero_crystalmaiden/maiden_crystal_nova.vpcf', context)
     PrecacheResource('particle', 'particles/econ/items/ancient_apparition/aa_blast_ti_5/ancient_apparition_ice_blast_explode_ti5.vpcf', context)
-    
+
     -- Spells
     PrecacheResource('particle', 'particles/units/heroes/hero_lina/lina_base_attack.vpcf', context)
-    
+
+    PrecacheResource('particle', 'particles/econ/items/crystal_maiden/crystal_maiden_maiden_of_icewrack/maiden_arcana_body_ambient.vpcf', context)
+    PrecacheResource('particle', 'particles/econ/items/crystal_maiden/crystal_maiden_maiden_of_icewrack/maiden_death_arcana.vpcf', context)
     -- Spell Testing
     PrecacheResource('particle', 'particles/econ/items/abaddon/abaddon_alliance/abaddon_death_coil_alliance.vpcf', context)
-    
+
     PrecacheResource('soundfile', 'soundevents/game_sounds_heroes/game_sounds_shadowshaman.vsndevts', context)
     PrecacheResource('soundfile', 'soundevents/game_sounds_heroes/game_sounds_ursa.vsndevts', context)
     PrecacheResource("soundfile", "soundevents/music/jboberg_01/soundevents_music.vsndevts", context)
-    
-    PrecacheUnitByNameSync("npc_dota_hero_dragon_knight", context)
-    PrecacheUnitByNameSync('npc_dota_hero_omniknight', context)
-    PrecacheUnitByNameSync('npc_dota_hero_bounty_hunter', context)
-    PrecacheUnitByNameSync("npc_dota_hero_windrunner", context)
-    PrecacheUnitByNameSync("npc_dota_hero_invoker", context)
-    PrecacheUnitByNameSync('npc_dota_hero_warlock', context)
-    
-    PrecacheUnitByNameSync("npc_dota_hero_lina", context)
-    PrecacheUnitByNameSync("dark_death_knight", context)
-    PrecacheUnitByNameSync("dark_boss", context)
-    
-    PrecacheUnitByNameSync("sheep", context)
-    PrecacheUnitByNameSync("quest_bear", context)
-    
+
     PrecacheItemByNameSync('item_amulet_tier1', context)
     PrecacheItemByNameSync('item_amulet_tier2', context)
     PrecacheItemByNameSync('item_amulet_tier3', context)
+
+    _G.GameItems = LoadKeyValues("scripts/items/items_game.txt")
+    local heroes = LoadKeyValues("scripts/npc/npc_heroes_custom.txt")
+    local units = LoadKeyValues("scripts/npc/npc_units_custom.txt")
+    local cosmeticsParticles = {}
+
+    for name,unit in pairs(units) do
+        PrecacheUnitByNameSync(name, context)
+        Debug('Precache', 'Unit', name)
+    end
+    for name,hero in pairs(heroes) do
+        PrecacheUnitByNameSync(name, context)
+        Debug('Precache', 'Hero', name)
+    end
+
 end
+
+function Boot:Test()
+    _G.GameItems = LoadKeyValues("scripts/items/items_game.txt")
+
+    local heroes = LoadKeyValues("scripts/npc/npc_heroes_custom.txt")
+    local units = LoadKeyValues("scripts/npc/npc_units_custom.txt")
+    local cosmeticsParticles = {}
+
+    --for name,unit in pairs(units) do
+    --    PrecacheUnitByNameSync(name, context)
+    --    print(name)
+    --    do return end
+    --end
+    for name,hero in pairs(heroes) do
+        print(name)
+        DeepPrintTable(hero)
+        do return end
+    end
+
+    for _,data in pairs(GameItems.items) do
+        print(_)
+        DeepPrintTable(data)
+        do return end
+    end
+    DeepPrintTable(units)
+end
+
+-- Boot:Test()
 
 function Boot:Activate()
     Debug('Boot', 'Activate')
@@ -170,7 +198,7 @@ function Boot:InitGameModeEntity()
     local levels = CharacterService:GetExperienceLevelRequirements()
     mode:SetUseCustomHeroLevels(true)
     mode:SetCustomXPRequiredToReachNextLevel(levels)
-    
+
     Debug('Boot', 'Configured GameModeEntity')
 end
 

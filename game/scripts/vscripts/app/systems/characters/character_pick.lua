@@ -175,7 +175,7 @@ function CharacterPick:CreateCustomHeroForPlayer(event)
         ParticleManager:SetParticleControlEnt(idx, 1, hero, PATTACH_POINT_FOLLOW, 'bow_mid', hero:GetAbsOrigin(), true)
         ParticleManager:SetParticleControlEnt(idx, 2, hero, PATTACH_POINT_FOLLOW, 'bow_top', hero:GetAbsOrigin(), true)
         
-        -- ParticleManager:ReleaseParticleIndex(idx)
+        ParticleManager:ReleaseParticleIndex(idx)
     end
     
     -- Load Data

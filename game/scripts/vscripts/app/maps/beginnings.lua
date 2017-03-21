@@ -43,7 +43,7 @@ function CustomMap:OnHeroPick(_, params)
     local hero = params.hero
     if TEST_START_WAYPOINT then
         local target = SpawnSystem:GetUnique('teleport_tower_'..TEST_START_WAYPOINT)
-        hero:SetAbsOrigin(target:GetAbsOrigin() +  RandomVector(100))
+        hero:SetAbsOrigin(target:GetAbsOrigin() +  RandomVector(120))
     end
     if TEST_START_LEVEL then
         hero.isInitialLevel = true

@@ -92,7 +92,21 @@
         "MaxCount" "1"
         "RespawnDelay" "125"
         "Chance" "75"
-        "AI" "ai_dark_boss"
+        "AI" "ai_aggro_leash" // ai_dark_boss
+        "AggroRange" "650"
+        "LeashRange" "3550"
+        "RandomScale" "0"
+        "SpawnPositionJitter" "1"
+    }
+    "spawn_dark_boss_summons" // For testing
+    {
+        "SpawnPoints" "spawn_dark_boss_1"
+        "Creature" "dark_boss_summons"
+        "OnInitSpawn" "2"
+        "MaxCount" "2"
+        "RespawnDelay" "125"
+        "Chance" "75"
+        "AI" "ai_aggro_leash" // ai_dark_boss
         "AggroRange" "650"
         "LeashRange" "3550"
         "RandomScale" "0"

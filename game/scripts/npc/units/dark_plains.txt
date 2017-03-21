@@ -122,7 +122,7 @@
     }
     "dark_death_knight"
     {
-        "Model"                 "models/heroes/abaddon/abaddon.vmdl"
+        "Model"                 "models/heroes/chaos_knight/chaos_knight.vmdl"
         "BaseClass"             "npc_dota_creature"
         "Level"                 "20"
         "ModelScale"            "1.28"
@@ -150,11 +150,11 @@
         {
             "AttachWearables"
             {
-                "Wearable1" { "ItemDef" "7457" }
-                "Wearable2" { "ItemDef" "7464" }
-                "Wearable3" { "ItemDef" "8747" }
-                "Wearable4" { "ItemDef" "8748" }
-                "Wearable5" { "ItemDef" "8749" }
+                "Wearable1" { "ItemDef" "5520" }
+                "Wearable2" { "ItemDef" "5518" }
+                "Wearable3" { "ItemDef" "5519" }
+                "Wearable4" { "ItemDef" "5521" }
+                "Wearable5" { "ItemDef" "5522" }
             }
         }
         "BountyXP"                    "340"
@@ -162,7 +162,7 @@
     "dark_spirit"
     {
         // Maybe recolor an invoker spirit?
-        "Model" "models/creeps/neutral_creeps/n_creep_ghost_a/n_creep_ghost_a.vmdl"
+        "Model" "models/creeps/neutral_creeps/n_creep_ghost_b/n_creep_ghost_red.vmdl"
         "BaseClass"             "npc_dota_creature"
         "Level"                 "19"
         "ModelScale"            "1.0"
@@ -178,10 +178,10 @@
         "AttackDamageMin"            "460"
         "AttackDamageMax"            "596"
         "AttackRate"                "1.00"
-        "AttackAnimationPoint"      "0.50"
+        "AttackAnimationPoint"      "0.35"
         "AttackRange"               "500"
         
-        "ProjectileModel"           "particles/neutral_fx/ghost_base_attack.vpcf"
+        "ProjectileModel"           "particles/units/dark_plains/ghost/ghost_attack.vpcf"
         "ProjectileSpeed"           "900"
         
         "CombatClassAttack"         "DOTA_COMBAT_CLASS_ATTACK_PIERCE"
@@ -193,27 +193,58 @@
         
         "BountyXP"                    "250"
     }
-    
-    "dark_boss"
+    "dark_boss_summons"
     {
-        "Model"                 "models/heroes/leshrac/leshrac.vmdl"
+        "Model" "models/items/invoker/forge_spirit/arsenal_magus_forged_spirit/arsenal_magus_forged_spirit.vmdl"
+
         "BaseClass"             "npc_dota_creature"
         "Level"                 "20"
-        "ModelScale"            "1.28"
-        "HealthBarOffset"       "400"
+        "ModelScale"            "1.10"
+        "HealthBarOffset"       "300"
+
+        "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_GROUND"
+        "MovementSpeed"             "360"
+        "ArmorPhysical"             "10"
+        "AttackCapabilities"        "DOTA_UNIT_CAP_RANGED_ATTACK"
+
+        "ProjectileModel"			"particles/units/heroes/hero_invoker/invoker_forged_spirit_projectile.vpcf"
+        "ProjectileSpeed"			"1000"
+
+        "AttackDamageMin"            "460"
+        "AttackDamageMax"            "496"
+        "AttackRate"                "1.50"
+        "AttackAnimationPoint"      "0.20"
+        "AttackRange"               "650"
+
+        "CombatClassAttack"         "DOTA_COMBAT_CLASS_ATTACK_BASIC"
+        "CombatClassDefend"         "DOTA_COMBAT_CLASS_DEFEND_BASIC"
+        "UnitRelationshipClass"     "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+
+        "StatusHealth"                "4472"
+        "StatusHealthRegen"           "25.0"
+    }
+    "dark_boss"
+    {
+        // "Model"                 "models/heroes/leshrac/leshrac.vmdl"
+        "Model"                 "models/heroes/queenofpain/queenofpain.vmdl"
+
+        "BaseClass"             "npc_dota_creature"
+        "Level"                 "20"
+        "ModelScale"            "1.50"
+        "HealthBarOffset"       "350"
         
         "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_GROUND"
         "MovementSpeed"             "360"
         "ArmorPhysical"             "10"
         "AttackCapabilities"        "DOTA_UNIT_CAP_RANGED_ATTACK"
         
-        "ProjectileModel"       "particles/units/heroes/hero_leshrac/leshrac_base_attack.vpcf"
+        "ProjectileModel"       "particles/econ/items/queen_of_pain/qop_navi_mace/queen_base_attack_navi_mace.vpcf"
         "ProjectileSpeed"       "900"
         
         "AttackDamageMin"            "760"
         "AttackDamageMax"            "896"
         "AttackRate"                "1.20"
-        "AttackAnimationPoint"      "0.40"
+        "AttackAnimationPoint"      "0.45"
         "AttackRange"               "650"
         
         "CombatClassAttack"         "DOTA_COMBAT_CLASS_ATTACK_BASIC"
@@ -227,11 +258,11 @@
         {
             "AttachWearables"
             {
-                "Wearable1" { "ItemDef" "7447" }
-                "Wearable2" { "ItemDef" "7448" }
-                "Wearable3" { "ItemDef" "7449" }
-                "Wearable4" { "ItemDef" "7450" }
-                "Wearable5" { "ItemDef" "7451" }
+                "Wearable1" { "ItemDef" "7635" } // 7447
+                "Wearable2" { "ItemDef" "7636" } //7528 7636 - replace 7448
+                "Wearable3" { "ItemDef" "7637" } // 7449
+                "Wearable4" { "ItemDef" "7638" } // 7450
+                // "Wearable5" { "ItemDef" "7451" } // 7451
             }
         }
         "BountyXP"                    "640"

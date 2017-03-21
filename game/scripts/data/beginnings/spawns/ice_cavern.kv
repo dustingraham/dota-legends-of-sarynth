@@ -86,17 +86,24 @@
         "Creature" "ice_dungeon_boss3"
         "OnInitSpawn" "1"
         "MaxCount" "1"
-        "AI" "ai_aggro_leash"
+        "RespawnDelay" "5"
+        "AI" "ice_dungeon_boss3"
         "AggroRange" "400"
         "LeashRange" "750"
         "Unique" "1"
-        "Cosmetics"
-        {
-            "01" "models/heroes/crystal_maiden/crystal_maiden_arcana_back.vmdl"
-            "02" "models/items/crystal_maiden/frozen_feather_bracers/frozen_feather_bracers.vmdl"
-            "03" "models/items/crystal_maiden/pw_cm_staff/crystal_maiden_weapon.vmdl"
-            "04" "models/items/crystal_maiden/frozen_feathers_head/frozen_feathers_head.vmdl"
-            "05" "models/items/crystal_maiden/frozen_feathers_shoulders/frozen_feathers_shoulders.vmdl"
-        }
+    }
+    "ice_dungeon_boss3_summons" // For testing
+    {
+        "SpawnPoints" "ice_boss_3"
+        "Creature" "ice_dungeon_boss3_summons"
+        "OnInitSpawn" "1"
+        "MaxCount" "1"
+        "RespawnDelay" "20"
+        "Chance" "75"
+        "AI" "ai_aggro_leash" // ai_dark_boss
+        "AggroRange" "650"
+        "LeashRange" "3550"
+        "RandomScale" "0"
+        "SpawnPositionJitter" "1"
     }
 }
