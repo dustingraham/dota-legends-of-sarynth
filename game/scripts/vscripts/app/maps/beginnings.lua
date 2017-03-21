@@ -5,6 +5,7 @@ CustomMap = CustomMap or {}
 function CustomMap:Activate()
     Event:Listen('OnStateGameSetup', Dynamic_Wrap(CustomMap, 'OnStateGameSetup'), CustomMap)
     Event:Listen('OnStateInGame', Dynamic_Wrap(CustomMap, 'OnStateInGame'), CustomMap)
+    Event:Listen('HeroPick', Dynamic_Wrap(CustomMap, 'OnHeroPick'), CustomMap)
 end
 
 
@@ -14,6 +15,11 @@ end
 
 function CustomMap:OnStateInGame()
     Debug('CustomMap', 'Beginnings In Game')
+    
+    -- Timers:CreateTimer(function()
+    --     print('GarbageCollect: ', collectgarbage("count"))
+    --     return 1
+    -- end)
     
     -- So we can auto-pick...
     ListenToGameEvent('npc_spawned', Dynamic_Wrap(CustomMap, 'OnNpcSpawned'), self)
@@ -30,6 +36,21 @@ function CustomMap:OnNpcSpawned(event)
                 CharacterPick:TestMapPickHero(npc, TEST_PICK_HERO)
             end
         end
+    end
+end
+
+function CustomMap:OnHeroPick(_, params)
+    local hero = params.hero
+    if TEST_START_WAYPOINT then
+        local target = SpawnSystem:GetUnique('teleport_tower_'..TEST_START_WAYPOINT)
+        hero:SetAbsOrigin(target:GetAbsOrigin() +  RandomVector(100))
+    end
+    if TEST_START_LEVEL then
+        hero.isInitialLevel = true
+        local expTable = CharacterService:GetExperienceLevelRequirements()
+        local expNeeded = expTable[TEST_START_LEVEL]
+        hero:AddExperience(expNeeded, 0, false, false)
+        hero.isInitialLevel = nil
     end
 end
 

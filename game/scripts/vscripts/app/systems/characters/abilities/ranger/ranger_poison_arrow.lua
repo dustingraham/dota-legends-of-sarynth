@@ -7,7 +7,7 @@ spell.target_type = DOTA_UNIT_TARGET_ALL
 spell.target_flag = DOTA_UNIT_TARGET_FLAG_NONE
 
 function spell:GetCastRange()
-    return 1000
+    return 800
 end
 
 function spell:OnSpellStart()

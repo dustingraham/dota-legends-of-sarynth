@@ -1,0 +1,147 @@
+"Units"
+{
+    "webbed_egg"
+    {
+        "Model"                 "models/props_winter/egg.vmdl"
+        "BaseClass"             "npc_dota_creature"
+        "Level"                 "10"
+        "ModelScale"            "0.9"
+        "HealthBarOffset"       "80"
+        
+        "ArmorPhysical"             "10"
+        
+        "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_NONE"
+        "AttackCapabilities"        "DOTA_UNIT_CAP_NO_ATTACK"
+        
+        "CombatClassAttack"         "DOTA_COMBAT_CLASS_ATTACK_BASIC"
+        "CombatClassDefend"         "DOTA_COMBAT_CLASS_DEFEND_BASIC"
+        "UnitRelationshipClass"     "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+        
+        "StatusHealth"                "772"
+        "StatusHealthRegen"           "2.5"
+        
+        "BountyXP"                    "50"
+    }
+    "webbed_spidy_bubble"
+    {
+        "Model"                 "models/items/broodmother/spiderling/virulent_matriarchs_spiderling/virulent_matriarchs_spiderling.vmdl"
+        "BaseClass"             "npc_dota_creature"
+        "Level"                 "14"
+        "ModelScale"            "0.3"
+        "HealthBarOffset"       "80"
+        
+        "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_GROUND"
+        "MovementSpeed"             "320"
+        "ArmorPhysical"             "10"
+        "AttackCapabilities"        "DOTA_UNIT_CAP_MELEE_ATTACK"
+        
+        "AttackDamageMin"            "160"
+        "AttackDamageMax"            "196"
+        "AttackRate"                "1.35"
+        "AttackAnimationPoint"      "0.50"
+        "AttackRange"               "100"
+        
+        "CombatClassAttack"         "DOTA_COMBAT_CLASS_ATTACK_BASIC"
+        "CombatClassDefend"         "DOTA_COMBAT_CLASS_DEFEND_BASIC"
+        "UnitRelationshipClass"     "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+        
+        "StatusHealth"                "1472"
+        "StatusHealthRegen"           "2.5"
+        
+        "BountyXP"                    "150"
+    }
+    "webbed_spidy_ling"
+    {
+        "Model"                 "models/heroes/broodmother/spiderling.vmdl"
+        "BaseClass"             "npc_dota_creature"
+        "Level"                 "15"
+        "ModelScale"            "0.3"
+        "HealthBarOffset"       "80"
+        
+        "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_GROUND"
+        "MovementSpeed"             "320"
+        "ArmorPhysical"             "10"
+        "AttackCapabilities"        "DOTA_UNIT_CAP_MELEE_ATTACK"
+        
+        "AttackDamageMin"            "160"
+        "AttackDamageMax"            "196"
+        "AttackRate"                "1.35"
+        "AttackAnimationPoint"      "0.50"
+        "AttackRange"               "100"
+        
+        "CombatClassAttack"         "DOTA_COMBAT_CLASS_ATTACK_BASIC"
+        "CombatClassDefend"         "DOTA_COMBAT_CLASS_DEFEND_BASIC"
+        "UnitRelationshipClass"     "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+        
+        "StatusHealth"                "1472"
+        "StatusHealthRegen"           "2.5"
+        
+        "BountyXP"                    "150"
+    }
+    "webbed_spidy_elder"
+    {
+        "Model"                 "models/items/broodmother/spiderling/elder_blood_heir_of_elder_blood/elder_blood_heir_of_elder_blood.vmdl"
+        "BaseClass"             "npc_dota_creature"
+        "Level"                 "16"
+        "ModelScale"            "0.44"
+        "HealthBarOffset"       "80"
+        
+        "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_GROUND"
+        "MovementSpeed"             "320"
+        "ArmorPhysical"             "10"
+        "AttackCapabilities"        "DOTA_UNIT_CAP_MELEE_ATTACK"
+        
+        "AttackDamageMin"            "160"
+        "AttackDamageMax"            "196"
+        "AttackRate"                "1.35"
+        "AttackAnimationPoint"      "0.50"
+        "AttackRange"               "100"
+        
+        "CombatClassAttack"         "DOTA_COMBAT_CLASS_ATTACK_BASIC"
+        "CombatClassDefend"         "DOTA_COMBAT_CLASS_DEFEND_BASIC"
+        "UnitRelationshipClass"     "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+        
+        "StatusHealth"                "1472"
+        "StatusHealthRegen"           "2.5"
+        
+        "BountyXP"                    "180"
+    }
+    "webbed_spidy_arachnid"
+    {
+        "Model"                 "models/heroes/broodmother/broodmother.vmdl"
+        "BaseClass"             "npc_dota_creature"
+        "Level"                 "18"
+        "ModelScale"            "0.64"
+        "HealthBarOffset"       "120"
+        
+        "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_GROUND"
+        "MovementSpeed"             "320"
+        "ArmorPhysical"             "10"
+        "AttackCapabilities"        "DOTA_UNIT_CAP_MELEE_ATTACK"
+        
+        "AttackDamageMin"            "460"
+        "AttackDamageMax"            "596"
+        "AttackRate"                "1.35"
+        "AttackAnimationPoint"      "0.50"
+        "AttackRange"               "100"
+        
+        "CombatClassAttack"         "DOTA_COMBAT_CLASS_ATTACK_BASIC"
+        "CombatClassDefend"         "DOTA_COMBAT_CLASS_DEFEND_BASIC"
+        "UnitRelationshipClass"     "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+        
+        "StatusHealth"                "4472"
+        "StatusHealthRegen"           "2.5"
+        
+        "Creature"
+        {
+            "AttachWearables"
+            {
+                "Wearable1" { "ItemDef" "8392" }
+                "Wearable2" { "ItemDef" "8395" }
+                "Wearable3" { "ItemDef" "8397" }
+                "Wearable4" { "ItemDef" "8399" }
+            }
+        }
+        "BountyXP"                    "180"
+    }
+}

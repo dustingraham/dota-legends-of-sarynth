@@ -22,6 +22,9 @@ function Boot:Precache(context)
         'particles/units/heroes/ranger/explosive_shot/ranger_explosive_shot.vpcf',
         'particles/units/heroes/ranger/explosive_shot/ranger_explosive_shot_impact.vpcf',
         
+        -- Dark Boss
+        'particles/units/heroes/hero_leshrac/leshrac_base_attack.vpcf',
+        
         -- Testing?
         'particles/econ/items/drow/drow_bow_monarch/drow_frost_arrow_monarch.vpcf',
         'particles/units/heroes/hero_drow/drow_frost_arrow.vpcf',
@@ -58,10 +61,12 @@ function Boot:Precache(context)
     PrecacheUnitByNameSync('npc_dota_hero_warlock', context)
     
     PrecacheUnitByNameSync("npc_dota_hero_lina", context)
-
+    PrecacheUnitByNameSync("dark_death_knight", context)
+    PrecacheUnitByNameSync("dark_boss", context)
+    
     PrecacheUnitByNameSync("sheep", context)
     PrecacheUnitByNameSync("quest_bear", context)
-
+    
     PrecacheItemByNameSync('item_amulet_tier1', context)
     PrecacheItemByNameSync('item_amulet_tier2', context)
     PrecacheItemByNameSync('item_amulet_tier3', context)
@@ -162,20 +167,10 @@ function Boot:InitGameModeEntity()
     mode:SetGoldSoundDisabled(false)
 
     -- Levels
+    local levels = CharacterService:GetExperienceLevelRequirements()
     mode:SetUseCustomHeroLevels(true)
-    mode:SetCustomXPRequiredToReachNextLevel({
-        0, -- Level 1
-        100, -- Level 2
-        200, -- Level 3
-        350, -- Level 4
-        500, -- Level 5
-        700, -- Level 6
-        900, -- Level 7
-        1200, -- Level 8
-        1600, -- Level 9
-        2400, -- Level 10
-    })
-
+    mode:SetCustomXPRequiredToReachNextLevel(levels)
+    
     Debug('Boot', 'Configured GameModeEntity')
 end
 

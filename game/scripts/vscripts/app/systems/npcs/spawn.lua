@@ -18,11 +18,14 @@ function Spawn:constructor(spawnNode)
     
     self.spawnPoint = targetEntity:GetAbsOrigin()
     
-    -- Make one attempt to find a different node.
-    for _,spawn in pairs(spawnNode.Spawns) do
-        if spawn.spawnPoint == self.spawnPoint then
-            key = spawnNode.SpawnPoints[RandomInt(1,#spawnNode.SpawnPoints)]
-            self.spawnPoint = Entities:FindByName(nil, key):GetAbsOrigin()
+    -- TODO: Stupid bad, but easy, trying to ensure unique...
+    for i = 1, 10 do
+        -- Make an attempt to find a different node.
+        for _,spawn in pairs(spawnNode.Spawns) do
+            if spawn.spawnPoint == self.spawnPoint then
+                key = spawnNode.SpawnPoints[RandomInt(1,#spawnNode.SpawnPoints)]
+                self.spawnPoint = Entities:FindByName(nil, key):GetAbsOrigin()
+            end
         end
     end
     

@@ -54,7 +54,7 @@
         // "AttackCapabilities"        "DOTA_UNIT_CAP_NO_ATTACK"
         
         "AttackAcquisitionRange"        "500"
-        "AttackRange"       "1000"
+        "AttackRange"       "800"
         "ProjectileModel"       "particles/units/heroes/hero_invoker/invoker_base_attack.vpcf"
         "ProjectileSpeed"       "600"
     }
@@ -95,7 +95,7 @@
         "Ability6" "self_regen"
         "Ability7" ""
         
-        "AttackRange"       "1000"
+        "AttackRange"       "800"
         
         "DisableWearables" "1"
     }

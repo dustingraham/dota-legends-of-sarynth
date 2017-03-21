@@ -1,0 +1,175 @@
+"Units"
+{
+    "kobolds_gnoll"
+    {
+        "Model"                 "models/creeps/neutral_creeps/n_creep_gnoll/n_creep_gnoll.vmdl"
+        "BaseClass"             "npc_dota_creature"
+        "Level"                 "10"
+        "ModelScale"            "0.9"
+        "HealthBarOffset"       "80"
+        
+        "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_GROUND"
+        "MovementSpeed"             "300"
+        "ArmorPhysical"             "5"
+        "AttackCapabilities"        "DOTA_UNIT_CAP_RANGED_ATTACK"
+        
+        "AttackDamageMin"            "110"
+        "AttackDamageMax"            "136"
+        "AttackRate"                "1.6"
+        "AttackAnimationPoint"      "0.4"
+        "AttackRange"               "500"
+        "ProjectileModel"           "particles/neutral_fx/gnoll_base_attack.vpcf"
+        "ProjectileSpeed"           "1500"
+        "CombatClassAttack"         "DOTA_COMBAT_CLASS_ATTACK_BASIC"
+        "CombatClassDefend"         "DOTA_COMBAT_CLASS_DEFEND_BASIC"
+        "UnitRelationshipClass"     "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+        
+        "StatusHealth"                "772"
+        "StatusHealthRegen"           "2.5"
+        
+        "BountyXP"                    "50"
+    }
+    "kobolds_basic"
+    {
+        "Model"                 "models/creeps/neutral_creeps/n_creep_kobold/kobold_c/n_creep_kobold_c.vmdl"
+        "BaseClass"             "npc_dota_creature"
+        "Level"                 "9"
+        "ModelScale"            "1.0"
+        "HealthBarOffset"       "80"
+        
+        "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_GROUND"
+        "MovementSpeed"             "320"
+        "ArmorPhysical"             "10"
+        "AttackCapabilities"        "DOTA_UNIT_CAP_MELEE_ATTACK"
+        
+        "AttackDamageMin"            "60"
+        "AttackDamageMax"            "96"
+        "AttackRate"                "0.65"
+        "AttackAnimationPoint"      "0.38"
+        "AttackRange"               "100"
+        
+        "CombatClassAttack"         "DOTA_COMBAT_CLASS_ATTACK_BASIC"
+        "CombatClassDefend"         "DOTA_COMBAT_CLASS_DEFEND_BASIC"
+        "UnitRelationshipClass"     "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+        
+        "StatusHealth"                "472"
+        "StatusHealthRegen"           "2.5"
+        
+        "BountyXP"                    "50"
+    }
+    "kobolds_spear"
+    {
+        "Model"                 "models/creeps/neutral_creeps/n_creep_kobold/kobold_b/n_creep_kobold_b.vmdl"
+        "BaseClass"             "npc_dota_creature"
+        "Level"                 "11"
+        "ModelScale"            "1.0"
+        "HealthBarOffset"       "80"
+        
+        "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_GROUND"
+        "MovementSpeed"             "320"
+        "ArmorPhysical"             "10"
+        "AttackCapabilities"        "DOTA_UNIT_CAP_MELEE_ATTACK"
+        
+        "AttackDamageMin"            "60"
+        "AttackDamageMax"            "96"
+        "AttackRate"                "0.65"
+        "AttackAnimationPoint"      "0.38"
+        "AttackRange"               "100"
+        
+        "CombatClassAttack"         "DOTA_COMBAT_CLASS_ATTACK_BASIC"
+        "CombatClassDefend"         "DOTA_COMBAT_CLASS_DEFEND_BASIC"
+        "UnitRelationshipClass"     "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+        
+        "StatusHealth"                "472"
+        "StatusHealthRegen"           "2.5"
+        
+        "BountyXP"                    "50"
+    }
+    "kobolds_archer"
+    {
+        "Model"                 "models/creeps/item_creeps/i_creep_necro_archer/necro_archer.vmdl"
+        "BaseClass"             "npc_dota_creature"
+        "Level"                 "11"
+        "ModelScale"            "0.5"
+        "HealthBarOffset"       "80"
+        
+        "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_GROUND"
+        "MovementSpeed"             "320"
+        "ArmorPhysical"             "10"
+        "AttackCapabilities"        "DOTA_UNIT_CAP_RANGED_ATTACK"
+        
+        "AttackDamageMin"            "160"
+        "AttackDamageMax"            "196"
+        "AttackRate"                "1"
+        "AttackAnimationPoint"      "0.7"
+        "AttackRange"               "550"
+        
+        "ProjectileModel"           "particles/items2_fx/necronomicon_archer_projectile.vpcf"
+        "ProjectileSpeed"           "900"
+        
+        "CombatClassAttack"         "DOTA_COMBAT_CLASS_ATTACK_BASIC"
+        "CombatClassDefend"         "DOTA_COMBAT_CLASS_DEFEND_BASIC"
+        "UnitRelationshipClass"     "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+        
+        "StatusHealth"                "1472"
+        "StatusHealthRegen"           "2.5"
+        
+        "BountyXP"                    "50"
+    }
+    "kobolds_overseer"
+    {
+        "Model"                 "models/creeps/neutral_creeps/n_creep_kobold/kobold_a/n_creep_kobold_a.vmdl"
+        "BaseClass"             "npc_dota_creature"
+        "Level"                 "13"
+        "ModelScale"            "1.0"
+        "HealthBarOffset"       "80"
+        
+        "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_GROUND"
+        "MovementSpeed"             "320"
+        "ArmorPhysical"             "10"
+        "AttackCapabilities"        "DOTA_UNIT_CAP_MELEE_ATTACK"
+        
+        "AttackDamageMin"            "160"
+        "AttackDamageMax"            "196"
+        "AttackRate"                "0.65"
+        "AttackAnimationPoint"      "0.38"
+        "AttackRange"               "100"
+        
+        "CombatClassAttack"         "DOTA_COMBAT_CLASS_ATTACK_BASIC"
+        "CombatClassDefend"         "DOTA_COMBAT_CLASS_DEFEND_BASIC"
+        "UnitRelationshipClass"     "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+        
+        "StatusHealth"                "2472"
+        "StatusHealthRegen"           "2.5"
+        
+        "BountyXP"                    "50"
+    }
+    "kobolds_ogre"
+    {
+        "Model"                 "models/creeps/neutral_creeps/n_creep_ogre_lrg/n_creep_ogre_lrg.vmdl"
+        "BaseClass"             "npc_dota_creature"
+        "Level"                 "13"
+        "ModelScale"            "1.0"
+        "HealthBarOffset"       "80"
+        
+        "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_GROUND"
+        "MovementSpeed"             "320"
+        "ArmorPhysical"             "10"
+        "AttackCapabilities"        "DOTA_UNIT_CAP_MELEE_ATTACK"
+        
+        "AttackDamageMin"            "260"
+        "AttackDamageMax"            "296"
+        "AttackRate"                "0.65"
+        "AttackAnimationPoint"      "0.38"
+        "AttackRange"               "100"
+        
+        "CombatClassAttack"         "DOTA_COMBAT_CLASS_ATTACK_BASIC"
+        "CombatClassDefend"         "DOTA_COMBAT_CLASS_DEFEND_BASIC"
+        "UnitRelationshipClass"     "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+        
+        "StatusHealth"                "3472"
+        "StatusHealthRegen"           "2.5"
+        
+        "BountyXP"                    "50"
+    }
+}

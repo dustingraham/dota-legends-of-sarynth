@@ -50,6 +50,7 @@ for _,file in ipairs({
 
 -- AI Modifiers
 for _,modifier in ipairs({
+    'ai_dark_boss',
     'ai_aggro_leash',
     'ai_basic_aggro',
     'ai_basic_sheep',

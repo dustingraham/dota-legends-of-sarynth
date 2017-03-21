@@ -12,7 +12,7 @@ end
 function mod:OnCreated(params)
     -- local target = self:GetParent()
     if IsServer() then
-        self:StartIntervalThink(1)
+        self:StartIntervalThink(0.25)
     end
 end
 
@@ -27,5 +27,5 @@ function mod:GetModifierHealthRegenPercentage()
 end
 
 function mod:OnIntervalThink()
-    PopupHealing(self:GetParent(), math.floor(self:GetParent():GetMaxHealth() / 10))
+    PopupHealing(self:GetParent(), math.floor(self:GetParent():GetMaxHealth() / 40))
 end

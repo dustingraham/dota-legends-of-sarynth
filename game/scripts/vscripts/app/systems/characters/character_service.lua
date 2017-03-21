@@ -32,6 +32,35 @@ function CharacterService:OnNPCSpawned(event)
     end
 end
 
+
+function CharacterService:GetExperienceLevelRequirements()
+    local old = {
+        0, -- Level 1
+        100, -- Level 2
+        200, -- Level 3
+        350, -- Level 4
+        500, -- Level 5
+        700, -- Level 6
+        900, -- Level 7
+        1200, -- Level 8
+        1600, -- Level 9
+        2400, -- Level 10
+    }
+    -- 
+    -- 0, 100, 300, 600, 1000,
+    -- 1500, 2100, 2800, 3600, 4500
+    -- 5500, 6600, 7800, 9100, 10500
+    -- 12000, 13600, 15300, 17100, 19000
+    --
+    local table = {}
+    for i = 1, 20 do
+        table[i] = 100 * (i - 1) + 50 * ((i - 1) * (i - 2))
+    end
+    return table
+end
+
+CharacterService:GetExperienceLevelRequirements()
+
 -- Combo Functions to display exp overhead.
 function CharacterService:OnEntityHurt(event)
     if not event.entindex_attacker then return end

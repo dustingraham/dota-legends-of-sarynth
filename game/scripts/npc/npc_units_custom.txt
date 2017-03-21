@@ -1,5 +1,8 @@
 #base "units\npcs.txt"
 #base "units\start.txt"
+#base "units\kobold.txt"
+#base "units\webbed_forest.txt"
+#base "units\dark_plains.txt"
 
 "DOTAUnits"
 {
