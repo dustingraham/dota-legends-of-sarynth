@@ -48,9 +48,24 @@ function Boot:Precache(context)
     -- Spell Testing
     PrecacheResource('particle', 'particles/econ/items/abaddon/abaddon_alliance/abaddon_death_coil_alliance.vpcf', context)
 
-    PrecacheResource('soundfile', 'soundevents/game_sounds_heroes/game_sounds_shadowshaman.vsndevts', context)
-    PrecacheResource('soundfile', 'soundevents/game_sounds_heroes/game_sounds_ursa.vsndevts', context)
-    PrecacheResource("soundfile", "soundevents/music/jboberg_01/soundevents_music.vsndevts", context)
+    local sounds = {
+        'soundevents/game_sounds_creeps.vsndevts',
+        'soundevents/game_sounds_heroes/game_sounds_broodmother.vsndevts',
+        'soundevents/game_sounds_heroes/game_sounds_crystalmaiden.vsndevts',
+        'soundevents/game_sounds_heroes/game_sounds_lina.vsndevts',
+        'soundevents/game_sounds_heroes/game_sounds_omniknight.vsndevts',
+        'soundevents/game_sounds_heroes/game_sounds_phoenix.vsndevts',
+        'soundevents/game_sounds_heroes/game_sounds_shadowshaman.vsndevts',
+        'soundevents/game_sounds_heroes/game_sounds_terrorblade.vsndevts',
+        'soundevents/game_sounds_heroes/game_sounds_tusk.vsndevts',
+        'soundevents/game_sounds_heroes/game_sounds_ursa.vsndevts',
+        'soundevents/game_sounds_heroes/game_sounds_vengefulspirit.vsndevts',
+        'soundevents/game_sounds_heroes/game_sounds_zuus.vsndevts',
+        'soundevents/music/jboberg_01/soundevents_music.vsndevts',
+        'soundevents/music/jboberg_01/soundevents_stingers.vsndevts',
+        'soundevents/voscripts/game_sounds_vo_beastmaster.vsndevts',
+    }
+    for _,name in ipairs(sounds) do PrecacheResource('soundfile', name, context) end
 
     PrecacheItemByNameSync('item_amulet_tier1', context)
     PrecacheItemByNameSync('item_amulet_tier2', context)

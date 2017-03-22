@@ -8,6 +8,7 @@ for _,file in ipairs({
     'app/core/boot',
     'app/core/event',
     'app/core/filters',
+    'app/core/sounds',
     
     'app/maps/'..GetMapName(),
     

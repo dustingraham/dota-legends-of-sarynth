@@ -130,9 +130,9 @@
         // CM as final boss, move hulk to second boss. IceForge spirits as support creeps.
         "Model" "models/heroes/crystal_maiden/crystal_maiden_arcana.vmdl"
         "BaseClass"             "npc_dota_creature"
-        "Level"                 "18"
+        "Level"                 "20"
         "ModelScale"            "1.4"
-        "HealthBarOffset"       "400"
+
         "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_GROUND"
         "MovementSpeed"             "360"
         "ArmorPhysical"             "10"
@@ -140,6 +140,7 @@
 
         "ProjectileModel"		"particles/units/heroes/hero_crystalmaiden/maiden_base_attack.vpcf"
         "ProjectileSpeed"		"900"
+        "DrawParticlesWhileHidden" "1"
 
         "AttackDamageMin"            "460"
         "AttackDamageMax"            "496"

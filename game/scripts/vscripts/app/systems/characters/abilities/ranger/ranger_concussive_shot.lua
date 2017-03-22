@@ -35,6 +35,7 @@ function spell:OnSpellStart()
         iVisionTeamNumber = caster:GetTeamNumber(),
         iSourceAttachment = DOTA_PROJECTILE_ATTACHMENT_ATTACK_1
     })
+    EmitSoundOn('Creep_Good_Melee.PreAttack', caster)
 end
 
 function spell:OnProjectileHit(target, pos)
@@ -49,6 +50,7 @@ function spell:OnProjectileHit(target, pos)
         damage_type = DAMAGE_TYPE_MAGICAL
     })
     target:AddNewModifier(caster, self, 'ranger_concussion', { duration = 2 })
+    EmitSoundOn('Hero_Terrorblade.Attack', target)
 end
 
 if IsClient() then

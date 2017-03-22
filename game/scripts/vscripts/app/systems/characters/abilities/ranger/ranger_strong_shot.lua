@@ -36,6 +36,7 @@ function spell:OnSpellStart()
         iVisionTeamNumber = caster:GetTeamNumber(),
         iSourceAttachment = DOTA_PROJECTILE_ATTACHMENT_ATTACK_1
     })
+    EmitSoundOn('Creep_Good_Melee.PreAttack', caster)
 end
 
 function spell:OnProjectileHit(target, pos)
@@ -49,6 +50,7 @@ function spell:OnProjectileHit(target, pos)
         damage = damage, 
         damage_type = DAMAGE_TYPE_MAGICAL
     })
+    EmitSoundOn('Hero_Zuus.Attack', caster)
 end
 
 if IsClient() then

@@ -46,7 +46,9 @@
     color:#ffffff;
     font-size:16px;
 }
-
+.quest-dialog-primary .text .quote {
+    font-style:italic;
+}
 
 .objective {
     margin-top:10px;

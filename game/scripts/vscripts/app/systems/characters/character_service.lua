@@ -234,6 +234,11 @@ function CharacterService:OnHeroPick(e, event)
     hero.customEquipment:Open(0)
     Containers:SetDefaultInventory(hero, hero.customInventory)
     
+    -- Entering world.
+    GameRules:GetGameModeEntity():EmitSound('jboberg_01.music.ui_hero_select')
+    -- GameRules:GetGameModeEntity():EmitSound('jboberg_01.stinger.radiant_win');
+    -- Sounds:EmitSoundOnClient(0, 'jboberg_01.stinger.radiant_win')
+
     -- Items for testing.
     if IsInToolsMode() and TEST_SPAWN_ITEMS then TestTest(hero) end
 end

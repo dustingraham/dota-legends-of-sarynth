@@ -52,6 +52,14 @@ function CustomMap:OnHeroPick(_, params)
         hero:AddExperience(expNeeded, 0, false, false)
         hero.isInitialLevel = nil
     end
+    if TEST_SUPERMAN then
+        hero:SetMoveCapability(DOTA_UNIT_CAP_MOVE_FLY)
+        hero:SetBaseMoveSpeed(3000)
+        hero:SetBaseStrength(1500)
+        hero:SetBaseAgility(600)
+        hero:SetBaseIntellect(1500)
+        hero:CalculateStatBonus()
+    end
 end
 
 if not CustomMap.initialized then

@@ -35,6 +35,7 @@ function spell:OnSpellStart()
         iVisionTeamNumber = caster:GetTeamNumber(),
         iSourceAttachment = DOTA_PROJECTILE_ATTACHMENT_ATTACK_1
     })
+    EmitSoundOn('hero_Crystal.preAttack', caster)
 end
 
 function spell:OnProjectileHit(target, pos)
@@ -51,6 +52,7 @@ function spell:OnProjectileHit(target, pos)
     })
     
     target:AddNewModifier(caster, self, 'ranger_slow', { duration = 9 })
+    EmitSoundOn('hero_Crystal.projectileImpact', target)
 end
 
 if IsClient() then

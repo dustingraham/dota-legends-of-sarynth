@@ -96,8 +96,8 @@
         "AbilityManaCost"         "0"
         "AbilityCastAnimation"    "ACT_DOTA_TELEPORT"
         "AbilityCastRange"        "0"
-        "AbilityChannelTime"      "5"
-        "AbilityCastPoint"        "0.50"
+        "AbilityChannelTime"      "4.0"
+        "AbilityCastPoint"        "0.00"
         "AnimationPlaybackRate"   "0.73"
         "AbilityDuration"         "2"
     }

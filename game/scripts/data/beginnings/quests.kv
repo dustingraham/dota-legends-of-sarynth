@@ -12,26 +12,26 @@
         }
         "start"
         {
-            "dialog" "Oh, hey! The name's Volgarth. Glad I caught you. Could you help me out real quick?<br><br>See those sheep over there? They have really been destroying my alchemy crops. You wouldn't mind thinning the flock a little, would you?"
+            "dialog" "<span class='quote'>I run with the rabbits, and hunt with the hounds.</span><br><br>The name's Volgarth. Glad I caught you. I could use your help.<br><br>The sheep have been destroying some of the crops around here. You wouldn't mind thinning the flock a little, would you?"
         }
         "complete"
         {
-            "dialog" "You did it!"
+            "dialog" "Ahh... you have my thanks."
         }
         "objectives"
         {
             "01" {
-                "long_description" "Kill 3 sheep, and return."
+                "long_description" "Kill 6 sheep, and return."
                 "description" "Sheep Culled"
                 "action" "kill"
                 "npc" "start_sheep"
-                "required" "3"
+                "required" "6"
             }
         }
         "rewards"
         {
-            "gold" "25"
-            "experience" "100"
+            //"gold" "25"
+            "experience" "120"
             "item_choose"
             {
                 "01" "item_shield_basic"
@@ -40,6 +40,7 @@
             }
         }
     }
+
     "1005"
     {
         "name" "start_area_report_to_town"
@@ -48,7 +49,7 @@
         "end_entity" "npc_quest_start"
         "requirements"
         {
-            "level" "1"
+            "level" "99"
         }
         "start"
         {

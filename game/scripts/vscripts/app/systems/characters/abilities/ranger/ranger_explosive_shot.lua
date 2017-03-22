@@ -36,6 +36,7 @@ function spell:OnSpellStart()
         iVisionTeamNumber = caster:GetTeamNumber(),
         iSourceAttachment = DOTA_PROJECTILE_ATTACHMENT_ATTACK_1
     })
+    EmitSoundOn('Hero_Phoenix.PreAttack', caster)
 end
 
 function spell:OnProjectileHit(target, pos)
@@ -73,8 +74,8 @@ function spell:OnProjectileHit(target, pos)
             damage = damage, 
             damage_type = DAMAGE_TYPE_MAGICAL
         })
-    end        
-    
+    end
+    EmitSoundOn('Hero_Phoenix.IcarusDive.Stop', caster)
 end
 
 if IsClient() then

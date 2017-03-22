@@ -36,6 +36,7 @@ function spell:OnSpellStart()
         iVisionTeamNumber = caster:GetTeamNumber(),
         iSourceAttachment = DOTA_PROJECTILE_ATTACHMENT_ATTACK_1
     })
+    EmitSoundOn('Hero_Broodmother.PreAttack', caster)
 end
 
 function spell:OnProjectileHit(target, pos)
@@ -54,6 +55,7 @@ function spell:OnProjectileHit(target, pos)
         damage = damage,
         interval = 3,
     })
+    EmitSoundOn('Hero_Broodmother.Attack', target)
 end
 
 if IsClient() then

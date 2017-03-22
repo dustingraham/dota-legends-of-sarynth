@@ -20,6 +20,12 @@ function ai:GetActivityTranslationModifiers()
     return "arcana"
 end
 
+function ai:CheckState()
+    return {
+        [MODIFIER_STATE_NO_HEALTH_BAR] = true
+    }
+end
+
 -- ai.STATE_IDLE = 0
 -- ai.STATE_AGGRO = 10
 -- ai.STATE_RETURN = 20
@@ -78,11 +84,12 @@ function ai:OnDeath(event)
     if self:GetParent() ~= event.unit then return end
     Debug('AiAggroLeash', 'OnDeath')
     local idx = ParticleManager:CreateParticle(
-        'particles/econ/items/crystal_maiden/crystal_maiden_maiden_of_icewrack/maiden_death_arcana.vpcf',
-        PATTACH_POINT_FOLLOW, -- PATTACH_ABSORIGIN_FOLLOW, -- PATTACH_OVERHEAD_FOLLOW,
-        self:GetParent()
+    'particles/econ/items/crystal_maiden/crystal_maiden_maiden_of_icewrack/maiden_death_arcana.vpcf',
+    PATTACH_POINT_FOLLOW, -- PATTACH_ABSORIGIN_FOLLOW, -- PATTACH_OVERHEAD_FOLLOW,
+    self:GetParent()
     )
     ParticleManager:ReleaseParticleIndex(idx)
+    self:GetParent():AddNoDraw()
     self:GetParent().spawn:OnDeath(self)
 end
 

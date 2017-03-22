@@ -13,19 +13,32 @@ function mod:OnCreated(params)
     -- local target = self:GetParent()
     if IsServer() then
         self:StartIntervalThink(0.25)
+        self.i = 0
+        self.healthRegen = self:GetParent():GetMaxHealth() / 4
+        self.manaRegen = self:GetParent():GetMaxMana() / 4
     end
 end
 
-
 function mod:DeclareFunctions()
     return {
-        MODIFIER_PROPERTY_HEALTH_REGEN_PERCENTAGE
+        MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT,
+        MODIFIER_PROPERTY_MANA_REGEN_CONSTANT,
     }
 end
-function mod:GetModifierHealthRegenPercentage()
-    return 10
+
+function mod:GetModifierConstantHealthRegen()
+    return self.healthRegen
+end
+
+function mod:GetModifierConstantManaRegen()
+    return self.manaRegen
 end
 
 function mod:OnIntervalThink()
-    PopupHealing(self:GetParent(), math.floor(self:GetParent():GetMaxHealth() / 40))
+    self.i = self.i + 1
+    if self.i % 2 == 0 then
+        PopupHealing(self:GetParent(), math.floor(self:GetParent():GetMaxHealth() / 8))
+    else
+        PopupManaing(self:GetParent(), math.floor(self:GetParent():GetMaxMana() / 8))
+    end
 end

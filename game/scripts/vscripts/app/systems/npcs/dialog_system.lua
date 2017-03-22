@@ -6,9 +6,27 @@ function DialogSystem:Activate()
     CustomGameEventManager:RegisterListener('questgiver_dialog_event', Dynamic_Wrap(DialogSystem, 'OnQuestDialogEvent', QuestGiver))
 end
 
+--print(PlayerResource:IsValidPlayerID(0))
+--local client = PlayerResource:GetPlayer(0)
+--local caster = PlayerResource:GetSelectedHeroEntity(0)
+--EmitSoundOnClient('Hero_Phoenix.IcarusDive.Stop', client)
+-- EmitSoundOn('beastmaster_beas_rare_02', caster)
+
+
 function DialogSystem:StartDialog(character, npc)
     local handled = false
-    
+
+    -- Create a special NPC handler class defined in the spawn/unit definition.
+    -- beastmaster_beas_rare_02
+    if npc.spawn_name == 'npc_quest_start' then
+        if npc.first_interaction == nil then
+            print('Chatter...')
+            Sounds:EmitSoundOnClient(character:GetPlayerOwnerID(), 'beastmaster_beas_rare_02')
+            -- EmitSoundOnClient('beastmaster_beas_rare_02', character:GetPlayerOwner())
+            npc.first_interaction = false
+        end
+    end
+
     -- Check if character has quest to turn in.
     handled = self:CheckTurnIn(character, npc)
     

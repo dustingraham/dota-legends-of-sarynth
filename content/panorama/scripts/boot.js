@@ -29,6 +29,10 @@ GameUI.SetDefaultUIEnabled( DotaDefaultUIElement_t.DOTA_DEFAULT_UI_INVENTORY_QUI
 
 $.Msg('[BOOT] Loaded');
 
+// TODO Keybinds.
+//Game.CreateCustomKeyBind("f1", "TestEvent123");
+//Game.AddCommand( "TestEvent123", function() {$.Msg("Hi");}, "", 0 );
+
 var upDownHide = function(up, down) {
     var panel = $.GetContextPanel();
     while(panel != null)
@@ -77,6 +81,13 @@ Game.CustomOnReleasedInventory = function()
     }
 };
 
+GameEvents.Subscribe('emit_client_sound', function(event)
+{
+    if (event.sound){
+        //$.Msg(msg);
+        Game.EmitSound(event.sound);
+    }
+});
 
 
 // (function() {
