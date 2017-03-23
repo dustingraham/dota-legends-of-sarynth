@@ -37,7 +37,8 @@ for _,file in ipairs({
     'app/utils/debug',
     'app/utils/helpers',
     'app/utils/md5',
-    
+
+    'vendor/barebones/animations',
     'vendor/barebones/containers',
     'vendor/barebones/notifications',
     'vendor/barebones/playertables',
@@ -59,5 +60,6 @@ for _,modifier in ipairs({
     'ai_npc_basic',
 }) do LinkLuaModifier(modifier, 'app/systems/npcs/ai/'..modifier, LUA_MODIFIER_MOTION_NONE) end
 for _,modifier in ipairs({
+    'ai_start_area_boss',
     'ice_dungeon_boss3',
 }) do LinkLuaModifier(modifier, 'app/systems/npcs/ai/units/'..modifier, LUA_MODIFIER_MOTION_NONE) end

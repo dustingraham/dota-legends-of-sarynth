@@ -66,7 +66,7 @@ function StartBossAreaStartTouch(trigger)
     relay:Trigger()
     MoveBlockers(219.125)
     -- https://github.com/SteamDatabase/GameTracking-Dota2/blob/c6a10d9fc4eae2aff810c9893377d675ddf3ffc4/game/dota/pak01_dir/soundevents/music/jboberg_01/soundevents_stingers.vsndevts
-    Sounds:EmitSoundOnClient(pid, 'jboberg_01.music.battle_01')
+    Sounds:EmitSoundOnClient(pid, 'jboberg_01.music.battle_02')
 end
 function StartBossAreaEndTouch(trigger)
     local pid = trigger.activator:GetPlayerOwnerID()
@@ -74,7 +74,8 @@ function StartBossAreaEndTouch(trigger)
     local relay = Entities:FindByName(nil, 'start_area_barricade_relay_off')
     relay:Trigger()
     MoveBlockers(-219.125)
-    Sounds:EmitSoundOnClient(pid, 'jboberg_01.music.battle_01_end')
+    -- Sounds:EmitSoundOnClient(pid, 'jboberg_01.music.battle_02_end')
+    Sounds:EmitSoundOnClient(pid, 'jboberg_01.music.ui_main')
 end
 function MoveBlockers(distance)
     local blockers = Entities:FindAllByName('start_area_barricade_wall')

@@ -53,6 +53,7 @@ function Boot:Precache(context)
         'soundevents/game_sounds_heroes/game_sounds_broodmother.vsndevts',
         'soundevents/game_sounds_heroes/game_sounds_crystalmaiden.vsndevts',
         'soundevents/game_sounds_heroes/game_sounds_lina.vsndevts',
+        'soundevents/game_sounds_heroes/game_sounds_lycan.vsndevts',
         'soundevents/game_sounds_heroes/game_sounds_omniknight.vsndevts',
         'soundevents/game_sounds_heroes/game_sounds_phoenix.vsndevts',
         'soundevents/game_sounds_heroes/game_sounds_shadowshaman.vsndevts',
@@ -64,6 +65,7 @@ function Boot:Precache(context)
         'soundevents/music/jboberg_01/soundevents_music.vsndevts',
         'soundevents/music/jboberg_01/soundevents_stingers.vsndevts',
         'soundevents/voscripts/game_sounds_vo_beastmaster.vsndevts',
+        'soundevents/voscripts/game_sounds_vo_lycan.vsndevts',
     }
     for _,name in ipairs(sounds) do PrecacheResource('soundfile', name, context) end
 
