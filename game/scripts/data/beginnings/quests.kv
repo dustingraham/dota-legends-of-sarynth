@@ -2,7 +2,7 @@
 {
     "1001"
     {
-        "name" "start_area_sheep_1"
+        "name" "start_area_sheep"
         "title" "Thinning the Flock"
         "start_entity" "npc_quest_start"
         "end_entity" "npc_quest_start"
@@ -21,11 +21,11 @@
         "objectives"
         {
             "01" {
-                "long_description" "Kill 6 sheep, and return."
+                "long_description" "Kill 8 sheep, and return."
                 "description" "Sheep Culled"
                 "action" "kill"
                 "npc" "start_sheep"
-                "required" "6"
+                "required" "8"
             }
         }
         "rewards"
@@ -40,7 +40,131 @@
             }
         }
     }
+    "1002"
+    {
+        "name" "start_area_worgs"
+        "title" "The Worg Pestilence"
+        "start_entity" "npc_quest_start"
+        "end_entity" "npc_quest_start"
+        "requirements"
+        {
+            "level" "3"
+            "quest" "start_area_sheep"
+        }
+        "start"
+        {
+            "dialog" "Fabulous work, champion. Could I trouble you for another favor.<br><br>The worgs along the river have gotten really aggressive of late. Teach them some manners will you?"
+        }
+        "complete"
+        {
+            "dialog" "Ahh... you have my thanks."
+        }
+        "objectives"
+        {
+            "01" {
+                "long_description" "Kill 6 worgs, and return."
+                "description" "Worgs Slain"
+                "action" "kill"
+                "npc" "start_worg"
+                "required" "6"
+            }
+        }
+        "rewards"
+        {
+            //"gold" "25"
+            "experience" "140"
+            "item_choose"
+            {
+                "01" "item_shield_basic"
+                "02" "item_armor_basic"
+                "03" "item_weapon_basic"
+            }
+        }
+    }
 
+    "1003"
+    {
+        "name" "start_area_wolves"
+        "title" "Our Wolf Problem"
+        "start_entity" "npc_quest_start"
+        "end_entity" "npc_quest_start"
+        "requirements"
+        {
+            "level" "4"
+            "quest" "start_area_worgs"
+        }
+        "start"
+        {
+            "dialog" "I must admit. Your skills appear to surpass mine. So, let's really put them to the test.<br><br>Head across the road here, there is a fledgling wolfpack that is quite tough. If you can't handle it, I would understand but I had to mention it."
+        }
+        "complete"
+        {
+            "dialog" "Ahh... you have my thanks."
+        }
+        "objectives"
+        {
+            "01" {
+                "long_description" "Send 6 wolves into the afterlife."
+                "description" "Wolves Killed"
+                "action" "kill"
+                "npc" "start_wolf"
+                "required" "6"
+            }
+        }
+        "rewards"
+        {
+            //"gold" "25"
+            "experience" "180"
+            "item_choose"
+            {
+                "01" "item_shield_basic"
+                "02" "item_armor_basic"
+                "03" "item_weapon_basic"
+            }
+        }
+    }
+
+    "1004"
+    {
+        "name" "start_area_kill_scar"
+        "title" "The Alpha Leader"
+        "start_entity" "npc_quest_start"
+        "end_entity" "npc_quest_start"
+        "requirements"
+        {
+            "level" "5"
+            "quest" "start_area_wolves"
+        }
+        "start"
+        {
+            "dialog" "I had written you off for dead, but you impress again. Okay, well if you're all that then I'll tell you what. East of the lake there is rumored to be an alpha wolf. Some have called him Scar. Clense the area of his presence and we will crown you champion of all. Whatcha think?"
+        }
+        "complete"
+        {
+            "dialog" "Ahh... you have my thanks."
+        }
+        "objectives"
+        {
+            "01" {
+                "long_description" "Slay Scar."
+                "description" "Slay Scar"
+                "action" "kill"
+                "npc" "start_area_wolf_boss"
+                "required" "1"
+            }
+        }
+        "rewards"
+        {
+            //"gold" "25"
+            "experience" "220"
+            "item_choose"
+            {
+                "01" "item_shield_basic"
+                "02" "item_armor_basic"
+                "03" "item_weapon_basic"
+            }
+        }
+    }
     "1005"
     {
         "name" "start_area_report_to_town"

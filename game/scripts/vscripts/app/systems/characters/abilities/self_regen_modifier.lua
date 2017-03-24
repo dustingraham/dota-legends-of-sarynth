@@ -23,7 +23,13 @@ function mod:DeclareFunctions()
     return {
         MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT,
         MODIFIER_PROPERTY_MANA_REGEN_CONSTANT,
+        MODIFIER_EVENT_ON_ATTACKED,
     }
+end
+
+function mod:OnAttacked()
+    print('Interrupting...')
+    self:GetParent():InterruptChannel()
 end
 
 function mod:GetModifierConstantHealthRegen()

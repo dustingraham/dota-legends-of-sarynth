@@ -5,9 +5,9 @@
         "SpawnPoints" "spawn_start_sheep_1,spawn_start_sheep_2,spawn_start_sheep_3,spawn_start_sheep_4"
         "Creature" "start_sheep"
         "OnInitSpawn" "1"
-        "MaxCount" "2"
-        "RespawnDelay" "5"
-        "Chance" "75" // TODO: Improve complexity.
+        "MaxCount" "6"
+        "RespawnDelay" "15"
+        "Chance" "50"
         "AI" "ai_basic_sheep"
         "RandomScale" "1"
         "SpawnPositionJitter" "1"
@@ -17,11 +17,11 @@
         "SpawnPoints" "spawn_start_worg_1,spawn_start_worg_2,spawn_start_worg_3,spawn_start_worg_4"
         "Creature" "start_worg"
         "OnInitSpawn" "1"
-        "MaxCount" "2"
-        "RespawnDelay" "5"
-        "Chance" "75" // TODO: Improve complexity.
+        "MaxCount" "3"
+        "RespawnDelay" "15"
+        "Chance" "75"
         "AI" "ai_aggro_leash"
-        "AggroRange" "600"
+        "AggroRange" "400"
         "LeashRange" "2250"
         "RandomScale" "1"
         "SpawnPositionJitter" "1"
@@ -31,13 +31,13 @@
         "SpawnPoints" "spawn_start_wolf_1,spawn_start_wolf_2,spawn_start_wolf_3,spawn_start_wolf_4"
         "Creature" "start_wolf"
         "OnInitSpawn" "1"
-        "MaxCount" "2"
-        "RespawnDelay" "5"
-        "Chance" "75" // TODO: Improve complexity.
+        "MaxCount" "3"
+        "RespawnDelay" "20"
+        "Chance" "50"
         "AI" "ai_aggro_leash"
         "AggroRange" "600"
         "LeashRange" "2250"
-        "RandomScale" "1"
+        "RandomScale" "0"
         "SpawnPositionJitter" "1"
     }
     "start_area_wolf_boss"
@@ -46,14 +46,10 @@
         "Creature" "start_area_wolf_boss"
         "OnInitSpawn" "1"
         "MaxCount" "1"
-        "RespawnDelay" "5"
-        "Chance" "75" // TODO: Improve complexity.
-        
+        "RespawnDelay" "120"
+        "Chance" "75"
         "Unique" "1"
         "SpawnPositionJitter" "1"
-        
         "AI" "ai_start_area_boss"
-        "AggroRange" "400"
-        "LeashRange" "750"
     }
 }

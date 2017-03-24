@@ -3,20 +3,19 @@
     "ranger_explosive_shot"
     {
         "BaseClass"                "ability_lua"
+        "MaxLevel"                      "1"
         "ScriptFile"               "app/systems/characters/abilities/ranger/ranger_explosive_shot"
         "AbilityBehavior"                "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_MOVEMENT"
         "AbilityUnitTargetTeam"            "DOTA_UNIT_TARGET_TEAM_ENEMY"
         "AbilityUnitTargetType"            "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
         "AbilityUnitDamageType"            "DAMAGE_TYPE_MAGICAL"
         "AbilityTextureName"            "custom/ranger/ranger_explosive_shot"
-        
+
         "AbilityCooldown"        "10.0"
         "AbilityManaCost"        "25"
         "AbilityCastAnimation" "ACT_DOTA_ATTACK"
         "AbilityCastRange"                "250"
-        // Default speed...
-        //"AbilityCastPoint"                "0.50"
-        
+
         "AbilityCastPoint"                "0.50"
         "AnimationPlaybackRate" "0.73"
         "AbilityDuration"                "2"
@@ -24,6 +23,7 @@
     "ranger_poison_arrow"
     {
         "BaseClass"                "ability_lua"
+        "MaxLevel"                      "1"
         "ScriptFile"               "app/systems/characters/abilities/ranger/ranger_poison_arrow"
         "AbilityBehavior"                "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_MOVEMENT"
         "AbilityUnitTargetTeam"            "DOTA_UNIT_TARGET_TEAM_ENEMY"
@@ -45,6 +45,7 @@
     "ranger_ice_arrow"
     {
         "BaseClass"                "ability_lua"
+        "MaxLevel"                      "1"
         "ScriptFile"               "app/systems/characters/abilities/ranger/ranger_ice_arrow"
         "AbilityBehavior"                "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_MOVEMENT"
         "AbilityUnitTargetTeam"            "DOTA_UNIT_TARGET_TEAM_ENEMY"
@@ -66,6 +67,7 @@
     "ranger_strong_shot"
     {
         "BaseClass"                "ability_lua"
+        "MaxLevel"                      "1"
         "ScriptFile"               "app/systems/characters/abilities/ranger/ranger_strong_shot"
         "AbilityBehavior"                "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_MOVEMENT"
         "AbilityUnitTargetTeam"            "DOTA_UNIT_TARGET_TEAM_ENEMY"
@@ -87,12 +89,13 @@
     "ranger_concussive_shot"
     {
         "BaseClass"                "ability_lua"
+        "MaxLevel"                 "1"
         "ScriptFile"               "app/systems/characters/abilities/ranger/ranger_concussive_shot"
-        "AbilityBehavior"                "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_MOVEMENT"
-        "AbilityUnitTargetTeam"            "DOTA_UNIT_TARGET_TEAM_ENEMY"
-        "AbilityUnitTargetType"            "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
-        "AbilityUnitDamageType"            "DAMAGE_TYPE_MAGICAL"
-        "AbilityTextureName"            "custom/ranger/ranger_concussive_shot"
+        "AbilityBehavior"          "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_MOVEMENT"
+        "AbilityUnitTargetTeam"    "DOTA_UNIT_TARGET_TEAM_ENEMY"
+        "AbilityUnitTargetType"    "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+        "AbilityUnitDamageType"    "DAMAGE_TYPE_MAGICAL"
+        "AbilityTextureName"       "custom/ranger/ranger_concussive_shot"
         
         "AbilityCooldown"        "8.0"
         "AbilityManaCost"        "30"

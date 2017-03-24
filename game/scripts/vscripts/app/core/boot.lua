@@ -22,6 +22,8 @@ function Boot:Precache(context)
         'particles/units/heroes/ranger/explosive_shot/ranger_explosive_shot.vpcf',
         'particles/units/heroes/ranger/explosive_shot/ranger_explosive_shot_impact.vpcf',
 
+         'particles/units/start/scar/claw.vpcf',
+
         -- Testing?
         'particles/econ/items/drow/drow_bow_monarch/drow_frost_arrow_monarch.vpcf',
         'particles/units/heroes/hero_drow/drow_frost_arrow.vpcf',

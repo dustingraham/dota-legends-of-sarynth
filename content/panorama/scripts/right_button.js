@@ -1,4 +1,3 @@
-"use strict";
 
 GameUI.customCurrentFocusId = -1;
 
@@ -30,13 +29,12 @@ function OnLeftButtonPressed()
         {
             SetFocusTarget(entityIndex);
             
-            var healthMax = Entities.GetMaxHealth(entityIndex);
-            var health = Entities.GetHealth(entityIndex);
-            var healthPercent = health / healthMax;
-            if (isNaN(healthPercent)) healthPercent = 0;
-            $.Msg('HP: '+(healthPercent*100) +'%');
-            
-            $.Msg(Entities.GetUnitName(entityIndex));
+            // var healthMax = Entities.GetMaxHealth(entityIndex);
+            // var health = Entities.GetHealth(entityIndex);
+            // var healthPercent = health / healthMax;
+            // if (isNaN(healthPercent)) healthPercent = 0;
+            // $.Msg('HP: '+(healthPercent*100) +'%');
+            // $.Msg(Entities.GetUnitName(entityIndex));
             
             // This will help prevent flickering of ability controls by
             // avoiding selection of the units. Still todo target unit frame.
@@ -45,6 +43,24 @@ function OnLeftButtonPressed()
     }
     
     return CONTINUE_PROCESSING_EVENT;
+}
+
+function TrySetDelayedFocusTarget() {
+    var cursor = GameUI.GetCursorPosition();
+    var mouseEntities = GameUI.FindScreenEntities(cursor);
+
+    for (var e of mouseEntities) {
+        var entityIndex = e.entityIndex;
+        if (Entities.IsSelectable(entityIndex)) {
+            $.Schedule(0.03, function()
+            {
+                // We need the brief delay here so that it doesn't
+                // break the current action.
+                SetFocusTarget(entityIndex);
+            });
+            break;
+        }
+    }
 }
 
 // Handle Right Button events
@@ -67,7 +83,7 @@ function OnRightButtonPressed()
 
     for ( var e of mouseEntities )
     {
-        var entityIndex = e.entityIndex
+        var entityIndex = e.entityIndex;
         if (Entities.IsInvulnerable( entityIndex )){
             Game.PrepareUnitOrders({
                 UnitIndex : hero,
@@ -137,8 +153,8 @@ function OnRightButtonPressed()
 }
 
 function IsSwitch( entityIndex ){
-    var name = Entities.GetUnitName(entityIndex)
-    return (name=="npc_dota_creature_gate_03_button")   
+    var name = Entities.GetUnitName(entityIndex);
+    return (name=="npc_dota_creature_gate_03_button");
 }
 
 function IsHarvest( entityIndex ){
@@ -172,28 +188,31 @@ function IsBank( entityIndex ){
 function IsTeamControlled ( entityIndex ) {
     var iPlayerID = Players.GetLocalPlayer();
     var hero = Players.GetPlayerHeroEntityIndex( iPlayerID );
-    var teamID = Entities.GetTeamNumber( hero )
+    var teamID = Entities.GetTeamNumber( hero );
     var playersOnTeam = Game.GetPlayerIDsOnTeam( teamID );
     for (var i = 0; i < playersOnTeam.length; i++)
     {
         if (Entities.IsControllableByPlayer( entityIndex, playersOnTeam[i] ))
         {
-            return true
+            return true;
         }
-    };
-    return false
+    }
+    return false;
 }
 
 // Main mouse event callback
 GameUI.SetMouseCallback(function( eventName, arg ) {
     var CONSUME_EVENT = true;
     var CONTINUE_PROCESSING_EVENT = false;
-    var LEFT_CLICK = (arg === 0)
-    var RIGHT_CLICK = (arg === 1)
+    var LEFT_CLICK = (arg === 0);
+    var RIGHT_CLICK = (arg === 1);
     if ( GameUI.GetClickBehaviors() !== CLICK_BEHAVIORS.DOTA_CLICK_BEHAVIOR_NONE )
+    {
+        TrySetDelayedFocusTarget();
         return CONTINUE_PROCESSING_EVENT;
+    }
 
-    var mainSelected = Players.GetLocalPlayerPortraitUnit()
+    var mainSelected = Players.GetLocalPlayerPortraitUnit();
 
     if ( eventName === "pressed" || eventName === "doublepressed")
     {

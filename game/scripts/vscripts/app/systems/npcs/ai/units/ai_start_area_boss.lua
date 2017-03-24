@@ -68,6 +68,20 @@ function ai:OnIntervalThink()
     Dynamic_Wrap(ai, self.state)(self)
 end
 
+function ai:AbilityClawAttack()
+    StartAnimation(self:GetParent(), {
+        duration = 0.5,
+        activity = ACT_DOTA_ATTACK,
+        rate = 1.5,
+    })
+    ParticleManager:ReleaseParticleIndex(ParticleManager:CreateParticle(
+        'particles/units/start/scar/claw.vpcf',
+        PATTACH_ABSORIGIN_FOLLOW,
+        self:GetParent()
+    ))
+
+end
+
 function ai:ActionIdle()
     local units = FindUnitsInRadius( self:GetParent():GetTeam(), self:GetParent():GetAbsOrigin(), nil,
                                      self.aggroRange, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_ALL, DOTA_UNIT_TARGET_FLAG_NONE,
@@ -77,14 +91,7 @@ function ai:ActionIdle()
     if #units > 0 then
         Debug('StartAreaBoss', 'Aggroing')
 
-        -- not precached currently: 'particles/econ/items/warlock/warlock_lost_ores/golem_lores_hulk_swipe_glow.vpcf',
-        --local particle_name = 'particles/econ/items/warlock/warlock_lost_ores/golem_lores_hulk_swipe_glow.vpcf'
-        --local particle = ParticleManager:CreateParticle(
-        --    particle_name,
-        --    PATTACH_ABSORIGIN_FOLLOW,
-        --    self:GetParent()
-        --)
-        --do return true end
+        -- self:AbilityClawAttack()
 
         EmitSoundOn('Hero_Lycan.Howl', self:GetParent())
         StartAnimation(self:GetParent(), {
@@ -97,6 +104,13 @@ function ai:ActionIdle()
             self:GetParent():MoveToTargetToAttack(units[1])
         end)
 
+        -- Concept
+        --self:GetParent():AddAbility('ranger_poison_arrow')
+        --Timers:CreateTimer(5.0, function()
+        --    local ability = self:GetParent():FindAbilityByName('ranger_poison_arrow')
+        --    self:GetParent():CastAbilityOnTarget(units[1], ability, -1)
+        --end)
+
         Timers:CreateTimer(8.0, function()
             self:GetParent():Stop()
             StartAnimation(self:GetParent(), {
@@ -104,6 +118,10 @@ function ai:ActionIdle()
                 activity = ACT_DOTA_IDLE_RARE,
             })
             EmitSoundOn('lycan_lycan_ability_howl_01', self:GetParent())
+
+            Timers:CreateTimer(2.0, function()
+                self:AbilityClawAttack()
+            end)
         end)
 
         self.aggroTarget = units[1]
@@ -146,7 +164,11 @@ function ai:FallbackAttackCheck()
         self.fallbackCheck = nil
     end
 end
+
 function ai:TransitionToReturn()
+    -- Remove aggro target.
+    self.aggroTarget = nil
+
     local target = self:GetParent().spawn.spawnPoint + Vector(math.random(-128, 128), math.random(-128, 128))
     self:GetParent():MoveToPosition( target ) --Move back to the spawnpoint
     self.returnTarget = target

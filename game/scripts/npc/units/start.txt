@@ -60,7 +60,8 @@
     
     "start_wolf"
     {
-        "Model"                 "models/creeps/neutral_creeps/n_creep_worg_large/n_creep_worg_large.vmdl"
+        "Model"                 "models/items/lycan/wolves/ambry_summon/ambry_summon.vmdl"
+        //"Model"                 "models/creeps/neutral_creeps/n_creep_worg_large/n_creep_worg_large.vmdl"
         "BaseClass"             "npc_dota_creature"
         "Level"                 "5"
         "ModelScale"            "1.0"
@@ -81,7 +82,7 @@
         "CombatClassDefend"         "DOTA_COMBAT_CLASS_DEFEND_BASIC"
         "UnitRelationshipClass"     "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
         
-        "StatusHealth"                "272"
+        "StatusHealth"                "472"
         "StatusHealthRegen"           "0.5"
         
         "BountyXP"                    "60"
@@ -89,13 +90,14 @@
     
     "start_area_wolf_boss"
     {
-        "Model" "models/items/lycan/wolves/ambry_summon/ambry_summon.vmdl"
+        "Model" "models/items/lycan/ultimate/hunter_kings_trueform/hunter_kings_trueform.vmdl"
+        //"Model" "models/items/lycan/wolves/ambry_summon/ambry_summon.vmdl"
         "BaseClass"             "npc_dota_creature"
         "Level"                 "7"
         "SoundSet"              "Lycan_Wolf"
-        "ModelScale"            "1.6"
+        "ModelScale"            "1.2"
         "HealthBarOffset"       "220"
-        "StatusHealth"              "1242"
+        "StatusHealth"              "2242"
         "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_GROUND"
         "MovementSpeed"             "400"
         "AttackCapabilities"        "DOTA_UNIT_CAP_MELEE_ATTACK"
