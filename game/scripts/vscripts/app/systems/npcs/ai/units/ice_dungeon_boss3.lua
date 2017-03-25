@@ -131,6 +131,9 @@ function ai:ActionAggro()
 end
 
 function ai:TransitionToReturn()
+    -- Remove aggro target.
+    self.aggroTarget = nil
+
     local target = self:GetParent().spawn.spawnPoint + Vector(math.random(-128, 128), math.random(-128, 128))
     self:GetParent():MoveToPosition( target ) --Move back to the spawnpoint
     self.returnTarget = target
