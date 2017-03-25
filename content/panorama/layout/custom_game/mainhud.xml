@@ -1,5 +1,6 @@
 <root>
     <styles>
+        <include src="file://{resources}/styles/reset.css" />
         <include src="file://{resources}/styles/mainhud.css" />
         <include src="file://{resources}/styles/mainhud/unitframes.css" />
         <include src="file://{resources}/styles/mainhud/quest.css" />
@@ -108,7 +109,7 @@
         <Panel id="QuestProgressContainer" class="quest-progress-container">
             <Image class="quest-progress-top-bar" src="file://{images}/quest/quest-bar-top.png" />
             <Panel class="quest-body">
-                <Label class="quest-progress-title" text=" QUEST LOG " />
+                <Label class="TitleFont quest-progress-title" text=" QUEST LOG " />
                 <Panel id="QuestBlocks" class="quest-progress-blocks" />
             </Panel>
             <Image class="quest-progress-bot-bar" src="file://{images}/quest/quest-bar-bot.png" />

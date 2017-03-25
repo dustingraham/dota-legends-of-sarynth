@@ -1,0 +1,17 @@
+/* DOTA Default fonts */
+Label, TextEntry
+{
+    font-family: Radiance,FZLanTingHei-R-GBK,TH Sarabun New,Gulim,MingLiU;
+}
+
+/* DOTA Default font, but with monospaced numbers for use in things like the scoreboard */
+Label.MonoNumbersFont, TextEntry.MonoNumbersFont
+{
+    font-family: RadianceM,Radiance,FZLanTingHei-R-GBK,TH Sarabun New,Gulim,MingLiU;
+}
+
+/* DOTA Title Fonts */
+Label.TitleFont, TextEntry.TitleFont
+{
+    font-family: Goudy Trajan Medium,FZKai-Z03,TH Sarabun New;
+}
