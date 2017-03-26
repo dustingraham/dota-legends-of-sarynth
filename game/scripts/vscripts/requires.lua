@@ -1,12 +1,14 @@
 -- Standard Required Files
 for _,file in ipairs({
     
+    -- Event first, needed for activation bindings.
+    'app/core/event',
+    
     'app/core/network/errors',
     'app/core/network/http',
     'app/core/network/reporter',
     'app/core/network/throttle',
     'app/core/boot',
-    'app/core/event',
     'app/core/filters',
     'app/core/sounds',
     

@@ -17,6 +17,8 @@ function Encounter:Start(boss, hero)
     self.startTime = GameRules:GetGameTime()
     self.InEncounter = true
 
+    self:Log('SteamID: '..tostring(PlayerResource:GetSteamID(hero:GetPlayerOwnerID())))
+    self:Log('MatchID: '..Boot.MatchID)
     self:Log('Hero: '..hero:GetName())
     self:Log('Level: '..hero:GetLevel())
     for _,item in pairs(hero.customEquipment:GetAllItems()) do
@@ -46,9 +48,14 @@ function Encounter:End()
 end
 
 function Encounter:Report()
-    print('TODO: Report Encounter')
-    DeepPrintTable(self.logs)
+    local PlayerID = self.hero:GetPlayerOwnerID()
+    Http:Send('/api/encounters', { data = {
+        match_id = Boot.MatchID,
+        player_id_64 = tostring(PlayerResource:GetSteamID(PlayerID)),
+        logs = self.logs
+    }})
 end
+
 function Encounter:LogBothHp(eventName)
     --self:LogHp(self.hero, 'hero')
     --self:LogHp(self.boss, 'boss')

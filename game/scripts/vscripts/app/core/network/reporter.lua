@@ -5,7 +5,7 @@ Reporter = Reporter or class({})
 ---
 --@function [parent=#Reporter] constructor
 --@param self
-function Reporter:Init(params)
+function Reporter:Activate(params)
     if IsInToolsMode() then
         Debug('Reporter', 'ToolsMode: Logging to localhost.')
     elseif GameRules:IsCheatMode() then
@@ -23,6 +23,7 @@ function Reporter:Init(params)
     
     Debug('Reporter', 'Initialized')
 end
+Event:BindActivate(Reporter)
 
 --[[
      Events

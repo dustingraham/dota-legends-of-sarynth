@@ -28,14 +28,13 @@ DEBUG_PRINT_SECTIONS = {
     CharacterService  = true,
     Reporter          = false,
     Triggers          = true,
-    
     AiBasic           = true,
     AiBasicSheep      = false,
     AiBasicAggro      = false,
     AiAggroLeash      = false,
     AiBasicNpc        = true,
     StartAreaBoss     = true,
-
+    Encounter         = true,
     Spawn             = false,
     FocusTarget       = false,
     SpawnSystem       = true,
@@ -44,22 +43,22 @@ DEBUG_PRINT_SECTIONS = {
     Drops             = true,
     DialogSystem      = true,
     Event             = true,
-    Filters           = true,
+    Filters           = false,
     Interaction       = true,
     PrintTable        = true,
 }
 DEBUG_PRINT_ALL = false
 
 -- TEST MODE
--- TEST_SPAWN_ITEMS = true
+--TEST_SPAWN_ITEMS = true
 --TEST_PICK_HERO = 'dragon_knight' -- Warrior
 --TEST_PICK_HERO = 'omniknight'    -- Paladin
 --TEST_PICK_HERO = 'bounty_hunter' -- Rogue
 TEST_PICK_HERO = 'windrunner'    -- Ranger
 --TEST_PICK_HERO = 'invoker'       -- Mage
 --TEST_PICK_HERO = 'warlock'       -- Sorcerer
-
 -- town kobolds ice webbed druids dark
 -- TEST_START_WAYPOINT = 'ice'
 -- TEST_START_LEVEL = 18
 -- TEST_SUPERMAN = true
+-- TEST_START_START_BOSS = true

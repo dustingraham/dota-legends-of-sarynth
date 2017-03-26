@@ -15,18 +15,18 @@ Http = Http or class({})
 --@param self
 --@param #string data
 function Http:SendExample(data)
-    
+
     local settings = {
         host = 'http://requestb.in/1c7am4o1'
     }
-    
+
     local payload = {
         alpha = 'beta',
         gamma = 'normal'
     }
     local json = json.encode(payload)
     print(json)
-    
+
     local request = CreateHTTPRequest('POST', settings.host)
     request:SetHTTPRequestRawPostBody('application/json', '{"beta":1}')
     --request:SetHTTPRequestGetOrPostParameter('payload', json)
@@ -36,16 +36,16 @@ function Http:SendExample(data)
             print(response.StatusCode or "nil")
             return
         end
-        
+
         if not response.Body then
             print('HTTP Server Error')
             print(response.Body or "nil")
             return
         end
-        
+
         print('Success')
         -- local obj, pos, err = json.decode(res.Body, 1, nil)
-        
+
         -- callback(err, obj)
     end)
 end
@@ -57,24 +57,25 @@ end
 --@param #string data
 --@param #function callback
 function Http:Send(api, data, callback)
-    
+
     local settings = LoadKeyValues('scripts/vscripts/settings.kv')
     if not settings then
         Debug('Http', '[ERROR] settings.kv is required')
         return
     end
-    
+
     if IsInToolsMode() then
         settings.host = settings.host_dev
     end
-    
+
     local payload = json.encode(data)
     -- Debug('Http', payload) -- Can be really long.
-    
-    local url = settings.host..api..'?token='..sha1.hmac(settings.key, payload)
-    -- url = 'http://requestb.in/ruxe6vru'..'?token='..sha1.hmac(settings.key, payload)
+
+    -- local url = settings.host..api..'?token='..sha1.hmac(settings.key, payload)
+    local url = settings.host..api..'?token='..Boot.MatchID
+    -- url = 'http://requestb.in/1mv269z1'..'?token='..Boot.MatchID --sha1.hmac(settings.key, payload)
     -- Debug('Http', url)
-    
+
     local request = CreateHTTPRequest('POST', url)
     request:SetHTTPRequestRawPostBody('application/json', payload)
     request:Send(function(response)
@@ -86,22 +87,22 @@ function Http:Send(api, data, callback)
             end
             return
         end
-        
+
         if not response.Body then
             Debug('Http', 'HTTP Server Error')
             Debug('Http', response.Body or 'nil')
             return
         end
-        
+
         local payload = json.decode(response.Body)
-        
+
         if not payload or not payload.success then
             Debug('Http', 'HTTP Response Error')
             Debug('Http', not payload or payload.error)
             Debug('Http', response.Body)
             return
         end
-        
+
         -- Success!
         if callback then callback(payload.data) end
     end)
@@ -147,7 +148,7 @@ function Http:ThrottledSendReport()
     Http:Send('/api/reports', { data = self.reports })
 end
 
-function Http:Init()
+function Http:Activate()
     self.reports = {}
     Timers:CreateTimer(function()
         if #self.reports > 0 then
@@ -155,11 +156,13 @@ function Http:Init()
             Http:ThrottledSendReport()
             self.reports = {}
         end
-        
+
         -- Every 30 seconds.
         return 30.0
     end)
 end
+
+Event:BindActivate(Http)
 
 -- Move to boot sequence.
 --if not Http.initialized then
