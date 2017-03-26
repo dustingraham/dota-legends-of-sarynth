@@ -3,6 +3,8 @@
 CustomMap = CustomMap or {}
 
 function CustomMap:Activate()
+    ListenToGameEvent('npc_spawned', Dynamic_Wrap(CustomMap, 'OnNpcSpawned'), self)
+    
     Event:Listen('OnStateGameSetup', Dynamic_Wrap(CustomMap, 'OnStateGameSetup'), CustomMap)
     Event:Listen('OnStateInGame', Dynamic_Wrap(CustomMap, 'OnStateInGame'), CustomMap)
     Event:Listen('HeroPick', Dynamic_Wrap(CustomMap, 'OnHeroPick'), CustomMap)
@@ -22,7 +24,7 @@ function CustomMap:OnStateInGame()
     -- end)
     
     -- So we can auto-pick...
-    ListenToGameEvent('npc_spawned', Dynamic_Wrap(CustomMap, 'OnNpcSpawned'), self)
+    -- ListenToGameEvent('npc_spawned', Dynamic_Wrap(CustomMap, 'OnNpcSpawned'), self)
 end
 
 function CustomMap:OnNpcSpawned(event)

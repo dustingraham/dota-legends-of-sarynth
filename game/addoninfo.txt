@@ -3,6 +3,10 @@
     "TeamCount"      "2"
     "maps"           "beginnings"
     "IsPlayable"     "1"
+    "beginnings"
+    {
+        "MaxPlayers" "1"
+    }
     "introduction"
     {
         "MaxPlayers" "1"

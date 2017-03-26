@@ -7,7 +7,7 @@
     </scripts>
     <Panel class="CharacterPickMainPanel" hittest="false">
         <Panel id="LoadingOverlay" />
-        <Panel id="CharacterPanelContainer" hittest="false">
+        <Panel id="CharacterPanelContainer" hittest="false" style="visibility:collapse;">
             <DOTAScenePanel id="BackgroundScene" map="maps/backgrounds/dashboard_test.vmap"
                 camera="shot_cameraC" always-cache-composition-layer="true"/>
             <Panel id="TopGradient" hittest="false"/>

@@ -32,7 +32,6 @@ function CharacterService:OnNPCSpawned(event)
     end
 end
 
-
 function CharacterService:GetExperienceLevelRequirements()
     local old = {
         0, -- Level 1
@@ -58,8 +57,6 @@ function CharacterService:GetExperienceLevelRequirements()
     end
     return table
 end
-
-CharacterService:GetExperienceLevelRequirements()
 
 -- Combo Functions to display exp overhead.
 function CharacterService:OnEntityHurt(event)

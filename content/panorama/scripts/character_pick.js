@@ -40,8 +40,10 @@ function CheckSceneLoad()
     
     var mapInfo = Game.GetMapInfo();
     var mapName = mapInfo.map_display_name;
-    if (mapName == 'testmap')
+    if (mapName == 'testmap' || mapName == 'beginnings')
     {
+        $.Msg('Character pick not currently used.');
+        
         // Hide Overlay
         overlay.style.opacity = '0.0';
         overlay.style.visibility = 'collapse';
