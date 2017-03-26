@@ -43,6 +43,8 @@ function spell:OnProjectileHit(target, pos)
     local caster = self:GetCaster()
     local damage = math.floor(caster:GetAverageTrueAttackDamage(target) * 0.75)
     
+    ScreenShake(pos, 3, 100, 0.35, 2000, 0, true)
+    
     -- Damage Deal
     ApplyDamage({
         victim = target,

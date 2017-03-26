@@ -55,12 +55,13 @@ function UpdateQuestStartPanel(data)
     }
     if (data.rewards.experience)
     {
-        rewards += '• '+data.rewards.experience + ' experience<br>';
+        rewards += '• '+data.rewards.experience + ' experience';
     }
     
     if (data.rewards.item_choose)
     {
-        // rewards += '• Maybe an item...<br>';
+        // $.Msg(data.rewards.item_choose['01']);
+        panel.FindChildTraverse('RewardItem').itemname = data.rewards.item_choose['01'];
     }
     
     panel.FindChildTraverse('MainRewards').text = rewards;
@@ -93,7 +94,9 @@ function UpdateQuestCompletePanel(data)
     
     if (data.rewards.item_choose)
     {
+        // TODO: Hide if no reward.
         // rewards += '• Maybe an item...<br>';
+        panel.FindChildTraverse('RewardItem').itemname = data.rewards.item_choose['01'];
     }
     
     panel.FindChildTraverse('MainRewards').text = rewards;

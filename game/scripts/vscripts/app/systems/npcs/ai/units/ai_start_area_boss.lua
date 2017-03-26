@@ -62,6 +62,12 @@ function ai:OnDeath(event)
     if self:GetParent() ~= event.unit then return end
     Debug('StartAreaBoss', 'OnDeath')
     self:GetParent().spawn:OnDeath(self)
+    
+    -- Takes a slight second for him to fall backwards.
+    local pos = self:GetParent():GetAbsOrigin()
+    Timers:CreateTimer(0.45, function()
+        ScreenShake(pos, 10, 150, 2.5, 3000, 0, true)
+    end)
 end
 
 function ai:OnIntervalThink()
@@ -92,11 +98,11 @@ function ai:ActionIdle()
         Debug('StartAreaBoss', 'Aggroing')
 
         -- self:AbilityClawAttack()
-
+        
         EmitSoundOn('Hero_Lycan.Howl', self:GetParent())
         StartAnimation(self:GetParent(), {
             duration = 3.0,
-            activity = ACT_DOTA_OVERRIDE_ABILITY_1,
+            activity = ACT_DOTA_CAST_ABILITY_2,
             rate = 0.35,
         })
         Timers:CreateTimer(3.0, function()
@@ -115,7 +121,7 @@ function ai:ActionIdle()
             self:GetParent():Stop()
             StartAnimation(self:GetParent(), {
                 duration = 2.0,
-                activity = ACT_DOTA_IDLE_RARE,
+                activity = ACT_DOTA_CAST_ABILITY_1,
             })
             EmitSoundOn('lycan_lycan_ability_howl_01', self:GetParent())
 

@@ -60,6 +60,14 @@ function Quest:ApplyReward(hero)
         hero:AddExperience(self.rewards.experience, 0, false, false)
         SendOverheadEventMessage( hero:GetPlayerOwner(), OVERHEAD_ALERT_XP , hero, self.rewards.experience, nil )
     end
+    if self.rewards.item_choose then
+        local item = CreateItem(self.rewards.item_choose['01'], nil, nil)
+        Containers:AddItemToUnit(hero, item)
+        if hero.firstQuestItem == nil then
+            hero.firstQuestItem = true
+            hero.customInventory:Open(hero:GetPlayerOwnerID())
+        end
+    end
 end
 
 function Quest:Accept()

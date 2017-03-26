@@ -315,7 +315,7 @@
             "03"
             {
                 "var_type" "FIELD_INTEGER"
-                "bonus_ms" "80"
+                "bonus_ms" "40"
             }
         }
         "Modifiers"
@@ -364,7 +364,7 @@
             "03"
             {
                 "var_type" "FIELD_INTEGER"
-                "bonus_ms" "110"
+                "bonus_ms" "60"
             }
         }
         "Modifiers"

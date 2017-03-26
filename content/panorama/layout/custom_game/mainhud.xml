@@ -121,24 +121,14 @@
             <Panel id="QuestDialogPrimary" class="quest-dialog-primary">
                 <Label id="MainDialog" class="text" html="true" />
                 
-                <Label id="ObjectiveTitle" class="objective" text="Objective:"/>
+                <Label id="ObjectiveTitle" class="objective" text="OBJECTIVES"/>
                 <Label id="MainObjectives" class="objectives" html="true" />
                 
-                <Label class="objective" text="Reward:"/>
+                <Label class="objective" text="REWARDS"/>
                 <Label id="MainRewards" class="objectives" html="true" />
-                <Panel class="reward-item" style="visibility:collapse;">
-                    <Panel class="justifier">
-                        <Image class="item-slot" src="file://{images}/window/item_slot_flat.png">
-                            <DOTAItemImage id="myitem" itemname="item_ring_of_health" />
-                        </Image>
-                        <Image class="item-slot" src="file://{images}/window/item_slot_flat.png">
-                            <DOTAItemImage id="myitem" itemname="item_poor_mans_shield" />
-                        </Image>
-                        <Image class="item-slot" src="file://{images}/window/item_slot_flat.png">
-                            <DOTAItemImage id="myitem" itemname="item_magic_stick" />
-                        </Image>
-                    </Panel>
-                </Panel>
+                <Image class="item-slot" src="file://{images}/window/item_slot_flat.png">
+                    <DOTAItemImage id="RewardItem" itemname="item_ring_of_health" />
+                </Image>
             </Panel>
             <Image class="quest-dialog-header" src="file://{images}/window/header_PURPLE.png">
                 <Label id="QuestMainTitle" class="quest-title" text="QUEST"/>

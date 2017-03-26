@@ -186,27 +186,50 @@ function CharacterService:OnPlayerLevelUp(event)
 end
 
 
-local function TestItem(pos, key)
-    local item = CreateItem(key, nil, nil)
-    local drop = CreateItemOnPositionSync(pos, item)
-    local pos_launch = pos + RandomVector(RandomFloat(150, 200))
-    item:LaunchLoot(false, 200, 0.75, pos_launch)
+local function TestItem(hero, key)
+    -- local item = CreateItem(key, nil, nil)
+    -- local drop = CreateItemOnPositionSync(pos, item)
+    -- local pos_launch = pos + RandomVector(RandomFloat(150, 200))
+    -- item:LaunchLoot(false, 200, 0.75, pos_launch)
+    Containers:AddItemToUnit(hero, CreateItem(key, nil, nil))
 end
 local function TestTest(hero)
-    local pos = hero:GetAbsOrigin()
-    TestItem(pos, 'item_broadsword_tier1')
-    TestItem(pos, 'item_broadsword_tier2')
-    TestItem(pos, 'item_broadsword_tier3')
-    TestItem(pos, 'item_broadsword_tier4')
-    TestItem(pos, 'item_campfire')
-    TestItem(pos, 'item_armor_tier1')
-    TestItem(pos, 'item_armor_tier2')
-    TestItem(pos, 'item_armor_tier3')
-    TestItem(pos, 'item_amulet_tier1')
-    TestItem(pos, 'item_amulet_tier2')
-    TestItem(pos, 'item_amulet_tier3')
-    TestItem(pos, 'item_boots_leather')
-    TestItem(pos, 'item_boots_leather_common')
+    -- local pos = hero:GetAbsOrigin()
+    TestItem(hero, 'item_broadsword_tier1')
+    TestItem(hero, 'item_broadsword_tier2')
+    TestItem(hero, 'item_broadsword_tier3')
+    TestItem(hero, 'item_broadsword_tier4')
+    TestItem(hero, 'item_campfire')
+    TestItem(hero, 'item_armor_tier1')
+    TestItem(hero, 'item_armor_tier2')
+    TestItem(hero, 'item_armor_tier3')
+    TestItem(hero, 'item_amulet_tier1')
+    TestItem(hero, 'item_amulet_tier2')
+    TestItem(hero, 'item_amulet_tier3')
+    TestItem(hero, 'item_boots_leather')
+    TestItem(hero, 'item_boots_leather_common')
+    
+    hero.customInventory:Open(hero:GetPlayerOwnerID())
+end
+local function TestQuest(hero)
+    -- local pos = hero:GetAbsOrigin()
+    
+    Containers:SetDefaultInventory(hero, hero.customEquipment)
+    -- Six items, this is what I got after test quests.
+    -- Level 6 also.
+    TestItem(hero, 'item_broadsword_tier1')
+    TestItem(hero, 'item_broadsword_tier2')
+    -- TestItem(hero, 'item_broadsword_tier3')
+    TestItem(hero, 'item_broadsword_tier4')
+    --TestItem(hero, 'item_armor_tier1')
+    TestItem(hero, 'item_armor_tier2')
+    --TestItem(hero, 'item_armor_tier3')
+    --TestItem(hero, 'item_amulet_tier1')
+    TestItem(hero, 'item_amulet_tier2')
+    --TestItem(hero, 'item_amulet_tier3')
+    --TestItem(hero, 'item_boots_leather')
+    TestItem(hero, 'item_boots_leather_common')
+    Containers:SetDefaultInventory(hero, hero.customInventory)
 end
 
 function CharacterService:OnHeroPick(e, event)
@@ -217,7 +240,7 @@ function CharacterService:OnHeroPick(e, event)
         position = "220px 120px 0px",
         entity = hero,
         headerText = "#Container_Backpack",
-        pids = {0}, -- tood Dynamic to hero
+        pids = {hero:GetPlayerOwnerID()},
         OnDragWorld = true,
         AddItemFilter = Dynamic_Wrap(CharacterService, 'ContainerItemFilter'),
     })
@@ -226,21 +249,22 @@ function CharacterService:OnHeroPick(e, event)
         position = "20px 120px 0px",
         entity = hero,
         headerText = "#Container_Equipment",
-        pids = {0}, -- tood Dynamic to hero
+        pids = {hero:GetPlayerOwnerID()},
         OnDragWorld = true,
         equipment = true,
         AddItemFilter = Dynamic_Wrap(CharacterService, 'ContainerItemFilter'),
     })
-    hero.customEquipment:Open(0)
+    hero.customEquipment:Open(hero:GetPlayerOwnerID())
     Containers:SetDefaultInventory(hero, hero.customInventory)
     
     -- Entering world.
     GameRules:GetGameModeEntity():EmitSound('jboberg_01.music.ui_hero_select')
     -- GameRules:GetGameModeEntity():EmitSound('jboberg_01.stinger.radiant_win');
     -- Sounds:EmitSoundOnClient(0, 'jboberg_01.stinger.radiant_win')
-
+    
     -- Items for testing.
     if IsInToolsMode() and TEST_SPAWN_ITEMS then TestTest(hero) end
+    --TestQuest(hero)
 end
 
 function CharacterService:ContainerItemFilter(item, slot)

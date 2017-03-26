@@ -39,7 +39,8 @@
         
         "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_GROUND"
         "MovementSpeed"             "320"
-        "ArmorPhysical"             "0"
+        "ArmorPhysical"             "6"
+        "MagicalResistance"         "20"
         "AttackCapabilities"        "DOTA_UNIT_CAP_MELEE_ATTACK"
         
         "AttackDamageMin"            "30"
@@ -69,7 +70,8 @@
         
         "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_GROUND"
         "MovementSpeed"             "320"
-        "ArmorPhysical"             "0"
+        "ArmorPhysical"             "10"
+        "MagicalResistance"         "30"
         "AttackCapabilities"        "DOTA_UNIT_CAP_MELEE_ATTACK"
         
         "AttackDamageMin"            "60"        // Damage range min.
@@ -97,15 +99,18 @@
         "SoundSet"              "Lycan_Wolf"
         "ModelScale"            "1.2"
         "HealthBarOffset"       "220"
-        "StatusHealth"              "2242"
         "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_GROUND"
-        "MovementSpeed"             "400"
         "AttackCapabilities"        "DOTA_UNIT_CAP_MELEE_ATTACK"
-        "AttackDamageMin"           "90"
-        "AttackDamageMax"           "100"
-        "AttackRate"                "0.9"
         "AttackAnimationPoint"      "0.33"
         "AttackRange"               "160"
         "RingRadius"                "140"
+        
+        "StatusHealth"              "6472"
+        "ArmorPhysical"             "22"
+        "MagicalResistance"         "55"
+        "MovementSpeed"             "400"
+        "AttackDamageMin"           "122"
+        "AttackDamageMax"           "146"
+        "AttackRate"                "0.9"
     }
 }

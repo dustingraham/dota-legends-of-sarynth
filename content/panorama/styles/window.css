@@ -3,7 +3,7 @@
 .quest-dialog {
     align:center center;
     width:447px;
-    height:480px;
+    height:580px;
     
     opacity:1.0;
     transform:translateX(0px) translateY(0px);
@@ -19,7 +19,7 @@
 }
 .quest-dialog-primary {
     background-image:url("file://{images}/window/window.png");
-    height:375px;
+    height:475px;
     width:427px;
     margin-top:30px;
     margin-left:20px;
@@ -63,21 +63,11 @@
     font-size:16px;
 }
 
-.reward-item {
-    background-image:url("file://{images}/window/window_note.png");
-    width:377px;
-    height:90px;
-    margin-top:10px;
-    margin-left:-4px;
-    margin-right:-4px;
-}
-.justifier { flow-children:right; align:center center; }
 .item-slot {
     margin-left:5px;
-    vertical-align:center;
     overflow:clip;
 }
-#myitem {
+#RewardItem {
     align:center center;
     width:44px;
 }
