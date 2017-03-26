@@ -1,37 +1,22 @@
 "DOTAAbilities"
 {
-    // Quality
-    //  = gray = 1 junk
-    //  = light yellow = 2 quest
-    // consumable = white = 3 
-    // component = white = 3 common
-    // common = green = 4 uncommon
-    // rare = blue = 5 rare
-    // epic = purple = 6 epic
-    // artifact = orange = 7 legendary
     "item_broadsword_tier1"
     {
         "ID" "3111"
-        
-        "BaseClass"                     "item_broadsword"
-        "AbilityTextureName"            "item_broadsword"
-        "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE"
-        
-        // Item Info
-        //-------------------------------------------------------------------------------------------------------------
-        "ItemCost"                      "100"
-        "ItemShopTags"                  "damage"
-        "ItemAliases"                   "broadsword"
-        "ItemShareability"              "ITEM_FULLY_SHAREABLE"
-        
-        "ItemQuality"                   "component"
-        
+        "BaseClass" "item_broadsword"
+        "AbilityTextureName" "default/blade_of_alacrity_png"
+        "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+        "ItemCost" "100"
+        "ItemShopTags" "damage"
+        "ItemAliases" "broadsword"
+        "ItemShareability" "ITEM_FULLY_SHAREABLE"
+        "ItemQuality" "component"
         "AbilitySpecial"
         {
             "01"
             {
-                "var_type"              "FIELD_INTEGER"
-                "bonus_damage"          "5"
+                "var_type" "FIELD_INTEGER"
+                "bonus_damage" "5"
             }
             "02"
             {
@@ -43,27 +28,20 @@
     "item_broadsword_tier2"
     {
         "ID" "3112"
-        
-        "BaseClass"                     "item_broadsword"
-        "AbilityTextureName"            "item_broadsword"
-        "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE"
-
-        // Item Info
-        //-------------------------------------------------------------------------------------------------------------
-        "ItemCost"                      "100"
-        "ItemShopTags"                  "damage"
-        "ItemQuality"                   "common"
-        "ItemAliases"                   "broadsword"
-        "ItemShareability"              "ITEM_FULLY_SHAREABLE"
-
-        // Special  
-        //-------------------------------------------------------------------------------------------------------------
+        "BaseClass" "item_broadsword"
+        "AbilityTextureName" "item_broadsword"
+        "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+        "ItemCost" "100"
+        "ItemShopTags" "damage"
+        "ItemQuality" "common"
+        "ItemAliases" "broadsword"
+        "ItemShareability" "ITEM_FULLY_SHAREABLE"
         "AbilitySpecial"
         {
             "01"
             {
-                "var_type"              "FIELD_INTEGER"
-                "bonus_damage"          "15"
+                "var_type" "FIELD_INTEGER"
+                "bonus_damage" "15"
             }
             "02"
             {
@@ -75,23 +53,20 @@
     "item_broadsword_tier3"
     {
         "ID" "3113"
-        
-        "BaseClass"                     "item_broadsword"
-        "AbilityTextureName"            "item_broadsword"
-        "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE"
-
-        "ItemCost"                      "100"
-        "ItemShopTags"                  "damage"
-        "ItemQuality"                   "rare"
-        "ItemAliases"                   "broadsword"
-        "ItemShareability"              "ITEM_FULLY_SHAREABLE"
-
+        "BaseClass" "item_broadsword"
+        "AbilityTextureName" "default/ethereal_blade_png"
+        "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+        "ItemCost" "100"
+        "ItemShopTags" "damage"
+        "ItemQuality" "rare"
+        "ItemAliases" "broadsword"
+        "ItemShareability" "ITEM_FULLY_SHAREABLE"
         "AbilitySpecial"
         {
             "01"
             {
-                "var_type"              "FIELD_INTEGER"
-                "bonus_damage"          "30"
+                "var_type" "FIELD_INTEGER"
+                "bonus_damage" "30"
             }
             "02"
             {
@@ -103,22 +78,19 @@
     "item_armor_tier1"
     {
         "ID" "3114"
-        
-        "BaseClass"                     "item_chainmail"
-        "AbilityTextureName"            "item_chainmail"
-        "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE"
-
-        "ItemShopTags"                  "armor"
-        "ItemQuality"                   "component"
-        "ItemAliases"                   "chainmail"
-        "ItemShareability"              "ITEM_FULLY_SHAREABLE"
-        
+        "BaseClass" "item_chainmail"
+        "AbilityTextureName" "default/cloak_png"
+        "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+        "ItemShopTags" "armor"
+        "ItemQuality" "component"
+        "ItemAliases" "chainmail"
+        "ItemShareability" "ITEM_FULLY_SHAREABLE"
         "AbilitySpecial"
         {
             "01"
             {
-                "var_type"              "FIELD_INTEGER"
-                "bonus_armor"          "4"
+                "var_type" "FIELD_INTEGER"
+                "bonus_armor" "4"
             }
             "02"
             {
@@ -130,22 +102,19 @@
     "item_armor_tier2"
     {
         "ID" "3115"
-        
-        "BaseClass"                     "item_chainmail"
-        "AbilityTextureName"            "item_chainmail"
-        "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE"
-
-        "ItemShopTags"                  "armor"
-        "ItemQuality"                   "common"
-        "ItemAliases"                   "chainmail"
-        "ItemShareability"              "ITEM_FULLY_SHAREABLE"
-        
+        "BaseClass" "item_chainmail"
+        "AbilityTextureName" "item_chainmail"
+        "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+        "ItemShopTags" "armor"
+        "ItemQuality" "common"
+        "ItemAliases" "chainmail"
+        "ItemShareability" "ITEM_FULLY_SHAREABLE"
         "AbilitySpecial"
         {
             "01"
             {
-                "var_type"              "FIELD_INTEGER"
-                "bonus_armor"          "11"
+                "var_type" "FIELD_INTEGER"
+                "bonus_armor" "11"
             }
             "02"
             {
@@ -157,22 +126,20 @@
     "item_armor_tier3"
     {
         "ID" "3116"
-        
-        "BaseClass"                     "item_chainmail"
-        "AbilityTextureName"            "item_chainmail"
-        "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE"
-
-        "ItemShopTags"                  "armor"
-        "ItemQuality"                   "rare"
-        "ItemAliases"                   "chainmail"
-        "ItemShareability"              "ITEM_FULLY_SHAREABLE"
-        
+        "BaseClass" "item_chainmail"
+        "AbilityTextureName" "default/platemail_png"
+        "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+        "Effect" "particles/generic_gameplay/dropped_aegis.vpcf"
+        "ItemShopTags" "armor"
+        "ItemQuality" "rare"
+        "ItemAliases" "chainmail"
+        "ItemShareability" "ITEM_FULLY_SHAREABLE"
         "AbilitySpecial"
         {
             "01"
             {
-                "var_type"              "FIELD_INTEGER"
-                "bonus_armor"          "20"
+                "var_type" "FIELD_INTEGER"
+                "bonus_armor" "20"
             }
             "02"
             {
@@ -184,29 +151,25 @@
     "item_amulet_tier1"
     {
         "ID" "3117"
-        
-        "BaseClass"    "item_datadriven"
+        "BaseClass" "item_datadriven"
         "AbilityTextureName" "custom/amulet_t1"
-        "Effect"       "particles/generic_gameplay/dropped_item.vpcf"
-        "ItemQuality"  "component"
-        
-        "ItemCost"     "322"
-        "ItemKillable" "0" 
+        "Effect" "particles/generic_gameplay/dropped_item.vpcf"
+        "ItemQuality" "component"
+        "ItemCost" "322"
+        "ItemKillable" "0"
         "ItemSellable" "1"
         "ItemPurchasable" "1"
         "ItemDroppable" "1"
         "ItemShareability" "ITEM_FULLY_SHAREABLE"
-
         "ItemStackable" "0"
         "ItemPermanent" "1"
         "ItemDisassembleRule" "DOTA_ITEM_DISASSEMBLE_ALWAYS"
-
         "AbilitySpecial"
         {
             "01"
             {
-                "var_type"      "FIELD_INTEGER"
-                "bonus_stat"    "3"
+                "var_type" "FIELD_INTEGER"
+                "bonus_stat" "3"
             }
             "02"
             {
@@ -214,19 +177,18 @@
                 "rarity" "3"
             }
         }
-
         "Modifiers"
         {
             "modifier_item_custom"
             {
-                "Passive"  "1"
+                "Passive" "1"
                 "IsHidden" "1"
                 "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE | MODIFIER_ATTRIBUTE_PERMANENT"
                 "Properties"
                 {
-                    "MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"  "%bonus_stat"
-                    "MODIFIER_PROPERTY_STATS_AGILITY_BONUS"  "%bonus_stat"
-                    "MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"  "%bonus_stat"
+                    "MODIFIER_PROPERTY_STATS_STRENGTH_BONUS" "%bonus_stat"
+                    "MODIFIER_PROPERTY_STATS_AGILITY_BONUS" "%bonus_stat"
+                    "MODIFIER_PROPERTY_STATS_INTELLECT_BONUS" "%bonus_stat"
                 }
             }
         }
@@ -234,29 +196,25 @@
     "item_amulet_tier2"
     {
         "ID" "3118"
-        
-        "BaseClass"    "item_datadriven"
+        "BaseClass" "item_datadriven"
         "AbilityTextureName" "custom/amulet_t2"
-        "Effect"       "particles/generic_gameplay/dropped_item.vpcf"
-        "ItemQuality"  "common"
-        
-        "ItemCost"     "322"
-        "ItemKillable" "0" 
+        "Effect" "particles/generic_gameplay/dropped_item.vpcf"
+        "ItemQuality" "common"
+        "ItemCost" "322"
+        "ItemKillable" "0"
         "ItemSellable" "1"
         "ItemPurchasable" "1"
         "ItemDroppable" "1"
         "ItemShareability" "ITEM_FULLY_SHAREABLE"
-
         "ItemStackable" "0"
         "ItemPermanent" "1"
         "ItemDisassembleRule" "DOTA_ITEM_DISASSEMBLE_ALWAYS"
-
         "AbilitySpecial"
         {
             "01"
             {
-                "var_type"      "FIELD_INTEGER"
-                "bonus_stat"    "7"
+                "var_type" "FIELD_INTEGER"
+                "bonus_stat" "7"
             }
             "02"
             {
@@ -268,45 +226,40 @@
         {
             "modifier_item_amulet_tier2"
             {
-                "Passive"  "1"
+                "Passive" "1"
                 "IsHidden" "1"
                 "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE | MODIFIER_ATTRIBUTE_PERMANENT"
                 "Properties"
                 {
-                    "MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"  "%bonus_stat"
-                    "MODIFIER_PROPERTY_STATS_AGILITY_BONUS"  "%bonus_stat"
-                    "MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"  "%bonus_stat"
+                    "MODIFIER_PROPERTY_STATS_STRENGTH_BONUS" "%bonus_stat"
+                    "MODIFIER_PROPERTY_STATS_AGILITY_BONUS" "%bonus_stat"
+                    "MODIFIER_PROPERTY_STATS_INTELLECT_BONUS" "%bonus_stat"
                 }
             }
         }
     }
-    
     "item_amulet_tier3"
     {
         "ID" "3119"
-        
-        "BaseClass"    "item_datadriven"
+        "BaseClass" "item_datadriven"
         "AbilityTextureName" "custom/amulet_t3"
-        "Effect"       "particles/generic_gameplay/dropped_item.vpcf"
-        "ItemQuality"  "rare"
-        
-        "ItemCost"     "322"
-        "ItemKillable" "0" 
+        "Effect" "particles/generic_gameplay/dropped_gem.vpcf"
+        "ItemQuality" "rare"
+        "ItemCost" "322"
+        "ItemKillable" "0"
         "ItemSellable" "1"
         "ItemPurchasable" "1"
         "ItemDroppable" "1"
         "ItemShareability" "ITEM_FULLY_SHAREABLE"
-
         "ItemStackable" "0"
         "ItemPermanent" "1"
         "ItemDisassembleRule" "DOTA_ITEM_DISASSEMBLE_ALWAYS"
-
         "AbilitySpecial"
         {
             "01"
             {
-                "var_type"      "FIELD_INTEGER"
-                "bonus_stat"    "15"
+                "var_type" "FIELD_INTEGER"
+                "bonus_stat" "15"
             }
             "02"
             {
@@ -318,14 +271,14 @@
         {
             "modifier_item_amulet_tier3"
             {
-                "Passive"  "1"
+                "Passive" "1"
                 "IsHidden" "1"
                 "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE | MODIFIER_ATTRIBUTE_PERMANENT"
                 "Properties"
                 {
-                    "MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"  "%bonus_stat"
-                    "MODIFIER_PROPERTY_STATS_AGILITY_BONUS"  "%bonus_stat"
-                    "MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"  "%bonus_stat"
+                    "MODIFIER_PROPERTY_STATS_STRENGTH_BONUS" "%bonus_stat"
+                    "MODIFIER_PROPERTY_STATS_AGILITY_BONUS" "%bonus_stat"
+                    "MODIFIER_PROPERTY_STATS_INTELLECT_BONUS" "%bonus_stat"
                     "MODIFIER_PROPERTY_MANA_REGEN_PERCENTAGE" "%bonus_stat"
                 }
             }
@@ -334,29 +287,25 @@
     "item_boots_leather"
     {
         "ID" "3120"
-        
-        "BaseClass"    "item_datadriven"
-        "AbilityTextureName" "item_boots"
-        "Effect"       "particles/generic_gameplay/dropped_item.vpcf"
-        "ItemQuality"  "component"
-        
-        "ItemCost"     "322"
-        "ItemKillable" "0" 
+        "BaseClass" "item_datadriven"
+        "AbilityTextureName" "default/winter_woolies_png"
+        "Effect" "particles/generic_gameplay/dropped_item.vpcf"
+        "ItemQuality" "component"
+        "ItemCost" "322"
+        "ItemKillable" "0"
         "ItemSellable" "1"
         "ItemPurchasable" "1"
         "ItemDroppable" "1"
         "ItemShareability" "ITEM_FULLY_SHAREABLE"
-
         "ItemStackable" "0"
         "ItemPermanent" "1"
         "ItemDisassembleRule" "DOTA_ITEM_DISASSEMBLE_ALWAYS"
-
         "AbilitySpecial"
         {
             "01"
             {
-                "var_type"      "FIELD_INTEGER"
-                "bonus_armor"    "2"
+                "var_type" "FIELD_INTEGER"
+                "bonus_armor" "2"
             }
             "02"
             {
@@ -373,13 +322,13 @@
         {
             "modifier_item_boots_leather"
             {
-                "Passive"  "1"
-                "IsHidden" "1" 
+                "Passive" "1"
+                "IsHidden" "1"
                 "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE | MODIFIER_ATTRIBUTE_PERMANENT"
                 "Properties"
                 {
-                    "MODIFIER_PROPERTY_MOVESPEED_BONUS_UNIQUE"  "%bonus_ms"
-                    "MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"  "%bonus_armor"
+                    "MODIFIER_PROPERTY_MOVESPEED_BONUS_UNIQUE" "%bonus_ms"
+                    "MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" "%bonus_armor"
                 }
             }
         }
@@ -387,29 +336,25 @@
     "item_boots_leather_common"
     {
         "ID" "3121"
-        
-        "BaseClass"    "item_datadriven"
+        "BaseClass" "item_datadriven"
         "AbilityTextureName" "item_boots"
-        "Effect"       "particles/generic_gameplay/dropped_item.vpcf"
-        "ItemQuality"  "common"
-        
-        "ItemCost"     "322"
-        "ItemKillable" "0" 
+        "Effect" "particles/generic_gameplay/dropped_item.vpcf"
+        "ItemQuality" "common"
+        "ItemCost" "322"
+        "ItemKillable" "0"
         "ItemSellable" "1"
         "ItemPurchasable" "1"
         "ItemDroppable" "1"
         "ItemShareability" "ITEM_FULLY_SHAREABLE"
-
         "ItemStackable" "0"
         "ItemPermanent" "1"
         "ItemDisassembleRule" "DOTA_ITEM_DISASSEMBLE_ALWAYS"
-
         "AbilitySpecial"
         {
             "01"
             {
-                "var_type"      "FIELD_INTEGER"
-                "bonus_armor"    "16"
+                "var_type" "FIELD_INTEGER"
+                "bonus_armor" "16"
             }
             "02"
             {
@@ -426,13 +371,13 @@
         {
             "modifier_item_boots_leather"
             {
-                "Passive"  "1"
-                "IsHidden" "1" 
+                "Passive" "1"
+                "IsHidden" "1"
                 "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE | MODIFIER_ATTRIBUTE_PERMANENT"
                 "Properties"
                 {
-                    "MODIFIER_PROPERTY_MOVESPEED_BONUS_UNIQUE"  "%bonus_ms"
-                    "MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"  "%bonus_armor"
+                    "MODIFIER_PROPERTY_MOVESPEED_BONUS_UNIQUE" "%bonus_ms"
+                    "MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" "%bonus_armor"
                 }
             }
         }
@@ -440,23 +385,21 @@
     "item_broadsword_tier4"
     {
         "ID" "3130"
-        
-        "BaseClass"                     "item_broadsword"
-        "AbilityTextureName"            "item_broadsword"
-        "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE"
-        
-        "ItemCost"                      "100"
-        "ItemShopTags"                  "damage"
-        "ItemQuality"                   "epic"
-        "ItemAliases"                   "broadsword"
-        "ItemShareability"              "ITEM_FULLY_SHAREABLE"
-        
+        "BaseClass" "item_broadsword"
+        "AbilityTextureName" "default/radiance_inactive_png"
+        "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+        "Effect" "particles/generic_gameplay/dropped_aegis.vpcf"
+        "ItemCost" "100"
+        "ItemShopTags" "damage"
+        "ItemQuality" "epic"
+        "ItemAliases" "broadsword"
+        "ItemShareability" "ITEM_FULLY_SHAREABLE"
         "AbilitySpecial"
         {
             "01"
             {
-                "var_type"              "FIELD_INTEGER"
-                "bonus_damage"          "75"
+                "var_type" "FIELD_INTEGER"
+                "bonus_damage" "75"
             }
             "02"
             {
@@ -468,29 +411,25 @@
     "item_campfire"
     {
         "ID" "3140"
-        
-        "BaseClass"    "item_datadriven"
+        "BaseClass" "item_datadriven"
         "AbilityTextureName" "custom/healing_campfire"
-        "Effect"       "particles/generic_gameplay/dropped_item.vpcf"
-        "ItemQuality"  "component"
-        
-        "ItemCost"     "20"
-        "ItemKillable" "0" 
+        "Effect" "particles/generic_gameplay/dropped_item.vpcf"
+        "ItemQuality" "component"
+        "ItemCost" "20"
+        "ItemKillable" "0"
         "ItemSellable" "1"
         "ItemPurchasable" "1"
         "ItemDroppable" "1"
         "ItemShareability" "ITEM_FULLY_SHAREABLE"
-
         "ItemStackable" "0"
         "ItemPermanent" "1"
         "ItemDisassembleRule" "DOTA_ITEM_DISASSEMBLE_ALWAYS"
-
         "AbilitySpecial"
         {
             "01"
             {
-                "var_type"      "FIELD_INTEGER"
-                "bonus_stat"    "15"
+                "var_type" "FIELD_INTEGER"
+                "bonus_stat" "15"
             }
             "02"
             {
