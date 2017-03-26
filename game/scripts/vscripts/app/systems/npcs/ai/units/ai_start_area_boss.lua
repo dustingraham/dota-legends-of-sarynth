@@ -23,6 +23,8 @@ ai.ACTION_IDLE = 'ActionIdle'
 ai.ACTION_AGGRO = 'ActionAggro'
 ai.ACTION_RETURN = 'ActionReturn'
 
+ai.ACTION_FIGHT_STANDARD = 'ActionFightStandard'
+
 if IsServer() then
     function ai:OnCreated(keys)
         Debug('StartAreaBoss', 'OnCreated')
@@ -37,8 +39,9 @@ if IsServer() then
 end
 
 function ai:GetModifierHealthRegenPercentage()
-    if self.state == ai.ACTION_AGGRO then return 0.0 end
-    return 20.0
+    if self.state == ai.ACTION_RETURN then return 10.0 end
+    if self.state == ai.ACTION_IDLE then return 20.0 end
+    return 0.0
 end
 
 function ai:OnAttackAllied(event)
@@ -51,10 +54,9 @@ function ai:OnTakeDamage(event)
     if self:GetParent() ~= event.unit then return end
 
     if self.state == ai.ACTION_IDLE then
-        self:GetParent():MoveToTargetToAttack( event.attacker ) --Start attacking
+        Debug('StartAreaBoss', 'Aggroing due to Attacked')
         self.aggroTarget = event.attacker
-        self.state = ai.ACTION_AGGRO --State transition
-        Debug('StartAreaBoss', 'Aggroing')
+        self:StartFight()
     end
 end
 
@@ -62,7 +64,9 @@ function ai:OnDeath(event)
     if self:GetParent() ~= event.unit then return end
     Debug('StartAreaBoss', 'OnDeath')
     self:GetParent().spawn:OnDeath(self)
-    
+
+    Encounter:Log('Boss died, ending encounter.')
+    Encounter:End()
     -- Takes a slight second for him to fall backwards.
     local pos = self:GetParent():GetAbsOrigin()
     Timers:CreateTimer(0.45, function()
@@ -74,6 +78,7 @@ function ai:OnIntervalThink()
     Dynamic_Wrap(ai, self.state)(self)
 end
 
+-- self:AbilityClawAttack()
 function ai:AbilityClawAttack()
     StartAnimation(self:GetParent(), {
         duration = 0.5,
@@ -88,57 +93,66 @@ function ai:AbilityClawAttack()
 
 end
 
+function ai:StartFight()
+    self.state = ai.ACTION_FIGHT_STANDARD
+    Encounter:Start(self:GetParent(), self.aggroTarget)
+
+    -- Howl and attack.
+    EmitSoundOn('Hero_Lycan.Howl', self:GetParent())
+    StartAnimation(self:GetParent(), {
+        duration = 3.0,
+        activity = ACT_DOTA_CAST_ABILITY_2,
+        rate = 0.35,
+    })
+    Timers:CreateTimer(3.0, function()
+        Debug('StartAreaBoss', 'Starting Attack')
+        self:GetParent():MoveToTargetToAttack(self.aggroTarget)
+    end)
+end
+
 function ai:ActionIdle()
-    local units = FindUnitsInRadius( self:GetParent():GetTeam(), self:GetParent():GetAbsOrigin(), nil,
-                                     self.aggroRange, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_ALL, DOTA_UNIT_TARGET_FLAG_NONE,
-                                     FIND_ANY_ORDER, false )
+    local units = FindUnitsInRadius(
+        self:GetParent():GetTeam(), self:GetParent():GetAbsOrigin(), nil,
+        self.aggroRange, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_ALL, DOTA_UNIT_TARGET_FLAG_NONE,
+        FIND_ANY_ORDER, false
+    )
 
     --If one or more units were found, start attacking the first one
     if #units > 0 then
-        Debug('StartAreaBoss', 'Aggroing')
-
-        -- self:AbilityClawAttack()
-        
-        EmitSoundOn('Hero_Lycan.Howl', self:GetParent())
-        StartAnimation(self:GetParent(), {
-            duration = 3.0,
-            activity = ACT_DOTA_CAST_ABILITY_2,
-            rate = 0.35,
-        })
-        Timers:CreateTimer(3.0, function()
-            Debug('StartAreaBoss', 'Starting Attack')
-            self:GetParent():MoveToTargetToAttack(units[1])
-        end)
-
-        -- Concept
-        --self:GetParent():AddAbility('ranger_poison_arrow')
-        --Timers:CreateTimer(5.0, function()
-        --    local ability = self:GetParent():FindAbilityByName('ranger_poison_arrow')
-        --    self:GetParent():CastAbilityOnTarget(units[1], ability, -1)
-        --end)
-
-        Timers:CreateTimer(8.0, function()
-            self:GetParent():Stop()
-            StartAnimation(self:GetParent(), {
-                duration = 2.0,
-                activity = ACT_DOTA_CAST_ABILITY_1,
-            })
-            EmitSoundOn('lycan_lycan_ability_howl_01', self:GetParent())
-
-            Timers:CreateTimer(2.0, function()
-                self:AbilityClawAttack()
-            end)
-        end)
-
+        Debug('StartAreaBoss', 'Aggroing due to Range')
         self.aggroTarget = units[1]
-        self.state = ai.ACTION_AGGRO --State transition
+        self:StartFight()
         return true
     end
 
     self:ActionIdleMove()
 end
 
-function ai:ActionAggro()
+function ai:ChargeAttack()
+    Timers:CreateTimer(8.0, function()
+        self:GetParent():Stop()
+        StartAnimation(self:GetParent(), {
+            duration = 2.0,
+            activity = ACT_DOTA_CAST_ABILITY_1,
+        })
+        EmitSoundOn('lycan_lycan_ability_howl_01', self:GetParent())
+        Timers:CreateTimer(2.0, function()
+            self:AbilityClawAttack()
+        end)
+    end)
+end
+
+function ai:UseAbility()
+    -- Concept
+    --self:GetParent():AddAbility('ranger_poison_arrow')
+    --Timers:CreateTimer(5.0, function()
+    --    local ability = self:GetParent():FindAbilityByName('ranger_poison_arrow')
+    --    self:GetParent():CastAbilityOnTarget(units[1], ability, -1)
+    --end)
+end
+
+--function ai:ActionAggro()
+function ai:ActionFightStandard()
     --Check if the unit has walked outside its leash range
     if ( self:GetParent().spawn.spawnPoint - self:GetParent():GetAbsOrigin() ):Length() > self.leashRange then
         self:TransitionToReturn()
@@ -174,6 +188,13 @@ end
 function ai:TransitionToReturn()
     -- Remove aggro target.
     self.aggroTarget = nil
+
+    -- Remove all negative modifiers.
+    for _,modifier in pairs(self:GetParent():FindAllModifiers()) do
+        if modifier:GetCaster() ~= self:GetParent() then
+            modifier:Destroy()
+        end
+    end
 
     local target = self:GetParent().spawn.spawnPoint + Vector(math.random(-128, 128), math.random(-128, 128))
     self:GetParent():MoveToPosition( target ) --Move back to the spawnpoint

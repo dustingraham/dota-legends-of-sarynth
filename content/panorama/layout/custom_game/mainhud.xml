@@ -41,8 +41,10 @@
                 <DOTAHeroMovie id="HeroPortrait"/>
                 <Image class="overlay" src="file://{images}/unitframes/big_overlay.png"/>
             </Panel>
-            <Panel id="HealthBar" class="health" />
-            <Panel id="ManaBar" class="mana" />
+            <Panel id="HealthBar" class="health"/>
+            <Label id="HeroHealthBarValue" class="MonoNumbersFont"/>
+            <Panel id="ManaBar" class="mana"/>
+            <Label id="HeroManaBarValue" class="MonoNumbersFont"/>
             <Image class="level" src="file://{images}/unitframes/big_level.png">
                 <Label id="HeroLevel" class="level-text" />
             </Image>

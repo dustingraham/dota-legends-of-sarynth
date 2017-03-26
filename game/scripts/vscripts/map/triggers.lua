@@ -1,14 +1,14 @@
 ---
 -- Scripts called by map entities.
--- 
+--
 
 ---
 -- Introductions - Area 2 Gate Demolish
--- 
+--
 function Area2_OnStartTouch(trigger)
     local hero = trigger.activator
     Debug('Triggers', 'Area2_OnStartTouch', thisEntity:GetName(), hero:GetUnitName())
-    
+
     -- Check Quest Completed
     if QuestService:CheckIfCompleted(hero:GetPlayerOwnerID(), 'intro_worg_2') then
         Entities:FindByName(nil, 'area_2_relay'):Trigger()
@@ -62,40 +62,18 @@ end
 function StartBossAreaStartTouch(trigger)
     local pid = trigger.activator:GetPlayerOwnerID()
     print('Boss Start Touch: ', pid)
-    local relay = Entities:FindByName(nil, 'start_area_barricade_relay_on')
-    relay:Trigger()
-    MoveBlockers(219.125)
+
     -- https://github.com/SteamDatabase/GameTracking-Dota2/blob/c6a10d9fc4eae2aff810c9893377d675ddf3ffc4/game/dota/pak01_dir/soundevents/music/jboberg_01/soundevents_stingers.vsndevts
     Sounds:EmitSoundOnClient(pid, 'jboberg_01.music.battle_02')
 end
 function StartBossAreaEndTouch(trigger)
     local pid = trigger.activator:GetPlayerOwnerID()
     print('Boss End Touch: ', pid)
-    local relay = Entities:FindByName(nil, 'start_area_barricade_relay_off')
-    relay:Trigger()
-    MoveBlockers(-219.125)
+
     -- Sounds:EmitSoundOnClient(pid, 'jboberg_01.music.battle_02_end')
     Sounds:EmitSoundOnClient(pid, 'jboberg_01.music.ui_main')
 end
-function MoveBlockers(distance)
-    local blockers = Entities:FindAllByName('start_area_barricade_wall')
-    -- 40 intervals
-    local d = distance / 40
-    local i = 0
-    local total = 0
-    Timers:CreateTimer(function()
-        for _,blocker in pairs(blockers) do
-            blocker:SetAbsOrigin(blocker:GetAbsOrigin()+Vector(0,0,d))
-        end
-        total = total + d
-        i = i + 1
-        if i > 40 then
-            print(total)
-            return nil
-        end
-        return 0.03
-    end)
-end
+
 --function StartAreaBarricadeWallUp(trigger)
 --    print('Wall Up Trigger')
 --    -- 219.125

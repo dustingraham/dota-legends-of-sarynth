@@ -60,7 +60,9 @@ function CustomMap:OnHeroPick(_, params)
         hero:SetBaseIntellect(1500)
         hero:CalculateStatBonus()
     end
-    -- hero:SetAbsOrigin(Entities:FindByName(nil, 'start_area_barricade_relay_on'):GetAbsOrigin())
+    if TEST_START_START_BOSS then
+        hero:SetAbsOrigin(Entities:FindByName(nil, 'start_area_barricade_relay_on'):GetAbsOrigin())
+    end
 end
 
 if not CustomMap.initialized then

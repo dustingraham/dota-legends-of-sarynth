@@ -30,6 +30,12 @@ end
 -- Useful reference.
 -- https://github.com/bmddota/barebones/blob/source2/game/dota_addons/barebones/scripts/vscripts/libraries/timers.lua
 
+function Event:BindActivate(target)
+    if not target.initialized then
+        target.initialized = true
+        Event:Listen('Activate', Dynamic_Wrap(target, 'Activate'), target)
+    end
+end
 
 ---
 --@function [parent=#Event] Trigger

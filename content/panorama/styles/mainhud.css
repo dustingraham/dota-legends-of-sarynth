@@ -60,6 +60,24 @@
     border-bottom-right-radius:6px;
     border-right:1px solid rgba(33,33,33,0.5);
 }
+.unitframe #HeroHealthBarValue {
+    margin-left:86px;
+    margin-top:22px;
+    width:265px;
+    height:29px;
+    font-size:20px;
+    color:#dd0000;
+    text-shadow:1px 1px 4px 2.0 #660000b0;
+}
+.unitframe #HeroManaBarValue {
+    margin-left:86px;
+    margin-top:52px;
+    width:246px;
+    height:19px;
+    font-size:14px;
+    color:#0099dd;
+    text-shadow:1px 1px 4px 2.0 #002266b0;
+}
 
 /* This should be children flow right. */
 .unitframe .point {

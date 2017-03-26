@@ -41,10 +41,4 @@ function FocusTarget:OrderFilter(event, order)
     return FILTER_EXECUTION_CONTINUE
 end
 
-function BindActivate(target)
-    if not target.initialized then
-        target.initialized = true
-        Event:Listen('Activate', Dynamic_Wrap(target, 'Activate'), target)
-    end
-end
-BindActivate(FocusTarget)
+Event:BindActivate(FocusTarget)

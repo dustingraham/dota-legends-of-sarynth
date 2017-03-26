@@ -104,6 +104,12 @@ function SetHeroUnitPanel(entityId)
     if (isNaN(manaPercent)) manaPercent = 0;
     panel.FindChildTraverse('ManaBar').style.width = (manaPercent * 246)+'px';
     
+    var healthRegen = Entities.GetHealthThinkRegen(entityId).toFixed(1);
+    var manaRegen = Entities.GetManaThinkRegen(entityId).toFixed(1);
+    
+    panel.FindChildTraverse('HeroHealthBarValue').text = health+'/'+healthMax + ' +'+healthRegen;
+    panel.FindChildTraverse('HeroManaBarValue').text = mana+'/'+manaMax + ' +'+manaRegen;
+    
     // Toggle visibility based on whether we have a valid selection.
     // Consider checking if entity is hero and hiding anyways.
     var visibility = (Entities.GetLevel(entityId) == -1) ? 'collapse' : 'visible';

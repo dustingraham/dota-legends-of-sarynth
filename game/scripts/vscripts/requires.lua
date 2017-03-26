@@ -23,6 +23,7 @@ for _,file in ipairs({
     'app/systems/npcs/base_npc_creature',
     'app/systems/npcs/dialog_system',
     'app/systems/npcs/drops',
+    'app/systems/npcs/encounter',
     'app/systems/npcs/interaction',
     'app/systems/npcs/spawn_node',
     'app/systems/npcs/spawn_system',

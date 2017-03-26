@@ -214,7 +214,7 @@
             "01"
             {
                 "var_type" "FIELD_INTEGER"
-                "bonus_stat" "7"
+                "bonus_stat" "5"
             }
             "02"
             {
@@ -259,7 +259,7 @@
             "01"
             {
                 "var_type" "FIELD_INTEGER"
-                "bonus_stat" "15"
+                "bonus_stat" "9"
             }
             "02"
             {
