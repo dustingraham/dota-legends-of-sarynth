@@ -182,6 +182,9 @@ var BuildQuestBlock = function(params)
     panel.BLoadLayoutSnippet('QuestProgress');
     panel.FindChildTraverse('Title').text = params.title;
     panel.FindChildTraverse('Progress').text = BuildObjectivesHtml(params.objectives);
+    panel.FindChildTraverse('TitleContainer').SetPanelEvent('onactivate', function() {
+        // $.Msg('Quest: ', params);
+    });
     
     return panel;
 };

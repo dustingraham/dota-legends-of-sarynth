@@ -17,7 +17,7 @@
         <!-- Quest Progress -->
         <snippet name="QuestProgress">
             <Panel class="quest-progress-block">
-                <Panel class="quest-block-title">
+                <Panel id="TitleContainer" class="quest-block-title">
                     <Image class="quest-progress-icon progress" src="file://{images}/quest/quest_icon_progress.png" />
                     <Image class="quest-progress-icon complete" src="file://{images}/quest/quest_icon_complete.png" />
                     <Label id="Title" class="quest-block-description" />
