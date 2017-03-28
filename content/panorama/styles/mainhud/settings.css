@@ -1,0 +1,19 @@
+
+#ToggleFocusTarget {
+    align:left bottom;
+    margin-left:300px;
+    margin-bottom:5px;
+}
+
+#ToggleFocusTarget.on .off,
+#ToggleFocusTarget.off .on,
+#ToggleFocusTarget .hover {
+    visibility:collapse;
+}
+
+#ToggleFocusTarget.off:hover .off.hover {
+    visibility: visible;
+}
+#ToggleFocusTarget.on:hover .on.hover {
+    visibility: visible;
+}

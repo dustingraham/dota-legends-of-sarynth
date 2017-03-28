@@ -29,40 +29,40 @@ function DialogSystem:StartDialog(character, npc)
 
     -- Check if character has quest to turn in.
     handled = self:CheckTurnIn(character, npc)
-    
+
     if not handled then
         handled = self:CheckQuestAvailable(character, npc)
     end
-    
+
     return handled
 end
 
 function DialogSystem:CheckTurnIn(character, npc)
     local quest = QuestService:FindTurnIn(character, npc)
     if not quest then return false end
-    
+
     Debug('DialogSystem', inspect(quest))
     local player = character:GetPlayerOwner()
     player.currentDialogQuest = quest
     local data = quest:GetEndData();
     data.panelType = 'quest_complete'
     CustomGameEventManager:Send_ServerToPlayer(player, 'dialog_start', data)
-    
+
     return true
 end
 
 function DialogSystem:CheckQuestAvailable(character, npc)
     local quest = QuestService:GetQuestForNpc(character, npc)
     if not quest then Debug('DialogSystem', 'No quest to present') return false end
-    
+
     -- Can't trust the client, so we have to remember what's open.
     local player = character:GetPlayerOwner()
     player.currentDialogQuest = quest
-    
+
     local data = quest:GetStartData();
     data.panelType = 'quest_start'
     CustomGameEventManager:Send_ServerToPlayer(player, 'dialog_start', data)
-    
+
     return true
 end
 

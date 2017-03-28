@@ -4,5 +4,6 @@
   [
     "containers_lua",
     "focus_target",
+    "settings",
   ]
 }

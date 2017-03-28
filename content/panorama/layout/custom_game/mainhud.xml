@@ -4,6 +4,7 @@
         <include src="file://{resources}/styles/mainhud.css" />
         <include src="file://{resources}/styles/mainhud/unitframes.css" />
         <include src="file://{resources}/styles/mainhud/quest.css" />
+        <include src="file://{resources}/styles/mainhud/settings.css" />
         <include src="file://{resources}/styles/window.css" />
         <include src="file://{resources}/styles/actionbar.css" />
     </styles>
@@ -12,6 +13,7 @@
         <include src="file://{resources}/scripts/actionbar.js" />
         <include src="file://{resources}/scripts/dialog_system.js" />
         <include src="file://{resources}/scripts/right_button.js" />
+        <include src="file://{resources}/scripts/mainhud/settings.js" />
     </scripts>
     <snippets>
         <!-- Quest Progress -->
@@ -32,8 +34,6 @@
         </snippet>
     </snippets>
     <Panel class="mainhud" hittest="false">
-        
-        <Image style="opacity:0;" src="file://{images}/items/amulet.png" />
         
         <!-- Unit Frame -->
         <Image id="HeroUnitFrame" class="unitframe" src="file://{images}/unitframes/big_empty.png" hittest="true">
@@ -115,6 +115,13 @@
                 <Panel id="QuestBlocks" class="quest-progress-blocks" />
             </Panel>
             <Image class="quest-progress-bot-bar" src="file://{images}/quest/quest-bar-bot.png" />
+        </Panel>
+        
+        <Panel id="ToggleFocusTarget" class="on">
+            <Image class="toggle-focus-target on" src="file://{images}/settings/focus_target_toggle_on.png" />
+            <Image class="toggle-focus-target on hover" src="file://{images}/settings/focus_target_toggle_on_hover.png" />
+            <Image class="toggle-focus-target off" src="file://{images}/settings/focus_target_toggle_off.png" />
+            <Image class="toggle-focus-target off hover" src="file://{images}/settings/focus_target_toggle_off_hover.png" />
         </Panel>
         
         <!-- To become a snippet -->

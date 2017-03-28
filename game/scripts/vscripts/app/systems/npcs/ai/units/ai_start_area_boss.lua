@@ -94,6 +94,7 @@ function ai:AbilityClawAttack()
 end
 
 function ai:StartFight()
+    Debug('StartAreaBoss', 'Starting fight state.')
     self.state = ai.ACTION_FIGHT_STANDARD
     Encounter:Start(self:GetParent(), self.aggroTarget)
 
@@ -191,12 +192,14 @@ function ai:TransitionToReturn()
 
     -- Remove all negative modifiers.
     for _,modifier in pairs(self:GetParent():FindAllModifiers()) do
-        if modifier:GetCaster() ~= self:GetParent() then
+        if modifier ~= self then
+            -- Proper Reset?
+            Debug('StartAreaBoss', 'Removing: '..modifier:GetName())
             modifier:Destroy()
         end
     end
 
-    local target = self:GetParent().spawn.spawnPoint + Vector(math.random(-128, 128), math.random(-128, 128))
+    local target = self:GetParent().spawn.spawnPoint + Vector(math.random(-64, 64), math.random(-64, 64))
     self:GetParent():MoveToPosition( target ) --Move back to the spawnpoint
     self.returnTarget = target
     self.state = ai.ACTION_RETURN --Transition the state to the 'Returning' state(!)
@@ -212,8 +215,16 @@ function ai:ActionReturn()
     end
 
     -- Sometimes we can't get there...
+    if not self.returnTicks then
+        self.returnTicks = 0
+    end
     self.returnTicks = self.returnTicks + 1
+    
+    -- Keep attempting to move, in case we were stunned.
+    self:GetParent():MoveToPosition( self.returnTarget ) --Move back to the spawnpoint
+    
     if self.returnTicks > 10 then
+        Debug('StartAreaBoss', 'Could not return in 10 ticks, safety idling.')
         self:TransitionToIdle()
         return true
     end
@@ -222,6 +233,7 @@ end
 function ai:TransitionToIdle()
     --Go into the idle state
     self.state = ai.ACTION_IDLE
+    self.returnTicks = nil
     Debug('StartAreaBoss', 'Idling')
 end
 

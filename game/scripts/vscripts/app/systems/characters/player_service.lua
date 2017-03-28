@@ -6,11 +6,17 @@ PlayerService = PlayerService or class({}, {
 
 function PlayerService:Activate()
     ListenToGameEvent('player_connect_full', Dynamic_Wrap(PlayerService, 'OnConnectFull'), PlayerService)
+    CustomGameEventManager:RegisterListener('settings_focus_target', Dynamic_Wrap(PlayerService, 'OnSettingsFocusTarget', PlayerService))
     Debug('PlayerService', 'Listening')
 end
 
 function PlayerService:OnConnectFull(event)
     Debug('PlayerService', 'OnConnectFull')
+    DeepPrintTable(event)
+
+    -- TODO: Recall setting.
+    Wrappers.ToggleFocusTargetUsage(event.PlayerID, 1)
+
     self.players[event.PlayerID] = Player(event.PlayerID)
 end
 
@@ -19,7 +25,9 @@ function PlayerService:Set(pid, key, value)
     self.players[pid]:Set(key, value)
 end
 
-if not PlayerService.initialized then
-    PlayerService.initialized = true
-    Event:Listen('Activate', Dynamic_Wrap(PlayerService, 'Activate'), PlayerService)
+function PlayerService:OnSettingsFocusTarget(event)
+    -- TODO: Store setting.
+    Wrappers.ToggleFocusTargetUsage(event.PlayerID, event.value)
 end
+
+Event:BindActivate(PlayerService)

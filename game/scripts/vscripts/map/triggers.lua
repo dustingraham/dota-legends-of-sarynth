@@ -61,17 +61,17 @@ end
 
 function StartBossAreaStartTouch(trigger)
     local pid = trigger.activator:GetPlayerOwnerID()
-    print('Boss Start Touch: ', pid)
+    -- print('Boss Start Touch: ', pid)
 
     -- https://github.com/SteamDatabase/GameTracking-Dota2/blob/c6a10d9fc4eae2aff810c9893377d675ddf3ffc4/game/dota/pak01_dir/soundevents/music/jboberg_01/soundevents_stingers.vsndevts
     Sounds:EmitSoundOnClient(pid, 'jboberg_01.music.battle_02')
 end
 function StartBossAreaEndTouch(trigger)
     local pid = trigger.activator:GetPlayerOwnerID()
-    print('Boss End Touch: ', pid)
+    -- print('Boss End Touch: ', pid)
 
-    -- Sounds:EmitSoundOnClient(pid, 'jboberg_01.music.battle_02_end')
-    Sounds:EmitSoundOnClient(pid, 'jboberg_01.music.ui_main')
+    Sounds:EmitSoundOnClient(pid, 'jboberg_01.music.battle_02_end')
+    -- Sounds:EmitSoundOnClient(pid, 'jboberg_01.music.ui_main')
 end
 
 --function StartAreaBarricadeWallUp(trigger)

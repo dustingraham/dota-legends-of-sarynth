@@ -86,7 +86,6 @@ function Encounter:MoveBlockers(distance)
         total = total + d
         i = i + 1
         if i > 40 then
-            print(total)
             return nil
         end
         return 0.03
