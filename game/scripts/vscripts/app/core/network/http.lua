@@ -27,7 +27,7 @@ function Http:SendExample(data)
     local json = json.encode(payload)
     print(json)
 
-    local request = CreateHTTPRequest('POST', settings.host)
+    local request = CreateHTTPRequestScriptVM('POST', settings.host)
     request:SetHTTPRequestRawPostBody('application/json', '{"beta":1}')
     --request:SetHTTPRequestGetOrPostParameter('payload', json)
     request:Send(function(response)
@@ -76,7 +76,7 @@ function Http:Send(api, data, callback)
     -- url = 'http://requestb.in/1mv269z1'..'?token='..Boot.MatchID --sha1.hmac(settings.key, payload)
     -- Debug('Http', url)
 
-    local request = CreateHTTPRequest('POST', url)
+    local request = CreateHTTPRequestScriptVM('POST', url)
     request:SetHTTPRequestRawPostBody('application/json', payload)
     request:Send(function(response)
         if response.StatusCode ~= 200 then

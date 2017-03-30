@@ -198,8 +198,11 @@ function Boot:InitGameModeEntity()
 
     -- Environment
     mode:SetDaynightCycleDisabled(true)
-    mode:SetFogOfWarDisabled(not DEBUG_SETTINGS_FOG)
-    mode:SetUnseenFogOfWarEnabled(DEBUG_SETTINGS_FOG)
+
+    -- Functions want a boolean value.
+    local enableFog = not TEST_DISABLE_FOG
+    mode:SetFogOfWarDisabled(not enableFog)
+    mode:SetUnseenFogOfWarEnabled(enableFog)
 
     -- Camera : -1 for default. (Default is about 1134)
     mode:SetCameraDistanceOverride(-1)

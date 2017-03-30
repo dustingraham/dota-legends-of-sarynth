@@ -1,7 +1,7 @@
 
 DEBUG_SETTINGS = IsInToolsMode()
 -- Override if necessary...
-DEBUG_SETTINGS = false
+-- DEBUG_SETTINGS = false
 
 -- Curronly only a single hero. Pick it!
 TEST_PICK_HERO = 'windrunner'    -- Ranger
@@ -11,17 +11,16 @@ TEST_PICK_HERO = 'windrunner'    -- Ranger
 --TEST_PICK_HERO = 'invoker'       -- Mage
 --TEST_PICK_HERO = 'warlock'       -- Sorcerer
 
-DEBUG_SETTINGS_FOG = true
 if DEBUG_SETTINGS then
-    DEBUG_SETTINGS_FOG = false
+    TEST_DISABLE_FOG = true
 
     -- TEST MODE
     TEST_SPAWN_ITEMS = true
     -- town kobolds ice webbed druids dark
-    -- TEST_START_WAYPOINT = 'ice'
-    -- TEST_START_LEVEL = 18
+    TEST_START_WAYPOINT = 'town'
+    TEST_START_LEVEL = 20
     -- TEST_SUPERMAN = true
-    TEST_START_START_BOSS = true
+    -- TEST_START_START_BOSS = true
 end
 
 DEBUG_SKIP_HTTP_REPORT = true -- TODO enable before deploy
