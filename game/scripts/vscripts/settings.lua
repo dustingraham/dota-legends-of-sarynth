@@ -4,7 +4,7 @@ DEBUG_SETTINGS = IsInToolsMode()
 -- DEBUG_SETTINGS = false
 
 -- Curronly only a single hero. Pick it!
-TEST_PICK_HERO = 'windrunner'    -- Ranger
+-- TEST_PICK_HERO = 'windrunner'    -- Ranger
 --TEST_PICK_HERO = 'dragon_knight' -- Warrior
 --TEST_PICK_HERO = 'omniknight'    -- Paladin
 --TEST_PICK_HERO = 'bounty_hunter' -- Rogue

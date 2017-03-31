@@ -1,5 +1,6 @@
 <root>
     <styles>
+        <include src="file://{resources}/styles/reset.css" />
         <include src="file://{resources}/styles/character_pick.css" />
     </styles>
     <scripts>
@@ -7,23 +8,19 @@
     </scripts>
     <Panel class="CharacterPickMainPanel" hittest="false">
         <Panel id="LoadingOverlay" />
-        <Panel id="CharacterPanelContainer" hittest="false" style="visibility:collapse;">
-            <DOTAScenePanel id="BackgroundScene" map="maps/backgrounds/dashboard_test.vmap"
-                camera="shot_cameraC" always-cache-composition-layer="true"/>
+        <Panel id="CharacterPanelContainer" hittest="false">
+            <DOTAScenePanel class="background-scene" map="backgrounds/character_pick" camera="cam" always-cache-composition-layer="true"/>
             <Panel id="TopGradient" hittest="false"/>
-            <Button class="CharacterPanel" onactivate="CharacterPick('dragon_knight')">
-                <DOTAScenePanel class="Ray" hittest="false" map="scenes/loadout_preview_rays" camera="camera_1" />
-                <DOTAScenePanel class="Character" unit="npc_dota_hero_dragon_knight"
-                    antialias="true" particleonly="false" always-cache-composition-layer="true"/>
-                <Label class="CharacterName" text="Knight" />
-            </Button>
-            <Button class="CharacterPanel Right" onactivate="CharacterPick('invoker')">
-                <DOTAScenePanel class="Ray" hittest="false" map="scenes/loadout_preview_rays" camera="camera_1" />
-                <DOTAScenePanel class="Character" unit="npc_dota_hero_invoker"
-                    antialias="true" particleonly="false" always-cache-composition-layer="true" />
-                <Label class="CharacterName" text="Mage" />
-            </Button>
-            <Label class="TopText" text="Choose your Character" />
+            <DOTAScenePanel id="MapPortrait" style="width:100%;height:100%;" renderdeferred="false" light="global_light" particleonly="false" map="backgrounds/characters" camera="cam"/>
+            <Label class="TitleFont TopText" text="Choose a Class" onactivate="CharacterTest()" />
+            <Image class="character-pick-names" src="file://{images}/character_pick/character_pick_names.png">
+                <Button class="first button" onactivate="SelectCharacter('Warrior')"/>
+                <Button class="button" onactivate="SelectCharacter('Paladin')"/>
+                <Button class="button" onactivate="SelectCharacter('Rogue')"/>
+                <Button class="button" onactivate="SelectCharacter('Ranger')"/>
+                <Button class="button" onactivate="SelectCharacter('Mage')"/>
+                <Button class="button" onactivate="SelectCharacter('Sorcerer')"/>
+            </Image>
         </Panel>
     </Panel>
 </root>

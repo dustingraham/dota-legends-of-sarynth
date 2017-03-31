@@ -1,9 +1,11 @@
 
 function CharacterPick(name)
 {
-    // $.Msg('[JS] Picked '+name)
+    $.Msg('[JS] Picked '+name);
+
+    return;
     GameEvents.SendCustomGameEventToServer('character_pick', { 'character': name });
-    
+
     // Hide Pick Screen
     var panel = $.GetContextPanel().FindChild('CharacterPanelContainer');
     panel.style.opacity = '0.0';
@@ -14,7 +16,20 @@ function CharacterPick(name)
         panel.hittestchildren = false;
     });
 }
+function CharacterTest()
+{
+    //$.Msg('Testing character.');
+    //$.DispatchEvent("DOTAGlobalSceneFireEntityInput", "MapPortrait", "ranger_entity_alt", 'spawn', 0);
+}
 
+var transit = 1.2;
+function SelectCharacter(character)
+{
+    $.Msg('Switching to: '+character);
+    $('#MapPortrait').camera = character;
+    $.DispatchEvent('DOTAGlobalSceneSetCameraEntity', 'MapPortrait', character, transit );
+    transit = 0.7;
+}
 function OnCharacterPicked(event)
 {
     // Hide Pick Screen
@@ -25,7 +40,7 @@ function OnCharacterPicked(event)
         // Collapse to prevent hittest.
         panel.style.visibility = 'collapse';
         panel.hittestchildren = false;
-    });	
+    });
 }
 
 // Game loads to black screen, remove once scenes are loaded.
@@ -37,30 +52,30 @@ function CheckSceneLoad()
         // Already removed.
         return;
     }
-    
+
     var mapInfo = Game.GetMapInfo();
     var mapName = mapInfo.map_display_name;
-    if (mapName == 'testmap' || mapName == 'beginnings')
+    if (mapName == 'testmap')
     {
         $.Msg('Character pick not currently used.');
-        
+
         // Hide Overlay
         overlay.style.opacity = '0.0';
         overlay.style.visibility = 'collapse';
         overlay.hittest = false;
         overlay.hittestchildren = false;
-        
+
         // Hide Pick
         var panel = $.GetContextPanel().FindChild('CharacterPanelContainer');
         panel.style.opacity = '0.0';
         panel.style.visibility = 'collapse';
         panel.hittest = false;
         panel.hittestchildren = false;
-        
+
         // Return
         return;
     }
-    
+
     var characters = $.GetContextPanel().FindChildrenWithClassTraverse('Character');
     var allLoaded = true;
     $.Each(characters, function(panel) {
@@ -69,7 +84,7 @@ function CheckSceneLoad()
             allLoaded = false;
         }
     });
-    
+
     if (allLoaded)
     {
         overlay.style.opacity = '0.0';
