@@ -6,21 +6,78 @@
     <scripts>
         <include src="file://{resources}/scripts/character_pick.js" />
     </scripts>
+    <snippets>
+        <snippet name="CharacterBlock">
+            <Panel class="character-info-wrapper">
+                <Image class="character-info" src="file://{images}/character_pick/character_pick_character_panel.png">
+                    <Label id="CharacterClass" text="No Character"/>
+                    <Button id="CreateCharacterButton" class="button button-yes">
+                        <Image src="file://{images}/window/button_green.png">
+                            <Label class="yes" text="CREATE"/>
+                        </Image>
+                    </Button>
+                    <Button class="button button-yes hide" onactivate="CharacterPick()">
+                        <Image src="file://{images}/window/button_green.png">
+                            <Label class="yes" text="LOAD"/>
+                        </Image>
+                    </Button>
+                </Image>
+            </Panel>
+        </snippet>
+    </snippets>
     <Panel class="CharacterPickMainPanel" hittest="false">
         <Panel id="LoadingOverlay" />
         <Panel id="CharacterPanelContainer" hittest="false">
             <DOTAScenePanel class="background-scene" map="backgrounds/character_pick" camera="cam" always-cache-composition-layer="true"/>
             <Panel id="TopGradient" hittest="false"/>
-            <DOTAScenePanel id="MapPortrait" style="width:100%;height:100%;" renderdeferred="false" light="global_light" particleonly="false" map="backgrounds/characters" camera="cam"/>
-            <Label class="TitleFont TopText" text="Choose a Class" onactivate="CharacterTest()" />
-            <Image class="character-pick-names" src="file://{images}/character_pick/character_pick_names.png">
-                <Button class="first button" onactivate="SelectCharacter('Warrior')"/>
-                <Button class="button" onactivate="SelectCharacter('Paladin')"/>
-                <Button class="button" onactivate="SelectCharacter('Rogue')"/>
-                <Button class="button" onactivate="SelectCharacter('Ranger')"/>
-                <Button class="button" onactivate="SelectCharacter('Mage')"/>
-                <Button class="button" onactivate="SelectCharacter('Sorcerer')"/>
-            </Image>
+            <Panel id="WelcomeScreen" class="stage">
+                <Image class="logo-full" src="file://{images}/general/sarynths_full.png"/>
+                
+                <Panel id="CharacterBlocks"/>
+                <Image class="character-info hide no-characters" src="file://{images}/character_pick/character_pick_no_characters_panel.png">
+                    <Label text="No Saved Characters"/>
+                </Image>
+            </Panel>
+            <Panel id="ChooseClass" class="stage" >
+                <Image class="logo-small" src="file://{images}/general/sarynths_small.png"/>
+                <DOTAScenePanel id="MapPortrait" style="width:100%;height:100%;" renderdeferred="false" light="global_light" particleonly="false" map="backgrounds/characters" camera="cam"/>
+                <Label class="TitleFont TopText" text="Choose a Class" onactivate="CharacterTest()" />
+                <Image class="character-pick-names" src="file://{images}/character_pick/character_pick_names.png">
+                    <Button class="first button" onactivate="SelectCharacter('Warrior')"/>
+                    <Button class="button" onactivate="SelectCharacter('Paladin')"/>
+                    <Button class="button" onactivate="SelectCharacter('Rogue')"/>
+                    <Button class="button" onactivate="SelectCharacter('Ranger')"/>
+                    <Button class="button" onactivate="SelectCharacter('Mage')"/>
+                    <Button class="button" onactivate="SelectCharacter('Sorcerer')"/>
+                </Image>
+                <Panel id="ClassDetails">
+                    <Image id="ClassDetailsWindow" class="class-details" src="file://{images}/character_pick/character_pick_character_panel.png">
+                        <Label id="ClassDetailsInfo" text="Elemental Damage"/>
+                        <Button id="ConfirmClassPick" class="button button-yes" onactivate="ConfirmClassPick()">
+                            <Image src="file://{images}/window/button_green.png">
+                                <Label class="yes" text="CREATE"/>
+                            </Image>
+                        </Button>
+                    </Image>
+                    <Image id="ClassDetailsHeader" src="file://{images}/character_pick/character_pick_info_header.png">
+                        <Label id="ClassDetailsName" class="TitleFont" text="Mage"/>
+                        <Panel class="hero-clipper">
+                            <DOTAHeroMovie id="ClassDetailsPortrait" heroname="npc_dota_hero_dragon_knight" />
+                            <Image class="overlay" src="file://{images}/character_pick/character_pick_info_header_overlay.png"/>
+                        </Panel>
+                    </Image>
+                </Panel>
+                <Button id="PickBack" class="button button-no" onactivate="PickBack()">
+                    <Image src="file://{images}/window/button_red.png">
+                        <Label class="no" text="BACK"/>
+                    </Image>
+                </Button>
+                <Button id="PickClass" class="hide button button-yes" onactivate="CharacterPick()">
+                    <Image src="file://{images}/window/button_green.png">
+                        <Label class="yes" text="PICK"/>
+                    </Image>
+                </Button>
+            </Panel>
         </Panel>
     </Panel>
 </root>

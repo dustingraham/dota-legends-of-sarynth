@@ -6,15 +6,11 @@ function CharacterPick:TestMapPickAll(heroReal)
     Debug('CharacterPick', 'Picking all for test map.')
 
     -- This gets purged after the first create...
-    local id = heroReal:GetPlayerOwnerID()
+    local PlayerID = heroReal:GetPlayerOwnerID()
 
     -- PlayerResource Replace/Select is not available quite yet...
     Timers:CreateTimer(0.01, function()
-        CharacterPick:CreateCustomHeroForPlayer({
-            ['PlayerID'] = id,
-            ['character'] = 'warlock',
-            ['create'] = false
-        })
+        CharacterPick:CreateCustomHeroForPlayer(PlayerID, 'warlock', true)
         for _,character in pairs({
 --            'dragon_knight', -- Warrior
 --            'omniknight', -- Paladin
@@ -23,11 +19,7 @@ function CharacterPick:TestMapPickAll(heroReal)
 --            'invoker', -- Mage
 --            'warlock', -- Sorcerer
         }) do
-            CharacterPick:CreateCustomHeroForPlayer({
-                ['PlayerID'] = id,
-                ['character'] = character,
-                ['create'] = true
-            })
+            CharacterPick:CreateCustomHeroForPlayer(PlayerID, character, false)
         end
     end)
 end
@@ -36,17 +28,13 @@ function CharacterPick:TestMapPickHero(heroReal, pickHero)
     Debug('CharacterPick', 'Picking '..pickHero)
 
     -- This gets purged after the first create...
-    local id = heroReal:GetPlayerOwnerID()
+    local PlayerID = heroReal:GetPlayerOwnerID()
 
     CustomGameEventManager:Send_ServerToPlayer(PlayerResource:GetPlayer(id), 'character_picked', {})
 
     -- PlayerResource Replace/Select is not available quite yet...
     Timers:CreateTimer(0.01, function()
-        CharacterPick:CreateCustomHeroForPlayer({
-            ['PlayerID'] = id,
-            ['character'] = pickHero,
-            ['create'] = false
-        })
+        CharacterPick:CreateCustomHeroForPlayer(PlayerID, pickHero, true)
     end)
 end
 
@@ -58,23 +46,33 @@ function CharacterPick:OnCharacterPick(event)
     EmitSoundOnClient('HeroPicker.Selected', PlayerResource:GetPlayer(event.PlayerID))
     GameRules:GetGameModeEntity():EmitSound('jboberg_01.music.ui_hero_select')
 
-    CharacterPick:CreateCustomHeroForPlayer(event)
+    local translateCharacter = {
+        Warrior = 'dragon_knight',
+        Paladin = 'omniknight',
+        Rogue = 'bounty_hunter',
+        Ranger = 'windrunner',
+        Mage = 'invoker',
+        Sorcerer = 'warlock'
+    }
+    local character = translateCharacter[event.character]
+    CharacterPick:CreateCustomHeroForPlayer(event.PlayerID, character, event.slotId, true)
 end
 
-function CharacterPick:CreateCustomHeroForPlayer(event)
+function CharacterPick:CreateCustomHeroForPlayer(PlayerID, character, slotId, isPrimary)
     local hero
-    local heroName = 'npc_dota_hero_'..event.character
-    if event.create then
-        Debug('CharacterPick', 'Create Hero', heroName)
-        local player = PlayerResource:GetPlayer(event.PlayerID)
-        hero = CreateHeroForPlayer(heroName, player)
-        hero:SetControllableByPlayer(event.PlayerID, false)
-        -- hero:SetOwner(player)
-    else
+    local heroName = 'npc_dota_hero_'..character
+    if isPrimary then
         Debug('CharacterPick', 'Replace Hero', heroName)
-        PlayerResource:ReplaceHeroWith(event.PlayerID, heroName, 0, 0)
-        hero = PlayerResource:GetSelectedHeroEntity(event.PlayerID)
+        PlayerResource:ReplaceHeroWith(PlayerID, heroName, 0, 0)
+        hero = PlayerResource:GetSelectedHeroEntity(PlayerID)
+    else
+        Debug('CharacterPick', 'Create Hero', heroName)
+        local player = PlayerResource:GetPlayer(PlayerID)
+        hero = CreateHeroForPlayer(heroName, player)
+        hero:SetControllableByPlayer(PlayerID, false)
+        -- hero:SetOwner(player)
     end
+    hero.slotId = slotId
 
     hero:SetAbilityPoints(0)
     -- hero:GetAbilityByIndex(0):SetLevel(1)
@@ -173,14 +171,14 @@ function CharacterPick:CreateCustomHeroForPlayer(event)
             'models/heroes/warlock/warlock_lantern.vmdl', -- 6068
         }
     }
-    if cosmetics[event.character] then
+    if cosmetics[character] then
         -- local hero = PlayerResource:GetSelectedHeroEntity(event.PlayerID)
-        for _,name in pairs(cosmetics[event.character]) do
+        for _,name in pairs(cosmetics[character]) do
             CharacterPick:AddCosmetic(hero, name)
         end
     end
 
-    if event.character == 'windrunner' then
+    if character == 'windrunner' then
         local particleName = 'particles/units/heroes/hero_windrunner/windrunner_bowstring.vpcf'
         local idx = ParticleManager:CreateParticle(
             particleName,
@@ -213,7 +211,7 @@ function CharacterPick:CreateCustomHeroForPlayer(event)
 
     Event:Trigger('HeroPick', {
         hero = hero,
-        PlayerID = event.PlayerID
+        PlayerID = PlayerID
     })
 end
 

@@ -5,7 +5,19 @@
     width: 100%;
     height: 100%;
 }
-
+#WelcomeScreen,
+#ChooseClass {
+    width:100%;
+    height:100%;
+}
+.logo-full {
+    align:center top;
+    margin-top:200px;
+}
+.logo-small {
+    margin-top:12px;
+    margin-left:70px;
+}
 #LoadingOverlay {
     height:100%;
     width:100%;
@@ -27,6 +39,98 @@
     opacity:1.0;
 }
 
+.stage {
+    transition-property: opacity;
+    transition-duration: 0.45s;
+}
+#WelcomeScreen {
+    opacity: 1.0;
+}
+#ChooseClass {
+    opacity: 0.0;
+}
+/** Load Existing Character **/
+#CharacterBlocks {
+    height:100%;
+    width:100%;
+}
+.character-info-wrapper,
+.character-info {
+    align:center center;
+}
+.character-info-wrapper.slotId0 {
+    margin-right:900px;
+}
+.character-info-wrapper.slotId2 {
+    margin-left:900px;
+}
+.character-info .button {
+    align:right top;
+    margin-top:10px;
+    margin-right:10px;
+}
+.no-characters Label {
+    color:#f8e3bf;
+    text-shadow:1px 1px 4px 2.0 #333333b0;
+    font-size:18px;
+    align:center center;
+}
+#ClassDetails {
+    align:left center;
+    margin-left:20px;
+    opacity: 0.0;
+    transition-property: opacity;
+    transition-duration: 0.45s;
+}
+#ClassDetailsHeader {
+    /*transform: translateY(-30px);*/
+}
+#ClassDetailsWindow {
+    /*transform: translateY(-30px);*/
+    margin-top:30px;
+    margin-left:28px;
+}
+#ClassDetails #ClassDetailsName {
+    color:#e6e6f0;
+    text-shadow:1px 1px 4px 2.0 #444444c0;
+    font-size:26px;
+    margin-top:18px;
+    margin-left:80px;
+}
+#ClassDetails #ClassDetailsInfo {
+    color:#f8e3bf;
+    text-shadow:1px 1px 4px 2.0 #333333b0;
+    font-size:18px;
+    margin-top:46px;
+    margin-left:20px;
+    width:380px;
+    height:100px;
+}
+#ClassDetailsHeader .hero-clipper {
+    height:66px;
+    width:66px;
+    border-radius:50%;
+    overflow:clip;
+}
+#ClassDetailsHeader .hero-clipper .overlay {
+    margin-left:3px;
+    margin-top:3px;
+}
+#ClassDetailsHeader #ClassDetailsPortrait {
+    width: 66px;
+    height: 74px;
+}
+#ClassDetails #ConfirmClassPick {
+    align:right bottom;
+    margin-right:20px;
+    margin-bottom:20px;
+}
+.dialog-design {
+    border:2px solid #585f63;
+    align:center center;
+    height:40px;
+    width:120px;
+}
 /** BACKGROUND **/
 .background-scene {
     width:100%;
@@ -34,6 +138,17 @@
     background-color: #000000;
 }
 
+#CharacterClass {
+    color:#f8e3bf;
+    text-shadow:1px 1px 4px 2.0 #333333b0;
+    font-size:18px;
+    margin-top:15px;
+    margin-left:20px;
+}
+
+#CreateCharacterButton {
+    align:center center;
+}
 /** Choose Selector **/
 .character-pick-names {
     align:right center;
@@ -57,6 +172,11 @@
     background-image:url("file://{images}/character_pick/character_pick_names_activate.png");
 }
 
+#PickBack {
+    align:right center;
+    margin-top:500px;
+    margin-right:155px;
+}
 #TopGradient
 {
     width: 100%;
@@ -64,8 +184,30 @@
     background-color: gradient( linear, 0% 0%, 0% 100%, from( #000000 ), to( #00000000 ) );
 }
 
+#PickClass {
+    align:center top;
+    margin-top:160px;
+    margin-right:150px;
+}
+.button Label {
+    align:center center;
+    font-size:22px;
+    color:#f8e3bf;
+    text-shadow:1px 1px 4px 2.0 #333333b0;
+}
+.button {
+    wash-color:#dddddd;
+}
+.button:hover {
+    wash-color:#ffffff;
+}
+.button:active {
+    wash-color:#aaaaaa;
+}
 /** CHARACTER PANELS **/
-
+.hide {
+    visibility: collapse;
+}
 .CharacterPanel {
     width: 50%;
     height: 100%;
@@ -151,4 +293,36 @@
 .PauseBackground
 {
     saturation: 0.3;
+}
+
+/** Better more friendly dashboard button... **/
+
+#DashboardButton
+{
+    tooltip-position: bottom;
+    width: 30px;
+    height: 30px;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    margin-top: 12px;
+    margin-left: 17px;
+    vertical-align: top;
+    horizontal-align: left;
+    background-position: center;
+    opacity: 0.5;
+    wash-color: #CDF;
+    
+    transition-property: opacity;
+    transition-duration: 0.2s;
+    z-index:2;
+}
+
+#DashboardButton:hover
+{
+    opacity: 1.0;
+}
+
+#DashboardButton:active
+{
+    opacity: 1.0;
 }
