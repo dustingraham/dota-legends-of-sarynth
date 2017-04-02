@@ -4,7 +4,7 @@ CustomMap = CustomMap or {}
 
 function CustomMap:Activate()
     ListenToGameEvent('npc_spawned', Dynamic_Wrap(CustomMap, 'OnNpcSpawned'), self)
-    
+
     Event:Listen('OnStateGameSetup', Dynamic_Wrap(CustomMap, 'OnStateGameSetup'), CustomMap)
     Event:Listen('OnStateInGame', Dynamic_Wrap(CustomMap, 'OnStateInGame'), CustomMap)
     Event:Listen('HeroPick', Dynamic_Wrap(CustomMap, 'OnHeroPick'), CustomMap)
@@ -17,14 +17,6 @@ end
 
 function CustomMap:OnStateInGame()
     Debug('CustomMap', 'Beginnings In Game')
-    
-    -- Timers:CreateTimer(function()
-    --     print('GarbageCollect: ', collectgarbage("count"))
-    --     return 1
-    -- end)
-    
-    -- So we can auto-pick...
-    -- ListenToGameEvent('npc_spawned', Dynamic_Wrap(CustomMap, 'OnNpcSpawned'), self)
 end
 
 function CustomMap:OnNpcSpawned(event)
@@ -71,9 +63,3 @@ if not CustomMap.initialized then
     CustomMap.initialized = true
     Event:Listen('Activate', Dynamic_Wrap(CustomMap, 'Activate'), CustomMap)
 end
-
---local pos = Entities:FindByName(nil, 'teleport_tower_kobolds')
---print(pos)
---pos = pos:GetAbsOrigin()
---print(pos)
---local entity = CreateUnitByName('teleport_pad', pos, true, nil, nil, DOTA_TEAM_GOODGUYS)

@@ -6,8 +6,8 @@ function SaveLoad:CreateCharacter(player)
     Http:Send('/api/save/create', {
         steamId64 = tostring(PlayerResource:GetSteamID(player.PlayerID)),
         data = {
-            slotId = player.slot_id,
-            character = player.character
+            slotId = player:GetSlotId(),
+            character = player:GetCharacter()
         }
     }, function(data)
         print('Saved')

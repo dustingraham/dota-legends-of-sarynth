@@ -5,6 +5,7 @@ CustomMap = CustomMap or {}
 function CustomMap:Activate()
     Event:Listen('OnStateGameSetup', Dynamic_Wrap(CustomMap, 'OnStateGameSetup'), CustomMap)
     Event:Listen('OnStateInGame', Dynamic_Wrap(CustomMap, 'OnStateInGame'), CustomMap)
+    ListenToGameEvent('npc_spawned', Dynamic_Wrap(CustomMap, 'OnNpcSpawned'), self)
 end
 
 
@@ -14,9 +15,6 @@ end
 
 function CustomMap:OnStateInGame()
     Debug('CustomMap', 'Test Map In Game')
-    
-    -- So we can auto-pick...
-    ListenToGameEvent('npc_spawned', Dynamic_Wrap(CustomMap, 'OnNpcSpawned'), self)
 end
 
 function CustomMap:OnNpcSpawned(event)
@@ -27,6 +25,7 @@ function CustomMap:OnNpcSpawned(event)
         if not Boot.allPick then
             Boot.allPick = true
             -- CharacterPick:TestMapPickAll(npc)
+            TEST_PICK_HERO = 'windrunner'
             CharacterPick:TestMapPickHero(npc, TEST_PICK_HERO)
         end
     end

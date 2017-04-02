@@ -3,8 +3,18 @@
 --
 --@type Player
 Player = Player or class({
-    gametime = 0
+    gametime = 0,
+    experience = 0
 })
+
+local translateCharacterToHeroName = {
+    Warrior = 'dragon_knight',
+    Paladin = 'omniknight',
+    Rogue = 'bounty_hunter',
+    Ranger = 'windrunner',
+    Mage = 'invoker',
+    Sorcerer = 'warlock'
+}
 
 function Player:constructor(PlayerID)
     self.PlayerID = PlayerID
@@ -38,12 +48,28 @@ function Player:SetCurrentSlot(slotId)
     self.slot_id = slotId
 end
 
+function Player:GetSlotId()
+    return self.slot_id
+end
+
 function Player:SetCharacter(character)
     self.character = character
 end
 
-function Player:GetCharacter(character)
+function Player:GetCharacter()
     return self.character
+end
+
+function Player:GetCharacterHeroName()
+    return translateCharacterToHeroName[self:GetCharacter()]
+end
+
+function Player:GetPriorGametime()
+    return self.gametime
+end
+
+function Player:GetPriorExperience()
+    return self.experience
 end
 
 function Player:LoadSlot(slotId)
@@ -72,7 +98,7 @@ end
 function Player:Load()
     SaveLoad:FetchCharacters(self, function(data)
         local key = 'player_'..self.PlayerID..'_characters'
-        DeepPrintTable(data)
+        -- DeepPrintTable(data)
         PlayerTables:SetTableValues(key, data)
     end)
 end

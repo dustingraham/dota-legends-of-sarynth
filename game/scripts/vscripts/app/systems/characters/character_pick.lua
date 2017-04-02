@@ -30,7 +30,7 @@ function CharacterPick:TestMapPickHero(heroReal, pickHero)
     -- This gets purged after the first create...
     local PlayerID = heroReal:GetPlayerOwnerID()
 
-    CustomGameEventManager:Send_ServerToPlayer(PlayerResource:GetPlayer(id), 'character_picked', {})
+    CustomGameEventManager:Send_ServerToPlayer(PlayerResource:GetPlayer(PlayerID), 'character_picked', {})
 
     -- PlayerResource Replace/Select is not available quite yet...
     Timers:CreateTimer(0.01, function()
@@ -53,19 +53,9 @@ function CharacterPick:OnCharacterPick(event)
     player:SetCharacter(event.character)
     player:Save()
 
-    local translateCharacter = {
-        Warrior = 'dragon_knight',
-        Paladin = 'omniknight',
-        Rogue = 'bounty_hunter',
-        Ranger = 'windrunner',
-        Mage = 'invoker',
-        Sorcerer = 'warlock'
-    }
-
     CharacterPick:CreateCustomHeroForPlayer(
         event.PlayerID,
-        translateCharacter[event.character],
-        event.slotId,
+        player:GetCharacterHeroName(),
         true
     )
 end
@@ -82,26 +72,15 @@ function CharacterPick:OnCharacterLoad(event)
 
     local player = PlayerService:GetPlayer(event.PlayerID)
     player:LoadSlot(event.slotId)
-    local character = player:GetCharacter()
-
-    local translateCharacter = {
-        Warrior = 'dragon_knight',
-        Paladin = 'omniknight',
-        Rogue = 'bounty_hunter',
-        Ranger = 'windrunner',
-        Mage = 'invoker',
-        Sorcerer = 'warlock'
-    }
 
     CharacterPick:CreateCustomHeroForPlayer(
         event.PlayerID,
-        translateCharacter[character],
-        event.slotId,
+        player:GetCharacterHeroName(),
         true
     )
 end
 
-function CharacterPick:CreateCustomHeroForPlayer(PlayerID, character, slotId, isPrimary)
+function CharacterPick:CreateCustomHeroForPlayer(PlayerID, character, isPrimary)
     local hero
     local heroName = 'npc_dota_hero_'..character
     if isPrimary then
@@ -115,14 +94,13 @@ function CharacterPick:CreateCustomHeroForPlayer(PlayerID, character, slotId, is
         hero:SetControllableByPlayer(PlayerID, false)
         -- hero:SetOwner(player)
     end
-    hero.slotId = slotId
 
     hero:SetAbilityPoints(0)
-    -- hero:GetAbilityByIndex(0):SetLevel(1)
     for i = 0, 5 do
-        hero:GetAbilityByIndex(i):SetLevel(1)
+        -- Note: Ability11 will bump down in index if there are no other abilities.
+        local talent = hero:GetAbilityByIndex(i)
+        if talent then talent:SetLevel(1) end
     end
-
 
     -- Standard vision past trees.
     hero:AddNewModifier(nil, nil, 'character_vision', nil)
@@ -253,10 +231,9 @@ function CharacterPick:CreateCustomHeroForPlayer(PlayerID, character, slotId, is
     --end
 
     local player = PlayerService:GetPlayer(PlayerID)
-    if player.experience then
+    if player:GetPriorExperience() then
         hero.isInitialLevel = true
-        -- Currently broken locally. Adding 20% too much.
-        hero:AddExperience(player.experience, DOTA_ModifyXP_Unspecified, false, true)
+        hero:AddExperience(player:GetPriorExperience(), DOTA_ModifyXP_Unspecified, false, true)
         hero.isInitialLevel = nil
     end
 

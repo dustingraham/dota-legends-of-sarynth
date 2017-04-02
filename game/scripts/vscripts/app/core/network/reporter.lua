@@ -12,7 +12,7 @@ function Reporter:Activate(params)
         Debug('Reporter', 'Not Logging Cheat Mode')
         return
     end
-    
+
     Event:Listen('HeroPick', Dynamic_Wrap(Reporter, 'OnHeroPick'), Reporter)
     Event:Listen('HeroLevelUp', Dynamic_Wrap(Reporter, 'OnHeroLevelUp'), Reporter)
     Event:Listen('HeroDeath', Dynamic_Wrap(Reporter, 'OnHeroDeath'), Reporter)
@@ -20,7 +20,7 @@ function Reporter:Activate(params)
     Event:Listen('HeroStartedQuest', Dynamic_Wrap(Reporter, 'OnHeroStartedQuest'), Reporter)
     Event:Listen('HeroCompletedQuest', Dynamic_Wrap(Reporter, 'OnHeroCompletedQuest'), Reporter)
     Event:Listen('HeroKilledCreature', Dynamic_Wrap(Reporter, 'OnHeroKilledCreature'), Reporter)
-    
+
     Debug('Reporter', 'Initialized')
 end
 Event:BindActivate(Reporter)
@@ -38,10 +38,10 @@ function Reporter:CreateReport(params)
     if IsInToolsMode() then
         Debug('Reporter', 'Reporting to localhost.')
     end
-    
+
     local PlayerID = params.player_id
     local version = 1
-    
+
     TableMerge(params, {
         match_id = Boot.MatchID,
         system_time = GetSystemDate()..' '..GetSystemTime(),
@@ -50,13 +50,13 @@ function Reporter:CreateReport(params)
         version = version,
         player_id_64 = tostring(PlayerResource:GetSteamID(PlayerID)),
     })
-    
+
     Debug('Reporter', inspect(params))
-    
+
     Http:SendReport(params)
     -- local player = PlayerResource:GetPlayer( params.player_id_const )
     -- local hero = PlayerResource:GetSelectedHeroEntity(params.player_id_const)
-    
+
 end
 
 function Reporter:PullCharacterReport(PlayerID)
@@ -65,11 +65,11 @@ function Reporter:PullCharacterReport(PlayerID)
     return {
         event_name = 'character_status',
         player_id_64 = tostring(PlayerResource:GetSteamID(PlayerID)),
-        slot_id = player.slot_id,
+        slot_id = player:GetSlotId(),
         data = {
             experience = hero:GetCurrentXP(),
             level = hero:GetLevel(),
-            gametime = player.gametime + math.ceil(GameRules:GetGameTime()),
+            gametime = player:GetPriorGametime() + math.ceil(GameRules:GetGameTime()),
         }
     }
 end
@@ -88,7 +88,7 @@ REPORTER_REPORT = {
 
 function Reporter:OnHeroPick(e, event)
     if not REPORTER_REPORT['hero_pick'] then return end
-    
+
     Debug('Reporter', 'OnHeroPick')
     Debug('Reporter', 'Hero: ', event.hero:GetName())
     self:CreateReport({
@@ -113,14 +113,14 @@ end
 function Reporter:OnHeroDeath(e, event)
     Debug('Reporter', 'OnHeroDeath')
     Debug('Reporter', 'Hero: ', event.hero:GetName())
-    
+
     local killer = 'unknown_nil_entindex_attacker'
     if event.killer then
         killer = event.killer:GetUnitName()
     end
-    
+
     Debug('Reporter', 'Killer: ', killer)
-    
+
     self:CreateReport({
         event_name = 'hero_death',
         player_id = event.hero:GetPlayerOwnerID(),
