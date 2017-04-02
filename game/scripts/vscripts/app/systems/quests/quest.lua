@@ -57,8 +57,8 @@ end
 
 function Quest:ApplyReward(hero)
     if self.rewards.experience then
-        hero:AddExperience(self.rewards.experience, 0, false, false)
-        SendOverheadEventMessage( hero:GetPlayerOwner(), OVERHEAD_ALERT_XP , hero, self.rewards.experience, nil )
+        hero:AddExperience(self.rewards.experience, DOTA_ModifyXP_Unspecified, false, true)
+        PopupExperience(hero, self.rewards.experience)
     end
     if self.rewards.item_choose then
         local item = CreateItem(self.rewards.item_choose['01'], nil, nil)
@@ -85,10 +85,10 @@ end
 -- Get reduced data set for client transmission.
 function Quest:GetData()
     -- Just enough to present client side display.
-    
+
     -- (icon) Title
     -- [current] / [required] [description]
-    
+
     local data = {
         icon = self.icon,
         title = self.title,
@@ -108,10 +108,10 @@ end
 -- Get reduced data set for client transmission.
 function Quest:GetStartData()
     -- Just enough to present client side display.
-    
+
     -- (icon) Title
     -- [current] / [required] [description]
-    
+
     local data = {
         icon = self.icon,
         title = self.title,
@@ -128,7 +128,7 @@ function Quest:GetStartData()
         }
         table.insert(data.objectives, oData)
     end
-    
+
     Debug('Quest', inspect(data))
     return data
 end
@@ -136,17 +136,17 @@ end
 -- Get reduced data set for client transmission.
 function Quest:GetEndData()
     -- Just enough to present client side display.
-    
+
     -- (icon) Title
     -- [current] / [required] [description]
-    
+
     local data = {
         icon = self.icon,
         title = self.title,
         dialog_text = self.complete.dialog,
         rewards = self.rewards,
     }
-    
+
     Debug('Quest', inspect(data))
     return data
 end

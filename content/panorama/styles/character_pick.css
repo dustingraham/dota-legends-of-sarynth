@@ -89,12 +89,12 @@
     width: 66px;
     height: 74px;
 }
-.character-details #LoadCharacterButton {
+.character-details #LoadCharacterButton,
+.character-details #CreateCharacterButton {
     align:right bottom;
     margin-right:20px;
     margin-bottom:20px;
 }
-
 
 /* ****************************************************************************************** */
 
@@ -185,9 +185,6 @@
     margin-left:20px;
 }
 
-#CreateCharacterButton {
-    align:center center;
-}
 /** Choose Selector **/
 .character-pick-names {
     align:right center;
@@ -233,6 +230,11 @@
     font-size:22px;
     color:#f8e3bf;
     text-shadow:1px 1px 4px 2.0 #333333b0;
+    
+    line-height:22px;
+    /* Line height doesn't seem to help, and needs slight adjustment. */
+    margin-top:4px;
+    margin-left:2px;
 }
 .button {
     wash-color:#dddddd;

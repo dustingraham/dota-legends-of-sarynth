@@ -5,13 +5,13 @@
     "IsPlayable"     "1"
     "beginnings"
     {
-        "MaxPlayers" "1"
+        "MaxPlayers" "3"
     }
     "introduction"
     {
         "MaxPlayers" "1"
     }
-    
+
     "Default_Keys"
     {
         "01"

@@ -64,7 +64,12 @@ end
 -- Used for character load by slot.
 function CharacterPick:OnCharacterLoad(event)
     local hero = PlayerResource:GetSelectedHeroEntity(event.PlayerID)
-    if hero:GetName() ~= DUMMY_HERO then Debug('CharacterPick', 'Already selected hero...') return end
+    if hero:GetName() ~= DUMMY_HERO then
+        Debug('CharacterPick', 'Attempt by: ', event.PlayerID)
+        Debug('CharacterPick', 'For Slot: ', event.slotId)
+        Debug('CharacterPick', 'Already selected hero...')
+        return
+    end
 
     -- Sound + Music for Standard Game Pick
     EmitSoundOnClient('HeroPicker.Selected', PlayerResource:GetPlayer(event.PlayerID))

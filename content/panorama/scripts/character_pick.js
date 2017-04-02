@@ -31,8 +31,16 @@ var InitCharacterPickListeners = function() {
             playerTableKey,
             function(tableName, changes, deletions) {
                 $.Msg('[JS] Table Change: '+tableName);
-                $.Msg(JSON.stringify(changes))
-                $.Msg(JSON.stringify(deletions))
+                //$.Msg(JSON.stringify(changes));
+                //$.Msg(JSON.stringify(deletions));
+
+                // If the server is slow to respond.
+                // TODO: Display a "loading" symbol until this data is available.
+                $.Each(PlayerTables.GetAllTableValues(playerTableKey), function(data)
+                {
+                    ReplaceCharacterBlock(data);
+                });
+
                 // $.Each(changes, function(params, key)
                 // {
                 //     if (activeQuests[key])

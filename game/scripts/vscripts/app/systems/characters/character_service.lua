@@ -45,7 +45,7 @@ function CharacterService:GetExperienceLevelRequirements()
         1600, -- Level 9
         2400, -- Level 10
     }
-    -- 
+    --
     -- 0, 100, 300, 600, 1000,
     -- 1500, 2100, 2800, 3600, 4500
     -- 5500, 6600, 7800, 9100, 10500
@@ -90,22 +90,17 @@ function CharacterService:OnEntityHurt(event)
         npc.expModifier = modifier
         npc:SetDeathXP(npc.originalExp * modifier)
     end
-
-    -- This might be troublesome...
-    attacker.lastAttacked = npc
 end
+
 function CharacterService:ExperienceFilter(e, params)
---    Debug('CharacterService', 'OnExperienceFilter')
---    print(inspect(params))
-    
-    local player = PlayerResource:GetPlayer( params.player_id_const )
     local hero = PlayerResource:GetSelectedHeroEntity(params.player_id_const)
 
-    -- This might be troublesome...
-    local npc = hero.lastAttacked
-
-    -- If Setting...
-    SendOverheadEventMessage( player, OVERHEAD_ALERT_XP , npc, params.experience, nil )
+    -- Difficult to track where this EXP came from. Might have come from a
+    -- target that an ally killed, which this hero doesn't know about.
+    -- So, we'll just show the +exp over the hero itself. Seems to make sense
+    -- anyways.
+    -- SendOverheadEventMessage( player, OVERHEAD_ALERT_XP , hero, params.experience, nil )
+    PopupExperience(hero, params.experience)
 
     return true
 end
@@ -113,7 +108,7 @@ end
 -- Compute experience needed for next level, and notify player
 function CharacterService:OnEntityKilled(event)
     local killed = EntIndexToHScript(event.entindex_killed);
-    local attacker = nil
+    local attacker
     if event.entindex_attacker ~= nil then
         attacker = EntIndexToHScript(event.entindex_attacker);
     end
@@ -143,7 +138,7 @@ end
 function CharacterService:OnPlayerLevelUp(event)
     local hero = HeroList:GetHero(event.player)
     hero:SetAbilityPoints(0)
-    
+
 --    for i = 0, 2 do
 --        -- Temp Spell Levels
 --        -- 0 : 1 4 7 10
@@ -153,19 +148,19 @@ function CharacterService:OnPlayerLevelUp(event)
 --            math.min(3, math.floor((event.level + 2- i) / 3))
 --        )
 --    end
-    
+
     if hero.isInitialLevel then return end
-    
+
     -- Slightly better level up particle...
     local pIdx = ParticleManager:CreateParticle("particles/econ/events/ti6/hero_levelup_ti6.vpcf", PATTACH_ABSORIGIN_FOLLOW, hero)
     ParticleManager:SetParticleControl(pIdx, 0, hero:GetAbsOrigin())
-    
+
     Notifications:Top(hero:GetPlayerOwnerID(), {
         text = "You just reached level "..event.level.."!",
         duration = 6,
         style = { color = "#ffcc00" }
     })
-    
+
     if not DEBUG_SKIP_HTTP_SAVE then
         Debug('CharacterService', 'Saving for: ', hero:GetName())
         Http:Save({
@@ -205,12 +200,12 @@ local function TestTest(hero)
     TestItem(hero, 'item_amulet_tier3')
     TestItem(hero, 'item_boots_leather')
     TestItem(hero, 'item_boots_leather_common')
-    
+
     hero.customInventory:Open(hero:GetPlayerOwnerID())
 end
 local function TestQuest(hero)
     -- local pos = hero:GetAbsOrigin()
-    
+
     Containers:SetDefaultInventory(hero, hero.customEquipment)
     -- Six items, this is what I got after test quests.
     -- Level 6 also.
@@ -253,12 +248,12 @@ function CharacterService:OnHeroPick(e, event)
     })
     hero.customEquipment:Open(hero:GetPlayerOwnerID())
     Containers:SetDefaultInventory(hero, hero.customInventory)
-    
+
     -- Entering world.
     GameRules:GetGameModeEntity():EmitSound('jboberg_01.music.ui_hero_select')
     -- GameRules:GetGameModeEntity():EmitSound('jboberg_01.stinger.radiant_win');
     -- Sounds:EmitSoundOnClient(0, 'jboberg_01.stinger.radiant_win')
-    
+
     -- Items for testing.
     if IsInToolsMode() and TEST_SPAWN_ITEMS then TestTest(hero) end
     --TestQuest(hero)

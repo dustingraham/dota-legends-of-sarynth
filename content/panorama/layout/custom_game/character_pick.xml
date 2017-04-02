@@ -17,7 +17,7 @@
                         </Image>
                     </Button>
                     <Button id="CreateCharacterButton" class="button button-yes">
-                        <Image src="file://{images}/window/button_green.png">
+                        <Image src="file://{images}/window/button_blue.png">
                             <Label class="yes" text="CREATE"/>
                         </Image>
                     </Button>
