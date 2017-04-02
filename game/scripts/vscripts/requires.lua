@@ -1,9 +1,9 @@
 -- Standard Required Files
 for _,file in ipairs({
-    
+
     -- Event first, needed for activation bindings.
     'app/core/event',
-    
+
     'app/core/network/errors',
     'app/core/network/http',
     'app/core/network/reporter',
@@ -11,17 +11,18 @@ for _,file in ipairs({
     'app/core/boot',
     'app/core/filters',
     'app/core/sounds',
-    
+
     'app/maps/'..GetMapName(),
-    
+
     'app/systems/characters/abilities/wrappers',
-    
+
     'app/systems/characters/character_pick',
     'app/systems/characters/character_service',
     'app/systems/characters/focus_target',
     'app/systems/characters/player_service',
     'app/systems/characters/player',
-    
+    'app/systems/characters/save_load',
+
     'app/systems/npcs/base_npc_creature',
     'app/systems/npcs/dialog_system',
     'app/systems/npcs/drops',
@@ -30,13 +31,13 @@ for _,file in ipairs({
     'app/systems/npcs/spawn_node',
     'app/systems/npcs/spawn_system',
     'app/systems/npcs/spawn',
-    
+
     'app/systems/quests/quest_giver',
     'app/systems/quests/quest_repository',
     'app/systems/quests/quest_service',
     'app/systems/quests/quest_system',
     'app/systems/quests/quest',
-    
+
     'app/utils/debug',
     'app/utils/helpers',
     'app/utils/md5',
@@ -48,9 +49,9 @@ for _,file in ipairs({
     'vendor/barebones/timers',
     'vendor/inspect',
     'vendor/popupnumbers',
-    
+
     'settings',
-    
+
 }) do require(file) end
 
 -- AI Modifiers

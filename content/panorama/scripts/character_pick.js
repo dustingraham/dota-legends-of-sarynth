@@ -2,6 +2,65 @@
 var selectedSlot = -1;
 var selectedClass = false;
 
+var charDescriptions = {
+    Warrior: 'Reliant on his sword and shield, the warrior is renowned for his strength. His heroic feats of unmatched power bring enemies to their knees. Just avoid confusing brawn with intellect.',
+    Paladin: 'Blessed by the sanctity of light, the Paladin relies on fortitude and purity. He brings to the fight his unstoppable hammer coupled with a healing touch. His holy powers can rejuvenate allies, and repel evil.',
+    Rogue: 'Speed, agility and focus lead to devastating critical strikes that cripple enemy. Not necessarily reliant on the shadows, the rogue finds his balance in swift precision. Armor is a hindrance that is often neglected.',
+    Ranger: 'One with her bow, the ranger rains death upon her enemies from afar. Through training and agility, she seeks to put every arrow on target while staying distant and untouched.',
+    Mage: 'The mage is forever in training, as he continues to refine his control over the elements. From apprentice to master, and beyond, every aspect of the natural world becomes his medium.',
+    Sorcerer: 'Dark arts consume the sorcerer, as he strives to avoid succumbing to pure evil. His chaotic good nature manifests itself as his ritualistic incantations rip apart enemies of the land. Fear the darkness.'
+};
+var charUnitNames = {
+    Warrior: 'npc_dota_hero_dragon_knight',
+    Paladin: 'npc_dota_hero_omniknight',
+    Rogue: 'npc_dota_hero_bounty_hunter',
+    Ranger: 'npc_dota_hero_windrunner',
+    Mage: 'npc_dota_hero_invoker',
+    Sorcerer: 'npc_dota_hero_warlock'
+};
+
+var InitCharacterPickListeners = function() {
+    var PlayerTables = GameUI.CustomUIConfig().PlayerTables;
+    var playerId = Game.GetLocalPlayerID();
+    var playerTableKey = 'player_'+playerId+'_characters';
+
+    // Subscribe to changes on the client
+    if (undefined === $.GetContextPanel().subscription_id)
+    {
+        $.GetContextPanel().subscription_id = PlayerTables.SubscribeNetTableListener(
+            playerTableKey,
+            function(tableName, changes, deletions) {
+                $.Msg('[JS] Table Change: '+tableName);
+                $.Msg(JSON.stringify(changes))
+                $.Msg(JSON.stringify(deletions))
+                // $.Each(changes, function(params, key)
+                // {
+                //     if (activeQuests[key])
+                //     {
+                //         UpdateQuestBlock(activeQuests[key], params);
+                //     }
+                //     else
+                //     {
+                //         activeQuests[key] = BuildQuestBlock(params)
+                //         $('#QuestProgressContainer').style.visibility = (Object.keys(activeQuests).length > 0) ? 'visible' : 'collapse';
+                //     }
+                // });
+                // $.Each(deletions, function(params, key)
+                // {
+                //     RemoveQuestBlock(key);
+                // });
+            });
+    }
+
+    // Retrieve values on the client
+    //$.Msg(PlayerTables.GetTableValue("player_0_quests", "count"));
+    $.Each(PlayerTables.GetAllTableValues(playerTableKey), function(data)
+    {
+        ReplaceCharacterBlock(data);
+    });
+};
+
+
 function ConfirmClassPick()
 {
     $.Msg('[JS] Picked '+selectedClass);
@@ -54,30 +113,81 @@ function CharacterTest()
     //$.DispatchEvent("DOTAGlobalSceneFireEntityInput", "MapPortrait", "ranger_entity_alt", 'spawn', 0);
 }
 
-var BuildCharacterBlock = function(params)
+function ReplaceCharacterBlock(data)
 {
-    var slotIdKey = 'slotId'+params.slotId;
-    var blockSlotId = params.slotId;
-    var panel = $.CreatePanel('Panel', $('#CharacterBlocks'), slotIdKey);
-    panel.BLoadLayoutSnippet('CharacterBlock');
-    panel.SetHasClass(slotIdKey, true);
-    if (params.emptySlot)
+    var slotIdKey = 'slotId'+data.slot_id;
+    var panel = $('#'+slotIdKey);
+
+    // Set Gameplay Time
+    var minutes = Math.ceil(data.gametime / 60);
+    var hours = Math.ceil(minutes / 60);
+    var playtime = '';
+    if (hours > 1)
     {
-        panel.FindChildTraverse('CreateCharacterButton').SetPanelEvent('onactivate', function()
-        {
-            selectedSlot = blockSlotId;
-            $('#WelcomeScreen').style.opacity = '0.0';
-            $.Schedule(0.25, function() {
-                $('#ChooseClass').style.opacity = '1.0';
-            });
-        });
+        playtime = hours + ' hours';
+    }
+    else if (minutes > 2)
+    {
+        playtime = minutes + ' minutes';
     }
     else
     {
-        // Populate with save data.
-        panel.FindChildTraverse('CharacterClass').text = params.characterClassName;
+        playtime = 'new character';
     }
-};
+    panel.FindChildTraverse('CharacterDetailsInfo').text =
+        'Level: <span class="detail">'+data.level+'</span><br>' +
+        'Experience: <span class="detail">'+data.experience+'</span><br>' +
+        'Playtime: <span class="detail">'+playtime+'</span>';
+    panel.FindChildTraverse('CharacterDetailPortraitContainer').SetHasClass('hide', false);
+
+    panel.FindChildTraverse('CharacterDetailsName').text = data.character;
+
+    panel.FindChildTraverse('CharacterDetailPortraitContainer').SetHasClass('hide', false);
+    panel.FindChildTraverse('CharacterDetailsPortrait').heroname = charUnitNames[data.character];
+
+    panel.FindChildTraverse('CreateCharacterButton').SetHasClass('hide', true);
+    panel.FindChildTraverse('LoadCharacterButton').SetHasClass('hide', false);
+    panel.FindChildTraverse('LoadCharacterButton').SetPanelEvent('onactivate', function()
+    {
+        GameEvents.SendCustomGameEventToServer('character_load', {
+            slotId: data.slot_id
+        });
+
+        // Hide Pick Screen
+        var panel = $.GetContextPanel().FindChild('CharacterPanelContainer');
+        panel.style.opacity = '0.0';
+        $.Schedule(1, function()
+        {
+            // Collapse to prevent hittest.
+            panel.style.visibility = 'collapse';
+            panel.hittestchildren = false;
+        });
+    });
+}
+
+function BuildCharacterBlock (slotId)
+{
+    var slotIdKey = 'slotId'+slotId;
+    var checkPanel = $('#'+slotIdKey);
+    if (checkPanel) {
+        return;
+        // Useful for recreating the XML, but timing screws up writing blocks.
+        //checkPanel.DeleteAsync(0);
+    }
+
+    var blockSlotId = slotId;
+    var panel = $.CreatePanel('Panel', $('#CharacterBlocks'), slotIdKey);
+    panel.BLoadLayoutSnippet('CharacterBlock');
+    panel.SetHasClass(slotIdKey, true);
+    panel.FindChildTraverse('CreateCharacterButton').SetPanelEvent('onactivate', function()
+    {
+        selectedSlot = blockSlotId;
+        $('#WelcomeScreen').style.opacity = '0.0';
+        $.Schedule(0.25, function() {
+            $('#ChooseClass').style.opacity = '1.0';
+        });
+    });
+}
 
 // Delete all debug
 if (false) {
@@ -91,8 +201,10 @@ if (false) {
 
 for (var i = 0; i < 3; i++)
 {
-    BuildCharacterBlock({ emptySlot: true, slotId: i });
+    BuildCharacterBlock(i);
 }
+
+InitCharacterPickListeners();
 
 var transit = 1.2;
 function SelectCharacter(character)
@@ -124,23 +236,6 @@ function OnCharacterPicked(event)
         panel.hittestchildren = false;
     });
 }
-
-var charDescriptions = {
-    Warrior: 'Reliant on his sword and shield, the warrior is renowned for his strength. His heroic feats of unmatched power bring enemies to their knees. Just avoid confusing brawn with intellect.',
-    Paladin: 'Blessed by the sanctity of light, the Paladin relies on fortitude and purity. He brings to the fight his unstoppable hammer coupled with a healing touch. His holy powers can rejuvenate allies, and repel evil.',
-    Rogue: 'Speed, agility and focus lead to devastating critical strikes that cripple enemy. Not necessarily reliant on the shadows, the rogue finds his balance in swift precision. Armor is a hindrance that is often neglected.',
-    Ranger: 'One with her bow, the ranger rains death upon her enemies from afar. Through training and agility, she seeks to put every arrow on target while staying distant and untouched.',
-    Mage: 'The mage is forever in training, as he continues to refine his control over the elements. From apprentice to master, and beyond, every aspect of the natural world becomes his medium.',
-    Sorcerer: 'Dark arts consume the sorcerer, as he strives to avoid succumbing to pure evil. His chaotic good nature manifests itself as his ritualistic incantations rip apart enemies of the land. Fear the darkness.'
-};
-var charUnitNames = {
-    Warrior: 'npc_dota_hero_dragon_knight',
-    Paladin: 'npc_dota_hero_omniknight',
-    Rogue: 'npc_dota_hero_bounty_hunter',
-    Ranger: 'npc_dota_hero_windrunner',
-    Mage: 'npc_dota_hero_invoker',
-    Sorcerer: 'npc_dota_hero_warlock'
-};
 
 // Game loads to black screen, remove once scenes are loaded.
 function CheckSceneLoad()

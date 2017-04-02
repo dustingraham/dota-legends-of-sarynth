@@ -8,19 +8,26 @@
     </scripts>
     <snippets>
         <snippet name="CharacterBlock">
-            <Panel class="character-info-wrapper">
-                <Image class="character-info" src="file://{images}/character_pick/character_pick_character_panel.png">
-                    <Label id="CharacterClass" text="No Character"/>
+            <Panel class="character-details">
+                <Image class="character-details-window" src="file://{images}/character_pick/character_pick_character_panel.png">
+                    <Label id="CharacterDetailsInfo" html="true" text="Create a character"/>
+                    <Button id="LoadCharacterButton" class="button button-yes hide">
+                        <Image src="file://{images}/window/button_green.png">
+                            <Label class="yes" text="LOAD"/>
+                        </Image>
+                    </Button>
                     <Button id="CreateCharacterButton" class="button button-yes">
                         <Image src="file://{images}/window/button_green.png">
                             <Label class="yes" text="CREATE"/>
                         </Image>
                     </Button>
-                    <Button class="button button-yes hide" onactivate="CharacterPick()">
-                        <Image src="file://{images}/window/button_green.png">
-                            <Label class="yes" text="LOAD"/>
-                        </Image>
-                    </Button>
+                </Image>
+                <Image class="character-details-header" src="file://{images}/character_pick/character_pick_info_header.png">
+                    <Label id="CharacterDetailsName" class="TitleFont" text="Empty"/>
+                    <Panel id="CharacterDetailPortraitContainer" class="hero-clipper hide">
+                        <DOTAHeroMovie id="CharacterDetailsPortrait" />
+                        <Image class="overlay" src="file://{images}/character_pick/character_pick_info_header_overlay.png"/>
+                    </Panel>
                 </Image>
             </Panel>
         </snippet>
@@ -32,11 +39,7 @@
             <Panel id="TopGradient" hittest="false"/>
             <Panel id="WelcomeScreen" class="stage">
                 <Image class="logo-full" src="file://{images}/general/sarynths_full.png"/>
-                
                 <Panel id="CharacterBlocks"/>
-                <Image class="character-info hide no-characters" src="file://{images}/character_pick/character_pick_no_characters_panel.png">
-                    <Label text="No Saved Characters"/>
-                </Image>
             </Panel>
             <Panel id="ChooseClass" class="stage" >
                 <Image class="logo-small" src="file://{images}/general/sarynths_small.png"/>

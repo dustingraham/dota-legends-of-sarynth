@@ -38,6 +38,8 @@ function CharacterPick:TestMapPickHero(heroReal, pickHero)
     end)
 end
 
+---
+-- This is currently the "create" character for new slots.
 function CharacterPick:OnCharacterPick(event)
     local hero = PlayerResource:GetSelectedHeroEntity(event.PlayerID)
     if hero:GetName() ~= DUMMY_HERO then Debug('CharacterPick', 'Already selected hero...') return end
@@ -45,6 +47,11 @@ function CharacterPick:OnCharacterPick(event)
     -- Sound + Music for Standard Game Pick
     EmitSoundOnClient('HeroPicker.Selected', PlayerResource:GetPlayer(event.PlayerID))
     GameRules:GetGameModeEntity():EmitSound('jboberg_01.music.ui_hero_select')
+
+    local player = PlayerService:GetPlayer(event.PlayerID)
+    player:SetCurrentSlot(event.slotId)
+    player:SetCharacter(event.character)
+    player:Save()
 
     local translateCharacter = {
         Warrior = 'dragon_knight',
@@ -54,8 +61,44 @@ function CharacterPick:OnCharacterPick(event)
         Mage = 'invoker',
         Sorcerer = 'warlock'
     }
-    local character = translateCharacter[event.character]
-    CharacterPick:CreateCustomHeroForPlayer(event.PlayerID, character, event.slotId, true)
+
+    CharacterPick:CreateCustomHeroForPlayer(
+        event.PlayerID,
+        translateCharacter[event.character],
+        event.slotId,
+        true
+    )
+end
+
+---
+-- Used for character load by slot.
+function CharacterPick:OnCharacterLoad(event)
+    local hero = PlayerResource:GetSelectedHeroEntity(event.PlayerID)
+    if hero:GetName() ~= DUMMY_HERO then Debug('CharacterPick', 'Already selected hero...') return end
+
+    -- Sound + Music for Standard Game Pick
+    EmitSoundOnClient('HeroPicker.Selected', PlayerResource:GetPlayer(event.PlayerID))
+    GameRules:GetGameModeEntity():EmitSound('jboberg_01.music.ui_hero_select')
+
+    local player = PlayerService:GetPlayer(event.PlayerID)
+    player:LoadSlot(event.slotId)
+    local character = player:GetCharacter()
+
+    local translateCharacter = {
+        Warrior = 'dragon_knight',
+        Paladin = 'omniknight',
+        Rogue = 'bounty_hunter',
+        Ranger = 'windrunner',
+        Mage = 'invoker',
+        Sorcerer = 'warlock'
+    }
+
+    CharacterPick:CreateCustomHeroForPlayer(
+        event.PlayerID,
+        translateCharacter[character],
+        event.slotId,
+        true
+    )
 end
 
 function CharacterPick:CreateCustomHeroForPlayer(PlayerID, character, slotId, isPrimary)
@@ -181,9 +224,9 @@ function CharacterPick:CreateCustomHeroForPlayer(PlayerID, character, slotId, is
     if character == 'windrunner' then
         local particleName = 'particles/units/heroes/hero_windrunner/windrunner_bowstring.vpcf'
         local idx = ParticleManager:CreateParticle(
-            particleName,
-            PATTACH_POINT_FOLLOW,
-            hero
+        particleName,
+        PATTACH_POINT_FOLLOW,
+        hero
         )
         ParticleManager:SetParticleControlEnt(idx, 0, hero, PATTACH_POINT_FOLLOW, 'bow_bot', hero:GetAbsOrigin(), true)
         ParticleManager:SetParticleControlEnt(idx, 1, hero, PATTACH_POINT_FOLLOW, 'bow_mid', hero:GetAbsOrigin(), true)
@@ -193,20 +236,28 @@ function CharacterPick:CreateCustomHeroForPlayer(PlayerID, character, slotId, is
     end
 
     -- Load Data
-    if not DEBUG_SKIP_HTTP_LOAD then
-        Http:Load({
-            steamId64 = tostring(PlayerResource:GetSteamID(event.PlayerID)),
-            hero = hero:GetName(),
-        }, function(data)
-            Debug('CharacterPick', 'Player Loaded')
-            DeepPrintTable(data)
-            if data.experience then
-                local hero = PlayerResource:GetSelectedHeroEntity(event.PlayerID)
-                hero.isInitialLevel = true
-                hero:AddExperience(data.experience, 0, false, false)
-                hero.isInitialLevel = nil
-            end
-        end)
+    --if not DEBUG_SKIP_HTTP_LOAD then
+    --    Http:Load({
+    --                  steamId64 = tostring(PlayerResource:GetSteamID(event.PlayerID)),
+    --                  hero = hero:GetName(),
+    --              }, function(data)
+    --        Debug('CharacterPick', 'Player Loaded')
+    --        DeepPrintTable(data)
+    --        if data.experience then
+    --            local hero = PlayerResource:GetSelectedHeroEntity(event.PlayerID)
+    --            hero.isInitialLevel = true
+    --            hero:AddExperience(data.experience, 0, false, false)
+    --            hero.isInitialLevel = nil
+    --        end
+    --    end)
+    --end
+
+    local player = PlayerService:GetPlayer(PlayerID)
+    if player.experience then
+        hero.isInitialLevel = true
+        -- Currently broken locally. Adding 20% too much.
+        hero:AddExperience(player.experience, DOTA_ModifyXP_Unspecified, false, true)
+        hero.isInitialLevel = nil
     end
 
     Event:Trigger('HeroPick', {
@@ -224,6 +275,7 @@ if not CharacterPick.initialized then
     CharacterPick.initialized = true
     -- May need to unregister this... to prevent abuse?
     CustomGameEventManager:RegisterListener('character_pick', Dynamic_Wrap(CharacterPick, 'OnCharacterPick'))
+    CustomGameEventManager:RegisterListener('character_load', Dynamic_Wrap(CharacterPick, 'OnCharacterLoad'))
 end
 
 LinkLuaModifier('character_vision', 'app/systems/characters/modifiers/character_vision', LUA_MODIFIER_MOTION_NONE)

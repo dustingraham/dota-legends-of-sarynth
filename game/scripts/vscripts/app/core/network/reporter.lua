@@ -59,6 +59,21 @@ function Reporter:CreateReport(params)
     
 end
 
+function Reporter:PullCharacterReport(PlayerID)
+    local player = PlayerService:GetPlayer(PlayerID)
+    local hero = PlayerResource:GetSelectedHeroEntity(PlayerID)
+    return {
+        event_name = 'character_status',
+        player_id_64 = tostring(PlayerResource:GetSteamID(PlayerID)),
+        slot_id = player.slot_id,
+        data = {
+            experience = hero:GetCurrentXP(),
+            level = hero:GetLevel(),
+            gametime = player.gametime + math.ceil(GameRules:GetGameTime()),
+        }
+    }
+end
+
 -- if not PlayerResource then
 --     Timers:CreateTimer(5, function()
 --         Reporter:Report({})

@@ -18,11 +18,16 @@ function PlayerService:OnConnectFull(event)
     Wrappers.ToggleFocusTargetUsage(event.PlayerID, 1)
 
     self.players[event.PlayerID] = Player(event.PlayerID)
+    self.players[event.PlayerID]:Load()
 end
 
-function PlayerService:Set(pid, key, value)
+function PlayerService:Set(PlayerID, key, value)
     -- Not Currently Used/Implemented
-    self.players[pid]:Set(key, value)
+    self.players[PlayerID]:Set(key, value)
+end
+
+function PlayerService:GetPlayer(PlayerID)
+    return self.players[PlayerID]
 end
 
 function PlayerService:OnSettingsFocusTarget(event)

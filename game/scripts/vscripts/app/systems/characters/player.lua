@@ -1,19 +1,22 @@
 ---
 -- Mainly for the table
--- 
+--
 --@type Player
-Player = Player or class({})
+Player = Player or class({
+    gametime = 0
+})
 
 function Player:constructor(PlayerID)
     self.PlayerID = PlayerID
-    
+
     --Create a Table and set a few values.
     PlayerTables:CreateTable('player_'..PlayerID..'_quests', {}, {PlayerID})
-    
+    PlayerTables:CreateTable('player_'..PlayerID..'_characters', {}, {PlayerID})
+
     -- PlayerTables:SetTableValue("player_0_quests", "count", 0)
     -- PlayerTables:SetTableValues("player_0_quests", {val1=1, val2=2})
-    
-    
+
+
     -- PlayerTables:SetTableValues('player_0_quests', 'quests', {})
 end
 
@@ -30,3 +33,46 @@ end
 -- PlayerTables:DeleteTableKey('player_0_quests', 'first')
 
 -- PlayerTables:DeleteTableKey('player_0_quests', 'second')
+
+function Player:SetCurrentSlot(slotId)
+    self.slot_id = slotId
+end
+
+function Player:SetCharacter(character)
+    self.character = character
+end
+
+function Player:GetCharacter(character)
+    return self.character
+end
+
+function Player:LoadSlot(slotId)
+    local key = 'player_'..self.PlayerID..'_characters'
+    for _,data in pairs(PlayerTables:GetAllTableValues(key)) do
+        if data.slot_id == slotId then
+            self:SetCurrentSlot(slotId)
+            self:LoadSlotData(data)
+            return
+        end
+    end
+    error('Attribute not found: slot_id [in character data]')
+end
+
+function Player:LoadSlotData(data)
+    self.character = data.character
+    self.experience = data.experience
+    self.gametime = data.gametime
+end
+
+function Player:Save()
+    if self.slot_id == nil then error('SlotID expected to be set.') end
+    SaveLoad:CreateCharacter(self)
+end
+
+function Player:Load()
+    SaveLoad:FetchCharacters(self, function(data)
+        local key = 'player_'..self.PlayerID..'_characters'
+        DeepPrintTable(data)
+        PlayerTables:SetTableValues(key, data)
+    end)
+end

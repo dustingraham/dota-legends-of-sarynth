@@ -68,13 +68,17 @@ function Http:Send(api, data, callback)
         settings.host = settings.host_dev
     end
 
+    -- local url = settings.host..api..'?token='..sha1.hmac(settings.key, payload)
+    local url = settings.host..api..'?token='..Boot.MatchID
+    --Debug('Http', url)
+
+    -- BIN TEST
+    --data.url = url
+    --url = 'http://requestb.in/zm1zu7zm'
+
     local payload = json.encode(data)
     -- Debug('Http', payload) -- Can be really long.
 
-    -- local url = settings.host..api..'?token='..sha1.hmac(settings.key, payload)
-    local url = settings.host..api..'?token='..Boot.MatchID
-    -- url = 'http://requestb.in/1mv269z1'..'?token='..Boot.MatchID --sha1.hmac(settings.key, payload)
-    -- Debug('Http', url)
 
     local request = CreateHTTPRequestScriptVM('POST', url)
     request:SetHTTPRequestRawPostBody('application/json', payload)
@@ -153,6 +157,12 @@ function Http:Activate()
     Timers:CreateTimer(function()
         if #self.reports > 0 then
             Debug('Http', 'Throttled Send Execute')
+
+            -- If we're sending anything, add current character data
+            for PlayerID,_ in pairs(PlayerService.players) do
+                table.insert(self.reports, Reporter:PullCharacterReport(PlayerID))
+            end
+
             Http:ThrottledSendReport()
             self.reports = {}
         end
