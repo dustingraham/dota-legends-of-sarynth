@@ -96,7 +96,7 @@ function CharacterPick:CreateCustomHeroForPlayer(PlayerID, character, isPrimary)
     end
 
     hero:SetAbilityPoints(0)
-    for i = 0, 5 do
+    for i = 0, hero:GetAbilityCount() - 1 do
         -- Note: Ability11 will bump down in index if there are no other abilities.
         local talent = hero:GetAbilityByIndex(i)
         if talent then talent:SetLevel(1) end
