@@ -20,7 +20,7 @@ function DialogSystem:StartDialog(character, npc)
     -- beastmaster_beas_rare_02
     if npc.spawn_name == 'npc_quest_start' then
         if npc.first_interaction == nil then
-            print('Chatter...')
+            Debug('DialogSystem', 'First interaction beastmaster.')
             Sounds:EmitSoundOnClient(character:GetPlayerOwnerID(), 'beastmaster_beas_rare_02')
             -- EmitSoundOnClient('beastmaster_beas_rare_02', character:GetPlayerOwner())
             npc.first_interaction = false
@@ -41,7 +41,7 @@ function DialogSystem:CheckTurnIn(character, npc)
     local quest = QuestService:FindTurnIn(character, npc)
     if not quest then return false end
 
-    Debug('DialogSystem', inspect(quest))
+    -- Debug('DialogSystem', inspect(quest))
     local player = character:GetPlayerOwner()
     player.currentDialogQuest = quest
     local data = quest:GetEndData();

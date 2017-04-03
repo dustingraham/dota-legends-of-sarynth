@@ -2,33 +2,33 @@
 {
     "start_sheep"
     {
-        "Model"                 "models/items/hex/sheep_hex/sheep_hex.vmdl" // Model.
+        "Model"                 "models/items/hex/sheep_hex/sheep_hex.vmdl"
         "BaseClass"             "npc_dota_creature"
         "Level"                 "1"
         "ModelScale"            "0.8"
         "HealthBarOffset"       "80"
-        
+
         "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_GROUND"
         "MovementSpeed"             "220"
         "ArmorPhysical"             "0"
         "AttackCapabilities"        "DOTA_UNIT_CAP_MELEE_ATTACK"
-        
-        "AttackDamageMin"            "30"        // Damage range min.
-        "AttackDamageMax"            "36"        // Damage range max.
-        "AttackRate"                "1.35"      // Speed of attack.
-        "AttackAnimationPoint"      "0.38"      // Normalized time in animation cycle to attack.
+
+        "AttackDamageMin"            "30"
+        "AttackDamageMax"            "36"
+        "AttackRate"                "1.35"
+        "AttackAnimationPoint"      "0.38"
         "AttackRange"               "100"
-        
+
         "CombatClassAttack"         "DOTA_COMBAT_CLASS_ATTACK_BASIC"
         "CombatClassDefend"         "DOTA_COMBAT_CLASS_DEFEND_BASIC"
         "UnitRelationshipClass"     "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
-        
-        "StatusHealth"                "72"        // Base health.
-        "StatusHealthRegen"            "0.5"        // Health regeneration rate.
-        
-        "BountyXP"                    "30"        // Experience earn.
+
+        "StatusHealth"                "72"
+        "StatusHealthRegen"           "0.5"
+
+        "BountyXP"                    "30"
     }
-    
+
     "start_worg"
     {
         "Model"                 "models/creeps/neutral_creeps/n_creep_worg_small/n_creep_worg_small.vmdl"
@@ -36,64 +36,62 @@
         "Level"                 "3"
         "ModelScale"            "1.0"
         "HealthBarOffset"       "80"
-        
+
         "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_GROUND"
         "MovementSpeed"             "320"
         "ArmorPhysical"             "6"
         "MagicalResistance"         "20"
         "AttackCapabilities"        "DOTA_UNIT_CAP_MELEE_ATTACK"
-        
+
         "AttackDamageMin"            "30"
         "AttackDamageMax"            "36"
         "AttackRate"                "0.65"
         "AttackAnimationPoint"      "0.38"
         "AttackRange"               "100"
-        
+
         "CombatClassAttack"         "DOTA_COMBAT_CLASS_ATTACK_BASIC"
         "CombatClassDefend"         "DOTA_COMBAT_CLASS_DEFEND_BASIC"
         "UnitRelationshipClass"     "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
-        
+
         "StatusHealth"                "272"
         "StatusHealthRegen"           "0.5"
-        
+
         "BountyXP"                    "40"
     }
-    
+
     "start_wolf"
     {
         "Model"                 "models/items/lycan/wolves/ambry_summon/ambry_summon.vmdl"
-        //"Model"                 "models/creeps/neutral_creeps/n_creep_worg_large/n_creep_worg_large.vmdl"
         "BaseClass"             "npc_dota_creature"
         "Level"                 "5"
         "ModelScale"            "1.0"
         "HealthBarOffset"       "80"
-        
+
         "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_GROUND"
         "MovementSpeed"             "320"
         "ArmorPhysical"             "10"
         "MagicalResistance"         "30"
         "AttackCapabilities"        "DOTA_UNIT_CAP_MELEE_ATTACK"
-        
-        "AttackDamageMin"            "60"        // Damage range min.
-        "AttackDamageMax"            "76"        // Damage range max.
-        "AttackRate"                "0.65"      // Speed of attack.
-        "AttackAnimationPoint"      "0.38"      // Normalized time in animation cycle to attack.
+
+        "AttackDamageMin"            "60"
+        "AttackDamageMax"            "76"
+        "AttackRate"                "0.65"
+        "AttackAnimationPoint"      "0.38"
         "AttackRange"               "100"
-        
+
         "CombatClassAttack"         "DOTA_COMBAT_CLASS_ATTACK_BASIC"
         "CombatClassDefend"         "DOTA_COMBAT_CLASS_DEFEND_BASIC"
         "UnitRelationshipClass"     "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
-        
+
         "StatusHealth"                "472"
         "StatusHealthRegen"           "0.5"
-        
+
         "BountyXP"                    "60"
     }
-    
+
     "start_area_wolf_boss"
     {
         "Model" "models/items/lycan/ultimate/hunter_kings_trueform/hunter_kings_trueform.vmdl"
-        //"Model" "models/items/lycan/wolves/ambry_summon/ambry_summon.vmdl"
         "BaseClass"             "npc_dota_creature"
         "Level"                 "7"
         "SoundSet"              "Lycan_Wolf"
@@ -104,7 +102,7 @@
         "AttackAnimationPoint"      "0.33"
         "AttackRange"               "160"
         "RingRadius"                "140"
-        
+
         "StatusHealth"              "6472"
         "ArmorPhysical"             "22"
         "MagicalResistance"         "55"
@@ -112,5 +110,7 @@
         "AttackDamageMin"           "122"
         "AttackDamageMax"           "146"
         "AttackRate"                "0.9"
+
+        "BountyXP"                    "90"
     }
 }

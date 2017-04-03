@@ -64,11 +64,15 @@ local function GetItemsForHero(hero)
         inventory = {},
         equipment = {},
     }
-    for _,item in pairs(hero.customEquipment:GetAllItems()) do
-        table.insert(items.equipment, {slot = hero.customEquipment:GetSlotForItem(item), name = item:GetName()})
+    if hero.customEquipment then
+        for _,item in pairs(hero.customEquipment:GetAllItems()) do
+            table.insert(items.equipment, {slot = hero.customEquipment:GetSlotForItem(item), name = item:GetName()})
+        end
     end
-    for _,item in pairs(hero.customInventory:GetAllItems()) do
-        table.insert(items.inventory, {slot = hero.customInventory:GetSlotForItem(item), name = item:GetName()})
+    if hero.customInventory then
+        for _,item in pairs(hero.customInventory:GetAllItems()) do
+            table.insert(items.inventory, {slot = hero.customInventory:GetSlotForItem(item), name = item:GetName()})
+        end
     end
     return items
 end

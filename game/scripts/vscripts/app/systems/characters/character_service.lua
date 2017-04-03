@@ -100,7 +100,9 @@ function CharacterService:ExperienceFilter(e, params)
     -- So, we'll just show the +exp over the hero itself. Seems to make sense
     -- anyways.
     -- SendOverheadEventMessage( player, OVERHEAD_ALERT_XP , hero, params.experience, nil )
-    PopupExperience(hero, params.experience)
+    if params.experience > 0 then
+        PopupExperience(hero, params.experience)
+    end
 
     return true
 end
@@ -139,15 +141,15 @@ function CharacterService:OnPlayerLevelUp(event)
     local hero = HeroList:GetHero(event.player)
     hero:SetAbilityPoints(0)
 
---    for i = 0, 2 do
---        -- Temp Spell Levels
---        -- 0 : 1 4 7 10
---        -- 1 : 2 5 8 11
---        -- 2 : 3 6 9 12
---        hero:GetAbilityByIndex(i):SetLevel(
---            math.min(3, math.floor((event.level + 2- i) / 3))
---        )
---    end
+    --    for i = 0, 2 do
+    --        -- Temp Spell Levels
+    --        -- 0 : 1 4 7 10
+    --        -- 1 : 2 5 8 11
+    --        -- 2 : 3 6 9 12
+    --        hero:GetAbilityByIndex(i):SetLevel(
+    --            math.min(3, math.floor((event.level + 2- i) / 3))
+    --        )
+    --    end
 
     if hero.isInitialLevel then return end
 
@@ -164,10 +166,10 @@ function CharacterService:OnPlayerLevelUp(event)
     if not DEBUG_SKIP_HTTP_SAVE then
         Debug('CharacterService', 'Saving for: ', hero:GetName())
         Http:Save({
-            steamId64 = tostring(PlayerResource:GetSteamID(hero:GetPlayerOwnerID())),
-            hero = hero:GetName(),
-            experience = hero:GetCurrentXP(),
-        }, function(data)
+                      steamId64 = tostring(PlayerResource:GetSteamID(hero:GetPlayerOwnerID())),
+                      hero = hero:GetName(),
+                      experience = hero:GetCurrentXP(),
+                  }, function(data)
             Debug('CharacterService', 'Successfully saved!')
         end)
     end
