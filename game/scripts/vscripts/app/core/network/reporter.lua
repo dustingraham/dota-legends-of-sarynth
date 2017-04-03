@@ -59,6 +59,51 @@ function Reporter:CreateReport(params)
 
 end
 
+local function GetItemsForHero(hero)
+    local items = {
+        inventory = {},
+        equipment = {},
+    }
+    for _,item in pairs(hero.customEquipment:GetAllItems()) do
+        table.insert(items.equipment, {slot = hero.customEquipment:GetSlotForItem(item), name = item:GetName()})
+    end
+    for _,item in pairs(hero.customInventory:GetAllItems()) do
+        table.insert(items.inventory, {slot = hero.customInventory:GetSlotForItem(item), name = item:GetName()})
+    end
+    return items
+end
+
+local function GetQuestsForPlayer(PlayerID)
+    local key = 'player_'..PlayerID..'_quests'
+    local quests = {
+        completed = QuestService.playerCompleted[key],
+        progress = {}
+    }
+    if QuestService.playerQuests[key] then
+        for _,quest in pairs(QuestService.playerQuests[key]) do
+            local objectives = {}
+            for oid,objective in pairs(quest.objectives) do
+                table.insert(objectives, {
+                    oid = oid,
+                    current = objective.current,
+                    required = objective.required,
+                })
+            end
+            table.insert(quests.progress, {
+                id = quest.id,
+                objectives = objectives,
+            })
+        end
+    end
+    return quests
+end
+
+-- local hero = PlayerResource:GetSelectedHeroEntity(0)
+-- print(inspect(GetItemsForHero(hero)))
+-- hero.customEquipment:AddItem(CreateItem('item_amulet_tier1', nil, nil), 4)
+-- print(inspect(GetQuestsForPlayer(0)))
+
+
 function Reporter:PullCharacterReport(PlayerID)
     local player = PlayerService:GetPlayer(PlayerID)
     local hero = PlayerResource:GetSelectedHeroEntity(PlayerID)
@@ -67,6 +112,8 @@ function Reporter:PullCharacterReport(PlayerID)
         player_id_64 = tostring(PlayerResource:GetSteamID(PlayerID)),
         slot_id = player:GetSlotId(),
         data = {
+            items = GetItemsForHero(hero),
+            quests = GetQuestsForPlayer(PlayerID),
             experience = hero:GetCurrentXP(),
             level = hero:GetLevel(),
             gametime = player:GetPriorGametime() + math.ceil(GameRules:GetGameTime()),

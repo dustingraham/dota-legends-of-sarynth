@@ -1,7 +1,7 @@
 
 DEBUG_SETTINGS = IsInToolsMode()
 -- Override if necessary...
--- DEBUG_SETTINGS = false
+DEBUG_SETTINGS = false
 
 -- Curronly only a single hero. Pick it!
 -- TEST_PICK_HERO = 'windrunner'    -- Ranger
@@ -23,9 +23,9 @@ if DEBUG_SETTINGS then
     -- TEST_START_START_BOSS = true
 end
 
-DEBUG_SKIP_HTTP_REPORT = true -- TODO enable before deploy
-DEBUG_SKIP_HTTP_LOAD = true
-DEBUG_SKIP_HTTP_SAVE = true
+DEBUG_SKIP_HTTP_REPORT = DEBUG_SETTINGS
+DEBUG_SKIP_HTTP_LOAD = DEBUG_SETTINGS or true
+DEBUG_SKIP_HTTP_SAVE = DEBUG_SETTINGS or true
 
 DEBUG_PRINT = true
 DEBUG_PRINT_SECTIONS = {

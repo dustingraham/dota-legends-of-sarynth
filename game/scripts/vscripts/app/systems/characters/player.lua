@@ -71,7 +71,12 @@ end
 function Player:GetPriorExperience()
     return self.experience
 end
-
+function Player:GetPriorItems()
+    return self.items
+end
+function Player:GetPriorQuests()
+    return self.quests
+end
 function Player:LoadSlot(slotId)
     local key = 'player_'..self.PlayerID..'_characters'
     for _,data in pairs(PlayerTables:GetAllTableValues(key)) do
@@ -85,9 +90,12 @@ function Player:LoadSlot(slotId)
 end
 
 function Player:LoadSlotData(data)
+    -- We could merge data in, but not 100% sure we want that just yet
     self.character = data.character
     self.experience = data.experience
     self.gametime = data.gametime
+    self.items = data.items
+    self.quests = data.quests
 end
 
 function Player:Save()

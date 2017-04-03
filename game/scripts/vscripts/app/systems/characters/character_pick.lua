@@ -235,6 +235,7 @@ function CharacterPick:CreateCustomHeroForPlayer(PlayerID, character, isPrimary)
     --    end)
     --end
 
+    -- Level/Experience
     local player = PlayerService:GetPlayer(PlayerID)
     if player:GetPriorExperience() then
         hero.isInitialLevel = true
@@ -244,6 +245,7 @@ function CharacterPick:CreateCustomHeroForPlayer(PlayerID, character, isPrimary)
 
     Event:Trigger('HeroPick', {
         hero = hero,
+        player = player,
         PlayerID = PlayerID
     })
 end

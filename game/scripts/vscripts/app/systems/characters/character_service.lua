@@ -226,7 +226,9 @@ end
 
 function CharacterService:OnHeroPick(e, event)
     local hero = event.hero
-    hero.customInventory = Containers:CreateContainer({
+
+    -- This separation is purely for the IDE formatting...
+    local invenDef = {
         -- layout = {6,6,6},
         layout = {4,4,4,4,4},
         position = "220px 120px 0px",
@@ -235,8 +237,10 @@ function CharacterService:OnHeroPick(e, event)
         pids = {hero:GetPlayerOwnerID()},
         OnDragWorld = true,
         AddItemFilter = Dynamic_Wrap(CharacterService, 'ContainerItemFilter'),
-    })
-    hero.customEquipment = Containers:CreateContainer({
+    }
+    hero.customInventory = Containers:CreateContainer(invenDef)
+
+    local equipDef = {
         layout = {2,2,2},
         position = "20px 120px 0px",
         entity = hero,
@@ -245,14 +249,29 @@ function CharacterService:OnHeroPick(e, event)
         OnDragWorld = true,
         equipment = true,
         AddItemFilter = Dynamic_Wrap(CharacterService, 'ContainerItemFilter'),
-    })
+    }
+    hero.customEquipment = Containers:CreateContainer(equipDef)
+
+    -- Default to open equipment on load.
     hero.customEquipment:Open(hero:GetPlayerOwnerID())
+    -- Picked up items go into inventory.
     Containers:SetDefaultInventory(hero, hero.customInventory)
 
     -- Entering world.
     GameRules:GetGameModeEntity():EmitSound('jboberg_01.music.ui_hero_select')
     -- GameRules:GetGameModeEntity():EmitSound('jboberg_01.stinger.radiant_win');
     -- Sounds:EmitSoundOnClient(0, 'jboberg_01.stinger.radiant_win')
+
+    -- Load Items Equipment/Inventory
+    local items = event.player:GetPriorItems()
+    if items then
+        for _,itemDef in pairs(items.equipment) do
+            hero.customEquipment:AddItem(CreateItem(itemDef.name, hero, hero), itemDef.slot)
+        end
+        for _,itemDef in pairs(items.inventory) do
+            hero.customInventory:AddItem(CreateItem(itemDef.name, hero, hero), itemDef.slot)
+        end
+    end
 
     -- Items for testing.
     if IsInToolsMode() and TEST_SPAWN_ITEMS then TestTest(hero) end
