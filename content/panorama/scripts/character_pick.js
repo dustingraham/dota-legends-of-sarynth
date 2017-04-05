@@ -4,7 +4,7 @@ var selectedClass = false;
 
 var charDescriptions = {
     Warrior: 'Reliant on his sword and shield, the warrior is renowned for his strength. His heroic feats of unmatched power bring enemies to their knees. Just avoid confusing brawn with intellect.',
-    Paladin: 'Blessed by the sanctity of light, the Paladin relies on fortitude and purity. He brings to the fight his unstoppable hammer coupled with a healing touch. His holy powers can rejuvenate allies, and repel evil.',
+    Paladin: 'Blessed by the sanctity of light, the Paladin relies on fortitude and purity. He brings to the fight his unstoppable hammer coupled with a healing touch. His holy powers can smite evil and rejuvenate allies.',
     Rogue: 'Speed, agility and focus lead to devastating critical strikes that cripple enemy. Not necessarily reliant on the shadows, the rogue finds his balance in swift precision. Armor is a hindrance that is often neglected.',
     Ranger: 'One with her bow, the ranger rains death upon her enemies from afar. Through training and agility, she seeks to put every arrow on target while staying distant and untouched.',
     Mage: 'The mage is forever in training, as he continues to refine his control over the elements. From apprentice to master, and beyond, every aspect of the natural world becomes his medium.',

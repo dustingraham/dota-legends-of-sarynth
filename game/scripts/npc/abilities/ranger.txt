@@ -30,14 +30,14 @@
         "AbilityUnitTargetType"            "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
         "AbilityUnitDamageType"            "DAMAGE_TYPE_MAGICAL"
         "AbilityTextureName"            "custom/ranger/ranger_poison_arrow"
-        
+
         "AbilityCooldown"        "6.0"
         "AbilityManaCost"        "15"
         "AbilityCastAnimation" "ACT_DOTA_ATTACK"
         "AbilityCastRange"                "250"
         // Default speed...
         //"AbilityCastPoint"                "0.50"
-        
+
         "AbilityCastPoint"                "0.50"
         "AnimationPlaybackRate" "0.73"
         "AbilityDuration"                "2"
@@ -52,14 +52,14 @@
         "AbilityUnitTargetType"            "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
         "AbilityUnitDamageType"            "DAMAGE_TYPE_MAGICAL"
         "AbilityTextureName"            "custom/ranger/ranger_ice_arrow"
-        
+
         "AbilityCooldown"        "5.0"
         "AbilityManaCost"        "25"
         "AbilityCastAnimation" "ACT_DOTA_ATTACK"
         "AbilityCastRange"                "250"
         // Default speed...
         //"AbilityCastPoint"                "0.50"
-        
+
         "AbilityCastPoint"                "0.50"
         "AnimationPlaybackRate" "0.73"
         "AbilityDuration"                "2"
@@ -74,14 +74,12 @@
         "AbilityUnitTargetType"            "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
         "AbilityUnitDamageType"            "DAMAGE_TYPE_MAGICAL"
         "AbilityTextureName"            "custom/ranger/ranger_strong_shot"
-        
+
         "AbilityCooldown"        "2.0"
         "AbilityManaCost"        "10"
         "AbilityCastAnimation" "ACT_DOTA_ATTACK"
         "AbilityCastRange"                "250"
-        // Default speed...
-        //"AbilityCastPoint"                "0.50"
-        
+
         "AbilityCastPoint"                "0.50"
         "AnimationPlaybackRate" "0.73"
         "AbilityDuration"                "2"
@@ -96,7 +94,7 @@
         "AbilityUnitTargetType"    "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
         "AbilityUnitDamageType"    "DAMAGE_TYPE_MAGICAL"
         "AbilityTextureName"       "custom/ranger/ranger_concussive_shot"
-        
+
         "AbilityCooldown"        "8.0"
         "AbilityManaCost"        "30"
         "AbilityCastAnimation" "ACT_DOTA_ATTACK"

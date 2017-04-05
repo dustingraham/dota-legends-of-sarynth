@@ -4,7 +4,7 @@ function character_vision:GetIntrinsicModifierName()
   return "character_vision"
 end
 
-function character_vision:IsPassive() 
+function character_vision:IsPassive()
   return true
 end
 
@@ -24,7 +24,7 @@ function character_vision:OnCreated()
 end
 
 function character_vision:IsHidden()
-  return self:GetStackCount() == 1
+  return true
 end
 
 function character_vision:OnIntervalThink()

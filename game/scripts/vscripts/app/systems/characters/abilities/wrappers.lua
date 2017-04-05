@@ -147,3 +147,30 @@ function Wrappers.OnThinkExampleAbility(ability)
         end
     end
 end
+
+-- Warrior
+function Wrappers.AbilityBasicsWarrior(spell)
+    -- Add basic stuff like range.
+    function spell:GetCastRange()
+        return 150
+    end
+    function spell:GetMaxLevel()
+        return 1
+    end
+    function spell:GetBehavior()
+        return DOTA_ABILITY_BEHAVIOR_UNIT_TARGET + DOTA_ABILITY_BEHAVIOR_DONT_RESUME_MOVEMENT
+    end
+
+    --function spell:GetAbilityTargetTeam()
+    --    print('GetAbilityTargetTeam')
+    --    return DOTA_UNIT_TARGET_TEAM_ENEMY
+    --end
+    --function spell:GetAbilityTargetType()
+    --    print('GetAbilityTargetType')
+    --    return DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC
+    --end
+    --function spell:GetAbilityDamageType()
+    --    print('GetAbilityDamageType')
+    --    return DAMAGE_TYPE_MAGICAL
+    --end
+end

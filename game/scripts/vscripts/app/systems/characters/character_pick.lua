@@ -108,7 +108,10 @@ function CharacterPick:CreateCustomHeroForPlayer(PlayerID, character, isPrimary)
     end
 
     -- Standard vision past trees.
-    hero:AddNewModifier(nil, nil, 'character_vision', nil)
+    hero:AddNewModifier(hero, nil, 'character_vision', nil)
+
+    -- Regen while passive.
+    hero:AddNewModifier(hero, nil, 'character_passive_regen', nil)
 
     local cosmetics = {
         invoker = {
@@ -218,6 +221,10 @@ function CharacterPick:CreateCustomHeroForPlayer(PlayerID, character, isPrimary)
         ParticleManager:ReleaseParticleIndex(idx)
     end
 
+    if character == 'dragon_knight' then
+        hero:AddNewModifier(hero, nil, 'warrior_stats', nil)
+    end
+
     -- Load Data
     --if not DEBUG_SKIP_HTTP_LOAD then
     --    Http:Load({
@@ -263,3 +270,6 @@ if not CharacterPick.initialized then
 end
 
 LinkLuaModifier('character_vision', 'app/systems/characters/modifiers/character_vision', LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier('character_passive_regen', 'app/systems/characters/modifiers/character_passive_regen', LUA_MODIFIER_MOTION_NONE)
+
+LinkLuaModifier('warrior_stats', 'app/systems/characters/abilities/warrior/warrior_stats', LUA_MODIFIER_MOTION_NONE)

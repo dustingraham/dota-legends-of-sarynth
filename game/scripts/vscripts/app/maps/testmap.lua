@@ -3,9 +3,10 @@
 CustomMap = CustomMap or {}
 
 function CustomMap:Activate()
+    ListenToGameEvent('npc_spawned', Dynamic_Wrap(CustomMap, 'OnNpcSpawned'), self)
+
     Event:Listen('OnStateGameSetup', Dynamic_Wrap(CustomMap, 'OnStateGameSetup'), CustomMap)
     Event:Listen('OnStateInGame', Dynamic_Wrap(CustomMap, 'OnStateInGame'), CustomMap)
-    ListenToGameEvent('npc_spawned', Dynamic_Wrap(CustomMap, 'OnNpcSpawned'), self)
 end
 
 
@@ -25,7 +26,9 @@ function CustomMap:OnNpcSpawned(event)
         if not Boot.allPick then
             Boot.allPick = true
             -- CharacterPick:TestMapPickAll(npc)
-            TEST_PICK_HERO = 'windrunner'
+            if not TEST_PICK_HERO then
+                TEST_PICK_HERO = 'windrunner'
+            end
             CharacterPick:TestMapPickHero(npc, TEST_PICK_HERO)
         end
     end

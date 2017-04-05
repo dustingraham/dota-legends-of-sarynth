@@ -8,7 +8,7 @@
 "DOTAUnits"
 {
     "Version"    "1"
-    
+
     "target_dummy"
     {
         "Model" "models/items/lycan/wolves/ambry_summon/ambry_summon.vmdl"
@@ -18,10 +18,10 @@
         "HealthBarOffset"       "220"
         "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_GROUND"
         "MovementSpeed"             "560"
-        "StatusHealth"                "99972" 
+        "StatusHealth"                "99972"
         "AttackCapabilities"        "DOTA_UNIT_CAP_MELEE_ATTACK"
         "AttackDamageMin"           "4"        // Damage range min.
-        "AttackDamageMax"           "8"        // Damage range max.    
+        "AttackDamageMax"           "8"        // Damage range max.
         "AttackRate"                "0.9"       // Speed of attack.
         "AttackAnimationPoint"      "0.33"      // Normalized time in animation cycle to attack.
         "AttackRange"               "160"        // Range within a target can be attacked.
@@ -35,25 +35,25 @@
         "Level"                 "11"
         "ModelScale"            "1.2"
         "HealthBarOffset"       "170"
-        
+
         "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_GROUND"
         "MovementSpeed"             "360"
         "ArmorPhysical"             "14"
         "AttackCapabilities"        "DOTA_UNIT_CAP_MELEE_ATTACK"
-        
+
         "AttackDamageMin"            "200"        // Damage range min.
         "AttackDamageMax"            "280"        // Damage range max.
         "AttackRate"                "0.90"      // Speed of attack.
         "AttackAnimationPoint"      "0.38"      // Normalized time in animation cycle to attack.
         "AttackRange"               "100"
-        
+
         "CombatClassAttack"         "DOTA_COMBAT_CLASS_ATTACK_BASIC"
         "CombatClassDefend"         "DOTA_COMBAT_CLASS_DEFEND_BASIC"
         "UnitRelationshipClass"     "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
-        
+
         "StatusHealth"                "2742"
         "StatusHealthRegen"            "6.5"
-        
+
         "BountyXP"                    "388"
     }
     "quest_wolf"
@@ -62,26 +62,26 @@
         "BaseClass"             "npc_dota_creature"
         "Level"                 "8"
         "ModelScale"            "0.9"
-        
+
         "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_GROUND"
         "MovementSpeed"             "320"
         "ArmorPhysical"             "0"
         "AttackCapabilities"        "DOTA_UNIT_CAP_MELEE_ATTACK"
-        
+
         "AttackDamageMin"            "60"
         "AttackDamageMax"            "86"
         "AttackRate"                "1.25"
         "AttackAnimationPoint"      "0.38"
         "AttackRange"               "100"
-        
+
         "CombatClassAttack"         "DOTA_COMBAT_CLASS_ATTACK_BASIC"
         "CombatClassDefend"         "DOTA_COMBAT_CLASS_DEFEND_BASIC"
         "UnitRelationshipClass"     "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
-        
+
         "StatusHealth"                "742"        // Base health.
         "StatusHealthRegen"            "0.5"        // Health regeneration rate.
-        
-        "BountyXP"                    "158"        // Experience earn.        
+
+        "BountyXP"                    "158"        // Experience earn.
     }
     "quest_boar"
     {
@@ -89,25 +89,25 @@
         "BaseClass"             "npc_dota_creature"
         "Level"                 "5"
         "ModelScale"            "1.0"
-        
+
         "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_GROUND"
         "MovementSpeed"             "360"
         "ArmorPhysical"             "0"
         "AttackCapabilities"        "DOTA_UNIT_CAP_MELEE_ATTACK"
-        
+
         "AttackDamageMin"            "40"        // Damage range min.
         "AttackDamageMax"            "56"        // Damage range max.
         "AttackRate"                "0.95"      // Speed of attack.
         "AttackAnimationPoint"      "0.38"      // Normalized time in animation cycle to attack.
         "AttackRange"               "100"
-        
+
         "CombatClassAttack"         "DOTA_COMBAT_CLASS_ATTACK_BASIC"
         "CombatClassDefend"         "DOTA_COMBAT_CLASS_DEFEND_BASIC"
         "UnitRelationshipClass"     "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
-        
+
         "StatusHealth"                "542"
         "StatusHealthRegen"            "1.5"
-        
+
         "BountyXP"                    "108"
     }
     "quest_worg"
@@ -116,56 +116,56 @@
         "BaseClass"             "npc_dota_creature"
         "Level"                 "4"
         "ModelScale"            "1.1"
-        
+
         "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_GROUND"
         "MovementSpeed"             "320"
         "ArmorPhysical"             "0"
         "AttackCapabilities"        "DOTA_UNIT_CAP_MELEE_ATTACK"
-        
+
         "AttackDamageMin"            "30"        // Damage range min.
         "AttackDamageMax"            "36"        // Damage range max.
         "AttackRate"                "0.65"      // Speed of attack.
         "AttackAnimationPoint"      "0.38"      // Normalized time in animation cycle to attack.
         "AttackRange"               "100"
-        
+
         "CombatClassAttack"         "DOTA_COMBAT_CLASS_ATTACK_BASIC"
         "CombatClassDefend"         "DOTA_COMBAT_CLASS_DEFEND_BASIC"
         "UnitRelationshipClass"     "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
-        
+
         "StatusHealth"                "742"        // Base health.
         "StatusHealthRegen"            "0.5"        // Health regeneration rate.
-        
-        "BountyXP"                    "188"        // Experience earn.    
+
+        "BountyXP"                    "188"        // Experience earn.
     }
     "sheep"
-    {                                       
+    {
         "Model"                 "models/items/hex/sheep_hex/sheep_hex.vmdl" // Model.
         "BaseClass"             "npc_dota_creature"
         "Level"                 "1"
         "ModelScale"            "0.8"
         "HealthBarOffset"       "80"
-        
+
         "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_GROUND"
         "MovementSpeed"             "220"
         "ArmorPhysical"             "0"
         "AttackCapabilities"        "DOTA_UNIT_CAP_MELEE_ATTACK"
-        
+
         "AttackDamageMin"            "30"        // Damage range min.
         "AttackDamageMax"            "36"        // Damage range max.
         "AttackRate"                "1.35"      // Speed of attack.
         "AttackAnimationPoint"      "0.38"      // Normalized time in animation cycle to attack.
         "AttackRange"               "100"
-        
+
         "CombatClassAttack"         "DOTA_COMBAT_CLASS_ATTACK_BASIC"
         "CombatClassDefend"         "DOTA_COMBAT_CLASS_DEFEND_BASIC"
         "UnitRelationshipClass"     "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
-        
+
         "StatusHealth"                "72"        // Base health.
         "StatusHealthRegen"            "0.5"        // Health regeneration rate.
-        
+
         "BountyXP"                    "30"        // Experience earn.
     }
-    
+
     "sheep_big"
     {
         "Model"                 "models/items/hex/sheep_hex/sheep_hex.vmdl" // Model.
@@ -173,7 +173,7 @@
         "Level"                 "2"
         "ModelScale"            "1.3"
         "HealthBarOffset"       "150"
-        
+
         "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_GROUND"
         "MovementSpeed"             "280"
         "ArmorPhysical"             "0"
@@ -184,7 +184,7 @@
         "AttackRate"                "1.35"      // Speed of attack.
         "AttackAnimationPoint"      "0.38"      // Normalized time in animation cycle to attack.
         "AttackRange"               "100"
-        
+
         "CombatClassAttack"         "DOTA_COMBAT_CLASS_ATTACK_BASIC"
         "CombatClassDefend"         "DOTA_COMBAT_CLASS_DEFEND_BASIC"
         "UnitRelationshipClass"     "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"

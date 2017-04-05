@@ -138,7 +138,8 @@ function CharacterService:OnHeroDeath(e, event)
 end
 
 function CharacterService:OnPlayerLevelUp(event)
-    local hero = PlayerResource:GetSelectedHeroEntity(event.player)
+    local player = EntIndexToHScript(event.player)
+    local hero = player:GetAssignedHero()
     hero:SetAbilityPoints(0)
 
     --    for i = 0, 2 do

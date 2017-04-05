@@ -14,8 +14,8 @@ function mod:OnCreated(params)
     if IsServer() then
         self:StartIntervalThink(0.25)
         self.i = 0
-        self.healthRegen = self:GetParent():GetMaxHealth() / 4
-        self.manaRegen = self:GetParent():GetMaxMana() / 4
+        self.healthRegen = self:GetParent():GetMaxHealth() / 5
+        self.manaRegen = self:GetParent():GetMaxMana() / 5
     end
 end
 
@@ -43,8 +43,8 @@ end
 function mod:OnIntervalThink()
     self.i = self.i + 1
     if self.i % 2 == 0 then
-        PopupHealing(self:GetParent(), math.floor(self:GetParent():GetMaxHealth() / 8))
+        PopupHealing(self:GetParent(), math.floor(self:GetParent():GetMaxHealth() / 10))
     else
-        PopupManaing(self:GetParent(), math.floor(self:GetParent():GetMaxMana() / 8))
+        PopupManaing(self:GetParent(), math.floor(self:GetParent():GetMaxMana() / 10))
     end
 end

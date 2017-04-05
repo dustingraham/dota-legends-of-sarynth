@@ -1,9 +1,10 @@
 #base "abilities\ranger.txt"
+#base "abilities\warrior.txt"
 
 "DOTAAbilities"
 {
     "Version"        "1"
-    
+
     "passive_npc"
     {
         "BaseClass"         "ability_datadriven"
@@ -41,14 +42,14 @@
         "AbilityUnitTargetType"            "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
         "AbilityUnitDamageType"            "DAMAGE_TYPE_MAGICAL"
         "AbilityTextureName"            "dragon_knight_dragon_tail"
-        
+
         "AbilityCooldown"        "3.0 4.0 5.0 6.0"
         "AbilityManaCost"        "20"
         "AbilityCastAnimation" "ACT_DOTA_ATTACK"
         "AbilityCastRange"                "150"
         // Default speed...
         //"AbilityCastPoint"                "0.50"
-        
+
         "AbilityCastPoint"                "0.55"
         "AnimationPlaybackRate" "0.73"
         "AbilityDuration"                "2"
@@ -60,7 +61,7 @@
             "particle"        "particles/units/heroes/hero_dragon_knight/dragon_knight_dragon_tail.vpcf"
         }
     }
-    
+
     "simple_projectile"
     {
         "BaseClass"                "ability_lua"
@@ -70,19 +71,19 @@
         "AbilityUnitTargetType"            "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
         "AbilityUnitDamageType"            "DAMAGE_TYPE_MAGICAL"
         "AbilityTextureName"            "dragon_knight_dragon_tail"
-        
+
         "AbilityCooldown"        "0.0"
         "AbilityManaCost"        "1"
         "AbilityCastAnimation" "ACT_DOTA_ATTACK"
         "AbilityCastRange"                "250"
         // Default speed...
         //"AbilityCastPoint"                "0.50"
-        
+
         "AbilityCastPoint"                "0.35"
         "AnimationPlaybackRate" "0.73"
         "AbilityDuration"                "2"
     }
-    
+
     "self_regen"
     {
         "BaseClass"               "ability_lua"
@@ -102,7 +103,7 @@
         "AnimationPlaybackRate"   "0.73"
         "AbilityDuration"         "2"
     }
-    
+
     "fireball"
     {
         "BaseClass"                "ability_lua"
@@ -112,19 +113,19 @@
         "AbilityUnitTargetType"            "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
         "AbilityUnitDamageType"            "DAMAGE_TYPE_MAGICAL"
         "AbilityTextureName"            "dragon_knight_dragon_tail"
-        
+
         "AbilityCooldown"        "1.0"
         "AbilityManaCost"        "1"
         "AbilityCastAnimation" "ACT_DOTA_ATTACK"
         "AbilityCastRange"                "250"
         // Default speed...
         //"AbilityCastPoint"                "0.50"
-        
+
         "AbilityCastPoint"                "0.35"
         "AnimationPlaybackRate" "0.73"
         "AbilityDuration"                "2"
     }
-    
+
     "sorcerer_pain"
     {
         "BaseClass"                "ability_lua"
@@ -134,19 +135,19 @@
         "AbilityUnitTargetType"            "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
         "AbilityUnitDamageType"            "DAMAGE_TYPE_MAGICAL"
         "AbilityTextureName"            "dragon_knight_dragon_tail"
-        
+
         "AbilityCooldown"        "1.0"
         "AbilityManaCost"        "1"
         "AbilityCastAnimation" "ACT_DOTA_CAST_ABILITY_4"
         "AbilityCastRange"                "250"
         // Default speed...
         //"AbilityCastPoint"                "0.50"
-        
+
         "AbilityCastPoint"                "0.50"
         "AnimationPlaybackRate" "0.73"
         "AbilityDuration"                "2"
     }
-    
+
     "rogue_crit_hit"
     {
         "BaseClass"                "ability_lua"
@@ -156,14 +157,14 @@
         "AbilityUnitTargetType"            "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
         "AbilityUnitDamageType"            "DAMAGE_TYPE_MAGICAL"
         "AbilityTextureName"            "dragon_knight_dragon_tail"
-        
+
         "AbilityCooldown"        "1.0"
         "AbilityManaCost"        "20"
         "AbilityCastAnimation" "ACT_DOTA_ATTACK"
         "AbilityCastRange"                "150"
         // Default speed...
         //"AbilityCastPoint"                "0.50"
-        
+
         "AbilityCastPoint"                "0.55"
         "AnimationPlaybackRate" "0.73"
         "AbilityDuration"                "2"
@@ -186,14 +187,14 @@
             "particle"            "particles/units/heroes/hero_sven/sven_spell_gods_strength.vpcf"
             "particle"            "particles/status_fx/status_effect_gods_strength.vpcf"
         }
-        
+
         "MaxLevel"                      "3"
-        
+
         "AbilityCastPoint"                "0.3 0.3 0.3"
         "AbilityCooldown"               "20.0 16.0 10.0"
         "AbilityDuration"               "10 30 60"
         "AbilityManaCost"               "35"
-        
+
         "AbilitySpecial"
         {
             "01"
@@ -217,7 +218,7 @@
                 "aspd_bonus" "20 30 40"
             }
         }
-        
+
         "OnSpellStart"
         {
             "FireSound"

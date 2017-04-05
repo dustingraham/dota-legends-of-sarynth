@@ -1,0 +1,111 @@
+"DOTAAbilities"
+{
+    "warrior_shield_bash"
+    {
+        "BaseClass"             "ability_lua"
+        "ScriptFile" "app/systems/characters/abilities/warrior/warrior_shield_bash"
+        "AbilityTextureName"    "custom/warrior/warrior_shield_bash"
+
+        "AbilityCooldown"       "12"
+        "AbilityManaCost"       "15"
+
+        "AbilityCastAnimation"  "ACT_DOTA_CAST_ABILITY_2"
+        "AbilityCastPoint"      "0.15"
+
+        "precache"
+        {
+            "particle" "particles/units/heroes/hero_dragon_knight/dragon_knight_dragon_tail.vpcf"
+        }
+    }
+    "warrior_ground_smash"
+    {
+        "BaseClass"             "ability_lua"
+        "ScriptFile" "app/systems/characters/abilities/warrior/warrior_ground_smash"
+        "AbilityTextureName"    "custom/warrior/warrior_ground_smash"
+
+        "AbilityCooldown"       "6.0"
+        "AbilityManaCost"       "12"
+
+        "AbilityCastAnimation"  "ACT_DOTA_CAST_ABILITY_2"
+        "AbilityCastPoint"      "0.30"
+
+        "precache"
+        {
+            "particle" "particles/units/heroes/hero_ursa/ursa_earthshock.vpcf"
+            "soundfile" "soundevents/game_sounds_heroes/game_sounds_earthshaker.vsndevts"
+        }
+    }
+    "warrior_great_cleave"
+    {
+        "BaseClass"             "ability_lua"
+        "ScriptFile" "app/systems/characters/abilities/warrior/warrior_great_cleave"
+        "AbilityTextureName"    "custom/warrior/warrior_great_cleave"
+
+        "AbilityCooldown"       "3.0"
+        "AbilityManaCost"       "8"
+
+        "AbilityCastAnimation"  "ACT_DOTA_ATTACK"
+        "AbilityCastPoint"      "0.30"
+        "AnimationPlaybackRate" "0.73"
+
+        "precache"
+        {
+            "particle" "particles/units/heroes/hero_chaos_knight/chaos_knight_weapon_blur_critical.vpcf"
+        }
+    }
+    "warrior_sharp_jab"
+    {
+        "BaseClass"             "ability_lua"
+        "ScriptFile" "app/systems/characters/abilities/warrior/warrior_sharp_jab"
+        "AbilityTextureName"    "custom/warrior/warrior_sharp_jab"
+
+        "AbilityCooldown"       "2.0"
+        "AbilityManaCost"       "6"
+
+        "AbilityCastAnimation"  "ACT_DOTA_ATTACK"
+        "AbilityCastPoint"      "0.30"
+        "AnimationPlaybackRate" "0.73"
+
+        "precache"
+        {
+            "particle" "particles/econ/items/juggernaut/jugg_arcana/juggernaut_arcana_omni_slash_tgt_bonus.vpcf"
+        }
+    }
+    "warrior_power"
+    {
+        "BaseClass"             "ability_lua"
+        "ScriptFile" "app/systems/characters/abilities/warrior/warrior_power"
+        "AbilityTextureName"    "custom/warrior/warrior_power_strike"
+
+        "AbilityCooldown"       "35.0"
+        "AbilityManaCost"       "30"
+
+        "AbilityCastAnimation"  "ACT_DOTA_ATTACK"
+        "AbilityCastPoint"      "0.90"
+
+        "precache"
+        {
+            "particle" "particles/econ/items/earthshaker/egteam_set/hero_earthshaker_egset/earthshaker_echoslam_start_egset.vpcf"
+        }
+    }
+    "warrior_rallying_cry"
+    {
+        "BaseClass"             "ability_lua"
+        "ScriptFile" "app/systems/characters/abilities/warrior/warrior_rallying_cry"
+        "AbilityTextureName"    "custom/warrior/warrior_rallying_cry"
+
+        "AbilityCooldown"       "30.0"
+        "AbilityManaCost"       "15"
+
+        "AbilityCastAnimation"  "ACT_DOTA_CAST_1"
+        "AbilityCastPoint"      "0.30"
+
+        "precache"
+        {
+            "particle" "particles/status_fx/status_effect_doom.vpcf"
+            "particle" "particles/units/heroes/hero_axe/axe_beserkers_call_owner.vpcf"
+            "particle" "particles/econ/items/dragon_knight/dk_aurora_warrior/dk_aurora_warrior_weapon_ambient.vpcf"
+            "particle" "particles/econ/items/dragon_knight/dk_aurora_warrior/dk_aurora_warrior_shield_ambient.vpcf"
+        }
+    }
+}

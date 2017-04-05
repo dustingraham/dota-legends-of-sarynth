@@ -10,6 +10,9 @@ function ai:DeclareFunctions()
     }
 end
 
+-- Good claw impact
+-- particles/units/heroes/hero_life_stealer/life_stealer_open_wounds_impact.vpcf
+
 -- ai.STATE_IDLE = 0
 -- ai.STATE_AGGRO = 10
 -- ai.STATE_RETURN = 20
@@ -219,10 +222,10 @@ function ai:ActionReturn()
         self.returnTicks = 0
     end
     self.returnTicks = self.returnTicks + 1
-    
+
     -- Keep attempting to move, in case we were stunned.
     self:GetParent():MoveToPosition( self.returnTarget ) --Move back to the spawnpoint
-    
+
     if self.returnTicks > 10 then
         Debug('StartAreaBoss', 'Could not return in 10 ticks, safety idling.')
         self:TransitionToIdle()
