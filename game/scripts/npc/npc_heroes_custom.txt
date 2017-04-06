@@ -207,12 +207,13 @@
 
         "AttackDamageMin"       "4"
         "AttackDamageMax"       "9"
+        "ProjectileModel"       "particles/units/heroes/sorcerer/attack/sorcerer_base_attack.vpcf"
 
-        "Ability1" "sorcerer_pain"
-        //"Ability2" "lich_frost_nova"
-        "Ability3" "rogue_crit_hit"
+        "Ability1" "sorcerer_mind_blast"
+        "Ability2" "sorcerer_inflict_pain"
+        "Ability3" "sorcerer_cursed_flames"
         "Ability4" ""
-        "Ability5" ""
+        "Ability5" "sorcerer_dark_ritual"
         "Ability6" ""
         "Ability7" "self_regen"
         "Ability8" ""
@@ -228,6 +229,8 @@
         "Ability18" ""
         "Ability19" ""
         "Ability20" ""
+
+        "AttackRange"       "850"
 
         "DisableWearables" "1"
     }

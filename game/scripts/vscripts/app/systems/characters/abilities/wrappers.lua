@@ -174,3 +174,17 @@ function Wrappers.AbilityBasicsWarrior(spell)
     --    return DAMAGE_TYPE_MAGICAL
     --end
 end
+
+-- Sorcerer
+function Wrappers.AbilityBasicsSorcerer(spell)
+    -- Add basic stuff like range.
+    function spell:GetCastRange()
+        return 850
+    end
+    function spell:GetMaxLevel()
+        return 1
+    end
+    function spell:GetBehavior()
+        return DOTA_ABILITY_BEHAVIOR_UNIT_TARGET + DOTA_ABILITY_BEHAVIOR_DONT_RESUME_MOVEMENT
+    end
+end

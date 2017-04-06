@@ -21,6 +21,10 @@ of exp, then track evenly up to max.
 */
 
 
+GameEvents.Subscribe('focus_target_updated', function(params)
+{
+    GameUI.customCurrentFocusId = params.id
+});
 function GetFocusTarget()
 {
     return GameUI.customCurrentFocusId;
@@ -44,7 +48,7 @@ function map_range(value, low1, high1, low2, high2) {
 }
 
 function UpdateExperience(expCurrent, expGoal) {
-    
+
     if (expGoal == 0)
     {
         expPercent.text = '10';
@@ -53,18 +57,18 @@ function UpdateExperience(expCurrent, expGoal) {
         expBar.style.width = '100%';
         return;
     }
-    
+
     var percent = expCurrent * 100 / expGoal;
     if (isNaN(percent)) percent = 0;
-    
+
     expPercent.text = Math.round(percent)+'%';
     expValue.text = expCurrent + ' / '+expGoal+' XP';
     expBar.style.width = percent+'%';
-    
+
     var px = percent;
     px = clamp(px, 1.4, 97.6);
     px = map_range(px, 1.4, 97.6, 0, 567);
-    
+
     expTip.style.marginLeft = px+'px';
 }
 
@@ -91,25 +95,25 @@ function SetHeroUnitPanel(entityId)
     // Set the movie portrait
     panel.FindChildTraverse('HeroPortrait').heroname = Entities.GetUnitName(entityId);
     panel.FindChildTraverse('HeroLevel').text = Entities.GetLevel(entityId);
-    
+
     var healthMax = Entities.GetMaxHealth(entityId);
     var health = Entities.GetHealth(entityId);
     var healthPercent = health / healthMax;
     if (isNaN(healthPercent)) healthPercent = 0;
     panel.FindChildTraverse('HealthBar').style.width = (healthPercent * 265)+'px';
-    
+
     var manaMax = Entities.GetMaxMana(entityId);
     var mana = Entities.GetMana(entityId);
     var manaPercent = mana / manaMax;
     if (isNaN(manaPercent)) manaPercent = 0;
     panel.FindChildTraverse('ManaBar').style.width = (manaPercent * 246)+'px';
-    
+
     var healthRegen = Entities.GetHealthThinkRegen(entityId).toFixed(1);
     var manaRegen = Entities.GetManaThinkRegen(entityId).toFixed(1);
-    
+
     panel.FindChildTraverse('HeroHealthBarValue').text = health+'/'+healthMax + ' +'+healthRegen;
     panel.FindChildTraverse('HeroManaBarValue').text = mana+'/'+manaMax + ' +'+manaRegen;
-    
+
     // Toggle visibility based on whether we have a valid selection.
     // Consider checking if entity is hero and hiding anyways.
     var visibility = (Entities.GetLevel(entityId) == -1) ? 'collapse' : 'visible';
@@ -119,12 +123,12 @@ function SetHeroUnitPanel(entityId)
 function ChangeTargetUnitPanel(entityId)
 {
     var panel = $.GetContextPanel();
-    
+
     var heroEntId = Players.GetPlayerHeroEntityIndex(playerId);
     var heroLevel = Entities.GetLevel(heroEntId);
     var entityLevel = Entities.GetLevel(entityId);
     var diff = entityLevel - heroLevel;
-    
+
     if (heroEntId == entityId || Entities.GetLevel(entityId) == -1 || entityId == -1)
     {
         panel.FindChildTraverse('TargetFrame').style.visibility = 'collapse';
@@ -133,16 +137,16 @@ function ChangeTargetUnitPanel(entityId)
     {
         panel.FindChildTraverse('TargetFrame').style.visibility = 'visible';
     }
-    
+
     var entityName = Entities.GetUnitName(entityId);
     panel.FindChildTraverse('TargetName').text = $.Localize('#'+entityName);
-    
+
     var container = panel.FindChildTraverse('TargetLevelContainer');
-    
+
     container.SetHasClass('hard', diff >= 2);
     container.SetHasClass('normal', diff < 2 && diff >= -5);
     container.SetHasClass('easy', diff < -5);
-    
+
     // It is not a state secret.
     panel.FindChildTraverse('TargetLevel').text = entityLevel;
 }
@@ -150,10 +154,10 @@ function ChangeTargetUnitPanel(entityId)
 function UpdateTargetUnitPanel()
 {
     var panel = $.GetContextPanel();
-    
+
     var entityId = GetFocusTarget();
     if (entityId == undefined) return;
-    
+
     if (!Entities.IsValidEntity(entityId))
     {
         // If it isn't already -1.
@@ -163,19 +167,19 @@ function UpdateTargetUnitPanel()
         }
         entityId = -1;
     }
-    
+
     if (panel.targetFocusId != entityId)
     {
         panel.targetFocusId = entityId;
         ChangeTargetUnitPanel(entityId);
     }
-    
+
     var healthMax = Entities.GetMaxHealth(entityId);
     var health = Entities.GetHealth(entityId);
     var healthPercent = health / healthMax;
     if (isNaN(healthPercent)) healthPercent = 0;
     panel.FindChildTraverse('TargetHealthBar').style.width = (healthPercent * 246)+'px';
-    
+
     // Toggle visibility based on whether we have a valid selection.
     // Consider checking if entity is hero and hiding anyways.
 }
@@ -183,30 +187,30 @@ function UpdateTargetUnitPanel()
 function UpdateUnitPanel() {
     // Hack
     $.Schedule(0.1, UpdateUnitPanel);
-    
+
     UpdateTargetUnitPanel()
-    
+
     var panel = $.GetContextPanel();
-    
+
     // Wasn't available at init.
     var heroId = Players.GetPlayerHeroEntityIndex(playerId);
-    
+
     // For now let's remain on the hero, until we have a proper target frame.
     SetHeroUnitPanel(heroId);
-    
+
         // Action Bar
     var healthMax = Entities.GetMaxHealth(heroId);
     var health = Entities.GetHealth(heroId);
     var healthPercent = health / healthMax;
     if (isNaN(healthPercent)) healthPercent = 0;
     globeHealth.style.height = (healthPercent*100)+'%';
-    
+
     var manaMax = Entities.GetMaxMana(heroId);
     var mana = Entities.GetMana(heroId);
     var manaPercent = mana / manaMax;
     if (isNaN(manaPercent)) manaPercent = 0;
     globeMana.style.height = (manaPercent*100)+'%';
-    
+
     if (Entities.GetNeededXPToLevel(heroId) > currentLevelXp) {
         // Recompute
         lastLevelXp = currentLevelXp;
@@ -214,10 +218,10 @@ function UpdateUnitPanel() {
     }
     var currentForLevel = Entities.GetCurrentXP(heroId) - lastLevelXp;
     var needForLevel = Entities.GetNeededXPToLevel(heroId) - lastLevelXp;
-    
+
     // Don't use less than zero.
     needForLevel = Math.max(needForLevel, 0);
-    
+
     UpdateExperience(currentForLevel, needForLevel);
 }
 

@@ -1,4 +1,5 @@
 #base "abilities\ranger.txt"
+#base "abilities\sorcerer.txt"
 #base "abilities\warrior.txt"
 
 "DOTAAbilities"
@@ -122,28 +123,6 @@
         //"AbilityCastPoint"                "0.50"
 
         "AbilityCastPoint"                "0.35"
-        "AnimationPlaybackRate" "0.73"
-        "AbilityDuration"                "2"
-    }
-
-    "sorcerer_pain"
-    {
-        "BaseClass"                "ability_lua"
-        "ScriptFile"               "app/systems/characters/abilities/sorcerer/sorcerer_pain"
-        "AbilityBehavior"                "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_MOVEMENT"
-        "AbilityUnitTargetTeam"            "DOTA_UNIT_TARGET_TEAM_ENEMY"
-        "AbilityUnitTargetType"            "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
-        "AbilityUnitDamageType"            "DAMAGE_TYPE_MAGICAL"
-        "AbilityTextureName"            "dragon_knight_dragon_tail"
-
-        "AbilityCooldown"        "1.0"
-        "AbilityManaCost"        "1"
-        "AbilityCastAnimation" "ACT_DOTA_CAST_ABILITY_4"
-        "AbilityCastRange"                "250"
-        // Default speed...
-        //"AbilityCastPoint"                "0.50"
-
-        "AbilityCastPoint"                "0.50"
         "AnimationPlaybackRate" "0.73"
         "AbilityDuration"                "2"
     }

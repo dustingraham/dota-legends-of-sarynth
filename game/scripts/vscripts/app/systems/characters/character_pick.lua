@@ -225,6 +225,26 @@ function CharacterPick:CreateCustomHeroForPlayer(PlayerID, character, isPrimary)
         hero:AddNewModifier(hero, nil, 'warrior_stats', nil)
     end
 
+    if character == 'warlock' then
+        hero:AddNewModifier(hero, nil, 'sorcerer_stats', nil)
+        local idx = ParticleManager:CreateParticle(
+            'particles/units/heroes/hero_warlock/warlock_ambient_smoke.vpcf',
+            PATTACH_POINT_FOLLOW,
+            hero
+        )
+        ParticleManager:SetParticleControlEnt(idx, 0, hero, PATTACH_POINT_FOLLOW, 'attach_attack2', hero:GetAbsOrigin(), true)
+        ParticleManager:ReleaseParticleIndex(idx)
+
+        idx = ParticleManager:CreateParticle(
+            'particles/units/heroes/sorcerer/sorcerer_ambient_staff.vpcf',
+            PATTACH_POINT_FOLLOW,
+            hero
+        )
+        ParticleManager:SetParticleControlEnt(idx, 0, hero, PATTACH_POINT_FOLLOW, 'attach_attack1', hero:GetAbsOrigin(), true)
+        ParticleManager:SetParticleControl(idx, 1, hero:GetAbsOrigin())
+        ParticleManager:ReleaseParticleIndex(idx)
+    end
+
     -- Load Data
     --if not DEBUG_SKIP_HTTP_LOAD then
     --    Http:Load({
@@ -273,3 +293,4 @@ LinkLuaModifier('character_vision', 'app/systems/characters/modifiers/character_
 LinkLuaModifier('character_passive_regen', 'app/systems/characters/modifiers/character_passive_regen', LUA_MODIFIER_MOTION_NONE)
 
 LinkLuaModifier('warrior_stats', 'app/systems/characters/abilities/warrior/warrior_stats', LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier('sorcerer_stats', 'app/systems/characters/abilities/sorcerer/sorcerer_stats', LUA_MODIFIER_MOTION_NONE)

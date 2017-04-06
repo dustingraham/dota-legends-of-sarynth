@@ -1,5 +1,5 @@
-warrior_rallying_cry = warrior_rallying_cry or class({})
-local spell = warrior_rallying_cry
+sorcerer_dark_ritual = sorcerer_dark_ritual or class({})
+local spell = sorcerer_dark_ritual
 
 --function spell:OnAbilityPhaseStart()
 --    StartAnimation(self:GetCaster(), {
@@ -25,7 +25,7 @@ function spell:OnSpellStart()
     ParticleManager:SetParticleControl(particle, 2, caster:GetAbsOrigin())
     ParticleManager:ReleaseParticleIndex(particle)
 
-    caster:AddNewModifier(caster, self, 'warrior_rallied_boost', { duration = 15 })
+    caster:AddNewModifier(caster, self, 'sorcerer_ritualized', { duration = 15 })
 
     -- EmitSoundOn('Creep_Good_Melee.PreAttack', caster)
     EmitSoundOn('Hero_EarthShaker.Totem.Attack', caster)
@@ -41,11 +41,11 @@ end
 --    require('app/systems/characters/abilities/wrappers')
 --end
 
-LinkLuaModifier('warrior_rallied_boost', 'app/systems/characters/abilities/warrior/warrior_rallying_cry', LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier('sorcerer_ritualized', 'app/systems/characters/abilities/sorcerer/sorcerer_dark_ritual', LUA_MODIFIER_MOTION_NONE)
 
 --- Modifier
-warrior_rallied_boost = warrior_rallied_boost or class({})
-local mod = warrior_rallied_boost
+sorcerer_ritualized = sorcerer_ritualized or class({})
+local mod = sorcerer_ritualized
 
 function mod:IsHidden()
     return false
@@ -55,7 +55,7 @@ function mod:IsBuff()
     return true
 end
 function mod:GetTexture()
-    return "custom/warrior/warrior_rallying_cry"
+    return 'custom/sorcerer/sorcerer_dark_ritual'
 end
 function mod:GetStatusEffectName()
     return "particles/status_fx/status_effect_doom.vpcf"
