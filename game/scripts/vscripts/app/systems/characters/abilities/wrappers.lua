@@ -150,6 +150,10 @@ end
 
 -- Warrior
 function Wrappers.AbilityBasicsWarrior(spell)
+    spell.target_team = DOTA_UNIT_TARGET_TEAM_ENEMY
+    spell.target_type = DOTA_UNIT_TARGET_ALL
+    spell.target_flag = DOTA_UNIT_TARGET_FLAG_NONE
+
     -- Add basic stuff like range.
     function spell:GetCastRange()
         return 150
@@ -177,9 +181,31 @@ end
 
 -- Sorcerer
 function Wrappers.AbilityBasicsSorcerer(spell)
+    spell.target_team = DOTA_UNIT_TARGET_TEAM_ENEMY
+    spell.target_type = DOTA_UNIT_TARGET_ALL
+    spell.target_flag = DOTA_UNIT_TARGET_FLAG_NONE
+
     -- Add basic stuff like range.
     function spell:GetCastRange()
         return 850
+    end
+    function spell:GetMaxLevel()
+        return 1
+    end
+    function spell:GetBehavior()
+        return DOTA_ABILITY_BEHAVIOR_UNIT_TARGET + DOTA_ABILITY_BEHAVIOR_DONT_RESUME_MOVEMENT
+    end
+end
+
+-- Ranger
+function Wrappers.AbilityBasicsRanger(spell)
+    spell.target_team = DOTA_UNIT_TARGET_TEAM_ENEMY
+    spell.target_type = DOTA_UNIT_TARGET_ALL
+    spell.target_flag = DOTA_UNIT_TARGET_FLAG_NONE
+
+    -- Add basic stuff like range.
+    function spell:GetCastRange()
+        return 800
     end
     function spell:GetMaxLevel()
         return 1

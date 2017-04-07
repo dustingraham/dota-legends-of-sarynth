@@ -15,7 +15,7 @@ function spell:OnSpellStart()
         return false
     end
 
-    local projectile_speed = 1100
+    local projectile_speed = 1000
     local particle_name = 'particles/econ/items/abaddon/abaddon_alliance/abaddon_death_coil_alliance.vpcf'
 
     -- Create the projectile

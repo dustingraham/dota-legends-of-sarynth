@@ -17,7 +17,7 @@
     function PrintNumbers( keys )
         PopupDamage(keys.target_points[1], keys.damage)
     end
-        
+
 
 ]]
 
@@ -68,6 +68,9 @@ end
 function PopupPoison(target, amount)
     PopupNumbers(target, "poison", Vector(21, 165, 47), 0.8, amount, nil, POPUP_SYMBOL_POST_DROP)
 end
+function PopupDisease(target, amount)
+    PopupNumbers(target, "poison", Vector(136, 36, 218), 0.8, amount, nil, POPUP_SYMBOL_POST_SKULL)
+end
 
 -- e.g. when blocking damage with a stout shield
 function PopupDamageBlock(target, amount)
@@ -115,22 +118,22 @@ end
 -- Customizable version.
 function PopupNumbers(target, pfx, color, lifetime, number, presymbol, postsymbol, overhead, playerOnly)
     local pfxPath = string.format("particles/msg_fx/msg_%s.vpcf", pfx)
-    
+
     local attach = PATTACH_ROOTBONE_FOLLOW
     if overhead then
         attach = PATTACH_OVERHEAD_FOLLOW
     end
-    
-    local pidx 
+
+    local pidx
     if playerOnly then
         pidx = ParticleManager:CreateParticleForPlayer(pfxPath, attach, target, target:GetOwner())
     else
         pidx = ParticleManager:CreateParticle(pfxPath, attach, target)
     end
-    
+
     -- PATTACH_ABSORIGIN_FOLLOW seems totally wrong
     --local pidx = ParticleManager:CreateParticle(pfxPath, PATTACH_ABSORIGIN_FOLLOW, target) -- target:GetOwner()
-    
+
     local digits = 0
     if number ~= nil then
         number = math.floor(number)

@@ -212,7 +212,7 @@
         "Ability1" "sorcerer_mind_blast"
         "Ability2" "sorcerer_inflict_pain"
         "Ability3" "sorcerer_cursed_flames"
-        "Ability4" ""
+        "Ability4" "sorcerer_disease"
         "Ability5" "sorcerer_dark_ritual"
         "Ability6" ""
         "Ability7" "self_regen"
