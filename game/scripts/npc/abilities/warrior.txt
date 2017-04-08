@@ -6,7 +6,7 @@
         "ScriptFile" "app/systems/characters/abilities/warrior/warrior_shield_bash"
         "AbilityTextureName"    "custom/warrior/warrior_shield_bash"
 
-        "AbilityCooldown"       "12"
+        "AbilityCooldown"       "20"
         "AbilityManaCost"       "15"
 
         "AbilityCastAnimation"  "ACT_DOTA_CAST_ABILITY_2"

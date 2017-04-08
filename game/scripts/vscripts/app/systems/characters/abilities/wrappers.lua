@@ -148,6 +148,44 @@ function Wrappers.OnThinkExampleAbility(ability)
     end
 end
 
+function Wrappers.StunMod(mod)
+    function mod:IsHidden()
+        return false
+    end
+
+    function mod:IsDebuff()
+        return true
+    end
+
+    function mod:IsStunDebuff()
+        return true
+    end
+
+    function mod:GetEffectName()
+        return "particles/generic_gameplay/generic_stunned.vpcf"
+    end
+
+    function mod:GetEffectAttachType()
+        return PATTACH_OVERHEAD_FOLLOW
+    end
+
+    function mod:CheckState()
+        return {
+            [MODIFIER_STATE_STUNNED] = true,
+        }
+    end
+
+    function mod:DeclareFunctions()
+        return {
+            MODIFIER_PROPERTY_OVERRIDE_ANIMATION
+        }
+    end
+
+    function mod:GetOverrideAnimation(params)
+        return ACT_DOTA_DISABLED
+    end
+end
+
 -- Warrior
 function Wrappers.AbilityBasicsWarrior(spell)
     spell.target_team = DOTA_UNIT_TARGET_TEAM_ENEMY
@@ -206,6 +244,28 @@ function Wrappers.AbilityBasicsRanger(spell)
     -- Add basic stuff like range.
     function spell:GetCastRange()
         return 800
+    end
+    function spell:GetMaxLevel()
+        return 1
+    end
+    function spell:GetBehavior()
+        return DOTA_ABILITY_BEHAVIOR_UNIT_TARGET + DOTA_ABILITY_BEHAVIOR_DONT_RESUME_MOVEMENT
+    end
+end
+
+-- Rogue
+function Wrappers.AbilityBasicsRogue(spell)
+    spell.target_team = DOTA_UNIT_TARGET_TEAM_ENEMY
+    spell.target_type = DOTA_UNIT_TARGET_ALL
+    spell.target_flag = DOTA_UNIT_TARGET_FLAG_NONE
+
+    -- Testing
+    --function spell:GetCooldown() return 0.0 end
+    --function spell:GetManaCost() return 1.0 end
+
+    -- Add basic stuff like range.
+    function spell:GetCastRange()
+        return 150
     end
     function spell:GetMaxLevel()
         return 1

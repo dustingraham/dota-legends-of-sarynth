@@ -1,11 +1,6 @@
 warrior_ground_smash = warrior_ground_smash or class({})
 local spell = warrior_ground_smash
 
--- Gah, load these via KV loads?
-spell.target_team = DOTA_UNIT_TARGET_TEAM_ENEMY
-spell.target_type = DOTA_UNIT_TARGET_ALL
-spell.target_flag = DOTA_UNIT_TARGET_FLAG_NONE
-
 function spell:OnAbilityPhaseStart()
     StartAnimation(self:GetCaster(), {
         duration = 0.7,

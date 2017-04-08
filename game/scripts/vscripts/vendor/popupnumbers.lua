@@ -68,6 +68,9 @@ end
 function PopupPoison(target, amount)
     PopupNumbers(target, "poison", Vector(21, 165, 47), 0.8, amount, nil, POPUP_SYMBOL_POST_DROP)
 end
+function PopupBleed(target, amount)
+    PopupNumbers(target, "poison", Vector(164, 33, 26), 0.8, amount, nil, POPUP_SYMBOL_POST_DROP)
+end
 function PopupDisease(target, amount)
     PopupNumbers(target, "poison", Vector(136, 36, 218), 0.8, amount, nil, POPUP_SYMBOL_POST_SKULL)
 end
