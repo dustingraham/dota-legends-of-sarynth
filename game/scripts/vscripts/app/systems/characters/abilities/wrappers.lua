@@ -264,20 +264,7 @@ end
 
 -- Mage
 function Wrappers.AbilityBasicsMage(spell)
-    spell.target_team = DOTA_UNIT_TARGET_TEAM_ENEMY
-    spell.target_type = DOTA_UNIT_TARGET_ALL
-    spell.target_flag = DOTA_UNIT_TARGET_FLAG_NONE
-
-    -- Add basic stuff like range.
-    function spell:GetCastRange()
-        return 800
-    end
-    function spell:GetMaxLevel()
-        return 1
-    end
-    function spell:GetBehavior()
-        return DOTA_ABILITY_BEHAVIOR_UNIT_TARGET + DOTA_ABILITY_BEHAVIOR_DONT_RESUME_MOVEMENT
-    end
+    Wrappers.AbilityBasics(spell, 800)
 end
 
 -- Ranger

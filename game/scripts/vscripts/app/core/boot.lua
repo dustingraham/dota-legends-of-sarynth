@@ -57,6 +57,8 @@ function Boot:Precache(context)
         'soundevents/game_sounds_heroes/game_sounds_chen.vsndevts',
         'soundevents/game_sounds_heroes/game_sounds_crystalmaiden.vsndevts',
         'soundevents/game_sounds_heroes/game_sounds_earthshaker.vsndevts',
+        'soundevents/game_sounds_heroes/game_sounds_enigma.vsndevts',
+        'soundevents/game_sounds_heroes/game_sounds_invoker.vsndevts',
         'soundevents/game_sounds_heroes/game_sounds_lina.vsndevts',
         'soundevents/game_sounds_heroes/game_sounds_lycan.vsndevts',
         'soundevents/game_sounds_heroes/game_sounds_omniknight.vsndevts',

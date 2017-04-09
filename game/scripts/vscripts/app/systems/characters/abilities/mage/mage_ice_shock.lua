@@ -10,8 +10,8 @@ function spell:OnSpellStart()
         return false
     end
 
-    local projectile_speed = 1000
-    local particle_name = 'particles/econ/items/abaddon/abaddon_alliance/abaddon_death_coil_alliance.vpcf'
+    local projectile_speed = 1100
+    local particle_name = 'particles/units/heroes/hero_crystalmaiden/maiden_base_attack.vpcf'
 
     -- Create the projectile
     ProjectileManager:CreateTrackingProjectile({
@@ -26,12 +26,12 @@ function spell:OnSpellStart()
         iVisionTeamNumber = caster:GetTeamNumber(),
         iSourceAttachment = DOTA_PROJECTILE_ATTACHMENT_ATTACK_1
     })
-    EmitSoundOn('Creep_Good_Melee.PreAttack', caster) -- todo
+    EmitSoundOn('hero_Crystal.attack', caster)
 end
 
 function spell:OnProjectileHit(target, pos)
     local caster = self:GetCaster()
-    local damage = math.floor(caster:GetAverageTrueAttackDamage(target) * 1.75)
+    local damage = math.floor(caster:GetAverageTrueAttackDamage(target) * 0.65)
 
     -- Damage Deal
     ApplyDamage({
@@ -40,7 +40,9 @@ function spell:OnProjectileHit(target, pos)
         damage = damage,
         damage_type = DAMAGE_TYPE_MAGICAL
     })
-    EmitSoundOn('Hero_Zuus.Attack', caster) -- todo
+    EmitSoundOn('hero_Crystal.projectileImpact', caster)
+
+    target:AddNewModifier(caster, self, 'mage_ice_shocked', { duration = 4 })
 end
 
 if IsClient() then
@@ -49,3 +51,10 @@ end
 
 Wrappers.AbilityBasicsMage(spell)
 Wrappers.FocusTargetAbility(spell)
+
+LinkLuaModifier('mage_ice_shocked', 'app/systems/characters/abilities/mage/mage_ice_shock', LUA_MODIFIER_MOTION_NONE)
+
+mage_ice_shocked = mage_ice_shocked or class({})
+local mod = mage_ice_shocked
+
+Wrappers.StunMod(mod)

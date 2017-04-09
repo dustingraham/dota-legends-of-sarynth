@@ -24,7 +24,7 @@ function spell:OnSpellStart()
 
     local targets = FindUnitsInRadius(
         target:GetTeamNumber(),
-        caster:GetAbsOrigin(),
+        target:GetAbsOrigin(),
         nil,
         300,
         DOTA_UNIT_TARGET_TEAM_FRIENDLY,
@@ -45,10 +45,9 @@ function spell:OnSpellStart()
         PATTACH_ABSORIGIN,
         caster
     )
-    ParticleManager:SetParticleControl(particle, 0, caster:GetAbsOrigin())
+    ParticleManager:SetParticleControl(particle, 0, target:GetAbsOrigin())
     ParticleManager:ReleaseParticleIndex(particle)
 
-    -- EmitSoundOn('Creep_Good_Melee.PreAttack', caster)
     EmitSoundOn('Hero_EarthShaker.Totem.Attack', target)
 end
 

@@ -1,6 +1,11 @@
 mage_fireball = mage_fireball or class({})
 local spell = mage_fireball
 
+function spell:OnAbilityPhaseStart()
+    EmitSoundOn('Hero_Lina.PreAttack', self:GetCaster())
+    return true
+end
+
 function spell:OnSpellStart()
     local caster = self:GetCaster()
     local target = self:GetCursorTarget()
@@ -11,7 +16,7 @@ function spell:OnSpellStart()
     end
 
     local projectile_speed = 1000
-    local particle_name = 'particles/econ/items/abaddon/abaddon_alliance/abaddon_death_coil_alliance.vpcf'
+    local particle_name = 'particles/units/heroes/hero_lina/lina_base_attack.vpcf'
 
     -- Create the projectile
     ProjectileManager:CreateTrackingProjectile({
@@ -26,7 +31,7 @@ function spell:OnSpellStart()
         iVisionTeamNumber = caster:GetTeamNumber(),
         iSourceAttachment = DOTA_PROJECTILE_ATTACHMENT_ATTACK_1
     })
-    EmitSoundOn('Creep_Good_Melee.PreAttack', caster) -- todo
+    EmitSoundOn('Hero_Lina.Attack', caster)
 end
 
 function spell:OnProjectileHit(target, pos)
@@ -40,7 +45,7 @@ function spell:OnProjectileHit(target, pos)
         damage = damage,
         damage_type = DAMAGE_TYPE_MAGICAL
     })
-    EmitSoundOn('Hero_Zuus.Attack', caster) -- todo
+    EmitSoundOn('Hero_Lina.ProjectileImpact', caster)
 end
 
 if IsClient() then

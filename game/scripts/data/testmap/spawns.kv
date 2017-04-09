@@ -1,6 +1,6 @@
 "Spawns"
 {
-    "worg_1"
+    "crowd_test_dummies"
     {
         "SpawnPoints" "worg_1,worg_2,worg_3,worg_4,worg_5"
         "Creature" "target_dummy"
@@ -12,15 +12,25 @@
     }
     "worg2"
     {
-        "SpawnPoints" "worg_1"
+        "SpawnPoints" "questgiver_4"
         "Creature" "start_area_wolf_boss"
-        "OnInitSpawn" "0"
-        "MaxCount" "0"
+        "OnInitSpawn" "1"
+        "MaxCount" "1"
         "RespawnDelay" "0"
         "Chance" "100"
         "AI" "ai_aggro_leash"
         "AggroRange" "100"
         "LeashRange" "2250"
+    }
+    "solo_test_dummy"
+    {
+        "SpawnPoints" "questgiver_4"
+        "Creature" "target_dummy"
+        "OnInitSpawn" "0"
+        "MaxCount" "0"
+        "RespawnDelay" "0"
+        "Chance" "100"
+        "AI" "ai_none"
     }
     "sheep_1"
     {
@@ -77,8 +87,8 @@
     {
         "SpawnPoints" "questgiver_4"
         "Creature" "npc_quest_woodsman"
-        "MaxCount" "1"
-        "OnInitSpawn" "1"
+        "MaxCount" "0"
+        "OnInitSpawn" "0"
         "RespawnDelay" "60"
         "Chance" "10"
         "AI" "ai_npc_basic"
