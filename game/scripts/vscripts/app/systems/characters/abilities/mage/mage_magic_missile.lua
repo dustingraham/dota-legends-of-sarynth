@@ -36,7 +36,7 @@ end
 
 function spell:OnProjectileHit(target, pos)
     local caster = self:GetCaster()
-    local damage = math.floor(caster:GetAverageTrueAttackDamage(target) * 1.75)
+    local damage = math.floor(caster:GetAverageTrueAttackDamage(target) * 1.25)
 
     -- Damage Deal
     ApplyDamage({
