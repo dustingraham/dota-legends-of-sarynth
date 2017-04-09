@@ -10,13 +10,13 @@ function character_teleporting:OnCreated(params)
         self.teleport_to = params.to
         local name = 'particles/transport_bird/transport_bird.vpcf'
         self:GetCaster():ParticleOn(name)
-        
+
         -- self.particle = ParticleManager:CreateParticle(self:GetEffectNameEx(), self:GetEffectAttachTypeEx(), self:GetCaster())
         -- ParticleManager:SetParticleControl(self.particle,0, Vector(0,0,20))
         self.trackTime = 0
-        
+
         PlayerResource:SetCameraTarget(self:GetCaster():GetPlayerOwnerID(), self:GetCaster())
-        
+
         self.nextPoint = nil
         self:StartIntervalThink(1/32)
     end
@@ -43,7 +43,7 @@ function character_teleporting:CheckState()
     }
 end
 
-function character_teleporting:IsPassive() 
+function character_teleporting:IsPassive()
   return true
 end
 
@@ -61,7 +61,7 @@ end
 
 function character_teleporting:OnIntervalThink()
     local caster = self:GetParent()
-    
+
     -- Move towards destination...
     self:UpdateDirection()
     caster:SetAbsOrigin(caster:GetAbsOrigin() + self.targetDir * self.speed)
@@ -69,8 +69,8 @@ end
 
 -- TownToIce
 local waypointGuide = {
-    ['teleport_ice'] = {
-        ['teleport_town'] = {
+    ['teleport_tower_ice'] = {
+        ['teleport_tower_town'] = {
             'teleport_waypoint_10',
             'teleport_waypoint_9',
             'teleport_waypoint_8',
@@ -84,8 +84,8 @@ local waypointGuide = {
             'teleport_tower_town',
         }
     },
-    ['teleport_town'] = {
-        ['teleport_ice'] = {
+    ['teleport_tower_town'] = {
+        ['teleport_tower_ice'] = {
             'teleport_waypoint_1',
             'teleport_waypoint_2',
             'teleport_waypoint_3',
@@ -97,6 +97,34 @@ local waypointGuide = {
             'teleport_waypoint_9',
             'teleport_waypoint_10',
             'teleport_tower_ice'
+        },
+        ['teleport_tower_kobolds'] = {
+            'teleport_waypoint_1',
+            'teleport_waypoint_2',
+            'teleport_waypoint_3',
+            'teleport_waypoint_11',
+            'teleport_tower_kobolds',
+        }
+    },
+    ['teleport_tower_kobolds'] = {
+        ['teleport_tower_ice'] = {
+            'teleport_waypoint_11',
+            'teleport_waypoint_3',
+            'teleport_waypoint_4',
+            'teleport_waypoint_5',
+            'teleport_waypoint_6',
+            'teleport_waypoint_7',
+            'teleport_waypoint_8',
+            'teleport_waypoint_9',
+            'teleport_waypoint_10',
+            'teleport_tower_ice'
+        },
+        ['teleport_tower_town'] = {
+            'teleport_waypoint_11',
+            'teleport_waypoint_3',
+            'teleport_waypoint_2',
+            'teleport_waypoint_1',
+            'teleport_tower_town',
         }
     }
 }
@@ -130,10 +158,10 @@ function character_teleporting:UpdateDirection()
             end
         end
     end
-    
+
     -- Find waypoint after next, and when less than 200 pos from next, start curving?
     -- self.targetTeleport = 'teleport_tower_ice'
-    
+
     self.targetDir = (self.nextPos - currentPos):Normalized()
     self:GetParent():SetForwardVector(self.targetDir)
 end

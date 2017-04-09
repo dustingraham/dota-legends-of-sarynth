@@ -9,6 +9,7 @@ QuestService = QuestService or class({}, {
 function QuestService:Activate()
     ListenToGameEvent('entity_killed', Dynamic_Wrap(QuestService, 'OnEntityKilled'), QuestService)
     Event:Listen('HeroPick', Dynamic_Wrap(QuestService, 'OnHeroPick'), QuestService)
+    Event:Listen('HeroLevelUp', Dynamic_Wrap(QuestService, 'OnHeroLevelUp'), QuestService)
 end
 
 function QuestService:OnHeroPick(e, event)
@@ -20,18 +21,26 @@ function QuestService:OnHeroPick(e, event)
         for _,questProgress in pairs(quests.progress) do
             -- Generate Quest Start
             local quest = QuestService:MakeQuestForPlayer(questProgress.id, event.PlayerID)
+            quest:Accept()
             -- Apply Progress
             for _,objective in pairs(questProgress.objectives) do
-                quest.objectives[objective.oid].current = objective.current
-                if quest.objectives[objective.oid].required ~= objective.required then
-                    -- Make note that they don't match. Not much we can do.
-                    Debug(
-                        'QuestService',
-                        'Saved required count does not match.',
-                        quest.objectives[objective.oid].required,
-                        objective.required
-                    )
+                if quest.objectives[objective.oid].action == 'kill' then
+                    quest.objectives[objective.oid].current = objective.current
+                    if quest.objectives[objective.oid].required ~= objective.required then
+                        -- Make note that they don't match. Not much we can do.
+                        Debug(
+                            'QuestService',
+                            'Saved required count does not match.',
+                            quest.objectives[objective.oid].required,
+                            objective.required
+                        )
+                    end
                 end
+                --if quest.objectives[objective.oid].action == 'report' then
+                --    if not quest.objectives[objective.oid].reported then
+                --
+                --    end
+                --end
             end
             -- Start it
             QuestService:OnQuestStart(quest)
@@ -40,6 +49,11 @@ function QuestService:OnHeroPick(e, event)
 
     -- Initialize Quests
     QuestService:CheckForQuestsAvailable(event.PlayerID)
+end
+
+-- Check for any potentially new quests after level up.
+function QuestService:OnHeroLevelUp(e, event)
+    QuestService:CheckForQuestsAvailable(event.hero:GetPlayerOwnerID())
 end
 
 function QuestService:OnQuestStart(quest)
@@ -178,6 +192,18 @@ function QuestService:OnEntityKilled(event)
     Debug('QuestService', attacker:GetName()..' killed '..killed_name)
     for _,quest in pairs(quests) do
         quest:OnEntityKilled(killed_name)
+    end
+end
+
+function QuestService:OnEntityInteract(hero, npc)
+    local key = 'player_'..hero:GetPlayerOwnerID()..'_quests'
+    local quests = QuestService.playerQuests[key]
+    if quests == nil then return end
+
+    local name = npc:GetUnitName();
+    Debug('QuestService', hero:GetName()..' interacted with '..name)
+    for _,quest in pairs(quests) do
+        quest:OnEntityInteract(name)
     end
 end
 

@@ -1,0 +1,6 @@
+
+ • Added support for "report to" type quests.
+ • Unlocked town + kobolds area.
+ • Enabled teleporter pads. Created teleport path between town and kobold area.
+ • Created report to town quest, and report to kobold area quest.
+ • Fixed new quests sometimes not displaying on level up.

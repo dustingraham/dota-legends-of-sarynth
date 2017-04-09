@@ -8,22 +8,6 @@
 
 "Spawns"
 {
-    // NPCs
-    
-    "npc_quest_kobold"
-    {
-        "SpawnPoints" "kobold_questgiver"
-        "Creature" "npc_questgiver_kobold"
-        "MaxCount" "1"
-        "OnInitSpawn" "1"
-        "RespawnDelay" "60"
-        "Chance" "10"
-        "AI" "ai_npc_basic"
-        "SpawnAngle" "260"
-        "Gesture" "ACT_DOTA_IDLE"
-        "IsNpc" "1"
-        "Unique" "1"
-    }
     "npc_quest_start"
     {
         "SpawnPoints" "npc_start_area"
@@ -44,5 +28,33 @@
             "03" "models/items/lone_druid/shoulder_poor.vmdl"
             "04" "models/items/lone_druid/dark_wood_back/dark_wood_back.vmdl"
         }
+    }
+    "npc_town_quest"
+    {
+        "SpawnPoints" "npc_town_quest"
+        "Creature" "npc_town_quest"
+        "MaxCount" "1"
+        "OnInitSpawn" "1"
+        "RespawnDelay" "60"
+        "Chance" "10"
+        "AI" "ai_npc_basic"
+        "SpawnAngle" "260"
+        "Gesture" "ACT_DOTA_IDLE"
+        "IsNpc" "1"
+        "Unique" "1"
+    }
+    "npc_quest_kobold"
+    {
+        "SpawnPoints" "kobold_questgiver"
+        "Creature" "npc_questgiver_kobold"
+        "MaxCount" "1"
+        "OnInitSpawn" "1"
+        "RespawnDelay" "60"
+        "Chance" "10"
+        "AI" "ai_npc_basic"
+        "SpawnAngle" "260"
+        "Gesture" "ACT_DOTA_IDLE"
+        "IsNpc" "1"
+        "Unique" "1"
     }
 }

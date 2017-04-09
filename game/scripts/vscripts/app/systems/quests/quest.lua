@@ -18,8 +18,11 @@ function Quest:constructor(PlayerID, questData)
     self.PlayerID = PlayerID
     TableMerge(self, questData)
     for k,v in pairs(self.objectives) do
-        if v.current == nil then
+        if v.action == 'kill' and v.current == nil then
             v.current = 0
+        end
+        if v.action == 'report' and v.reported == nil then
+            v.reported = false
         end
     end
 end
@@ -48,7 +51,10 @@ end
 
 function Quest:IsComplete()
     for k,v in pairs(self.objectives) do
-        if v.current < v.required then
+        if v.action == 'kill' and v.current < v.required then
+            return false
+        end
+        if v.action == 'report' and not v.reported then
             return false
         end
     end
@@ -74,6 +80,15 @@ function Quest:Accept()
     -- self.PlayerID
     -- local player = PlayerResource:GetPlayer(event.PlayerID)
     self:GetStartNpc():ParticleOffForPlayer(QuestService.questParticleName, self.PlayerID)
+
+    -- Check for report to objectives.
+    for _,objective in pairs(self.objectives) do
+        if objective.action == 'report' and not objective.reported then
+            -- TODO: We may not always want the end NPC. This won't work for that.
+            print('Light up')
+            self:GetEndNpc():ParticleOnForPlayer(QuestService.questParticleName, self.PlayerID)
+        end
+    end
 end
 
 function Quest:Complete()
@@ -173,6 +188,28 @@ function Quest:OnEntityKilled(npc_name)
                 if self:IsComplete() then
                     self:GetEndNpc():ParticleOnForPlayer(QuestService.questParticleName, self.PlayerID)
                 end
+            end
+        end
+    end
+end
+
+-- TODO: This is the "name" of the entity. Not the unique name. TODO: Lookup the unique name. (?)
+function Quest:OnEntityInteract(npc_name)
+    for _,objective in pairs(self.objectives) do
+        if objective.action == 'report' and not objective.reported then
+            Debug('Quest', ' needs interaction ')
+            print(inspect(objective))
+            local npcMatch = false
+            for _,npc in pairs(objective.npc) do
+                if npc == npc_name then
+                    npcMatch = true
+                    break
+                end
+            end
+            if npcMatch then
+                Debug('Quest', 'Reported to report target.')
+                self:GetEndNpc():ParticleOffForPlayer(QuestService.questParticleName, self.PlayerID)
+                objective.reported = true
             end
         end
     end

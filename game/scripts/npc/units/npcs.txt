@@ -2,7 +2,7 @@
 "DOTAUnits"
 {
     "Version"    "1"
-    
+
     "teleport_pad"
     {
         "BaseClass" "npc_dota_creature"
@@ -10,7 +10,7 @@
         "VisionDaytimeRange"        "0"
         "VisionNighttimeRange"      "0"
     }
-    
+
     "npc_quest_town"
     {
         "BaseClass"             "npc_dota_creature"
@@ -18,11 +18,11 @@
         "ModelScale"            "0.9"
         "Level"                 "11"
         "HealthBarOffset"       "220"
-        
+
         "VisionDaytimeRange"        "0"
         "VisionNighttimeRange"      "0"
     }
-    
+
     "npc_quest_woodsman"
     {
         "BaseClass"             "npc_dota_creature"
@@ -30,7 +30,7 @@
         "ModelScale"            "0.9"
         "Level"                 "11"
         "HealthBarOffset"       "220"
-        
+
         "VisionDaytimeRange"        "0"
         "VisionNighttimeRange"      "0"
     }
@@ -41,7 +41,7 @@
         "ModelScale"            "0.9"
         "Level"                 "11"
         "HealthBarOffset"       "220"
-        
+
         "VisionDaytimeRange"        "0"
         "VisionNighttimeRange"      "0"
     }
@@ -53,6 +53,17 @@
         "Level"                 "6"
         "HealthBarOffset"       "220"
         "RingRadius"                "100"
+        "VisionDaytimeRange"        "0"
+        "VisionNighttimeRange"      "0"
+    }
+    "npc_town_quest"
+    {
+        "BaseClass"             "npc_dota_creature"
+        "Model"                 "models/props_gameplay/shopkeeper_fountain/shopkeeper_fountain.vmdl"
+        "ModelScale"            "0.9"
+        "Level"                 "11"
+        "HealthBarOffset"       "220"
+
         "VisionDaytimeRange"        "0"
         "VisionNighttimeRange"      "0"
     }

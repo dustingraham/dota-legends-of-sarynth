@@ -27,15 +27,6 @@ end
 
 function TownGateTrigger(trigger)
     local pid = trigger.activator:GetPlayerOwnerID()
-    Notifications:Top(pid, {
-        text = "#town_gate_trigger_soon",
-        duration = 5,
-        style = { color = "#ffcc00" }
-    })
-    Sounds:EmitSoundOnClient(pid, 'jboberg_01.stinger.radiant_lose')
-end
-function SoonTownGateTrigger(trigger)
-    local pid = trigger.activator:GetPlayerOwnerID()
     local quest = QuestService:GetPlayerQuest(pid, 'start_area_report_to_town')
     if quest or QuestService:CheckIfCompleted(pid, 'start_area_report_to_town') then
         Entities:FindByName(nil, 'town_entrance_relay'):Trigger()

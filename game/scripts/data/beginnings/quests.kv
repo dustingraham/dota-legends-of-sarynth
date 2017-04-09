@@ -77,7 +77,7 @@
             }
         }
     }
-    
+
     "1003"
     {
         "name" "start_area_wolves"
@@ -164,10 +164,11 @@
         "name" "start_area_report_to_town"
         "title" "Report to Town"
         "start_entity" "npc_quest_start"
-        "end_entity" "npc_quest_start"
+        "end_entity" "npc_town_quest"
         "requirements"
         {
-            "level" "99"
+            "level" "6"
+            "quest" "start_area_wolves"
         }
         "start"
         {
@@ -182,21 +183,47 @@
             "01" {
                 "long_description" "Report to town."
                 "description" "Report to Town"
-                "action" "kill"
-                "npc" "sheep,sheep_big"
-                "required" "1"
+                "action" "report"
+                "npc" "npc_town_quest"
             }
         }
         "rewards"
         {
-            "gold" "25"
-            "experience" "100"
-            "item_choose"
-            {
-                "01" "item_shield_basic"
-                "02" "item_armor_basic"
-                "03" "item_weapon_basic"
+            "gold" "5"
+            "experience" "75"
+        }
+    }
+    "1006"
+    {
+        "name" "start_area_report_to_kobolds"
+        "title" "Kobolds on the Western Front"
+        "start_entity" "npc_town_quest"
+        "end_entity" "npc_quest_kobold"
+        "requirements"
+        {
+            "quest" "start_area_report_to_town"
+        }
+        "start"
+        {
+            "dialog" "Hate to send you away just when you get here, but we have trouble brewing on the western front. The kobolds have become fiercely agitated, for some unknown reason. My guy out there could really use your help."
+        }
+        "complete"
+        {
+            "dialog" "You made it. Great. Let's get down to business!"
+        }
+        "objectives"
+        {
+            "01" {
+                "long_description" "Report to the western front."
+                "description" "Report to the Western Front"
+                "action" "report"
+                "npc" "npc_questgiver_kobold"
             }
+        }
+        "rewards"
+        {
+            "gold" "5"
+            "experience" "75"
         }
     }
 }

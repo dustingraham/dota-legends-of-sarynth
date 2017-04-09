@@ -54,15 +54,24 @@ end
 LinkLuaModifier('character_teleporting', 'app/systems/characters/modifiers/character_teleporting', LUA_MODIFIER_MOTION_NONE)
 
 function Interaction:StartInteraction(action)
-    if action.target.spawn_name == 'teleport_town' then
+    -- Trigger quest pre-check for "report" type.
+    QuestService:OnEntityInteract(action.unit, action.target)
+    Debug('Interaction', 'StartInteraction')
+    print(inspect(action, {depth = 2}))
+    if action.target.spawn_name == 'teleport_tower_town' then
         action.unit:AddNewModifier(action.unit, nil, 'character_teleporting', {
-            from = 'teleport_town',
-            to = 'teleport_ice'
+            from = 'teleport_tower_town',
+            to = 'teleport_tower_kobolds'
         })
-    elseif action.target.spawn_name == 'teleport_ice' then
+    elseif action.target.spawn_name == 'teleport_tower_ice' then
         action.unit:AddNewModifier(action.unit, nil, 'character_teleporting', {
-            from = 'teleport_ice',
-            to = 'teleport_town'
+            from = 'teleport_tower_ice',
+            to = 'teleport_tower_town'
+        })
+    elseif action.target.spawn_name == 'teleport_tower_kobolds' then
+        action.unit:AddNewModifier(action.unit, nil, 'character_teleporting', {
+            from = 'teleport_tower_kobolds',
+            to = 'teleport_tower_town'
         })
     else
         DialogSystem:StartDialog(action.unit, action.target)
@@ -70,20 +79,20 @@ function Interaction:StartInteraction(action)
 end
 
 function Interaction:OrderFilter(event, order)
-    
+
     -- TODO: Test Queue
-    
+
     -- Clear out any current rangedActions by this character.
     -- TODO: Consider move-out-of-range watchers like quest dialogs.
     if order.units['0'] then
         Interaction.rangedActions[order.units['0']] = nil
     end
-    
+
     -- The main order we're watching for.
     if order.order_type == DOTA_UNIT_ORDER_MOVE_TO_TARGET then
         Debug('Interaction', 'DOTA_UNIT_ORDER_MOVE_TO_TARGET')
         local target = EntIndexToHScript(order.entindex_target)
-        
+
         Interaction.rangedActions[order.units['0']] = {
             PlayerID = order.issuer_player_id_const,
             unit = EntIndexToHScript(order.units['0']),
@@ -92,17 +101,17 @@ function Interaction:OrderFilter(event, order)
             callback = function(action)
                 Debug('Interaction', 'Arrived at move target.')
                 action.unit:Stop()
-                
+
                 action.unit:Hold()
                 action.unit:Interrupt()
-                
+
                 Interaction:StartInteraction(action)
             end
         }
-        
+
         return FILTER_EXECUTION_CONTINUE
     end
-    
+
     return FILTER_EXECUTION_CONTINUE
 end
 

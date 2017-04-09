@@ -1,0 +1,33 @@
+[b]Legends of Sarynth[/b] is a classic role-playing game with all of the traditional elements: character classes, quests, boss fights, items, spells and more.
+
+This is an alpha release, so please report bugs. The road to beta is described below.
+
+Join us on: [url=https://discord.gg/QsvaXb3]Discord[/url]
+
+[b][u]Alpha[/u][/b]
+
+Players may solo, or co-op with up to 3 total players. Six classes to choose from, each with a small set of core skills. Follow the introduction quest line to slay Scar. Progress, items, and quests are all saved.
+
+The second area is expected to be released later today (April 9), so check back soon.
+
+Unique mechanic, "Focus Target" is enabled by default. While not very helpful with the sheep, as you progress to more difficult enemies, you may find it helpful. It can be toggled with the "Focus Target" button in the bottom left.
+
+Feedback welcome in discord, or on the steam page.
+
+[b][u]Beta[/u][/b]
+
+We will move from alpha to beta release once the entire map has been unlocked, there are six main areas. The entire map is already built, and the creatures have been added in, but still need to build the quests, and balance the progression.
+
+Be forewarned, there will likely be a full wipe either when transitioning from alpha to beta, or beta to full release, or both times.
+
+[b][u]Credits[/u][/b]
+ • DoctorGester - Amazing contributions in code, time, patience, and wisdom.
+ • ModDota - The only reason any of this is possible. Thank you! (SinZ, Psychotic, Shush)
+ • Arhowk - Excellent youtube tutorials on ModDota forums
+ • Perry - Deep wealth of all knowledge. Very kind.
+ • Dreoh - Help testing, and great inspiration, code assistance.
+ • Toyoka - Particle inspiration and knowledge
+ • Yunten - Valuable assistance with meshes and hitboxes.
+ • BMD - Excellent timers library
+ • Noya - Many dozens of valuable scripting posts on ModDota
+ • Invalid Nick - [url=https://www.hiveworkshop.com/threads/core-assets-release.275239/]Released five beautiful house models[/url], sprinkled throughout.
