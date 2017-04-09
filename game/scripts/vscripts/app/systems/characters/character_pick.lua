@@ -163,6 +163,7 @@ function CharacterPick:CreateCustomHeroForPlayer(PlayerID, character, isPrimary)
         },
         omniknight = {
             'models/heroes/omniknight/head.vmdl', -- 45
+            -- 'models/items/omniknight/omniknight_sacred_light_head/omniknight_sacred_light_head.vmdl',
             'models/items/omniknight/stalwart_arms/stalwart_arms.vmdl', -- 7090
             'models/items/omniknight/stalwart_weapon/stalwart_weapon.vmdl', -- 7091
             'models/items/omniknight/stalwart_head/stalwart_head.vmdl', -- 7092
@@ -210,9 +211,9 @@ function CharacterPick:CreateCustomHeroForPlayer(PlayerID, character, isPrimary)
     if character == 'windrunner' then
         local particleName = 'particles/units/heroes/hero_windrunner/windrunner_bowstring.vpcf'
         local idx = ParticleManager:CreateParticle(
-        particleName,
-        PATTACH_POINT_FOLLOW,
-        hero
+            particleName,
+            PATTACH_POINT_FOLLOW,
+            hero
         )
         ParticleManager:SetParticleControlEnt(idx, 0, hero, PATTACH_POINT_FOLLOW, 'bow_bot', hero:GetAbsOrigin(), true)
         ParticleManager:SetParticleControlEnt(idx, 1, hero, PATTACH_POINT_FOLLOW, 'bow_mid', hero:GetAbsOrigin(), true)

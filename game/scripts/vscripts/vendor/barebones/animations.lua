@@ -27,7 +27,7 @@ ANIMATIONS_VERSION = "1.00"
   Notes
   -Animations can only play for valid activities/sequences possessed by the model the unit is using.
   -Sequences requiring 3+ activity modifier translates (i.e "stun+fear+loadout" or similar) are not possible currently in this library.
-  -Calling EndAnimation and attempting to StartAnimation a new animation for the same unit withing ~2 server frames of the animation end will likely fail to play the new animation.  
+  -Calling EndAnimation and attempting to StartAnimation a new animation for the same unit withing ~2 server frames of the animation end will likely fail to play the new animation.
     Calling StartAnimation directly without ending the previous animation will automatically add in this delay and cancel the previous animation.
   -The maximum animation rate which can be used is 12.75, and animation rates can only exist at a 0.05 resolution (i.e. 1.0, 1.05, 1.1 and not 1.06)
   -StartAnimation and EndAnimation functions can also be accessed through GameRules as GameRules.StartAnimation and GameRules.EndAnimation for use in scoped lua files (triggers, vscript ai, etc)
@@ -440,7 +440,7 @@ local _ANIMATION_TRANSLATE_TO_CODE = {
     twinblade_run=368,
     twinblade_run_injured=369,
     windwalk=370,
-
+    light=371,
 }
 
 function StartAnimation(unit, table)

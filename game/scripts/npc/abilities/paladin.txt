@@ -1,0 +1,93 @@
+"DOTAAbilities"
+{
+    "paladin_hammer_smash"
+    {
+        "BaseClass"             "ability_lua"
+        "ScriptFile" "app/systems/characters/abilities/paladin/paladin_hammer_smash"
+        "AbilityTextureName"    "custom/paladin/paladin_hammer_smash"
+
+        "AbilityCooldown"       "6.0"
+        "AbilityManaCost"       "12"
+
+        "AbilityCastAnimation"  "ACT_DOTA_ATTACK2"
+        "AbilityCastPoint"      "0.30"
+
+        "precache"
+        {
+            "particle" "particles/units/heroes/hero_ursa/ursa_earthshock.vpcf"
+            "soundfile" "soundevents/game_sounds_heroes/game_sounds_earthshaker.vsndevts"
+        }
+    }
+    "paladin_smite"
+    {
+        "BaseClass"             "ability_lua"
+        "ScriptFile" "app/systems/characters/abilities/paladin/paladin_smite"
+        "AbilityTextureName"    "custom/paladin/paladin_smite"
+
+        "AbilityCooldown"       "18"
+        "AbilityManaCost"       "15"
+
+        "AbilityCastAnimation"  "ACT_DOTA_CAST_ABILITY_2"
+        "AbilityCastPoint"      "0.4"
+
+        "precache"
+        {
+            "particle" "particles/units/heroes/hero_skywrath_mage/skywrath_mage_concussive_shot.vpcf"
+        }
+    }
+    "paladin_divine_blow"
+    {
+        "BaseClass"             "ability_lua"
+        "ScriptFile" "app/systems/characters/abilities/paladin/paladin_divine_blow"
+        "AbilityTextureName"    "custom/paladin/paladin_divine_blow"
+
+        "AbilityCooldown"       "3.0"
+        "AbilityManaCost"       "8"
+
+        "AbilityCastAnimation"  "ACT_DOTA_ATTACK"
+        "AbilityCastPoint"      "0.30"
+        "AnimationPlaybackRate" "0.73"
+
+        "precache"
+        {
+            "particle" "particles/econ/events/ti5/dagon_lvl2_ti5.vpcf"
+            "particle" "particles/units/heroes/hero_sven/sven_spell_great_cleave.vpcf"
+        }
+    }
+    "paladin_holy_shield"
+    {
+        "BaseClass"             "ability_lua"
+        "ScriptFile" "app/systems/characters/abilities/paladin/paladin_holy_shield"
+        "AbilityTextureName"    "custom/paladin/paladin_holy_shield"
+
+        "AbilityCooldown"       "18.0"
+        "AbilityManaCost"       "20"
+
+        "AbilityCastAnimation"  "ACT_DOTA_CAST_ABILITY_4"
+        "AbilityCastPoint"      "0.20"
+
+        "precache"
+        {
+            "particle" "particles/units/heroes/paladin/shield/paladin_holy_shield.vpcf"
+        }
+    }
+    "paladin_blessing"
+    {
+        "BaseClass"             "ability_lua"
+        "ScriptFile" "app/systems/characters/abilities/paladin/paladin_blessing"
+        "AbilityTextureName"    "custom/paladin/paladin_blessing"
+
+        "AbilityCooldown"       "20.0"
+        "AbilityManaCost"       "15"
+
+        "AbilityCastAnimation"  "ACT_DOTA_CAST_ABILITY_4"
+        "AbilityCastPoint"      "0.45"
+
+        "precache"
+        {
+            "model" "models/items/omniknight/omniknight_sacred_light_head/omniknight_sacred_light_head.vmdl"
+            "particle" "particles/units/heroes/paladin/blessing/paladin_blessing.vpcf"
+            "particle" "particles/econ/items/omniknight/omni_sacred_light_head/omni_ambient_sacred_light.vpcf"
+        }
+    }
+}

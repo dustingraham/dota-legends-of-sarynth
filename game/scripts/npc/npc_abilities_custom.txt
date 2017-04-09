@@ -1,7 +1,9 @@
-#base "abilities\ranger.txt"
-#base "abilities\sorcerer.txt"
 #base "abilities\warrior.txt"
+#base "abilities\paladin.txt"
+#base "abilities\ranger.txt"
 #base "abilities\rogue.txt"
+#base "abilities\mage.txt"
+#base "abilities\sorcerer.txt"
 
 "DOTAAbilities"
 {

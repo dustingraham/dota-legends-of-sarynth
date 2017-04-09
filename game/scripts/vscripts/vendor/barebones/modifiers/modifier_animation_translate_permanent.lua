@@ -372,6 +372,7 @@ local _CODE_TO_ANIMATION_TRANSLATE = {
     [368]="twinblade_run",
     [369]="twinblade_run_injured",
     [370]="windwalk",
+    [371]="light",
 }
 
 function modifier_animation_translate_permanent:OnCreated(keys)
@@ -412,7 +413,7 @@ function modifier_animation_translate_permanent:GetActivityTranslationModifiers(
     return self.translate or 0
 end
 
---[[function modifier_animation_translate_permanent:CheckState() 
+--[[function modifier_animation_translate_permanent:CheckState()
   local state = {
     [MODIFIER_STATE_UNSELECTABLE] = true,
     [MODIFIER_STATE_INVULNERABLE] = true,

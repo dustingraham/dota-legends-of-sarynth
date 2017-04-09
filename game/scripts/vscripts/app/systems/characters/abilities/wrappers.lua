@@ -217,6 +217,33 @@ function Wrappers.AbilityBasicsWarrior(spell)
     --end
 end
 
+-- Paladin
+function Wrappers.AbilityBasicsPaladin(spell, range)
+    if range == nil then range = 150 end
+    Wrappers.AbilityBasics(spell, range)
+end
+
+function Wrappers.AbilityBasics(spell, range)
+    spell.target_team = DOTA_UNIT_TARGET_TEAM_ENEMY
+    spell.target_type = DOTA_UNIT_TARGET_ALL
+    spell.target_flag = DOTA_UNIT_TARGET_FLAG_NONE
+
+    -- Testing
+    --function spell:GetCooldown() return 0.0 end
+    --function spell:GetManaCost() return 1.0 end
+
+    -- Add basic stuff like range.
+    function spell:GetCastRange()
+        return range
+    end
+    function spell:GetMaxLevel()
+        return 1
+    end
+    function spell:GetBehavior()
+        return DOTA_ABILITY_BEHAVIOR_UNIT_TARGET + DOTA_ABILITY_BEHAVIOR_DONT_RESUME_MOVEMENT
+    end
+end
+
 -- Sorcerer
 function Wrappers.AbilityBasicsSorcerer(spell)
     spell.target_team = DOTA_UNIT_TARGET_TEAM_ENEMY
@@ -226,6 +253,24 @@ function Wrappers.AbilityBasicsSorcerer(spell)
     -- Add basic stuff like range.
     function spell:GetCastRange()
         return 850
+    end
+    function spell:GetMaxLevel()
+        return 1
+    end
+    function spell:GetBehavior()
+        return DOTA_ABILITY_BEHAVIOR_UNIT_TARGET + DOTA_ABILITY_BEHAVIOR_DONT_RESUME_MOVEMENT
+    end
+end
+
+-- Mage
+function Wrappers.AbilityBasicsMage(spell)
+    spell.target_team = DOTA_UNIT_TARGET_TEAM_ENEMY
+    spell.target_type = DOTA_UNIT_TARGET_ALL
+    spell.target_flag = DOTA_UNIT_TARGET_FLAG_NONE
+
+    -- Add basic stuff like range.
+    function spell:GetCastRange()
+        return 800
     end
     function spell:GetMaxLevel()
         return 1
@@ -258,10 +303,6 @@ function Wrappers.AbilityBasicsRogue(spell)
     spell.target_team = DOTA_UNIT_TARGET_TEAM_ENEMY
     spell.target_type = DOTA_UNIT_TARGET_ALL
     spell.target_flag = DOTA_UNIT_TARGET_FLAG_NONE
-
-    -- Testing
-    --function spell:GetCooldown() return 0.0 end
-    --function spell:GetManaCost() return 1.0 end
 
     -- Add basic stuff like range.
     function spell:GetCastRange()

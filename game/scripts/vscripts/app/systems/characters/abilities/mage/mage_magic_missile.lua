@@ -1,5 +1,5 @@
-sorcerer_inflict_pain = sorcerer_inflict_pain or class({})
-local spell = sorcerer_inflict_pain
+mage_magic_missile = mage_magic_missile or class({})
+local spell = mage_magic_missile
 
 function spell:OnSpellStart()
     local caster = self:GetCaster()
@@ -47,5 +47,5 @@ if IsClient() then
     require('app/systems/characters/abilities/wrappers')
 end
 
-Wrappers.AbilityBasicsSorcerer(spell)
+Wrappers.AbilityBasicsMage(spell)
 Wrappers.FocusTargetAbility(spell)

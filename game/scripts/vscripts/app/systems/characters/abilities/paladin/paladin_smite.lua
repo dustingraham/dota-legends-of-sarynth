@@ -1,5 +1,10 @@
-sorcerer_inflict_pain = sorcerer_inflict_pain or class({})
-local spell = sorcerer_inflict_pain
+paladin_smite = paladin_smite or class({})
+local spell = paladin_smite
+
+-- Gah, load these via KV loads?
+spell.target_team = DOTA_UNIT_TARGET_TEAM_ENEMY
+spell.target_type = DOTA_UNIT_TARGET_ALL
+spell.target_flag = DOTA_UNIT_TARGET_FLAG_NONE
 
 function spell:OnSpellStart()
     local caster = self:GetCaster()
@@ -11,7 +16,7 @@ function spell:OnSpellStart()
     end
 
     local projectile_speed = 1000
-    local particle_name = 'particles/econ/items/abaddon/abaddon_alliance/abaddon_death_coil_alliance.vpcf'
+    local particle_name = 'particles/units/heroes/hero_skywrath_mage/skywrath_mage_concussive_shot.vpcf'
 
     -- Create the projectile
     ProjectileManager:CreateTrackingProjectile({
@@ -24,9 +29,9 @@ function spell:OnSpellStart()
         iMoveSpeed = projectile_speed,
         iVisionRadius = 0,
         iVisionTeamNumber = caster:GetTeamNumber(),
-        iSourceAttachment = DOTA_PROJECTILE_ATTACHMENT_ATTACK_1
+        iSourceAttachment = DOTA_PROJECTILE_ATTACHMENT_ATTACK_2
     })
-    EmitSoundOn('Creep_Good_Melee.PreAttack', caster) -- todo
+    EmitSoundOn('Hero_SkywrathMage.ConcussiveShot.Cast', caster)
 end
 
 function spell:OnProjectileHit(target, pos)
@@ -40,12 +45,12 @@ function spell:OnProjectileHit(target, pos)
         damage = damage,
         damage_type = DAMAGE_TYPE_MAGICAL
     })
-    EmitSoundOn('Hero_Zuus.Attack', caster) -- todo
+    EmitSoundOn('Hero_SkywrathMage.ConcussiveShot.Target', target)
 end
 
 if IsClient() then
     require('app/systems/characters/abilities/wrappers')
 end
 
-Wrappers.AbilityBasicsSorcerer(spell)
+Wrappers.AbilityBasicsPaladin(spell, 600)
 Wrappers.FocusTargetAbility(spell)
