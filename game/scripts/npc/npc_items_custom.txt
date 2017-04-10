@@ -386,7 +386,7 @@
     {
         "ID" "3130"
         "BaseClass" "item_broadsword"
-        "AbilityTextureName" "default/radiance_inactive_png"
+        "AbilityTextureName" "default/claymore_png"
         "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
         "Effect" "particles/generic_gameplay/dropped_aegis.vpcf"
         "ItemCost" "100"
@@ -435,6 +435,360 @@
             {
                 "var_type" "FIELD_INTEGER"
                 "rarity" "3"
+            }
+        }
+    }
+    "item_amulet_scar"
+    {
+        "ID" "3141"
+        "BaseClass" "item_datadriven"
+        "AbilityTextureName" "free/pRjRlaW"
+        "Effect" "particles/generic_gameplay/dropped_gem.vpcf"
+        "ItemQuality" "epic"
+        "ItemCost" "322"
+        "ItemKillable" "0"
+        "ItemSellable" "1"
+        "ItemPurchasable" "1"
+        "ItemDroppable" "1"
+        "ItemShareability" "ITEM_FULLY_SHAREABLE"
+        "ItemStackable" "0"
+        "ItemPermanent" "1"
+        "ItemDisassembleRule" "DOTA_ITEM_DISASSEMBLE_ALWAYS"
+        "AbilitySpecial"
+        {
+            "01"
+            {
+                "var_type" "FIELD_INTEGER"
+                "bonus_stat" "21"
+            }
+            "02"
+            {
+                "var_type" "FIELD_INTEGER"
+                "rarity" "6"
+            }
+        }
+        "Modifiers"
+        {
+            "modifier_item_amulet_scar"
+            {
+                "Passive" "1"
+                "IsHidden" "1"
+                "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE | MODIFIER_ATTRIBUTE_PERMANENT"
+                "Properties"
+                {
+                    "MODIFIER_PROPERTY_STATS_STRENGTH_BONUS" "%bonus_stat"
+                    "MODIFIER_PROPERTY_STATS_AGILITY_BONUS" "%bonus_stat"
+                    "MODIFIER_PROPERTY_STATS_INTELLECT_BONUS" "%bonus_stat"
+                }
+            }
+        }
+    }
+    "item_kobold_weapon_1"
+    {
+        "ID" "3201"
+        "BaseClass" "item_broadsword"
+        "AbilityTextureName" "default/diffusal_blade_2_png"
+        "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+        "ItemCost" "100"
+        "ItemShopTags" "damage"
+        "ItemQuality" "common"
+        "ItemAliases" "broadsword"
+        "ItemShareability" "ITEM_FULLY_SHAREABLE"
+        "AbilitySpecial"
+        {
+            "01"
+            {
+                "var_type" "FIELD_INTEGER"
+                "bonus_damage" "115"
+            }
+            "02"
+            {
+                "var_type" "FIELD_INTEGER"
+                "rarity" "4"
+            }
+        }
+    }
+    "item_kobold_weapon_2"
+    {
+        "ID" "3202"
+        "BaseClass" "item_broadsword"
+        "AbilityTextureName" "default/butterfly_png"
+        "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+        "ItemCost" "100"
+        "ItemShopTags" "damage"
+        "ItemQuality" "rare"
+        "ItemAliases" "broadsword"
+        "ItemShareability" "ITEM_FULLY_SHAREABLE"
+        "AbilitySpecial"
+        {
+            "01"
+            {
+                "var_type" "FIELD_INTEGER"
+                "bonus_damage" "175"
+            }
+            "02"
+            {
+                "var_type" "FIELD_INTEGER"
+                "rarity" "5"
+            }
+        }
+    }
+    "item_kobold_weapon_unique"
+    {
+        "ID" "3203"
+        "BaseClass" "item_broadsword"
+        "AbilityTextureName" "default/abyssal_blade_png"
+        "Effect" "particles/generic_gameplay/dropped_aegis.vpcf"
+        "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+        "ItemCost" "100"
+        "ItemShopTags" "damage"
+        "ItemQuality" "epic"
+        "ItemAliases" "broadsword"
+        "ItemShareability" "ITEM_FULLY_SHAREABLE"
+        "AbilitySpecial"
+        {
+            "01"
+            {
+                "var_type" "FIELD_INTEGER"
+                "bonus_damage" "265"
+            }
+            "02"
+            {
+                "var_type" "FIELD_INTEGER"
+                "rarity" "6"
+            }
+        }
+    }
+    "item_kobold_armor_1"
+    {
+        "ID" "3211"
+        "BaseClass" "item_datadriven"
+        "AbilityTextureName" "default/cloak_png"
+        "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+        "ItemQuality" "common"
+        "ItemShareability" "ITEM_FULLY_SHAREABLE"
+        "AbilitySpecial"
+        {
+            "01"
+            {
+                "var_type" "FIELD_INTEGER"
+                "rarity" "4"
+            }
+            "02"
+            {
+                "var_type" "FIELD_INTEGER"
+                "bonus_health" "600"
+            }
+            "03"
+            {
+                "var_type" "FIELD_INTEGER"
+                "bonus_armor" "10"
+            }
+        }
+        "Modifiers"
+        {
+            "item_item_kobold_armor_1"
+            {
+                "Passive" "1"
+                "IsHidden" "1"
+                "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+                "Properties"
+                {
+                    "MODIFIER_PROPERTY_HEALTH_BONUS" "%bonus_health"
+                    "MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" "%bonus_armor"
+                }
+            }
+        }
+    }
+    "item_kobold_armor_2"
+    {
+        "ID" "3212"
+        "BaseClass" "item_datadriven"
+        "AbilityTextureName" "free/28LIvHX"
+        "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+        "ItemQuality" "rare"
+        "ItemShareability" "ITEM_FULLY_SHAREABLE"
+        "AbilitySpecial"
+        {
+            "01"
+            {
+                "var_type" "FIELD_INTEGER"
+                "rarity" "5"
+            }
+            "02"
+            {
+                "var_type" "FIELD_INTEGER"
+                "bonus_armor" "12"
+            }
+            "03"
+            {
+                "var_type" "FIELD_INTEGER"
+                "bonus_health" "1400"
+            }
+        }
+        "Modifiers"
+        {
+            "item_item_kobold_armor_1"
+            {
+                "Passive" "1"
+                "IsHidden" "1"
+                "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+                "Properties"
+                {
+                    "MODIFIER_PROPERTY_HEALTH_BONUS" "%bonus_health"
+                    "MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" "%bonus_armor"
+                }
+            }
+        }
+    }
+    "item_kobold_amulet_1"
+    {
+        "ID" "3221"
+        "BaseClass" "item_datadriven"
+        "AbilityTextureName" "default/ring_of_basilius_png"
+        "ItemQuality" "common"
+        "ItemCost" "322"
+        "ItemKillable" "0"
+        "ItemSellable" "1"
+        "ItemPurchasable" "1"
+        "ItemDroppable" "1"
+        "ItemShareability" "ITEM_FULLY_SHAREABLE"
+        "ItemStackable" "0"
+        "ItemPermanent" "1"
+        "ItemDisassembleRule" "DOTA_ITEM_DISASSEMBLE_ALWAYS"
+        "AbilitySpecial"
+        {
+            "01"
+            {
+                "var_type" "FIELD_INTEGER"
+                "rarity" "4"
+            }
+            "02"
+            {
+                "var_type" "FIELD_INTEGER"
+                "bonus_stat" "15"
+            }
+            "03"
+            {
+                "var_type" "FIELD_INTEGER"
+                "bonus_health" "300"
+            }
+        }
+        "Modifiers"
+        {
+            "modifier_item_kobold_amulet_1"
+            {
+                "Passive" "1"
+                "IsHidden" "1"
+                "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE | MODIFIER_ATTRIBUTE_PERMANENT"
+                "Properties"
+                {
+                    "MODIFIER_PROPERTY_STATS_STRENGTH_BONUS" "%bonus_stat"
+                    "MODIFIER_PROPERTY_STATS_AGILITY_BONUS" "%bonus_stat"
+                    "MODIFIER_PROPERTY_STATS_INTELLECT_BONUS" "%bonus_stat"
+                    "MODIFIER_PROPERTY_HEALTH_BONUS" "%bonus_health"
+                }
+            }
+        }
+    }
+    "item_kobold_amulet_2"
+    {
+        "ID" "3222"
+        "BaseClass" "item_datadriven"
+        "AbilityTextureName" "free/KvSvg8f"
+        "ItemQuality" "rare"
+        "ItemCost" "322"
+        "ItemKillable" "0"
+        "ItemSellable" "1"
+        "ItemPurchasable" "1"
+        "ItemDroppable" "1"
+        "ItemShareability" "ITEM_FULLY_SHAREABLE"
+        "ItemStackable" "0"
+        "ItemPermanent" "1"
+        "ItemDisassembleRule" "DOTA_ITEM_DISASSEMBLE_ALWAYS"
+        "AbilitySpecial"
+        {
+            "01"
+            {
+                "var_type" "FIELD_INTEGER"
+                "rarity" "5"
+            }
+            "02"
+            {
+                "var_type" "FIELD_INTEGER"
+                "bonus_stat" "20"
+            }
+            "03"
+            {
+                "var_type" "FIELD_INTEGER"
+                "bonus_health" "800"
+            }
+        }
+        "Modifiers"
+        {
+            "modifier_item_kobold_amulet_1"
+            {
+                "Passive" "1"
+                "IsHidden" "1"
+                "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE | MODIFIER_ATTRIBUTE_PERMANENT"
+                "Properties"
+                {
+                    "MODIFIER_PROPERTY_STATS_STRENGTH_BONUS" "%bonus_stat"
+                    "MODIFIER_PROPERTY_STATS_AGILITY_BONUS" "%bonus_stat"
+                    "MODIFIER_PROPERTY_STATS_INTELLECT_BONUS" "%bonus_stat"
+                    "MODIFIER_PROPERTY_HEALTH_BONUS" "%bonus_health"
+                }
+            }
+        }
+    }
+    "item_kobold_amulet_unique"
+    {
+        "ID" "3223"
+        "BaseClass" "item_datadriven"
+        "Effect" "particles/generic_gameplay/dropped_aegis.vpcf"
+        "AbilityTextureName" "free/MMLS0mj"
+        "ItemQuality" "epic"
+        "ItemCost" "322"
+        "ItemKillable" "0"
+        "ItemSellable" "1"
+        "ItemPurchasable" "1"
+        "ItemDroppable" "1"
+        "ItemShareability" "ITEM_FULLY_SHAREABLE"
+        "ItemStackable" "0"
+        "ItemPermanent" "1"
+        "ItemDisassembleRule" "DOTA_ITEM_DISASSEMBLE_ALWAYS"
+        "AbilitySpecial"
+        {
+            "01"
+            {
+                "var_type" "FIELD_INTEGER"
+                "rarity" "6"
+            }
+            "02"
+            {
+                "var_type" "FIELD_INTEGER"
+                "bonus_stat" "32"
+            }
+            "03"
+            {
+                "var_type" "FIELD_INTEGER"
+                "bonus_health" "1250"
+            }
+        }
+        "Modifiers"
+        {
+            "modifier_item_kobold_amulet_1"
+            {
+                "Passive" "1"
+                "IsHidden" "1"
+                "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE | MODIFIER_ATTRIBUTE_PERMANENT"
+                "Properties"
+                {
+                    "MODIFIER_PROPERTY_STATS_STRENGTH_BONUS" "%bonus_stat"
+                    "MODIFIER_PROPERTY_STATS_AGILITY_BONUS" "%bonus_stat"
+                    "MODIFIER_PROPERTY_STATS_INTELLECT_BONUS" "%bonus_stat"
+                    "MODIFIER_PROPERTY_HEALTH_BONUS" "%bonus_health"
+                }
             }
         }
     }

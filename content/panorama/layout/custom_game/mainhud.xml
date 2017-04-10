@@ -135,7 +135,7 @@
                 
                 <Label class="objective" text="REWARDS"/>
                 <Label id="MainRewards" class="objectives" html="true" />
-                <Image class="item-slot" src="file://{images}/window/item_slot_flat.png">
+                <Image id="ItemRewardBlock" class="item-slot" src="file://{images}/window/item_slot_flat.png">
                     <DOTAItemImage id="RewardItem" itemname="item_ring_of_health" />
                 </Image>
             </Panel>

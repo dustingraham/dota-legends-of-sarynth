@@ -74,6 +74,9 @@ function QuestService:OnQuestStart(quest)
         hero = hero,
         quest = quest,
     })
+
+    -- In case the same npc has another quest
+    QuestService:CheckForQuestsAvailable(quest.PlayerID)
 end
 
 function QuestService:SendQuestUpdate(quest)
@@ -117,6 +120,20 @@ function QuestService:OnQuestComplete(quest)
 
     -- Give Reward
     quest:ApplyReward(hero)
+
+    -- Tmp
+    if quest.id == '1012' then
+        Notifications:Top(quest.PlayerID, {
+            text = "#alpha_release_the_end",
+            duration = 30,
+            style = { color = "#b21d00" }
+        })
+        Notifications:Top(quest.PlayerID, {
+            text = "#alpha_release_the_end2",
+            duration = 15,
+            style = { color = "#cccccc" }
+        })
+    end
 
     -- Check if any quests open up now.
     QuestService:CheckForQuestsAvailable(quest.PlayerID)

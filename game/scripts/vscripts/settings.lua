@@ -1,7 +1,7 @@
 
 DEBUG_SETTINGS = IsInToolsMode()
 -- Override if necessary...
-DEBUG_SETTINGS = false
+-- DEBUG_SETTINGS = false
 
 -- TEST MODE
 if DEBUG_SETTINGS then
@@ -13,16 +13,16 @@ if DEBUG_SETTINGS then
     TEST_PICK_HERO = 'invoker'       -- Mage
     --TEST_PICK_HERO = 'warlock'       -- Sorcerer
 
-    TEST_DISABLE_FOG = true
-    TEST_SPAWN_ITEMS = true
-    TEST_START_LEVEL = 6
-    --TEST_SUPERMAN = true
+    --TEST_DISABLE_FOG = true
+    --TEST_SPAWN_ITEMS = true
+    --TEST_START_LEVEL = 7
+    TEST_SUPERMAN = true
     -- town kobolds ice webbed druids dark
-    --TEST_START_WAYPOINT = 'town'
-    TEST_START_START_BOSS = true
+    TEST_START_WAYPOINT = 'kobolds'
+    --TEST_START_START_BOSS = true
 end
 
-DEBUG_SKIP_HTTP_REPORT = DEBUG_SETTINGS
+DEBUG_SKIP_HTTP_REPORT = false -- DEBUG_SETTINGS
 DEBUG_SKIP_HTTP_LOAD = DEBUG_SETTINGS or true
 DEBUG_SKIP_HTTP_SAVE = DEBUG_SETTINGS or true
 

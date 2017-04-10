@@ -4,3 +4,12 @@
  • Enabled teleporter pads. Created teleport path between town and kobold area.
  • Created report to town quest, and report to kobold area quest.
  • Fixed new quests sometimes not displaying on level up.
+
+ • Doubled the number of kobolds, adjusted stats, exp.
+ • Added items for kobold area, and quests.
+
+ • Added a note after the final quest is turned in, mentioning end of released content. (After defeating the kobold warchief.)
+ 
+ • Fixed issue with quest dialog displaying a placeholder image when no item reward was available for the quest.
+ • Fix a bug where an NPC with two quests wouldn't indicate a second quest was available after accepting the first.
+ 
