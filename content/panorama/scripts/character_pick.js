@@ -134,18 +134,21 @@ function ReplaceCharacterBlock(data)
     {
         playtime = hours + ' hours';
     }
-    else if (minutes > 2)
+    else if (minutes > 1)
     {
         playtime = minutes + ' minutes';
     }
     else
     {
-        playtime = 'new character';
+        playtime = data.gametime + ' seconds';
     }
+
     panel.FindChildTraverse('CharacterDetailsInfo').text =
         'Level: <span class="detail">'+data.level+'</span><br>' +
-        'Experience: <span class="detail">'+data.experience+'</span><br>' +
-        'Playtime: <span class="detail">'+playtime+'</span>';
+        (data.zone ? ('Location: <span class="detail">'+$.Localize('zone_name_'+data.zone)+'</span><br>') : '') +
+        'Playtime: <span class="detail">'+playtime+'</span><br>' +
+        'Experience: <span class="detail">'+data.experience+'</span>';
+
     panel.FindChildTraverse('CharacterDetailPortraitContainer').SetHasClass('hide', false);
 
     panel.FindChildTraverse('CharacterDetailsName').text = data.character;

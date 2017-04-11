@@ -1,5 +1,6 @@
 v0.0.4
- • Kobold armor stats will now persist through death.
+ • Kobold armor item stats will now persist through death.
+ • Display character location on pick screen.
  
 v0.0.3
  • Created better respawn locations. Dying in kobold area will no longer send you back to the start area.
