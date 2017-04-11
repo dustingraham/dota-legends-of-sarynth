@@ -74,6 +74,9 @@ end
 function Player:GetPriorItems()
     return self.items
 end
+function Player:GetPriorZone()
+    return self.zone
+end
 function Player:GetPriorQuests()
     return self.quests
 end
@@ -90,12 +93,8 @@ function Player:LoadSlot(slotId)
 end
 
 function Player:LoadSlotData(data)
-    -- We could merge data in, but not 100% sure we want that just yet
-    self.character = data.character
-    self.experience = data.experience
-    self.gametime = data.gametime
-    self.items = data.items
-    self.quests = data.quests
+    -- Merge in selected data.
+    TableMerge(self, data)
 end
 
 function Player:Save()

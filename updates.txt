@@ -1,5 +1,6 @@
 v0.0.3
  • Created better respawn locations. Dying in kobold area will no longer send you back to the start area.
+ • Remember prior zone on next load. (Since this is a new value, it is initialized to the start zone for all characters.)
  • Added tooltips to most buffs.
  • Potential fix for an issue with auto-attack on first spawn.
  

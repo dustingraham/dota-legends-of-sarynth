@@ -86,7 +86,18 @@ function CharacterPick:OnCharacterLoad(event)
 end
 
 function CharacterPick:CreateCustomHeroForPlayer(PlayerID, character, isPrimary)
-    local hero
+    -- Set zone if applicable
+    local hero = PlayerResource:GetSelectedHeroEntity(PlayerID)
+    local player = PlayerService:GetPlayer(PlayerID)
+    if player:GetPriorZone() then
+        hero.currentZone = player:GetPriorZone()
+        local point = Entities:FindByName(nil, hero.currentZone..'_spawn_point')
+        if point then
+            hero:SetAbsOrigin(point:GetAbsOrigin())
+        end
+    end
+
+    -- Replace dummy unit with actual character
     local heroName = 'npc_dota_hero_'..character
     if isPrimary then
         Debug('CharacterPick', 'Replace Hero', heroName)
@@ -267,7 +278,6 @@ function CharacterPick:CreateCustomHeroForPlayer(PlayerID, character, isPrimary)
     --end
 
     -- Level/Experience
-    local player = PlayerService:GetPlayer(PlayerID)
     if player:GetPriorExperience() then
         hero.isInitialLevel = true
         hero:AddExperience(player:GetPriorExperience(), DOTA_ModifyXP_Unspecified, false, true)
