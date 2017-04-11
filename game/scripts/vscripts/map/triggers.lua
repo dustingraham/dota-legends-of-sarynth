@@ -56,6 +56,9 @@ function StartBossAreaStartTouch(trigger)
 
     -- https://github.com/SteamDatabase/GameTracking-Dota2/blob/c6a10d9fc4eae2aff810c9893377d675ddf3ffc4/game/dota/pak01_dir/soundevents/music/jboberg_01/soundevents_stingers.vsndevts
     Sounds:EmitSoundOnClient(pid, 'jboberg_01.music.battle_02')
+
+    -- Also call the standard trigger.
+    ZoneIn(trigger)
 end
 function StartBossAreaEndTouch(trigger)
     local pid = trigger.activator:GetPlayerOwnerID()
@@ -75,3 +78,8 @@ end
 --    -- 0.00
 --    DeepPrintTable(trigger)
 --end
+
+function ZoneIn(trigger)
+    Debug('Triggers', trigger.activator:GetPlayerOwnerID(), 'zoning into', trigger.caller:GetName())
+    CharacterService:SetZone(trigger.activator, trigger.caller:GetName())
+end

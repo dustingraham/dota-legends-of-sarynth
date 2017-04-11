@@ -16,10 +16,13 @@ if DEBUG_SETTINGS then
     --TEST_DISABLE_FOG = true
     --TEST_SPAWN_ITEMS = true
     --TEST_START_LEVEL = 7
-    TEST_SUPERMAN = true
+    --TEST_SUPERMAN = true
     -- town kobolds ice webbed druids dark
     TEST_START_WAYPOINT = 'kobolds'
     --TEST_START_START_BOSS = true
+    TEST_QUESTS_COMPLETE = {
+        ['1005'] = 'start_area_report_to_town'
+    }
 end
 
 DEBUG_SKIP_HTTP_REPORT = false -- DEBUG_SETTINGS

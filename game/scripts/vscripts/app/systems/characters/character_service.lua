@@ -133,24 +133,44 @@ function CharacterService:OnEntityKilled(event)
     end
 end
 
+function CharacterService:SetZone(hero, zone)
+    hero.currentZone = zone
+end
 function CharacterService:OnHeroDeath(e, event)
-    Debug('CharacterService', 'OnHeroDeath', event.hero:GetName())
+    local hero = event.hero
+    Debug('CharacterService', 'OnHeroDeath', hero:GetName())
 
     -- Find closest respawn point.
-    local points = Entities:FindAllByName('respawn_option')
-    local closestDistance
-    local closestPoint
-    local deathPoint = event.hero:GetAbsOrigin()
-    for _,point in pairs(points) do
-        local distance = GridNav:FindPathLength(point:GetAbsOrigin(), deathPoint)
-        if distance ~= -1 then
-            if closestDistance == nil or distance < closestDistance then
-                closestDistance = distance
-                closestPoint = point
-            end
+    if hero.currentZone then
+        local point = Entities:FindByName(nil, hero.currentZone..'_spawn_point')
+        if point then
+            hero:SetRespawnPosition(point:GetAbsOrigin())
         end
     end
-    event.hero:SetRespawnPosition(closestPoint:GetAbsOrigin())
+
+    -- FindPathLength appears broken above 2000 distance.
+    --local closestDistance
+    --local closestPoint
+    --local deathPoint = event.hero:GetAbsOrigin()
+    --for _,point in pairs(Entities:FindAllByName('respawn_option')) do
+    --    local distance = GridNav:FindPathLength(point:GetAbsOrigin(), deathPoint)
+    --    if distance ~= -1 then
+    --        print('-----------')
+    --        print('CanFind: ', GridNav:CanFindPath(point:GetAbsOrigin(), deathPoint))
+    --        print('GridNav: ', distance)
+    --        print('Point: ', point:GetAbsOrigin())
+    --        print('Death: ', deathPoint)
+    --        print('Straight: ', (point:GetAbsOrigin() - deathPoint):Length())
+    --
+    --        if closestDistance == nil or distance < closestDistance then
+    --            print('Picking: ', distance)
+    --            closestDistance = distance
+    --            closestPoint = point
+    --        end
+    --    end
+    --end
+    --print('Picked: ', closestDistance)
+    --event.hero:SetRespawnPosition(closestPoint:GetAbsOrigin())
 end
 
 function CharacterService:OnPlayerLevelUp(event)

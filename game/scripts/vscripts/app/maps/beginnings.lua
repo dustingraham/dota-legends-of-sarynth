@@ -21,13 +21,17 @@ end
 
 function CustomMap:OnNpcSpawned(event)
     local npc = EntIndexToHScript(event.entindex)
-    if npc:IsRealHero() and npc.bFirstSpawned == nil then
-        Debug('CustomMap', 'OnNpcSpawned FirstSpawn', npc:GetUnitName())
-        npc.bFirstSpawned = true
-        if not Boot.allPick then
-            Boot.allPick = true
-            if TEST_PICK_HERO then
-                CharacterPick:TestMapPickHero(npc, TEST_PICK_HERO)
+    if npc:IsRealHero() then
+        -- Potential fix for auto-attack issue. Unable to reproduce.
+        npc:Stop()
+        if npc.bFirstSpawned == nil then
+            Debug('CustomMap', 'OnNpcSpawned FirstSpawn', npc:GetUnitName())
+            npc.bFirstSpawned = true
+            if not Boot.allPick then
+                Boot.allPick = true
+                if TEST_PICK_HERO then
+                    CharacterPick:TestMapPickHero(npc, TEST_PICK_HERO)
+                end
             end
         end
     end

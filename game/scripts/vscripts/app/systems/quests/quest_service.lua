@@ -14,9 +14,9 @@ end
 
 function QuestService:OnHeroPick(e, event)
     -- Load Quest Data
+    local key = 'player_'..event.PlayerID..'_quests'
     local quests = event.player:GetPriorQuests()
     if quests then
-        local key = 'player_'..event.PlayerID..'_quests'
         QuestService.playerCompleted[key] = quests.completed
         for _,questProgress in pairs(quests.progress) do
             -- Generate Quest Start
@@ -44,6 +44,17 @@ function QuestService:OnHeroPick(e, event)
             end
             -- Start it
             QuestService:OnQuestStart(quest)
+        end
+    end
+
+    -- Initialize/merge in test quests.
+    if TEST_QUESTS_COMPLETE then
+        if not QuestService.playerCompleted[key] then
+            QuestService.playerCompleted[key] = TEST_QUESTS_COMPLETE
+        else
+            for id,quest in pairs(TEST_QUESTS_COMPLETE) do
+                QuestService.playerCompleted[key][id] = quest
+            end
         end
     end
 
