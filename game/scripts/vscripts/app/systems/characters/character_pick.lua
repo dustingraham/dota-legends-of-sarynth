@@ -100,6 +100,9 @@ function CharacterPick:CreateCustomHeroForPlayer(PlayerID, character, isPrimary)
         -- hero:SetOwner(player)
     end
 
+    -- Potential fix for auto-attack issue. Unable to reproduce.
+    hero:Stop()
+
     hero:SetAbilityPoints(0)
     for i = 0, hero:GetAbilityCount() - 1 do
         -- Note: Ability11 will bump down in index if there are no other abilities.

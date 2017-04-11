@@ -135,6 +135,22 @@ end
 
 function CharacterService:OnHeroDeath(e, event)
     Debug('CharacterService', 'OnHeroDeath', event.hero:GetName())
+
+    -- Find closest respawn point.
+    local points = Entities:FindAllByName('respawn_option')
+    local closestDistance
+    local closestPoint
+    local deathPoint = event.hero:GetAbsOrigin()
+    for _,point in pairs(points) do
+        local distance = GridNav:FindPathLength(point:GetAbsOrigin(), deathPoint)
+        if distance ~= -1 then
+            if closestDistance == nil or distance < closestDistance then
+                closestDistance = distance
+                closestPoint = point
+            end
+        end
+    end
+    event.hero:SetRespawnPosition(closestPoint:GetAbsOrigin())
 end
 
 function CharacterService:OnPlayerLevelUp(event)

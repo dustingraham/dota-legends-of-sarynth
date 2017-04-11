@@ -1,4 +1,9 @@
-
+v0.0.3
+ • Created better respawn locations. Dying in kobold area will no longer send you back to the start area.
+ • Added tooltips to most buffs.
+ • Potential fix for an issue with auto-attack on first spawn.
+ 
+v0.0.2
  • Added support for "report to" type quests.
  • Unlocked town + kobolds area.
  • Enabled teleporter pads. Created teleport path between town and kobold area.
