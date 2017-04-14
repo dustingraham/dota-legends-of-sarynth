@@ -1,6 +1,8 @@
 v0.0.4
  • Kobold armor item stats will now persist through death.
  • Display character location on pick screen.
+ • Adjust items to not be killable. Was causing crash.
+ • Added a loot expiration timer. Grab that loot within 60 seconds! It will start burning in the last 20 seconds.
  
 v0.0.3
  • Created better respawn locations. Dying in kobold area will no longer send you back to the start area.

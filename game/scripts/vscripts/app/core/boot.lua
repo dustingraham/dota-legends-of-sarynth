@@ -22,6 +22,9 @@ function Boot:Precache(context)
         'particles/units/heroes/ranger/explosive_shot/ranger_explosive_shot.vpcf',
         'particles/units/heroes/ranger/explosive_shot/ranger_explosive_shot_impact.vpcf',
 
+        -- Game Effects
+        'particles/effects/loot_expire/loot_expire.vpcf',
+
          'particles/units/start/scar/claw.vpcf',
 
         -- Testing?

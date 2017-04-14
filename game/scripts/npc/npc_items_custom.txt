@@ -24,6 +24,12 @@
                 "rarity" "3"
             }
         }
+        "ItemKillable" "0"
+        "ItemSellable" "1"
+        "ItemPurchasable" "0"
+        "ItemDroppable" "1"
+        "ItemStackable" "0"
+        "ItemPermanent" "1"
     }
     "item_broadsword_tier2"
     {
@@ -49,6 +55,12 @@
                 "rarity" "4"
             }
         }
+        "ItemKillable" "0"
+        "ItemSellable" "1"
+        "ItemPurchasable" "0"
+        "ItemDroppable" "1"
+        "ItemStackable" "0"
+        "ItemPermanent" "1"
     }
     "item_broadsword_tier3"
     {
@@ -74,6 +86,12 @@
                 "rarity" "5"
             }
         }
+        "ItemKillable" "0"
+        "ItemSellable" "1"
+        "ItemPurchasable" "0"
+        "ItemDroppable" "1"
+        "ItemStackable" "0"
+        "ItemPermanent" "1"
     }
     "item_armor_tier1"
     {
@@ -98,6 +116,13 @@
                 "rarity" "3"
             }
         }
+        "ItemCost" "99"
+        "ItemKillable" "0"
+        "ItemSellable" "1"
+        "ItemPurchasable" "0"
+        "ItemDroppable" "1"
+        "ItemStackable" "0"
+        "ItemPermanent" "1"
     }
     "item_armor_tier2"
     {
@@ -122,6 +147,13 @@
                 "rarity" "4"
             }
         }
+        "ItemCost" "99"
+        "ItemKillable" "0"
+        "ItemSellable" "1"
+        "ItemPurchasable" "0"
+        "ItemDroppable" "1"
+        "ItemStackable" "0"
+        "ItemPermanent" "1"
     }
     "item_armor_tier3"
     {
@@ -147,6 +179,13 @@
                 "rarity" "5"
             }
         }
+        "ItemCost" "99"
+        "ItemKillable" "0"
+        "ItemSellable" "1"
+        "ItemPurchasable" "0"
+        "ItemDroppable" "1"
+        "ItemStackable" "0"
+        "ItemPermanent" "1"
     }
     "item_amulet_tier1"
     {
@@ -407,6 +446,12 @@
                 "rarity" "6"
             }
         }
+        "ItemKillable" "0"
+        "ItemSellable" "1"
+        "ItemPurchasable" "0"
+        "ItemDroppable" "1"
+        "ItemStackable" "0"
+        "ItemPermanent" "1"
     }
     "item_campfire"
     {
@@ -490,6 +535,8 @@
         "AbilityTextureName" "default/diffusal_blade_2_png"
         "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
         "ItemCost" "100"
+        "ItemKillable" "0"
+        "ItemSellable" "1"
         "ItemShopTags" "damage"
         "ItemQuality" "common"
         "ItemAliases" "broadsword"
@@ -507,6 +554,10 @@
                 "rarity" "4"
             }
         }
+        "ItemPurchasable" "0"
+        "ItemDroppable" "1"
+        "ItemStackable" "0"
+        "ItemPermanent" "1"
     }
     "item_kobold_weapon_2"
     {
@@ -515,6 +566,8 @@
         "AbilityTextureName" "default/butterfly_png"
         "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
         "ItemCost" "100"
+        "ItemKillable" "0"
+        "ItemSellable" "1"
         "ItemShopTags" "damage"
         "ItemQuality" "rare"
         "ItemAliases" "broadsword"
@@ -532,6 +585,10 @@
                 "rarity" "5"
             }
         }
+        "ItemPurchasable" "0"
+        "ItemDroppable" "1"
+        "ItemStackable" "0"
+        "ItemPermanent" "1"
     }
     "item_kobold_weapon_unique"
     {
@@ -541,6 +598,8 @@
         "Effect" "particles/generic_gameplay/dropped_aegis.vpcf"
         "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
         "ItemCost" "100"
+        "ItemKillable" "0"
+        "ItemSellable" "1"
         "ItemShopTags" "damage"
         "ItemQuality" "epic"
         "ItemAliases" "broadsword"
@@ -558,6 +617,10 @@
                 "rarity" "6"
             }
         }
+        "ItemPurchasable" "0"
+        "ItemDroppable" "1"
+        "ItemStackable" "0"
+        "ItemPermanent" "1"
     }
     "item_kobold_armor_1"
     {
@@ -566,6 +629,8 @@
         "AbilityTextureName" "default/cloak_png"
         "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
         "ItemQuality" "common"
+        "ItemKillable" "0"
+        "ItemSellable" "1"
         "ItemShareability" "ITEM_FULLY_SHAREABLE"
         "AbilitySpecial"
         {
@@ -599,6 +664,11 @@
                 }
             }
         }
+        "ItemCost" "99"
+        "ItemPurchasable" "0"
+        "ItemDroppable" "1"
+        "ItemStackable" "0"
+        "ItemPermanent" "1"
     }
     "item_kobold_armor_2"
     {
@@ -607,6 +677,8 @@
         "AbilityTextureName" "free/28LIvHX"
         "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
         "ItemQuality" "rare"
+        "ItemKillable" "0"
+        "ItemSellable" "1"
         "ItemShareability" "ITEM_FULLY_SHAREABLE"
         "AbilitySpecial"
         {
@@ -640,6 +712,11 @@
                 }
             }
         }
+        "ItemCost" "99"
+        "ItemPurchasable" "0"
+        "ItemDroppable" "1"
+        "ItemStackable" "0"
+        "ItemPermanent" "1"
     }
     "item_kobold_amulet_1"
     {
@@ -749,7 +826,6 @@
         "AbilityTextureName" "free/MMLS0mj"
         "ItemQuality" "epic"
         "ItemCost" "322"
-        "ItemKillable" "0"
         "ItemSellable" "1"
         "ItemPurchasable" "1"
         "ItemDroppable" "1"
@@ -791,5 +867,6 @@
                 }
             }
         }
+        "ItemKillable" "0"
     }
 }
