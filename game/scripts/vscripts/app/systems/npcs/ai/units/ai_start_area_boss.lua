@@ -23,7 +23,7 @@ end
 -- ]
 
 ai.ACTION_IDLE = 'ActionIdle'
-ai.ACTION_AGGRO = 'ActionAggro'
+--ai.ACTION_AGGRO = 'ActionAggro'
 ai.ACTION_RETURN = 'ActionReturn'
 
 ai.ACTION_FIGHT_STANDARD = 'ActionFightStandard'
@@ -162,6 +162,8 @@ function ai:ActionFightStandard()
         self:TransitionToReturn()
         return true --Return to make sure no other code is executed in this state
     end
+
+    -- TODO: Check for unit closer than target if target is running away.
 
     --Check if the unit's target is still alive (self.aggroTarget will have to be set when transitioning into this state)
     if not self.aggroTarget:IsAlive() then

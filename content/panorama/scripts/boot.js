@@ -29,10 +29,6 @@ GameUI.SetDefaultUIEnabled( DotaDefaultUIElement_t.DOTA_DEFAULT_UI_INVENTORY_QUI
 
 $.Msg('[BOOT] Loaded');
 
-// TODO Keybinds.
-//Game.CreateCustomKeyBind("f1", "TestEvent123");
-//Game.AddCommand( "TestEvent123", function() {$.Msg("Hi");}, "", 0 );
-
 var upDownHide = function(up, down) {
     var panel = $.GetContextPanel();
     while(panel != null)
@@ -65,21 +61,21 @@ upDownHide('Hud', 'GlyphScanContainer');
 
 // CONCEPT
 
-var timePressed = 0;
-Game.CustomOnPressedInventory = function()
-{
-    timePressed = Game.GetGameTime();
-    GameEvents.SendCustomGameEventToServer('inventory_open', {});
-};
-Game.CustomOnReleasedInventory = function()
-{
-    var delay = Game.GetGameTime() - timePressed;
-    if (delay > 1.0)
-    {
-        // Auto-close if held for more than 1 second.
-        GameEvents.SendCustomGameEventToServer('inventory_close', {});
-    }
-};
+// var timePressed = 0;
+// Game.CustomOnPressedInventory = function()
+// {
+//     timePressed = Game.GetGameTime();
+//     GameEvents.SendCustomGameEventToServer('inventory_open', {});
+// };
+// Game.CustomOnReleasedInventory = function()
+// {
+//     var delay = Game.GetGameTime() - timePressed;
+//     if (delay > 1.0)
+//     {
+//         // Auto-close if held for more than 1 second.
+//         GameEvents.SendCustomGameEventToServer('inventory_close', {});
+//     }
+// };
 
 GameEvents.Subscribe('emit_client_sound', function(event)
 {

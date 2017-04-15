@@ -1,0 +1,53 @@
+<root>
+    <styles>
+        <include src="file://{resources}/styles/reset.css" />
+        
+        <!--<include src="s2r://panorama/styles/dotastyles.vcss_c" />-->
+        <!--<include src="file://{resources}/styles/containers/container.css" />-->
+        <!--<include src="file://{resources}/styles/containers/container_skins.css" />-->
+        
+        <include src="file://{resources}/styles/inventory/inventory.css" />
+    </styles>
+    <scripts>
+        <!--<include src="file://{resources}/scripts/containers/container.js" />-->
+        <include src="file://{resources}/scripts/inventory/inventory.js" />
+    </scripts>
+    <snippets>
+        <snippet name="ItemBlock">
+            <Panel class="item" draggable="true">
+                <Button class="btn">
+                    <DOTAItemImage hittest="true" id="TheItemImage" class="ItemImage" />
+                    <Panel hittest="false" id="Cooldown">
+                        <Panel hittest="false" id="CooldownOverlay" />
+                        <Label hittest="false" id="CooldownTimer" />
+                    </Panel>
+                    <Panel hittest="false" class="DropTargetHighlight" />
+                </Button>
+            </Panel>
+        </snippet>
+    </snippets>
+    <Panel class="inventoryhud" hittest="false">
+        <Panel id="InventoryDialog" class="inventory-container hide">
+            <Image class="inventory-dialog" src="file://{images}/inventory/window.png">
+                <Panel class="left">
+                    <Label class="TitleFont classname" text="Warrior"/>
+                    <Label class="level" text="Level 13"/>
+                    <Panel id="Eqmpt" class="test-equipment"></Panel>
+                    <Image class="doll" src="file://{images}/inventory/doll.png"/>
+                </Panel>
+                <Panel class="right">
+                    <Label class="backpackLabel" text="BACKPACK"/>
+                    <Panel id="ItmCnt" class="test-container"></Panel>
+                    <Panel class="gold-coins">
+                        <Image src="file://{images}/inventory/gold_coins.png"/>
+                        <Label class="MonoNumbersFont gold-count" text="23,917"/>
+                    </Panel>
+                </Panel>
+            </Image>
+            
+            <Image class="quest-dialog-icon" src="file://{images}/inventory/header.png">
+                <Label id="InventoryMainTitle" class="TitleFont header-label" text="INVENTORY"/>
+            </Image>
+        </Panel>
+    </Panel>
+</root>

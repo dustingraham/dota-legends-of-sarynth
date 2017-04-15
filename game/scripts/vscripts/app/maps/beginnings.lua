@@ -32,6 +32,9 @@ function CustomMap:OnNpcSpawned(event)
                 if TEST_PICK_HERO then
                     CharacterPick:TestMapPickHero(npc, TEST_PICK_HERO)
                 end
+                if TEST_PICK_HERO_ALT then
+                    CharacterPick:CreateCustomHeroForPlayer(npc:GetPlayerOwnerID(), TEST_PICK_HERO_ALT, false)
+                end
             end
         end
     end

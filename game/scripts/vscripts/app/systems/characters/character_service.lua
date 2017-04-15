@@ -174,8 +174,11 @@ function CharacterService:OnHeroDeath(e, event)
 end
 
 function CharacterService:OnPlayerLevelUp(event)
+    DeepPrintTable(event)
     local player = EntIndexToHScript(event.player)
     local hero = player:GetAssignedHero()
+    if not hero then return end
+
     hero:SetAbilityPoints(0)
 
     --    for i = 0, 2 do
@@ -222,77 +225,82 @@ local function TestItem(hero, key)
     -- local drop = CreateItemOnPositionSync(pos, item)
     -- local pos_launch = pos + RandomVector(RandomFloat(150, 200))
     -- item:LaunchLoot(false, 200, 0.75, pos_launch)
-    Containers:AddItemToUnit(hero, CreateItem(key, nil, nil))
-end
-local function TestTest(hero)
-    -- local pos = hero:GetAbsOrigin()
-    TestItem(hero, 'item_boots_leather_common')
-
-    TestItem(hero, 'item_kobold_amulet_unique')
-    TestItem(hero, 'item_kobold_amulet_2')
-    TestItem(hero, 'item_kobold_amulet_1')
-    TestItem(hero, 'item_kobold_armor_2')
-    TestItem(hero, 'item_kobold_armor_1')
-    TestItem(hero, 'item_kobold_weapon_unique')
-    TestItem(hero, 'item_kobold_weapon_2')
-    TestItem(hero, 'item_kobold_weapon_1')
-    TestItem(hero, 'item_amulet_scar')
-
-    hero.customInventory:Open(hero:GetPlayerOwnerID())
+    --Containers:AddItemToUnit(hero, CreateItem(key, nil, nil))
+    hero.inventory:AddItem(CreateItem(key, nil, nil))
 end
 local function TestQuest(hero)
     -- local pos = hero:GetAbsOrigin()
 
-    Containers:SetDefaultInventory(hero, hero.customEquipment)
+    --Containers:SetDefaultInventory(hero, hero.customEquipment)
     -- Six items, this is what I got after test quests.
     -- Level 6 also.
-    TestItem(hero, 'item_broadsword_tier1')
-    TestItem(hero, 'item_broadsword_tier2')
-    -- TestItem(hero, 'item_broadsword_tier3')
     TestItem(hero, 'item_broadsword_tier4')
-    --TestItem(hero, 'item_armor_tier1')
     TestItem(hero, 'item_armor_tier2')
+    -- TestItem(hero, 'item_broadsword_tier3')
+    TestItem(hero, 'item_broadsword_tier2')
+    --TestItem(hero, 'item_armor_tier1')
+    TestItem(hero, 'item_boots_leather_common')
     --TestItem(hero, 'item_armor_tier3')
     --TestItem(hero, 'item_amulet_tier1')
-    TestItem(hero, 'item_amulet_tier2')
+    TestItem(hero, 'item_broadsword_tier3')
     --TestItem(hero, 'item_amulet_tier3')
     --TestItem(hero, 'item_boots_leather')
-    TestItem(hero, 'item_boots_leather_common')
-    Containers:SetDefaultInventory(hero, hero.customInventory)
+    TestItem(hero, 'item_armor_tier3')
+    --Containers:SetDefaultInventory(hero, hero.customInventory)
+end
+local function TestTest(hero)
+    -- local pos = hero:GetAbsOrigin()
+    --TestItem(hero, 'item_boots_leather_common')
+
+    TestItem(hero, 'item_broadsword_tier1')
+    TestItem(hero, 'item_broadsword_tier2')
+    TestItem(hero, 'item_kobold_amulet_2')
+    TestItem(hero, 'item_kobold_amulet_1')
+    TestItem(hero, 'item_kobold_amulet_1')
+    --TestItem(hero, 'item_kobold_armor_2')
+    --TestItem(hero, 'item_kobold_armor_1')
+    --TestItem(hero, 'item_kobold_weapon_unique')
+    --TestItem(hero, 'item_kobold_weapon_2')
+    --TestItem(hero, 'item_kobold_weapon_1')
+    --TestItem(hero, 'item_amulet_scar')
+    --TestQuest(hero)
+    --hero.customInventory:Open(hero:GetPlayerOwnerID())
 end
 
 function CharacterService:OnHeroPick(e, event)
     local hero = event.hero
 
+    hero.inventory = Inventory(hero)
+
     -- This separation is purely for the IDE formatting...
-    local invenDef = {
-        -- layout = {6,6,6},
-        layout = {4,4,4,4,4},
-        position = "220px 120px 0px",
-        entity = hero,
-        headerText = "#Container_Backpack",
-        pids = {hero:GetPlayerOwnerID()},
-        OnDragWorld = true,
-        AddItemFilter = Dynamic_Wrap(CharacterService, 'ContainerItemFilter'),
-    }
-    hero.customInventory = Containers:CreateContainer(invenDef)
-
-    local equipDef = {
-        layout = {2,2,2},
-        position = "20px 120px 0px",
-        entity = hero,
-        headerText = "#Container_Equipment",
-        pids = {hero:GetPlayerOwnerID()},
-        OnDragWorld = true,
-        equipment = true,
-        AddItemFilter = Dynamic_Wrap(CharacterService, 'ContainerItemFilter'),
-    }
-    hero.customEquipment = Containers:CreateContainer(equipDef)
-
-    -- Default to open equipment on load.
-    hero.customEquipment:Open(hero:GetPlayerOwnerID())
-    -- Picked up items go into inventory.
-    Containers:SetDefaultInventory(hero, hero.customInventory)
+    --local invenDef = {
+    --    -- layout = {6,6,6},
+    --    layout = {6,6,6,6,6,6},
+    --    position = "220px 120px 0px",
+    --    entity = hero,
+    --    headerText = "#Container_Backpack",
+    --    pids = {hero:GetPlayerOwnerID()},
+    --    OnDragWorld = true,
+    --    AddItemFilter = Dynamic_Wrap(CharacterService, 'ContainerItemFilter'),
+    --}
+    --hero.customInventory = Containers:CreateContainer(invenDef)
+    --
+    --local equipDef = {
+    --    layout = {2,2,2},
+    --    position = "20px 120px 0px",
+    --    entity = hero,
+    --    headerText = "#Container_Equipment",
+    --    pids = {hero:GetPlayerOwnerID()},
+    --    OnDragWorld = true,
+    --    equipment = true,
+    --    AddItemFilter = Dynamic_Wrap(CharacterService, 'ContainerItemFilter'),
+    --}
+    --hero.customEquipment = Containers:CreateContainer(equipDef)
+    --
+    ---- Default to open equipment on load.
+    --hero.customEquipment:Open(hero:GetPlayerOwnerID())
+    ---- Picked up items go into inventory.
+    --Containers:SetDefaultInventory(hero, hero.customInventory)
 
     -- Entering world.
     GameRules:GetGameModeEntity():EmitSound('jboberg_01.music.ui_hero_select')
@@ -300,15 +308,16 @@ function CharacterService:OnHeroPick(e, event)
     -- Sounds:EmitSoundOnClient(0, 'jboberg_01.stinger.radiant_win')
 
     -- Load Items Equipment/Inventory
-    local items = event.player:GetPriorItems()
-    if items then
-        for _,itemDef in pairs(items.equipment) do
-            hero.customEquipment:AddItem(CreateItem(itemDef.name, hero, hero), itemDef.slot)
-        end
-        for _,itemDef in pairs(items.inventory) do
-            hero.customInventory:AddItem(CreateItem(itemDef.name, hero, hero), itemDef.slot)
-        end
-    end
+    -- TODO TODO
+    --local items = event.player:GetPriorItems()
+    --if items then
+    --    for _,itemDef in pairs(items.equipment) do
+    --        hero.customEquipment:AddItem(CreateItem(itemDef.name, hero, hero), itemDef.slot)
+    --    end
+    --    for _,itemDef in pairs(items.inventory) do
+    --        hero.customInventory:AddItem(CreateItem(itemDef.name, hero, hero), itemDef.slot)
+    --    end
+    --end
 
     -- Items for testing.
     if IsInToolsMode() and TEST_SPAWN_ITEMS then TestTest(hero) end

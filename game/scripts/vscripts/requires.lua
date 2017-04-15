@@ -23,6 +23,9 @@ for _,file in ipairs({
     'app/systems/characters/player',
     'app/systems/characters/save_load',
 
+    'app/systems/inventory/inventory_service',
+    'app/systems/inventory/inventory',
+
     'app/systems/npcs/base_npc_creature',
     'app/systems/npcs/dialog_system',
     'app/systems/npcs/drops',
@@ -43,7 +46,7 @@ for _,file in ipairs({
     'app/utils/md5',
 
     'vendor/barebones/animations',
-    'vendor/barebones/containers',
+    -- 'vendor/barebones/containers',
     'vendor/barebones/notifications',
     'vendor/barebones/playertables',
     'vendor/barebones/timers',

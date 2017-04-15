@@ -103,12 +103,14 @@ function CharacterPick:CreateCustomHeroForPlayer(PlayerID, character, isPrimary)
         Debug('CharacterPick', 'Replace Hero', heroName)
         PlayerResource:ReplaceHeroWith(PlayerID, heroName, 0, 0)
         hero = PlayerResource:GetSelectedHeroEntity(PlayerID)
+        hero:SetAbsOrigin(hero:GetAbsOrigin())
     else
+        -- TODO: Probably won't work idk.
         Debug('CharacterPick', 'Create Hero', heroName)
-        local player = PlayerResource:GetPlayer(PlayerID)
-        hero = CreateHeroForPlayer(heroName, player)
+        hero = CreateHeroForPlayer(heroName, PlayerResource:GetPlayer(PlayerID))
         hero:SetControllableByPlayer(PlayerID, false)
-        -- hero:SetOwner(player)
+        hero:SetAbsOrigin(hero:GetAbsOrigin())
+        hero:SetOwner(PlayerResource:GetPlayer(PlayerID))
     end
 
     -- Potential fix for auto-attack issue. Unable to reproduce.

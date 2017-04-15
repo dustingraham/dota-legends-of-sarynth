@@ -64,7 +64,6 @@ function Drops:RollForDrops(killedUnit)
     end
 end
 
--- Drop item with 60 second auto-self-cleanup.
 function Drops:DropItem(item, pos_launch, drop)
     -- Set a 60 second timer.
     local expires = 60

@@ -14,3 +14,16 @@ function WrapFunction(name) {
 
 Game.AddCommand("+CustomGameInventory", WrapFunction("CustomOnPressedInventory"), "", 0);
 Game.AddCommand("-CustomGameInventory", WrapFunction("CustomOnReleasedInventory"), "", 0);
+
+Game.CreateCustomKeyBind('n', 'KeyInventoryToggle');
+Game.AddCommand('KeyInventoryToggle', WrapFunction('KeyInventoryToggle'), '', 0);
+
+
+
+// Game.CreateCustomKeyBind("h", "+npress");
+// Game.AddCommand( "+npress", function() {
+//     $.Msg("n up");
+// }, "", 0 );
+// Game.AddCommand( "-npress", function() {
+//     $.Msg("n down");
+// }, "", 0 );

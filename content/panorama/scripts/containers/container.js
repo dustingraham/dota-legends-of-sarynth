@@ -97,16 +97,17 @@ function SetLayout(layout)
   inner.RemoveAndDeleteChildren();
 
   var slot = 1;
-   
+
   for (var key in layout){
     var row = $.CreatePanel( "Panel", inner, "row" + key);
     row.AddClass('ItemRow');
- 
+
     //var queryUnit = Players.GetLocalPlayerPortraitUnit();
     //var item = Entities.GetItemInSlot( queryUnit, i );
- 
+ $.Msg(contID);
+
     for (var j=0; j<layout[key]; j++){
-      var child = $.CreatePanel( "Panel", row, "slot" + slot); 
+      var child = $.CreatePanel( "Panel", row, "slot" + slot);
       child.BLoadLayout("file://{resources}/layout/custom_game/containers/inventory_item.xml", false, false);
       child.SetItem( -1, contID, slot, $.GetContextPanel() );
 
@@ -138,7 +139,7 @@ function ButtonPress(number, name)
     if (!ret)
       return;
   }
-  
+
   if (action !== 0){
     GameEvents.SendCustomGameEventToServer( "Containers_OnButtonPressed", {unit:unit, contID:contID, button:parseInt(number)} );
     return;
@@ -236,7 +237,7 @@ function NewContainer(id)
 
   var pt = PlayerTables.GetAllTableValues(idString);
   //$.Msg(pt);
-  
+
   //$.Msg("container panel created ", panel.id);
 
   SetSkins(pt.skins);
@@ -258,7 +259,7 @@ function NewContainer(id)
     f = function(){
       count++;
       if (panel.desiredlayoutheight === 0){
-        $.Schedule(1/30, f);      
+        $.Schedule(1/30, f);
         return;
       }
 
@@ -329,7 +330,7 @@ function CloseClicked()
       return;
   }
 
-  
+
   if (action !== 0){
     GameEvents.SendCustomGameEventToServer( "Containers_OnCloseClicked", {unit:unit, contID:contID} );
     return;
@@ -352,14 +353,14 @@ function OnDragStart( panelId, dragCallbacks )
   dragCallbacks.offsetY = cursor[1] - panel.actualyoffset;//20;
   dragCallbacks.removePositionBeforeDrop = false;
   return false;
-} 
+}
 
 function OnDragEnd( panelId, draggedPanel )
 {
   //$.Msg('OnDragEnd -- ', panelId, ' -- ', draggedPanel);
   draggedPanel.SetParent(draggedPanel.dragParent);
-  return false; 
-} 
+  return false;
+}
 
 function NullDragStart( panelId, dragCallbacks)
 {
@@ -374,7 +375,7 @@ function NullDragEnd( panelId, draggedPanel)
 
 
 (function(){
-  //$.DispatchEvent("DOTAShowTitleTextTooltipStyled", $.GetContextPanel(), "Title asdf", "asdfasdf asdf asdf asdf asdf few fwef wef we", "StlyeClass") 
+  //$.DispatchEvent("DOTAShowTitleTextTooltipStyled", $.GetContextPanel(), "Title asdf", "asdfasdf asdf asdf asdf asdf few fwef wef we", "StlyeClass")
 
   //TestFunction();
   //TestFunctionTwo();

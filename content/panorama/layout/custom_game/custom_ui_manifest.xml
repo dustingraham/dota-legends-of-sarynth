@@ -10,7 +10,7 @@
         <CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/libraries/barebones_notifications.xml" />
         <CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/keybinds.xml" />
         <CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/mainhud.xml" />
-        <CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/containers/container_base.xml" />
         <CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/character_pick.xml" />
+        <CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/inventory.xml" />
     </Panel>
 </root>

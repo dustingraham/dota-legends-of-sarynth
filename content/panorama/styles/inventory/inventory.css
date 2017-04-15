@@ -1,0 +1,253 @@
+.inventoryhud {
+    align:center center;
+}
+.inventory-container {
+    align:center center;
+    /*border:1px solid #00ff00;*/
+}
+.inventory-container .header-label {
+    color:#dab59b;
+    vertical-align:center;
+    margin-left:85px;
+    font-size:23px;
+    transform:translateY(-3px);
+}
+.inventory-dialog {
+    align:center center;
+    /*border:1px solid #ff0000;*/
+    flow-children:right;
+    margin:40px;
+}
+.inventory-dialog .left {
+    /*border:1px solid #0000ff;*/
+    width:47%;
+    height:100%;
+}
+.inventory-dialog .classname {
+    align:center top;
+    margin-top:50px;
+    color:#dab59b;
+    font-size:24px;
+}
+.inventory-dialog .level {
+    align:center top;
+    margin-top:80px;
+    font-size:16px;
+}
+.inventory-dialog .doll {
+    align:center center;
+}
+
+.inventory-dialog .right {
+    /*border:1px solid #ff00ff;*/
+    width:53%;
+    height:100%;
+}
+.inventory-dialog .backpackLabel {
+    align:center top;
+    margin-top:80px;
+    font-size:16px;
+}
+.test-equipment {
+    /*border:1px solid #ff0000;*/
+    width:100%;
+    height:100%;
+}
+.test-container {
+    /*border:1px solid #ffff00;*/
+    flow-children:down;
+    width:100%;
+    margin-top:112px;
+}
+.test-container .ItemRow {
+    margin-bottom:0;
+}
+.gold-coins {
+    flow-children:right;
+    align:right bottom;
+    padding:0 20px 10px 0;
+}
+.gold-coins Image {
+}
+.gold-count {
+    color:#ffd700;
+    font-size:20px;
+    line-height:32px;
+}
+
+.test-equipment .item {
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+.test-equipment #slot1 {
+    background-image:url("file://{images}/inventory/slots/slot_helm.png");
+}
+.test-equipment #slot2 {
+    background-image:url("file://{images}/inventory/slots/slot_necklace.png");
+}
+.test-equipment #slot3 {
+    background-image:url("file://{images}/inventory/slots/slot_chest.png");
+}
+.test-equipment #slot4 {
+    background-image:url("file://{images}/inventory/slots/slot_gloves.png");
+}
+.test-equipment #slot5 {
+    background-image:url("file://{images}/inventory/slots/slot_pants.png");
+}
+.test-equipment #slot6,
+.test-equipment #slot7 {
+    background-image:url("file://{images}/inventory/slots/slot_ring.png");
+}
+.test-equipment #slot8 {
+    background-image:url("file://{images}/inventory/slots/slot_boots.png");
+}
+.test-equipment #slot9 {
+    background-image:url("file://{images}/inventory/slots/slot_weapon.png");
+}
+.test-equipment #slot10 {
+    background-image:url("file://{images}/inventory/slots/slot_offhand.png");
+}
+
+.hide { visibility:collapse; }
+
+.test-equipment #slot1,
+.test-equipment #slot2,
+.test-equipment #slot3,
+.test-equipment #slot4 {
+    align:left center;
+    margin-left:50px;
+}
+.test-equipment #slot5,
+.test-equipment #slot6,
+.test-equipment #slot7,
+.test-equipment #slot8 {
+    align:right center;
+    margin-right:50px;
+}
+
+.test-equipment #slot1,
+.test-equipment #slot5 {
+    margin-bottom:225px;
+}
+.test-equipment #slot2,
+.test-equipment #slot6 {
+    margin-bottom:75px;
+}
+.test-equipment #slot3,
+.test-equipment #slot7 {
+    margin-top:75px;
+}
+.test-equipment #slot4,
+.test-equipment #slot8 {
+    margin-top:225px;
+}
+
+
+.test-equipment #slot9,
+.test-equipment #slot10 {
+    align:center bottom;
+    margin-bottom:50px;
+}
+.test-equipment #slot9 {
+    margin-right:100px;
+}
+.test-equipment #slot10 {
+    margin-left:100px;
+}
+.test-container .item,
+.test-equipment .item { width:70px; height:52px; }
+.test-container .btn,
+.test-equipment .btn { width:100%; height:100%; align:center center; }
+.test-container .ItemImage ,
+.test-equipment .ItemImage {
+    align: center center;
+    width: 90%;
+    height: 90%;
+    border-radius:2px;
+}
+.test-container .btn {
+    background-image:url("file://{images}/inventory/inventory-backpack-placeholder.png");
+}
+.test-container .ItemImage {
+    background-image:none;
+}
+.test-equipment .ItemImage {
+    background-image:url("file://{images}/inventory/inventory-equipment-placeholder.png");
+}
+
+.MyItemRow {
+    margin:0;
+    flow-children:right;
+    align: center center;
+}
+
+.ItemImage.item_rarity_junk
+{
+    border:1px solid #999999;
+    box-shadow: inset 0 0 5px 0 #99999944;
+}
+.ItemImage.item_rarity_quest
+{
+    border:1px solid #ffffb2;
+    box-shadow: inset 0 0 5px 0 #ffffb244;
+}
+.ItemImage.item_rarity_common
+{
+    border:1px solid #ffffff;
+    box-shadow: inset 0 0 5px 0 #ffffff44;
+}
+.ItemImage.item_rarity_uncommon
+{
+    border:1px solid #1eff00;
+    box-shadow: inset 1px 0 5px 0 rgba(30,255,0,0.25);
+}
+.ItemImage.item_rarity_rare
+{
+    border:1px solid #0070ff;
+    box-shadow: inset 0 0 5px 0 #0070ff44;
+}
+.ItemImage.item_rarity_epic
+{
+    border:1px solid #a335ee;
+    box-shadow: inset 1px -1px 8px 1px #a335ee44;
+}
+.ItemImage.item_rarity_legendary
+{
+    border:1px solid #ff8000;
+    box-shadow: inset 0 0 5px 0 #ff800044;
+}
+
+.dragging_from {
+    saturation: 0.5;
+    wash-color: #808080;
+}
+
+.DropTargetHighlight
+{
+    align:center center;
+    width: 88%;
+    height: 82%;
+    border-radius:2px;
+    background-color: gradient( radial, 50% -20%, 0% 0%, 80% 80%, from( #999999 ), to( #FFFFFF00 ) );
+    opacity: 0.0;
+}
+.test-equipment .empty .DropTargetHighlight
+{
+    border-radius:1px;
+    width:79%;
+    height:76%;
+}
+.has-item .DropTargetHighlight
+{
+    width:90%;
+    height:90%;
+}
+.potential_drop_target .DropTargetHighlight
+{
+    opacity: 0.3;
+}
+.bad_drag_target .DropTargetHighlight
+{
+    background-color: gradient( radial, 50% -20%, 0% 0%, 80% 80%, from( #990000 ), to( #FF000000 ) );
+}
