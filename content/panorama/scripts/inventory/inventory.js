@@ -1,5 +1,9 @@
 var GetPanel = function(panel)
 {
+    // $.Msg('---');
+    // $.Msg('Panel Find Attempt');
+    // $.Msg(panel);
+
     // If numeric, prepend slot prefix.
     if (typeof panel === 'number')
     {
@@ -11,9 +15,15 @@ var GetPanel = function(panel)
         panel = inventory.panels[panel];
     }
 
+    // $.Msg('Panel Find Result');
+    // $.Msg(panel);
+
     // Return the panel object.
     return panel;
 };
+
+var $backpack = $('#Backpack');
+var $equipment = $('#Equipment');
 
 var inventory = {
     panels: {},
@@ -30,7 +40,7 @@ var inventory = {
             return true;
         }
 
-        $.Msg('Drag Start: '+panel.panelId);
+        // $.Msg('Drag Start: '+panel.panelId);
 
         var itemName = panel.FindChildTraverse('TheItemImage').itemname;
 
@@ -40,7 +50,19 @@ var inventory = {
         displayPanel.foundDestination = false;
         displayPanel.originalPanel = panel;
         displayPanel.slotType = Abilities.GetSpecialValueFor(panel.eid, 'slot_type');
-        $.Msg('Dragging Slot Type: '+displayPanel.slotType);
+
+        // $.Msg('Dragging Slot Type: '+displayPanel.slotType);
+        if (displayPanel.slotType > 0)
+        {
+            // Highlight available targets...
+            $equipment.FindChildrenWithClassTraverse('slot-type-'+displayPanel.slotType).forEach(function(e) {
+                e.AddClass('compatible_drop_target');
+            });
+
+            // var slots = $equipment.FindChildrenWithClassTraverse('slot-type-'+displayPanel.slotType);
+            // $.Msg('Found compatible...');
+            // $.Msg(slots);
+        }
 
         // displayPanel.contextEntityIndex = m_Item;
         // displayPanel.m_DragItem = m_Item;
@@ -57,53 +79,68 @@ var inventory = {
     },
     OnDragEnd: function(panelId, draggedPanel)
     {
-        $.Msg('Drag End: '+panelId);
+        // $.Msg('Drag End: '+panelId);
 
         // TODO: World drop.
 
+        // Remove compatibility highlights.
+        $equipment.FindChildrenWithClassTraverse('compatible_drop_target').forEach(function(e) {
+            e.RemoveClass('compatible_drop_target');
+        });
+
         draggedPanel.DeleteAsync( 0 );
         draggedPanel.originalPanel.RemoveClass('dragging_from');
+
         return true;
     },
     OnDragEnter: function(panel, draggedPanel)
     {
-        $.Msg('Drag Enter: '+panel.panelId);
-        $.Msg('Drag Enter Type: '+panel.slotType);
-        $.Msg('Drag Drrrg Type: '+draggedPanel.slotType);
+        // $.Msg('Drag Enter: '+panel.panelId);
+        // $.Msg('Drag Enter Type: '+panel.slotType);
+        // $.Msg('Drag Drrrg Type: '+draggedPanel.slotType);
 
         panel.AddClass('potential_drop_target');
-        if (panel.slotType !== draggedPanel.slotType)
+        if (panel.slotType > 0 && panel.slotType !== draggedPanel.slotType)
         {
             panel.AddClass('bad_drag_target');
         }
+
         return true;
     },
     OnDragDrop: function(panel, draggedPanel)
     {
+        draggedPanel.foundDestination = true;
+        // If they dropped back in same location.
         if (panel === draggedPanel.originalPanel)
         {
             // Dropped on self, nothing to do.
-            draggedPanel.foundDestination = true;
+            return true;
+        }
+        // If they dropped on an invalid slot.
+        if (panel.slotType > 0 && panel.slotType !== draggedPanel.slotType)
+        {
             return true;
         }
 
-        $.Msg('Drag Drop: '+panel.panelId);
-
-        draggedPanel.foundDestination = true;
-
-        // Remove item from both panels.
         var targetItemName = panel.FindChildTraverse('TheItemImage').itemname;
         var targetRare = panel.tmpRare;
-        var draggedRare = draggedPanel.originalPanel.tmpRare;
         var targetEid = panel.eid;
-        $.Msg('Target: '+targetEid);
-        $.Msg('Old: '+draggedPanel.originalPanel.eid);
+        var draggedRare = draggedPanel.originalPanel.tmpRare;
+        var draggedEid = draggedPanel.originalPanel.eid;
+        var draggedItemName = draggedPanel.itemname;
 
-        RemoveItem(panel.panelId);
-        RemoveItem(draggedPanel.originalPanel.panelId);
+        // Containers_OnDragFrom
+        GameEvents.SendCustomGameEventToServer('Inventory_OnDragDrop', {
+            slotFrom:panel.panelId,
+            slotTo:draggedPanel.originalPanel.panelId
+        });
 
-        AddItem(panel, draggedPanel.originalPanel.eid, draggedPanel.itemname, draggedRare);
-        AddItem(draggedPanel.originalPanel, targetEid, targetItemName, targetRare);
+
+        // JS SWAP!
+        // RemoveItem(panel.panelId);
+        // RemoveItem(draggedPanel.originalPanel.panelId);
+        // AddItem(panel, draggedEid, draggedItemName, draggedRare);
+        // AddItem(draggedPanel.originalPanel, targetEid, targetItemName, targetRare);
 
         return true;
     },
@@ -133,8 +170,13 @@ var AddItem = function(panel, eid, itemName, itemRarity)
     panel.AddClass('has-item');
 
     panel.FindChildTraverse('TheItemImage').itemname = itemName;
+    if (panel.currentRarity)
+    {
+        // If we're swapping items, remove old rarity.
+        panel.FindChildTraverse('TheItemImage').SetHasClass(panel.currentRarity, false);
+    }
     panel.FindChildTraverse('TheItemImage').SetHasClass(itemRarity, true);
-    panel.tmpRare = itemRarity;
+    panel.currentRarity = itemRarity;
     panel.eid = eid;
 };
 
@@ -146,7 +188,8 @@ var RemoveItem = function(panel)
     panel.RemoveClass('has-item');
 
     panel.FindChildTraverse('TheItemImage').itemname = null;
-    panel.FindChildTraverse('TheItemImage').SetHasClass(panel.tmpRare, false);
+    panel.FindChildTraverse('TheItemImage').SetHasClass(panel.currentRarity, false);
+    panel.currentRarity = false;
 };
 
 var panelSlotTypes = {
@@ -180,32 +223,17 @@ var panelSlotTypes = {
 
 var BuildItemBlock = function(attachTo, slotId, slotType)
 {
-    // var panel = $.CreatePanel('Panel', $('#'+params.cont), 'myslot'+params.id);
-    // panel.BLoadLayoutSnippet('TestItem');
-    // //panel.SetItem(-1, 99, params.id, $.GetContextPanel());
-
-    //$.Msg(params);
-
-    //var child = $.CreatePanel( "Panel", params.row, "slot" + params.id);
-    //child.BLoadLayout("file://{resources}/layout/custom_game/containers/inventory_item.xml", false, false);
-    //child.SetItem( -1, params.contID, params.id, $.GetContextPanel() );
-
-    var panelId = "slot" + slotId;
-    var panel = $.CreatePanel( "Panel", params.row, panelId);
+    var panelId = 'slot' + slotId;
+    var panel = $.CreatePanel('Panel', attachTo, panelId);
 
     panel.panelId = panelId;
-
-    // Temp
-    panel.slotType = slotId;
-
-    //$.Msg('Build: '+panelId);
+    panel.slotType = slotType;
     inventory.panels[panelId] = panel;
 
-    // panel.BLoadLayout("file://{resources}/layout/custom_game/containers/inventory_item.xml", false, false);
     panel.BLoadLayoutSnippet('ItemBlock');
-    panel.tmp = panelId;
-
-    //panel.FindChildTraverse('TheButton').onmouseover = function() { $.Msg('ok...'); };
+    panel.AddClass('slot-type-'+slotType);
+    //panel.AddClass('empty');
+    //panel.tmp = panelId;
 
     $.RegisterEventHandler('Activated', panel, inventory.ActivateItem);
     $.RegisterEventHandler('DragStart', panel, inventory.OnDragStart);
@@ -213,58 +241,40 @@ var BuildItemBlock = function(attachTo, slotId, slotType)
     $.RegisterEventHandler('DragEnter', panel, function(_, dragged) { inventory.OnDragEnter(panel, dragged); });
     $.RegisterEventHandler('DragDrop', panel, function(_, dragged) { inventory.OnDragDrop(panel, dragged); });
     $.RegisterEventHandler('DragLeave', panel, function(_, dragged) { inventory.OnDragLeave(panel, dragged); });
-
     //panel.SetPanelEvent('onmouseover', inventory.OnMouseOver);
-
-    //if (params.row.id == 'Eqmpt') { return; }
-    panel.AddClass('empty');
 
     // item_kobold_weapon_2
     //panel.SetItem( -1, params.contID, params.id, $.GetContextPanel() );
 };
 
-Game.KeyInventoryToggle = function()
-{
-    $('#InventoryDialog').ToggleClass('hide');
-};
-
 // For reloadingness.
-$('#ItmCnt').RemoveAndDeleteChildren();
-$('#Eqmpt').RemoveAndDeleteChildren();
+$backpack.RemoveAndDeleteChildren();
+$equipment.RemoveAndDeleteChildren();
 
-for (i = 1; i <= 12; i++)
+// Equipment panels.
+var BuildEquipmentPanel = function(position, start, end)
 {
-    // Skip unused slots.
-    if (i > 3 && i < 8) continue;
+    var panel = $.CreatePanel('Panel', $equipment, 'equipment_' + position);
+    panel.AddClass('equipment-panel-group');
+    for (var i = start; i <= end; i++)
+    {
+        BuildItemBlock(panel, i, panelSlotTypes[i]);
+    }
+};
+BuildEquipmentPanel('left', 1, 3);
+BuildEquipmentPanel('right', 8, 10);
+BuildEquipmentPanel('bottom', 11, 12);
 
-    BuildItemBlock($('#Eqmpt'), i, panelSlotTypes[i]);
-}
-
-// Six rows of six.
+// Six rows of six for backpack.
 for (i = 0; i <= 5; i++) {
-    var row = $.CreatePanel('Panel', $('#ItmCnt'), 'row' + i);
-    row.AddClass('MyItemRow');
-
+    var row = $.CreatePanel('Panel', $backpack, 'row' + i);
+    row.AddClass('backpack-panel-group');
     for (var j = 1; j <= 6; j++) {
         // Offset by 12.
         var slotId = 12 + j + i * 6;
         BuildItemBlock(row, slotId, 0);
     }
 }
-
-// AddItem(20, 'item_kobold_amulet_unique', 'item_rarity_common');
-// AddItem(4, 'item_kobold_armor_2', 'item_rarity_epic');
-// AddItem(5, 'item_kobold_amulet_1', 'item_rarity_rare');
-// AddItem(7, 'item_amulet_tier2', 'item_rarity_uncommon');
-// AddItem(12, 'item_kobold_amulet_unique', 'item_rarity_epic');
-// AddItem(15, 'item_kobold_armor_2', 'item_rarity_common');
-// AddItem(16, 'item_kobold_amulet_1', 'item_rarity_rare');
-// AddItem(17, 'item_kobold_weapon_1', 'item_rarity_uncommon');
-// AddItem(18, 'item_broadsword_tier2', 'item_rarity_common');
-// AddItem(19, 'item_armor_tier2', 'item_rarity_uncommon');
-// AddItem(20, 'item_boots_leather_common', 'item_rarity_uncommon');
-
-$.Msg('Rebuild Complete');
 
 var colorMap = {
     // Special based on level.
@@ -279,41 +289,51 @@ var colorMap = {
     '-16736538': 'item_rarity_legendary'
 };
 
-var PlaceItemTemp = function(eid, slot)
-{
-    $.Msg('Slot is: '+slot);
-    $.Msg('Level is: '+Abilities.GetLevel(eid));
-
-    var itemName = Abilities.GetAbilityName(eid);
-    var colorId = Items.GetItemColor(eid);
-    if (colorId === -1)
-    {
-        colorId = Abilities.GetLevel(eid);
-    }
-
-    var rarityClass = colorMap[colorId];
-    AddItem(slot, eid, itemName, rarityClass);
-};
-
 var PlaceAllItems = function(items)
 {
-    $.Each(items, PlaceItemTemp);
+    $.Each(items, function(eid, slot)
+    {
+        // $.Msg('Slot is: '+slot);
+        // $.Msg('Level is: '+Abilities.GetLevel(eid));
+
+        var itemName = Abilities.GetAbilityName(eid);
+        var colorId = Items.GetItemColor(eid);
+        if (colorId === -1)
+        {
+            colorId = Abilities.GetLevel(eid);
+        }
+
+        var rarityClass = colorMap[colorId];
+        AddItem(slot, eid, itemName, rarityClass);
+    });
 };
 
+function isEmptyObject(obj) {
+    for(var prop in obj) {
+        if (Object.prototype.hasOwnProperty.call(obj, prop)) {
+            return false;
+        }
+    }
+    return true;
+}
+
 var InventoryTableChange = function(tableName, changes, deletions) {
-    $.Msg('Changes happened');
-    $.Msg(tableName);
-    $.Msg(changes);
-    $.Msg(deletions);
-    PlaceAllItems(changes);
-    // $.Each(changes, function(eid, slot)
-    // {
-    //     var itemName = Abilities.GetAbilityName(eid);
-    //     $.Msg(eid);
-    //     $.Msg(itemName);
-    //     //AddItem(3, 'item_kobold_amulet_unique', 'item_rarity_common');
-    // });
-    //$.Msg('Changes done.');
+    // $.Msg('PlayerTableUpdate happened: '+tableName);
+    if (!isEmptyObject(deletions))
+    {
+        //$.Msg('Deletions happened.');
+        //$.Msg(deletions);
+        $.Each(deletions, function(eid, slotId)
+        {
+            RemoveItem(slotId)
+        });
+    }
+    if (!isEmptyObject(changes))
+    {
+        //$.Msg('Changes happened.');
+        //$.Msg(changes);
+        PlaceAllItems(changes);
+    }
 };
 
 var PlayerTables = GameUI.CustomUIConfig().PlayerTables;
@@ -331,10 +351,15 @@ PlayerTables.SubscribeNetTableListener(playerTableKey, InventoryTableChange);
 // $.GetContextPanel().SetHasClass('item_rarity_legendary', !isEmpty && rarity == 7);
 
 // Retrieve values on the client
-//$.Msg(PlayerTables.GetTableValue("player_0_quests", "count"));
+//$.Msg(playerTableKey);
 var currentValues = PlayerTables.GetAllTableValues(playerTableKey);
-$.Msg(playerTableKey);
 if (currentValues)
 {
+    //$.Msg('Placing known entities.');
     PlaceAllItems(currentValues);
 }
+
+Game.KeyInventoryToggle = function()
+{
+    $('#InventoryDialog').ToggleClass('hide');
+};

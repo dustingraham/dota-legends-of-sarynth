@@ -12,6 +12,10 @@
     font-size:23px;
     transform:translateY(-3px);
 }
+.backpackLabel, .levelLabel {
+    color:#999;
+}
+
 .inventory-dialog {
     align:center center;
     /*border:1px solid #ff0000;*/
@@ -29,7 +33,7 @@
     color:#dab59b;
     font-size:24px;
 }
-.inventory-dialog .level {
+.inventory-dialog .levelLabel {
     align:center top;
     margin-top:80px;
     font-size:16px;
@@ -48,18 +52,18 @@
     margin-top:80px;
     font-size:16px;
 }
-.test-equipment {
+.equipment-container {
     /*border:1px solid #ff0000;*/
     width:100%;
     height:100%;
 }
-.test-container {
+.backpack-container {
     /*border:1px solid #ffff00;*/
     flow-children:down;
     width:100%;
     margin-top:112px;
 }
-.test-container .ItemRow {
+.backpack-container .ItemRow {
     margin-bottom:0;
 }
 .gold-coins {
@@ -75,108 +79,101 @@
     line-height:32px;
 }
 
-.test-equipment .item {
+.equipment-container .item {
     background-position: center center;
     background-repeat: no-repeat;
 }
 
-.test-equipment #slot1 {
+.equipment-container #slot1 {
     background-image:url("file://{images}/inventory/slots/slot_helm.png");
 }
-.test-equipment #slot2 {
+.equipment-container #slot2 {
     background-image:url("file://{images}/inventory/slots/slot_necklace.png");
 }
-.test-equipment #slot3 {
+.equipment-container #slot3 {
     background-image:url("file://{images}/inventory/slots/slot_chest.png");
 }
-.test-equipment #slot4 {
+.equipment-container #slot4 {
     background-image:url("file://{images}/inventory/slots/slot_gloves.png");
 }
-.test-equipment #slot5 {
+.equipment-container #slot5 {
     background-image:url("file://{images}/inventory/slots/slot_pants.png");
 }
-.test-equipment #slot6,
-.test-equipment #slot7 {
+.equipment-container #slot8,
+.equipment-container #slot9 {
     background-image:url("file://{images}/inventory/slots/slot_ring.png");
 }
-.test-equipment #slot8 {
+.equipment-container #slot10 {
     background-image:url("file://{images}/inventory/slots/slot_boots.png");
 }
-.test-equipment #slot9 {
+.equipment-container #slot11 {
     background-image:url("file://{images}/inventory/slots/slot_weapon.png");
 }
-.test-equipment #slot10 {
+.equipment-container #slot12 {
     background-image:url("file://{images}/inventory/slots/slot_offhand.png");
 }
 
-.hide { visibility:collapse; }
+ .hide { visibility:collapse; }
 
-.test-equipment #slot1,
-.test-equipment #slot2,
-.test-equipment #slot3,
-.test-equipment #slot4 {
+.equipment-panel-group {
+    flow-children:down;
+}
+#equipment_left {
     align:left center;
-    margin-left:50px;
+    margin-left:30px;
+    margin-bottom:100px;
 }
-.test-equipment #slot5,
-.test-equipment #slot6,
-.test-equipment #slot7,
-.test-equipment #slot8 {
+#equipment_right {
     align:right center;
-    margin-right:50px;
+    margin-right:30px;
+    margin-bottom:100px;
 }
-
-.test-equipment #slot1,
-.test-equipment #slot5 {
-    margin-bottom:225px;
-}
-.test-equipment #slot2,
-.test-equipment #slot6 {
-    margin-bottom:75px;
-}
-.test-equipment #slot3,
-.test-equipment #slot7 {
-    margin-top:75px;
-}
-.test-equipment #slot4,
-.test-equipment #slot8 {
-    margin-top:225px;
-}
-
-
-.test-equipment #slot9,
-.test-equipment #slot10 {
+#equipment_bottom {
+    flow-children:right;
     align:center bottom;
-    margin-bottom:50px;
 }
-.test-equipment #slot9 {
-    margin-right:100px;
+
+.backpack-container .item {
+    width:70px;
+    height:52px;
 }
-.test-equipment #slot10 {
-    margin-left:100px;
+.equipment-container .item {
+    width:76px;
+    height:60px;
+    margin:0 10px 40px;
 }
-.test-container .item,
-.test-equipment .item { width:70px; height:52px; }
-.test-container .btn,
-.test-equipment .btn { width:100%; height:100%; align:center center; }
-.test-container .ItemImage ,
-.test-equipment .ItemImage {
+.backpack-container .btn,
+.equipment-container .btn {
+    width:100%;
+    height:100%;
+    align:center center;
+}
+.backpack-container .ItemImage ,
+.equipment-container .ItemImage {
     align: center center;
     width: 90%;
     height: 90%;
     border-radius:2px;
 }
-.test-container .btn {
+/* Odd proportionality issues... */
+.equipment-container .has-item .ItemImage {
+    margin-top:-1px;
+    margin-left:2px;
+    width: 84%;
+    height: 77%;
+    border-radius:2px;
+}
+.backpack-container .btn {
     background-image:url("file://{images}/inventory/inventory-backpack-placeholder.png");
 }
-.test-container .ItemImage {
+.backpack-container .ItemImage {
     background-image:none;
 }
-.test-equipment .ItemImage {
+.equipment-container .ItemImage {
     background-image:url("file://{images}/inventory/inventory-equipment-placeholder.png");
 }
 
-.MyItemRow {
+.backpack-panel-group {
     margin:0;
     flow-children:right;
     align: center center;
@@ -232,22 +229,34 @@
     background-color: gradient( radial, 50% -20%, 0% 0%, 80% 80%, from( #999999 ), to( #FFFFFF00 ) );
     opacity: 0.0;
 }
-.test-equipment .empty .DropTargetHighlight
+.compatible_drop_target .DropTargetHighlight
 {
-    border-radius:1px;
-    width:79%;
-    height:76%;
+    background-color: gradient( radial, 50% -20%, 0% 0%, 80% 80%, from( #999900 ), to( #FFFF0000 ) );
+    opacity: 0.2;
+}
+.equipment-container .empty .DropTargetHighlight
+{
+    width:80%;
+    margin-left:2px;
+    height:73%;
 }
 .has-item .DropTargetHighlight
 {
     width:90%;
     height:90%;
 }
+.equipment-container .has-item .DropTargetHighlight
+{
+    width:82%;
+    height:76%;
+}
 .potential_drop_target .DropTargetHighlight
 {
-    opacity: 0.3;
+    background-color: gradient( radial, 50% -20%, 0% 0%, 80% 80%, from( #999999 ), to( #FFFFFF00 ) );
+    opacity: 0.4;
 }
 .bad_drag_target .DropTargetHighlight
 {
     background-color: gradient( radial, 50% -20%, 0% 0%, 80% 80%, from( #990000 ), to( #FF000000 ) );
 }
+

@@ -44,9 +44,10 @@ function InventoryService:Activate()
 
     Filters:OnOrderFilter(Dynamic_Wrap(InventoryService, 'OrderFilter'), InventoryService)
 
-    CustomGameEventManager:RegisterListener("InventoryService_OnLeftClick", Dynamic_Wrap(InventoryService, "InventoryService_OnLeftClick"))
-    CustomGameEventManager:RegisterListener("InventoryService_OnRightClick", Dynamic_Wrap(InventoryService, "InventoryService_OnRightClick"))
-    CustomGameEventManager:RegisterListener("InventoryService_OnDragFrom", Dynamic_Wrap(InventoryService, "InventoryService_OnDragFrom"))
+    --CustomGameEventManager:RegisterListener("InventoryService_OnLeftClick", Dynamic_Wrap(InventoryService, "InventoryService_OnLeftClick"))
+    --CustomGameEventManager:RegisterListener("InventoryService_OnRightClick", Dynamic_Wrap(InventoryService, "InventoryService_OnRightClick"))
+
+    CustomGameEventManager:RegisterListener("Inventory_OnDragDrop", Dynamic_Wrap(InventoryService, 'OnDragDrop'))
 
     Debug('InventoryService', 'Activated')
 end
@@ -84,9 +85,14 @@ end
 function InventoryService:InventoryService_OnRightClick(event)
     Debug('InventoryService', 'InventoryService_OnRightClick')
 end
-function InventoryService:InventoryService_OnDragFrom(event)
-    Debug('InventoryService', 'InventoryService_OnDragFrom')
+
+function InventoryService:OnDragDrop(event)
+    Debug('InventoryService', 'OnDragDrop')
+    -- DeepPrintTable(event)
+    local hero = PlayerResource:GetSelectedHeroEntity(event.PlayerID)
+    hero.inventory:SwapSlots(event.slotFrom, event.slotTo)
 end
+
 function InventoryService:OrderFilter(event, order)
     -- TODO: Range cancel/abort?
     if order.units["0"] and order.order_type == DOTA_UNIT_ORDER_PICKUP_ITEM then
@@ -146,6 +152,6 @@ function InventoryService:OrderFilterPickupItem(event, order)
 
 end
 
--- Event:BindActivate(InventoryService)
+Event:BindActivate(InventoryService)
 
 -- InventoryService:Activate()

@@ -94,12 +94,12 @@
                     </Image>
                 </Panel>
             </Panel>
-            <Button id="ActionBarEquipment" class="actionbar-button" onactivate="ActionBarButton('customEquipment')">
+            <Button id="ActionBarEquipment" class="actionbar-button" onactivate="Game.KeyInventoryToggle()">
                 <Image src="file://{images}/actionbar1/action_bar_button_equipment.png" />
             </Button>
-            <Button id="ActionBarBackpack" class="actionbar-button" onactivate="ActionBarButton('customInventory')">
-                <Image src="file://{images}/actionbar1/action_bar_button_backpack.png" />
-            </Button>
+            <!--<Button id="ActionBarBackpack" class="hide actionbar-button" onactivate="ActionBarButton('customInventory')">-->
+                <!--<Image src="file://{images}/actionbar1/action_bar_button_backpack.png" />-->
+            <!--</Button>-->
             <Panel id="DefaultBuffBar" class="default-buff-container" hittest="false" />
             <Panel id="DefaultBar" class="default-bar-container" hittest="false" />
         </Panel>
