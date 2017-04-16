@@ -6,7 +6,7 @@
         "BaseClass" "item_broadsword"
         "AbilityTextureName" "default/blade_of_alacrity_png"
         "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
-        "ItemCost" "100"
+        "ItemCost" "28"
         "ItemShopTags" "damage"
         "ItemAliases" "broadsword"
         "ItemShareability" "ITEM_FULLY_SHAREABLE"
@@ -35,6 +35,7 @@
         "ItemDroppable" "1"
         "ItemStackable" "0"
         "ItemPermanent" "1"
+        "ItemBaseLevel" "1"
     }
     "item_broadsword_tier2"
     {
@@ -42,7 +43,7 @@
         "BaseClass" "item_broadsword"
         "AbilityTextureName" "item_broadsword"
         "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
-        "ItemCost" "100"
+        "ItemCost" "43"
         "ItemShopTags" "damage"
         "ItemQuality" "component"
         "ItemAliases" "broadsword"
@@ -78,9 +79,9 @@
         "BaseClass" "item_broadsword"
         "AbilityTextureName" "default/ethereal_blade_png"
         "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
-        "ItemCost" "100"
+        "ItemCost" "96"
         "ItemShopTags" "damage"
-        "ItemQuality" "rare"
+        "ItemQuality" "common"
         "ItemAliases" "broadsword"
         "ItemShareability" "ITEM_FULLY_SHAREABLE"
         "AbilitySpecial"
@@ -130,8 +131,13 @@
                 "var_type" "FIELD_INTEGER"
                 "rarity" "3"
             }
+            "slot_type"
+            {
+                "var_type" "FIELD_INTEGER"
+                "slot_type" "5"
+            }
         }
-        "ItemCost" "99"
+        "ItemCost" "52"
         "ItemKillable" "0"
         "ItemSellable" "1"
         "ItemPurchasable" "0"
@@ -161,8 +167,13 @@
                 "var_type" "FIELD_INTEGER"
                 "rarity" "4"
             }
+            "slot_type"
+            {
+                "var_type" "FIELD_INTEGER"
+                "slot_type" "5"
+            }
         }
-        "ItemCost" "99"
+        "ItemCost" "72"
         "ItemKillable" "0"
         "ItemSellable" "1"
         "ItemPurchasable" "0"
@@ -193,8 +204,13 @@
                 "var_type" "FIELD_INTEGER"
                 "rarity" "5"
             }
+            "slot_type"
+            {
+                "var_type" "FIELD_INTEGER"
+                "slot_type" "5"
+            }
         }
-        "ItemCost" "99"
+        "ItemCost" "135"
         "ItemKillable" "0"
         "ItemSellable" "1"
         "ItemPurchasable" "0"
@@ -209,7 +225,7 @@
         "AbilityTextureName" "custom/amulet_t1"
         "Effect" "particles/generic_gameplay/dropped_item.vpcf"
         "ItemQuality" "component"
-        "ItemCost" "322"
+        "ItemCost" "44"
         "ItemKillable" "0"
         "ItemSellable" "1"
         "ItemPurchasable" "1"
@@ -229,6 +245,11 @@
             {
                 "var_type" "FIELD_INTEGER"
                 "rarity" "3"
+            }
+            "slot_type"
+            {
+                "var_type" "FIELD_INTEGER"
+                "slot_type" "4"
             }
         }
         "Modifiers"
@@ -254,7 +275,7 @@
         "AbilityTextureName" "custom/amulet_t2"
         "Effect" "particles/generic_gameplay/dropped_item.vpcf"
         "ItemQuality" "common"
-        "ItemCost" "322"
+        "ItemCost" "75"
         "ItemKillable" "0"
         "ItemSellable" "1"
         "ItemPurchasable" "1"
@@ -274,6 +295,11 @@
             {
                 "var_type" "FIELD_INTEGER"
                 "rarity" "4"
+            }
+            "slot_type"
+            {
+                "var_type" "FIELD_INTEGER"
+                "slot_type" "4"
             }
         }
         "Modifiers"
@@ -299,7 +325,7 @@
         "AbilityTextureName" "custom/amulet_t3"
         "Effect" "particles/generic_gameplay/dropped_gem.vpcf"
         "ItemQuality" "rare"
-        "ItemCost" "322"
+        "ItemCost" "93"
         "ItemKillable" "0"
         "ItemSellable" "1"
         "ItemPurchasable" "1"
@@ -319,6 +345,11 @@
             {
                 "var_type" "FIELD_INTEGER"
                 "rarity" "5"
+            }
+            "slot_type"
+            {
+                "var_type" "FIELD_INTEGER"
+                "slot_type" "4"
             }
         }
         "Modifiers"
@@ -344,8 +375,8 @@
         "BaseClass" "item_datadriven"
         "AbilityTextureName" "default/winter_woolies_png"
         "Effect" "particles/generic_gameplay/dropped_item.vpcf"
-        "ItemQuality" "component"
-        "ItemCost" "322"
+        "ItemQuality" "common"
+        "ItemCost" "122"
         "ItemKillable" "0"
         "ItemSellable" "1"
         "ItemPurchasable" "1"
@@ -371,6 +402,11 @@
                 "var_type" "FIELD_INTEGER"
                 "bonus_ms" "40"
             }
+            "slot_type"
+            {
+                "var_type" "FIELD_INTEGER"
+                "slot_type" "10"
+            }
         }
         "Modifiers"
         {
@@ -394,7 +430,7 @@
         "AbilityTextureName" "item_boots"
         "Effect" "particles/generic_gameplay/dropped_item.vpcf"
         "ItemQuality" "common"
-        "ItemCost" "322"
+        "ItemCost" "215"
         "ItemKillable" "0"
         "ItemSellable" "1"
         "ItemPurchasable" "1"
@@ -420,6 +456,11 @@
                 "var_type" "FIELD_INTEGER"
                 "bonus_ms" "60"
             }
+            "slot_type"
+            {
+                "var_type" "FIELD_INTEGER"
+                "slot_type" "10"
+            }
         }
         "Modifiers"
         {
@@ -443,7 +484,7 @@
         "AbilityTextureName" "default/claymore_png"
         "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
         "Effect" "particles/generic_gameplay/dropped_aegis.vpcf"
-        "ItemCost" "100"
+        "ItemCost" "105"
         "ItemShopTags" "damage"
         "ItemQuality" "epic"
         "ItemAliases" "broadsword"
@@ -459,6 +500,11 @@
             {
                 "var_type" "FIELD_INTEGER"
                 "rarity" "6"
+            }
+            "slot_type"
+            {
+                "var_type" "FIELD_INTEGER"
+                "slot_type" "1"
             }
         }
         "ItemKillable" "0"
@@ -505,7 +551,7 @@
         "AbilityTextureName" "free/pRjRlaW"
         "Effect" "particles/generic_gameplay/dropped_gem.vpcf"
         "ItemQuality" "epic"
-        "ItemCost" "322"
+        "ItemCost" "172"
         "ItemKillable" "0"
         "ItemSellable" "1"
         "ItemPurchasable" "1"
@@ -525,6 +571,11 @@
             {
                 "var_type" "FIELD_INTEGER"
                 "rarity" "6"
+            }
+            "slot_type"
+            {
+                "var_type" "FIELD_INTEGER"
+                "slot_type" "11"
             }
         }
         "Modifiers"
@@ -549,7 +600,7 @@
         "BaseClass" "item_broadsword"
         "AbilityTextureName" "default/diffusal_blade_2_png"
         "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
-        "ItemCost" "100"
+        "ItemCost" "142"
         "ItemKillable" "0"
         "ItemSellable" "1"
         "ItemShopTags" "damage"
@@ -568,6 +619,11 @@
                 "var_type" "FIELD_INTEGER"
                 "rarity" "4"
             }
+            "slot_type"
+            {
+                "var_type" "FIELD_INTEGER"
+                "slot_type" "1"
+            }
         }
         "ItemPurchasable" "0"
         "ItemDroppable" "1"
@@ -580,7 +636,7 @@
         "BaseClass" "item_broadsword"
         "AbilityTextureName" "default/butterfly_png"
         "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
-        "ItemCost" "100"
+        "ItemCost" "180"
         "ItemKillable" "0"
         "ItemSellable" "1"
         "ItemShopTags" "damage"
@@ -599,6 +655,11 @@
                 "var_type" "FIELD_INTEGER"
                 "rarity" "5"
             }
+            "slot_type"
+            {
+                "var_type" "FIELD_INTEGER"
+                "slot_type" "1"
+            }
         }
         "ItemPurchasable" "0"
         "ItemDroppable" "1"
@@ -612,7 +673,7 @@
         "AbilityTextureName" "default/abyssal_blade_png"
         "Effect" "particles/generic_gameplay/dropped_aegis.vpcf"
         "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
-        "ItemCost" "100"
+        "ItemCost" "315"
         "ItemKillable" "0"
         "ItemSellable" "1"
         "ItemShopTags" "damage"
@@ -631,6 +692,11 @@
                 "var_type" "FIELD_INTEGER"
                 "rarity" "6"
             }
+            "slot_type"
+            {
+                "var_type" "FIELD_INTEGER"
+                "slot_type" "1"
+            }
         }
         "ItemPurchasable" "0"
         "ItemDroppable" "1"
@@ -641,7 +707,7 @@
     {
         "ID" "3211"
         "BaseClass" "item_datadriven"
-        "AbilityTextureName" "default/cloak_png"
+        "AbilityTextureName" "default/crimson_robe_png"
         "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
         "ItemQuality" "common"
         "ItemKillable" "0"
@@ -664,6 +730,11 @@
                 "var_type" "FIELD_INTEGER"
                 "bonus_armor" "10"
             }
+            "slot_type"
+            {
+                "var_type" "FIELD_INTEGER"
+                "slot_type" "5"
+            }
         }
         "Modifiers"
         {
@@ -679,7 +750,7 @@
                 }
             }
         }
-        "ItemCost" "99"
+        "ItemCost" "121"
         "ItemPurchasable" "0"
         "ItemDroppable" "1"
         "ItemStackable" "0"
@@ -712,6 +783,11 @@
                 "var_type" "FIELD_INTEGER"
                 "bonus_health" "1400"
             }
+            "slot_type"
+            {
+                "var_type" "FIELD_INTEGER"
+                "slot_type" "3"
+            }
         }
         "Modifiers"
         {
@@ -727,7 +803,7 @@
                 }
             }
         }
-        "ItemCost" "99"
+        "ItemCost" "152"
         "ItemPurchasable" "0"
         "ItemDroppable" "1"
         "ItemStackable" "0"
@@ -739,7 +815,7 @@
         "BaseClass" "item_datadriven"
         "AbilityTextureName" "default/ring_of_basilius_png"
         "ItemQuality" "common"
-        "ItemCost" "322"
+        "ItemCost" "92"
         "ItemKillable" "0"
         "ItemSellable" "1"
         "ItemPurchasable" "1"
@@ -770,7 +846,6 @@
                 "var_type" "FIELD_INTEGER"
                 "slot_type" "11"
             }
-
         }
         "Modifiers"
         {
@@ -795,7 +870,7 @@
         "BaseClass" "item_datadriven"
         "AbilityTextureName" "free/KvSvg8f"
         "ItemQuality" "rare"
-        "ItemCost" "322"
+        "ItemCost" "145"
         "ItemKillable" "0"
         "ItemSellable" "1"
         "ItemPurchasable" "1"
@@ -851,7 +926,7 @@
         "Effect" "particles/generic_gameplay/dropped_aegis.vpcf"
         "AbilityTextureName" "free/MMLS0mj"
         "ItemQuality" "epic"
-        "ItemCost" "322"
+        "ItemCost" "228"
         "ItemSellable" "1"
         "ItemPurchasable" "1"
         "ItemDroppable" "1"
@@ -875,6 +950,11 @@
             {
                 "var_type" "FIELD_INTEGER"
                 "bonus_health" "1250"
+            }
+            "slot_type"
+            {
+                "var_type" "FIELD_INTEGER"
+                "slot_type" "11"
             }
         }
         "Modifiers"
