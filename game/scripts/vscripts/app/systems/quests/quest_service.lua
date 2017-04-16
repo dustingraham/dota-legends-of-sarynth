@@ -8,6 +8,8 @@ QuestService = QuestService or class({}, {
 
 function QuestService:Activate()
     ListenToGameEvent('entity_killed', Dynamic_Wrap(QuestService, 'OnEntityKilled'), QuestService)
+    Event:Listen('InventoryAdd', Dynamic_Wrap(QuestService, 'OnInventoryChange'), QuestService)
+    Event:Listen('InventoryDrop', Dynamic_Wrap(QuestService, 'OnInventoryChange'), QuestService)
     Event:Listen('HeroPick', Dynamic_Wrap(QuestService, 'OnHeroPick'), QuestService)
     Event:Listen('HeroLevelUp', Dynamic_Wrap(QuestService, 'OnHeroLevelUp'), QuestService)
 end
@@ -234,6 +236,24 @@ function QuestService:OnEntityInteract(hero, npc)
         quest:OnEntityInteract(name)
     end
 end
+
+function QuestService:OnInventoryChange(e, event)
+    if not event.item:IsQuestItem() then return end
+
+    local key = 'player_'..event.hero:GetPlayerOwnerID()..'_quests'
+    local quests = QuestService.playerQuests[key]
+    if quests == nil then return end
+
+    Debug('QuestService', event.hero:GetName()..' item change '..event.item:GetAbilityName())
+    for _,quest in pairs(quests) do
+        quest:OnInventoryChange(event.hero, event.item)
+    end
+end
+
+-- item_3127
+--local item = CreateItem('item_3127', nil, nil)
+--item:IsQuestItem()
+
 
 -- Deprecating
 --function QuestService:OnRightClickQuestGiver(action)

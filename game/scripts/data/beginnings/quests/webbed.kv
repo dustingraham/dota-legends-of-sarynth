@@ -1,0 +1,82 @@
+"Quests"
+{
+
+
+    "1020"
+    {
+        "name" "webbed_egg_collect"
+        "title" "Weapons Reconnaissance"
+        "start_entity" "npc_quest_webbed"
+        "end_entity" "npc_quest_webbed"
+        "requirements"
+        {
+            "level" "11"
+        }
+        "start"
+        {
+            "dialog" "I have noticed that the spidersilk around here is incredibly strong. Can you bring me a sample of four spider eggs to see if I can determine what magical properties make the silk so resiliant."
+        }
+        "complete"
+        {
+            "dialog" "This will do perfectly. From my researh so far, I was able to craft these boots. Please take them as a token of my appreciation. With these additional specimens I will continue my research at once."
+        }
+        "objectives"
+        {
+            "01" {
+                "long_description" "Collect 4 spider eggs."
+                "description" "Spider Eggs"
+                "action" "collect"
+                "item" "item_3128"
+                "required" "4"
+            }
+        }
+        "rewards"
+        {
+            "gold" "10"
+            "experience" "220"
+            "item_choose"
+            {
+                "01" "item_3129"
+            }
+        }
+    }
+
+    "1022"
+    {
+        "name" "webbed_start_the_purge"
+        "title" "These Woods Need Clensing"
+        "start_entity" "npc_quest_webbed"
+        "end_entity" "npc_quest_webbed"
+        "requirements"
+        {
+            "level" "11"
+        }
+        "start"
+        {
+            "dialog" "Things around here are really getting webbed up. We need to do a deep clense of these woods. But, be careful. They can quickly overwhelm you if not careful."
+        }
+        "complete"
+        {
+            "dialog" "Phew. I can see progress already."
+        }
+        "objectives"
+        {
+            "01" {
+                "long_description" "Kill 6 spiders."
+                "description" "Spiders slain"
+                "action" "kill"
+                "npc" "webbed_spidy_bubble,webbed_spidy_ling"
+                "required" "6"
+            }
+        }
+        "rewards"
+        {
+            "gold" "25"
+            "experience" "480"
+            "item_choose"
+            {
+                "01" "item_kobold_amulet_2"
+            }
+        }
+    }
+}

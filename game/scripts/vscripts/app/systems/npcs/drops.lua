@@ -16,18 +16,20 @@ function Drops:Activate()
     ListenToGameEvent('entity_killed', Dynamic_Wrap(Drops, 'OnEntityKilled'), Drops)
 end
 
-
 function Drops:OnEntityKilled(event)
     local killedUnit = EntIndexToHScript(event.entindex_killed)
-    if killedUnit:IsCreature() then
-        Drops:RollForDrops(killedUnit)
+    local attacker
+    if event.entindex_attacker ~= nil then
+        attacker = EntIndexToHScript(event.entindex_attacker)
+    end
+    if attacker and attacker:IsHero() and killedUnit:IsCreature() then
+        Drops:RollForDrops(killedUnit, attacker)
     end
 end
 
-function Drops:RollForDrops(killedUnit)
+function Drops:RollForDrops(killedUnit, hero)
     local DropInfo = Drops.DropTable[killedUnit:GetUnitName()]
     if not DropInfo then return end
-
     for _,ItemTable in pairs(DropInfo) do
         -- Check for ItemSet
         local item_name
@@ -51,6 +53,22 @@ function Drops:RollForDrops(killedUnit)
 
         local chance = ItemTable.Chance or 100
         local max_drops = ItemTable.Multiple or 1
+
+        -- Check if this is a quest item...
+        if ItemTable.Quest then
+            local quest = QuestService:GetPlayerQuest(hero:GetPlayerOwnerID(), ItemTable.Quest)
+            if quest then
+                -- TODO: Multi-objective will drop if only one is filled.
+                if quest:IsComplete() then
+                    -- Avoid dropping if is complete.
+                    max_drops = 0
+                end
+            else
+                -- Avoid dropping a quest item.
+                max_drops = 0
+            end
+        end
+
         -- TODO: This will increase the raw chance of at least 1 aquisition for multiples.
         for i = 1, max_drops do
             --local rolledSuccess = RollPercentage(chance)

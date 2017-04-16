@@ -1,3 +1,5 @@
+#base "quests\webbed.kv"
+
 "Quests"
 {
     "1001"
@@ -233,7 +235,7 @@
         "end_entity" "npc_quest_kobold"
         "requirements"
         {
-            // "quest" "start_area_report_to_town"
+            "level" "6"
         }
         "start"
         {
@@ -264,10 +266,10 @@
         {
             "gold" "25"
             "experience" "460"
-            "item_choose"
-            {
-                "01" "item_3123"
-            }
+            //"item_choose"
+            //{
+            //    "01" "item_3123"
+            //}
         }
     }
 
@@ -352,6 +354,45 @@
             "item_choose"
             {
                 "01" "item_kobold_amulet_2"
+            }
+        }
+    }
+
+    "1013"
+    {
+        "name" "kobolds_munitions"
+        "title" "Weapons Reconnaissance"
+        "start_entity" "npc_quest_kobold"
+        "end_entity" "npc_quest_kobold"
+        "requirements"
+        {
+            "level" "6"
+        }
+        "start"
+        {
+            "dialog" "While you're out there, you might as well grab some of their weapons and bring them back for analysis. Perhaps we could learn some improved defensive techniques."
+        }
+        "complete"
+        {
+            "dialog" "These are great. Please take this shield, it has been optimized to defend against these hairy thugs."
+        }
+        "objectives"
+        {
+            "01" {
+                "long_description" "Collect 3 discarded kobold weapons."
+                "description" "Kobold Weapons Collected"
+                "action" "collect"
+                "item" "item_3127"
+                "required" "3"
+            }
+        }
+        "rewards"
+        {
+            "gold" "10"
+            "experience" "220"
+            "item_choose"
+            {
+                "01" "item_3123"
             }
         }
     }

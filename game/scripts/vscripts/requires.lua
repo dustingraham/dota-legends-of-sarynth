@@ -23,6 +23,7 @@ for _,file in ipairs({
     'app/systems/characters/player',
     'app/systems/characters/save_load',
 
+    'app/systems/inventory/base_item',
     'app/systems/inventory/inventory_service',
     'app/systems/inventory/inventory',
 

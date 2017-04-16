@@ -76,7 +76,6 @@ function InventoryService:Activate()
 end
 
 function InventoryService:LoadItemData()
-
     self.itemKV = LoadKeyValues("scripts/npc/npc_items_custom.txt")
     self.itemIDs = {}
     for k,v in pairs(self.itemKV) do
@@ -84,10 +83,11 @@ function InventoryService:LoadItemData()
             self.itemIDs[v.ID] = k
         end
     end
-
+    self.itemQualities = {}
     self.itemPassives = {}
     for id,itemName in pairs(self.itemIDs) do
         local kv = self.itemKV[itemName]
+        self.itemQualities[itemName] = kv.ItemQuality
         if kv.BaseClass == "item_datadriven" then
             self.itemPassives[itemName] = {}
             if kv.Modifiers then
@@ -99,7 +99,12 @@ function InventoryService:LoadItemData()
             end
         end
     end
+    --DeepPrintTable(self.itemQualities)
     --DeepPrintTable(self.itemPassives)
+end
+
+function InventoryService:GetItemQuality(itemName)
+    return self.itemQualities[itemName]
 end
 
 function InventoryService:InventoryService_OnLeftClick(event)
@@ -124,10 +129,10 @@ function InventoryService:OnDragWorld(event)
     end
 
     ExecuteOrderFromTable({
-        UnitIndex = hero:GetEntityIndex(),
-        OrderType = DOTA_UNIT_ORDER_MOVE_TO_POSITION,
-        Position =  pos,
-    })
+                              UnitIndex = hero:GetEntityIndex(),
+                              OrderType = DOTA_UNIT_ORDER_MOVE_TO_POSITION,
+                              Position =  pos,
+                          })
     InventoryService.rangedActions[hero:GetEntityIndex()] = {
         unit = hero,
         targetPosition = pos,

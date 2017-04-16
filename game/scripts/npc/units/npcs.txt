@@ -67,4 +67,15 @@
         "VisionDaytimeRange"        "0"
         "VisionNighttimeRange"      "0"
     }
+    "npc_questgiver_webbed"
+    {
+        "BaseClass"             "npc_dota_creature"
+        "Model"                 "models/heroes/keeper_of_the_light/keeper_of_the_light.vmdl"
+        "ModelScale"            "0.9"
+        "Level"                 "11"
+        "HealthBarOffset"       "220"
+
+        "VisionDaytimeRange"        "0"
+        "VisionNighttimeRange"      "0"
+    }
 }

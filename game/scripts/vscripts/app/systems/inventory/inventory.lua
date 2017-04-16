@@ -101,6 +101,10 @@ function Inventory:AddItem(item, slotId)
 
             -- Notify client
             PlayerTables:SetTableValue(self.tableName, 'slot'..slotId, itemid)
+            Event:Trigger('InventoryAdd', {
+                hero = self.hero,
+                item = item
+            })
             return true
         else
             Debug('Inventory', 'Invalid slot placement. Dropping in backpack.')
@@ -123,11 +127,31 @@ function Inventory:AddItem(item, slotId)
 
             -- Notify client
             PlayerTables:SetTableValue(self.tableName, 'slot'..i, itemid)
+            Event:Trigger('InventoryAdd', {
+                hero = self.hero,
+                item = item
+            })
             return true
         end
     end
     -- Bad...
     return false
+end
+
+function Inventory:GetItemCount(itemName)
+    local count = 0
+    for i = 1, 48 do
+        local item = self:GetItemInSlot(i)
+        if item ~= nil then
+            print(item:GetAbilityName())
+            if item:GetAbilityName() == itemName then
+                -- Check item matches name, then check stack counts...
+                -- TODO: Inventory Stacking
+                count = count + 1
+            end
+        end
+    end
+    return count
 end
 
 function Inventory:SwapSlots(fromSlotId, toSlotId)
@@ -311,4 +335,8 @@ function Inventory:DropToWorld(fromSlotId, position)
 
     -- Place it in the world
     CreateItemOnPositionSync(position, fromItem)
+    Event:Trigger('InventoryDrop', {
+        hero = self.hero,
+        item = fromItem
+    })
 end

@@ -104,6 +104,14 @@ local waypointGuide = {
             'teleport_waypoint_3',
             'teleport_waypoint_11',
             'teleport_tower_kobolds',
+        },
+        ['teleport_tower_webbed'] = {
+            'teleport_waypoint_1',
+            'teleport_waypoint_2',
+            'teleport_waypoint_3',
+            'teleport_waypoint_12',
+            'teleport_waypoint_13',
+            'teleport_tower_webbed',
         }
     },
     ['teleport_tower_kobolds'] = {
@@ -125,6 +133,43 @@ local waypointGuide = {
             'teleport_waypoint_2',
             'teleport_waypoint_1',
             'teleport_tower_town',
+        },
+        ['teleport_tower_webbed'] = {
+            'teleport_waypoint_11',
+            'teleport_waypoint_3',
+            'teleport_waypoint_12',
+            'teleport_waypoint_13',
+            'teleport_tower_webbed',
+        }
+    },
+    ['teleport_tower_webbed'] = {
+        ['teleport_tower_ice'] = {
+            'teleport_waypoint_13',
+            'teleport_waypoint_12',
+            'teleport_waypoint_3',
+            'teleport_waypoint_4',
+            'teleport_waypoint_5',
+            'teleport_waypoint_6',
+            'teleport_waypoint_7',
+            'teleport_waypoint_8',
+            'teleport_waypoint_9',
+            'teleport_waypoint_10',
+            'teleport_tower_ice'
+        },
+        ['teleport_tower_town'] = {
+            'teleport_waypoint_13',
+            'teleport_waypoint_12',
+            'teleport_waypoint_3',
+            'teleport_waypoint_2',
+            'teleport_waypoint_1',
+            'teleport_tower_town',
+        },
+        ['teleport_tower_kobolds'] = {
+            'teleport_waypoint_13',
+            'teleport_waypoint_2',
+            'teleport_waypoint_3',
+            'teleport_waypoint_11',
+            'teleport_tower_kobolds',
         }
     }
 }

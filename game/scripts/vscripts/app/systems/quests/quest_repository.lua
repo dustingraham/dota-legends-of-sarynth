@@ -9,24 +9,25 @@ QuestRepository = QuestRepository or class({})
 
 function QuestRepository:Activate()
     QuestRepository.nameCache = {}
-    
+
     local kvFileName = 'scripts/data/'..GetMapName()..'/quests.kv'
     local data = LoadKeyValues(kvFileName)
-    
+
     if not data then
         Debug('QuestRepository', '[ERROR] Likely KV Syntax Error: ', kvFileName)
         self.data = {}
         return
     end
-    
+
     for id,quest in pairs(data) do
         data[id].id = id
         QuestRepository.nameCache[quest.name] = quest
         for k,v in pairs(quest.objectives) do
             if type(v.npc) == "string" then v.npc = Split(v.npc) end
+            if type(v.item) == "string" then v.item = Split(v.item) end
         end
     end
-    
+
     QuestRepository.data = data
 end
 

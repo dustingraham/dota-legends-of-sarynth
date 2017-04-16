@@ -69,10 +69,15 @@ function Interaction:StartInteraction(action)
             from = 'teleport_tower_ice',
             to = 'teleport_tower_town'
         })
+    elseif action.target.spawn_name == 'teleport_tower_webbed' then
+        action.unit:AddNewModifier(action.unit, nil, 'character_teleporting', {
+            from = 'teleport_tower_webbed',
+            to = 'teleport_tower_town'
+        })
     elseif action.target.spawn_name == 'teleport_tower_kobolds' then
         action.unit:AddNewModifier(action.unit, nil, 'character_teleporting', {
             from = 'teleport_tower_kobolds',
-            to = 'teleport_tower_town'
+            to = 'teleport_tower_webbed'
         })
     else
         DialogSystem:StartDialog(action.unit, action.target)

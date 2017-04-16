@@ -21,6 +21,9 @@ function Quest:constructor(PlayerID, questData)
         if v.action == 'kill' and v.current == nil then
             v.current = 0
         end
+        if v.action == 'collect' and v.current == nil then
+            v.current = 0
+        end
         if v.action == 'report' and v.reported == nil then
             v.reported = false
         end
@@ -52,6 +55,9 @@ end
 function Quest:IsComplete()
     for k,v in pairs(self.objectives) do
         if v.action == 'kill' and v.current < v.required then
+            return false
+        end
+        if v.action == 'collect' and v.current < v.required then
             return false
         end
         if v.action == 'report' and not v.reported then
@@ -89,7 +95,7 @@ function Quest:Accept()
     for _,objective in pairs(self.objectives) do
         if objective.action == 'report' and not objective.reported then
             -- TODO: We may not always want the end NPC. This won't work for that.
-            print('Light up')
+            Debug('Quest', 'Light up the end npc.')
             self:GetEndNpc():ParticleOnForPlayer(QuestService.questParticleName, self.PlayerID)
         end
     end
@@ -178,7 +184,7 @@ function Quest:OnEntityKilled(npc_name)
     -- Check each objective.
     for _,objective in pairs(self.objectives) do
         -- Do nothing if we alredy have required number.
-        if objective.current ~= objective.required then
+        if objective.action == 'kill' and objective.current ~= objective.required then
             local npcMatch = false
             for _,npc in pairs(objective.npc) do
                 if npc == npc_name then
@@ -192,6 +198,34 @@ function Quest:OnEntityKilled(npc_name)
                 if self:IsComplete() then
                     self:GetEndNpc():ParticleOnForPlayer(QuestService.questParticleName, self.PlayerID)
                 end
+            end
+        end
+    end
+end
+
+function Quest:OnInventoryChange(hero, item)
+    -- Check each objective.
+    for _,objective in pairs(self.objectives) do
+        -- Also checking that we lost items and no longer fill objective.
+        if objective.action == 'collect' then
+            local count = 0
+            for _,itemName in pairs(objective.item) do
+                --    if itemName == item:GetAbilityName() then
+                --        itemMatch = itemName
+                --        break
+                --    end
+                --end
+                --if itemMatch then
+                print('Check '..itemName)
+                count = count + hero.inventory:GetItemCount(itemName)
+                print('Just testing, all item count: ', count)
+            end
+            objective.current = math.min(objective.required, count)
+            print('Just testing, current: ', objective.current)
+            QuestService:SendQuestUpdate(self)
+            -- TODO: turn it back off if lose items?
+            if self:IsComplete() then
+                self:GetEndNpc():ParticleOnForPlayer(QuestService.questParticleName, self.PlayerID)
             end
         end
     end
