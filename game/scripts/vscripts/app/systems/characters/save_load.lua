@@ -10,7 +10,7 @@ function SaveLoad:CreateCharacter(player)
             character = player:GetCharacter()
         }
     }, function(data)
-        print('Saved')
+        Debug('Http', 'Saved initial character create.')
     end)
 end
 

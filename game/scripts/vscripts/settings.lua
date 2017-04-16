@@ -14,7 +14,7 @@ if DEBUG_SETTINGS then
     --TEST_PICK_HERO = 'warlock'       -- Sorcerer
     --TEST_PICK_HERO_ALT = 'omniknight'
 
-    TEST_DISABLE_FOG = false
+    TEST_DISABLE_FOG = true
     TEST_SPAWN_ITEMS = true
     TEST_START_LEVEL = 8
     --TEST_SUPERMAN = true

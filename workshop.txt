@@ -8,7 +8,7 @@ Join us on: [url=https://discord.gg/QsvaXb3]Discord[/url]
 
 Players may solo, or co-op with up to 3 total players. Six classes to choose from, each with a small set of core skills. Follow the introduction quest line to slay Scar. Progress, items, and quests are all saved.
 
-The second area is expected to be released later today (April 9), so check back soon.
+Your progress is automatically saved. The first (scar) and second (kobold) areas have been released. Third area will be released soon.
 
 Unique mechanic, "Focus Target" is enabled by default. While not very helpful with the sheep, as you progress to more difficult enemies, you may find it helpful. It can be toggled with the "Focus Target" button in the bottom left.
 
