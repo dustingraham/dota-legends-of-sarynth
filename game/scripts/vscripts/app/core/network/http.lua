@@ -168,7 +168,7 @@ function Http:Activate()
         end
 
         -- Every 30 seconds.
-        return 3.0
+        return 30.0
     end)
 end
 

@@ -89,5 +89,5 @@ function mod:GetModifierMoveSpeedBonus_Percentage()
 end
 
 function mod:GetModifierPercentageCooldown()
-    return 80.0
+    return 50.0
 end

@@ -96,7 +96,7 @@ function mod:DeclareFunctions()
     return {
         MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT,
         MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE,
-        --MODIFIER_PROPERTY_COOLDOWN_PERCENTAGE
+        MODIFIER_PROPERTY_COOLDOWN_PERCENTAGE
     }
 end
 
@@ -105,9 +105,9 @@ function mod:GetModifierAttackSpeedBonus_Constant()
 end
 
 function mod:GetModifierMoveSpeedBonus_Percentage()
-    return 60.0
+    return 30.0
 end
 
---function mod:GetModifierPercentageCooldown()
---    return 80.0
---end
+function mod:GetModifierPercentageCooldown()
+    return 30.0
+end

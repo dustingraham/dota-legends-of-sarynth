@@ -75,7 +75,6 @@ end
 function Encounter:Log(str)
     local timeElapsed = math.ceil(GameRules:GetGameTime() - self.startTime)
     timeElapsed = string.format("%4s ",timeElapsed)
-    print(str)
     table.insert(self.logs, '['..timeElapsed..'] '..str)
 end
 

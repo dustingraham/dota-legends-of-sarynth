@@ -37,7 +37,7 @@
     "npc_questgiver_kobold"
     {
         "BaseClass"             "npc_dota_creature"
-        "Model"                 "models/props_gameplay/shopkeeper_fountain/shopkeeper_fountain.vmdl"
+        "Model"                 "models/heroes/shopkeeper/shopkeeper.vmdl"
         "ModelScale"            "0.9"
         "Level"                 "11"
         "HealthBarOffset"       "220"

@@ -1,17 +1,27 @@
 v0.0.4
- • Moved town questgiver closer to entrance to town near teleporter.
- • Added a loot expiration timer. Grab that loot within 60 seconds! It will start burning in the last 20 seconds.
- • Kobold armor item stats will now persist through death.
- • Display character location on pick screen.
- • Adjust items to not be killable. Was causing crash.
- • Fix small bug with popupnumbers not releasing particle indexes.
- 
  • Created custom inventory system. (Removes containers.lua)
- • Add gold to quests.
- • Added some more items, slightly reduced the drop rate of most creatures.
+ • Added a loot expiration timer. Grab that loot within 60 seconds! It will start burning in the last 20 seconds.
+ • Display character location on pick screen.
+ • Increased world bounds in anticipation of next area unlock.
  • Overseer is now a guaranteed drop, but random item.
- • Reduced rogue crit cd by 1 second.
+ • Added some more items, slightly reduced the drop rate of most creatures.
+ • Moved town questgiver closer to entrance to town near teleporter. 
+ • Town and Kobold questgivers now have names.
+ • Reduce worg and wolf leash range from 2250 to 1500.
+ • Reduce wolf aggro range from 600 to 400.
+ • Add gold to quests.
+Hero Tweaks
+ • Ranger powershot cooldown increased from 2s to 3s.
+ • Rogue crippling slash cooldown reduced from 9s to 8s.
+ • Rogue flurry move speed bonus reduced from 60% to 30%
+ • Rogue flurry now also reduces cooldowns by 30%
  • Sorcerer disease now has an initial tick of damage on impact.
+ • Warrior's rallying cry cooldown reduction from 80% to 50%
+Bug Fixes
+ • Kobold armor item stats will now persist through death.
+ • Fix small bug with popupnumbers not releasing particle indexes.
+ • Adjust items to not be killable. Was causing crash.
+ • Fix bug with mobs re-aggro after hero respawn.
  
 v0.0.3
  • Created better respawn locations. Dying in kobold area will no longer send you back to the start area.

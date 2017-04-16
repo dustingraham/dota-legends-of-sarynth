@@ -57,7 +57,8 @@ function Interaction:StartInteraction(action)
     -- Trigger quest pre-check for "report" type.
     QuestService:OnEntityInteract(action.unit, action.target)
     Debug('Interaction', 'StartInteraction')
-    print(inspect(action, {depth = 2}))
+    -- print(inspect(action, {depth = 2}))
+
     if action.target.spawn_name == 'teleport_tower_town' then
         action.unit:AddNewModifier(action.unit, nil, 'character_teleporting', {
             from = 'teleport_tower_town',
