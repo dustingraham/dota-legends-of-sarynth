@@ -161,7 +161,7 @@
             "01"
             {
                 "var_type" "FIELD_INTEGER"
-                "bonus_armor" "11"
+                "bonus_armor" "7"
             }
             "02"
             {
@@ -198,7 +198,7 @@
             "01"
             {
                 "var_type" "FIELD_INTEGER"
-                "bonus_armor" "20"
+                "bonus_armor" "10"
             }
             "02"
             {
@@ -445,7 +445,7 @@
             "01"
             {
                 "var_type" "FIELD_INTEGER"
-                "bonus_armor" "16"
+                "bonus_armor" "8"
             }
             "03"
             {
@@ -721,12 +721,12 @@
             "02"
             {
                 "var_type" "FIELD_INTEGER"
-                "bonus_health" "600"
+                "bonus_health" "700"
             }
             "03"
             {
                 "var_type" "FIELD_INTEGER"
-                "bonus_armor" "10"
+                "bonus_armor" "7"
             }
             "slot_type"
             {
@@ -774,12 +774,12 @@
             "02"
             {
                 "var_type" "FIELD_INTEGER"
-                "bonus_armor" "12"
+                "bonus_armor" "9"
             }
             "03"
             {
                 "var_type" "FIELD_INTEGER"
-                "bonus_health" "1400"
+                "bonus_health" "1600"
             }
             "slot_type"
             {
@@ -837,7 +837,7 @@
             "03"
             {
                 "var_type" "FIELD_INTEGER"
-                "bonus_health" "300"
+                "bonus_health" "450"
             }
             "slot_type"
             {
@@ -892,7 +892,7 @@
             "03"
             {
                 "var_type" "FIELD_INTEGER"
-                "bonus_health" "800"
+                "bonus_health" "950"
             }
             "slot_type"
             {
@@ -947,7 +947,7 @@
             "03"
             {
                 "var_type" "FIELD_INTEGER"
-                "bonus_health" "1250"
+                "bonus_health" "1550"
             }
             "slot_type"
             {
@@ -1037,12 +1037,12 @@
             "02"
             {
                 "var_type" "FIELD_INTEGER"
-                "bonus_health" "400"
+                "bonus_health" "650"
             }
             "03"
             {
                 "var_type" "FIELD_INTEGER"
-                "bonus_armor" "12"
+                "bonus_armor" "6"
             }
             "slot_type"
             {
@@ -1089,12 +1089,12 @@
             "02"
             {
                 "var_type" "FIELD_INTEGER"
-                "bonus_health" "800"
+                "bonus_health" "975"
             }
             "03"
             {
                 "var_type" "FIELD_INTEGER"
-                "bonus_armor" "12"
+                "bonus_armor" "9"
             }
             "slot_type"
             {
@@ -1143,12 +1143,12 @@
             "02"
             {
                 "var_type" "FIELD_INTEGER"
-                "bonus_armor" "6"
+                "bonus_armor" "5"
             }
             "03"
             {
                 "var_type" "FIELD_INTEGER"
-                "bonus_health" "500"
+                "bonus_health" "625"
             }
             "slot_type"
             {
@@ -1207,7 +1207,7 @@
             "03"
             {
                 "var_type" "FIELD_INTEGER"
-                "bonus_health" "400"
+                "bonus_health" "520"
             }
             "slot_type"
             {
@@ -1276,7 +1276,7 @@
         "BaseClass" "item_broadsword"
         "Model" "models/props_winter/egg.vmdl"
         "Effect" "particles/generic_gameplay/dropped_item.vpcf"
-        "AbilityTextureName" "default/winter_snowball_png"
+        "AbilityTextureName" "custom/spider_egg"
         "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
         "ItemCost" "10"
         "ItemShopTags" "damage"
@@ -1330,7 +1330,7 @@
             "01"
             {
                 "var_type" "FIELD_INTEGER"
-                "bonus_armor" "20"
+                "bonus_armor" "6"
             }
             "02"
             {
@@ -1340,7 +1340,7 @@
             "03"
             {
                 "var_type" "FIELD_INTEGER"
-                "bonus_health" "800"
+                "bonus_health" "875"
             }
             "slot_type"
             {

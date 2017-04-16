@@ -1,11 +1,9 @@
 "Quests"
 {
-
-
     "1020"
     {
         "name" "webbed_egg_collect"
-        "title" "Weapons Reconnaissance"
+        "title" "A Yearning for Spidersilk"
         "start_entity" "npc_quest_webbed"
         "end_entity" "npc_quest_webbed"
         "requirements"
@@ -43,8 +41,8 @@
 
     "1022"
     {
-        "name" "webbed_start_the_purge"
-        "title" "These Woods Need Clensing"
+        "name" "webbed_check_the_problem"
+        "title" "A Creeping Feeling"
         "start_entity" "npc_quest_webbed"
         "end_entity" "npc_quest_webbed"
         "requirements"
@@ -53,19 +51,19 @@
         }
         "start"
         {
-            "dialog" "Things around here are really getting webbed up. We need to do a deep clense of these woods. But, be careful. They can quickly overwhelm you if not careful."
+            "dialog" "I've got a creeping feeling that the spider infestation has begun to get out of control. Be careful, but take a look and clear out a couple of those red bubble spiders if you could."
         }
         "complete"
         {
-            "dialog" "Phew. I can see progress already."
+            "dialog" "Thanks for that, but we have a bigger problem than I thought."
         }
         "objectives"
         {
             "01" {
-                "long_description" "Kill 6 spiders."
-                "description" "Spiders slain"
+                "long_description" "Kill 6 red bubble spiders."
+                "description" "Red Bubble Spiders"
                 "action" "kill"
-                "npc" "webbed_spidy_bubble,webbed_spidy_ling"
+                "npc" "webbed_spidy_bubble"
                 "required" "6"
             }
         }
@@ -73,10 +71,173 @@
         {
             "gold" "25"
             "experience" "480"
-            "item_choose"
-            {
-                "01" "item_kobold_amulet_2"
+            //"item_choose"
+            //{
+            //    "01" "item_kobold_amulet_2"
+            //}
+        }
+    }
+
+    "1024"
+    {
+        "name" "webbed_start_the_purge"
+        "title" "These Woods Need Cleansing"
+        "start_entity" "npc_quest_webbed"
+        "end_entity" "npc_quest_webbed"
+        "requirements"
+        {
+            "quest" "webbed_check_the_problem"
+        }
+        "start"
+        {
+            "dialog" "Things around here are really getting webbed up. We need to do a deep cleanse of these woods but, cleanse with caution. They can quickly overwhelm you if not careful."
+        }
+        "complete"
+        {
+            "dialog" "Phew. I can see progress already. The cleanse has begun something good. We will keep up the good fight."
+        }
+        "objectives"
+        {
+            "01" {
+                "long_description" "Kill 30 spiders."
+                "description" "Spiders slain"
+                "action" "kill"
+                "npc" "webbed_spidy_bubble,webbed_spidy_ling,webbed_spidy_yellowback,webbed_spidy_elder,webbed_spidy_arachnid,webbed_viral_queen"
+                "required" "30"
             }
+        }
+        "rewards"
+        {
+            "gold" "25"
+            "experience" "720"
+            //"item_choose"
+            //{
+            //    "01" "item_kobold_amulet_2"
+            //}
+        }
+    }
+
+    "1025"
+    {
+        "name" "webbed_yellowback"
+        "title" "Seeing Yellow Spots"
+        "start_entity" "npc_quest_webbed"
+        "end_entity" "npc_quest_webbed"
+        "requirements"
+        {
+            "quest" "webbed_check_the_problem"
+        }
+        "start"
+        {
+            "dialog" "I imagine you may have noticed the distinctive Yellowback spiders out there with the yellow markings on their abdomen? They are incredibly venomous. To keep our fellow adventurers safe, could you make a priority to hit those when you can?"
+        }
+        "complete"
+        {
+            "dialog" "These woods are safer for your efforts."
+        }
+        "objectives"
+        {
+            "01" {
+                "long_description" "Kill 4 Yellowback Widow."
+                "description" "Yellowback Widows"
+                "action" "kill"
+                "npc" "webbed_spidy_yellowback"
+                "required" "4"
+            }
+        }
+        "rewards"
+        {
+            "gold" "50"
+            "experience" "480"
+            //"item_choose"
+            //{
+            //    "01" "item_kobold_amulet_2"
+            //}
+        }
+    }
+
+    "1026"
+    {
+        "name" "webbed_arachnid"
+        "title" "Arachnophobia"
+        "start_entity" "npc_quest_webbed"
+        "end_entity" "npc_quest_webbed"
+        "requirements"
+        {
+            "quest" "webbed_check_the_problem"
+        }
+        "start"
+        {
+            "dialog" "While you are working on the purge, one of the townsfolk reported sightings of an arachnid to the east. While the townsperson is fraught with arachnophobia, I tend to trust her intuition. If the rumor is true, it must be delt with at once."
+        }
+        "complete"
+        {
+            "dialog" "So, they were not just hallucinating. You sure are a savior."
+        }
+        "objectives"
+        {
+            "01" {
+                "long_description" "Find and kill the Plated Arachnid."
+                "description" "Plated Arachnid Slain"
+                "action" "kill"
+                "npc" "webbed_spidy_arachnid"
+                "required" "1"
+            }
+        }
+        "rewards"
+        {
+            "gold" "65"
+            "experience" "615"
+            //"item_choose"
+            //{
+            //    "01" "item_kobold_amulet_2"
+            //}
+        }
+    }
+
+    "1028"
+    {
+        "name" "webbed_queen"
+        "title" "Untangling the Web"
+        "start_entity" "npc_quest_webbed"
+        "end_entity" "npc_quest_webbed"
+        "requirements"
+        {
+            "quest" "webbed_arachnid"
+        }
+        "start"
+        {
+            "dialog" "I have never seen someone so competent in the face of this webbed forest. The tipping point to clearing this forest is going to be eliminating the Virulent Queen. But, I must say I'm not sure it can be done with her Elder Wolf Spider protection detail. If you want to tackle this task, we will be in your debt."
+        }
+        "complete"
+        {
+            "dialog" "This webbed forest will become a shining light of spring in no time. Thank you for your efforts."
+        }
+        "objectives"
+        {
+            "01" {
+                "long_description" "Kill 8 Elder Wolf Spiders"
+                "description" "Elder Wolf Spiders Killed"
+                "action" "kill"
+                "npc" "webbed_spidy_elder"
+                "required" "8"
+            }
+            "02" {
+                "long_description" "Squish the Virulent Queen"
+                "description" "Virulent Queen Squished"
+                "action" "kill"
+                "npc" "webbed_viral_queen"
+                "required" "1"
+            }
+        }
+        "rewards"
+        {
+            "gold" "120"
+            "experience" "815"
+            //"item_choose"
+            //{
+            //    "01" "item_kobold_amulet_2"
+            //}
         }
     }
 }

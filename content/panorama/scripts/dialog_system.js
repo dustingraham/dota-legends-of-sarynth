@@ -102,6 +102,11 @@ function UpdateQuestCompletePanel(data)
         // TODO: Hide if no reward.
         // rewards += '• Maybe an item...<br>';
         panel.FindChildTraverse('RewardItem').itemname = data.rewards.item_choose['01'];
+        panel.FindChildTraverse('ItemRewardBlock').style.visibility = 'visible';
+    }
+    else
+    {
+        panel.FindChildTraverse('ItemRewardBlock').style.visibility = 'collapse';
     }
 
     panel.FindChildTraverse('MainRewards').text = rewards;

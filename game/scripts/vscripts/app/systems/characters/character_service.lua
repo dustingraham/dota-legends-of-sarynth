@@ -220,38 +220,23 @@ function CharacterService:OnPlayerLevelUp(event)
 end
 
 
-local function TestItem(hero, key)
-    -- local item = CreateItem(key, nil, nil)
-    -- local drop = CreateItemOnPositionSync(pos, item)
-    -- local pos_launch = pos + RandomVector(RandomFloat(150, 200))
-    -- item:LaunchLoot(false, 200, 0.75, pos_launch)
-    --Containers:AddItemToUnit(hero, CreateItem(key, nil, nil))
-    hero.inventory:AddItem(CreateItem(key, nil, nil))
+local function TestItem(hero, key, slot)
+    hero.inventory:AddItem(CreateItem(key, nil, nil), slot)
 end
+
 local function TestQuest(hero)
-    -- local pos = hero:GetAbsOrigin()
-
-    --Containers:SetDefaultInventory(hero, hero.customEquipment)
-    -- Six items, this is what I got after test quests.
-    -- Level 6 also.
-    TestItem(hero, 'item_broadsword_tier4')
-    TestItem(hero, 'item_armor_tier2')
-    -- TestItem(hero, 'item_broadsword_tier3')
-    TestItem(hero, 'item_broadsword_tier2')
-    --TestItem(hero, 'item_armor_tier1')
-    TestItem(hero, 'item_boots_leather_common')
-    --TestItem(hero, 'item_armor_tier3')
-    --TestItem(hero, 'item_amulet_tier1')
-    TestItem(hero, 'item_broadsword_tier3')
-    --TestItem(hero, 'item_amulet_tier3')
-    --TestItem(hero, 'item_boots_leather')
-    TestItem(hero, 'item_armor_tier3')
-    --Containers:SetDefaultInventory(hero, hero.customInventory)
+    TestItem(hero, 'item_kobold_amulet_2', 1)
+    TestItem(hero, 'item_amulet_tier3', 2)
+    TestItem(hero, 'item_kobold_armor_1', 3)
+    TestItem(hero, 'item_kobold_amulet_1', 8)
+    TestItem(hero, 'item_kobold_amulet_1', 9)
+    TestItem(hero, 'item_boots_leather_common', 10)
+    TestItem(hero, 'item_kobold_weapon_unique', 11)
+    TestItem(hero, 'item_3123', 12)
 end
-local function TestTest(hero)
-    -- local pos = hero:GetAbsOrigin()
-    TestItem(hero, 'item_boots_leather_common')
 
+local function TestItems(hero)
+    TestItem(hero, 'item_boots_leather_common')
     TestItem(hero, 'item_broadsword_tier1')
     TestItem(hero, 'item_broadsword_tier2')
     TestItem(hero, 'item_kobold_amulet_2')
@@ -260,11 +245,7 @@ local function TestTest(hero)
     TestItem(hero, 'item_3126')
     TestItem(hero, 'item_kobold_armor_1')
     TestItem(hero, 'item_kobold_weapon_unique')
-    TestItem(hero, 'item_3127')
-    TestItem(hero, 'item_3127')
     TestItem(hero, 'item_amulet_scar')
-    --TestQuest(hero)
-    --hero.customInventory:Open(hero:GetPlayerOwnerID())
 end
 
 function CharacterService:OnHeroPick(e, event)
@@ -331,7 +312,10 @@ function CharacterService:OnHeroPick(e, event)
     end
 
     -- Items for testing.
-    if IsInToolsMode() and TEST_SPAWN_ITEMS then TestTest(hero) end
+    if IsInToolsMode() and TEST_SPAWN_ITEMS then
+        TestItems(hero)
+        TestQuest(hero)
+    end
     --TestQuest(hero)
 end
 

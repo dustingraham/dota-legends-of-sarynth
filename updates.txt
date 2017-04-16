@@ -1,3 +1,13 @@
+[b]v0.0.5[/b]
+ • Release the Webbed Forest area. New items, quests, creatures.
+ • Added a quest to collect kobold spears, which rewards a shield.
+[b]Items[/b]
+ • Reduced MS of leather boots from 60 to 50
+ • Reduced most armor bonuses in half.
+[b]Bugs[/b]
+ • Fixed bug where reward item was sometimes not shown on quest turn in.
+
+ 
 [b]v0.0.4[/b]
  • Created custom inventory system.
  • Added a loot expiration timer. Grab that loot within 60 seconds! It will start burning in the last 20 seconds.

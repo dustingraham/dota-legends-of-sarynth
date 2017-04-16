@@ -13,7 +13,7 @@ end
 -- EmitSoundOn('beastmaster_beas_rare_02', caster)
 
 
-function DialogSystem:StartDialog(character, npc)
+function DialogSystem:StartDialog(hero, npc)
     local handled = false
 
     -- Create a special NPC handler class defined in the spawn/unit definition.
@@ -21,17 +21,17 @@ function DialogSystem:StartDialog(character, npc)
     if npc.spawn_name == 'npc_quest_start' then
         if npc.first_interaction == nil then
             Debug('DialogSystem', 'First interaction beastmaster.')
-            Sounds:EmitSoundOnClient(character:GetPlayerOwnerID(), 'beastmaster_beas_rare_02')
+            Sounds:EmitSoundOnClient(hero:GetPlayerOwnerID(), 'beastmaster_beas_rare_02')
             -- EmitSoundOnClient('beastmaster_beas_rare_02', character:GetPlayerOwner())
             npc.first_interaction = false
         end
     end
 
     -- Check if character has quest to turn in.
-    handled = self:CheckTurnIn(character, npc)
+    handled = self:CheckTurnIn(hero, npc)
 
     if not handled then
-        handled = self:CheckQuestAvailable(character, npc)
+        handled = self:CheckQuestAvailable(hero, npc)
     end
 
     return handled
@@ -51,12 +51,12 @@ function DialogSystem:CheckTurnIn(character, npc)
     return true
 end
 
-function DialogSystem:CheckQuestAvailable(character, npc)
-    local quest = QuestService:GetQuestForNpc(character, npc)
+function DialogSystem:CheckQuestAvailable(hero, npc)
+    local quest = QuestService:GetQuestForNpc(hero, npc)
     if not quest then Debug('DialogSystem', 'No quest to present') return false end
 
     -- Can't trust the client, so we have to remember what's open.
-    local player = character:GetPlayerOwner()
+    local player = hero:GetPlayerOwner()
     player.currentDialogQuest = quest
 
     local data = quest:GetStartData();
@@ -80,6 +80,9 @@ function DialogSystem:OnQuestDialogEvent(event)
             --local player = PlayerResource:GetPlayer(event.PlayerID)
             quest:Accept()
             QuestService:OnQuestStart(quest)
+
+            -- Check if there is another quest available...
+            DialogSystem:CheckQuestAvailable(player:GetAssignedHero(), quest:GetStartNpc())
         end
     end
 end

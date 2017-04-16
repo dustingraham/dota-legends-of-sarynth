@@ -56,8 +56,8 @@ function CustomMap:OnHeroPick(_, params)
     if TEST_SUPERMAN then
         hero:SetMoveCapability(DOTA_UNIT_CAP_MOVE_FLY)
         hero:SetBaseMoveSpeed(3000)
-        hero:SetBaseStrength(1500)
-        hero:SetBaseAgility(600)
+        hero:SetBaseStrength(2500)
+        hero:SetBaseAgility(900)
         hero:SetBaseIntellect(1500)
         hero:CalculateStatBonus()
     end
