@@ -37,7 +37,9 @@ end
 
 ---
 --@type InventoryService
-InventoryService = InventoryService or class({})
+InventoryService = InventoryService or class({}, {
+    rangedActions = {}
+})
 
 function InventoryService:Activate()
     self:LoadItemData()
@@ -48,6 +50,27 @@ function InventoryService:Activate()
     --CustomGameEventManager:RegisterListener("InventoryService_OnRightClick", Dynamic_Wrap(InventoryService, "InventoryService_OnRightClick"))
 
     CustomGameEventManager:RegisterListener("Inventory_OnDragDrop", Dynamic_Wrap(InventoryService, 'OnDragDrop'))
+    CustomGameEventManager:RegisterListener("Inventory_OnDragWorld", Dynamic_Wrap(InventoryService, 'OnDragWorld'))
+
+    -- TODO: Remove duplicate...
+    Timers:CreateTimer(function()
+        for id, action in pairs(InventoryService.rangedActions) do
+            -- Pythagorean
+            local rangeSquared = 150 * 150
+            local distance = action.unit:GetAbsOrigin() - action.targetPosition
+            local rangeCurrent = distance.x * distance.x + distance.y * distance.y
+            -- Check if position is inside the range.
+            if rangeCurrent <= rangeSquared then
+                local status, result = xpcall(
+                    function() return action.callback(action) end,
+                    function (msg) return msg..'\n'..debug.traceback()..'\n' end
+                )
+                InventoryService.rangedActions[id] = nil
+                if not status then Debug('InventoryService', '[ERROR]', result) end
+            end
+        end
+        return 0.03
+    end)
 
     Debug('InventoryService', 'Activated')
 end
@@ -76,7 +99,7 @@ function InventoryService:LoadItemData()
             end
         end
     end
-    DeepPrintTable(self.itemPassives)
+    --DeepPrintTable(self.itemPassives)
 end
 
 function InventoryService:InventoryService_OnLeftClick(event)
@@ -84,6 +107,37 @@ function InventoryService:InventoryService_OnLeftClick(event)
 end
 function InventoryService:InventoryService_OnRightClick(event)
     Debug('InventoryService', 'InventoryService_OnRightClick')
+end
+
+function InventoryService:OnDragWorld(event)
+    Debug('InventoryService', 'OnDragWorld')
+    -- DeepPrintTable(event)
+    local hero = PlayerResource:GetSelectedHeroEntity(event.PlayerID)
+    local position = Vector(event.position["0"], event.position["1"], event.position["2"])
+
+    local unitpos = hero:GetAbsOrigin()
+    local diff = unitpos - position
+    local dist = diff:Length2D()
+    local pos = unitpos
+    if dist > 150 *.9 then
+        pos = position + diff:Normalized() * 150 * .9
+    end
+
+    ExecuteOrderFromTable({
+        UnitIndex = hero:GetEntityIndex(),
+        OrderType = DOTA_UNIT_ORDER_MOVE_TO_POSITION,
+        Position =  pos,
+    })
+    InventoryService.rangedActions[hero:GetEntityIndex()] = {
+        unit = hero,
+        targetPosition = pos,
+        range = 150,
+        playerID = event.PlayerID,
+        callback = function(action)
+            print('Callback happening...')
+            hero.inventory:DropToWorld(event.slotFrom, event.position)
+        end,
+    }
 end
 
 function InventoryService:OnDragDrop(event)
@@ -97,59 +151,68 @@ function InventoryService:OrderFilter(event, order)
     -- TODO: Range cancel/abort?
     if order.units["0"] and order.order_type == DOTA_UNIT_ORDER_PICKUP_ITEM then
         InventoryService:OrderFilterPickupItem(event, order)
+        return true
     end
 end
 
 function InventoryService:AddItem(hero, item)
     print('Adding '..item:GetName()..' to '..hero:GetName())
+    hero.inventory:AddItem(item)
+    return true
 end
 
 function InventoryService:OrderFilterPickupItem(event, order)
+    print('Order Filter Fire')
+    --DeepPrintTable(event)
+    --DeepPrintTable(order)
+    --print('=---=')
+
     -- For now, ranged pickup lol!
+    --local hero = EntIndexToHScript(order.units["0"])
+    --local physItem = EntIndexToHScript(order.entindex_target)
+    --if not physItem then return false end
+    --local item = physItem:GetContainedItem()
+    --if item and InventoryService:AddItem(hero, item) then
+    --    physItem:RemoveSelf()
+    --end
+
+    if order.units['0'] then
+        InventoryService.rangedActions[order.units["0"]] = nil
+    end
+
     local hero = EntIndexToHScript(order.units["0"])
     local physItem = EntIndexToHScript(order.entindex_target)
     if not physItem then return false end
-    local item = physItem:GetContainedItem()
-    if item and InventoryService:AddItem(hero, item) then
-        physItem:RemoveSelf()
-    end
-
-    -- TODO
-    if true then return false end
-
-    local unit = EntIndexToHScript(order.units["0"])
-    local physItem = EntIndexToHScript(order.entindex_target)
-    local unitpos = unit:GetAbsOrigin()
-    if not physItem then return false end
+    local unitpos = hero:GetAbsOrigin()
     local diff = unitpos - physItem:GetAbsOrigin()
     local dist = diff:Length2D()
     local pos = unitpos
     if dist > 90 then
         pos = physItem:GetAbsOrigin() + diff:Normalized() * 90
     end
-    local defInventoryService = Containers:GetDefaultInventoryService(unit)
-    if defInventoryService then
-        order.order_type = DOTA_UNIT_ORDER_MOVE_TO_POSITION
-        order.position_x = pos.x
-        order.position_y = pos.y
-        order.position_z = pos.z
 
-        Containers.rangeActions[order.units["0"]] = {
-            unit = unit,
-            position = physItem:GetAbsOrigin(),
-            range = 100,
-            playerID = issuerID,
-            action = function(playerID, container, unit, target)
-                if IsValidEntity(physItem) then
-                    local item = physItem:GetContainedItem()
-                    if item and defInventoryService:AddItem(item) then
-                        physItem:RemoveSelf()
-                    end
+    print('Altering order...')
+    order.order_type = DOTA_UNIT_ORDER_MOVE_TO_POSITION
+    order.position_x = pos.x
+    order.position_y = pos.y
+    order.position_z = pos.z
+
+    InventoryService.rangedActions[order.units["0"]] = {
+        unit = hero,
+        targetPosition = physItem:GetAbsOrigin(),
+        range = 150,
+        playerID = order.issuer_player_id_const,
+        callback = function(action)
+        -- action = function(playerID, container, unit, target)
+            print('Callback happening...')
+            if IsValidEntity(physItem) then
+                local item = physItem:GetContainedItem()
+                if item and InventoryService:AddItem(hero, item) then
+                    physItem:RemoveSelf()
                 end
-            end,
-        }
-    end
-
+            end
+        end,
+    }
 end
 
 Event:BindActivate(InventoryService)

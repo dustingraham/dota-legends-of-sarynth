@@ -120,14 +120,28 @@ function Inventory:SwapSlots(fromSlotId, toSlotId)
     if fromItem and toItem then
         return self:SwapItems(fromItem, toItem)
     elseif fromItem then
-        print('This should not happen...')
+        local toItemSlotId = tonumber(string.match(toSlotId, "%d+"))
+        local fromItemSlotId = tonumber(string.match(fromSlotId, "%d+"))
         local fromItemId = fromItem:GetEntityIndex()
         local fromItemName = fromItem:GetAbilityName()
-        self.items[fromItemId] = toSlotId
-        self.itemNames[fromItemName][fromItemId] = toSlotId
-        PlayerTables:SetTableValue(self.tableName, "slot"..toSlotId, fromItemId)
-        PlayerTables:DeleteTableKey(self.tableName, "slot"..fromSlotId)
+        self.items[fromItemId] = toItemSlotId
+        self.itemNames[fromItemName][fromItemId] = toItemSlotId
+        PlayerTables:SetTableValue(self.tableName, "slot"..toItemSlotId, fromItemId)
+        PlayerTables:DeleteTableKey(self.tableName, "slot"..fromItemSlotId)
+        if fromItemSlotId <= 12 then
+            RemovePassives(self.hero, fromItem)
+        end
+        if toItemSlotId <= 12 then
+            ApplyPassives(self.hero, fromItem)
+        end
+        --local fromItemId = fromItem:GetEntityIndex()
+        --local fromItemName = fromItem:GetAbilityName()
+        --self.items[fromItemId] = toSlotId
+        --self.itemNames[fromItemName][fromItemId] = toSlotId
+        --PlayerTables:SetTableValue(self.tableName, "slot"..toSlotId, fromItemId)
+        --PlayerTables:DeleteTableKey(self.tableName, "slot"..fromSlotId)
     elseif toItem then
+        print('This should not happen...')
         local fromItemSlotId = tonumber(string.match(fromSlotId, "%d+"))
         local toItemSlotId = tonumber(string.match(toSlotId, "%d+"))
         local toItemId = toItem:GetEntityIndex()
@@ -246,4 +260,35 @@ end
 
 function Inventory:IsItemInSlot(i)
     return self:GetItemInSlot(i) ~= nil
+end
+
+function Inventory:DropToWorld(fromSlotId, position)
+    if not self:IsItemInSlot(fromSlotId) then return end
+
+    local fromItem = self:GetItemInSlot(fromSlotId)
+    if not fromItem:IsDroppable() then
+        print('TODO: Send message to user, you can not drop that...')
+        return
+    end
+
+    -- Remap position...
+    if not position["0"] or not position["1"] or not position["2"] then return end
+    position = Vector(position["0"], position["1"], position["2"])
+
+    local fromItemSlotId = tonumber(string.match(fromSlotId, "%d+"))
+    local fromItemId = fromItem:GetEntityIndex()
+    local fromItemName = fromItem:GetAbilityName()
+
+    self.items[fromItemId] = nil
+    self.itemNames[fromItemName][fromItemId] = nil
+    PlayerTables:DeleteTableKey(self.tableName, "slot"..fromItemSlotId)
+    if fromItemSlotId <= 12 then
+        RemovePassives(self.hero, fromItem)
+    end
+
+    -- Place it in the world
+    CreateItemOnPositionSync(position, fromItem)
+
+    print('HERO HAS ITEMS:')
+    DeepPrintTable(self.items)
 end

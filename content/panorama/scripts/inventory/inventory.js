@@ -80,8 +80,15 @@ var inventory = {
     OnDragEnd: function(panelId, draggedPanel)
     {
         // $.Msg('Drag End: '+panelId);
-
-        // TODO: World drop.
+        if (!draggedPanel.foundDestination)
+        {
+            // World drop.
+            var position = GameUI.GetScreenWorldPosition(GameUI.GetCursorPosition());
+            GameEvents.SendCustomGameEventToServer('Inventory_OnDragWorld', {
+                slotFrom:draggedPanel.originalPanel.panelId,
+                position:position
+            });
+        }
 
         // Remove compatibility highlights.
         $equipment.FindChildrenWithClassTraverse('compatible_drop_target').forEach(function(e) {
@@ -131,10 +138,9 @@ var inventory = {
 
         // Containers_OnDragFrom
         GameEvents.SendCustomGameEventToServer('Inventory_OnDragDrop', {
-            slotFrom:panel.panelId,
-            slotTo:draggedPanel.originalPanel.panelId
+            slotFrom:draggedPanel.originalPanel.panelId,
+            slotTo:panel.panelId
         });
-
 
         // JS SWAP!
         // RemoveItem(panel.panelId);
