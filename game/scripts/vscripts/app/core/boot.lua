@@ -171,6 +171,9 @@ function Boot:InitGameRules()
     -- Trees
     GameRules:SetTreeRegrowTime(30)
 
+    GameRules:SetGoldPerTick(0)
+    GameRules:SetStartingGold(100)
+
     -- For reference
     -- GameRules:SetHeroSelectionTime(0)
     -- GameRules:SetCustomGameEndDelay(-1)
@@ -178,7 +181,6 @@ function Boot:InitGameRules()
     -- GameRules:SetUseUniversalShopMode(true)
     -- GameRules:SetSameHeroSelectionEnabled(true)
     -- GameRules:SetUseCustomHeroXPValues(false)
-    -- GameRules:SetGoldPerTick(GOLD_PER_TICK)
     -- GameRules:SetGoldTickTime(GOLD_TICK_TIME)
     -- GameRules:SetRuneSpawnTime(RUNE_SPAWN_TIME)
     -- GameRules:SetUseBaseGoldBountyOnHeroes(USE_STANDARD_HERO_GOLD_BOUNTY)
@@ -188,7 +190,7 @@ function Boot:InitGameRules()
     -- GameRules:SetFirstBloodActive( ENABLE_FIRST_BLOOD )
     -- GameRules:SetHideKillMessageHeaders( HIDE_KILL_BANNERS )
     -- GameRules:SetCustomVictoryMessageDuration( VICTORY_MESSAGE_DURATION )
-    -- GameRules:SetStartingGold( STARTING_GOLD )
+    --
     -- SetTeamCustomHealthbarColor(DOTA_TEAM_GOODGUYS, 255, 0, 255)
 
     Debug('Boot', 'Configured GameRules')

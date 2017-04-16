@@ -8,7 +8,9 @@
     margin-left:50px;
     margin-top:5px;
 }
-
+.hide {
+    visibility: collapse;
+}
 .unitframe .hero {
     horizontal-align:left;
     margin-left:4px;

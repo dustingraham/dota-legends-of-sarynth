@@ -12,6 +12,14 @@
     font-size:23px;
     transform:translateY(-3px);
 }
+.inventory-container .close-label {
+    margin-top:24px;
+    margin-left:290px;
+    wash-color:#eeeeee;
+}
+.inventory-container .close-label:hover {
+    wash-color:#ff9999;
+}
 .backpackLabel, .levelLabel {
     color:#999;
 }
@@ -40,6 +48,8 @@
 }
 .inventory-dialog .doll {
     align:center center;
+    margin-bottom:10px;
+    border-bottom:1px solid #22222266;
 }
 
 .inventory-dialog .right {

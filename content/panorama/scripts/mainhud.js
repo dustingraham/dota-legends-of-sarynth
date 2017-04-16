@@ -188,7 +188,7 @@ function UpdateUnitPanel() {
     // Hack
     $.Schedule(0.1, UpdateUnitPanel);
 
-    UpdateTargetUnitPanel()
+    UpdateTargetUnitPanel();
 
     var panel = $.GetContextPanel();
 

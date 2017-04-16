@@ -24,8 +24,8 @@
         <Panel id="InventoryDialog" class="inventory-container hide">
             <Image class="inventory-dialog" src="file://{images}/inventory/window.png">
                 <Panel class="left">
-                    <Label class="TitleFont classname" text="Warrior"/>
-                    <Label class="levelLabel" text="Level 13"/>
+                    <Label id="HeroClassLabel" class="TitleFont classname" text="Warrior"/>
+                    <Label id="HeroLevelLabel" class="levelLabel" text="Level 13"/>
                     <Panel id="Equipment" class="equipment-container"/>
                     <Image class="doll" src="file://{images}/inventory/doll.png"/>
                 </Panel>
@@ -34,12 +34,13 @@
                     <Panel id="Backpack" class="backpack-container"/>
                     <Panel class="gold-coins">
                         <Image src="file://{images}/inventory/gold_coins.png"/>
-                        <Label class="MonoNumbersFont gold-count" text="23,917"/>
+                        <Label id="HeroGoldLabel" class="MonoNumbersFont gold-count" text="23,917"/>
                     </Panel>
                 </Panel>
             </Image>
             <Image class="quest-dialog-icon" src="file://{images}/inventory/header.png">
                 <Label id="InventoryMainTitle" class="TitleFont header-label" text="INVENTORY"/>
+                <Image onactivate="Game.KeyInventoryToggle()" class="close-label" src="file://{images}/inventory/close_x.png"/>
             </Image>
         </Panel>
     </Panel>

@@ -365,7 +365,30 @@ if (currentValues)
     PlaceAllItems(currentValues);
 }
 
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
 Game.KeyInventoryToggle = function()
 {
     $('#InventoryDialog').ToggleClass('hide');
+
+    // Update text fields.
+    var panel = $.GetContextPanel();
+    var playerId = Game.GetLocalPlayerID();
+    var heroId = Players.GetPlayerHeroEntityIndex(playerId);
+    var heroName = unitNamesToClass[Entities.GetUnitName(heroId)];
+
+    panel.FindChildTraverse('HeroClassLabel').text = heroName;
+    panel.FindChildTraverse('HeroLevelLabel').text = 'Level '+Entities.GetLevel(heroId);
+    panel.FindChildTraverse('HeroGoldLabel').text = numberWithCommas(Players.GetGold(playerId));
+};
+
+var unitNamesToClass= {
+    npc_dota_hero_dragon_knight: 'Warrior',
+    npc_dota_hero_omniknight: 'Paladin',
+    npc_dota_hero_bounty_hunter: 'Rogue',
+    npc_dota_hero_windrunner: 'Ranger',
+    npc_dota_hero_invoker: 'Mage',
+    npc_dota_hero_warlock: 'Sorcerer'
 };

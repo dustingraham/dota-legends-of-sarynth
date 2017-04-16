@@ -66,12 +66,16 @@ function Quest:ApplyReward(hero)
         hero:AddExperience(self.rewards.experience, DOTA_ModifyXP_Unspecified, false, true)
         PopupExperience(hero, self.rewards.experience)
     end
+    if self.rewards.gold then
+        hero:ModifyGold(self.rewards.gold, true, DOTA_ModifyGold_Unspecified)
+        PopupGoldGain(hero, self.rewards.gold)
+    end
     if self.rewards.item_choose then
         local item = CreateItem(self.rewards.item_choose['01'], nil, nil)
-        Containers:AddItemToUnit(hero, item)
+        InventoryService:AddItem(hero, item)
         if hero.firstQuestItem == nil then
             hero.firstQuestItem = true
-            hero.customInventory:Open(hero:GetPlayerOwnerID())
+            -- hero.customInventory:Open(hero:GetPlayerOwnerID())
         end
     end
 end

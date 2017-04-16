@@ -23,6 +23,11 @@
                 "var_type" "FIELD_INTEGER"
                 "rarity" "3"
             }
+            "slot_type"
+            {
+                "var_type" "FIELD_INTEGER"
+                "slot_type" "1"
+            }
         }
         "ItemKillable" "0"
         "ItemSellable" "1"
@@ -39,7 +44,7 @@
         "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
         "ItemCost" "100"
         "ItemShopTags" "damage"
-        "ItemQuality" "common"
+        "ItemQuality" "component"
         "ItemAliases" "broadsword"
         "ItemShareability" "ITEM_FULLY_SHAREABLE"
         "AbilitySpecial"
@@ -53,6 +58,11 @@
             {
                 "var_type" "FIELD_INTEGER"
                 "rarity" "4"
+            }
+            "slot_type"
+            {
+                "var_type" "FIELD_INTEGER"
+                "slot_type" "1"
             }
         }
         "ItemKillable" "0"
@@ -84,6 +94,11 @@
             {
                 "var_type" "FIELD_INTEGER"
                 "rarity" "5"
+            }
+            "slot_type"
+            {
+                "var_type" "FIELD_INTEGER"
+                "slot_type" "1"
             }
         }
         "ItemKillable" "0"
@@ -750,6 +765,12 @@
                 "var_type" "FIELD_INTEGER"
                 "bonus_health" "300"
             }
+            "slot_type"
+            {
+                "var_type" "FIELD_INTEGER"
+                "slot_type" "11"
+            }
+
         }
         "Modifiers"
         {
@@ -799,6 +820,11 @@
             {
                 "var_type" "FIELD_INTEGER"
                 "bonus_health" "800"
+            }
+            "slot_type"
+            {
+                "var_type" "FIELD_INTEGER"
+                "slot_type" "3"
             }
         }
         "Modifiers"

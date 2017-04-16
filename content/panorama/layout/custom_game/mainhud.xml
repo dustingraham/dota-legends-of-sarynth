@@ -71,11 +71,11 @@
         
         <Panel id="ActionBar" class="action-bar-container">
             <!-- Health Globe -->
-            <Image class="globe-health-empty" src="file://{images}/actionbar1/globe_empty.png">
+            <Image class="globe-health-empty hide" src="file://{images}/actionbar1/globe_empty.png">
                 <Panel id="GlobeHealth" class="globe-full globe-health-full" />
             </Image>
             <!-- Mana Globe -->
-            <Image class="globe-mana-empty" src="file://{images}/actionbar1/globe_empty.png">
+            <Image class="globe-mana-empty hide" src="file://{images}/actionbar1/globe_empty.png">
                 <Panel id="GlobeMana" class="globe-full globe-mana-full" />
             </Image>
             
@@ -96,6 +96,7 @@
             </Panel>
             <Button id="ActionBarEquipment" class="actionbar-button" onactivate="Game.KeyInventoryToggle()">
                 <Image src="file://{images}/actionbar1/action_bar_button_equipment.png" />
+                <Label id="ActionBarEquipmentHotkey" class="" text="N"/>
             </Button>
             <!--<Button id="ActionBarBackpack" class="hide actionbar-button" onactivate="ActionBarButton('customInventory')">-->
                 <!--<Image src="file://{images}/actionbar1/action_bar_button_backpack.png" />-->

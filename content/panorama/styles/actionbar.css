@@ -108,7 +108,7 @@
     margin-left:567px;
     
     /* Slight delay in, no delay out. Prevent flicker for bypass. */
-    transition:opacity 0.1s linear 0.5s;
+    transition:opacity 0.1s linear 0.1s;
     opacity:0.0;
 }
 .experience-bar-tooltip-container:hover .experience-bar-tooltip {
@@ -125,6 +125,7 @@
     horizontal-align:center;
     color:gray;
     font-size:11px;
+    transform: translateY(-3px);
 }
 
 .actionbar-button {
@@ -135,10 +136,23 @@
     wash-color:#ffffff;
 }
 #ActionBarEquipment {
-    margin-right:95px;
+    margin-right:85px;
     margin-bottom:15px;
+    padding-left:10px;
 }
 #ActionBarBackpack {
     margin-right:60px;
     margin-bottom:3px;
+}
+#ActionBarEquipmentHotkey {
+    color:#927561;
+    border:1px solid #927561;
+    border-radius:3px;
+    background-color:#272424;
+    padding:2px 2px 0 4px;
+    margin-top:-5px;
+    margin-left:-5px;
+    font-size:11px;
+    transform: translateY(5px);
+    box-shadow:  1px 0 8px 1px #92756144;
 }
