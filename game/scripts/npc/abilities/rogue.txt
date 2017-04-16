@@ -24,7 +24,7 @@
         "ScriptFile" "app/systems/characters/abilities/rogue/rogue_crippling_slash"
         "AbilityTextureName"    "custom/rogue/rogue_crippling_slash"
 
-        "AbilityCooldown"       "9"
+        "AbilityCooldown"       "8"
         "AbilityManaCost"       "18"
 
         "AbilityCastAnimation"  "ACT_DOTA_ATTACK"

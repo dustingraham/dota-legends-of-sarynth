@@ -59,25 +59,16 @@ function Reporter:CreateReport(params)
 
 end
 
-local function GetItemsForHero(hero)
-    local items = {
-        inventory = {},
-        equipment = {},
-    }
-    if hero.customEquipment then
-        for _,item in pairs(hero.customEquipment:GetAllItems()) do
-            table.insert(items.equipment, {slot = hero.customEquipment:GetSlotForItem(item), name = item:GetName()})
-        end
-    end
-    if hero.customInventory then
-        for _,item in pairs(hero.customInventory:GetAllItems()) do
-            table.insert(items.inventory, {slot = hero.customInventory:GetSlotForItem(item), name = item:GetName()})
-        end
+function Reporter:GetItemsForHero(hero)
+    local items = {}
+    for slot,itemId in pairs(hero.inventory:GetAllItems()) do
+        local item = EntIndexToHScript(itemId)
+        items[slot] = item:GetName()
     end
     return items
 end
 
-local function GetQuestsForPlayer(PlayerID)
+function Reporter:GetQuestsForPlayer(PlayerID)
     local key = 'player_'..PlayerID..'_quests'
     local quests = {
         completed = QuestService.playerCompleted[key],
@@ -107,7 +98,6 @@ end
 -- hero.customEquipment:AddItem(CreateItem('item_amulet_tier1', nil, nil), 4)
 -- print(inspect(GetQuestsForPlayer(0)))
 
-
 function Reporter:PullCharacterReport(PlayerID)
     local player = PlayerService:GetPlayer(PlayerID)
     local hero = PlayerResource:GetSelectedHeroEntity(PlayerID)
@@ -116,8 +106,8 @@ function Reporter:PullCharacterReport(PlayerID)
         player_id_64 = tostring(PlayerResource:GetSteamID(PlayerID)),
         slot_id = player:GetSlotId(),
         data = {
-            items = GetItemsForHero(hero),
-            quests = GetQuestsForPlayer(PlayerID),
+            items = self:GetItemsForHero(hero),
+            quests = self:GetQuestsForPlayer(PlayerID),
             experience = hero:GetCurrentXP(),
             level = hero:GetLevel(),
             gametime = player:GetPriorGametime() + math.ceil(GameRules:GetGameTime()),

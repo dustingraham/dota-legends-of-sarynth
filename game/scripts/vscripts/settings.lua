@@ -1,7 +1,7 @@
 
 DEBUG_SETTINGS = IsInToolsMode()
 -- Override if necessary...
--- DEBUG_SETTINGS = false
+--DEBUG_SETTINGS = false
 
 -- TEST MODE
 if DEBUG_SETTINGS then
@@ -10,22 +10,23 @@ if DEBUG_SETTINGS then
     --TEST_PICK_HERO = 'dragon_knight' -- Warrior
     --TEST_PICK_HERO = 'omniknight'    -- Paladin
     --TEST_PICK_HERO = 'bounty_hunter' -- Rogue
-    TEST_PICK_HERO = 'invoker'       -- Mage
-    --TEST_PICK_HERO = 'warlock'       -- Sorcerer
+    --TEST_PICK_HERO = 'invoker'       -- Mage
+    TEST_PICK_HERO = 'warlock'       -- Sorcerer
+    --TEST_PICK_HERO_ALT = 'omniknight'
 
     --TEST_DISABLE_FOG = true
-    --TEST_SPAWN_ITEMS = true
-    --TEST_START_LEVEL = 7
-    --TEST_SUPERMAN = true
+    TEST_SPAWN_ITEMS = true
+    TEST_START_LEVEL = 6
+    TEST_SUPERMAN = true
     -- town kobolds ice webbed druids dark
-    TEST_START_WAYPOINT = 'kobolds'
+    --TEST_START_WAYPOINT = 'kobolds'
     --TEST_START_START_BOSS = true
     TEST_QUESTS_COMPLETE = {
         ['1005'] = 'start_area_report_to_town'
     }
 end
 
-DEBUG_SKIP_HTTP_REPORT = false -- DEBUG_SETTINGS
+DEBUG_SKIP_HTTP_REPORT = DEBUG_SETTINGS
 DEBUG_SKIP_HTTP_LOAD = DEBUG_SETTINGS or true
 DEBUG_SKIP_HTTP_SAVE = DEBUG_SETTINGS or true
 
@@ -38,7 +39,7 @@ DEBUG_PRINT_SECTIONS = {
     CharacterPick     = true,
     PlayerService     = true,
     CustomMap         = true,
-    QuestService      = true,
+    QuestService      = false,
     QuestGiver        = true,
     Quest             = true,
     OrderFilter       = true,
@@ -63,5 +64,7 @@ DEBUG_PRINT_SECTIONS = {
     Filters           = false,
     Interaction       = true,
     PrintTable        = true,
+    InventoryService  = true,
+    Inventory         = true,
 }
 DEBUG_PRINT_ALL = false

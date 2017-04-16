@@ -174,7 +174,7 @@ function CharacterService:OnHeroDeath(e, event)
 end
 
 function CharacterService:OnPlayerLevelUp(event)
-    DeepPrintTable(event)
+    --DeepPrintTable(event)
     local player = EntIndexToHScript(event.player)
     local hero = player:GetAssignedHero()
     if not hero then return end
@@ -309,15 +309,26 @@ function CharacterService:OnHeroPick(e, event)
 
     -- Load Items Equipment/Inventory
     -- TODO TODO
-    --local items = event.player:GetPriorItems()
-    --if items then
-    --    for _,itemDef in pairs(items.equipment) do
-    --        hero.customEquipment:AddItem(CreateItem(itemDef.name, hero, hero), itemDef.slot)
-    --    end
-    --    for _,itemDef in pairs(items.inventory) do
-    --        hero.customInventory:AddItem(CreateItem(itemDef.name, hero, hero), itemDef.slot)
-    --    end
-    --end
+
+    local items = event.player:GetPriorItems()
+    if items then
+        if items.equipment then
+            -- Old style.
+            Debug('CharacterService', 'Loading old item style.')
+            for _,itemDef in pairs(items.equipment) do
+                hero.inventory:AddItem(CreateItem(itemDef.name, hero, hero))
+            end
+            for _,itemDef in pairs(items.inventory) do
+                hero.inventory:AddItem(CreateItem(itemDef.name, hero, hero))
+            end
+        else
+            -- New style.
+            Debug('CharacterService', 'Loading new item style.')
+            for slotId,itemName in pairs(items) do
+                hero.inventory:AddItem(CreateItem(itemName, hero, hero), slotId)
+            end
+        end
+    end
 
     -- Items for testing.
     if IsInToolsMode() and TEST_SPAWN_ITEMS then TestTest(hero) end

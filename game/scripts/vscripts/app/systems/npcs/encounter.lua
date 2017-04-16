@@ -21,13 +21,18 @@ function Encounter:Start(boss, hero)
     self:Log('MatchID: '..Boot.MatchID)
     self:Log('Hero: '..hero:GetName())
     self:Log('Level: '..hero:GetLevel())
-    for _,item in pairs(hero.customEquipment:GetAllItems()) do
-        self:Log('Equipment: '..item:GetName())
+    for slotId,itemId in pairs(hero.inventory:GetAllItems()) do
+        local item = EntIndexToHScript(itemId)
+        slotId = tonumber(string.match(slotId, "%d+"))
+        if slotId <= 12 then
+            self:Log('Equipment: '..item:GetName())
+        else
+            self:Log('Backpack: '..item:GetName())
+        end
     end
     self:Log('TrueDmg: '..hero:GetAverageTrueAttackDamage(boss))
 
     self:LogBothHp('Started at '..math.ceil(self.startTime))
-    --self:LogBothHp()
 
     local relay = Entities:FindByName(nil, 'start_area_barricade_relay_on')
     relay:Trigger()
@@ -70,6 +75,7 @@ end
 function Encounter:Log(str)
     local timeElapsed = math.ceil(GameRules:GetGameTime() - self.startTime)
     timeElapsed = string.format("%4s ",timeElapsed)
+    print(str)
     table.insert(self.logs, '['..timeElapsed..'] '..str)
 end
 

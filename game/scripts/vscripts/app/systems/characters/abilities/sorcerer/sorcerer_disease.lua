@@ -33,13 +33,14 @@ function spell:OnProjectileHit(target, pos)
     local caster = self:GetCaster()
     local damage = math.floor(caster:GetAverageTrueAttackDamage(target) * 0.40)
 
-    -- Damage Deal
-    --ApplyDamage({
-    --    victim = target,
-    --    attacker = caster,
-    --    damage = damage,
-    --    damage_type = DAMAGE_TYPE_MAGICAL
-    --})
+    -- Damage Deal on impact
+    -- TODO: Possibly a more visual plume cloud of infection if we revert to no initial damage.
+    ApplyDamage({
+        victim = target,
+        attacker = caster,
+        damage = damage,
+        damage_type = DAMAGE_TYPE_MAGICAL
+    })
     target:AddNewModifier(caster, self, 'sorcerer_diseased', {
         duration = 15,
         damage = damage,

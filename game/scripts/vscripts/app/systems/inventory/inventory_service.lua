@@ -156,13 +156,13 @@ function InventoryService:OrderFilter(event, order)
 end
 
 function InventoryService:AddItem(hero, item)
-    print('Adding '..item:GetName()..' to '..hero:GetName())
+    --print('Adding '..item:GetName()..' to '..hero:GetName())
     hero.inventory:AddItem(item)
     return true
 end
 
 function InventoryService:OrderFilterPickupItem(event, order)
-    print('Order Filter Fire')
+    --print('Order Filter Fire')
     --DeepPrintTable(event)
     --DeepPrintTable(order)
     --print('=---=')
@@ -191,7 +191,7 @@ function InventoryService:OrderFilterPickupItem(event, order)
         pos = physItem:GetAbsOrigin() + diff:Normalized() * 90
     end
 
-    print('Altering order...')
+    -- Convert to move order.
     order.order_type = DOTA_UNIT_ORDER_MOVE_TO_POSITION
     order.position_x = pos.x
     order.position_y = pos.y
@@ -203,8 +203,6 @@ function InventoryService:OrderFilterPickupItem(event, order)
         range = 150,
         playerID = order.issuer_player_id_const,
         callback = function(action)
-        -- action = function(playerID, container, unit, target)
-            print('Callback happening...')
             if IsValidEntity(physItem) then
                 local item = physItem:GetContainedItem()
                 if item and InventoryService:AddItem(hero, item) then

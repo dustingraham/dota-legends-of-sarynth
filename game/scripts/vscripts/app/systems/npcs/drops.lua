@@ -53,7 +53,10 @@ function Drops:RollForDrops(killedUnit)
         local max_drops = ItemTable.Multiple or 1
         -- TODO: This will increase the raw chance of at least 1 aquisition for multiples.
         for i = 1, max_drops do
-            if RollPercentage(chance) then
+            --local rolledSuccess = RollPercentage(chance)
+            local roll = math.random(100)
+            Debug('Drops', 'Roll: ', roll, ' Chance: ', chance, ' Success: ', chance >= roll)
+            if chance >= roll then
                 local item = CreateItem(item_name, nil, nil)
                 local pos = killedUnit:GetAbsOrigin()
                 local drop = CreateItemOnPositionSync(pos, item)

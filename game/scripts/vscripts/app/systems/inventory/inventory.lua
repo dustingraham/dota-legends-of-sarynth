@@ -80,14 +80,33 @@ function Inventory:constructor(hero)
     self.hero = hero
     self.tableName = 'player_items_'..hero:GetPlayerOwnerID()
     PlayerTables:CreateTable(self.tableName, {}, {hero:GetPlayerOwnerID()})
-    print('Created: ', self.tableName)
+    Debug('Inventory', 'Created PlayerTable: ', self.tableName)
 end
 
-function Inventory:AddItem(item)
+function Inventory:AddItem(item, slotId)
     item = ResolveItem(item)
-
     local itemid = item:GetEntityIndex()
     local itemname = item:GetAbilityName()
+
+    if slotId ~= nil then
+        slotId = tonumber(string.match(slotId, "%d+"))
+        if slotId > 12 or self:CheckCompatibleSlot(slotId, item) then
+            self.items[itemid] = slotId
+            self.itemNames[itemname] = self.itemNames[itemname] or {}
+            self.itemNames[itemname][itemid] = slotId
+
+            if slotId <= 12 then
+                ApplyPassives(self.hero, item)
+            end
+
+            -- Notify client
+            PlayerTables:SetTableValue(self.tableName, 'slot'..slotId, itemid)
+            return true
+        else
+            Debug('Inventory', 'Invalid slot placement. Dropping in backpack.')
+            slotId = nil
+        end
+    end
 
     -- Straight add item will go to backpack.
     -- Start looking at 13
@@ -262,6 +281,10 @@ function Inventory:IsItemInSlot(i)
     return self:GetItemInSlot(i) ~= nil
 end
 
+function Inventory:GetAllItems()
+    return PlayerTables:GetAllTableValues(self.tableName)
+end
+
 function Inventory:DropToWorld(fromSlotId, position)
     if not self:IsItemInSlot(fromSlotId) then return end
 
@@ -288,7 +311,4 @@ function Inventory:DropToWorld(fromSlotId, position)
 
     -- Place it in the world
     CreateItemOnPositionSync(position, fromItem)
-
-    print('HERO HAS ITEMS:')
-    DeepPrintTable(self.items)
 end

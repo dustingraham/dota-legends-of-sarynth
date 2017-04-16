@@ -1,8 +1,17 @@
 v0.0.4
+ • Moved town questgiver closer to entrance to town near teleporter.
+ • Added a loot expiration timer. Grab that loot within 60 seconds! It will start burning in the last 20 seconds.
  • Kobold armor item stats will now persist through death.
  • Display character location on pick screen.
  • Adjust items to not be killable. Was causing crash.
- • Added a loot expiration timer. Grab that loot within 60 seconds! It will start burning in the last 20 seconds.
+ • Fix small bug with popupnumbers not releasing particle indexes.
+ 
+ • Created custom inventory system. (Removes containers.lua)
+ • Add gold to quests.
+ • Added some more items, slightly reduced the drop rate of most creatures.
+ • Overseer is now a guaranteed drop, but random item.
+ • Reduced rogue crit cd by 1 second.
+ • Sorcerer disease now has an initial tick of damage on impact.
  
 v0.0.3
  • Created better respawn locations. Dying in kobold area will no longer send you back to the start area.

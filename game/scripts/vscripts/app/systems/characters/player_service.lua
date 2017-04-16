@@ -11,8 +11,8 @@ function PlayerService:Activate()
 end
 
 function PlayerService:OnConnectFull(event)
-    Debug('PlayerService', 'OnConnectFull')
-    DeepPrintTable(event)
+    Debug('PlayerService', 'OnConnectFull PlayerID: ', event.PlayerID)
+    -- DeepPrintTable(event)
 
     -- TODO: Recall setting.
     Wrappers.ToggleFocusTargetUsage(event.PlayerID, 1)
