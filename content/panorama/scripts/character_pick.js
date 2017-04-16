@@ -40,23 +40,6 @@ var InitCharacterPickListeners = function() {
                 {
                     ReplaceCharacterBlock(data);
                 });
-
-                // $.Each(changes, function(params, key)
-                // {
-                //     if (activeQuests[key])
-                //     {
-                //         UpdateQuestBlock(activeQuests[key], params);
-                //     }
-                //     else
-                //     {
-                //         activeQuests[key] = BuildQuestBlock(params)
-                //         $('#QuestProgressContainer').style.visibility = (Object.keys(activeQuests).length > 0) ? 'visible' : 'collapse';
-                //     }
-                // });
-                // $.Each(deletions, function(params, key)
-                // {
-                //     RemoveQuestBlock(key);
-                // });
             });
     }
 
@@ -68,6 +51,20 @@ var InitCharacterPickListeners = function() {
     });
 };
 
+var playerSaveSlotCount = 0;
+var LoadExtraSlots = function()
+{
+    var $welcomeScreen = $('#WelcomeScreen');
+    if (!$welcomeScreen.BHasClass('double-slots'))
+    {
+        // If user has 3 characters, build 3 more.
+        $welcomeScreen.AddClass('double-slots');
+        for (var i = 3; i < 6; i++)
+        {
+            BuildCharacterBlock(i);
+        }
+    }
+};
 
 function ConfirmClassPick()
 {
@@ -123,6 +120,12 @@ function CharacterTest()
 
 function ReplaceCharacterBlock(data)
 {
+    // If we already have extra slots, load them now.
+    if (data.slot_id > 2) LoadExtraSlots();
+    // Count to 3 slots. If they have 3 full, show next row.
+    playerSaveSlotCount = playerSaveSlotCount + 1;
+    if (playerSaveSlotCount >= 3) LoadExtraSlots();
+
     var slotIdKey = 'slotId'+data.slot_id;
     var panel = $('#'+slotIdKey);
 
@@ -210,6 +213,7 @@ if (false) {
     });
 }
 
+// Build the first 3 blocks.
 for (var i = 0; i < 3; i++)
 {
     BuildCharacterBlock(i);

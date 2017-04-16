@@ -1,12 +1,14 @@
 [b]v0.0.5[/b]
  • Release the Webbed Forest area. New items, quests, creatures.
+ • Added 3 more character slots for a total of 6. (One per class.)
  • Added a quest to collect kobold spears, which rewards a shield.
+ • If a questgiver has another quest to give, the dialog will immediately show after accepting the first quest.
 [b]Items[/b]
  • Reduced MS of leather boots from 60 to 50
  • Reduced most armor bonuses in half.
 [b]Bugs[/b]
  • Fixed bug where reward item was sometimes not shown on quest turn in.
-
+ • Fixed overlap of focus target toggle on 16x10 and 4x3 aspect ratios.
  
 [b]v0.0.4[/b]
  • Created custom inventory system.

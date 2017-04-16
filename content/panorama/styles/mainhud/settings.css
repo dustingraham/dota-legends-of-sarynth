@@ -4,6 +4,12 @@
     margin-left:300px;
     margin-bottom:5px;
 }
+.AspectRatio4x3 #ToggleFocusTarget,
+.AspectRatio16x10 #ToggleFocusTarget
+{
+    align:right bottom;
+    margin-right: 100px;
+}
 
 #ToggleFocusTarget.on .off,
 #ToggleFocusTarget.off .on,

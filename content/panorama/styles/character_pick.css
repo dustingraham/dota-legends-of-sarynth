@@ -51,6 +51,26 @@
 .character-details.slotId2 {
     margin-left:950px;
 }
+
+/* Two rows of slots. */
+.double-slots .character-details {
+    margin-top:-50px;
+}
+.double-slots .logo-full {
+    margin-top:120px;
+}
+
+.character-details.slotId3,
+.character-details.slotId4,
+.character-details.slotId5 {
+    margin-top:550px;
+}
+.character-details.slotId3 {
+    margin-right:950px;
+}
+.character-details.slotId5 {
+    margin-left:950px;
+}
 .character-details-window {
     /*transform: translateY(-30px);*/
     margin-top:30px;
