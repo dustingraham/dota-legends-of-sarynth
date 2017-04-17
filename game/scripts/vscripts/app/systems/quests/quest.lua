@@ -224,18 +224,12 @@ function Quest:OnInventoryChange(hero, item)
         if objective.action == 'collect' then
             local count = 0
             for _,itemName in pairs(objective.item) do
-                --    if itemName == item:GetAbilityName() then
-                --        itemMatch = itemName
-                --        break
-                --    end
-                --end
-                --if itemMatch then
-                print('Check '..itemName)
+                --print('Check '..itemName)
                 count = count + hero.inventory:GetItemCount(itemName)
-                print('Just testing, all item count: ', count)
+                --print('Just testing, all item count: ', count)
             end
             objective.current = math.min(objective.required, count)
-            print('Just testing, current: ', objective.current)
+            --print('Just testing, current: ', objective.current)
             QuestService:SendQuestUpdate(self)
             -- TODO: turn it back off if lose items?
             if self:IsComplete() then

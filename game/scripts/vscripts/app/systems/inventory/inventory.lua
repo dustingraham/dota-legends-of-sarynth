@@ -143,7 +143,7 @@ function Inventory:GetItemCount(itemName)
     for i = 1, 48 do
         local item = self:GetItemInSlot(i)
         if item ~= nil then
-            print(item:GetAbilityName())
+            --print(item:GetAbilityName())
             if item:GetAbilityName() == itemName then
                 -- Check item matches name, then check stack counts...
                 -- TODO: Inventory Stacking
