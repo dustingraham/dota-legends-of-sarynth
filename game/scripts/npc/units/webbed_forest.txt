@@ -59,7 +59,7 @@
         "HealthBarOffset"       "80"
 
         "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_GROUND"
-        "MovementSpeed"             "320"
+        "MovementSpeed"             "300"
         "ArmorPhysical"             "10"
         "AttackCapabilities"        "DOTA_UNIT_CAP_MELEE_ATTACK"
 
@@ -91,8 +91,8 @@
         "ArmorPhysical"             "10"
         "AttackCapabilities"        "DOTA_UNIT_CAP_MELEE_ATTACK"
 
-        "AttackDamageMin"            "680"
-        "AttackDamageMax"            "796"
+        "AttackDamageMin"            "780"
+        "AttackDamageMax"            "816"
         "AttackRate"                "1.35"
         "AttackAnimationPoint"      "0.50"
         "AttackRange"               "100"

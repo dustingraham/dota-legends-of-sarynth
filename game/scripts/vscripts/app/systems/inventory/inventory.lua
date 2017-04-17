@@ -340,3 +340,41 @@ function Inventory:DropToWorld(fromSlotId, position)
         item = fromItem
     })
 end
+
+-- Currently special for quest removal. Generalize...?
+-- There may be 3-5 of the same item. Purge all.
+function Inventory:RemoveItemsByName(itemName)
+    for i = 1, 48 do
+        local item = self:GetItemInSlot(i)
+        if item ~= nil then
+            print(item:GetAbilityName())
+            if item:GetAbilityName() == itemName then
+                self:RemoveItemInSlot(i)
+            end
+        end
+    end
+end
+function Inventory:RemoveItemInSlot(slotId)
+    local item = self:GetItemInSlot(slotId)
+    if not item:IsQuestItem() then
+        print('Error: Currently only expect quest items...')
+        return
+    end
+
+    local fromItemSlotId = tonumber(string.match(slotId, "%d+"))
+    local fromItemId = item:GetEntityIndex()
+    local fromItemName = item:GetAbilityName()
+
+    self.items[fromItemId] = nil
+    self.itemNames[fromItemName][fromItemId] = nil
+    PlayerTables:DeleteTableKey(self.tableName, "slot"..fromItemSlotId)
+    if fromItemSlotId <= 12 then
+        print('Error: Not expecting equipped items...')
+        RemovePassives(self.hero, item)
+    end
+
+    Event:Trigger('InventoryDrop', {
+        hero = self.hero,
+        item = item
+    })
+end

@@ -131,11 +131,14 @@ function QuestService:OnQuestComplete(quest)
         quest = quest,
     })
 
+    -- Take Quest Items (if necessary)
+    quest:TakeQuestItems(hero)
+
     -- Give Reward
     quest:ApplyReward(hero)
 
     -- Tmp
-    if quest.id == '1028' then
+    if quest.id == '1228' then
         Notifications:Top(quest.PlayerID, {
             text = "#alpha_release_the_end",
             duration = 30,

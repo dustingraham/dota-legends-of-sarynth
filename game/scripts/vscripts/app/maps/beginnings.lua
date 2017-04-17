@@ -57,8 +57,8 @@ function CustomMap:OnHeroPick(_, params)
         hero:SetMoveCapability(DOTA_UNIT_CAP_MOVE_FLY)
         hero:SetBaseMoveSpeed(3000)
         hero:SetBaseStrength(2500)
-        hero:SetBaseAgility(900)
-        hero:SetBaseIntellect(1500)
+        hero:SetBaseAgility(2500)
+        hero:SetBaseIntellect(2500)
         hero:CalculateStatBonus()
     end
     if TEST_START_START_BOSS then

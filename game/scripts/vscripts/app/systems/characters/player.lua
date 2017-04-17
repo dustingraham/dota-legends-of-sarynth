@@ -68,6 +68,9 @@ function Player:GetPriorGametime()
     return self.gametime
 end
 
+function Player:GetPriorGold()
+    return self.gold
+end
 function Player:GetPriorExperience()
     return self.experience
 end

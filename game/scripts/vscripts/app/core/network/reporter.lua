@@ -110,6 +110,7 @@ function Reporter:PullCharacterReport(PlayerID)
             quests = self:GetQuestsForPlayer(PlayerID),
             experience = hero:GetCurrentXP(),
             level = hero:GetLevel(),
+            gold = hero:GetGold(),
             gametime = player:GetPriorGametime() + math.ceil(GameRules:GetGameTime()),
             zone = hero.currentZone,
         }

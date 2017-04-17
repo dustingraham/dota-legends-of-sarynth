@@ -67,6 +67,20 @@ function Quest:IsComplete()
     return true
 end
 
+function Quest:TakeQuestItems(hero)
+    -- Check each objective, and banish the items.
+    for _,objective in pairs(self.objectives) do
+        -- Also checking that we lost items and no longer fill objective.
+        if objective.action == 'collect' then
+            local count = 0
+            for _,itemName in pairs(objective.item) do
+                -- Destroy it
+                hero.inventory:RemoveItemsByName(itemName)
+            end
+        end
+    end
+end
+
 function Quest:ApplyReward(hero)
     if self.rewards.experience then
         hero:AddExperience(self.rewards.experience, DOTA_ModifyXP_Unspecified, false, true)

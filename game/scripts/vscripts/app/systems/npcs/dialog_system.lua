@@ -73,17 +73,21 @@ function DialogSystem:OnQuestDialogEvent(event)
         -- Can't trust the client, so we have to remember what's open.
         local player = PlayerResource:GetPlayer(event.PlayerID)
         local quest = player.currentDialogQuest
+        -- Which NPC to check depends on whether we're finishing or starting.
+        local npc
         if quest:IsComplete() then
             quest:Complete()
             QuestService:OnQuestComplete(quest)
+            npc = quest:GetEndNpc()
         else
             --local player = PlayerResource:GetPlayer(event.PlayerID)
             quest:Accept()
             QuestService:OnQuestStart(quest)
-
-            -- Check if there is another quest available...
-            DialogSystem:CheckQuestAvailable(player:GetAssignedHero(), quest:GetStartNpc())
+            npc = quest:GetStartNpc()
         end
+
+        -- Check if there is another quest action.
+        DialogSystem:StartDialog(player:GetAssignedHero(), npc)
     end
 end
 

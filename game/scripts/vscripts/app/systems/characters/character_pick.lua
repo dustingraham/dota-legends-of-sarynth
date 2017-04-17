@@ -227,9 +227,9 @@ function CharacterPick:CreateCustomHeroForPlayer(PlayerID, character, isPrimary)
     if character == 'windrunner' then
         local particleName = 'particles/units/heroes/hero_windrunner/windrunner_bowstring.vpcf'
         local idx = ParticleManager:CreateParticle(
-            particleName,
-            PATTACH_POINT_FOLLOW,
-            hero
+        particleName,
+        PATTACH_POINT_FOLLOW,
+        hero
         )
         ParticleManager:SetParticleControlEnt(idx, 0, hero, PATTACH_POINT_FOLLOW, 'bow_bot', hero:GetAbsOrigin(), true)
         ParticleManager:SetParticleControlEnt(idx, 1, hero, PATTACH_POINT_FOLLOW, 'bow_mid', hero:GetAbsOrigin(), true)
@@ -245,17 +245,17 @@ function CharacterPick:CreateCustomHeroForPlayer(PlayerID, character, isPrimary)
     if character == 'warlock' then
         hero:AddNewModifier(hero, nil, 'sorcerer_stats', nil)
         local idx = ParticleManager:CreateParticle(
-            'particles/units/heroes/hero_warlock/warlock_ambient_smoke.vpcf',
-            PATTACH_POINT_FOLLOW,
-            hero
+        'particles/units/heroes/hero_warlock/warlock_ambient_smoke.vpcf',
+        PATTACH_POINT_FOLLOW,
+        hero
         )
         ParticleManager:SetParticleControlEnt(idx, 0, hero, PATTACH_POINT_FOLLOW, 'attach_attack2', hero:GetAbsOrigin(), true)
         ParticleManager:ReleaseParticleIndex(idx)
 
         idx = ParticleManager:CreateParticle(
-            'particles/units/heroes/sorcerer/sorcerer_ambient_staff.vpcf',
-            PATTACH_POINT_FOLLOW,
-            hero
+        'particles/units/heroes/sorcerer/sorcerer_ambient_staff.vpcf',
+        PATTACH_POINT_FOLLOW,
+        hero
         )
         ParticleManager:SetParticleControlEnt(idx, 0, hero, PATTACH_POINT_FOLLOW, 'attach_attack1', hero:GetAbsOrigin(), true)
         ParticleManager:SetParticleControl(idx, 1, hero:GetAbsOrigin())
@@ -284,6 +284,13 @@ function CharacterPick:CreateCustomHeroForPlayer(PlayerID, character, isPrimary)
         hero.isInitialLevel = true
         hero:AddExperience(player:GetPriorExperience(), DOTA_ModifyXP_Unspecified, false, true)
         hero.isInitialLevel = nil
+    end
+
+    -- Gold
+    print('setting the gold')
+    if player:GetPriorGold() ~= nil then
+        print('setting to ', player:GetPriorGold())
+        hero:SetGold(player:GetPriorGold(), true)
     end
 
     Event:Trigger('HeroPick', {
