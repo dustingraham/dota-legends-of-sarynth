@@ -103,12 +103,12 @@
         "AttackRange"               "160"
         "RingRadius"                "140"
 
-        "StatusHealth"              "6472"
-        "ArmorPhysical"             "22"
-        "MagicalResistance"         "55"
-        "MovementSpeed"             "400"
-        "AttackDamageMin"           "122"
-        "AttackDamageMax"           "146"
+        "StatusHealth"              "4530"
+        "ArmorPhysical"             "15"
+        "MagicalResistance"         "35"
+        "MovementSpeed"             "380"
+        "AttackDamageMin"           "112"
+        "AttackDamageMax"           "136"
         "AttackRate"                "0.9"
 
         "BountyXP"                    "90"

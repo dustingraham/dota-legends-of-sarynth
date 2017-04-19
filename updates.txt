@@ -1,8 +1,15 @@
 [b]v0.0.60[/b]
- • 
-[b]Buts[/b]
- • Fixed two bugs with disconnecting/reconnecting. Should fix lost saves, please report any more lost saves.
- • Fix bug where saving was crashing in 2 and 3 player games.
+ • Added 4 new items to spider area. (weapon, chest, 2 rings)
+ • Added 2 new item to kobold area. (ring, weapon)
+ • Added 3 new items to the start area (ring, shield, weapon).
+ • Reduced health of Scar by 30% due to the recent inventory changes limiting heroes to a single weapon.
+ • Vorpal Spider Fangs now only drops on the Venomous Recluse
+ • Overall drop rates increased by 1% but with added items there are fewer duplicates.
+[b]Bugs[/b]
+ • Fix bug where saving was crashing in 2 and 3 player games. Should fix lost saves, please report any more lost saves.
+ • Fixed bug where reconnection was displaying a black screen.
+ • Fix bug on reconnect where player cosmetics were not loading.
+ • Reconnect now works much better (previously unfunctional.)
 
 [b]v0.0.5[/b]
  • Release the Webbed Forest area. New items, quests, creatures.
