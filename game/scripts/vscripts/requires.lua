@@ -27,6 +27,7 @@ for _,file in ipairs({
     'app/systems/inventory/inventory_service',
     'app/systems/inventory/inventory',
 
+    'app/systems/npcs/ai_mixin',
     'app/systems/npcs/base_npc_creature',
     'app/systems/npcs/dialog_system',
     'app/systems/npcs/drops',
@@ -69,5 +70,6 @@ for _,modifier in ipairs({
 }) do LinkLuaModifier(modifier, 'app/systems/npcs/ai/'..modifier, LUA_MODIFIER_MOTION_NONE) end
 for _,modifier in ipairs({
     'ai_start_area_boss',
+    'ai_webbed_queen',
     'ice_dungeon_boss3',
 }) do LinkLuaModifier(modifier, 'app/systems/npcs/ai/units/'..modifier, LUA_MODIFIER_MOTION_NONE) end

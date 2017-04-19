@@ -253,25 +253,30 @@ var InitQuestTableListener = function() {
             });
     }
 
-    // Retrieve values on the client
-    //$.Msg(PlayerTables.GetTableValue("player_0_quests", "count"));
-    $.Each(PlayerTables.GetAllTableValues(playerTableKey), function(params, key)
+    // Grab data if it is already available.
+    var quests = PlayerTables.GetAllTableValues(playerTableKey);
+    if (quests)
     {
-        if (activeQuests[key])
+        $.Each(quests, function(params, key)
         {
-            UpdateQuestBlock(activeQuests[key], params);
-        }
-        else
-        {
-            activeQuests[key] = BuildQuestBlock(params);
-            $('#QuestProgressContainer').style.visibility = (Object.keys(activeQuests).length > 0) ? 'visible' : 'collapse';
-        }
-    });
+            if (activeQuests[key])
+            {
+                UpdateQuestBlock(activeQuests[key], params);
+            }
+            else
+            {
+                activeQuests[key] = BuildQuestBlock(params);
+                $('#QuestProgressContainer').style.visibility = (Object.keys(activeQuests).length > 0) ? 'visible' : 'collapse';
+            }
+        });
+    }
 };
 
 var mapInfo = Game.GetMapInfo();
 var mapName = mapInfo.map_display_name;
-    InitQuestTableListener();
+
+InitQuestTableListener();
+
 // if (mapName == 'introduction')
 // {
 //     InitQuestTableListener();

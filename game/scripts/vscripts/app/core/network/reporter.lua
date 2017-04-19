@@ -51,7 +51,7 @@ function Reporter:CreateReport(params)
         player_id_64 = tostring(PlayerResource:GetSteamID(PlayerID)),
     })
 
-    Debug('Reporter', inspect(params))
+    Debug('ReporterVerbose', inspect(params))
 
     Http:SendReport(params)
     -- local player = PlayerResource:GetPlayer( params.player_id_const )
@@ -99,6 +99,7 @@ end
 -- print(inspect(GetQuestsForPlayer(0)))
 
 function Reporter:PullCharacterReport(PlayerID)
+    Debug('ReporterVerbose', 'Pulling character report.')
     local player = PlayerService:GetPlayer(PlayerID)
     local hero = PlayerResource:GetSelectedHeroEntity(PlayerID)
     return {

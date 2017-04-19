@@ -65,6 +65,7 @@ end
 function CharacterPick:OnCharacterLoad(event)
     local hero = PlayerResource:GetSelectedHeroEntity(event.PlayerID)
     if hero:GetName() ~= DUMMY_HERO then
+        -- Seems to be common doubleclick issue of some sort.
         Debug('CharacterPick', 'Attempt by: ', event.PlayerID)
         Debug('CharacterPick', 'For Slot: ', event.slotId)
         Debug('CharacterPick', 'Already selected hero...')
@@ -75,6 +76,7 @@ function CharacterPick:OnCharacterLoad(event)
     EmitSoundOnClient('HeroPicker.Selected', PlayerResource:GetPlayer(event.PlayerID))
     GameRules:GetGameModeEntity():EmitSound('jboberg_01.music.ui_hero_select')
 
+    Debug('CharacterPick', event.PlayerID, 'Loading slot...', event.slotId)
     local player = PlayerService:GetPlayer(event.PlayerID)
     player:LoadSlot(event.slotId)
 
@@ -112,9 +114,6 @@ function CharacterPick:CreateCustomHeroForPlayer(PlayerID, character, isPrimary)
         hero:SetAbsOrigin(hero:GetAbsOrigin())
         hero:SetOwner(PlayerResource:GetPlayer(PlayerID))
     end
-
-    -- Potential fix for auto-attack issue. Unable to reproduce.
-    hero:Stop()
 
     hero:SetAbilityPoints(0)
     for i = 0, hero:GetAbilityCount() - 1 do
@@ -287,9 +286,7 @@ function CharacterPick:CreateCustomHeroForPlayer(PlayerID, character, isPrimary)
     end
 
     -- Gold
-    print('setting the gold')
     if player:GetPriorGold() ~= nil then
-        print('setting to ', player:GetPriorGold())
         hero:SetGold(player:GetPriorGold(), true)
     end
 
@@ -305,9 +302,23 @@ function CharacterPick:AddCosmetic(hero, thing)
     SpawnEntityFromTableSynchronous("prop_dynamic", { model = thing } ):FollowEntity(hero, true)
 end
 
+-- On Reconnect (?)
+function CharacterPick:OnConnectFull(event)
+    --Debug('CharacterPick', 'OnConnectFull PlayerID: ', event.PlayerID)
+    --DeepPrintTable(event)
+    local hero = PlayerResource:GetSelectedHeroEntity(event.PlayerID)
+    if hero and hero:GetName() ~= DUMMY_HERO then
+        Debug('CharacterPick', 'Possible reconnect.')
+        -- Bypass pick screen.
+        CustomGameEventManager:Send_ServerToPlayer(PlayerResource:GetPlayer(event.PlayerID), 'character_picked', {})
+    end
+end
+
 if not CharacterPick.initialized then
     CharacterPick.initialized = true
     -- May need to unregister this... to prevent abuse?
+    ListenToGameEvent('player_connect_full', Dynamic_Wrap(CharacterPick, 'OnConnectFull'), CharacterPick)
+
     CustomGameEventManager:RegisterListener('character_pick', Dynamic_Wrap(CharacterPick, 'OnCharacterPick'))
     CustomGameEventManager:RegisterListener('character_load', Dynamic_Wrap(CharacterPick, 'OnCharacterLoad'))
 end

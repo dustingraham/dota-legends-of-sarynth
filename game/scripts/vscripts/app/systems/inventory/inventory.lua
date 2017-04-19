@@ -79,7 +79,7 @@ Inventory = Inventory or class({
 function Inventory:constructor(hero)
     self.hero = hero
     self.tableName = 'player_items_'..hero:GetPlayerOwnerID()
-    PlayerTables:CreateTable(self.tableName, {}, {hero:GetPlayerOwnerID()})
+    PlayerTables:CreateOrSubscribe(self.tableName, {}, {hero:GetPlayerOwnerID()})
     Debug('Inventory', 'Created PlayerTable: ', self.tableName)
 end
 

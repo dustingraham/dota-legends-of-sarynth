@@ -1,3 +1,9 @@
+[b]v0.0.60[/b]
+ • 
+[b]Buts[/b]
+ • Fixed two bugs with disconnecting/reconnecting. Should fix lost saves, please report any more lost saves.
+ • Fix bug where saving was crashing in 2 and 3 player games.
+
 [b]v0.0.5[/b]
  • Release the Webbed Forest area. New items, quests, creatures.
  • Added 3 more character slots for a total of 6. (One per class.)

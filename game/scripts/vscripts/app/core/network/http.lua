@@ -159,8 +159,11 @@ function Http:Activate()
             Debug('Http', 'Throttled Send Execute')
 
             -- If we're sending anything, add current character data
-            for PlayerID,_ in pairs(PlayerService.players) do
-                table.insert(self.reports, Reporter:PullCharacterReport(PlayerID))
+            for PlayerID,player in pairs(PlayerService.players) do
+                -- Ensure they have picked a slot/hero.
+                if player.slot_id ~= nil then
+                    table.insert(self.reports, Reporter:PullCharacterReport(PlayerID))
+                end
             end
 
             Http:ThrottledSendReport()

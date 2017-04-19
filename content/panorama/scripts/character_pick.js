@@ -43,12 +43,14 @@ var InitCharacterPickListeners = function() {
             });
     }
 
-    // Retrieve values on the client
-    //$.Msg(PlayerTables.GetTableValue("player_0_quests", "count"));
-    $.Each(PlayerTables.GetAllTableValues(playerTableKey), function(data)
-    {
-        ReplaceCharacterBlock(data);
-    });
+    // Grab data if it is already available.
+    var blocks = PlayerTables.GetAllTableValues(playerTableKey);
+    if (blocks) {
+        $.Each(blocks, function(data)
+        {
+            ReplaceCharacterBlock(data);
+        });
+    }
 };
 
 var playerSaveSlotCount = 0;

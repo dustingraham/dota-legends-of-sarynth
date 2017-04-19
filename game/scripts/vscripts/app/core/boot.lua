@@ -28,12 +28,48 @@ function Boot:Precache(context)
          'particles/units/start/scar/claw.vpcf',
 
         -- Testing?
+        'particles/units/heroes/hero_venomancer/venomancer_venomous_gale.vpcf',
         'particles/econ/items/drow/drow_bow_monarch/drow_frost_arrow_monarch.vpcf',
         'particles/units/heroes/hero_drow/drow_frost_arrow.vpcf',
         'particles/econ/items/mirana/mirana_crescent_arrow/mirana_spell_crescent_arrow.vpcf',
         'particles/units/heroes/hero_legion_commander/legion_commander_odds_hero_arrow_parent.vpcf'
     }) do PrecacheResource('particle', name, context) end
 
+    -- This is required for reconnected players.
+    -- Should figure out how to add this to a kv...
+    for _,name in ipairs({
+        'models/heroes/invoker/invoker_head.vmdl', -- 98
+        'models/items/invoker/sempiternal_revelations_hat_s1/sempiternal_revelations_hat_s1.vmdl', -- 6441
+        'models/items/invoker/arsenal_magus_belt/arsenal_magus_belt.vmdl', -- 6200
+        'models/items/dragon_knight/fire_tribunal_tabard/fire_tribunal_tabard.vmdl', -- 6105
+        'models/items/dragon_knight/fire_tribunal_helm/fire_tribunal_helm.vmdl', -- 6099
+        'models/items/dragon_knight/fire_tribunal_arms/fire_tribunal_arms.vmdl', -- 6093
+        'models/items/dragon_knight/sword_of_the_drake/sword_of_the_drake.vmdl', -- 4503
+        'models/items/dragon_knight/shield_timedragon.vmdl', -- 4095
+        'models/heroes/omniknight/head.vmdl', -- 45
+        'models/items/omniknight/stalwart_arms/stalwart_arms.vmdl', -- 7090
+        'models/items/omniknight/stalwart_weapon/stalwart_weapon.vmdl', -- 7091
+        'models/items/omniknight/stalwart_head/stalwart_head.vmdl', -- 7092
+        'models/items/omniknight/stalwart_back/stalwart_back.vmdl', -- 7093
+        'models/items/omniknight/stalwart_shoulder/stalwart_shoulder.vmdl', -- 7094
+        'models/items/bounty_hunter/immortal_warrior_knife/immortal_warrior_knife.vmdl', -- 4830
+        'models/items/bounty_hunter/immortal_warrior_blades/immortal_warrior_blades.vmdl', -- 4829
+        'models/items/bounty_hunter/twinblades_back/twinblades_back.vmdl', -- 6527
+        'models/items/bounty_hunter/twinblades_shoulder/twinblades_shoulder.vmdl', -- 6529
+        'models/items/bounty_hunter/twinblades_armor/twinblades_armor.vmdl', -- 6537
+        'models/items/bounty_hunter/twinblades_head/twinblades_head.vmdl', -- 6525
+        'models/items/windrunner/ti6_windranger_back/ti6_windranger_back.vmdl', -- 7923
+        'models/items/windrunner/deadly_feather_swing_head/deadly_feather_swing_head.vmdl', -- 8252
+        'models/items/windrunner/ti6_windranger_shoulder/ti6_windranger_shoulder.vmdl', -- 7926
+        'models/items/windrunner/the_swift_pathfinder_swift_pathfinders_bow/the_swift_pathfinder_swift_pathfinders_bow.vmdl', -- 8922
+        'models/items/windrunner/ti6_windranger_offhand/ti6_windranger_offhand.vmdl', -- 7925
+        'models/items/warlock/tevent_2_gatekeeper_head/tevent_2_gatekeeper_head.vmdl', -- 8079
+        'models/items/warlock/archivists_robe/archivists_robe.vmdl', -- 4474
+        'models/items/warlock/staff_of_infernal_chaos/staff_of_infernal_chaos.vmdl', -- 5424
+        'models/heroes/warlock/warlock_lantern.vmdl', -- 6068
+    }) do
+        PrecacheResource('model', name, context)
+    end
 
     PrecacheResource('particle', 'particles/units/heroes/hero_ursa/ursa_earthshock.vpcf', context)
     PrecacheResource('particle', 'particles/quest_available.vpcf', context)

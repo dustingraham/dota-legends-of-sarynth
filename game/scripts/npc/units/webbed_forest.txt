@@ -198,6 +198,8 @@
         "StatusHealth"                "21472"
         "StatusHealthRegen"           "2.5"
 
+        "Ability1" "webbed_queen_poison"
+
         "Creature"
         {
             "AttachWearables"

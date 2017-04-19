@@ -7,6 +7,7 @@ function CustomMap:Activate()
 
     Event:Listen('OnStateGameSetup', Dynamic_Wrap(CustomMap, 'OnStateGameSetup'), CustomMap)
     Event:Listen('OnStateInGame', Dynamic_Wrap(CustomMap, 'OnStateInGame'), CustomMap)
+    Event:Listen('HeroPick', Dynamic_Wrap(CustomMap, 'OnHeroPick'), CustomMap)
 end
 
 
@@ -34,7 +35,45 @@ function CustomMap:OnNpcSpawned(event)
     end
 end
 
+function CustomMap:OnHeroPick(_, params)
+    if TEST_SUPERMAN then
+        local hero = params.hero
+        hero:SetMoveCapability(DOTA_UNIT_CAP_MOVE_FLY)
+        hero:SetBaseMoveSpeed(3000)
+        hero:SetBaseStrength(1500)
+        hero:SetBaseAgility(600)
+        hero:SetBaseIntellect(1500)
+        hero:CalculateStatBonus()
+    end
+end
+
+function CustomMap:OnScriptReload()
+    print('Reload...')
+
+    --local units = FindUnitsInRadius(
+    --DOTA_TEAM_GOODGUYS, nil, nil,
+    --self.aggroRange, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_ALL, DOTA_UNIT_TARGET_FLAG_NONE,
+    --FIND_ANY_ORDER, false
+    --)
+
+    for _,unit in pairs(FindUnitsInRadius(DOTA_TEAM_GOODGUYS,
+                                          Vector(0, 0, 0),
+                                          nil,
+                                          FIND_UNITS_EVERYWHERE,
+                                          DOTA_UNIT_TARGET_TEAM_ENEMY,
+                                          DOTA_UNIT_TARGET_ALL,
+                                          DOTA_UNIT_TARGET_FLAG_NONE,
+                                          FIND_ANY_ORDER,
+                                          false)) do
+        unit:ForceKill(false)
+    end
+
+end
+
 if not CustomMap.initialized then
     CustomMap.initialized = true
     Event:Listen('Activate', Dynamic_Wrap(CustomMap, 'Activate'), CustomMap)
+else
+    CustomMap:OnScriptReload()
 end
+

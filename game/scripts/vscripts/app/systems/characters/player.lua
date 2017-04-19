@@ -20,8 +20,8 @@ function Player:constructor(PlayerID)
     self.PlayerID = PlayerID
 
     --Create a Table and set a few values.
-    PlayerTables:CreateTable('player_'..PlayerID..'_quests', {}, {PlayerID})
-    PlayerTables:CreateTable('player_'..PlayerID..'_characters', {}, {PlayerID})
+    PlayerTables:CreateOrSubscribe('player_'..PlayerID..'_quests', {}, {PlayerID})
+    PlayerTables:CreateOrSubscribe('player_'..PlayerID..'_characters', {}, {PlayerID})
 
     -- PlayerTables:SetTableValue("player_0_quests", "count", 0)
     -- PlayerTables:SetTableValues("player_0_quests", {val1=1, val2=2})
