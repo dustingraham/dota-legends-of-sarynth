@@ -62,6 +62,66 @@ function ai_aggro_leash:OnDeath(event)
     if self:GetParent() ~= event.unit then return end
     Debug('AiAggroLeash', 'OnDeath')
     self:GetParent().spawn:OnDeath(self)
+
+    -- TODO: Move this elsewhere.
+    if self:GetParent():GetUnitName() == 'webbed_spidy_bubble' then
+        local ticks = 0
+        local position = self:GetParent():GetAbsOrigin()
+        local entity = CreateUnitByName('webbed_spidy_bubble_death', position, true, nil, nil, DOTA_TEAM_NEUTRALS)
+
+        -- Initial Cloud Visual
+        local particle = ParticleManager:CreateParticle(
+            "particles/econ/items/undying/undying_manyone/undying_pale_tombstone_cloud.vpcf",
+            PATTACH_CUSTOMORIGIN,
+            entity
+        )
+        ParticleManager:SetParticleControl( particle, 0, position )
+        ParticleManager:ReleaseParticleIndex(particle)
+
+        -- Death Splat
+        Timers(0.3, function()
+            local particle = ParticleManager:CreateParticle(
+                'particles/units/heroes/hero_broodmother/broodmother_spiderlings_spawn_b_lv.vpcf',
+                PATTACH_CUSTOMORIGIN,
+                entity
+            )
+            ParticleManager:SetParticleControl( particle, 0, position )
+            ParticleManager:ReleaseParticleIndex(particle)
+        end)
+
+        -- Poison Cloud
+        Timers:CreateTimer(1.25, function()
+            ticks = ticks + 1
+            if ticks < 20 then
+                local particle = ParticleManager:CreateParticle(
+                    "particles/econ/items/undying/undying_manyone/undying_pale_tombstone_cloud.vpcf",
+                    PATTACH_CUSTOMORIGIN,
+                    entity
+                )
+                ParticleManager:SetParticleControl( particle, 0, position )
+                ParticleManager:ReleaseParticleIndex(particle)
+
+                -- Make the ouch
+                local units = FindUnitsInRadius(
+                    DOTA_TEAM_GOODGUYS,
+                    position,
+                    nil,
+                    225,
+                    DOTA_UNIT_TARGET_TEAM_FRIENDLY,
+                    DOTA_UNIT_TARGET_ALL,
+                    DOTA_UNIT_TARGET_FLAG_NONE,
+                    FIND_ANY_ORDER,
+                    false
+                )
+                for _,ouchUnit in pairs(units) do
+                    ouchUnit:AddNewModifier(entity, nil, 'webbed_spidy_bubble_death_cloud', { duration = 3 })
+                end
+                return 1
+            else
+                entity:ForceKill(false)
+            end
+        end)
+    end
 end
 
 function ai_aggro_leash:OnIntervalThink()

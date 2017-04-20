@@ -216,16 +216,28 @@ function QuestService:OnEntityKilled(event)
     if not attacker:IsHero() then return end
 
     local killed = EntIndexToHScript(event.entindex_killed);
-    -- DeepPrintTable(killed)
-    local key = 'player_'..attacker:GetPlayerID()..'_quests'
-    local quests = QuestService.playerQuests[key]
-    if quests == nil then return end
-
     local killed_name = killed:GetUnitName();
     Debug('QuestService', attacker:GetName()..' killed '..killed_name)
-    for _,quest in pairs(quests) do
-        quest:OnEntityKilled(killed_name)
+
+    -- Tmp Fix? Not looking for/worried about any sort of abuse here.
+    --Debug('QuestService', 'Checking Quest Kill Credit')
+    for key, quests in pairs(QuestService.playerQuests) do
+        --Debug('QuestService', 'Check: '..key)
+        for _,quest in pairs(quests) do
+            quest:OnEntityKilled(killed_name)
+        end
     end
+
+    -- DeepPrintTable(killed)
+    --local key = 'player_'..attacker:GetPlayerID()..'_quests'
+    --local quests = QuestService.playerQuests[key]
+    --if quests == nil then return end
+    --
+    --local killed_name = killed:GetUnitName();
+    --Debug('QuestService', attacker:GetName()..' killed '..killed_name)
+    --for _,quest in pairs(quests) do
+    --    quest:OnEntityKilled(killed_name)
+    --end
 end
 
 function QuestService:OnEntityInteract(hero, npc)

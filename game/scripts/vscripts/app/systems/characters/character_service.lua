@@ -246,6 +246,7 @@ local function TestItems(hero)
     TestItem(hero, 'item_kobold_armor_1')
     TestItem(hero, 'item_kobold_weapon_unique')
     TestItem(hero, 'item_amulet_scar')
+    TestItem(hero, 'item_3138')
 end
 
 function CharacterService:OnHeroPick(e, event)

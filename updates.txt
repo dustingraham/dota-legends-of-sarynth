@@ -1,9 +1,14 @@
 [b]v0.0.61[/b]
+ • [b]All players now receive quest credit for creature kills![/b]
  • Added the debuff bar to indicate a player's own debuffs. (Such as a slow from the kobold archer's new spell.)
- • Added Ice Arrow to the kobold archer. Slows the hero's move speed by 40%.
  • Built creature AI to build desire to cast an ability when available.
- 
  • Bumped drop rate from 18% to 20% for worgs and sheep in start area.
+ • Virulent Mask description now properly displays the bonus stats in the tooltip.
+[b]Creatures[/b]
+ • Replaced kobold boss with meepo model. (Good idea Napoqe)
+ • Added ground slam skill to kobold boss. Stuns nearby enemies for 2 seconds.
+ • Added poison cloud after death of a Red Bubble Spider. Deals damage every second standing in the cloud.
+ • Added ice arrow to the kobold archer. Slows the hero's move speed by 40%.
  
 [b]v0.0.60[/b]
  • Added 4 new items to spider area. (weapon, chest, 2 rings)
