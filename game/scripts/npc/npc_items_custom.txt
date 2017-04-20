@@ -982,12 +982,7 @@
             "01"
             {
                 "var_type" "FIELD_INTEGER"
-                "bonus_damage" "5"
-            }
-            "02"
-            {
-                "var_type" "FIELD_INTEGER"
-                "rarity" "3"
+                "bonus_damage" "10"
             }
             "slot_type"
             {
@@ -1197,7 +1192,7 @@
             "02"
             {
                 "var_type" "FIELD_INTEGER"
-                "bonus_stat" "18"
+                "bonus_stat" "17"
             }
             "03"
             {

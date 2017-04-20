@@ -113,6 +113,10 @@
 
         "StatusHealth"                "2672"
         "StatusHealthRegen"           "2.5"
+        "StatusMana"                "60"
+        "StatusManaRegen"           "2.5"
+
+        "Ability1"                    "archer_ice_arrow"
 
         "BountyXP"                    "85"
     }

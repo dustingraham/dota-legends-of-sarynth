@@ -48,7 +48,7 @@
 }
 
 .default-buff-container {
-    transform:translateX(-250px) translateY(70px);
+    transform:translateY(70px);
 }
 
 .default-stats-container {

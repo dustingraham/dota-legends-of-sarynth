@@ -29,6 +29,7 @@ if IsServer() then
         Debug('AiAggroLeash', 'OnCreated')
         self.state = ai_aggro_leash.ACTION_IDLE
         Debug('AiAggroLeash', 'Idling OC')
+        self.castDesire = 0
         self.aggroRange = self:GetParent().spawn.spawnNode.AggroRange or 400
         self.leashRange = self:GetParent().spawn.spawnNode.LeashRange or 750
         self:StartIntervalThink(1.0)
@@ -96,6 +97,53 @@ function ai_aggro_leash:ActionAggro()
         return true --Return to make sure no other code is executed in this state
     end
 
+    local ability = self:GetParent():GetAbilityByIndex(0)
+    if ability then
+        --print('=----=')
+        --print(ability:GetName())
+        --print('FC', ability:IsFullyCastable())
+        --print('IA', self:GetParent():IsAttacking())
+        --print('CD ', ability:IsCooldownReady())
+        --print('Mana', ability:IsOwnersManaEnough())
+        if ability:IsFullyCastable() then
+            local roll = math.random(100)
+            if roll < self.castDesire then
+                self:GetParent():CastAbilityOnTarget(self.aggroTarget, ability, -1)
+                self.castDesire = 0
+            else
+                self.castDesire = self.castDesire + 20
+            end
+            --print('DO IT:', 'Go cast fool.')
+            --ExecuteOrderFromTable({
+            --      UnitIndex = self:GetParent():entindex(),
+            --      OrderType = DOTA_UNIT_ORDER_CAST_TARGET,
+            --      AbilityIndex = ability:entindex(),
+            --      TargetIndex = self.aggroTarget:entindex()
+            --  })
+        else
+            if not self:GetParent():IsAttacking() then
+                --print('DO IT: ', 'Go attack fool.')
+                self:GetParent():MoveToTargetToAttack( self.aggroTarget )
+            end
+        end
+    end
+
+    --local ability = self:GetParent():GetAbilityByIndex(1)
+    --if ability then
+    --    --print('=----=')
+    --    --print(ability:GetName())
+    --    --print('CD ', ability:IsCooldownReady())
+    --    --print('Mana', ability:IsOwnersManaEnough())
+    --    if ability:IsCooldownReady() and ability:IsOwnersManaEnough() then
+    --        --self:GetParent():CastAbilityOnTarget(self.aggroTarget, ability, -1)
+    --        ExecuteOrderFromTable({
+    --            UnitIndex = self:GetParent():entindex(),
+    --            OrderType = DOTA_UNIT_ORDER_CAST_TARGET,
+    --            AbilityIndex = ability:entindex(),
+    --            TargetIndex = self.aggroTarget:entindex()
+    --        })
+    --    end
+    --end
     --State behavior
     --Here we can just do any behaviour you want to repeat in this state
 end

@@ -18,30 +18,30 @@ function OnLeftButtonPressed()
 {
     var CONTINUE_PROCESSING_EVENT = false;
     var CONSUME_EVENT = true;
-    
+
     var cursor = GameUI.GetCursorPosition();
     var mouseEntities = GameUI.FindScreenEntities(cursor);
-    
+
     for ( var e of mouseEntities )
     {
         var entityIndex = e.entityIndex
         if (Entities.IsSelectable(entityIndex))
         {
             SetFocusTarget(entityIndex);
-            
+
             // var healthMax = Entities.GetMaxHealth(entityIndex);
             // var health = Entities.GetHealth(entityIndex);
             // var healthPercent = health / healthMax;
             // if (isNaN(healthPercent)) healthPercent = 0;
             // $.Msg('HP: '+(healthPercent*100) +'%');
             // $.Msg(Entities.GetUnitName(entityIndex));
-            
+
             // This will help prevent flickering of ability controls by
             // avoiding selection of the units. Still todo target unit frame.
             return CONSUME_EVENT;
         }
     }
-    
+
     return CONTINUE_PROCESSING_EVENT;
 }
 
@@ -69,16 +69,16 @@ function OnRightButtonPressed()
     // $.Msg("OnRightButtonPressed")
 
     var iPlayerID = Players.GetLocalPlayer();
-    var mainSelected = Players.GetLocalPlayerPortraitUnit(); 
+    var mainSelected = Players.GetLocalPlayerPortraitUnit();
     var hero = Players.GetPlayerHeroEntityIndex( iPlayerID );
     var heroName = Entities.GetUnitName(hero);
     // $.Msg(heroName)
-    
+
     //var mainSelectedName = Entities.GetUnitName( mainSelected );
     var cursor = GameUI.GetCursorPosition();
     var mouseEntities = GameUI.FindScreenEntities( cursor );
     //mouseEntities = mouseEntities.filter( function(e) { return e.entityIndex != mainSelected; } )
-    
+
     //var pressedShift = GameUI.IsShiftDown();
 
     for ( var e of mouseEntities )
@@ -94,7 +94,7 @@ function OnRightButtonPressed()
             });
             return true;
         }
-        
+
         if (Entities.IsEnemy(entityIndex))
         {
             SetFocusTarget(entityIndex);
@@ -104,10 +104,10 @@ function OnRightButtonPressed()
             });
             return false;
         }
-        
+
         // else if (IsShop (entityIndex) || IsHarvest (entityIndex) || IsBank(entityIndex)) {
         //     $.Msg('Shop Harvest Bank');
-            
+
         //     var order = {
         //         UnitIndex : hero,
         //         TargetIndex : entityIndex,
@@ -120,7 +120,7 @@ function OnRightButtonPressed()
 
         //     return true;
         // } else if (IsSwitch (entityIndex)) {
-            
+
         //     GameEvents.SendCustomGameEventToServer( "interactable", { pID: iPlayerID, unit: hero, target: entityIndex })
 
         //     return true;
@@ -147,7 +147,7 @@ function OnRightButtonPressed()
     // if (GameUI.IsAltDown() && heroName == "npc_dota_hero_rattletrap"){
     //     GameEvents.SendCustomGameEventToServer( "gunner_remove_target", { pID: iPlayerID, unit: hero })
     // }
-    
+
     //$.Msg('Default behavior');
     return false;
 }
@@ -216,15 +216,15 @@ GameUI.SetMouseCallback(function( eventName, arg ) {
 
     if ( eventName === "pressed" || eventName === "doublepressed")
     {
-        if (LEFT_CLICK) 
+        if (LEFT_CLICK)
         {
             return  OnLeftButtonPressed();
         }
-        if (RIGHT_CLICK) 
+        if (RIGHT_CLICK)
         {
             return OnRightButtonPressed();
         }
     }
-    
+
     return CONTINUE_PROCESSING_EVENT;
 });

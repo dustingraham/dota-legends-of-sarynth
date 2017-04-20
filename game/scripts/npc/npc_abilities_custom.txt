@@ -1,3 +1,4 @@
+#base "abilities\creature.txt"
 #base "abilities\warrior.txt"
 #base "abilities\paladin.txt"
 #base "abilities\ranger.txt"
