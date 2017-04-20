@@ -39,7 +39,7 @@
         "AttackDamageMax"            "266"
         "AttackRate"                "1.35"
         "AttackAnimationPoint"      "0.50"
-        "AttackRange"               "100"
+        "AttackRange"               "60"
 
         "CombatClassAttack"         "DOTA_COMBAT_CLASS_ATTACK_BASIC"
         "CombatClassDefend"         "DOTA_COMBAT_CLASS_DEFEND_BASIC"
@@ -67,7 +67,7 @@
         "AttackDamageMax"            "646"
         "AttackRate"                "1.35"
         "AttackAnimationPoint"      "0.50"
-        "AttackRange"               "100"
+        "AttackRange"               "60"
 
         "CombatClassAttack"         "DOTA_COMBAT_CLASS_ATTACK_BASIC"
         "CombatClassDefend"         "DOTA_COMBAT_CLASS_DEFEND_BASIC"
@@ -95,7 +95,7 @@
         "AttackDamageMax"            "816"
         "AttackRate"                "1.35"
         "AttackAnimationPoint"      "0.50"
-        "AttackRange"               "100"
+        "AttackRange"               "80"
 
         "CombatClassAttack"         "DOTA_COMBAT_CLASS_ATTACK_BASIC"
         "CombatClassDefend"         "DOTA_COMBAT_CLASS_DEFEND_BASIC"
@@ -112,7 +112,7 @@
         "BaseClass"             "npc_dota_creature"
         "Level"                 "17"
         "ModelScale"            "0.44"
-        "HealthBarOffset"       "80"
+        "HealthBarOffset"       "100"
 
         "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_GROUND"
         "MovementSpeed"             "320"
@@ -123,7 +123,7 @@
         "AttackDamageMax"            "1056"
         "AttackRate"                "1.35"
         "AttackAnimationPoint"      "0.50"
-        "AttackRange"               "100"
+        "AttackRange"               "80"
 
         "CombatClassAttack"         "DOTA_COMBAT_CLASS_ATTACK_BASIC"
         "CombatClassDefend"         "DOTA_COMBAT_CLASS_DEFEND_BASIC"

@@ -6,7 +6,7 @@
         "BaseClass"             "npc_dota_creature"
         "Level"                 "8"
         "ModelScale"            "1.0"
-        "HealthBarOffset"       "80"
+        "HealthBarOffset"       "100"
 
         "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_GROUND"
         "MovementSpeed"             "320"
@@ -63,7 +63,7 @@
         "BaseClass"             "npc_dota_creature"
         "Level"                 "10"
         "ModelScale"            "1.0"
-        "HealthBarOffset"       "80"
+        "HealthBarOffset"       "120"
 
         "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_GROUND"
         "MovementSpeed"             "320"
@@ -91,7 +91,7 @@
         "BaseClass"             "npc_dota_creature"
         "Level"                 "11"
         "ModelScale"            "0.5"
-        "HealthBarOffset"       "80"
+        "HealthBarOffset"       "90"
 
         "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_GROUND"
         "MovementSpeed"             "320"
@@ -125,8 +125,8 @@
         "Model"                 "models/creeps/neutral_creeps/n_creep_kobold/kobold_a/n_creep_kobold_a.vmdl"
         "BaseClass"             "npc_dota_creature"
         "Level"                 "12"
-        "ModelScale"            "1.0"
-        "HealthBarOffset"       "80"
+        "ModelScale"            "1.2"
+        "HealthBarOffset"       "150"
 
         "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_GROUND"
         "MovementSpeed"             "320"
@@ -150,11 +150,12 @@
     }
     "kobolds_ogre"
     {
-        "Model"                 "models/creeps/neutral_creeps/n_creep_ogre_lrg/n_creep_ogre_lrg.vmdl"
+        //"Model"                 "models/creeps/neutral_creeps/n_creep_ogre_lrg/n_creep_ogre_lrg.vmdl"
+        "Model"                 "models/heroes/meepo/meepo.vmdl"
         "BaseClass"             "npc_dota_creature"
         "Level"                 "13"
-        "ModelScale"            "1.0"
-        "HealthBarOffset"       "80"
+        "ModelScale"            "1.4"
+        "HealthBarOffset"       "200"
 
         "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_GROUND"
         "MovementSpeed"             "320"
@@ -173,6 +174,24 @@
 
         "StatusHealth"              "5472"
         "StatusHealthRegen"         "2.5"
+        "StatusMana"              "100"
+        "StatusManaRegen"         "2.5"
+
+        "Ability1"                  "kobold_boss_slam"
+        "Creature"
+        {
+            "AttachWearables"
+            {
+                // "Wearable1" { "ItemDef" "6564" } // Crystal Scavenger's Reinforced Pads
+                "Wearable1" { "ItemDef" "6228" } // Dosa Shoulders
+                "Wearable2" { "ItemDef" "6237" } // Dosa Back
+                "Wearable3" { "ItemDef" "7204" } // The Spelunker's Torch
+                //"Wearable4" { "ItemDef" "299" } // Meepo's Bracers
+                "Wearable4" { "ItemDef" "6227" } // Dosa Arms
+                //"Wearable5" { "ItemDef" "300" } // Meepo's Tail
+                "Wearable5" { "ItemDef" "6229" } // Dosa Tail
+            }
+        }
 
         "BountyXP"                  "105"
     }

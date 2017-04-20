@@ -6,9 +6,9 @@ DEBUG_SETTINGS = IsInToolsMode()
 -- TEST MODE
 if DEBUG_SETTINGS then
     -- Curronly only a single hero. Pick it!
-    TEST_PICK_HERO = 'windrunner'    -- Ranger
+    --TEST_PICK_HERO = 'windrunner'    -- Ranger
     --TEST_PICK_HERO = 'dragon_knight' -- Warrior
-    --TEST_PICK_HERO = 'omniknight'    -- Paladin
+    TEST_PICK_HERO = 'omniknight'    -- Paladin
     --TEST_PICK_HERO = 'bounty_hunter' -- Rogue
     --TEST_PICK_HERO = 'invoker'       -- Mage
     --TEST_PICK_HERO = 'warlock'       -- Sorcerer
@@ -45,7 +45,7 @@ DEBUG_PRINT_SECTIONS = {
     Quest             = false,
     OrderFilter       = true,
     CharacterService  = true,
-    Reporter          = true,
+    Reporter          = false,
     ReporterVerbose   = false,
     Triggers          = true,
     AiBasic           = true,

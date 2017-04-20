@@ -72,7 +72,9 @@ end
 function mod:GetStatusEffectName()
     return "particles/status_fx/status_effect_frost.vpcf"
 end
-
+function mod:GetTexture()
+    return "custom/ranger/ranger_ice_arrow"
+end
 function mod:DeclareFunctions()
     return {
         MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE
