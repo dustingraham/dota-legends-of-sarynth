@@ -24,12 +24,10 @@ function OnDialogStart(data) {
 
 GameEvents.Subscribe('dialog_start', OnDialogStart);
 
-
 function UpdateQuestStartPanel(data)
 {
     // $.Msg('[JS] Need to populate...');
     // $.Msg(data);
-
     var panel = $.GetContextPanel();
     panel.FindChildTraverse('QuestMainTitle').text = data.title;
     panel.FindChildTraverse('MainDialog').text = data.dialog_text;

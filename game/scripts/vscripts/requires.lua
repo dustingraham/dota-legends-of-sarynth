@@ -75,3 +75,11 @@ for _,modifier in ipairs({
 }) do LinkLuaModifier(modifier, 'app/systems/npcs/ai/units/'..modifier, LUA_MODIFIER_MOTION_NONE) end
 
 LinkLuaModifier('webbed_spidy_bubble_death_cloud', 'app/systems/npcs/abilities/webbed_spidy_bubble_death_cloud', LUA_MODIFIER_MOTION_NONE)
+
+LinkLuaModifier('character_vision', 'app/systems/characters/modifiers/character_vision', LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier('character_passive_regen', 'app/systems/characters/modifiers/character_passive_regen', LUA_MODIFIER_MOTION_NONE)
+
+LinkLuaModifier('warrior_stats', 'app/systems/characters/abilities/warrior/warrior_stats', LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier('sorcerer_stats', 'app/systems/characters/abilities/sorcerer/sorcerer_stats', LUA_MODIFIER_MOTION_NONE)
+
+LinkLuaModifier('character_testmode', 'app/systems/characters/modifiers/character_testmode', LUA_MODIFIER_MOTION_NONE)

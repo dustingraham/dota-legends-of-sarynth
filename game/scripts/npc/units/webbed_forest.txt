@@ -77,6 +77,10 @@
         "StatusHealthRegen"           "2.5"
 
         "BountyXP"                    "150"
+        "precache"
+        {
+            "particle" "particles/units/webbed/noxious_cloud.vpcf"
+        }
     }
     "webbed_spidy_bubble_death"
     {
@@ -209,6 +213,8 @@
 
         "StatusHealth"                "21472"
         "StatusHealthRegen"           "2.5"
+        "StatusMana"                "500"
+        "StatusManaRegen"           "2.5"
 
         "Ability1" "webbed_queen_poison"
 

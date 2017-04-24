@@ -7,7 +7,7 @@ function ai:DeclareFunctions()
         MODIFIER_EVENT_ON_DEATH,
         MODIFIER_EVENT_ON_TAKEDAMAGE,
         MODIFIER_EVENT_ON_ATTACK_ALLIED,
-        MODIFIER_PROPERTY_HEALTH_REGEN_PERCENTAGE,
+        --MODIFIER_PROPERTY_HEALTH_REGEN_PERCENTAGE,
     }
 end
 
@@ -37,6 +37,13 @@ if IsServer() then
         self.aggroRange    = 1000
         self.leashRange    = 1850
         self.timeInState   = 0
+
+
+        local ability = self:GetParent():AddAbility('ranger_poison_arrow')
+        ability:SetLevel(1)
+        self.pAbility = ability
+
+
 
         self.startLocation = self:GetParent():GetAbsOrigin()
         -- self.aggroRange = self:GetParent().spawn.spawnNode.AggroRange or 400
@@ -343,41 +350,73 @@ function volly(args)
     end
 end
 
+
 function ai:ActionPoison()
+    if self.timeInState == 1 then
+        print('Lets do something interesting...')
+        -- self:GetParent():Stop()
+
+        --self.aggroTarget:FaceTowards(self:GetParent():GetAbsOrigin())
+        --self:GetParent():FaceTowards(self.aggroTarget:GetAbsOrigin())
+        self:GetParent():CastAbilityOnTarget(self.aggroTarget, self.pAbility, -1)
+        Timers(1.00, function()
+            self.pAbility:EndCooldown()
+            self:GetParent():CastAbilityOnTarget(self.aggroTarget, self.pAbility, -1)
+        end)
+        Timers(2.0, function()
+            self.pAbility:EndCooldown()
+            self:GetParent():CastAbilityOnTarget(self.aggroTarget, self.pAbility, -1)
+        end)
+
+        --ExecuteOrderFromTable({
+        --    UnitIndex = self:GetParent():entindex(),
+        --    OrderType = DOTA_UNIT_ORDER_CAST_TARGET,
+        --    AbilityIndex = self.pAbility:entindex(),
+        --    TargetIndex = self.aggroTarget:entindex()
+        --})
+
+    end
+end
+function ai:xActionPoison()
     print('Time to poison:', self.timeInState)
 
     -- Face them
     if self.timeInState == 1 then
         print('Lets do something interesting...')
         self:GetParent():Stop()
-        self:AnimatedFace(self.aggroTarget, function()
-            Timers(0.25, function()
-                print('ACT_DOTA_CAST_ABILITY_1')
-                StartAnimation(self:GetParent(), {
-                    duration = 1.0,
-                    activity = ACT_DOTA_CAST_ABILITY_1,
-                })
-                self:FireTheThing(500)
-            end)
-            Timers(2.00, function()
-                print('ACT_DOTA_CAST_ABILITY_1')
-                StartAnimation(self:GetParent(), {
-                    duration = 1.0,
-                    activity = ACT_DOTA_CAST_ABILITY_1,
-                    rate = 1.5,
-                })
-                self:FireTheThing(500)
-            end)
-            Timers(4.00, function()
-                print('ACT_DOTA_CAST_ABILITY_1')
-                StartAnimation(self:GetParent(), {
-                    duration = 1.0,
-                    activity = ACT_DOTA_CAST_ABILITY_1,
-                    rate = 0.5,
-                })
-                self:FireTheThing(500)
-            end)
+
+        --self.aggroTarget:FaceTowards(self:GetParent():GetAbsOrigin())
+        --self:GetParent():FaceTowards(self.aggroTarget:GetAbsOrigin())
+
+        self:AnimatedFace(self.aggroTarget, function() end)
+
+        --    Timers(0.25, function()
+        --        print('ACT_DOTA_CAST_ABILITY_1')
+        --        StartAnimation(self:GetParent(), {
+        --            duration = 1.0,
+        --            activity = ACT_DOTA_CAST_ABILITY_1,
+        --        })
+        --        self:FireTheThing(500)
+        --    end)
+        Timers(2.00, function()
+            print('ACT_DOTA_CAST_ABILITY_1')
+            StartAnimation(self:GetParent(), {
+                duration = 1.0,
+                activity = ACT_DOTA_CAST_ABILITY_1,
+                rate = 1.5,
+            })
+            self:FireTheThing(500)
         end)
+        Timers(4.00, function()
+            print('ACT_DOTA_CAST_ABILITY_1')
+            StartAnimation(self:GetParent(), {
+                duration = 1.0,
+                activity = ACT_DOTA_CAST_ABILITY_1,
+                rate = 0.5,
+            })
+            self:FireTheThing(500)
+        end)
+        --end)
     end
 
     if self.timeInState > 6 then

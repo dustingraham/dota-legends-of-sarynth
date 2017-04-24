@@ -1,15 +1,20 @@
 character_teleporting = character_teleporting or class({})
 
-function character_teleporting:GetIntrinsicModifierName()
-  return "character_teleporting"
-end
-
 function character_teleporting:OnCreated(params)
     if IsServer() then
         self.teleport_from = params.from
         self.teleport_to = params.to
-        local name = 'particles/transport_bird/transport_bird.vpcf'
-        self:GetCaster():ParticleOn(name)
+        self:GetCaster():ParticleOn('particles/transport_bird/transport_bird.vpcf')
+        -- Some Noise
+        Sounds:Start('Teleport.Liftoff', self:GetCaster():GetPlayerOwnerID())
+        Sounds:Start('rune_idle_02', self:GetCaster():GetPlayerOwnerID())
+
+        --StartSoundEvent('Teleport.Liftoff', self:GetCaster())
+        --StartSoundEvent('rune_idle_02', self:GetCaster())
+
+        --StartSoundEvent('powerup_01', self:GetCaster())
+        --EmitSoundOnClient('powerup_01', self:GetCaster():GetPlayerOwner())
+        -- EmitSoundOnClient('Rune.Regen', self:GetCaster():GetPlayerOwner())
 
         -- self.particle = ParticleManager:CreateParticle(self:GetEffectNameEx(), self:GetEffectAttachTypeEx(), self:GetCaster())
         -- ParticleManager:SetParticleControl(self.particle,0, Vector(0,0,20))
@@ -24,8 +29,15 @@ end
 
 function character_teleporting:OnDestroy()
     if IsServer() then
-        local name = 'particles/transport_bird/transport_bird.vpcf'
-        self:GetCaster():ParticleOff(name)
+        self:GetCaster():ParticleOff('particles/transport_bird/transport_bird.vpcf')
+        --local hero = self:GetCaster()
+        local PlayerID = self:GetCaster():GetPlayerOwnerID()
+        Sounds:Start('ui.herochallenge_complete', PlayerID)
+        Timers(0.25, function()
+            Sounds:Stop('rune_idle_02', PlayerID)
+            --StopSoundEvent('rune_idle_02',  hero)
+        end)
+        --StartSoundEvent('ui.herochallenge_complete', self:GetCaster())
         PlayerResource:SetCameraTarget(self:GetCaster():GetPlayerOwnerID(), nil)
     end
 end
@@ -44,19 +56,19 @@ function character_teleporting:CheckState()
 end
 
 function character_teleporting:IsPassive()
-  return true
+    return true
 end
 
 function character_teleporting:IsPurgable()
-  return false
+    return false
 end
 
 function character_teleporting:RemoveOnDeath()
-  return true
+    return true
 end
 
 function character_teleporting:IsHidden()
-  return true
+    return true
 end
 
 function character_teleporting:OnIntervalThink()

@@ -1,10 +1,6 @@
 character_passive_regen = character_passive_regen or class({})
 local mod = character_passive_regen
 
-function mod:GetIntrinsicModifierName()
-    return "character_passive_regen"
-end
-
 function mod:IsPassive()
     return true
 end
@@ -19,8 +15,9 @@ end
 
 function mod:OnCreated()
     if IsServer() then
+        -- TODO: Actual in-combat tracking.
         self.outOfCombatCooldown = 5
-        self:StartIntervalThink(1/32)
+        self:StartIntervalThink(1)
     end
 end
 
@@ -74,15 +71,16 @@ end
 
 function mod:OnIntervalThink()
     if self.outOfCombatCooldown > 0 then
-        self.outOfCombatCooldown = self.outOfCombatCooldown - 1/32
+        self.outOfCombatCooldown = self.outOfCombatCooldown - 1
     end
     if self.outOfCombatCooldown < 0 then
         self.outOfCombatCooldown = 0
     end
 
     if self:GetParent():IsAlive() and self.outOfCombatCooldown == 0 then
-        self.healthRegen = self:GetParent():GetMaxHealth() / 12
-        self.manaRegen = self:GetParent():GetMaxMana() / 12
+        -- Game gets angry at 1000+/500+ total hp/mp regen.
+        self.healthRegen = Clamp(self:GetParent():GetMaxHealth() / 12, 0, 500)
+        self.manaRegen = Clamp(self:GetParent():GetMaxMana() / 12, 0, 200)
         self:SetStackCount(0)
     else
         self:SetStackCount(1)

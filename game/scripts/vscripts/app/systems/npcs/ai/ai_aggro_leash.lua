@@ -7,7 +7,8 @@ function ai_aggro_leash:DeclareFunctions()
 
         MODIFIER_EVENT_ON_ATTACK_ALLIED,
 
-        MODIFIER_PROPERTY_HEALTH_REGEN_PERCENTAGE,
+        --MODIFIER_PROPERTY_HEALTH_REGEN_PERCENTAGE,
+        MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT,
     }
 end
 
@@ -32,6 +33,7 @@ if IsServer() then
         self.castDesire = 0
         self.aggroRange = self:GetParent().spawn.spawnNode.AggroRange or 400
         self.leashRange = self:GetParent().spawn.spawnNode.LeashRange or 750
+        self.passiveHealthRegen = Clamp(self:GetParent():GetMaxHealth() / 10, 0, 800)
         self:StartIntervalThink(1.0)
     end
 end
@@ -39,6 +41,12 @@ end
 function ai_aggro_leash:GetModifierHealthRegenPercentage()
     if self.state == ai_aggro_leash.ACTION_AGGRO then return 0.0 end
     return 20.0
+end
+
+function ai_aggro_leash:GetModifierConstantHealthRegen()
+    if self.state == ai_aggro_leash.ACTION_AGGRO then return 0.0 end
+    -- print(self:GetParent():GetUnitName(), self.passiveHealthRegen)
+    return self.passiveHealthRegen
 end
 
 function ai_aggro_leash:OnAttackAllied(event)
@@ -70,13 +78,13 @@ function ai_aggro_leash:OnDeath(event)
         local entity = CreateUnitByName('webbed_spidy_bubble_death', position, true, nil, nil, DOTA_TEAM_NEUTRALS)
 
         -- Initial Cloud Visual
-        local particle = ParticleManager:CreateParticle(
-            "particles/econ/items/undying/undying_manyone/undying_pale_tombstone_cloud.vpcf",
+        local noxiousParticle = ParticleManager:CreateParticle(
+            'particles/units/webbed/noxious_cloud.vpcf',
             PATTACH_CUSTOMORIGIN,
             entity
         )
-        ParticleManager:SetParticleControl( particle, 0, position )
-        ParticleManager:ReleaseParticleIndex(particle)
+        ParticleManager:SetParticleControl( noxiousParticle, 0, position )
+        --ParticleManager:ReleaseParticleIndex(particle)
 
         -- Death Splat
         Timers(0.3, function()
@@ -86,27 +94,26 @@ function ai_aggro_leash:OnDeath(event)
                 entity
             )
             ParticleManager:SetParticleControl( particle, 0, position )
-            ParticleManager:ReleaseParticleIndex(particle)
         end)
 
         -- Poison Cloud
         Timers:CreateTimer(1.25, function()
             ticks = ticks + 1
             if ticks < 20 then
-                local particle = ParticleManager:CreateParticle(
-                    "particles/econ/items/undying/undying_manyone/undying_pale_tombstone_cloud.vpcf",
-                    PATTACH_CUSTOMORIGIN,
-                    entity
-                )
-                ParticleManager:SetParticleControl( particle, 0, position )
-                ParticleManager:ReleaseParticleIndex(particle)
+                --local particle = ParticleManager:CreateParticle(
+                --    "particles/econ/items/undying/undying_manyone/undying_pale_tombstone_cloud.vpcf",
+                --    PATTACH_CUSTOMORIGIN,
+                --    entity
+                --)
+                --ParticleManager:SetParticleControl( particle, 0, position )
+                --ParticleManager:ReleaseParticleIndex(particle)
 
                 -- Make the ouch
                 local units = FindUnitsInRadius(
                     DOTA_TEAM_GOODGUYS,
                     position,
                     nil,
-                    225,
+                    100,
                     DOTA_UNIT_TARGET_TEAM_FRIENDLY,
                     DOTA_UNIT_TARGET_ALL,
                     DOTA_UNIT_TARGET_FLAG_NONE,
@@ -118,7 +125,15 @@ function ai_aggro_leash:OnDeath(event)
                 end
                 return 1
             else
-                entity:ForceKill(false)
+                -- Stop the particle...
+                ParticleManager:DestroyParticle(noxiousParticle, false)
+                ParticleManager:ReleaseParticleIndex(noxiousParticle)
+
+                -- Delay to destroy the entity, otherwise particle clips off.
+                Timers(3, function()
+                    -- TODO: Create a single global dummy entity.
+                    entity:ForceKill(false)
+                end)
             end
         end)
     end
@@ -129,10 +144,11 @@ function ai_aggro_leash:OnIntervalThink()
 end
 
 function ai_aggro_leash:ActionIdle()
-    local units = FindUnitsInRadius( self:GetParent():GetTeam(), self:GetParent():GetAbsOrigin(), nil,
+    local units = FindUnitsInRadius(
+        self:GetParent():GetTeam(), self:GetParent():GetAbsOrigin(), nil,
         self.aggroRange, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_ALL, DOTA_UNIT_TARGET_FLAG_NONE,
-        FIND_ANY_ORDER, false )
-
+        FIND_ANY_ORDER, false
+    )
     --If one or more units were found, start attacking the first one
     if #units > 0 then
         self:GetParent():MoveToTargetToAttack( units[1] ) --Start attacking

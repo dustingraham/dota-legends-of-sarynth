@@ -80,9 +80,19 @@ upDownHide('Hud', 'GlyphScanContainer');
 GameEvents.Subscribe('emit_client_sound', function(event)
 {
     if (event.sound){
-        //$.Msg(msg);
         Game.EmitSound(event.sound);
     }
+});
+
+GameEvents.soundIds = {};
+GameEvents.Subscribe('emit_client_sound_start', function(event)
+{
+    GameEvents.soundIds[event.sound] = Game.EmitSound(event.sound);
+});
+
+GameEvents.Subscribe('emit_client_sound_stop', function(event)
+{
+    Game.StopSound(GameEvents.soundIds[event.sound]);
 });
 
 

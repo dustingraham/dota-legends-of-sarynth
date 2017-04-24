@@ -80,6 +80,6 @@ end
 --end
 
 function ZoneIn(trigger)
-    Debug('Triggers', trigger.activator:GetPlayerOwnerID(), 'zoning into', trigger.caller:GetName())
+    Debug('TriggersVerbose', trigger.activator:GetPlayerOwnerID(), 'zoning into', trigger.caller:GetName())
     CharacterService:SetZone(trigger.activator, trigger.caller:GetName())
 end

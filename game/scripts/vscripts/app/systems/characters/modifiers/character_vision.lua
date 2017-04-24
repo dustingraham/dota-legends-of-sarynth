@@ -1,10 +1,6 @@
 character_vision = character_vision or class({})
 local mod = character_vision
 
-function mod:GetIntrinsicModifierName()
-  return "mod"
-end
-
 function mod:IsPassive()
   return true
 end

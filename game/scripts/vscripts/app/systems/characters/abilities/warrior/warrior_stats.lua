@@ -17,8 +17,8 @@ function mod:IsHidden()
     return true
 end
 
-function mod:GetModifierConstantHealthRegen()
-    return 1
+function mod:GetModifierHealthRegenPercentage()
+    return 0.5
 end
 
 function mod:GetModifierConstantManaRegen()
@@ -27,13 +27,13 @@ end
 
 function mod:GetModifierExtraHealthPercentage()
     -- Double base health (1 + n) * base
-    return 1
+    return 0.5
 end
 
 function mod:DeclareFunctions()
     return {
-        MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT,
-        MODIFIER_PROPERTY_MANA_REGEN_CONSTANT,
+        MODIFIER_PROPERTY_HEALTH_REGEN_PERCENTAGE,
+        --MODIFIER_PROPERTY_MANA_REGEN_CONSTANT,
         MODIFIER_PROPERTY_EXTRA_HEALTH_PERCENTAGE,
     }
 end

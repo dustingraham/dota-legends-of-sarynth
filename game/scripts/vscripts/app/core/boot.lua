@@ -67,6 +67,14 @@ function Boot:Precache(context)
         'models/items/warlock/archivists_robe/archivists_robe.vmdl', -- 4474
         'models/items/warlock/staff_of_infernal_chaos/staff_of_infernal_chaos.vmdl', -- 5424
         'models/heroes/warlock/warlock_lantern.vmdl', -- 6068
+        'models/heroes/lone_druid/arms.vmdl',
+        'models/items/lone_druid/hair_of_the_wolf_hunter/hair_of_the_wolf_hunter.vmdl',
+        'models/items/lone_druid/dark_wood_back/dark_wood_back.vmdl',
+        'models/items/lone_druid/shoulder_poor.vmdl',
+        'models/items/keeper_of_the_light/wise_cap_of_the_first_light/wise_cap_of_the_first_light.vmdl',
+        'models/items/keeper_of_the_light/spiral_staff_of_the_first_light/spiral_staff_of_the_first_light.vmdl',
+        'models/items/keeper_of_the_light/gladys_the_lightbearing_mule_new/gladys_the_lightbearing_mule_new.vmdl',
+        'models/items/keeper_of_the_light/robes_of_the_first_light/robes_of_the_first_light.vmdl',
     }) do
         PrecacheResource('model', name, context)
     end
@@ -90,6 +98,8 @@ function Boot:Precache(context)
     PrecacheResource('particle', 'particles/econ/items/abaddon/abaddon_alliance/abaddon_death_coil_alliance.vpcf', context)
 
     local sounds = {
+        'soundevents/game_sounds.vsndevts',
+        'soundevents/game_sounds_ui_imported.vsndevts',
         'soundevents/game_sounds_creeps.vsndevts',
         'soundevents/game_sounds_heroes/game_sounds_broodmother.vsndevts',
         'soundevents/game_sounds_heroes/game_sounds_centaur.vsndevts',
@@ -113,6 +123,7 @@ function Boot:Precache(context)
         'soundevents/music/jboberg_01/soundevents_stingers.vsndevts',
         'soundevents/voscripts/game_sounds_vo_beastmaster.vsndevts',
         'soundevents/voscripts/game_sounds_vo_lycan.vsndevts',
+        'soundevents/sarynth.vsndevts',
     }
     for _,name in ipairs(sounds) do PrecacheResource('soundfile', name, context) end
 

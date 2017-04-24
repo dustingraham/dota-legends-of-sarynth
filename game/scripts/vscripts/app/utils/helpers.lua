@@ -48,3 +48,10 @@ end
 function PrintTable(table)
     Debug('PrintTable', inspect(table))
 end
+
+-- Already exists.
+--function Clamp(val, lower, upper)
+--    assert(val and lower and upper, "Missing params in math.Clamp")
+--    if lower > upper then lower, upper = upper, lower end -- swap if boundaries supplied the wrong way
+--    return math.max(lower, math.min(upper, val))
+--end

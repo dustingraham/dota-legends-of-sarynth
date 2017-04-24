@@ -236,17 +236,9 @@ local function TestQuest(hero)
 end
 
 local function TestItems(hero)
-    TestItem(hero, 'item_boots_leather_common')
-    TestItem(hero, 'item_broadsword_tier1')
-    TestItem(hero, 'item_broadsword_tier2')
-    TestItem(hero, 'item_kobold_amulet_2')
-    TestItem(hero, 'item_armor_tier3')
-    TestItem(hero, 'item_kobold_amulet_1')
-    TestItem(hero, 'item_3126')
-    TestItem(hero, 'item_kobold_armor_1')
-    TestItem(hero, 'item_kobold_weapon_unique')
-    TestItem(hero, 'item_amulet_scar')
-    TestItem(hero, 'item_3138')
+    for _,itemName in pairs(TEST_ADD_ITEMS) do
+        TestItem(hero, itemName)
+    end
 end
 
 function CharacterService:OnHeroPick(e, event)

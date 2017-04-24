@@ -6,11 +6,11 @@ function ai:DeclareFunctions()
     return {
         MODIFIER_EVENT_ON_DEATH,
         MODIFIER_EVENT_ON_TAKEDAMAGE,
-        
+
         MODIFIER_EVENT_ON_ATTACK_ALLIED,
-        
-        MODIFIER_PROPERTY_HEALTH_REGEN_PERCENTAGE,
-        
+
+        --MODIFIER_PROPERTY_HEALTH_REGEN_PERCENTAGE,
+
         -- For the staff
         MODIFIER_PROPERTY_TRANSLATE_ACTIVITY_MODIFIERS,
     }
@@ -57,7 +57,7 @@ end
 
 function ai:OnTakeDamage(event)
     if self:GetParent() ~= event.unit then return end
-    
+
     if self.state == ai.ACTION_IDLE then
         self:GetParent():MoveToTargetToAttack( event.attacker ) --Start attacking
         self.aggroTarget = event.attacker
@@ -78,9 +78,9 @@ end
 
 function ai:ActionIdle()
     local units = FindUnitsInRadius( self:GetParent():GetTeam(), self:GetParent():GetAbsOrigin(), nil,
-        self.aggroRange, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_ALL, DOTA_UNIT_TARGET_FLAG_NONE, 
+        self.aggroRange, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_ALL, DOTA_UNIT_TARGET_FLAG_NONE,
         FIND_ANY_ORDER, false )
-    
+
     --If one or more units were found, start attacking the first one
     if #units > 0 then
         self:GetParent():MoveToTargetToAttack( units[1] ) --Start attacking
@@ -89,7 +89,7 @@ function ai:ActionIdle()
         Debug('AiAggroLeash', 'Aggroing')
         return true
     end
-    
+
     self:ActionIdleMove()
 end
 function ai:ActionAggro()
@@ -127,7 +127,7 @@ function ai:ActionReturn()
         self:TransitionToIdle()
         return true
     end
-    
+
     -- Sometimes we can't get there...
     self.returnTicks = self.returnTicks + 1
     if self.returnTicks > 10 then
@@ -147,7 +147,7 @@ function ai:ActionIdleMove()
     -- local rand = math.random(0, 10)
     -- if rand < 10 then return end
     if RollPercentage(80) then return end
-    
+
     -- Move!
     local target = self:GetParent().spawn.spawnPoint + Vector(math.random(-196, 196), math.random(-196, 196))
     self:GetParent():MoveToPosition(target)

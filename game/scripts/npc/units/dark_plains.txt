@@ -7,19 +7,19 @@
         "Level"                 "18"
         "ModelScale"            "1.0"
         "HealthBarOffset"       "80"
-        
+
         "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_FLY"
         "MovementSpeed"             "320"
         "ArmorPhysical"             "10"
         "AttackCapabilities"        "DOTA_UNIT_CAP_NO_ATTACK"
-        
+
         "CombatClassAttack"         "DOTA_COMBAT_CLASS_ATTACK_PIERCE"
         "CombatClassDefend"         "DOTA_COMBAT_CLASS_DEFEND_BASIC"
         "UnitRelationshipClass"     "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
-        
+
         "StatusHealth"                "1"
         "StatusHealthRegen"           "0"
-        
+
         "BountyXP"                    "20"
     }
     "dark_ranged"
@@ -29,28 +29,28 @@
         "Level"                 "18"
         "ModelScale"            "1.0"
         "HealthBarOffset"       "80"
-        
+
         "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_GROUND"
         "MovementSpeed"             "320"
         "ArmorPhysical"             "10"
         "AttackCapabilities"        "DOTA_UNIT_CAP_RANGED_ATTACK"
-        
+
         "AttackDamageMin"            "460"
         "AttackDamageMax"            "596"
         "AttackRate"                "1.00"
         "AttackAnimationPoint"      "0.50"
         "AttackRange"               "500"
-        
+
         "ProjectileModel"           "particles/base_attacks/ranged_badguy.vpcf"
         "ProjectileSpeed"           "900"
-        
+
         "CombatClassAttack"         "DOTA_COMBAT_CLASS_ATTACK_PIERCE"
         "CombatClassDefend"         "DOTA_COMBAT_CLASS_DEFEND_BASIC"
         "UnitRelationshipClass"     "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
-        
+
         "StatusHealth"                "2472"
         "StatusHealthRegen"           "12.5"
-        
+
         "BountyXP"                    "250"
     }
     "dark_zombie"
@@ -60,25 +60,25 @@
         "Level"                 "18"
         "ModelScale"            "1.0"
         "HealthBarOffset"       "90"
-        
+
         "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_GROUND"
         "MovementSpeed"             "320"
         "ArmorPhysical"             "10"
         "AttackCapabilities"        "DOTA_UNIT_CAP_MELEE_ATTACK"
-        
+
         "AttackDamageMin"            "160"
         "AttackDamageMax"            "196"
         "AttackRate"                "1.35"
         "AttackAnimationPoint"      "0.467"
         "AttackRange"               "100"
-        
+
         "CombatClassAttack"         "DOTA_COMBAT_CLASS_ATTACK_BASIC"
         "CombatClassDefend"         "DOTA_COMBAT_CLASS_DEFEND_BASIC"
         "UnitRelationshipClass"     "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
-        
+
         "StatusHealth"                "4472"
         "StatusHealthRegen"           "20.0"
-        
+
         "BountyXP"                    "350"
     }
     "dark_dark_seer"
@@ -88,25 +88,25 @@
         "Level"                 "20"
         "ModelScale"            "1.48"
         "HealthBarOffset"       "220"
-        
+
         "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_GROUND"
         "MovementSpeed"             "360"
         "ArmorPhysical"             "10"
         "AttackCapabilities"        "DOTA_UNIT_CAP_MELEE_ATTACK"
-        
+
         "AttackDamageMin"            "760"
         "AttackDamageMax"            "896"
         "AttackRate"                "1.20"
         "AttackAnimationPoint"      "0.59"
         "AttackRange"               "150"
-        
+
         "CombatClassAttack"         "DOTA_COMBAT_CLASS_ATTACK_BASIC"
         "CombatClassDefend"         "DOTA_COMBAT_CLASS_DEFEND_BASIC"
         "UnitRelationshipClass"     "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
-        
+
         "StatusHealth"                "6472"
         "StatusHealthRegen"           "25.0"
-        
+
         "Creature"
         {
             "AttachWearables"
@@ -125,27 +125,27 @@
         "Model"                 "models/heroes/chaos_knight/chaos_knight.vmdl"
         "BaseClass"             "npc_dota_creature"
         "Level"                 "20"
-        "ModelScale"            "1.28"
-        "HealthBarOffset"       "400"
-        
+        "ModelScale"            "1.10"
+        "HealthBarOffset"       "300"
+
         "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_GROUND"
         "MovementSpeed"             "360"
         "ArmorPhysical"             "10"
         "AttackCapabilities"        "DOTA_UNIT_CAP_MELEE_ATTACK"
-        
+
         "AttackDamageMin"            "560"
         "AttackDamageMax"            "696"
         "AttackRate"                "1.20"
         "AttackAnimationPoint"      "0.56"
         "AttackRange"               "150"
-        
+
         "CombatClassAttack"         "DOTA_COMBAT_CLASS_ATTACK_BASIC"
         "CombatClassDefend"         "DOTA_COMBAT_CLASS_DEFEND_BASIC"
         "UnitRelationshipClass"     "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
-        
+
         "StatusHealth"                "5472"
         "StatusHealthRegen"           "25.0"
-        
+
         "Creature"
         {
             "AttachWearables"
@@ -167,30 +167,30 @@
         "Level"                 "19"
         "ModelScale"            "1.0"
         "HealthBarOffset"       "80"
-        
+
         "SoundSet"                  "n_creep_Ranged"
-        
+
         "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_GROUND"
         "MovementSpeed"             "320"
         "ArmorPhysical"             "10"
         "AttackCapabilities"        "DOTA_UNIT_CAP_RANGED_ATTACK"
-        
+
         "AttackDamageMin"            "460"
         "AttackDamageMax"            "596"
         "AttackRate"                "1.00"
         "AttackAnimationPoint"      "0.35"
         "AttackRange"               "500"
-        
+
         "ProjectileModel"           "particles/units/dark_plains/ghost/ghost_attack.vpcf"
         "ProjectileSpeed"           "900"
-        
+
         "CombatClassAttack"         "DOTA_COMBAT_CLASS_ATTACK_PIERCE"
         "CombatClassDefend"         "DOTA_COMBAT_CLASS_DEFEND_BASIC"
         "UnitRelationshipClass"     "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
-        
+
         "StatusHealth"                "2472"
         "StatusHealthRegen"           "12.5"
-        
+
         "BountyXP"                    "250"
     }
     "dark_boss_summons"
@@ -232,28 +232,28 @@
         "Level"                 "20"
         "ModelScale"            "1.50"
         "HealthBarOffset"       "350"
-        
+
         "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_GROUND"
         "MovementSpeed"             "360"
         "ArmorPhysical"             "10"
         "AttackCapabilities"        "DOTA_UNIT_CAP_RANGED_ATTACK"
-        
+
         "ProjectileModel"       "particles/econ/items/queen_of_pain/qop_navi_mace/queen_base_attack_navi_mace.vpcf"
         "ProjectileSpeed"       "900"
-        
+
         "AttackDamageMin"            "760"
         "AttackDamageMax"            "896"
         "AttackRate"                "1.20"
         "AttackAnimationPoint"      "0.45"
         "AttackRange"               "650"
-        
+
         "CombatClassAttack"         "DOTA_COMBAT_CLASS_ATTACK_BASIC"
         "CombatClassDefend"         "DOTA_COMBAT_CLASS_DEFEND_BASIC"
         "UnitRelationshipClass"     "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
-        
+
         "StatusHealth"                "8472"
         "StatusHealthRegen"           "25.0"
-        
+
         "Creature"
         {
             "AttachWearables"

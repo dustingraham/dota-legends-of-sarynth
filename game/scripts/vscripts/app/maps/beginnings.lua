@@ -42,6 +42,9 @@ end
 
 function CustomMap:OnHeroPick(_, params)
     local hero = params.hero
+    if DEBUG_SETTINGS then
+        hero:AddNewModifier(hero, nil, 'character_testmode', nil)
+    end
     if TEST_START_WAYPOINT then
         local target = SpawnSystem:GetUnique('teleport_tower_'..TEST_START_WAYPOINT)
         hero:SetAbsOrigin(target:GetAbsOrigin() +  RandomVector(120))
@@ -53,9 +56,11 @@ function CustomMap:OnHeroPick(_, params)
         hero:AddExperience(expNeeded, 0, false, false)
         hero.isInitialLevel = nil
     end
-    if TEST_SUPERMAN then
+    if TEST_SUPERPATHEY then
         hero:SetMoveCapability(DOTA_UNIT_CAP_MOVE_FLY)
-        hero:SetBaseMoveSpeed(3000)
+        hero:SetBaseMoveSpeed(TEST_SUPERPATHEY)
+    end
+    if TEST_SUPERSTRONG then
         hero:SetBaseStrength(2500)
         hero:SetBaseAgility(2500)
         hero:SetBaseIntellect(2500)
@@ -70,3 +75,4 @@ if not CustomMap.initialized then
     CustomMap.initialized = true
     Event:Listen('Activate', Dynamic_Wrap(CustomMap, 'Activate'), CustomMap)
 end
+

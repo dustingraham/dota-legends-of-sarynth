@@ -30,6 +30,7 @@ end
 function mod:OnCreated(kv)
     if IsServer() then
         self:SetStackCount(1)
+        self.lastDamageTick = 0
         local damageTable = {
             victim = self:GetParent(),
             attacker = self:GetCaster(),
@@ -47,10 +48,12 @@ function mod:OnRefresh(kv)
         -- print('Modifier Parent: ', self:GetParent():GetName())
         -- print('Modifier Caster: ', self:GetCaster():GetName())
         self:IncrementStackCount()
+        self.lastDamageTick = self.lastDamageTick + math.random(20,40)
         local damageTable = {
             victim = self:GetParent(),
             attacker = self:GetCaster(),
-            damage = self:GetStackCount() * math.random(20,40),
+            --damage = self:GetStackCount() * math.random(20,40),
+            damage = self.lastDamageTick,
             damage_type = DAMAGE_TYPE_MAGICAL
         }
         ApplyDamage(damageTable)

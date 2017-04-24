@@ -70,17 +70,19 @@ function DialogSystem:OnQuestDialogEvent(event)
     local choice = event.result
     if choice == 1 then
         Debug('DialogSystem', 'Quest accepted.')
+
         -- Can't trust the client, so we have to remember what's open.
         local player = PlayerResource:GetPlayer(event.PlayerID)
         local quest = player.currentDialogQuest
         -- Which NPC to check depends on whether we're finishing or starting.
         local npc
         if quest:IsComplete() then
+            EmitSoundOnClient('ui.treasure_03', player)
             quest:Complete()
             QuestService:OnQuestComplete(quest)
             npc = quest:GetEndNpc()
         else
-            --local player = PlayerResource:GetPlayer(event.PlayerID)
+            EmitSoundOnClient('ui.trophy_new', player)
             quest:Accept()
             QuestService:OnQuestStart(quest)
             npc = quest:GetStartNpc()

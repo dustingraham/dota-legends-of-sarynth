@@ -47,8 +47,7 @@
 
         "precache"
         {
-            "particle" "particles/units/heroes/mage/mage_cursed_flames.vpcf"
-            "particle" "particles/units/heroes/mage/cursed_flames_impact/mage_cursed_flames_impact.vpcf"
+            "particle" "particles/units/heroes/hero_ursa/ursa_earthshock.vpcf"
         }
     }
 

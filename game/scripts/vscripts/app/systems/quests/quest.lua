@@ -210,6 +210,8 @@ function Quest:OnEntityKilled(npc_name)
                 objective.current = objective.current + 1
                 QuestService:SendQuestUpdate(self)
                 if self:IsComplete() then
+                    local player = PlayerResource:GetPlayer(self.PlayerID)
+                    EmitSoundOnClient('powerup_06', player)
                     self:GetEndNpc():ParticleOnForPlayer(QuestService.questParticleName, self.PlayerID)
                 end
             end
@@ -233,6 +235,8 @@ function Quest:OnInventoryChange(hero, item)
             QuestService:SendQuestUpdate(self)
             -- TODO: turn it back off if lose items?
             if self:IsComplete() then
+                local player = PlayerResource:GetPlayer(self.PlayerID)
+                EmitSoundOnClient('powerup_06', player)
                 self:GetEndNpc():ParticleOnForPlayer(QuestService.questParticleName, self.PlayerID)
             end
         end

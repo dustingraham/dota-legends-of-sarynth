@@ -322,9 +322,3 @@ if not CharacterPick.initialized then
     CustomGameEventManager:RegisterListener('character_pick', Dynamic_Wrap(CharacterPick, 'OnCharacterPick'))
     CustomGameEventManager:RegisterListener('character_load', Dynamic_Wrap(CharacterPick, 'OnCharacterLoad'))
 end
-
-LinkLuaModifier('character_vision', 'app/systems/characters/modifiers/character_vision', LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier('character_passive_regen', 'app/systems/characters/modifiers/character_passive_regen', LUA_MODIFIER_MOTION_NONE)
-
-LinkLuaModifier('warrior_stats', 'app/systems/characters/abilities/warrior/warrior_stats', LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier('sorcerer_stats', 'app/systems/characters/abilities/sorcerer/sorcerer_stats', LUA_MODIFIER_MOTION_NONE)

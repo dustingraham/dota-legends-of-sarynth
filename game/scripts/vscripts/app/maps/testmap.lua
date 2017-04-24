@@ -36,10 +36,15 @@ function CustomMap:OnNpcSpawned(event)
 end
 
 function CustomMap:OnHeroPick(_, params)
-    if TEST_SUPERMAN then
-        local hero = params.hero
+    local hero = params.hero
+    if DEBUG_SETTINGS then
+        hero:AddNewModifier(hero, nil, 'character_testmode', nil)
+    end
+    if TEST_SUPERPATHEY then
         hero:SetMoveCapability(DOTA_UNIT_CAP_MOVE_FLY)
-        hero:SetBaseMoveSpeed(3000)
+        hero:SetBaseMoveSpeed(TEST_SUPERPATHEY)
+    end
+    if TEST_SUPERSTRONG then
         hero:SetBaseStrength(1500)
         hero:SetBaseAgility(600)
         hero:SetBaseIntellect(1500)
