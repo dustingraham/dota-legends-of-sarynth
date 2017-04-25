@@ -7,15 +7,15 @@ DEBUG_SETTINGS = IsInToolsMode()
 if DEBUG_SETTINGS then
     -- Curronly only a single hero. Pick it!
     --TEST_PICK_HERO = 'windrunner'    -- Ranger
-    --TEST_PICK_HERO = 'dragon_knight' -- Warrior
+    TEST_PICK_HERO = 'dragon_knight' -- Warrior
     --TEST_PICK_HERO = 'omniknight'    -- Paladin
     --TEST_PICK_HERO = 'bounty_hunter' -- Rogue
     --TEST_PICK_HERO = 'invoker'       -- Mage
-    TEST_PICK_HERO = 'warlock'       -- Sorcerer
+    --TEST_PICK_HERO = 'warlock'       -- Sorcerer
     --TEST_PICK_HERO_ALT = 'omniknight'
 
-    TEST_DISABLE_FOG = true
-    TEST_START_LEVEL = 6
+    --TEST_DISABLE_FOG = true
+    TEST_START_LEVEL = 7
     --TEST_SUPERSTRONG = true
     --TEST_SUPERPATHEY = 3500
     -- town kobolds ice webbed druids dark
@@ -23,7 +23,7 @@ if DEBUG_SETTINGS then
     TEST_START_START_BOSS = true
     TEST_QUESTS_COMPLETE = {
         ['1005'] = 'start_area_report_to_town',
-        ['1012'] ='kobolds_warchief',
+        -- ['1012'] ='kobolds_warchief',
     }
     TEST_SPAWN_ITEMS = true
     TEST_ADD_ITEMS = {
@@ -46,6 +46,16 @@ if DEBUG_SETTINGS then
         'item_3161',
         'item_3162',
     }
+    TEST_EQUIP_ITEMS = {
+        --[1] = '', -- helm
+        [2] = 'item_amulet_tier2', -- neck
+        [3] = 'item_armor_tier3', -- armor
+        [8] = 'item_3146', -- ring
+        [9] = 'item_amulet_scar', -- ring
+        [10] = 'item_boots_leather_common', -- boots
+        [11] = 'item_broadsword_tier4', -- weapon
+        [12] = 'item_3147', -- shield
+    }
 end
 
 DEBUG_SKIP_HTTP_REPORT = DEBUG_SETTINGS
@@ -64,6 +74,7 @@ DEBUG_PRINT_SECTIONS = {
     QuestService      = false,
     QuestGiver        = true,
     Quest             = false,
+    Spells            = true,
     OrderFilter       = true,
     CharacterService  = true,
     Reporter          = false,

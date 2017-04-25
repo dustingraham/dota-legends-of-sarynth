@@ -6,7 +6,7 @@ function spell:OnAbilityPhaseStart()
         duration = 1.4,
         activity = ACT_DOTA_VICTORY,
         -- translate = "iron",
-        rate = 1.1
+        rate = 1.0
     })
     return true
 end
@@ -27,7 +27,7 @@ function spell:OnSpellStart()
     ParticleManager:SetParticleControl(particle, 4, caster:GetAbsOrigin())
     ParticleManager:ReleaseParticleIndex(particle)
 
-    caster:AddNewModifier(caster, self, 'rogue_flurried', { duration = 15 })
+    caster:AddNewModifier(caster, self, 'rogue_flurried', { duration = 18 })
 
     -- EmitSoundOn('Creep_Good_Melee.PreAttack', caster)
     EmitSoundOn('Hero_EarthShaker.Totem.Attack', caster)
@@ -109,5 +109,5 @@ function mod:GetModifierMoveSpeedBonus_Percentage()
 end
 
 function mod:GetModifierPercentageCooldown()
-    return 30.0
+    return 40.0
 end

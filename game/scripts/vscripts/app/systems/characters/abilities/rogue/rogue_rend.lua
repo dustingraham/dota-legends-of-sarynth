@@ -10,7 +10,7 @@ function spell:OnSpellStart()
         return false
     end
 
-    local damage = math.floor(caster:GetAverageTrueAttackDamage(target) * 0.60)
+    local damage = math.floor(caster:GetAverageTrueAttackDamage(target) * 0.80)
 
     ApplyDamage({
         victim = target,

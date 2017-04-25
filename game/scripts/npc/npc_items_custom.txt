@@ -2011,7 +2011,7 @@
         "ID" "3147"
         "BaseClass" "item_datadriven"
         "AbilityTextureName" "default/poor_mans_shield_png"
-        "Effect" "particles/generic_gameplay/dropped_gem.vpcf"
+        "Effect" "particles/generic_gameplay/dropped_item.vpcf"
         "ItemQuality" "component"
         "ItemCost" "48"
         "ItemKillable" "0"
@@ -2024,20 +2024,15 @@
         "ItemDisassembleRule" "DOTA_ITEM_DISASSEMBLE_ALWAYS"
         "AbilitySpecial"
         {
-            "01"
-            {
-                "var_type" "FIELD_INTEGER"
-                "bonus_stat" "10"
-            }
             "02"
             {
                 "var_type" "FIELD_INTEGER"
-                "bonus_health" "650"
+                "bonus_health" "450"
             }
             "03"
             {
                 "var_type" "FIELD_INTEGER"
-                "bonus_armor" "6"
+                "bonus_armor" "4"
             }
             "slot_type"
             {
@@ -2054,9 +2049,6 @@
                 "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE | MODIFIER_ATTRIBUTE_PERMANENT"
                 "Properties"
                 {
-                    "MODIFIER_PROPERTY_STATS_STRENGTH_BONUS" "%bonus_stat"
-                    "MODIFIER_PROPERTY_STATS_AGILITY_BONUS" "%bonus_stat"
-                    "MODIFIER_PROPERTY_STATS_INTELLECT_BONUS" "%bonus_stat"
                     "MODIFIER_PROPERTY_HEALTH_BONUS" "%bonus_health"
                     "MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" "%bonus_armor"
                 }

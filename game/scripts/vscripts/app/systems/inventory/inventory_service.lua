@@ -139,7 +139,7 @@ function InventoryService:OnDragWorld(event)
         range = 150,
         playerID = event.PlayerID,
         callback = function(action)
-            print('Callback happening...')
+            --print('Callback happening...')
             hero.inventory:DropToWorld(event.slotFrom, event.position)
         end,
     }

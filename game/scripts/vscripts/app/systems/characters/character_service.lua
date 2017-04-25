@@ -219,28 +219,6 @@ function CharacterService:OnPlayerLevelUp(event)
     })
 end
 
-
-local function TestItem(hero, key, slot)
-    hero.inventory:AddItem(CreateItem(key, nil, nil), slot)
-end
-
-local function TestQuest(hero)
-    TestItem(hero, 'item_kobold_amulet_2', 1)
-    TestItem(hero, 'item_amulet_tier3', 2)
-    TestItem(hero, 'item_kobold_armor_1', 3)
-    TestItem(hero, 'item_kobold_amulet_1', 8)
-    TestItem(hero, 'item_kobold_amulet_1', 9)
-    TestItem(hero, 'item_boots_leather_common', 10)
-    TestItem(hero, 'item_kobold_weapon_unique', 11)
-    TestItem(hero, 'item_3123', 12)
-end
-
-local function TestItems(hero)
-    for _,itemName in pairs(TEST_ADD_ITEMS) do
-        TestItem(hero, itemName)
-    end
-end
-
 function CharacterService:OnHeroPick(e, event)
     local hero = event.hero
 
@@ -306,8 +284,12 @@ function CharacterService:OnHeroPick(e, event)
 
     -- Items for testing.
     if IsInToolsMode() and TEST_SPAWN_ITEMS then
-        TestItems(hero)
-        TestQuest(hero)
+        for slot,itemName in pairs(TEST_EQUIP_ITEMS) do
+            hero.inventory:AddItem(CreateItem(itemName, nil, nil), slot)
+        end
+        for _,itemName in pairs(TEST_ADD_ITEMS) do
+            hero.inventory:AddItem(CreateItem(itemName, nil, nil), nil)
+        end
     end
     --TestQuest(hero)
 end

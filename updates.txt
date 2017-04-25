@@ -11,10 +11,13 @@
  • Noxious cloud particle improved, damage radius reduced from 225 to 100
  • Noxious poison cloud damage now increase more smoothly.
  • Scar has a new ability that scars the ground, damaging any that stand in it.
+ • Scar rebalanced with all heroes. Please report any issues.
  
 [b]Heroes[/b]
  • Passive regen is now capped at +500hp/+200mp bonus.
  • Warrior's base health pool reduced by 25%. Increased active health regen rate to 0.50%
+ • Rogue flurry duration increased from 15s to 18s, cooldown reduction improved from 30% to 40%, castpoint reduced from 0.8 to 0.6
+ • Rogue rend damage per tick increased from x0.6 to x0.8
  
 [b]World[/b]
  • Buildings in town can't be walked through anymore.
@@ -24,6 +27,7 @@
  • Some minor terrascaping. (Doodads, trees, lights, plants.)
 [b]Items[/b]
  • Overseer's Sigil reclassified as legendary. (The only in the game at this point.)
+ • Reinforced Shield removed +10 stat bonus that was unintended. Armor reduced from +6 to +4, health bonus reduced from +650 to +450.
  
 [b]Bugs[/b]
  • Poison cloud left from bubble spider will no longer block pathing.

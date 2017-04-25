@@ -82,8 +82,8 @@
         "AbilityManaCost"       "30"
 
         "AbilityCastAnimation"  "ACT_DOTA_ATTACK"
-        "AbilityCastPoint"      "0.80"
-        "AbilityBackswingTime"       "2.1"
+        "AbilityCastPoint"      "0.60"
+        //"AbilityBackswingTime"       "2.1"
 
         "precache"
         {

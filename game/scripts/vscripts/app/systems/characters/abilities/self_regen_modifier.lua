@@ -28,7 +28,7 @@ function mod:DeclareFunctions()
 end
 
 function mod:OnAttacked()
-    print('Interrupting...')
+    Debug('Spells', 'Regen interrupted by attack...')
     self:GetParent():InterruptChannel()
 end
 
