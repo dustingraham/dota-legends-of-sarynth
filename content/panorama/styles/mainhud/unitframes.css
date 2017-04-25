@@ -1,8 +1,8 @@
-
-.targetframe {
+#TargetFrameContainer {
     align:left top;
     margin-left:440px;
     margin-top:5px;
+    flow-children:down;
 }
 
 .targetframe .level {

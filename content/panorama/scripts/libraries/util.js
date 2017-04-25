@@ -3,3 +3,9 @@ function RandomInt(min, max) {
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min)) + min;
 }
+
+function RemapVal(v, a, b, c, d)
+{
+    if (a === b) return c;
+    return c + (d - c) * (v - a) / (b - a);
+}

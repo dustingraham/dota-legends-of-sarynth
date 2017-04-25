@@ -1,0 +1,243 @@
+"Quests"
+{
+    "1420"
+    {
+        "name" "dark_plains_bauble"
+        "title" "Lost my Bauble"
+        "start_entity" "npc_quest_dark"
+        "end_entity" "npc_quest_dark"
+        "requirements"
+        {
+            "level" "17"
+        }
+        "start"
+        {
+            "dialog" "I lost my bauble. Can you find it?"
+        }
+        "complete"
+        {
+            "dialog" "My bauble!"
+        }
+        "objectives"
+        {
+            "01" {
+                "long_description" "Collect 4 spider eggs."
+                "description" "Spider Eggs"
+                "action" "collect"
+                "item" "item_3128"
+                "required" "4"
+            }
+        }
+        "rewards"
+        {
+            "gold" "10"
+            "experience" "220"
+            "item_choose"
+            {
+                "01" "item_3129"
+            }
+        }
+    }
+
+    "1222"
+    {
+        "name" "dark_snarky_creeps"
+        "title" "Snarky Creeps"
+        "start_entity" "npc_quest_dark"
+        "end_entity" "npc_quest_dark"
+        "requirements"
+        {
+            "level" "17"
+        }
+        "start"
+        {
+            "dialog" "Snarky Creeps, kill them all!"
+        }
+        "complete"
+        {
+            "dialog" "Thanks for that, but we have a bigger problem than I thought."
+        }
+        "objectives"
+        {
+            "01" {
+                "long_description" "Kill 6 noxious bubble spiders."
+                "description" "Noxious Bubble Spiders"
+                "action" "kill"
+                "npc" "webbed_spidy_bubble"
+                "required" "6"
+            }
+        }
+        "rewards"
+        {
+            "gold" "25"
+            "experience" "480"
+            //"item_choose"
+            //{
+            //    "01" "item_kobold_amulet_2"
+            //}
+        }
+    }
+
+    "1224"
+    {
+        "name" "dark_wooded_priest"
+        "title" "Slay the Dark Priest"
+        "start_entity" "npc_quest_dark"
+        "end_entity" "npc_quest_dark"
+        "requirements"
+        {
+            "quest" "dark_snarky_creeps"
+        }
+        "start"
+        {
+            "dialog" "You may have seen him, there is a dark priest in these woods. Slay him, and bring me his charms."
+        }
+        "complete"
+        {
+            "dialog" "Phew. I can see progress already. The cleanse has begun something good. We will keep up the good fight."
+        }
+        "objectives"
+        {
+            "01" {
+                "long_description" "Kill 30 spiders."
+                "description" "Spiders slain"
+                "action" "kill"
+                "npc" "webbed_spidy_bubble,webbed_spidy_ling,webbed_spidy_yellowback,webbed_spidy_elder,webbed_spidy_arachnid,webbed_viral_queen"
+                "required" "30"
+            }
+        }
+        "rewards"
+        {
+            "gold" "25"
+            "experience" "720"
+            //"item_choose"
+            //{
+            //    "01" "item_kobold_amulet_2"
+            //}
+        }
+    }
+
+    "1225"
+    {
+        "name" "webbed_yellowback"
+        "title" "Seeing Yellow Spots"
+        "start_entity" "npc_quest_dark"
+        "end_entity" "npc_quest_dark"
+        "requirements"
+        {
+            "quest" "webbed_check_the_problem"
+        }
+        "start"
+        {
+            "dialog" "I imagine you may have noticed the distinctive Yellowback spiders out there with the yellow markings on their abdomen? They are incredibly venomous. To keep our fellow adventurers safe, could you make a priority to hit those when you can?"
+        }
+        "complete"
+        {
+            "dialog" "These woods are safer for your efforts."
+        }
+        "objectives"
+        {
+            "01" {
+                "long_description" "Kill 4 Yellowback Widow."
+                "description" "Yellowback Widows"
+                "action" "kill"
+                "npc" "webbed_spidy_yellowback"
+                "required" "4"
+            }
+        }
+        "rewards"
+        {
+            "gold" "50"
+            "experience" "480"
+            "item_choose"
+            {
+                "01" "item_3143"
+            }
+        }
+    }
+
+    "1226"
+    {
+        "name" "webbed_arachnid"
+        "title" "Arachnophobia"
+        "start_entity" "npc_quest_dark"
+        "end_entity" "npc_quest_dark"
+        "requirements"
+        {
+            "quest" "webbed_check_the_problem"
+        }
+        "start"
+        {
+            "dialog" "While you are working on the purge, one of the townsfolk reported sightings of an arachnid to the east. While the townsperson is fraught with arachnophobia, I tend to trust her intuition. If the rumor is true, it must be delt with at once."
+        }
+        "complete"
+        {
+            "dialog" "So, they were not just hallucinating. You sure are a savior."
+        }
+        "objectives"
+        {
+            "01" {
+                "long_description" "Find and kill the Plated Arachnid."
+                "description" "Plated Arachnid Slain"
+                "action" "kill"
+                "npc" "webbed_spidy_arachnid"
+                "required" "1"
+            }
+        }
+        "rewards"
+        {
+            "gold" "65"
+            "experience" "615"
+            "item_choose"
+            {
+                "01" "item_3144"
+            }
+        }
+    }
+
+    "1228"
+    {
+        "name" "webbed_queen"
+        "title" "Untangling the Web"
+        "start_entity" "npc_quest_dark"
+        "end_entity" "npc_quest_dark"
+        "requirements"
+        {
+            "quest" "webbed_arachnid"
+        }
+        "start"
+        {
+            "dialog" "I have never seen someone so competent in the face of this webbed forest. The tipping point to clearing this forest is going to be eliminating the Virulent Queen. But, I must say I'm not sure it can be done with her Elder Wolf Spider protection detail. If you want to tackle this task, we will be in your debt."
+        }
+        "complete"
+        {
+            "dialog" "This webbed forest will become a shining light of spring in no time. Thank you for your efforts."
+        }
+        "objectives"
+        {
+            "01" {
+                "long_description" "Kill 8 Elder Wolf Spiders"
+                "description" "Elder Wolf Spiders Killed"
+                "action" "kill"
+                "npc" "webbed_spidy_elder"
+                "required" "8"
+            }
+            "02" {
+                "long_description" "Squish the Virulent Queen"
+                "description" "Virulent Queen Squished"
+                "action" "kill"
+                "npc" "webbed_viral_queen"
+                "required" "1"
+            }
+        }
+        "rewards"
+        {
+            "gold" "120"
+            "experience" "815"
+            //"item_choose"
+            //{
+            //    "01" "item_kobold_amulet_2"
+            //}
+        }
+    }
+}

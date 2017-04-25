@@ -7,13 +7,16 @@
         <include src="file://{resources}/styles/mainhud/settings.css" />
         <include src="file://{resources}/styles/window.css" />
         <include src="file://{resources}/styles/actionbar.css" />
+        <include src="file://{resources}/styles/hud_buffs.css" />
     </styles>
     <scripts>
+        <include src="file://{resources}/scripts/libraries/util.js" />
         <include src="file://{resources}/scripts/mainhud.js" />
         <include src="file://{resources}/scripts/actionbar.js" />
         <include src="file://{resources}/scripts/dialog_system.js" />
         <include src="file://{resources}/scripts/right_button.js" />
         <include src="file://{resources}/scripts/mainhud/settings.js" />
+        <include src="file://{resources}/scripts/mainhud/buffs.js" />
     </scripts>
     <snippets>
         <!-- Quest Progress -->
@@ -31,6 +34,20 @@
             <Image class="action-bar-slot" src="file://{images}/actionbar1/action_bar_slot.png">
                 <DOTAAbilityImage class="action-bar-ability" abilityname="dragon_knight_custom_1" />
             </Image>
+        </snippet>
+        <snippet name="Buff">
+            <Panel class="BuffBlock">
+                <Button id="BuffBorder" class="BuffBorder"
+                        onactivate="DOTAHUDBuffClicked()"
+                        onmouseover="DOTAHUDShowTooltip()"
+                        onmouseout="DOTAHUDHideTooltip()"
+                >
+                    <Panel id="Wipe" class="BuffBorder" />
+                    <Image id="BuffImage" scaling="stretch-to-fit-y-preserve-aspect" />
+                    <Label id="StackCount" text="{d:stack_count}" />
+                    <Panel id="CircularDuration" />
+                </Button>
+            </Panel>
         </snippet>
     </snippets>
     <Panel class="mainhud" hittest="false">
@@ -60,14 +77,20 @@
         </Image>
         
         <!-- Target Unit Frame -->
-        <Image id="TargetFrame" class="targetframe" src="file://{images}/unitframes/targetframe/frame_empty.png" hittest="true">
-            <Panel id="TargetHealthBar" class="health" />
-            <Label id="TargetName" class="target-name" text="Skadi's Gollum" />
-            <Panel id="TargetLevelContainer" class="level">
-                <Label id="TargetLevel" class="level-text"/>
-                <Image id="TargetLevelSkull" src="file://{images}/unitframes/targetframe/skull_icon.png"/>
+        <Panel id="TargetFrameContainer">
+            <Image id="TargetFrame" class="targetframe" src="file://{images}/unitframes/targetframe/frame_empty.png" hittest="true">
+                <Panel id="TargetHealthBar" class="health" />
+                <Label id="TargetName" class="target-name" text="Skadi's Gollum" />
+                <Panel id="TargetLevelContainer" class="level">
+                    <Label id="TargetLevel" class="level-text"/>
+                    <Image id="TargetLevelSkull" src="file://{images}/unitframes/targetframe/skull_icon.png"/>
+                </Panel>
+            </Image>
+            <Panel id="TargetBuffContainer">
+                <Panel id="Buffs" class="buffdebuff" />
+                <Panel id="Debuffs" class="buffdebuff" />
             </Panel>
-        </Image>
+        </Panel>
         
         <Panel id="ActionBar" class="action-bar-container">
             <!-- Health Globe -->

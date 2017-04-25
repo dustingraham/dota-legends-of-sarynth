@@ -1,0 +1,268 @@
+.BuffBlock
+{
+    opacity: 1;
+    width: 45px;
+    pre-transform-scale2d: 1;
+    transition-property: opacity, pre-transform-scale2d, width;
+    transition-duration: 0.15s;
+    transition-timing-function: ease-in-out;
+}
+
+.BuffBlock.Hidden
+{
+    pre-transform-scale2d: 0;
+    opacity: 0;
+    width: 0px;
+}
+
+.BuffBlock .BuffBorder
+{
+    background-image: url("s2r://panorama/images/hud/buff_friendly_png.vtex");
+    background-size: 100% 100%;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+}
+
+.BuffBlock .is_debuff .BuffBorder
+{
+    background-image: url("s2r://panorama/images/hud/buff_enemy_png.vtex");
+    background-size: 100% 100%;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+}
+
+.BuffBlock #Wipe
+{
+    wash-color: #606060;
+    width: 100%;
+    height: 100%;
+    visibility: collapse;
+}
+
+.BuffBlock .show_wipe #Wipe
+{
+    visibility: visible;
+}
+
+.BuffBlock #StackCount
+{
+    text-shadow: 0px 0px 6px 6 #000000;
+    margin: 2px;
+    vertical-align: bottom;
+    horizontal-align: right;
+    font-size: 18px;
+    font-family: Goudy Trajan Medium;
+    color: white;
+    visibility: collapse;
+}
+
+.BuffBlock .has_stacks #StackCount
+{
+    visibility: visible;
+}
+
+.BuffBlock #BuffImage
+{
+    width: 30px;
+    height: 30px;
+    margin: 7px 8px 8px 7px;
+}
+
+.BuffBlock #AbilityImage
+{
+    width: 100%;
+    height: 100%;
+}
+.BuffBlock .item_buff #AbilityImage
+{
+    visibility: collapse;
+}
+
+.BuffBlock #ItemImage
+{
+    width: 100%;
+    height: 100%;
+}
+
+.BuffBlock .ability_buff #ItemImage
+{
+    visibility: collapse;
+}
+
+.BuffBlock #CircularDuration
+{
+    visibility: collapse;
+}
+
+/* ---------------------------------------------------------------------- */
+/* Reborn */
+
+   .Reborn .BuffBlock
+   {
+       width: 40px;
+       height: 40px;
+       margin-left: 2px;
+       margin-right: 2px;
+   }
+
+.Reborn .BuffBlock .BuffBorder
+{
+    background-image: none;
+}
+
+.Reborn .BuffBlock .is_debuff .BuffBorder
+{
+    background-image: none;
+}
+
+.Reborn .BuffBlock #Wipe.BuffBorder
+{
+    visibility: collapse;
+}
+
+.Reborn .BuffBlock .BuffBorder
+{
+
+}
+
+.Reborn .BuffBlock Button
+{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    box-shadow: fill #00000099 -2px -2px 4px 4px;
+}
+
+.Reborn .BuffBlock #BuffImage
+{
+    margin-left: 2px;
+    margin-right: 2px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    box-shadow: inset #000000aa 2px 2px 4px 4px;
+}
+
+.Reborn .BuffBlock #CircularDuration
+{
+    visibility: visible;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-image: url("s2r://panorama/images/hud/reborn/buff_outline_psd.vtex");
+    background-size: 95% 95%;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    wash-color: #8bdd4f;
+}
+
+.Reborn .BuffBlock .is_debuff #CircularDuration
+{
+    wash-color: #e43c10;
+}
+
+.BuffBlock DOTAStunBar .is_debuff #CircularDuration
+{
+    border: 3px solid #c24f15;
+}
+
+.BuffBlock DOTAStunBar .is_debuff #BuffImage
+{
+    visibility: visible;
+    border: 3px solid #3d1908;
+    margin: 0px;
+}
+
+.BuffBlock #ChannelBar #CircularDuration, #SpellDamageContainer #CircularDuration
+{
+    visibility: collapse;
+}
+
+.Reborn .BuffBlock #StackCount
+{
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    horizontal-align: center;
+    vertical-align: center;
+    font-family: RadianceM,Radiance,FZLanTingHei-R-GBK,TH Sarabun New,YDYGO 540,Gulim,MingLiU;
+    font-size: 20px;
+    overflow: noclip noclip;
+}
+
+/* ---------------------------------------------------------------------- */
+/* Reborn Query */
+
+   .QueryUnit .BuffBlock
+   {
+       width: 36px;
+       height: 36px;
+   }
+
+.QueryUnit .BuffBlock #BuffImage
+{
+    width: 36px;
+    height: 36px;
+    margin: 2px;
+}
+
+.Reborn .QueryUnit .BuffBlock #CircularDuration
+{
+//border: 2px solid #8bc34f;
+}
+
+.Reborn .QueryUnit .BuffBlock .is_debuff #CircularDuration
+{
+//border: 2px solid #ff6263;
+}
+
+/* ---------------------------------------------------------------------- */
+
+.BuffBlock DOTAKillGraph #Details #CircularDuration
+  {
+      visibility: collapse;
+  }
+
+/*
+#buffs.AltPressed #Buff1
+{
+	opacity: .8;
+}
+
+#buffs.AltPressed #Buff2
+{
+	opacity: .6;
+}
+
+
+#buffs.AltPressed #Buff3
+{
+	opacity: .2;
+}
+
+
+#buffs.AltPressed #Buff4,
+#buffs.AltPressed #Buff5,
+#buffs.AltPressed #Buff6,
+#buffs.AltPressed #Buff7
+{
+	opacity: .05;
+	
+	
+}*/
+
+/* ******** SARYNTH ************ */
+
+#TargetBuffContainer {
+    width:100%;
+    flow-children:left;
+}
+#TargetBuffContainer .buffdebuff {
+    flow-children:left;
+}
+#bt1 #CircularDuration {
+    clip: radial(50.0% 50.0%, 115deg, 245deg);
+}

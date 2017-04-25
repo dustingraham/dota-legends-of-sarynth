@@ -59,6 +59,26 @@
             }
         }
     }
+    "test_for_modifiers"
+    {
+        "BaseClass"                "ability_datadriven"
+        "AbilityBehavior"                "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
+        "AbilityTextureName"            "dragon_knight_dragon_blood"
+        "Modifiers"
+        {
+            "modifier_test_for_modifiers"
+            {
+                "IsDebuff"      "0"
+                "IsPurgable"    "0"
+                "Passive"       "1"
+                "AbilityTextureName"            "dragon_knight_dragon_blood"
+                "StatusEffectName"    "particles/status_fx/status_effect_gods_strength.vpcf"
+                "StatusEffectPriority"    "10"
+                "EffectName" "particles/econ/courier/courier_golden_roshan/golden_roshan_ambient.vpcf"
+                "EffectAttachType" "follow_overhead"
+            }
+        }
+    }
     "webbed_queen_poison"
     {
         "BaseClass"              "ability_lua"

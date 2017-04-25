@@ -1,5 +1,7 @@
 [b]v0.0.62[/b]
 
+ • Added a buff/debuff bar to the focus target unit panel!
+ 
  • Added sound effects for quest events. It should be easier to notice when you complete the quest objectives.
  • Added sounds for teleport system.
  • Added a sound when Scar dies.
