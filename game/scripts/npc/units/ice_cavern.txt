@@ -1,5 +1,33 @@
 "Units"
 {
+    "ice_dungeon_yetti"
+    {
+        "Model" "models/items/lone_druid/true_form/form_of_the_atniw/form_of_the_atniw.vmdl"
+        "BaseClass"             "npc_dota_creature"
+        "Level"                 "10"
+        "ModelScale"            "1.1"
+        "HealthBarOffset"       "240"
+
+        "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_GROUND"
+        "MovementSpeed"             "320"
+        "ArmorPhysical"             "10"
+        "AttackCapabilities"        "DOTA_UNIT_CAP_MELEE_ATTACK"
+
+        "AttackDamageMin"            "60"
+        "AttackDamageMax"            "96"
+        "AttackRate"                "0.65"
+        "AttackAnimationPoint"      "0.38"
+        "AttackRange"               "100"
+
+        "CombatClassAttack"         "DOTA_COMBAT_CLASS_ATTACK_BASIC"
+        "CombatClassDefend"         "DOTA_COMBAT_CLASS_DEFEND_BASIC"
+        "UnitRelationshipClass"     "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+
+        "StatusHealth"                "2272"
+        "StatusHealthRegen"           "5"
+
+        "BountyXP"                    "80"
+    }
     "ice_dungeon_golem"
     {
         "Model"                 "models/creeps/neutral_creeps/n_creep_golem_a/neutral_creep_golem_a.vmdl"

@@ -75,6 +75,26 @@
             "particle" "particles/econ/items/abaddon/abaddon_alliance/abaddon_death_coil_alliance.vpcf"
         }
     }
+    "scar_ground"
+    {
+        "BaseClass"              "ability_lua"
+        "ScriptFile"             "app/systems/npcs/abilities/scar_ground"
+        "AbilityBehavior"                "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+        "AbilityUnitTargetTeam"            "DOTA_UNIT_TARGET_TEAM_ENEMY"
+        "AbilityUnitTargetType"            "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+        "AbilityUnitDamageType"            "DAMAGE_TYPE_MAGICAL"
+
+        "AbilityTextureName"     "npcs/scar_ground"
+
+        "AbilityCooldown"        "10"
+        "AbilityManaCost"        "10"
+        "AbilityCastAnimation"   "ACT_DOTA_CAST_ABILITY_1"
+        "AbilityCastPoint"       "1.50"
+
+        "precache"
+        {
+        }
+    }
     "dragon_knight_custom_1"
     {
         // General

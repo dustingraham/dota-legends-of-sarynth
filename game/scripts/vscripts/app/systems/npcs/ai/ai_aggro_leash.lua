@@ -185,6 +185,7 @@ function ai_aggro_leash:ActionAggro()
             local roll = math.random(100)
             if roll < self.castDesire then
                 self:GetParent():CastAbilityOnTarget(self.aggroTarget, ability, -1)
+                --self:GetParent():CastAbilityOnPosition(self.aggroTarget:GetAbsOrigin(), ability, -1)
                 self.castDesire = 0
             else
                 self.castDesire = self.castDesire + 20

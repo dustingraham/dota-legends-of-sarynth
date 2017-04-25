@@ -8,4 +8,23 @@
 		]
 		volume = "0.20"
 	}
+	Scar.Death = {
+		type = "dota_src1_2d"
+		vsnd_files =
+		[
+			"sounds/ambient/soundscapes/diretide/diretide_wolf_01.vsnd",
+			"sounds/ambient/soundscapes/diretide/diretide_wolf_02.vsnd",
+			"sounds/ambient/soundscapes/diretide/diretide_wolf_03.vsnd",
+			"sounds/ambient/soundscapes/diretide/diretide_wolf_04.vsnd",
+		]
+		volume = "1"
+	}
+	Scar.DeathGrunt = {
+		type = "dota_src1_2d"
+		vsnd_files =
+		[
+			"sounds/weapons/hero/lycan/wolf_preattack02.vsnd",
+		]
+		volume = "1"
+	}
 }

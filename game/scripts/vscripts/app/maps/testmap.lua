@@ -33,6 +33,7 @@ function CustomMap:OnNpcSpawned(event)
             CharacterPick:TestMapPickHero(npc, TEST_PICK_HERO)
         end
     end
+    npc:SetControllableByPlayer(0, false)
 end
 
 function CustomMap:OnHeroPick(_, params)

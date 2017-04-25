@@ -9,15 +9,6 @@ function character_teleporting:OnCreated(params)
         Sounds:Start('Teleport.Liftoff', self:GetCaster():GetPlayerOwnerID())
         Sounds:Start('rune_idle_02', self:GetCaster():GetPlayerOwnerID())
 
-        --StartSoundEvent('Teleport.Liftoff', self:GetCaster())
-        --StartSoundEvent('rune_idle_02', self:GetCaster())
-
-        --StartSoundEvent('powerup_01', self:GetCaster())
-        --EmitSoundOnClient('powerup_01', self:GetCaster():GetPlayerOwner())
-        -- EmitSoundOnClient('Rune.Regen', self:GetCaster():GetPlayerOwner())
-
-        -- self.particle = ParticleManager:CreateParticle(self:GetEffectNameEx(), self:GetEffectAttachTypeEx(), self:GetCaster())
-        -- ParticleManager:SetParticleControl(self.particle,0, Vector(0,0,20))
         self.trackTime = 0
 
         PlayerResource:SetCameraTarget(self:GetCaster():GetPlayerOwnerID(), self:GetCaster())
@@ -32,12 +23,11 @@ function character_teleporting:OnDestroy()
         self:GetCaster():ParticleOff('particles/transport_bird/transport_bird.vpcf')
         --local hero = self:GetCaster()
         local PlayerID = self:GetCaster():GetPlayerOwnerID()
+        --StartSoundEvent('ui.herochallenge_complete', self:GetCaster())
         Sounds:Start('ui.herochallenge_complete', PlayerID)
         Timers(0.25, function()
             Sounds:Stop('rune_idle_02', PlayerID)
-            --StopSoundEvent('rune_idle_02',  hero)
         end)
-        --StartSoundEvent('ui.herochallenge_complete', self:GetCaster())
         PlayerResource:SetCameraTarget(self:GetCaster():GetPlayerOwnerID(), nil)
     end
 end
@@ -200,7 +190,7 @@ function character_teleporting:UpdateDirection()
     local currentPos = self:GetParent():GetAbsOrigin()
     if (currentPos - self.nextPos):Length2D() < (self.speed + 140) then
         -- Find Next Waypoint
-        local nextWaypoint = nil
+        local nextWaypoint
         for i,waypoint in ipairs(waypointGuide[self.teleport_from][self.teleport_to]) do
             if self.nextWaypoint == waypoint then
                 local nextI = i + 1

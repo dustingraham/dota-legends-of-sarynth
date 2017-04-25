@@ -1,14 +1,16 @@
 [b]v0.0.62[/b]
 
- • Added more internal support tools for development.
  • Added sound effects for quest events. It should be easier to notice when you complete the quest objectives.
  • Added sounds for teleport system.
+ • Added a sound when Scar dies.
+ • Added more internal support tools for development.
  
 [b]Creatures[/b]
  • Red Bubble Spider has had an identity crisis. Now goes by Noxious Bubble Spider
  • Noxious spiders now spawn near trees.
  • Noxious cloud particle improved, damage radius reduced from 225 to 100
  • Noxious poison cloud damage now increase more smoothly.
+ • Scar has a new ability that scars the ground, damaging any that stand in it.
  
 [b]Heroes[/b]
  • Passive regen is now capped at +500hp/+200mp bonus.

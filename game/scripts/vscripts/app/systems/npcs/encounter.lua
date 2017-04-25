@@ -35,8 +35,10 @@ function Encounter:Start(boss, hero)
     self:LogBothHp('Started at '..math.ceil(self.startTime))
 
     local relay = Entities:FindByName(nil, 'start_area_barricade_relay_on')
-    relay:Trigger()
-    self:MoveBlockers(219.125)
+    if relay then
+        relay:Trigger()
+        self:MoveBlockers(219.125)
+    end
 end
 
 function Encounter:End()
@@ -47,8 +49,10 @@ function Encounter:End()
     -- self:LogBothHp()
 
     local relay = Entities:FindByName(nil, 'start_area_barricade_relay_off')
-    relay:Trigger()
-    self:MoveBlockers(-219.125)
+    if relay then
+        relay:Trigger()
+        self:MoveBlockers(-219.125)
+    end
     self:Report()
 end
 

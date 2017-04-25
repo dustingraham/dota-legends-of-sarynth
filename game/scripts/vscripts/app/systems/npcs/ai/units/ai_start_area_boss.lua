@@ -33,6 +33,7 @@ if IsServer() then
         Debug('StartAreaBoss', 'OnCreated')
         self.state = ai.ACTION_IDLE
         Debug('StartAreaBoss', 'Idling OC')
+        self.castDesire = 0
         self.aggroRange = 850
         self.leashRange = 2000
         -- self.aggroRange = self:GetParent().spawn.spawnNode.AggroRange or 400
@@ -75,6 +76,8 @@ function ai:OnDeath(event)
     Timers:CreateTimer(0.45, function()
         ScreenShake(pos, 10, 150, 2.5, 3000, 0, true)
     end)
+    EmitSoundOn('Scar.DeathGrunt', self:GetParent())
+    EmitSoundOn('Scar.Death', self:GetParent())
 end
 
 function ai:OnIntervalThink()
@@ -146,13 +149,45 @@ function ai:ChargeAttack()
     end)
 end
 
-function ai:UseAbility()
+function ai:ReviewAbilityDesire()
     -- Concept
     --self:GetParent():AddAbility('ranger_poison_arrow')
     --Timers:CreateTimer(5.0, function()
     --    local ability = self:GetParent():FindAbilityByName('ranger_poison_arrow')
     --    self:GetParent():CastAbilityOnTarget(units[1], ability, -1)
     --end)
+    local ability = self:GetParent():GetAbilityByIndex(0)
+    if ability then
+        --print('=----=')
+        --print(ability:GetName())
+        --print('FC', ability:IsFullyCastable())
+        --print('IA', self:GetParent():IsAttacking())
+        --print('CD ', ability:IsCooldownReady())
+        --print('Mana', ability:IsOwnersManaEnough())
+        if ability:IsFullyCastable() then
+            local roll = math.random(100)
+            if roll < self.castDesire then
+                --self:GetParent():CastAbilityOnTarget(self.aggroTarget, ability, -1)
+                self:GetParent():CastAbilityOnPosition(self.aggroTarget:GetAbsOrigin(), ability, -1)
+                self.castDesire = 0
+            else
+                self.castDesire = self.castDesire + 10
+            end
+            --print('DO IT:', 'Go cast fool.')
+            --ExecuteOrderFromTable({
+            --      UnitIndex = self:GetParent():entindex(),
+            --      OrderType = DOTA_UNIT_ORDER_CAST_TARGET,
+            --      AbilityIndex = ability:entindex(),
+            --      TargetIndex = self.aggroTarget:entindex()
+            --  })
+        else
+            if not self:GetParent():IsAttacking() then
+                --print('DO IT: ', 'Go attack fool.')
+                self:GetParent():MoveToTargetToAttack( self.aggroTarget )
+            end
+        end
+    end
+
 end
 
 --function ai:ActionAggro()
@@ -171,6 +206,8 @@ function ai:ActionFightStandard()
         self:TransitionToReturn()
         return true --Return to make sure no other code is executed in this state
     end
+
+    self:ReviewAbilityDesire()
 
     --State behavior
     --Here we can just do any behaviour you want to repeat in this state

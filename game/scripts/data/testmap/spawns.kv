@@ -15,11 +15,25 @@
     {
         "SpawnPoints" "questgiver_4"
         "Creature" "webbed_viral_queen"
+        "OnInitSpawn" "0"
+        "MaxCount" "0"
+        "RespawnDelay" "3"
+        "Chance" "100"
+        "AI" "ai_webbed_queen"
+        "AggroRange" "100"
+        "LeashRange" "850"
+    }
+
+    "spawn_scar"
+    {
+        "SpawnPoints" "questgiver_4"
+        "Creature" "start_area_wolf_boss"
         "OnInitSpawn" "1"
         "MaxCount" "1"
         "RespawnDelay" "3"
         "Chance" "100"
-        "AI" "ai_webbed_queen"
+        //"AI" "ai_start_area_boss"
+        "AI" "ai_aggro_leash"
         "AggroRange" "100"
         "LeashRange" "850"
     }
