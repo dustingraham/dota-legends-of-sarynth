@@ -445,7 +445,7 @@
             "01"
             {
                 "var_type" "FIELD_INTEGER"
-                "bonus_armor" "8"
+                "bonus_armor" "2"
             }
             "03"
             {
@@ -1303,7 +1303,7 @@
             "01"
             {
                 "var_type" "FIELD_INTEGER"
-                "bonus_armor" "6"
+                "bonus_armor" "3"
             }
             "02"
             {
@@ -1687,12 +1687,12 @@
             "02"
             {
                 "var_type" "FIELD_INTEGER"
-                "bonus_armor" "10"
+                "bonus_armor" "8"
             }
             "03"
             {
                 "var_type" "FIELD_INTEGER"
-                "bonus_health" "2200"
+                "bonus_health" "2350"
             }
             "slot_type"
             {
@@ -2261,7 +2261,7 @@
             "02"
             {
                 "var_type" "FIELD_INTEGER"
-                "bonus_health" "1975"
+                "bonus_health" "2645"
             }
             "03"
             {
@@ -2344,12 +2344,17 @@
             "02"
             {
                 "var_type" "FIELD_INTEGER"
-                "bonus_health" "1975"
+                "bonus_health" "3275"
             }
             "03"
             {
                 "var_type" "FIELD_INTEGER"
                 "bonus_armor" "9"
+            }
+            "bonus_str"
+            {
+                "var_type" "FIELD_INTEGER"
+                "bonus_str" "30"
             }
             "slot_type"
             {
@@ -2368,6 +2373,7 @@
                 {
                     "MODIFIER_PROPERTY_HEALTH_BONUS" "%bonus_health"
                     "MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" "%bonus_armor"
+                    "MODIFIER_PROPERTY_STATS_STRENGTH_BONUS" "%bonus_str"
                 }
             }
         }
@@ -2401,6 +2407,11 @@
                 "var_type" "FIELD_INTEGER"
                 "bonus_armor" "9"
             }
+            "bonus_agi"
+            {
+                "var_type" "FIELD_INTEGER"
+                "bonus_agi" "30"
+            }
             "slot_type"
             {
                 "var_type" "FIELD_INTEGER"
@@ -2417,6 +2428,7 @@
                 "Properties"
                 {
                     "MODIFIER_PROPERTY_HEALTH_BONUS" "%bonus_health"
+                    "MODIFIER_PROPERTY_STATS_AGILITY_BONUS" "%bonus_agi"
                     "MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" "%bonus_armor"
                 }
             }
@@ -2444,12 +2456,17 @@
             "02"
             {
                 "var_type" "FIELD_INTEGER"
-                "bonus_health" "1975"
+                "bonus_health" "2450"
             }
             "03"
             {
                 "var_type" "FIELD_INTEGER"
                 "bonus_armor" "9"
+            }
+            "bonus_int"
+            {
+                "var_type" "FIELD_INTEGER"
+                "bonus_int" "30"
             }
             "slot_type"
             {
@@ -2468,6 +2485,7 @@
                 {
                     "MODIFIER_PROPERTY_HEALTH_BONUS" "%bonus_health"
                     "MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" "%bonus_armor"
+                    "MODIFIER_PROPERTY_STATS_INTELLECT_BONUS" "%bonus_int"
                 }
             }
         }
@@ -2496,20 +2514,20 @@
         "ItemDisassembleRule" "DOTA_ITEM_DISASSEMBLE_ALWAYS"
         "AbilitySpecial"
         {
-            "01"
+            "bonus_str"
             {
                 "var_type" "FIELD_INTEGER"
-                "bonus_armor" "6"
+                "bonus_str" "26"
             }
             "02"
             {
                 "var_type" "FIELD_INTEGER"
-                "bonus_ms" "50"
+                "bonus_ms" "60"
             }
             "03"
             {
                 "var_type" "FIELD_INTEGER"
-                "bonus_health" "875"
+                "bonus_health" "1275"
             }
             "slot_type"
             {
@@ -2527,7 +2545,7 @@
                 "Properties"
                 {
                     "MODIFIER_PROPERTY_MOVESPEED_BONUS_UNIQUE" "%bonus_ms"
-                    "MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" "%bonus_armor"
+                    "MODIFIER_PROPERTY_STATS_STRENGTH_BONUS" "%bonus_str"
                     "MODIFIER_PROPERTY_HEALTH_BONUS" "%bonus_health"
                 }
             }
@@ -2552,20 +2570,20 @@
         "ItemDisassembleRule" "DOTA_ITEM_DISASSEMBLE_ALWAYS"
         "AbilitySpecial"
         {
-            "01"
-            {
-                "var_type" "FIELD_INTEGER"
-                "bonus_armor" "6"
-            }
             "02"
             {
                 "var_type" "FIELD_INTEGER"
-                "bonus_ms" "50"
+                "bonus_ms" "60"
             }
             "03"
             {
                 "var_type" "FIELD_INTEGER"
-                "bonus_health" "875"
+                "bonus_health" "1275"
+            }
+            "bonus_agi"
+            {
+                "var_type" "FIELD_INTEGER"
+                "bonus_agi" "26"
             }
             "slot_type"
             {
@@ -2583,7 +2601,7 @@
                 "Properties"
                 {
                     "MODIFIER_PROPERTY_MOVESPEED_BONUS_UNIQUE" "%bonus_ms"
-                    "MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" "%bonus_armor"
+                    "MODIFIER_PROPERTY_STATS_AGILITY_BONUS" "%bonus_agi"
                     "MODIFIER_PROPERTY_HEALTH_BONUS" "%bonus_health"
                 }
             }
@@ -2608,15 +2626,15 @@
         "ItemDisassembleRule" "DOTA_ITEM_DISASSEMBLE_ALWAYS"
         "AbilitySpecial"
         {
-            "01"
+            "bonus_int"
             {
                 "var_type" "FIELD_INTEGER"
-                "bonus_armor" "6"
+                "bonus_int" "26"
             }
             "02"
             {
                 "var_type" "FIELD_INTEGER"
-                "bonus_ms" "50"
+                "bonus_ms" "60"
             }
             "03"
             {
@@ -2639,8 +2657,8 @@
                 "Properties"
                 {
                     "MODIFIER_PROPERTY_MOVESPEED_BONUS_UNIQUE" "%bonus_ms"
-                    "MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" "%bonus_armor"
                     "MODIFIER_PROPERTY_HEALTH_BONUS" "%bonus_health"
+                    "MODIFIER_PROPERTY_STATS_INTELLECT_BONUS" "%bonus_int"
                 }
             }
         }
@@ -2662,17 +2680,17 @@
             "01"
             {
                 "var_type" "FIELD_INTEGER"
-                "bonus_stat" "15"
+                "bonus_str" "16"
             }
             "02"
             {
                 "var_type" "FIELD_INTEGER"
-                "bonus_armor" "10"
+                "bonus_armor" "8"
             }
             "03"
             {
                 "var_type" "FIELD_INTEGER"
-                "bonus_health" "2200"
+                "bonus_health" "2750"
             }
             "slot_type"
             {
@@ -2691,9 +2709,7 @@
                 {
                     "MODIFIER_PROPERTY_HEALTH_BONUS" "%bonus_health"
                     "MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" "%bonus_armor"
-                    "MODIFIER_PROPERTY_STATS_STRENGTH_BONUS" "%bonus_stat"
-                    "MODIFIER_PROPERTY_STATS_AGILITY_BONUS" "%bonus_stat"
-                    "MODIFIER_PROPERTY_STATS_INTELLECT_BONUS" "%bonus_stat"
+                    "MODIFIER_PROPERTY_STATS_STRENGTH_BONUS" "%bonus_str"
                 }
             }
         }
@@ -2717,20 +2733,20 @@
         "ItemShareability" "ITEM_FULLY_SHAREABLE"
         "AbilitySpecial"
         {
-            "01"
-            {
-                "var_type" "FIELD_INTEGER"
-                "bonus_stat" "15"
-            }
             "02"
             {
                 "var_type" "FIELD_INTEGER"
-                "bonus_armor" "10"
+                "bonus_armor" "6"
             }
             "03"
             {
                 "var_type" "FIELD_INTEGER"
-                "bonus_health" "2200"
+                "bonus_health" "2150"
+            }
+            "bonus_agi"
+            {
+                "var_type" "FIELD_INTEGER"
+                "bonus_agi" "18"
             }
             "slot_type"
             {
@@ -2749,9 +2765,7 @@
                 {
                     "MODIFIER_PROPERTY_HEALTH_BONUS" "%bonus_health"
                     "MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" "%bonus_armor"
-                    "MODIFIER_PROPERTY_STATS_STRENGTH_BONUS" "%bonus_stat"
-                    "MODIFIER_PROPERTY_STATS_AGILITY_BONUS" "%bonus_stat"
-                    "MODIFIER_PROPERTY_STATS_INTELLECT_BONUS" "%bonus_stat"
+                    "MODIFIER_PROPERTY_STATS_AGILITY_BONUS" "%bonus_agi"
                 }
             }
         }
@@ -2775,20 +2789,20 @@
         "ItemShareability" "ITEM_FULLY_SHAREABLE"
         "AbilitySpecial"
         {
-            "01"
+            "bonus_int"
             {
                 "var_type" "FIELD_INTEGER"
-                "bonus_stat" "15"
+                "bonus_int" "22"
             }
             "02"
             {
                 "var_type" "FIELD_INTEGER"
-                "bonus_armor" "10"
+                "bonus_armor" "6"
             }
             "03"
             {
                 "var_type" "FIELD_INTEGER"
-                "bonus_health" "2200"
+                "bonus_health" "1980"
             }
             "slot_type"
             {
@@ -2807,9 +2821,7 @@
                 {
                     "MODIFIER_PROPERTY_HEALTH_BONUS" "%bonus_health"
                     "MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" "%bonus_armor"
-                    "MODIFIER_PROPERTY_STATS_STRENGTH_BONUS" "%bonus_stat"
-                    "MODIFIER_PROPERTY_STATS_AGILITY_BONUS" "%bonus_stat"
-                    "MODIFIER_PROPERTY_STATS_INTELLECT_BONUS" "%bonus_stat"
+                    "MODIFIER_PROPERTY_STATS_INTELLECT_BONUS" "%bonus_int"
                 }
             }
             "set_bonus_test"
@@ -2918,5 +2930,397 @@
         "ItemStackable" "1"
         "ItemPermanent" "1"
         "ItemBaseLevel" "0"
+    }
+    "item_3165"
+    {
+        "ID" "3165"
+        "BaseClass" "item_datadriven"
+        "AbilityTextureName" "free/ik3MmZC"
+        "Effect" "particles/generic_gameplay/dropped_item.vpcf"
+        "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+        "ItemQuality" "common"
+        "ItemKillable" "0"
+        "ItemSellable" "1"
+        "ItemShareability" "ITEM_FULLY_SHAREABLE"
+        "AbilitySpecial"
+        {
+            "02"
+            {
+                "var_type" "FIELD_INTEGER"
+                "bonus_health" "3015"
+            }
+            "03"
+            {
+                "var_type" "FIELD_INTEGER"
+                "bonus_armor" "8"
+            }
+            "slot_type"
+            {
+                "var_type" "FIELD_INTEGER"
+                "slot_type" "5"
+            }
+        }
+        "Modifiers"
+        {
+            "item_item_kobold_armor_1"
+            {
+                "Passive" "1"
+                "IsHidden" "1"
+                "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE | MODIFIER_ATTRIBUTE_PERMANENT"
+                "Properties"
+                {
+                    "MODIFIER_PROPERTY_HEALTH_BONUS" "%bonus_health"
+                    "MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" "%bonus_armor"
+                }
+            }
+        }
+        "ItemCost" "262"
+        "ItemPurchasable" "0"
+        "ItemDroppable" "1"
+        "ItemStackable" "0"
+        "ItemPermanent" "1"
+        "ItemBaseLevel" "1"
+    }
+    "item_3166"
+    {
+        "ID" "3166"
+        "BaseClass" "item_datadriven"
+        "AbilityTextureName" "default/ultimate_orb_png"
+        "ItemQuality" "common"
+        "ItemCost" "106"
+        "ItemKillable" "0"
+        "ItemSellable" "1"
+        "ItemPurchasable" "1"
+        "ItemDroppable" "1"
+        "ItemShareability" "ITEM_FULLY_SHAREABLE"
+        "ItemStackable" "0"
+        "ItemPermanent" "1"
+        "ItemDisassembleRule" "DOTA_ITEM_DISASSEMBLE_ALWAYS"
+        "AbilitySpecial"
+        {
+            "02"
+            {
+                "var_type" "FIELD_INTEGER"
+                "bonus_stat" "22"
+            }
+            "03"
+            {
+                "var_type" "FIELD_INTEGER"
+                "bonus_health" "1615"
+            }
+            "slot_type"
+            {
+                "var_type" "FIELD_INTEGER"
+                "slot_type" "4"
+            }
+        }
+        "Modifiers"
+        {
+            "modifier_item_kobold_amulet_1"
+            {
+                "Passive" "1"
+                "IsHidden" "1"
+                "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE | MODIFIER_ATTRIBUTE_PERMANENT"
+                "Properties"
+                {
+                    "MODIFIER_PROPERTY_STATS_STRENGTH_BONUS" "%bonus_stat"
+                    "MODIFIER_PROPERTY_STATS_AGILITY_BONUS" "%bonus_stat"
+                    "MODIFIER_PROPERTY_STATS_INTELLECT_BONUS" "%bonus_stat"
+                    "MODIFIER_PROPERTY_HEALTH_BONUS" "%bonus_health"
+                }
+            }
+        }
+        "ItemBaseLevel" "1"
+        "Effect" "particles/generic_gameplay/dropped_item.vpcf"
+    }
+    "item_3167"
+    {
+        "ID" "3167"
+        "BaseClass" "item_datadriven"
+        "AbilityTextureName" "default/ring_of_aquila_active_png"
+        "ItemQuality" "common"
+        "ItemCost" "85"
+        "ItemKillable" "0"
+        "ItemSellable" "1"
+        "ItemPurchasable" "1"
+        "ItemDroppable" "1"
+        "ItemShareability" "ITEM_FULLY_SHAREABLE"
+        "ItemStackable" "0"
+        "ItemPermanent" "1"
+        "ItemDisassembleRule" "DOTA_ITEM_DISASSEMBLE_ALWAYS"
+        "AbilitySpecial"
+        {
+            "02"
+            {
+                "var_type" "FIELD_INTEGER"
+                "bonus_stat" "22"
+            }
+            "03"
+            {
+                "var_type" "FIELD_INTEGER"
+                "bonus_health" "1085"
+            }
+            "slot_type"
+            {
+                "var_type" "FIELD_INTEGER"
+                "slot_type" "11"
+            }
+        }
+        "Modifiers"
+        {
+            "modifier_item_kobold_amulet_1"
+            {
+                "Passive" "1"
+                "IsHidden" "1"
+                "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE | MODIFIER_ATTRIBUTE_PERMANENT"
+                "Properties"
+                {
+                    "MODIFIER_PROPERTY_STATS_STRENGTH_BONUS" "%bonus_stat"
+                    "MODIFIER_PROPERTY_STATS_AGILITY_BONUS" "%bonus_stat"
+                    "MODIFIER_PROPERTY_STATS_INTELLECT_BONUS" "%bonus_stat"
+                    "MODIFIER_PROPERTY_HEALTH_BONUS" "%bonus_health"
+                }
+            }
+        }
+        "Effect" "particles/generic_gameplay/dropped_item.vpcf"
+        "ItemBaseLevel" "1"
+    }
+    "item_3168"
+    {
+        "ID" "3168"
+        "BaseClass" "item_datadriven"
+        "AbilityTextureName" "default/ring_of_aquila_png"
+        "ItemQuality" "rare"
+        "ItemCost" "145"
+        "ItemKillable" "0"
+        "ItemSellable" "1"
+        "ItemPurchasable" "1"
+        "ItemDroppable" "1"
+        "ItemShareability" "ITEM_FULLY_SHAREABLE"
+        "ItemStackable" "0"
+        "ItemPermanent" "1"
+        "ItemDisassembleRule" "DOTA_ITEM_DISASSEMBLE_ALWAYS"
+        "AbilitySpecial"
+        {
+            "02"
+            {
+                "var_type" "FIELD_INTEGER"
+                "bonus_stat" "28"
+            }
+            "03"
+            {
+                "var_type" "FIELD_INTEGER"
+                "bonus_health" "1375"
+            }
+            "slot_type"
+            {
+                "var_type" "FIELD_INTEGER"
+                "slot_type" "11"
+            }
+        }
+        "Modifiers"
+        {
+            "modifier_item_kobold_amulet_1"
+            {
+                "Passive" "1"
+                "IsHidden" "1"
+                "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE | MODIFIER_ATTRIBUTE_PERMANENT"
+                "Properties"
+                {
+                    "MODIFIER_PROPERTY_STATS_STRENGTH_BONUS" "%bonus_stat"
+                    "MODIFIER_PROPERTY_STATS_AGILITY_BONUS" "%bonus_stat"
+                    "MODIFIER_PROPERTY_STATS_INTELLECT_BONUS" "%bonus_stat"
+                    "MODIFIER_PROPERTY_HEALTH_BONUS" "%bonus_health"
+                }
+            }
+        }
+        "Effect" "particles/generic_gameplay/dropped_gem.vpcf"
+        "ItemBaseLevel" "1"
+    }
+    "item_3169"
+    {
+        "ID" "3169"
+        "BaseClass" "item_broadsword"
+        "AbilityTextureName" "default/echo_sabre_png"
+        "Effect" "particles/generic_gameplay/dropped_item.vpcf"
+        "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+        "ItemCost" "213"
+        "ItemKillable" "0"
+        "ItemSellable" "1"
+        "ItemShopTags" "damage"
+        "ItemQuality" "common"
+        "ItemAliases" "broadsword"
+        "ItemShareability" "ITEM_FULLY_SHAREABLE"
+        "AbilitySpecial"
+        {
+            "01"
+            {
+                "var_type" "FIELD_INTEGER"
+                "bonus_damage" "330"
+            }
+            "slot_type"
+            {
+                "var_type" "FIELD_INTEGER"
+                "slot_type" "1"
+            }
+        }
+        "ItemPurchasable" "0"
+        "ItemDroppable" "1"
+        "ItemStackable" "0"
+        "ItemPermanent" "1"
+        "ItemBaseLevel" "1"
+    }
+    "item_3170"
+    {
+        "ID" "3170"
+        "BaseClass" "item_datadriven"
+        "AbilityTextureName" "default/ultimate_scepter_png"
+        "Effect" "particles/generic_gameplay/dropped_item.vpcf"
+        "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+        "ItemCost" "213"
+        "ItemKillable" "0"
+        "ItemSellable" "1"
+        "ItemShopTags" "damage"
+        "ItemQuality" "common"
+        "ItemShareability" "ITEM_FULLY_SHAREABLE"
+        "AbilitySpecial"
+        {
+            "01"
+            {
+                "var_type" "FIELD_INTEGER"
+                "bonus_damage" "330"
+            }
+            "slot_type"
+            {
+                "var_type" "FIELD_INTEGER"
+                "slot_type" "1"
+            }
+            "02"
+            {
+                "var_type" "FIELD_INTEGER"
+                "bonus_int" "40"
+            }
+        }
+        "ItemPurchasable" "0"
+        "ItemDroppable" "1"
+        "ItemStackable" "0"
+        "ItemPermanent" "1"
+        "ItemBaseLevel" "1"
+        "Modifiers"
+        {
+            "item_weapon_int"
+            {
+                "Passive" "1"
+                "IsHidden" "1"
+                "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE | MODIFIER_ATTRIBUTE_PERMANENT"
+                "Properties"
+                {
+                    "MODIFIER_PROPERTY_STATS_INTELLECT_BONUS" "%bonus_int"
+                    "MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE" "%bonus_damage"
+                }
+            }
+        }
+    }
+    "item_3171"
+    {
+        "ID" "3171"
+        "BaseClass" "item_datadriven"
+        "AbilityTextureName" "default/javelin_png"
+        "Effect" "particles/generic_gameplay/dropped_item.vpcf"
+        "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+        "ItemCost" "213"
+        "ItemKillable" "0"
+        "ItemSellable" "1"
+        "ItemShopTags" "damage"
+        "ItemQuality" "common"
+        "ItemShareability" "ITEM_FULLY_SHAREABLE"
+        "AbilitySpecial"
+        {
+            "01"
+            {
+                "var_type" "FIELD_INTEGER"
+                "bonus_damage" "330"
+            }
+            "slot_type"
+            {
+                "var_type" "FIELD_INTEGER"
+                "slot_type" "1"
+            }
+            "02"
+            {
+                "var_type" "FIELD_INTEGER"
+                "bonus_agi" "40"
+            }
+        }
+        "ItemPurchasable" "0"
+        "ItemDroppable" "1"
+        "ItemStackable" "0"
+        "ItemPermanent" "1"
+        "ItemBaseLevel" "1"
+        "Modifiers"
+        {
+            "item_weapon_int"
+            {
+                "Passive" "1"
+                "IsHidden" "1"
+                "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE | MODIFIER_ATTRIBUTE_PERMANENT"
+                "Properties"
+                {
+                    "MODIFIER_PROPERTY_STATS_AGILITY_BONUS" "%bonus_agi"
+                    "MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE" "%bonus_damage"
+                }
+            }
+        }
+    }
+    "item_3172"
+    {
+        "ID" "3172"
+        "BaseClass" "item_datadriven"
+        "AbilityTextureName" "default/demon_edge_png"
+        "Effect" "particles/generic_gameplay/dropped_item.vpcf"
+        "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+        "ItemCost" "263"
+        "ItemKillable" "0"
+        "ItemSellable" "1"
+        "ItemShopTags" "damage"
+        "ItemQuality" "common"
+        "ItemShareability" "ITEM_FULLY_SHAREABLE"
+        "AbilitySpecial"
+        {
+            "01"
+            {
+                "var_type" "FIELD_INTEGER"
+                "bonus_damage" "330"
+            }
+            "slot_type"
+            {
+                "var_type" "FIELD_INTEGER"
+                "slot_type" "1"
+            }
+            "02"
+            {
+                "var_type" "FIELD_INTEGER"
+                "bonus_str" "40"
+            }
+        }
+        "ItemPurchasable" "0"
+        "ItemDroppable" "1"
+        "ItemStackable" "0"
+        "ItemPermanent" "1"
+        "ItemBaseLevel" "1"
+        "Modifiers"
+        {
+            "item_weapon_int"
+            {
+                "Passive" "1"
+                "IsHidden" "1"
+                "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE | MODIFIER_ATTRIBUTE_PERMANENT"
+                "Properties"
+                {
+                    "MODIFIER_PROPERTY_STATS_STRENGTH_BONUS" "%bonus_str"
+                    "MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE" "%bonus_damage"
+                }
+            }
+        }
     }
 }

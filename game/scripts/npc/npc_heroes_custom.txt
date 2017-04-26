@@ -194,6 +194,15 @@
         "Ability19" ""
         "Ability20" ""
 
+        // To make her an agi hero, mirror clinkz.
+        "AttributePrimary"        "DOTA_ATTRIBUTE_AGILITY"
+        "AttributeBaseStrength"        "15"
+        "AttributeStrengthGain"        "2.200000"
+        "AttributeBaseAgility"        "22"
+        "AttributeAgilityGain"        "3.300000"
+        "AttributeBaseIntelligence"        "16"
+        "AttributeIntelligenceGain"        "1.55000"
+
         "AttackRange"       "800"
 
         "DisableWearables" "1"

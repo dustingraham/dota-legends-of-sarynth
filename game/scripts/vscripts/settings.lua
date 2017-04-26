@@ -6,18 +6,18 @@ DEBUG_SETTINGS = IsInToolsMode()
 -- TEST MODE
 if DEBUG_SETTINGS then
     -- Curronly only a single hero. Pick it!
-    TEST_PICK_HERO = 'windrunner'    -- Ranger
+    --TEST_PICK_HERO = 'windrunner'    -- Ranger
     --TEST_PICK_HERO = 'dragon_knight' -- Warrior
     --TEST_PICK_HERO = 'omniknight'    -- Paladin
     --TEST_PICK_HERO = 'bounty_hunter' -- Rogue
-    --TEST_PICK_HERO = 'invoker'       -- Mage
+    TEST_PICK_HERO = 'invoker'       -- Mage
     --TEST_PICK_HERO = 'warlock'       -- Sorcerer
     --TEST_PICK_HERO_ALT = 'omniknight'
 
     TEST_DISABLE_FOG = true
     TEST_START_LEVEL = 24
     --TEST_SUPERSTRONG = true
-    --TEST_SUPERPATHEY = 1200
+    --TEST_SUPERPATHEY = 2200
     -- town kobolds ice webbed druids dark
     TEST_START_WAYPOINT = 'dark'
     --TEST_START_START_BOSS = true
@@ -28,11 +28,10 @@ if DEBUG_SETTINGS then
     }
     TEST_SPAWN_ITEMS = true
     TEST_ADD_ITEMS = {
-        --- Level 6 items
-        'item_armor_tier3',
-        'item_amulet_tier2',
-        'item_broadsword_tier4',
-        'item_boots_leather_common',
+        'item_3166',
+        'item_3165',
+        'item_3168',
+        'item_3170',
         'item_3135',
         --- Test Items
         'item_3149',
