@@ -347,7 +347,7 @@ function Inventory:RemoveItemsByName(itemName)
     for i = 1, 48 do
         local item = self:GetItemInSlot(i)
         if item ~= nil then
-            print(item:GetAbilityName())
+            --print(item:GetAbilityName())
             if item:GetAbilityName() == itemName then
                 self:RemoveItemInSlot(i)
             end

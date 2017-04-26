@@ -28,6 +28,12 @@
         "RingRadius"                "140"
     }
 
+    "dummy_entity"
+    {
+        "BaseClass" "npc_dota_creature"
+        "Ability1" "dummy_unit"
+    }
+
     "quest_bear"
     {
         "Model"                 "models/heroes/lone_druid/spirit_bear.vmdl"

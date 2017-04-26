@@ -25,7 +25,9 @@ function Boot:Precache(context)
         -- Game Effects
         'particles/effects/loot_expire/loot_expire.vpcf',
 
-         'particles/units/start/scar/claw.vpcf',
+        'particles/units/start/scar/claw.vpcf',
+
+        'particles/dire_fx/bad_ancient_ambient.vpcf', -- Dark Boss Barricade
 
         -- Testing?
         'particles/units/heroes/hero_venomancer/venomancer_venomous_gale.vpcf',
@@ -122,6 +124,7 @@ function Boot:Precache(context)
         'soundevents/music/jboberg_01/soundevents_music.vsndevts',
         'soundevents/music/jboberg_01/soundevents_stingers.vsndevts',
         'soundevents/voscripts/game_sounds_vo_beastmaster.vsndevts',
+        'soundevents/voscripts/game_sounds_vo_death_prophet.vsndevts',
         'soundevents/voscripts/game_sounds_vo_lycan.vsndevts',
         'soundevents/sarynth.vsndevts',
     }

@@ -72,7 +72,7 @@
     {
         "Model"                 "models/creeps/lane_creeps/creep_bad_ranged/lane_dire_ranged.vmdl"
         "BaseClass"             "npc_dota_creature"
-        "Level"                 "18"
+        "Level"                 "20"
         "ModelScale"            "1.0"
         "HealthBarOffset"       "80"
 
@@ -103,7 +103,7 @@
     {
         "Model"                 "models/creeps/lane_creeps/creep_bad_melee_diretide/creep_bad_melee_diretide.vmdl"
         "BaseClass"             "npc_dota_creature"
-        "Level"                 "18"
+        "Level"                 "19"
         "ModelScale"            "1.0"
         "HealthBarOffset"       "90"
 
@@ -131,7 +131,7 @@
     {
         "Model"                 "models/heroes/dark_seer/dark_seer.vmdl"
         "BaseClass"             "npc_dota_creature"
-        "Level"                 "20"
+        "Level"                 "21"
         "ModelScale"            "1.48"
         "HealthBarOffset"       "220"
 
@@ -170,7 +170,7 @@
     {
         "Model"                 "models/heroes/chaos_knight/chaos_knight.vmdl"
         "BaseClass"             "npc_dota_creature"
-        "Level"                 "20"
+        "Level"                 "23"
         "ModelScale"            "1.10"
         "HealthBarOffset"       "300"
 
@@ -210,7 +210,7 @@
         // Maybe recolor an invoker spirit?
         "Model" "models/creeps/neutral_creeps/n_creep_ghost_b/n_creep_ghost_red.vmdl"
         "BaseClass"             "npc_dota_creature"
-        "Level"                 "19"
+        "Level"                 "22"
         "ModelScale"            "1.0"
         "HealthBarOffset"       "80"
 
@@ -244,7 +244,7 @@
         "Model" "models/items/invoker/forge_spirit/arsenal_magus_forged_spirit/arsenal_magus_forged_spirit.vmdl"
 
         "BaseClass"             "npc_dota_creature"
-        "Level"                 "20"
+        "Level"                 "24"
         "ModelScale"            "1.10"
         "HealthBarOffset"       "300"
 
@@ -256,8 +256,8 @@
         "ProjectileModel"            "particles/units/heroes/hero_invoker/invoker_forged_spirit_projectile.vpcf"
         "ProjectileSpeed"            "1000"
 
-        "AttackDamageMin"            "460"
-        "AttackDamageMax"            "496"
+        "AttackDamageMin"            "2360"
+        "AttackDamageMax"            "2596"
         "AttackRate"                "1.50"
         "AttackAnimationPoint"      "0.20"
         "AttackRange"               "650"
@@ -275,7 +275,7 @@
         "Model"                 "models/heroes/queenofpain/queenofpain.vmdl"
 
         "BaseClass"             "npc_dota_creature"
-        "Level"                 "20"
+        "Level"                 "24"
         "ModelScale"            "1.50"
         "HealthBarOffset"       "350"
 
@@ -287,8 +287,8 @@
         "ProjectileModel"       "particles/econ/items/queen_of_pain/qop_navi_mace/queen_base_attack_navi_mace.vpcf"
         "ProjectileSpeed"       "900"
 
-        "AttackDamageMin"            "760"
-        "AttackDamageMax"            "896"
+        "AttackDamageMin"            "1460"
+        "AttackDamageMax"            "1696"
         "AttackRate"                "1.20"
         "AttackAnimationPoint"      "0.45"
         "AttackRange"               "650"
@@ -297,7 +297,7 @@
         "CombatClassDefend"         "DOTA_COMBAT_CLASS_DEFEND_BASIC"
         "UnitRelationshipClass"     "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
 
-        "StatusHealth"                "8472"
+        "StatusHealth"                "38472"
         "StatusHealthRegen"           "25.0"
 
         "Creature"

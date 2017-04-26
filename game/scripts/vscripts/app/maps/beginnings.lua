@@ -69,6 +69,9 @@ function CustomMap:OnHeroPick(_, params)
     if TEST_START_START_BOSS then
         hero:SetAbsOrigin(Entities:FindByName(nil, 'start_area_barricade_relay_on'):GetAbsOrigin())
     end
+    if TEST_START_DARK_BOSS then
+        hero:SetAbsOrigin(Entities:FindByName(nil, 'zone_dark_boss_spawn_point'):GetAbsOrigin())
+    end
 end
 
 if not CustomMap.initialized then

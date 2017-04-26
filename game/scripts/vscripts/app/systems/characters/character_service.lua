@@ -33,27 +33,16 @@ function CharacterService:OnNPCSpawned(event)
 end
 
 function CharacterService:GetExperienceLevelRequirements()
-    local old = {
-        0, -- Level 1
-        100, -- Level 2
-        200, -- Level 3
-        350, -- Level 4
-        500, -- Level 5
-        700, -- Level 6
-        900, -- Level 7
-        1200, -- Level 8
-        1600, -- Level 9
-        2400, -- Level 10
-    }
-    --
     -- 0, 100, 300, 600, 1000,
     -- 1500, 2100, 2800, 3600, 4500
     -- 5500, 6600, 7800, 9100, 10500
     -- 12000, 13600, 15300, 17100, 19000
-    --
+    -- L25: 34500
+    -- L30: 60000
     local table = {}
-    for i = 1, 20 do
+    for i = 1, 25 do
         table[i] = 100 * (i - 1) + 50 * ((i - 1) * (i - 2))
+        if i > 20 then table[i] = table[i] + (i - 19)*(i - 20) * 150 end
     end
     return table
 end
