@@ -2841,4 +2841,82 @@
         "ItemPermanent" "1"
         "ItemBaseLevel" "1"
     }
+    "item_3163"
+    {
+        "ID" "3163"
+        "BaseClass" "item_broadsword"
+        "Model" "models/items/meepo/diggers_divining_rod/diggers_divining_rod_gem_emerald.vmdl"
+        "Effect" "particles/generic_gameplay/dropped_gem.vpcf"
+        "AbilityTextureName" "default/refresher_png"
+        "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+        "ItemCost" "8"
+        "ItemShopTags" "damage"
+        "ItemAliases" "broadsword"
+        "ItemShareability" "ITEM_FULLY_SHAREABLE"
+        "ItemQuality" "component"
+        "AbilitySpecial"
+        {
+            "01"
+            {
+                "var_type" "FIELD_INTEGER"
+                "bonus_damage" "5"
+            }
+            "02"
+            {
+                "var_type" "FIELD_INTEGER"
+                "rarity" "3"
+            }
+            "slot_type"
+            {
+                "var_type" "FIELD_INTEGER"
+                "slot_type" "0"
+            }
+        }
+        "ItemKillable" "0"
+        "ItemSellable" "1"
+        "ItemPurchasable" "0"
+        "ItemDroppable" "1"
+        "ItemStackable" "1"
+        "ItemPermanent" "1"
+        "ItemBaseLevel" "0"
+    }
+    "item_3164"
+    {
+        "ID" "3164"
+        "BaseClass" "item_broadsword"
+        "Model" "models/props_gameplay/smoke.vmdl"
+        "Effect" "particles/generic_gameplay/dropped_smoke.vpcf"
+        "AbilityTextureName" "default/smoke_of_deceit_png"
+        "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+        "ItemCost" "8"
+        "ItemShopTags" "damage"
+        "ItemAliases" "broadsword"
+        "ItemShareability" "ITEM_FULLY_SHAREABLE"
+        "ItemQuality" "component"
+        "AbilitySpecial"
+        {
+            "01"
+            {
+                "var_type" "FIELD_INTEGER"
+                "bonus_damage" "5"
+            }
+            "02"
+            {
+                "var_type" "FIELD_INTEGER"
+                "rarity" "3"
+            }
+            "slot_type"
+            {
+                "var_type" "FIELD_INTEGER"
+                "slot_type" "0"
+            }
+        }
+        "ItemKillable" "0"
+        "ItemSellable" "1"
+        "ItemPurchasable" "0"
+        "ItemDroppable" "1"
+        "ItemStackable" "1"
+        "ItemPermanent" "1"
+        "ItemBaseLevel" "0"
+    }
 }

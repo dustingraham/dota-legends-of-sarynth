@@ -1,7 +1,7 @@
 #base "spawns\start.kv"
 #base "spawns\kobold.kv"
 #base "spawns\webbed.kv"
-//#base "spawns\dark_plains.kv"
+#base "spawns\dark_plains.kv"
 //#base "spawns\ice_cavern.kv"
 
 #base "spawns\teleports.kv"
@@ -77,5 +77,33 @@
             "03" "models/items/keeper_of_the_light/robes_of_the_first_light/robes_of_the_first_light.vmdl"
             "04" "models/items/keeper_of_the_light/gladys_the_lightbearing_mule_new/gladys_the_lightbearing_mule_new.vmdl"
         }
+    }
+    "npc_quest_dark_1"
+    {
+        "SpawnPoints" "dark_npc_1"
+        "Creature" "npc_questgiver_dark_1"
+        "MaxCount" "1"
+        "OnInitSpawn" "1"
+        "RespawnDelay" "60"
+        "Chance" "10"
+        "AI" "ai_npc_basic"
+        "SpawnAngle" "355"
+        "Gesture" "ACT_DOTA_IDLE"
+        "IsNpc" "1"
+        "Unique" "1"
+    }
+    "npc_quest_dark_2"
+    {
+        "SpawnPoints" "dark_npc_2"
+        "Creature" "npc_questgiver_dark_2"
+        "MaxCount" "1"
+        "OnInitSpawn" "1"
+        "RespawnDelay" "60"
+        "Chance" "10"
+        "AI" "ai_npc_basic"
+        "SpawnAngle" "265"
+        "Gesture" "ACT_DOTA_IDLE"
+        "IsNpc" "1"
+        "Unique" "1"
     }
 }

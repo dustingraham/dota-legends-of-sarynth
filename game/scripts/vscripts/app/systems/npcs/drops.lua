@@ -59,6 +59,7 @@ function Drops:RollForDrops(killedUnit, hero)
             local quest = QuestService:GetPlayerQuest(hero:GetPlayerOwnerID(), ItemTable.Quest)
             if quest then
                 -- TODO: Multi-objective will drop if only one is filled.
+                -- TODO: Some quests like the dark priest need one-per-player...
                 if quest:IsComplete() then
                     -- Avoid dropping if is complete.
                     max_drops = 0

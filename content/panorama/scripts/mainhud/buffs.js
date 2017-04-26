@@ -6,7 +6,8 @@ function BuffUpdater()
     var panel = $.GetContextPanel();
     var id = panel.targetFocusId;
 
-    // ToDo: Don't delete every time...
+    // TODD: Don't delete every time...
+    // TODO: Fade in/out when created/removed.
     $('#Debuffs').RemoveAndDeleteChildren();
     $('#Buffs').RemoveAndDeleteChildren();
 

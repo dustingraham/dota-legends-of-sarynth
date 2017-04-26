@@ -1,37 +1,37 @@
 "Quests"
 {
-    "1420"
+    "1401"
     {
         "name" "dark_plains_bauble"
         "title" "Lost my Bauble"
-        "start_entity" "npc_quest_dark"
-        "end_entity" "npc_quest_dark"
+        "start_entity" "npc_quest_dark_2"
+        "end_entity" "npc_quest_dark_2"
         "requirements"
         {
             "level" "17"
         }
         "start"
         {
-            "dialog" "I lost my bauble. Can you find it?"
+            "dialog" "<span class='quote'>Hrumph.</span><br><br>I don’t know why you had to come all the way out here. We had things covered.<br><br>Guess you should make yourself useful. When you come across the dark priest, please retrieve my bauble. Once retrieved bring it here at once. Do not delay."
         }
         "complete"
         {
-            "dialog" "My bauble!"
+            "dialog" "That's it. Please give it here."
         }
         "objectives"
         {
             "01" {
-                "long_description" "Collect 4 spider eggs."
-                "description" "Spider Eggs"
+                "long_description" "Collect Eoldarhorn's bauble from the Dark Priest."
+                "description" "Acquire Eoldarhorn's Bauble from the Dark Priest"
                 "action" "collect"
-                "item" "item_3128"
-                "required" "4"
+                "item" "item_3163"
+                "required" "1"
             }
         }
         "rewards"
         {
-            "gold" "10"
-            "experience" "220"
+            //"gold" "10"
+            "experience" "450"
             "item_choose"
             {
                 "01" "item_3129"
@@ -39,38 +39,52 @@
         }
     }
 
-    "1222"
+    "1402"
     {
-        "name" "dark_snarky_creeps"
-        "title" "Snarky Creeps"
-        "start_entity" "npc_quest_dark"
-        "end_entity" "npc_quest_dark"
+        "name" "dark_minons"
+        "title" "Aquaintence with the Dark Minons"
+        "start_entity" "npc_quest_dark_1"
+        "end_entity" "npc_quest_dark_1"
         "requirements"
         {
             "level" "17"
         }
         "start"
         {
-            "dialog" "Snarky Creeps, kill them all!"
+            "dialog" "Hey, you are a sight for sore eyes. Thanks for coming all the way out here to help us.<br><br>Why don’t you get acquainted with the local mischief makers by slaying a few of those dark minions over there?"
         }
         "complete"
         {
-            "dialog" "Thanks for that, but we have a bigger problem than I thought."
+            "dialog" "Thanks for that, you seem able to handle yourself."
         }
         "objectives"
         {
             "01" {
-                "long_description" "Kill 6 noxious bubble spiders."
-                "description" "Noxious Bubble Spiders"
+                "long_description" "Kill 8 dark ghouls."
+                "description" "Dark Ghouls"
                 "action" "kill"
-                "npc" "webbed_spidy_bubble"
+                "npc" "dark_zombie"
+                "required" "8"
+            }
+            "02" {
+                "long_description" "Kill 6 gnarled spellcasters."
+                "description" "Gnarled Spellcasters"
+                "action" "kill"
+                "npc" "dark_ranged"
                 "required" "6"
+            }
+            "03" {
+                "long_description" "Kill 4 lesser wyverns."
+                "description" "Lesser Wyverns"
+                "action" "kill"
+                "npc" "dark_dragon_small"
+                "required" "4"
             }
         }
         "rewards"
         {
-            "gold" "25"
-            "experience" "480"
+            "gold" "65"
+            "experience" "880"
             //"item_choose"
             //{
             //    "01" "item_kobold_amulet_2"
@@ -78,32 +92,32 @@
         }
     }
 
-    "1224"
+    "1405"
     {
-        "name" "dark_wooded_priest"
-        "title" "Slay the Dark Priest"
-        "start_entity" "npc_quest_dark"
-        "end_entity" "npc_quest_dark"
+        "name" "dark_death_knights"
+        "title" "Beware the Darkness"
+        "start_entity" "npc_quest_dark_1"
+        "end_entity" "npc_quest_dark_1"
         "requirements"
         {
-            "quest" "dark_snarky_creeps"
+            //"quest" "dark_minons"
         }
         "start"
         {
-            "dialog" "You may have seen him, there is a dark priest in these woods. Slay him, and bring me his charms."
+            "dialog" "You seem to know what you are doing. What we could really use help with is the real reason that we are here.<br><br>You see, the death knights up on the plains have a bit of a grip on these parts. We have not been able to shake things loose. Eoldarhorn won't admit it, but I think we're a bit in over our heads. Anything you can do would be appreciated."
         }
         "complete"
         {
-            "dialog" "Phew. I can see progress already. The cleanse has begun something good. We will keep up the good fight."
+            "dialog" "That will certainly do it. Nice work. I expect your achievements might impress even Eoldarhorn."
         }
         "objectives"
         {
             "01" {
-                "long_description" "Kill 30 spiders."
-                "description" "Spiders slain"
+                "long_description" "Kill 5 death knights."
+                "description" "Death knights slain"
                 "action" "kill"
-                "npc" "webbed_spidy_bubble,webbed_spidy_ling,webbed_spidy_yellowback,webbed_spidy_elder,webbed_spidy_arachnid,webbed_viral_queen"
-                "required" "30"
+                "npc" "dark_death_knight"
+                "required" "5"
             }
         }
         "rewards"
@@ -116,71 +130,70 @@
             //}
         }
     }
-
-    "1225"
+    "1406"
     {
-        "name" "webbed_yellowback"
-        "title" "Seeing Yellow Spots"
-        "start_entity" "npc_quest_dark"
-        "end_entity" "npc_quest_dark"
+        "name" "dark_plains_spirit_essence"
+        "title" "Research into the Dark Energies"
+        "start_entity" "npc_quest_dark_2"
+        "end_entity" "npc_quest_dark_2"
         "requirements"
         {
-            "quest" "webbed_check_the_problem"
+            //"quest" "dark_plains_bauble"
         }
         "start"
         {
-            "dialog" "I imagine you may have noticed the distinctive Yellowback spiders out there with the yellow markings on their abdomen? They are incredibly venomous. To keep our fellow adventurers safe, could you make a priority to hit those when you can?"
+            "dialog" "There is one other thing you can do. If you are not killed by the death knights, and manage to kill the dark spirits. Collect some of their essence and bring it back to me. It will facilitate my research."
         }
         "complete"
         {
-            "dialog" "These woods are safer for your efforts."
+            "dialog" "While meager, this sample will do."
         }
         "objectives"
         {
             "01" {
-                "long_description" "Kill 4 Yellowback Widow."
-                "description" "Yellowback Widows"
-                "action" "kill"
-                "npc" "webbed_spidy_yellowback"
+                "long_description" "Collect 4 dark spirit essences."
+                "description" "Dark Spirit Essence"
+                "action" "collect"
+                "item" "item_3164"
                 "required" "4"
             }
         }
         "rewards"
         {
-            "gold" "50"
-            "experience" "480"
+            //"gold" "10"
+            "experience" "450"
             "item_choose"
             {
-                "01" "item_3143"
+                "01" "item_3129"
             }
         }
     }
 
-    "1226"
+    "1410"
     {
-        "name" "webbed_arachnid"
-        "title" "Arachnophobia"
-        "start_entity" "npc_quest_dark"
-        "end_entity" "npc_quest_dark"
+        "name" "dark_priestess"
+        "title" "Meddling with Dark Arts"
+        "start_entity" "npc_quest_dark_1"
+        "end_entity" "npc_quest_dark_1"
         "requirements"
         {
-            "quest" "webbed_check_the_problem"
+            //"quest" "dark_death_knights"
         }
         "start"
         {
-            "dialog" "While you are working on the purge, one of the townsfolk reported sightings of an arachnid to the east. While the townsperson is fraught with arachnophobia, I tend to trust her intuition. If the rumor is true, it must be delt with at once."
+            "dialog" "My cohort over here has told me that the dark energies have begun to receed. It may be an opportune time to rush the dark priestess herself. Lumorase will not be happy to be distrubed. Proceed with all out mayhem."
         }
         "complete"
         {
-            "dialog" "So, they were not just hallucinating. You sure are a savior."
+            "dialog" "Alas, we can bring light back to the plains. I am in your debt."
         }
         "objectives"
         {
             "01" {
-                "long_description" "Find and kill the Plated Arachnid."
-                "description" "Plated Arachnid Slain"
+                "long_description" "Find and kill the dark priestess Lumorase."
+                "description" "Lumorase Slain"
                 "action" "kill"
-                "npc" "webbed_spidy_arachnid"
+                "npc" "dark_boss"
                 "required" "1"
             }
         }
@@ -192,52 +205,6 @@
             {
                 "01" "item_3144"
             }
-        }
-    }
-
-    "1228"
-    {
-        "name" "webbed_queen"
-        "title" "Untangling the Web"
-        "start_entity" "npc_quest_dark"
-        "end_entity" "npc_quest_dark"
-        "requirements"
-        {
-            "quest" "webbed_arachnid"
-        }
-        "start"
-        {
-            "dialog" "I have never seen someone so competent in the face of this webbed forest. The tipping point to clearing this forest is going to be eliminating the Virulent Queen. But, I must say I'm not sure it can be done with her Elder Wolf Spider protection detail. If you want to tackle this task, we will be in your debt."
-        }
-        "complete"
-        {
-            "dialog" "This webbed forest will become a shining light of spring in no time. Thank you for your efforts."
-        }
-        "objectives"
-        {
-            "01" {
-                "long_description" "Kill 8 Elder Wolf Spiders"
-                "description" "Elder Wolf Spiders Killed"
-                "action" "kill"
-                "npc" "webbed_spidy_elder"
-                "required" "8"
-            }
-            "02" {
-                "long_description" "Squish the Virulent Queen"
-                "description" "Virulent Queen Squished"
-                "action" "kill"
-                "npc" "webbed_viral_queen"
-                "required" "1"
-            }
-        }
-        "rewards"
-        {
-            "gold" "120"
-            "experience" "815"
-            //"item_choose"
-            //{
-            //    "01" "item_kobold_amulet_2"
-            //}
         }
     }
 }
