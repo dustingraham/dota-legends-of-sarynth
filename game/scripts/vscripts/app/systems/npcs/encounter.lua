@@ -19,6 +19,7 @@ function Encounter:Start(boss, hero)
 
     self:Log('SteamID: '..tostring(PlayerResource:GetSteamID(hero:GetPlayerOwnerID())))
     self:Log('MatchID: '..Boot.MatchID)
+    self:Log('Boss: '..boss:GetUnitName())
     self:Log('Hero: '..hero:GetName())
     self:Log('Level: '..hero:GetLevel())
     for slotId,itemId in pairs(hero.inventory:GetAllItems()) do

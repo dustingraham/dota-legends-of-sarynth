@@ -14,7 +14,7 @@ if DEBUG_SETTINGS then
     TEST_PICK_HERO = 'warlock'       -- Sorcerer
     --TEST_PICK_HERO_ALT = 'omniknight'
 
-    TEST_DISABLE_FOG = true
+    --TEST_DISABLE_FOG = true
     TEST_START_LEVEL = 24
     --TEST_SUPERSTRONG = true
     --TEST_SUPERPATHEY = 2200
@@ -120,7 +120,7 @@ DEBUG_PRINT_SECTIONS = {
     Reporter          = false,
     ReporterVerbose   = false,
     Triggers          = true,
-    TriggersVerbose   = false,
+    TriggersVerbose   = true,
     AiBasic           = true,
     AiBasicSheep      = false,
     AiBasicAggro      = false,

@@ -12,6 +12,19 @@ end
 --EmitSoundOnClient('Hero_Phoenix.IcarusDive.Stop', client)
 -- EmitSoundOn('beastmaster_beas_rare_02', caster)
 
+function DialogSystem:StartTeleportDialog(hero, target)
+    -- Can't trust the client, so we have to remember what's open.
+    local player = hero:GetPlayerOwner()
+    player.currentDialogTeleporter = target
+
+    --local data = quest:GetStartData();
+    --data.panelType = 'quest_start'
+    CustomGameEventManager:Send_ServerToPlayer(player, 'dialog_start', {
+        spawn_name = target.spawn_name,
+        unit_name = target:GetUnitName(),
+        panelType = 'teleport',
+    })
+end
 
 function DialogSystem:StartDialog(hero, npc)
     local handled = false

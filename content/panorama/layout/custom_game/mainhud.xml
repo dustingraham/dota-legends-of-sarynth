@@ -157,7 +157,7 @@
                 <Label id="ObjectiveTitle" class="objective" text="OBJECTIVES"/>
                 <Label id="MainObjectives" class="objectives" html="true" />
                 
-                <Label class="objective" text="REWARDS"/>
+                <Label id="RewardsTitle" class="objective" text="REWARDS"/>
                 <Label id="MainRewards" class="objectives" html="true" />
                 <Image id="ItemRewardBlock" class="item-slot" src="file://{images}/window/item_slot_flat.png">
                     <DOTAItemImage id="RewardItem" itemname="item_ring_of_health" />
@@ -179,6 +179,7 @@
                 </Button>
             </Panel>
             <Image class="quest-dialog-icon" src="file://{images}/window/window_icon_quest.png"/>
+            <!--<Image class="quest-dialog-icon" src="file://{images}/window/window_teleporter_icon.png"/>-->
         </Panel>
     </Panel>
 </root>

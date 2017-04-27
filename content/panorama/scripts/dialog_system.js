@@ -5,17 +5,22 @@ var dialog = $.GetContextPanel().FindChild('QuestDialog');
 function OnDialogStart(data) {
     //$.Msg('[JS] On Questgiver Open');
 
-    if (data.panelType == 'quest_start')
+    if (data.panelType === 'quest_start')
     {
         UpdateQuestStartPanel(data);
     }
-    else if (data.panelType == 'quest_complete')
+    else if (data.panelType === 'quest_complete')
     {
         UpdateQuestCompletePanel(data);
+    }
+    else if (data.panelType === 'teleport')
+    {
+        UpdateTeleportDialog(data);
     }
     else
     {
         $.Msg('Unknown panel type');
+        $.Msg(data);
     }
 
     dialog.SetHasClass('hidden', false);
@@ -23,6 +28,27 @@ function OnDialogStart(data) {
 
 
 GameEvents.Subscribe('dialog_start', OnDialogStart);
+
+function UpdateTeleportDialog(data)
+{
+    var panel = $.GetContextPanel();
+    panel.FindChildTraverse('QuestMainTitle').text = 'Manaflow Transporter';
+    panel.FindChildTraverse('MainDialog').text = 'Welcome to the Manaflow Transporter! You have unlocked this location as a transport destination option. As you explore new areas, be sure to unlock other locations in order to quickly navigate around the world.<br><br>Now, go forth and save the world!';
+
+    // Station unlocked!
+    // Where would you like to flow today?
+    panel.FindChildTraverse('ObjectiveTitle').style.visibility = 'collapse';
+    panel.FindChildTraverse('MainObjectives').style.visibility = 'collapse';
+    panel.FindChildTraverse('ItemRewardBlock').style.visibility = 'collapse';
+    panel.FindChildTraverse('MainRewards').style.visibility = 'collapse';
+    panel.FindChildTraverse('RewardsTitle').style.visibility = 'collapse';
+
+    $.Msg(data);
+
+    // Acknowledge.
+    panel.FindChildTraverse('QuestAcceptText').text = 'Okay!';
+    panel.FindChildTraverse('QuestDecline').style.visibility = 'collapse';
+}
 
 function UpdateQuestStartPanel(data)
 {
@@ -67,6 +93,7 @@ function UpdateQuestStartPanel(data)
         panel.FindChildTraverse('ItemRewardBlock').style.visibility = 'collapse';
     }
 
+    panel.FindChildTraverse('RewardsTitle').style.visibility = 'visible';
     panel.FindChildTraverse('MainRewards').text = rewards;
 
     panel.FindChildTraverse('QuestAcceptText').text = 'Accept';
@@ -107,6 +134,7 @@ function UpdateQuestCompletePanel(data)
         panel.FindChildTraverse('ItemRewardBlock').style.visibility = 'collapse';
     }
 
+    panel.FindChildTraverse('RewardsTitle').style.visibility = 'visible';
     panel.FindChildTraverse('MainRewards').text = rewards;
 
     panel.FindChildTraverse('QuestAcceptText').text = 'Complete';
