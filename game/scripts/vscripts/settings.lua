@@ -10,8 +10,8 @@ if DEBUG_SETTINGS then
     --TEST_PICK_HERO = 'dragon_knight' -- Warrior
     --TEST_PICK_HERO = 'omniknight'    -- Paladin
     --TEST_PICK_HERO = 'bounty_hunter' -- Rogue
-    TEST_PICK_HERO = 'invoker'       -- Mage
-    --TEST_PICK_HERO = 'warlock'       -- Sorcerer
+    --TEST_PICK_HERO = 'invoker'       -- Mage
+    TEST_PICK_HERO = 'warlock'       -- Sorcerer
     --TEST_PICK_HERO_ALT = 'omniknight'
 
     TEST_DISABLE_FOG = true
@@ -28,11 +28,20 @@ if DEBUG_SETTINGS then
     }
     TEST_SPAWN_ITEMS = true
     TEST_ADD_ITEMS = {
-        'item_3166',
-        'item_3165',
-        'item_3168',
+        --'item_3166',
+        --'item_3165',
+        --'item_3168',
+        --'item_3170',
+        --'item_3135',
+        'item_3173', -- CD Ring
         'item_3170',
-        'item_3135',
+        'item_3173',
+        'item_3181',
+        'item_3177',
+        'item_3178', -- boots
+        'item_3181',
+        'item_3171',
+        'item_3182',
         --- Test Items
         'item_3149',
         'item_3153',

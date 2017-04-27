@@ -1,13 +1,16 @@
+TODO:
+ - Couple more items. (Got two necklaces, no shields or weapon drops.)
+ - Teleporter Pads
+ - Respawn Zone
+
 [b]v0.0.62[/b]
  • New area released! Dark Plains.
  • Level cap raised to 25.
  • Added a buff/debuff bar to the focus target unit panel!
-
  • Added sound effects for quest events. It should be easier to notice when you complete the quest objectives.
  • Added sounds for teleport system.
  • Added a sound when Scar dies.
  • Added more internal support tools for development.
- 
 [b]Creatures[/b]
  • Red Bubble Spider has had an identity crisis. Now goes by Noxious Bubble Spider
  • Noxious spiders now spawn near trees.
@@ -15,13 +18,11 @@
  • Noxious poison cloud damage now increase more smoothly.
  • Scar has a new ability that scars the ground, damaging any that stand in it.
  • Scar rebalanced with all heroes. Please report any issues.
- 
 [b]Heroes[/b]
  • Passive regen is now capped at +500hp/+200mp bonus.
  • Warrior's base health pool reduced by 25%. Increased active health regen rate to 0.50%
  • Rogue flurry duration increased from 15s to 18s, cooldown reduction improved from 30% to 40%, castpoint reduced from 0.8 to 0.6
  • Rogue rend damage per tick increased from x0.6 to x0.8
- 
 [b]World[/b]
  • Buildings in town can't be walked through anymore.
  • Added water to the town fountain with custom spray particle.
@@ -30,15 +31,14 @@
  • Some minor terrascaping. (Doodads, trees, lights, plants.)
 [b]Items[/b]
  • Overseer's Sigil reclassified as legendary. (The only in the game at this point.)
- • Reinforced Shield removed +10 stat bonus that was unintended. Armor reduced from +6 to +4, health bonus reduced from +650 to +450.
- 
+ • Reinforced Shield removed +10 stat bonus that was unintended. Armor reduced from +6 to +4, health bonus reduced from +650 to +450. 
 [b]Bugs[/b]
  • Poison cloud left from bubble spider will no longer block pathing.
  • Cleaned up warning messages for overly large hp/mp regeneration for creeps and heroes.
  • Cleaned up warning for invalid flag prop settings.
  • Fixed missing precache for npc cosmetics.
- 
- 
+ • Ranger is now an agility hero. (Was intelligence due to "windrunner" base.)
+
  
 [b]v0.0.61[/b]
  • [b]All players now receive quest credit for creature kills![/b]

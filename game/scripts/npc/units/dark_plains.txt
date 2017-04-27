@@ -97,7 +97,7 @@
         "StatusHealth"                "2472"
         "StatusHealthRegen"           "12.5"
 
-        "BountyXP"                    "250"
+        "BountyXP"                    "270"
     }
     "dark_zombie"
     {
@@ -237,7 +237,7 @@
         "StatusHealth"                "2472"
         "StatusHealthRegen"           "12.5"
 
-        "BountyXP"                    "250"
+        "BountyXP"                    "220"
     }
     "dark_boss_summons"
     {
