@@ -356,6 +356,10 @@ end
 function ai:TransitionToIdle()
     --Go into the idle state
     self.state = ai.ACTION_IDLE
+
+    -- Get full health.
+    self:GetParent():SetHealth(self:GetParent():GetMaxHealth())
+
     self.returnTicks = nil
     Debug('AiDarkBoss', 'Idling')
 end
