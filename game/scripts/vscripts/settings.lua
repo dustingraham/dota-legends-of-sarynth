@@ -1,7 +1,7 @@
 
 DEBUG_SETTINGS = IsInToolsMode()
 -- Override if necessary...
---DEBUG_SETTINGS = false
+DEBUG_SETTINGS = false
 
 -- TEST MODE
 if DEBUG_SETTINGS then
@@ -9,15 +9,15 @@ if DEBUG_SETTINGS then
     --TEST_PICK_HERO = 'windrunner'    -- Ranger
     --TEST_PICK_HERO = 'dragon_knight' -- Warrior
     --TEST_PICK_HERO = 'omniknight'    -- Paladin
-    --TEST_PICK_HERO = 'bounty_hunter' -- Rogue
+    TEST_PICK_HERO = 'bounty_hunter' -- Rogue
     --TEST_PICK_HERO = 'invoker'       -- Mage
-    TEST_PICK_HERO = 'warlock'       -- Sorcerer
+    --TEST_PICK_HERO = 'warlock'       -- Sorcerer
     --TEST_PICK_HERO_ALT = 'omniknight'
 
-    --TEST_DISABLE_FOG = true
-    TEST_START_LEVEL = 24
-    --TEST_SUPERSTRONG = true
-    --TEST_SUPERPATHEY = 2200
+    TEST_DISABLE_FOG = true
+    TEST_START_LEVEL = 25
+    TEST_SUPERSTRONG = true
+    TEST_SUPERPATHEY = 2200
     -- town kobolds ice webbed druids dark
     TEST_START_WAYPOINT = 'dark'
     --TEST_START_START_BOSS = true
@@ -28,24 +28,12 @@ if DEBUG_SETTINGS then
     }
     TEST_SPAWN_ITEMS = true
     TEST_ADD_ITEMS = {
-        --'item_3166',
-        --'item_3165',
-        --'item_3168',
-        --'item_3170',
-        --'item_3135',
-        'item_3173', -- CD Ring
-        'item_3170',
-        'item_3173',
-        'item_3181',
-        'item_3177',
-        'item_3178', -- boots
-        'item_3181',
-        'item_3171',
-        'item_3182',
-        --- Test Items
-        'item_3149',
+        'item_3172',
+        'item_3179',
         'item_3153',
-        'item_3154', -- Set Equip
+
+        -- Set Equip
+        'item_3154',
         'item_3155',
         'item_3156',
         'item_3157',
@@ -95,7 +83,17 @@ if DEBUG_SETTINGS then
         [11] = 'item_3153', -- weapon
         [12] = 'item_3142', -- shield
     }
-    TEST_EQUIP_ITEMS = TEST_EQUIP_ITEMS_20_TWINK
+    TEST_EQUIP_MAX_WARRIOR = {
+        [1] = 'item_3160', -- helm
+        [2] = 'item_3176', -- neck
+        [3] = 'item_3154', -- armor
+        [8] = 'item_3168', -- ring
+        [9] = 'item_3167', -- ring
+        [10] = 'item_3157', -- boots
+        [11] = 'item_3172', -- weapon
+        [12] = 'item_3179', -- shield
+    }
+    TEST_EQUIP_ITEMS = TEST_EQUIP_MAX_WARRIOR
 end
 
 DEBUG_SKIP_HTTP_REPORT = DEBUG_SETTINGS
@@ -120,7 +118,7 @@ DEBUG_PRINT_SECTIONS = {
     Reporter          = false,
     ReporterVerbose   = false,
     Triggers          = true,
-    TriggersVerbose   = true,
+    TriggersVerbose   = false,
     AiBasic           = true,
     AiBasicSheep      = false,
     AiBasicAggro      = false,

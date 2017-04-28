@@ -3671,7 +3671,7 @@
         "ItemDisassembleRule" "DOTA_ITEM_DISASSEMBLE_ALWAYS"
         "AbilitySpecial"
         {
-            "01"
+            "bonus_str"
             {
                 "var_type" "FIELD_INTEGER"
                 "bonus_str" "35"
@@ -3701,9 +3701,7 @@
                 "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE | MODIFIER_ATTRIBUTE_PERMANENT"
                 "Properties"
                 {
-                    "MODIFIER_PROPERTY_STATS_STRENGTH_BONUS" "%bonus_stat"
-                    "MODIFIER_PROPERTY_STATS_AGILITY_BONUS" "%bonus_stat"
-                    "MODIFIER_PROPERTY_STATS_INTELLECT_BONUS" "%bonus_stat"
+                    "MODIFIER_PROPERTY_STATS_STRENGTH_BONUS" "%bonus_str"
                     "MODIFIER_PROPERTY_HEALTH_BONUS" "%bonus_health"
                     "MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" "%bonus_armor"
                 }

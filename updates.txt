@@ -1,3 +1,15 @@
+[b]v0.0.71b[/b]
+ • Fix bug where Dark Priestess Lumorase death would not unlock the exit.
+
+[b]v0.0.71[/b]
+ • Added more combat mechanics to Dark Priestess Lumorase's encounter.
+ • Lumorase now has a guaranteed drop.
+ • Passive regen no longer kicks in when an encounter is active.
+[b]Items[/b]
+ • Dark Kite Shield now properly adds strength.
+ • Reduced excessive drop rate of Dark Talisman and Dark Ornamental Chain.
+ • Krumendi's Footwear now properly named. (Thanks Montezuma)
+ 
 [b]v0.0.70[/b]
  • New area released! Dark Plains. New quests, items, creatures, and fights.
  • Level cap raised to 25.
@@ -34,7 +46,6 @@
  • Fixed missing precache for npc cosmetics.
  • Ranger is now an agility hero. (Was intelligence due to "windrunner" base.)
 
- 
 [b]v0.0.61[/b]
  • [b]All players now receive quest credit for creature kills![/b]
  • Added the debuff bar to indicate a player's own debuffs. (Such as a slow from the kobold archer's new spell.)

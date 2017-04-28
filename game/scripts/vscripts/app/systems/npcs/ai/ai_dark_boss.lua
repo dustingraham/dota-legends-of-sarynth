@@ -1,5 +1,7 @@
 ai_dark_boss = ai_dark_boss or class({})
 local ai = ai_dark_boss
+AiDarkBossActions(ai)
+AiDarkBossLogic(ai)
 
 function ai:DeclareFunctions()
     return {
@@ -7,29 +9,65 @@ function ai:DeclareFunctions()
         MODIFIER_EVENT_ON_TAKEDAMAGE,
         --MODIFIER_PROPERTY_HEALTH_REGEN_PERCENTAGE,
         MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT,
+        MODIFIER_PROPERTY_MOVESPEED_BASE_OVERRIDE,
+        MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT,
     }
 end
 
-ai.ACTION_IDLE = 'ActionIdle'
-ai.ACTION_RETURN = 'ActionReturn'
+ai.ACTION_IDLE           = 'ActionIdle'
+ai.ACTION_RETURN         = 'ActionReturn'
 ai.ACTION_FIGHT_STANDARD = 'ActionFightStandard'
 
+ai.ACTION_LINK_DESIRE    = 'ActionLinkDesire'
+ai.ACTION_LINK_CHANNEL   = 'ActionLinkChannel'
+
+ai.INITIAL_STATE         = ai.ACTION_IDLE
+
+if DEBUG_SETTINGS then
+    Debug('AiDarkBoss', 'Setting non-standard default state.')
+    --ai.INITIAL_STATE = ai.ACTION_DESIRE_LINK
+end
+
+ai.intervalDuration = 1
 if IsServer() then
     function ai:OnCreated(keys)
-        Debug('AiDarkBoss', 'OnCreated Idling')
-        self.state = ai.ACTION_IDLE
+        --self.state = ai.ACTION_IDLE
+        self.state = ai.INITIAL_STATE
+        Debug('AiDarkBoss', 'OnCreated State to:', self.state)
+
+        self.energyParticle = Entities:FindByName(nil, 'dark_barricade_particle')
+
+        -- TESTING
+        --self:ToggleWall(true)
 
         self.castDesire = 0
         self.testTicks = 0
+        self.timeInState   = 0
 
-        self.shardsCreated = 0
+        self.shardsCreated = false
         self.shards = {}
 
         self.aggroRange = 850
         self.leashRange = 2000
         self.passiveHealthRegen = Clamp(self:GetParent():GetMaxHealth() / 10, 0, 800)
-        self:StartIntervalThink(1.0)
+        self:StartIntervalThink(self.intervalDuration)
     end
+end
+
+function ai:OnIntervalThink()
+    self.timeInState = self.timeInState + self.intervalDuration
+    Dynamic_Wrap(ai, self.state)(self)
+end
+
+-- Slower speed while idling.
+function ai:GetModifierMoveSpeedOverride()
+    if self.state == ai.ACTION_IDLE then return 220 end
+    return 360
+end
+
+function ai:GetModifierAttackSpeedBonus_Constant()
+    if self.energized then return 80 end
+    return 0
 end
 
 --function ai:GetModifierHealthRegenPercentage()
@@ -47,23 +85,32 @@ end
 
 function ai:OnTakeDamage(event)
     if self:GetParent() ~= event.unit then return end
+    if self:GetParent() == event.attacker then Debug('AiDarkBoss', 'Self ForceKill') return end
 
     if self.state == ai.ACTION_IDLE then
         Debug('AiDarkBoss', 'Aggroing due to Attacked')
         self.aggroTarget = event.attacker
         self:StartFight()
     end
-    if self.state == ai.ACTION_FIGHT_STANDARD then
-        if self.shardsCreated == 0 then
-            if self:GetParent():GetHealth() / self:GetParent():GetMaxHealth() < 0.5 then
-                self:CreateShards()
-            end
-        end
-    end
+    --if self.state == ai.ACTION_FIGHT_STANDARD then
+    --    if self.shardsCreated == 0 then
+    --        if self:GetParent():GetHealth() / self:GetParent():GetMaxHealth() < 0.5 then
+    --            self:CreateShards()
+    --        end
+    --    end
+    --end
 end
 
 function ai:OnDeath(event)
+    if self.shardsCreated == true then
+        for _,shard in pairs(self.shards) do
+            if event.unit == shard then
+                self:OnShardKilled(shard)
+            end
+        end
+    end
     if self:GetParent() ~= event.unit then return end
+
     Debug('AiDarkBoss', 'OnDeath')
     self:GetParent().spawn:OnDeath(self)
 
@@ -71,16 +118,15 @@ function ai:OnDeath(event)
     Encounter:End()
     self:ToggleWall(false)
 
+    -- Clean Up.... Ensure not making noise...
+    self:EnergyLinkStop(true)
+
     -- Takes a slight second for him to fall backwards.
     local pos = self:GetParent():GetAbsOrigin()
     Timers:CreateTimer(0.25, function()
         ScreenShake(pos, 3, 100, 0.35, 2000, 0, true)
     end)
     EmitSoundOn('death_prophet_dpro_defeat_04', self:GetParent())
-end
-
-function ai:OnIntervalThink()
-    Dynamic_Wrap(ai, self.state)(self)
 end
 
 -- self:AbilityClawAttack()
@@ -97,13 +143,12 @@ function ai:AbilityClawAttack()
     ))
 
 end
-
 function ai:StartFight()
     Debug('AiDarkBoss', 'Starting fight state.')
     self.state = ai.ACTION_FIGHT_STANDARD
     self:ToggleWall(true)
 
-    Encounter:Start(self:GetParent(), self.aggroTarget)
+    Encounter:Start(self:GetParent(), self.aggroTarget, self)
 
     EmitSoundOn('death_prophet_dpro_spawn_03', self:GetParent())
     self:GetParent():MoveToTargetToAttack(self.aggroTarget)
@@ -124,40 +169,6 @@ function ai:StartFight()
     --        end
     --    end
     --end)
-end
-
-function ai:CreateShards()
-    Debug('AiDarkBoss', 'Creating shards...')
-    EmitSoundOn('death_prophet_dpro_laugh_012', self:GetParent())
-
-    self.shardsCreated = 1
-    local caster = self:GetParent()
-    local caster_location = caster:GetAbsOrigin()
-
-    local shard1 = CreateUnitByName('dark_boss_summons', caster_location + RandomVector(200), true, caster, caster, caster:GetTeamNumber())
-    shard1:MoveToTargetToAttack( self.aggroTarget )
-    table.insert(self.shards, shard1)
-    local shard2 = CreateUnitByName('dark_boss_summons', caster_location + RandomVector(200), true, caster, caster, caster:GetTeamNumber())
-    shard2:MoveToTargetToAttack( self.aggroTarget )
-    table.insert(self.shards, shard2)
-    Timers(1.0, function()
-        if IsValidEntity(shard1) then
-            shard1:MoveToTargetToAttack( self.aggroTarget )
-        end
-        if IsValidEntity(shard2) then
-            shard2:MoveToTargetToAttack( self.aggroTarget )
-        end
-    end)
-end
-
-function ai:KillShards()
-    for _,s in pairs(self.shards) do
-        if s and IsValidEntity(s) then
-            s:ForceKill(false)
-        end
-    end
-    self.shards = {}
-    self.shardsCreated = 0
 end
 
 function ai:ActionIdle()
@@ -184,37 +195,6 @@ function ai:ActionIdle()
     self:ActionIdleMove()
 end
 
-function ai:ToggleWall(toggleTo)
-    local particle = Entities:FindByName(nil, 'dark_barricade_particle')
-    -- Create the dummy if we don't have one already.
-    if not self.dummyEntity then
-        self.dummyEntity = CreateUnitByName('dummy_entity', particle:GetAbsOrigin(), true, nil, nil, DOTA_TEAM_NEUTRALS)
-    end
-    -- Toggle the wall
-    if self.toggleWall then
-        self.toggleWall = false
-        ParticleManager:DestroyParticle(self.particleIndex, false)
-        ParticleManager:ReleaseParticleIndex(self.particleIndex)
-        self.particleIndex = nil
-        -- Opening wall, kill shards.
-        self:KillShards()
-    else
-        self.toggleWall = true
-        self.particleIndex = ParticleManager:CreateParticle('particles/dire_fx/bad_ancient_ambient.vpcf', PATTACH_ABSORIGIN, self.dummyEntity)
-        ParticleManager:SetParticleControl(self.particleIndex, 0, particle:GetAbsOrigin())
-    end
-
-    Debug('AiDarkBoss', 'Wall toggled to:', self.toggleWall)
-    if self.toggleWall ~= toggleTo then
-        Debug('AiDarkBoss', 'DANGER Wall Mismatch....')
-    end
-
-    -- Toggle the simple obstructions
-    for _,obstruction in pairs(Entities:FindAllByName('dark_barricade_obstruction')) do
-        obstruction:SetEnabled(self.toggleWall, false)
-    end
-end
-
 function ai:ChargeAttack()
     Timers:CreateTimer(8.0, function()
         self:GetParent():Stop()
@@ -230,6 +210,12 @@ function ai:ChargeAttack()
 end
 
 function ai:ReviewAbilityDesire()
+    if not self.hasLinked and self.timeInState > 5 then
+        self:TransitionTo(ai.ACTION_LINK_DESIRE)
+        self.hasLinked = true
+        return
+    end
+
     -- Concept
     --self:GetParent():AddAbility('ranger_poison_arrow')
     --Timers:CreateTimer(5.0, function()
@@ -270,30 +256,8 @@ function ai:ReviewAbilityDesire()
 
 end
 
---function ai:ActionAggro()
-function ai:ActionFightStandard()
-    --Check if the unit has walked outside its leash range
-    if ( self:GetParent().spawn.spawnPoint - self:GetParent():GetAbsOrigin() ):Length() > self.leashRange then
-        self:TransitionToReturn()
-        return true --Return to make sure no other code is executed in this state
-    end
-
-    -- TODO: Check for unit closer than target if target is running away.
-
-    --Check if the unit's target is still alive (self.aggroTarget will have to be set when transitioning into this state)
-    if not self.aggroTarget:IsAlive() then
-        -- TODO Look for another target in the area!!
-        self:TransitionToReturn()
-        return true --Return to make sure no other code is executed in this state
-    end
-
-    self:ReviewAbilityDesire()
-
-    --State behavior
-    --Here we can just do any behaviour you want to repeat in this state
-    if not self:GetParent():IsAttacking() then
-        self:FallbackAttackCheck()
-    end
+function ai:AttackTarget()
+    self:GetParent():MoveToTargetToAttack(self.aggroTarget)
 end
 
 -- If we get stuck somewhere, start attacking after 5 seconds.
@@ -308,69 +272,16 @@ function ai:FallbackAttackCheck()
     end
 end
 
-function ai:TransitionToReturn()
-    -- Remove aggro target.
-    self.aggroTarget = nil
-
-    -- Remove all negative modifiers.
-    for _,modifier in pairs(self:GetParent():FindAllModifiers()) do
-        if modifier ~= self then
-            -- Proper Reset?
-            Debug('AiDarkBoss', 'Removing: '..modifier:GetName())
-            modifier:Destroy()
-        end
-    end
-
-    local target = self:GetParent().spawn.spawnPoint + Vector(math.random(-64, 64), math.random(-64, 64))
-    self:GetParent():MoveToPosition( target ) --Move back to the spawnpoint
-    self.returnTarget = target
-    self.state = ai.ACTION_RETURN --Transition the state to the 'Returning' state(!)
-    self.returnTicks = 0
-    self:ToggleWall(false)
-    Debug('AiDarkBoss', 'Returning')
-end
-
-function ai:ActionReturn()
-    --Check if the AI unit has reached its spawn location yet
-    if ( self.returnTarget - self:GetParent():GetAbsOrigin() ):Length() < 10 then
-        self:TransitionToIdle()
-        return true
-    end
-
-    -- Sometimes we can't get there...
-    if not self.returnTicks then
-        self.returnTicks = 0
-    end
-    self.returnTicks = self.returnTicks + 1
-
-    -- Keep attempting to move, in case we were stunned.
-    self:GetParent():MoveToPosition( self.returnTarget ) --Move back to the spawnpoint
-
-    if self.returnTicks > 10 then
-        Debug('AiDarkBoss', 'Could not return in 10 ticks, safety idling.')
-        self:TransitionToIdle()
-        return true
-    end
-end
-
-function ai:TransitionToIdle()
-    --Go into the idle state
-    self.state = ai.ACTION_IDLE
-
-    -- Get full health.
-    self:GetParent():SetHealth(self:GetParent():GetMaxHealth())
-
-    self.returnTicks = nil
-    Debug('AiDarkBoss', 'Idling')
-end
-
-function ai:ActionIdleMove()
-    -- 10% chance to move.
-    -- local rand = math.random(0, 10)
-    -- if rand < 10 then return end
-    if RollPercentage(80) then return end
-
-    -- Move!
-    local target = self:GetParent().spawn.spawnPoint + Vector(math.random(-196, 196), math.random(-196, 196))
-    self:GetParent():MoveToPosition(target)
+function ai:FindHeroes(range)
+    return FindUnitsInRadius(
+        self:GetParent():GetTeam(),
+        self:GetParent():GetAbsOrigin(),
+        nil,
+        range,
+        DOTA_UNIT_TARGET_TEAM_ENEMY,
+        DOTA_UNIT_TARGET_ALL,
+        DOTA_UNIT_TARGET_FLAG_NONE,
+        FIND_ANY_ORDER,
+        false
+    )
 end

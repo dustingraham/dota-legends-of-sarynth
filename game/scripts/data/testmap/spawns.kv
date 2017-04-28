@@ -24,12 +24,25 @@
         "LeashRange" "850"
     }
 
+    "spawn_dark_boss"
+    {
+        "SpawnPoints" "spawn_dark_boss_1"
+        "Creature" "dark_boss"
+        "OnInitSpawn" "1"
+        "MaxCount" "1"
+        "RespawnDelay" "5"
+        "Chance" "100"
+        "AI" "ai_dark_boss"
+        //"AI" "ai_aggro_leash"
+        "AggroRange" "100"
+        "LeashRange" "850"
+    }
     "spawn_scar"
     {
         "SpawnPoints" "questgiver_4"
         "Creature" "start_area_wolf_boss"
-        "OnInitSpawn" "1"
-        "MaxCount" "1"
+        "OnInitSpawn" "0"
+        "MaxCount" "0"
         "RespawnDelay" "3"
         "Chance" "100"
         //"AI" "ai_start_area_boss"

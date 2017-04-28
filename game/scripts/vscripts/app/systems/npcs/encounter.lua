@@ -9,10 +9,11 @@ function Encounter:Activate()
     ListenToGameEvent('dota_player_used_ability', Dynamic_Wrap(Encounter, 'OnAbilityUsed'), self)
 end
 
-function Encounter:Start(boss, hero)
+function Encounter:Start(boss, hero, ai)
     Debug('Encounter', 'Starting encounter')
     self.boss = boss
     self.hero = hero -- TODO : ONE FOR NOW...
+    self.ai = ai
     self.logs = {}
     self.startTime = GameRules:GetGameTime()
     self.InEncounter = true
@@ -43,11 +44,20 @@ function Encounter:Start(boss, hero)
 end
 
 function Encounter:End()
+    if not self.InEncounter then
+        Debug('Encounter', 'End encounter called, but no active encounter. Aborting.')
+        return
+    end
+
     Debug('Encounter', 'Ending encounter')
     self.InEncounter = false
 
     self:LogBothHp('Ended at '..math.ceil(GameRules:GetGameTime()))
     -- self:LogBothHp()
+
+    if self.ai then
+        self.ai:OnEncounterEnd()
+    end
 
     local relay = Entities:FindByName(nil, 'start_area_barricade_relay_off')
     if relay then

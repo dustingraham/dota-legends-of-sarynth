@@ -256,18 +256,22 @@
         "ProjectileModel"            "particles/units/heroes/hero_invoker/invoker_forged_spirit_projectile.vpcf"
         "ProjectileSpeed"            "1000"
 
-        "AttackDamageMin"            "2360"
-        "AttackDamageMax"            "2596"
+        "AttackDamageMin"            "1760"
+        "AttackDamageMax"            "1996"
         "AttackRate"                "1.50"
         "AttackAnimationPoint"      "0.20"
-        "AttackRange"               "650"
+        "AttackRange"               "550"
 
         "CombatClassAttack"         "DOTA_COMBAT_CLASS_ATTACK_BASIC"
         "CombatClassDefend"         "DOTA_COMBAT_CLASS_DEFEND_BASIC"
         "UnitRelationshipClass"     "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
 
-        "StatusHealth"                "4472"
+        "StatusHealth"                "3672"
         "StatusHealthRegen"           "25.0"
+        "precache"
+        {
+            "particle" "particles/units/heroes/hero_techies/techies_blast_off.vpcf"
+        }
     }
     "dark_boss"
     {
@@ -280,7 +284,7 @@
         "HealthBarOffset"       "350"
 
         "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_GROUND"
-        "MovementSpeed"             "360"
+        "MovementSpeed"             "360" // Set in AI
         "ArmorPhysical"             "10"
         "AttackCapabilities"        "DOTA_UNIT_CAP_RANGED_ATTACK"
 
@@ -312,5 +316,9 @@
             }
         }
         "BountyXP"                    "640"
+        "precache"
+        {
+            "particle" "particles/units/dark_plains/boss/energized_attack/energized_attack.vpcf"
+        }
     }
 }

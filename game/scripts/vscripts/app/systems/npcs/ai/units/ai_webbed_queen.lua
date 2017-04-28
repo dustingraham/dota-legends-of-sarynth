@@ -48,7 +48,6 @@ if IsServer() then
         self.startLocation = self:GetParent():GetAbsOrigin()
         -- self.aggroRange = self:GetParent().spawn.spawnNode.AggroRange or 400
         -- self.leashRange = self:GetParent().spawn.spawnNode.LeashRange or 750
-        print('ID: ',self.intervalDuration)
         self:StartIntervalThink(self.intervalDuration)
     end
 end

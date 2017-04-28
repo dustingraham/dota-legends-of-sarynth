@@ -28,6 +28,7 @@ function Boot:Precache(context)
         'particles/units/start/scar/claw.vpcf',
 
         'particles/dire_fx/bad_ancient_ambient.vpcf', -- Dark Boss Barricade
+        'particles/units/dark_plains/boss/energy_pull/energy_pull.vpcf', -- Dark Boss Link
 
         -- Testing?
         'particles/units/heroes/hero_venomancer/venomancer_venomous_gale.vpcf',
@@ -107,6 +108,7 @@ function Boot:Precache(context)
         'soundevents/game_sounds_heroes/game_sounds_centaur.vsndevts',
         'soundevents/game_sounds_heroes/game_sounds_chen.vsndevts',
         'soundevents/game_sounds_heroes/game_sounds_crystalmaiden.vsndevts',
+        'soundevents/game_sounds_heroes/game_sounds_death_prophet.vsndevts',
         'soundevents/game_sounds_heroes/game_sounds_earthshaker.vsndevts',
         'soundevents/game_sounds_heroes/game_sounds_enigma.vsndevts',
         'soundevents/game_sounds_heroes/game_sounds_invoker.vsndevts',

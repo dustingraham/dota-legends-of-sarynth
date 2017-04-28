@@ -77,7 +77,7 @@ function mod:OnIntervalThink()
         self.outOfCombatCooldown = 0
     end
 
-    if self:GetParent():IsAlive() and self.outOfCombatCooldown == 0 then
+    if self:GetParent():IsAlive() and Encounter.InEncounter == false and self.outOfCombatCooldown == 0 then
         -- Game gets angry at 1000+/500+ total hp/mp regen.
         self.healthRegen = Clamp(self:GetParent():GetMaxHealth() / 12, 0, 500)
         self.manaRegen = Clamp(self:GetParent():GetMaxMana() / 12, 0, 200)

@@ -27,6 +27,9 @@ for _,file in ipairs({
     'app/systems/inventory/inventory_service',
     'app/systems/inventory/inventory',
 
+    'app/systems/npcs/ai/units/ai_dark_boss_actions',
+    'app/systems/npcs/ai/units/ai_dark_boss_logic',
+
     'app/systems/npcs/ai_mixin',
     'app/systems/npcs/base_npc_creature',
     'app/systems/npcs/dialog_system',
