@@ -56,11 +56,14 @@ function InventoryService:Activate()
     Timers:CreateTimer(function()
         for id, action in pairs(InventoryService.rangedActions) do
             -- Pythagorean
-            local rangeSquared = 150 * 150
+            local range = action.range
+            if not range then range = 100 end
+            local rangeSquared = range * range
             local distance = action.unit:GetAbsOrigin() - action.targetPosition
             local rangeCurrent = distance.x * distance.x + distance.y * distance.y
             -- Check if position is inside the range.
             if rangeCurrent <= rangeSquared then
+                action.unit:Stop()
                 local status, result = xpcall(
                     function() return action.callback(action) end,
                     function (msg) return msg..'\n'..debug.traceback()..'\n' end
@@ -124,8 +127,8 @@ function InventoryService:OnDragWorld(event)
     local diff = unitpos - position
     local dist = diff:Length2D()
     local pos = unitpos
-    if dist > 150 *.9 then
-        pos = position + diff:Normalized() * 150 * .9
+    if dist > 50 then
+        pos = position + diff:Normalized() * 50
     end
 
     ExecuteOrderFromTable({
@@ -136,7 +139,7 @@ function InventoryService:OnDragWorld(event)
     InventoryService.rangedActions[hero:GetEntityIndex()] = {
         unit = hero,
         targetPosition = pos,
-        range = 150,
+        range = 100,
         playerID = event.PlayerID,
         callback = function(action)
             --print('Callback happening...')
@@ -192,8 +195,8 @@ function InventoryService:OrderFilterPickupItem(event, order)
     local diff = unitpos - physItem:GetAbsOrigin()
     local dist = diff:Length2D()
     local pos = unitpos
-    if dist > 90 then
-        pos = physItem:GetAbsOrigin() + diff:Normalized() * 90
+    if dist > 50 then
+        pos = physItem:GetAbsOrigin() + diff:Normalized() * 50
     end
 
     -- Convert to move order.
@@ -205,7 +208,7 @@ function InventoryService:OrderFilterPickupItem(event, order)
     InventoryService.rangedActions[order.units["0"]] = {
         unit = hero,
         targetPosition = physItem:GetAbsOrigin(),
-        range = 150,
+        range = 100,
         playerID = order.issuer_player_id_const,
         callback = function(action)
             if IsValidEntity(physItem) then
@@ -219,5 +222,3 @@ function InventoryService:OrderFilterPickupItem(event, order)
 end
 
 Event:BindActivate(InventoryService)
-
--- InventoryService:Activate()
