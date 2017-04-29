@@ -212,7 +212,7 @@ function AiDarkBossLogic(ai)
         if self:GetParent():IsMoving() then return end
         -- 20% chance to move.
         local rand = math.random(0, 10)
-        print('AiDarkBoss', 'Random', rand)
+        --Debug('AiDarkBoss', 'Random move:', rand)
         if rand < 5 then return end
 
         -- Move!

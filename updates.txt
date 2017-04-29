@@ -1,8 +1,8 @@
 [b]v0.0.72[/b]
+ • Fix bug with out-of-combat regen not working until after first encounter.
  • Fix bug where picking up inventory beyond max capacity would disappear.
  • Normalized dropped item effects to be more consistent.
- 
- 
+ • Potential fix for inability to pick up a nearby item.
  
 [b]v0.0.71b[/b]
  • Fix bug where Dark Priestess Lumorase death would not unlock the exit.

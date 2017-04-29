@@ -16,9 +16,10 @@ end
 function mod:OnCreated()
     if IsServer() then
         -- TODO: Actual in-combat tracking.
-        self.outOfCombatCooldown = 5
+        self.outOfCombatCooldown = 6
         self:StartIntervalThink(1)
     end
+    self:SetStackCount(1)
 end
 
 function mod:IsHidden()
@@ -77,12 +78,13 @@ function mod:OnIntervalThink()
         self.outOfCombatCooldown = 0
     end
 
-    if self:GetParent():IsAlive() and Encounter.InEncounter == false and self.outOfCombatCooldown == 0 then
+    if self:GetParent():IsAlive() and not Encounter.InEncounter and self.outOfCombatCooldown == 0 then
         -- Game gets angry at 1000+/500+ total hp/mp regen.
         self.healthRegen = Clamp(self:GetParent():GetMaxHealth() / 12, 0, 500)
         self.manaRegen = Clamp(self:GetParent():GetMaxMana() / 12, 0, 200)
         self:SetStackCount(0)
     else
+        -- This is reverse in order to avoid showing a "1" while visible.
         self:SetStackCount(1)
     end
 end
