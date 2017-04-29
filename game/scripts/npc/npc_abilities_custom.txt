@@ -174,7 +174,7 @@
         "MaxLevel"                "1"
         "ScriptFile"              "app/systems/characters/abilities/self_regen"
         "AbilityTextureName"      "custom/self_regen"
-        "AbilityBehavior"         "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_CHANNELLED"
+        "AbilityBehavior"         "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_MOVEMENT"
         "AbilityType"             "DOTA_ABILITY_TYPE_ULTIMATE"
         "AbilityUnitTargetTeam"   "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
         "AbilityUnitTargetType"   "DOTA_UNIT_TARGET_HERO"
