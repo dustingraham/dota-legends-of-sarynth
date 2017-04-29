@@ -165,8 +165,7 @@ end
 
 function InventoryService:AddItem(hero, item)
     --print('Adding '..item:GetName()..' to '..hero:GetName())
-    hero.inventory:AddItem(item)
-    return true
+    return hero.inventory:AddItem(item)
 end
 
 function InventoryService:OrderFilterPickupItem(event, order)

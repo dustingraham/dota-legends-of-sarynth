@@ -134,7 +134,7 @@ function Inventory:AddItem(item, slotId)
             return true
         end
     end
-    -- Bad...
+    -- No Room
     return false
 end
 

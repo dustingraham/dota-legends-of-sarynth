@@ -1,3 +1,6 @@
+[b]v0.0.72[/b]
+ • Fix bug where picking up inventory beyond max capacity would disappear.
+ 
 [b]v0.0.71b[/b]
  • Fix bug where Dark Priestess Lumorase death would not unlock the exit.
 
