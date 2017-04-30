@@ -241,6 +241,10 @@ function CharacterPick:CreateCustomHeroForPlayer(PlayerID, character, isPrimary)
         hero:AddNewModifier(hero, nil, 'warrior_stats', nil)
     end
 
+    if character == 'bounty_hunter' then
+        hero:AddNewModifier(hero, nil, 'rogue_stats', nil)
+    end
+
     if character == 'warlock' then
         hero:AddNewModifier(hero, nil, 'sorcerer_stats', nil)
         local idx = ParticleManager:CreateParticle(

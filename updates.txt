@@ -8,6 +8,7 @@
   = Energizes after reaching 25% hp instead of 75% hp.
 [b]Heroes[/b]
  • Rogue rend damage doubled. Ticks every 1 second for 18 seconds, up from every 2 seconds for 18 seconds.
+ • Rogue now has 30% base evasion.
  • Mage magic missile damage increased from 125% to 175% of base damage.
  • Sorcerer cursed flames damage increased from 85% to 105% of base damage for all targets hit.
 
