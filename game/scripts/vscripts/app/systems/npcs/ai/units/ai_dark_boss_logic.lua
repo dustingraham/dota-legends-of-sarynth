@@ -17,6 +17,7 @@ Energized:
  - Double attack rate.
 
 TODO: Make priestess path/phase through units when moving to the portal/particle.
+ - MODIFIER_STATE_NO_UNIT_COLLISION
 TODO: Check that summon spawn position is gridnav safe.
 
 --]]
@@ -33,7 +34,7 @@ function AiDarkBossLogic(ai)
             return true --Return to make sure no other code is executed in this state
         end
 
-        --self:ReviewAbilityDesire()
+        self:ReviewAbilityDesire()
 
         --if self.timeInState > 5 then
         -- Cast Skill
@@ -76,11 +77,11 @@ function AiDarkBossLogic(ai)
         ))
         -- Deal 1800 damage in 1000 radius.
         for _,target in pairs(self:FindHeroes(1000)) do
-            self:DealDamage(target, 1800, DAMAGE_TYPE_MAGICAL, deadShard)
+            self:DealDamage(target, 800, DAMAGE_TYPE_MAGICAL, deadShard)
         end
         -- Deal an extra 3200 damage in a 400 radius.
         for _,target in pairs(self:FindHeroes(400)) do
-            self:DealDamage(target, 3200, DAMAGE_TYPE_MAGICAL, deadShard)
+            self:DealDamage(target, 4800, DAMAGE_TYPE_MAGICAL, deadShard)
         end
 
         for _,shard in pairs(self.shards) do
@@ -210,6 +211,7 @@ function AiDarkBossLogic(ai)
     -- Idling around spawn point.
     function ai:ActionIdleMove()
         if self:GetParent():IsMoving() then return end
+
         -- 20% chance to move.
         local rand = math.random(0, 10)
         --Debug('AiDarkBoss', 'Random move:', rand)

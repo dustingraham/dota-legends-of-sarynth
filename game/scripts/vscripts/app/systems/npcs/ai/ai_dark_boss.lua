@@ -14,6 +14,17 @@ function ai:DeclareFunctions()
     }
 end
 
+--function ai:GetPriority()
+--    return MODIFIER_PRIORITY_HIGH
+--end
+--
+--function ai:CheckState()
+--    local state = {
+--        [MODIFIER_STATE_STUNNED] = false,
+--    }
+--    return state
+--end
+
 ai.ACTION_IDLE           = 'ActionIdle'
 ai.ACTION_RETURN         = 'ActionReturn'
 ai.ACTION_FIGHT_STANDARD = 'ActionFightStandard'
@@ -27,6 +38,10 @@ if DEBUG_SETTINGS then
     Debug('AiDarkBoss', 'Setting non-standard default state.')
     --ai.INITIAL_STATE = ai.ACTION_DESIRE_LINK
 end
+
+-- SetModifierGainedFilter
+-- TODO: remove the purge
+function ai:IsDebuff() return false end
 
 ai.intervalDuration = 1
 if IsServer() then
@@ -55,6 +70,8 @@ if IsServer() then
 end
 
 function ai:OnIntervalThink()
+    self:GetParent():Purge(false, true, false, true, false)
+
     self.timeInState = self.timeInState + self.intervalDuration
     Dynamic_Wrap(ai, self.state)(self)
 end
@@ -210,11 +227,11 @@ function ai:ChargeAttack()
 end
 
 function ai:ReviewAbilityDesire()
-    if not self.hasLinked and self.timeInState > 5 then
-        self:TransitionTo(ai.ACTION_LINK_DESIRE)
-        self.hasLinked = true
-        return
-    end
+    --if not self.hasLinked and self.timeInState > 5 then
+    --    self:TransitionTo(ai.ACTION_LINK_DESIRE)
+    --    self.hasLinked = true
+    --    return
+    --end
 
     -- Concept
     --self:GetParent():AddAbility('ranger_poison_arrow')
@@ -230,7 +247,9 @@ function ai:ReviewAbilityDesire()
         --print('IA', self:GetParent():IsAttacking())
         --print('CD ', ability:IsCooldownReady())
         --print('Mana', ability:IsOwnersManaEnough())
-        if ability:IsFullyCastable() then
+        local distance = (self.aggroTarget:GetAbsOrigin() - self:GetParent():GetAbsOrigin()):Length2D()
+
+        if ability:IsFullyCastable() and distance > 250 then
             local roll = math.random(100)
             if roll < self.castDesire then
                 --self:GetParent():CastAbilityOnTarget(self.aggroTarget, ability, -1)
@@ -274,14 +293,14 @@ end
 
 function ai:FindHeroes(range)
     return FindUnitsInRadius(
-        self:GetParent():GetTeam(),
-        self:GetParent():GetAbsOrigin(),
-        nil,
-        range,
-        DOTA_UNIT_TARGET_TEAM_ENEMY,
-        DOTA_UNIT_TARGET_ALL,
-        DOTA_UNIT_TARGET_FLAG_NONE,
-        FIND_ANY_ORDER,
-        false
+    self:GetParent():GetTeam(),
+    self:GetParent():GetAbsOrigin(),
+    nil,
+    range,
+    DOTA_UNIT_TARGET_TEAM_ENEMY,
+    DOTA_UNIT_TARGET_ALL,
+    DOTA_UNIT_TARGET_FLAG_NONE,
+    FIND_ANY_ORDER,
+    false
     )
 end

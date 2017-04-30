@@ -303,6 +303,10 @@
 
         "StatusHealth"                "38472"
         "StatusHealthRegen"           "25.0"
+        "StatusMana"                "600"
+        "StatusManaRegen"           "5.0"
+
+        "Ability1" "dark_fireball"
 
         "Creature"
         {
@@ -319,6 +323,9 @@
         "precache"
         {
             "particle" "particles/units/dark_plains/boss/energized_attack/energized_attack.vpcf"
+            "particle" "particles/effects/ground_indicator.vpcf"
+            "particle" "particles/hw_fx/hw_rosh_fireball.vpcf"
+            "particle" "particles/econ/items/brewmaster/brewmaster_offhand_elixir/brewmaster_thunder_clap_elixir.vpcf"
         }
     }
 }

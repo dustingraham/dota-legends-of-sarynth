@@ -34,6 +34,22 @@ function AiDarkBossActions(ai)
         self.shardsCreated = false
     end
 
+    function ai:CreateIndicator()
+        if not self.indicatorParticle then
+            self.indicatorParticle = ParticleManager:CreateParticle('particles/effects/ground_indicator.vpcf', PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
+            ParticleManager:SetParticleControl(self.indicatorParticle, 0, self:GetParent():GetAbsOrigin())
+            ParticleManager:SetParticleControl(self.indicatorParticle, 1, Vector(315,0,0))
+        end
+    end
+
+    function ai:DestroyIndicator()
+        if self.indicatorParticle then
+            ParticleManager:DestroyParticle(self.indicatorParticle, false)
+            ParticleManager:ReleaseParticleIndex(self.indicatorParticle)
+            self.indicatorParticle = nil
+        end
+    end
+
     function ai:EnergyLinkStart()
         -- We walked to it in theory, but ensure we're facing...
         self:GetParent():FaceTowards(self.energyParticle:GetAbsOrigin())

@@ -57,6 +57,7 @@ for _,file in ipairs({
     'vendor/barebones/timers',
     'vendor/inspect',
     'vendor/popupnumbers',
+    'vendor/tracking_projectile',
 
     'settings',
 
