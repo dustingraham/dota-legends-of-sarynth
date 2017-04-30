@@ -27,6 +27,12 @@ function OnLeftButtonPressed()
         var entityIndex = e.entityIndex
         if (Entities.IsSelectable(entityIndex))
         {
+            // TODO
+            // We may want an "if is-attacking then start attacking."
+            // We certainly don't want to start attacking if hero is not currently
+            // attacking, they are likely just scoping out the target.
+            // But if they are attacking, their target will immediately
+            // revert to the current target on the next auto-attack.
             SetFocusTarget(entityIndex);
 
             // var healthMax = Entities.GetMaxHealth(entityIndex);

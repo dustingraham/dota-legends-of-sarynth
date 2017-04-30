@@ -137,6 +137,9 @@ function CharacterService:OnHeroDeath(e, event)
         end
     end
 
+    -- Clear focus target
+    FocusTarget:ClearFocusTarget(hero:GetPlayerOwnerID())
+
     -- FindPathLength appears broken above 2000 distance.
     --local closestDistance
     --local closestPoint
@@ -272,10 +275,12 @@ function CharacterService:OnHeroPick(e, event)
     end
 
     -- Items for testing.
-    if IsInToolsMode() and TEST_SPAWN_ITEMS then
+    if IsInToolsMode() and TEST_SPAWN_ITEMS and TEST_EQUIP_ITEMS then
         for slot,itemName in pairs(TEST_EQUIP_ITEMS) do
             hero.inventory:AddItem(CreateItem(itemName, nil, nil), slot)
         end
+    end
+    if IsInToolsMode() and TEST_SPAWN_ITEMS and TEST_ADD_ITEMS then
         for _,itemName in pairs(TEST_ADD_ITEMS) do
             hero.inventory:AddItem(CreateItem(itemName, nil, nil), nil)
         end

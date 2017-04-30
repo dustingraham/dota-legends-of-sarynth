@@ -175,6 +175,8 @@ function AiDarkBossLogic(ai)
 
         -- Reset various states created during fight.
         --self.shardsCreated = false -- Reset by "force kill" check action.
+
+        self:EnergyLinkStop(true)
         self.energized = false
         self.hasLinked = false
         self.aggroTarget = nil

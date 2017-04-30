@@ -51,14 +51,16 @@ function mod:DeclareFunctions()
 end
 
 function mod:UpdateFocusTarget(newFocusTarget)
-    Wrappers.SetNetTable('focus_target', self:GetParent():GetPlayerOwnerID(), newFocusTarget:GetEntityIndex())
-    CustomGameEventManager:Send_ServerToPlayer(self:GetParent():GetPlayerOwner(), 'focus_target_updated', { id = newFocusTarget:GetEntityIndex() })
+    FocusTarget:SetFocusTarget(self:GetParent():GetPlayerOwnerID(), newFocusTarget:GetEntityIndex())
 end
 
 function mod:OnAttack(event)
     if self:GetParent() ~= event.attacker then return end
     local target = Wrappers.GetFocusTarget(self:GetParent())
-    if not IsValidEntity(target) or not target:IsAlive() then
+    -- If our current target is invalid, dead, or matches the current hero, then switch.
+    --if not IsValidEntity(target) or not target:IsAlive() or target == self:GetParent() then
+    -- Switch if we change attack targets...
+    if not IsValidEntity(target) or not target:IsAlive() or target ~= event.target or target == self:GetParent() then
         self:UpdateFocusTarget(event.target)
     end
 end
@@ -66,9 +68,8 @@ end
 function mod:OnAttacked(event)
     if self:GetParent() ~= event.target then return end
     local target = Wrappers.GetFocusTarget(self:GetParent())
-    if not IsValidEntity(target) or not target:IsAlive() then
+    -- If our current target is invalid, dead, or matches the current hero, then switch.
+    if not IsValidEntity(target) or not target:IsAlive() or target == self:GetParent() then
         self:UpdateFocusTarget(event.attacker)
-        --Wrappers.SetNetTable('focus_target', self:GetParent():GetPlayerOwnerID(), event.attacker:GetEntityIndex())
-        --CustomGameEventManager:Send_ServerToPlayer(self:GetParent():GetPlayerOwner(), 'focus_target_updated', { id = event.attacker:GetEntityIndex() })
     end
 end
