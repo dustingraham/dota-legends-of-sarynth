@@ -1,29 +1,22 @@
 ai_dark_boss = ai_dark_boss or class({})
 local ai = ai_dark_boss
-AiDarkBossActions(ai)
-AiDarkBossLogic(ai)
+function ai:IsDebuff() return false end
+function ai:IsHidden() return true end
+
+if IsServer() then
+    AiDarkBossActions(ai)
+    AiDarkBossLogic(ai)
+end
 
 function ai:DeclareFunctions()
     return {
         MODIFIER_EVENT_ON_DEATH,
         MODIFIER_EVENT_ON_TAKEDAMAGE,
-        --MODIFIER_PROPERTY_HEALTH_REGEN_PERCENTAGE,
         MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT,
         MODIFIER_PROPERTY_MOVESPEED_BASE_OVERRIDE,
         MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT,
     }
 end
-
---function ai:GetPriority()
---    return MODIFIER_PRIORITY_HIGH
---end
---
---function ai:CheckState()
---    local state = {
---        [MODIFIER_STATE_STUNNED] = false,
---    }
---    return state
---end
 
 ai.ACTION_IDLE           = 'ActionIdle'
 ai.ACTION_RETURN         = 'ActionReturn'
@@ -33,15 +26,6 @@ ai.ACTION_LINK_DESIRE    = 'ActionLinkDesire'
 ai.ACTION_LINK_CHANNEL   = 'ActionLinkChannel'
 
 ai.INITIAL_STATE         = ai.ACTION_IDLE
-
-if DEBUG_SETTINGS then
-    Debug('AiDarkBoss', 'Setting non-standard default state.')
-    --ai.INITIAL_STATE = ai.ACTION_DESIRE_LINK
-end
-
--- SetModifierGainedFilter
--- TODO: remove the purge
-function ai:IsDebuff() return false end
 
 ai.intervalDuration = 1
 if IsServer() then
@@ -59,8 +43,14 @@ if IsServer() then
         self.testTicks = 0
         self.timeInState   = 0
 
-        self.shardsCreated = false
-        self.shards = {}
+        --self:SetStackCount(0)
+        self.numShards = 0
+        self.shardOne = false
+        self.shardTwo = false
+        self.shardThree = false
+        self.shardFour = false
+        --self.shardsCreated = false
+        --self.shards = {}
 
         self.aggroRange = 850
         self.leashRange = 2000
@@ -70,8 +60,6 @@ if IsServer() then
 end
 
 function ai:OnIntervalThink()
-    self:GetParent():Purge(false, true, false, true, false)
-
     self.timeInState = self.timeInState + self.intervalDuration
     Dynamic_Wrap(ai, self.state)(self)
 end
@@ -86,12 +74,6 @@ function ai:GetModifierAttackSpeedBonus_Constant()
     if self.energized then return 80 end
     return 0
 end
-
---function ai:GetModifierHealthRegenPercentage()
---    if self.state == ai.ACTION_RETURN then return 10.0 end
---    if self.state == ai.ACTION_IDLE then return 20.0 end
---    return 0.0
---end
 
 function ai:GetModifierConstantHealthRegen()
     if self.state == ai.ACTION_RETURN then return self.passiveHealthRegen / 2 end
@@ -118,13 +100,27 @@ function ai:OnTakeDamage(event)
     --end
 end
 
+function ai:GetTexture()
+    return 'forged_spirit_melting_strike'
+end
+
+--function ai:UpdateStackCount()
+--    local count = 0
+--    if self.shardOne and IsValidEntity(self.shardOne) and self.shardOne:IsAlive() then
+--        count = count + 1
+--    end
+--    if self.shardTwo and IsValidEntity(self.shardTwo) and self.shardTwo:IsAlive() then
+--        count = count + 1
+--    end
+--    if self.shardThree and IsValidEntity(self.shardThree) and self.shardThree:IsAlive() then
+--        count = count + 1
+--    end
+--    self:SetStackCount(count)
+--end
+
 function ai:OnDeath(event)
-    if self.shardsCreated == true then
-        for _,shard in pairs(self.shards) do
-            if event.unit == shard then
-                self:OnShardKilled(shard)
-            end
-        end
+    if event.unit == self.shardOne or event.unit == self.shardTwo or event.unit == self.shardThree or event.unit == self.shardFour then
+        self:OnShardKilled(event.unit)
     end
     if self:GetParent() ~= event.unit then return end
 

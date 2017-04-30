@@ -32,7 +32,7 @@ end
 
 function spell:OnProjectileHit(target, pos)
     local caster = self:GetCaster()
-    local damage = math.floor(caster:GetAverageTrueAttackDamage(target) * 0.85)
+    local damage = math.floor(caster:GetAverageTrueAttackDamage(target) * 1.05)
 
     ScreenShake(pos, 3, 100, 0.35, 2000, 0, true)
 

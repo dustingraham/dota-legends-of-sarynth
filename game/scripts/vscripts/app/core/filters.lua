@@ -11,6 +11,7 @@ FILTER_EXECUTION_CONTINUE = true
 function Filters:Activate()
     self:ActivateOrderFilter()
     self:ActivateModifyExperienceFilter()
+    self:ActivateModifierGainedFilter()
     Debug('Filters', 'Activated')
 end
 
@@ -38,6 +39,15 @@ function Filters:ActivateModifyExperienceFilter()
     end
 end
 
+function Filters:ActivateModifierGainedFilter()
+    local mode = GameRules:GetGameModeEntity()
+    mode:SetModifierGainedFilter(Dynamic_Wrap(Filters, 'ModifierGainedFilter'), Filters)
+    mode.SetModifierGainedFilter = function(mode, callback, context)
+        Debug('Filters', '[NOTICE] SetModifierGainedFilter should not be called directly')
+        Event:Listen('FilterModifierGainedFilter', callback, context)
+    end
+end
+
 ---
 --@function [parent=#Filters] OrderFilter
 --@param self
@@ -54,6 +64,15 @@ end
 function Filters:ModifyExperienceFilter(params)
     Debug('Filters', 'ModifyExperienceFilter Fired')
     return Event:Trigger('FilterModifyExperienceFilter', params)
+end
+
+function Filters:ModifierGainedFilter(params)
+    Debug('Filters', 'ModifierGainedFilter Fired')
+    -- DeepPrintTable(params)
+    local result = Event:Trigger('FilterModifierGainedFilter', params)
+    -- If no callback returned false explicitly, then we want to return true.
+    if result == nil then result = true end
+    return result
 end
 
 ---
@@ -78,6 +97,11 @@ end
 function Filters:OnModifyExperienceFilter(callback, context)
     Debug('Filters', 'OnModifyExperienceFilter Callback Listening')
     self:Listen('ModifyExperienceFilter', callback, context)
+end
+
+function Filters:OnModifierGainedFilter(callback, context)
+    Debug('Filters', 'OnModifierGainedFilter Callback Listening')
+    self:Listen('ModifierGainedFilter', callback, context)
 end
 
 ---

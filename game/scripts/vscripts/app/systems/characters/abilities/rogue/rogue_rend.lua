@@ -32,7 +32,7 @@ function spell:OnSpellStart()
     target:AddNewModifier(caster, self, 'rogue_rend_bleeding', {
         duration = 18,
         damage = damage,
-        interval = 2,
+        interval = 1,
     })
 
     -- EmitSoundOn('Creep_Good_Melee.PreAttack', caster)

@@ -1,37 +1,68 @@
 function AiDarkBossActions(ai)
+    --function ai:CreateShards()
+    --    Debug('AiDarkBoss', 'Creating shards...')
+    --    EmitSoundOn('death_prophet_dpro_laugh_012', self:GetParent())
+    --
+    --    self.shardsCreated = true
+    --    local caster = self:GetParent()
+    --    local caster_location = caster:GetAbsOrigin()
+    --
+    --    local shard1 = CreateUnitByName('dark_boss_summons', caster_location + RandomVector(200), true, caster, caster, caster:GetTeamNumber())
+    --    shard1:MoveToTargetToAttack( self.aggroTarget )
+    --    table.insert(self.shards, shard1)
+    --    local shard2 = CreateUnitByName('dark_boss_summons', caster_location + RandomVector(200), true, caster, caster, caster:GetTeamNumber())
+    --    shard2:MoveToTargetToAttack( self.aggroTarget )
+    --    table.insert(self.shards, shard2)
+    --    Timers(1.0, function()
+    --        if IsValidEntity(shard1) then
+    --            shard1:MoveToTargetToAttack( self.aggroTarget )
+    --        end
+    --        if IsValidEntity(shard2) then
+    --            shard2:MoveToTargetToAttack( self.aggroTarget )
+    --        end
+    --    end)
+    --end
 
-    function ai:CreateShards()
-        Debug('AiDarkBoss', 'Creating shards...')
+    function ai:CreateShard()
+        Debug('AiDarkBoss', 'Creating shard...')
         EmitSoundOn('death_prophet_dpro_laugh_012', self:GetParent())
 
-        self.shardsCreated = true
+        --self.shardsCreated = true
+        local target = self.aggroTarget
         local caster = self:GetParent()
-        local caster_location = caster:GetAbsOrigin()
-
-        local shard1 = CreateUnitByName('dark_boss_summons', caster_location + RandomVector(200), true, caster, caster, caster:GetTeamNumber())
-        shard1:MoveToTargetToAttack( self.aggroTarget )
-        table.insert(self.shards, shard1)
-        local shard2 = CreateUnitByName('dark_boss_summons', caster_location + RandomVector(200), true, caster, caster, caster:GetTeamNumber())
-        shard2:MoveToTargetToAttack( self.aggroTarget )
-        table.insert(self.shards, shard2)
+        --local caster_location = caster:GetAbsOrigin()
+        local position = Entities:FindByName(nil, 'spawn_dark_boss_summon'):GetAbsOrigin() + RandomVector(50)
+        -- caster_location + RandomVector(200)
+        local shard = CreateUnitByName('dark_boss_summons', position, true, caster, caster, caster:GetTeamNumber())
+        shard:MoveToTargetToAttack( self.aggroTarget )
         Timers(1.0, function()
-            if IsValidEntity(shard1) then
-                shard1:MoveToTargetToAttack( self.aggroTarget )
-            end
-            if IsValidEntity(shard2) then
-                shard2:MoveToTargetToAttack( self.aggroTarget )
+            if IsValidEntity(shard) then
+                shard:MoveToTargetToAttack( target )
             end
         end)
+        return shard
     end
 
     function ai:KillShards()
-        for _,s in pairs(self.shards) do
-            if s and IsValidEntity(s) then
-                s:ForceKill(false)
-            end
+        if self.shardOne and IsValidEntity(self.shardOne) then
+            self.shardOne:ForceKill(false)
         end
-        self.shards = {}
-        self.shardsCreated = false
+        self.shardOne = false
+
+        if self.shardTwo and IsValidEntity(self.shardTwo) then
+            self.shardTwo:ForceKill(false)
+        end
+        self.shardTwo = false
+
+        if self.shardThree and IsValidEntity(self.shardThree) then
+            self.shardThree:ForceKill(false)
+        end
+        self.shardThree = false
+
+        if self.shardFour and IsValidEntity(self.shardFour) then
+            self.shardFour:ForceKill(false)
+        end
+        self.shardFour = false
     end
 
     function ai:CreateIndicator()

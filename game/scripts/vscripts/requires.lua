@@ -32,6 +32,7 @@ for _,file in ipairs({
 
     'app/systems/npcs/ai_mixin',
     'app/systems/npcs/base_npc_creature',
+    'app/systems/npcs/creature_system',
     'app/systems/npcs/dialog_system',
     'app/systems/npcs/drops',
     'app/systems/npcs/encounter',

@@ -256,8 +256,8 @@
         "ProjectileModel"            "particles/units/heroes/hero_invoker/invoker_forged_spirit_projectile.vpcf"
         "ProjectileSpeed"            "1000"
 
-        "AttackDamageMin"            "1760"
-        "AttackDamageMax"            "1996"
+        "AttackDamageMin"            "1360"
+        "AttackDamageMax"            "1596"
         "AttackRate"                "1.50"
         "AttackAnimationPoint"      "0.20"
         "AttackRange"               "550"
@@ -265,6 +265,8 @@
         "CombatClassAttack"         "DOTA_COMBAT_CLASS_ATTACK_BASIC"
         "CombatClassDefend"         "DOTA_COMBAT_CLASS_DEFEND_BASIC"
         "UnitRelationshipClass"     "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+
+        "Ability1" "dark_summon_buff"
 
         "StatusHealth"                "3672"
         "StatusHealthRegen"           "25.0"
@@ -301,7 +303,7 @@
         "CombatClassDefend"         "DOTA_COMBAT_CLASS_DEFEND_BASIC"
         "UnitRelationshipClass"     "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
 
-        "StatusHealth"                "38472"
+        "StatusHealth"                "45472"
         "StatusHealthRegen"           "25.0"
         "StatusMana"                "600"
         "StatusManaRegen"           "5.0"

@@ -83,7 +83,7 @@ function Spawn:Spawn(data)
 
     -- TODO: Source from unit data, override with spawn data.
     if data.AI then
-        entity:AddNewModifier(nil, nil, data.AI, nil)
+        entity:AddNewModifier(entity, nil, data.AI, nil)
     end
 
     if data.Cosmetics then

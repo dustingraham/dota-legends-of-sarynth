@@ -37,7 +37,10 @@ var BuildBuffBlock = function(id, buffId)
 
     var stacks = Buffs.GetStackCount(id, buffId);
     if (stacks > 0)
+    {
+        // TODO!!
         $.Msg('Stacks: '+stacks);
+    }
 
     var duration = Buffs.GetDuration(id, buffId);
     if (duration > 0)

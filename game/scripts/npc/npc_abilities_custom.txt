@@ -210,6 +210,40 @@
         //"AbilityDuration"          "0.5"
     }
 
+    "dark_summon_buff"
+    {
+        "BaseClass"                 "ability_datadriven"
+        "AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_AURA"
+        "AbilityTextureName"        "invoker_forge_spirit"
+        "AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+        "Modifiers"
+        {
+            "modifier_armor_aura"
+            {
+                "Passive" "1"
+                "IsHidden"    "1" //Don't show the aura applier
+
+                "Aura"        "armor_aura_effect"
+                "Aura_Radius" "1800"
+                "Aura_Teams"  "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+                "Aura_Types"  "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+                "Aura_Flags"  "DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
+                "Aura_ApplyToCaster" "0"
+            }
+
+            "armor_aura_effect"
+            {
+                "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+                "Properties"
+                {
+                    "MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" "20"
+                    "MODIFIER_PROPERTY_MAGICAL_RESISTANCE_BONUS" "60"
+                    "MODIFIER_PROPERTY_INCOMING_DAMAGE_PERCENTAGE" "-50"
+                }
+            }
+        }
+    }
+
     "fireball"
     {
         "BaseClass"                "ability_lua"

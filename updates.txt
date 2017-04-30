@@ -1,4 +1,19 @@
+[b]v0.0.73[/b]
+ • Dark Priestess Lumorase encounter adjusted.
+  = One spirit at 75% hp, 50% hp, and two spirits at 25% hp.
+  = Spirits now give Lumorase a strong armor modifier while alive.
+  = Spirit damage reduced slightly.
+  = Lumorase health increased slightly.
+  = Channel time when energizing reduced from 6 seconds to 4 seconds.
+  = Energizes after reaching 25% hp instead of 75% hp.
+[b]Heroes[/b]
+ • Rogue rend damage doubled. Ticks every 1 second for 18 seconds, up from every 2 seconds for 18 seconds.
+ • Mage magic missile damage increased from 125% to 175% of base damage.
+ • Sorcerer cursed flames damage increased from 85% to 105% of base damage for all targets hit.
+
 [b]v0.0.72[/b]
+ • Dark Priestess Lumorase has learned how to use fireballs.
+[b]Bugs[/b]
  • Fix bug with out-of-combat regen not working until after first encounter.
  • Fix bug where picking up inventory beyond max capacity would disappear.
  • Normalized dropped item effects to be more consistent.

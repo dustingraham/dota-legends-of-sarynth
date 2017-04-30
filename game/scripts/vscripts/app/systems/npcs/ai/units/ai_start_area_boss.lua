@@ -42,6 +42,8 @@ if IsServer() then
     end
 end
 
+function ai:IsHIdden() return true end
+
 function ai:GetModifierHealthRegenPercentage()
     if self.state == ai.ACTION_RETURN then return 10.0 end
     if self.state == ai.ACTION_IDLE then return 20.0 end

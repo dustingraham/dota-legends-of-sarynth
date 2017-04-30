@@ -3,14 +3,21 @@ Fight
 
 Start:
  - Begin attacking hero.
- - At 5 seconds, cast a spell/projectile to be side-stepped.
+ - Casts fireballs regularly throughout the fight to be side stepped.
 
 75% HP:
- - Spawn two shards.
+ - Spawn one shard that gives a stacking armor buff to priestess.
 
-Shards Die:
- - "Noooo...."
- - Energizes, runs to ball, links.
+50% HP:
+ - Spawn one shard that gives a stacking armor buff to priestess.
+
+25% HP:
+ - Spawn one/two shards that gives a stacking armor buff to priestess.
+ - Priestess runs to ball, links, energizes.
+
+Shard Die:
+ - Priestess: "Noooo...."
+ - Shard explodes for aoe damage.
 
 Energized:
  - Casts spells faster.
@@ -30,6 +37,8 @@ function AiDarkBossLogic(ai)
         --Check if the unit's target is still alive (self.aggroTarget will have to be set when transitioning into this state)
         if not self.aggroTarget:IsAlive() then
             -- TODO Look for another target in the area!!
+            -- local alternate = self:FindClosestAggro
+            -- FindHeroesInArea (With our zone, or have attacked us.)
             self:TransitionToReturn()
             return true --Return to make sure no other code is executed in this state
         end
@@ -39,15 +48,23 @@ function AiDarkBossLogic(ai)
         --if self.timeInState > 5 then
         -- Cast Skill
         --end
-        if self.shardsCreated == false then
+        if self.shardOne == false then
             if self:GetParent():GetHealth() / self:GetParent():GetMaxHealth() < 0.75 then
-                self:CreateShards()
-
-                -- TESTING
-                --self.shardsCreated = 1
-                --self:TransitionTo(ai.ACTION_LINK_DESIRE)
+                self.shardOne = self:CreateShard()
+            end
+        elseif self.shardTwo == false then
+            if self:GetParent():GetHealth() / self:GetParent():GetMaxHealth() < 0.50 then
+                self.shardTwo = self:CreateShard()
+            end
+        elseif self.shardThree == false then
+            if self:GetParent():GetHealth() / self:GetParent():GetMaxHealth() < 0.25 then
+                self.shardThree = self:CreateShard()
+                self.shardFour = self:CreateShard()
+                self:TransitionToEnergize()
             end
         end
+
+        --self:UpdateStackCount()
 
         --State behavior
         --Here we can just do any behaviour you want to repeat in this state
@@ -55,7 +72,10 @@ function AiDarkBossLogic(ai)
             self:FallbackAttackCheck()
         end
     end
-
+    function ai:TransitionToEnergize()
+        EmitSoundOn('death_prophet_dpro_pain_22', self:GetParent())
+        self:TransitionTo(ai.ACTION_LINK_DESIRE)
+    end
     function ai:DealDamage(target, damage, damageType, source)
         if not source then source = self:GetParent() end
         if not damageType then damageType = DAMAGE_TYPE_MAGICAL end
@@ -68,12 +88,14 @@ function AiDarkBossLogic(ai)
     end
 
     function ai:OnShardKilled(deadShard)
+        --self:UpdateStackCount()
+
         -- TODO: Explosion and damage? And, damage spot?
         -- TODO: Noise.
         ParticleManager:ReleaseParticleIndex(ParticleManager:CreateParticle(
-        'particles/units/heroes/hero_techies/techies_blast_off.vpcf',
-        PATTACH_ABSORIGIN_FOLLOW,
-        deadShard
+            'particles/units/heroes/hero_techies/techies_blast_off.vpcf',
+            PATTACH_ABSORIGIN_FOLLOW,
+            deadShard
         ))
         -- Deal 1800 damage in 1000 radius.
         for _,target in pairs(self:FindHeroes(1000)) do
@@ -84,19 +106,19 @@ function AiDarkBossLogic(ai)
             self:DealDamage(target, 4800, DAMAGE_TYPE_MAGICAL, deadShard)
         end
 
-        for _,shard in pairs(self.shards) do
-            if IsValidEntity(shard) and shard:IsAlive() then
-                Debug('AiDarkBoss', 'At least one shard is still alive...')
-                return
-            end
-        end
+        --for _,shard in pairs(self.shards) do
+        --    if IsValidEntity(shard) and shard:IsAlive() then
+        --        Debug('AiDarkBoss', 'At least one shard is still alive...')
+        --        return
+        --    end
+        --end
 
         -- All shards have died, transition to link desire.
         -- IFF we are in the fight state.
-        if self.state == ai.ACTION_FIGHT_STANDARD then
-            EmitSoundOn('death_prophet_dpro_pain_22', self:GetParent())
-            self:TransitionTo(ai.ACTION_LINK_DESIRE)
-        end
+        --if self.state == ai.ACTION_FIGHT_STANDARD then
+        --    EmitSoundOn('death_prophet_dpro_pain_22', self:GetParent())
+        --    self:TransitionTo(ai.ACTION_LINK_DESIRE)
+        --end
     end
 
     -- Desires a link, walk to the sphere and start channeling once arrived.
@@ -121,7 +143,7 @@ function AiDarkBossLogic(ai)
 
     -- Channel for 5 seconds, small burst, then continue attacking.
     function ai:ActionLinkChannel()
-        if self.timeInState > 5 then
+        if self.timeInState > 3 then
             self.energized = true
 
             self:GetParent():SetRangedProjectileName('particles/units/dark_plains/boss/energized_attack/energized_attack.vpcf')

@@ -38,6 +38,10 @@ if IsServer() then
     end
 end
 
+function ai_aggro_leash:IsHidden()
+    return true
+end
+
 function ai_aggro_leash:GetModifierHealthRegenPercentage()
     if self.state == ai_aggro_leash.ACTION_AGGRO then return 0.0 end
     return 20.0
@@ -79,9 +83,9 @@ function ai_aggro_leash:OnDeath(event)
 
         -- Initial Cloud Visual
         local noxiousParticle = ParticleManager:CreateParticle(
-            'particles/units/webbed/noxious_cloud.vpcf',
-            PATTACH_CUSTOMORIGIN,
-            entity
+        'particles/units/webbed/noxious_cloud.vpcf',
+        PATTACH_CUSTOMORIGIN,
+        entity
         )
         ParticleManager:SetParticleControl( noxiousParticle, 0, position )
         --ParticleManager:ReleaseParticleIndex(particle)
@@ -89,9 +93,9 @@ function ai_aggro_leash:OnDeath(event)
         -- Death Splat
         Timers(0.3, function()
             local particle = ParticleManager:CreateParticle(
-                'particles/units/heroes/hero_broodmother/broodmother_spiderlings_spawn_b_lv.vpcf',
-                PATTACH_CUSTOMORIGIN,
-                entity
+            'particles/units/heroes/hero_broodmother/broodmother_spiderlings_spawn_b_lv.vpcf',
+            PATTACH_CUSTOMORIGIN,
+            entity
             )
             ParticleManager:SetParticleControl( particle, 0, position )
         end)
@@ -110,15 +114,15 @@ function ai_aggro_leash:OnDeath(event)
 
                 -- Make the ouch
                 local units = FindUnitsInRadius(
-                    DOTA_TEAM_GOODGUYS,
-                    position,
-                    nil,
-                    100,
-                    DOTA_UNIT_TARGET_TEAM_FRIENDLY,
-                    DOTA_UNIT_TARGET_ALL,
-                    DOTA_UNIT_TARGET_FLAG_NONE,
-                    FIND_ANY_ORDER,
-                    false
+                DOTA_TEAM_GOODGUYS,
+                position,
+                nil,
+                100,
+                DOTA_UNIT_TARGET_TEAM_FRIENDLY,
+                DOTA_UNIT_TARGET_ALL,
+                DOTA_UNIT_TARGET_FLAG_NONE,
+                FIND_ANY_ORDER,
+                false
                 )
                 for _,ouchUnit in pairs(units) do
                     ouchUnit:AddNewModifier(entity, nil, 'webbed_spidy_bubble_death_cloud', { duration = 3 })
@@ -145,9 +149,9 @@ end
 
 function ai_aggro_leash:ActionIdle()
     local units = FindUnitsInRadius(
-        self:GetParent():GetTeam(), self:GetParent():GetAbsOrigin(), nil,
-        self.aggroRange, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_ALL, DOTA_UNIT_TARGET_FLAG_NONE,
-        FIND_ANY_ORDER, false
+    self:GetParent():GetTeam(), self:GetParent():GetAbsOrigin(), nil,
+    self.aggroRange, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_ALL, DOTA_UNIT_TARGET_FLAG_NONE,
+    FIND_ANY_ORDER, false
     )
     --If one or more units were found, start attacking the first one
     if #units > 0 then

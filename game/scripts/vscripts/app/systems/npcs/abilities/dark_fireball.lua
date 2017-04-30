@@ -9,7 +9,6 @@ function spell:OnAbilityPhaseStart()
     })
     --EmitSoundOn('Hero_Lycan.SummonWolves', self:GetCaster())
 
-
     --self:GetCaster():SetAbsOrigin(self:GetCaster():GetAbsOrigin()+Vector(0,0,60))
     return true
 end
