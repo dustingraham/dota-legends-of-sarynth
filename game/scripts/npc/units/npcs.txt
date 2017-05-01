@@ -67,6 +67,57 @@
         "VisionDaytimeRange"        "0"
         "VisionNighttimeRange"      "0"
     }
+    "npc_town_shopkeeper"
+    {
+        "BaseClass"             "npc_dota_creature"
+        "Model"                 "models/heroes/pudge/pudge.vmdl"
+        "ModelScale"            "0.80"
+        "Level"                 "30"
+        "HealthBarOffset"       "260"
+
+        "VisionDaytimeRange"        "0"
+        "VisionNighttimeRange"      "0"
+        "Creature"
+        {
+            "AttachWearables"
+            {
+                //"Wearable0" { "ItemDef" "7933" } // Hook of the Royal Butcher
+                "Wearable0" { "ItemDef" "8380" } // Cleaver of the Nurgle Champion
+
+                "Wearable1" { "ItemDef" "7971" } // Beard of the Royal Butcher
+                "Wearable2" { "ItemDef" "7975" } // Fan of the Royal Butcher
+                "Wearable3" { "ItemDef" "7977" } // Buckle of the Royal Butcher
+                "Wearable4" { "ItemDef" "7991" } // Belt of the Royal Butcher
+                "Wearable5" { "ItemDef" "7992" } // Wrap of the Royal Butcher
+                "Wearable6" { "ItemDef" "7993" } // Sleeves of the Royal Butcher
+            }
+        }
+    }
+    "npc_town_smuggler"
+    {
+        "BaseClass"             "npc_dota_creature"
+        "Model"                 "models/heroes/bounty_hunter/bounty_hunter.vmdl"
+        "ModelScale"            "0.80"
+        "Level"                 "30"
+        "HealthBarOffset"       "260"
+
+        "VisionDaytimeRange"        "0"
+        "VisionNighttimeRange"      "0"
+        "Creature"
+        {
+            "AttachWearables"
+            {
+                //"Wearable0" { "ItemDef" "8380" } // Cleaver of the Nurgle Champion
+
+                "Wearable1" { "ItemDef" "6692" } // Hat of the Hunter
+                "Wearable2" { "ItemDef" "6693" } // Armor of the Hunter
+                "Wearable3" { "ItemDef" "6688" } // Cape of the Hunter
+                "Wearable4" { "ItemDef" "6689" } // Pistol Blade of the Hunter
+                "Wearable5" { "ItemDef" "6690" } // Rifle Blade of the Hunter
+                "Wearable6" { "ItemDef" "6691" } // Shuriken of the Hunter
+            }
+        }
+    }
     "npc_questgiver_webbed"
     {
         "BaseClass"             "npc_dota_creature"

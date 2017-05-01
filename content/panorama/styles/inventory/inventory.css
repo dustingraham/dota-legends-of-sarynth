@@ -270,3 +270,45 @@
     background-color: gradient( radial, 50% -20%, 0% 0%, 80% 80%, from( #990000 ), to( #FF000000 ) );
 }
 
+
+/** ************************************************** **/
+/* Shop */
+
+.inventory-dialog .left.shop,
+.inventory-dialog .right #ShopBackpack {
+    visibility:collapse;
+}
+.shop-dialog.inventory-dialog .left.shop,
+.shop-dialog.inventory-dialog .right #ShopBackpack {
+    visibility:visible;
+}
+
+.shop-dialog .left.inventory {
+    visibility:collapse;
+}
+.shop-dialog .backpackLabel {
+    visibility: collapse;
+}
+.shop-dialog .right {
+    width:50%;
+    padding-right:15px;
+}
+.shop-dialog .left.shop {
+    padding-left:15px;
+    width:50%;
+}
+.shop-dialog .left.shop #ForSaleLabel {
+    margin-top:85px;
+}
+.shop-dialog .left.shop .backpack-container {
+    margin-top:0;
+}
+.shop-dialog .left.shop #BuyBackLabel {
+    margin-top:90px;
+}
+.shop-dialog .left.shop #BuyBack {
+    margin-top:50px;
+}
+.shop-dialog .right #ShopBackpack {
+    margin-top:80px;
+}

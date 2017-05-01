@@ -25,6 +25,9 @@ var GetPanel = function(panel)
 var $backpack = $('#Backpack');
 var $equipment = $('#Equipment');
 
+var $shopForSale = $('#ForSale');
+var $shopBuyBack = $('#BuyBack');
+
 var inventory = {
     panels: {},
     ActivateItem: function()
@@ -257,6 +260,9 @@ var BuildItemBlock = function(attachTo, slotId, slotType)
 $backpack.RemoveAndDeleteChildren();
 $equipment.RemoveAndDeleteChildren();
 
+$shopForSale.RemoveAndDeleteChildren();
+$shopBuyBack.RemoveAndDeleteChildren();
+
 // Equipment panels.
 var BuildEquipmentPanel = function(position, start, end)
 {
@@ -281,6 +287,28 @@ for (i = 0; i <= 5; i++) {
         BuildItemBlock(row, slotId, 0);
     }
 }
+
+// // Five rows of six for shop.
+// for (i = 0; i <= 5; i++) {
+//     var row = $.CreatePanel('Panel', $shopForSale, 'forsale-row' + i);
+//     row.AddClass('backpack-panel-group');
+//     for (var j = 1; j <= 6; j++) {
+//         // Offset by 12.
+//         var slotId = 100 + j + i * 6;
+//         BuildItemBlock(row, slotId, 0);
+//     }
+// }
+// // Five rows of six for shop.
+// for (i = 0; i <= 0; i++) {
+//     var row = $.CreatePanel('Panel', $shopBuyBack, 'buyback-row' + i);
+//     row.AddClass('backpack-panel-group');
+//     for (var j = 1; j <= 6; j++) {
+//         // Offset by 12.
+//         var slotId = 150 + j + i * 6;
+//         BuildItemBlock(row, slotId, 0);
+//     }
+// }
+
 
 var colorMap = {
     // Special based on level.

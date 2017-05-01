@@ -23,13 +23,20 @@
     <Panel class="inventoryhud" hittest="false">
         <Panel id="InventoryDialog" class="inventory-container hide">
             <Image class="inventory-dialog" src="file://{images}/inventory/window.png">
-                <Panel class="left">
+                <Panel class="left inventory">
                     <Label id="HeroClassLabel" class="TitleFont classname" text="Warrior"/>
                     <Label id="HeroLevelLabel" class="levelLabel" text="Level 13"/>
                     <Panel id="Equipment" class="equipment-container"/>
                     <Image class="doll" src="file://{images}/inventory/doll.png"/>
                 </Panel>
+                <Panel class="left shop">
+                    <Label id="ForSaleLabel" class="TitleFont classname" text="For Sale"/>
+                    <Panel id="ForSale" class="backpack-container"/>
+                    <Label id="BuyBackLabel" class="TitleFont classname" text="Buy Back (Recently Sold)"/>
+                    <Panel id="BuyBack" class="backpack-container"/>
+                </Panel>
                 <Panel class="right">
+                    <Label id="ShopBackpack" class="TitleFont classname" text="Backpack"/>
                     <Label class="backpackLabel" text="BACKPACK"/>
                     <Panel id="Backpack" class="backpack-container"/>
                     <Panel class="gold-coins">
