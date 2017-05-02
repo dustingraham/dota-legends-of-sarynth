@@ -236,9 +236,9 @@
                 "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
                 "Properties"
                 {
-                    "MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" "20"
-                    "MODIFIER_PROPERTY_MAGICAL_RESISTANCE_BONUS" "60"
-                    "MODIFIER_PROPERTY_INCOMING_DAMAGE_PERCENTAGE" "-50"
+                    //"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" "20"
+                    //"MODIFIER_PROPERTY_MAGICAL_RESISTANCE_BONUS" "60"
+                    "MODIFIER_PROPERTY_INCOMING_DAMAGE_PERCENTAGE" "-60"
                 }
             }
         }

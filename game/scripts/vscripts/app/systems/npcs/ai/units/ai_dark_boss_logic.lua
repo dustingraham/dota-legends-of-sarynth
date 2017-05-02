@@ -64,7 +64,8 @@ function AiDarkBossLogic(ai)
             end
         end
 
-        --self:UpdateStackCount()
+        -- Keep track of shards up.
+        self:UpdateShardCount()
 
         --State behavior
         --Here we can just do any behaviour you want to repeat in this state
@@ -105,6 +106,8 @@ function AiDarkBossLogic(ai)
         for _,target in pairs(self:FindHeroes(400)) do
             self:DealDamage(target, 4800, DAMAGE_TYPE_MAGICAL, deadShard)
         end
+
+        self:UpdateShardCount()
 
         --for _,shard in pairs(self.shards) do
         --    if IsValidEntity(shard) and shard:IsAlive() then

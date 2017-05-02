@@ -91,32 +91,44 @@ function ai:OnTakeDamage(event)
         self.aggroTarget = event.attacker
         self:StartFight()
     end
-    --if self.state == ai.ACTION_FIGHT_STANDARD then
-    --    if self.shardsCreated == 0 then
-    --        if self:GetParent():GetHealth() / self:GetParent():GetMaxHealth() < 0.5 then
-    --            self:CreateShards()
-    --        end
-    --    end
-    --end
+
+    -- Rather than checking for mods on every attack.... we ought to have a mod if there's one up.
+    -- Just flash!
+    if self.numShards > 0 then
+        self:ShieldFlash()
+    end
+end
+
+function ai:ShieldFlash()
+    local pIdx = ParticleManager:CreateParticle(
+        'particles/units/dark_plains/boss/shield_deflection.vpcf',
+        PATTACH_ABSORIGIN_FOLLOW,
+        self:GetParent()
+    )
+    ParticleManager:SetParticleControl(pIdx, 0, self:GetParent():GetAbsOrigin())
+    ParticleManager:ReleaseParticleIndex(pIdx)
 end
 
 function ai:GetTexture()
     return 'forged_spirit_melting_strike'
 end
 
---function ai:UpdateStackCount()
---    local count = 0
---    if self.shardOne and IsValidEntity(self.shardOne) and self.shardOne:IsAlive() then
---        count = count + 1
---    end
---    if self.shardTwo and IsValidEntity(self.shardTwo) and self.shardTwo:IsAlive() then
---        count = count + 1
---    end
---    if self.shardThree and IsValidEntity(self.shardThree) and self.shardThree:IsAlive() then
---        count = count + 1
---    end
---    self:SetStackCount(count)
---end
+function ai:UpdateShardCount()
+    local count = 0
+    if self.shardOne and IsValidEntity(self.shardOne) and self.shardOne:IsAlive() then
+        count = count + 1
+    end
+    if self.shardTwo and IsValidEntity(self.shardTwo) and self.shardTwo:IsAlive() then
+        count = count + 1
+    end
+    if self.shardThree and IsValidEntity(self.shardThree) and self.shardThree:IsAlive() then
+        count = count + 1
+    end
+    if self.shardFour and IsValidEntity(self.shardFour) and self.shardFour:IsAlive() then
+        count = count + 1
+    end
+    self.numShards = count
+end
 
 function ai:OnDeath(event)
     if event.unit == self.shardOne or event.unit == self.shardTwo or event.unit == self.shardThree or event.unit == self.shardFour then

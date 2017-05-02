@@ -63,6 +63,7 @@ function AiDarkBossActions(ai)
             self.shardFour:ForceKill(false)
         end
         self.shardFour = false
+        self:UpdateShardCount()
     end
 
     function ai:CreateIndicator()

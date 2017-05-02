@@ -326,6 +326,7 @@
         {
             "particle" "particles/units/dark_plains/boss/energized_attack/energized_attack.vpcf"
             "particle" "particles/effects/ground_indicator.vpcf"
+            "particle" "particles/units/dark_plains/boss/shield_deflection.vpcf"
             "particle" "particles/hw_fx/hw_rosh_fireball.vpcf"
             "particle" "particles/econ/items/brewmaster/brewmaster_offhand_elixir/brewmaster_thunder_clap_elixir.vpcf"
         }
