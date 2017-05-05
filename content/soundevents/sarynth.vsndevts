@@ -1,30 +1,135 @@
 <!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
 {
-	Teleport.Liftoff = {
-		type = "dota_src1_2d"
-		vsnd_files =
-		[
-			"sounds/ui/power_up_03.vsnd",
-		]
-		volume = "0.20"
-	}
-	Scar.Death = {
-		type = "dota_src1_2d"
-		vsnd_files =
-		[
-			"sounds/ambient/soundscapes/diretide/diretide_wolf_01.vsnd",
-			"sounds/ambient/soundscapes/diretide/diretide_wolf_02.vsnd",
-			"sounds/ambient/soundscapes/diretide/diretide_wolf_03.vsnd",
-			"sounds/ambient/soundscapes/diretide/diretide_wolf_04.vsnd",
-		]
-		volume = "1"
-	}
-	Scar.DeathGrunt = {
-		type = "dota_src1_2d"
-		vsnd_files =
-		[
-			"sounds/weapons/hero/lycan/wolf_preattack02.vsnd",
-		]
-		volume = "1"
-	}
+    Teleport.Liftoff = {
+        type = "dota_src1_2d"
+        vsnd_files =
+        [
+            "sounds/ui/power_up_03.vsnd",
+        ]
+        volume = "0.20"
+    }
+    Scar.Death = {
+        type = "dota_src1_2d"
+        vsnd_files =
+        [
+            "sounds/ambient/soundscapes/diretide/diretide_wolf_01.vsnd",
+            "sounds/ambient/soundscapes/diretide/diretide_wolf_02.vsnd",
+            "sounds/ambient/soundscapes/diretide/diretide_wolf_03.vsnd",
+            "sounds/ambient/soundscapes/diretide/diretide_wolf_04.vsnd",
+        ]
+        volume = "1.0"
+    }
+    Scar.DeathGrunt = {
+        type = "dota_src1_2d"
+        vsnd_files =
+        [
+            "sounds/weapons/hero/lycan/wolf_preattack02.vsnd",
+        ]
+        volume = "1.0"
+    }
+
+    Music.Pick = {
+        type = "dota_update_hero_select"
+        vsnd_files =
+        [
+            "sounds/music/jlin_01/music/ui_startup.vsnd",
+        ]
+        volume = "1.0"
+        pitch_rand_min = "-0.05"
+        pitch_rand_max = "0.05"
+        pitch = "1.0"
+        soundlevel = "95.0"
+        event_type = "1.0"
+    }
+    Music.Zone.Start = {
+        type = "dota_update_hero_select"
+        vsnd_files =
+        [
+            "sounds/music/jboberg_01/music/ui_hero_select.vsnd",
+        ]
+        volume = "1.0"
+        pitch_rand_min = "-0.05"
+        pitch_rand_max = "0.05"
+        pitch = "1.0"
+        soundlevel = "95.0"
+        event_type = "1.0"
+    }
+    Music.Zone.Town = {
+        type = "dota_update_hero_select"
+        vsnd_files =
+        [
+            "sounds/music/jbrice_01/music/ui_hero_select.vsnd",
+        ]
+        volume = "1.0"
+        pitch_rand_min = "-0.05"
+        pitch_rand_max = "0.05"
+        pitch = "1.0"
+        soundlevel = "95.0"
+        event_type = "1.0"
+    }
+    Music.Zone.Kobolds = {
+        type = "dota_update_hero_select"
+        vsnd_files =
+        [
+            "sounds/music/deadmau5_01/music/ui_hero_select.vsnd",
+        ]
+        volume = "1.0"
+        pitch_rand_min = "-0.05"
+        pitch_rand_max = "0.05"
+        pitch = "1.0"
+        soundlevel = "95.0"
+        event_type = "1.0"
+    }
+    Music.Zone.Webbed = {
+        type = "dota_update_hero_select"
+        vsnd_files =
+        [
+            "sounds/music/jlin_01/music/ui_hero_select.vsnd",
+        ]
+        volume = "1.0"
+        pitch_rand_min = "-0.05"
+        pitch_rand_max = "0.05"
+        pitch = "1.0"
+        soundlevel = "95.0"
+        event_type = "1.0"
+    }
+    Music.Zone.Dark = {
+        type = "dota_update_hero_select"
+        vsnd_files =
+        [
+            "sounds/music/dsadowski_02/music/ui_hero_select.vsnd",
+        ]
+        volume = "1.0"
+        pitch_rand_min = "-0.05"
+        pitch_rand_max = "0.05"
+        pitch = "1.0"
+        soundlevel = "95.0"
+        event_type = "1.0"
+    }
+    Music.Zone.Druids = {
+        type = "dota_update_hero_select"
+        vsnd_files =
+        [
+            "sounds/music/mhawken_01/music/ui_hero_select.vsnd",
+        ]
+        volume = "1.0"
+        pitch_rand_min = "-0.05"
+        pitch_rand_max = "0.05"
+        pitch = "1.0"
+        soundlevel = "95.0"
+        event_type = "1.0"
+    }
+    Music.Zone.Snow = {
+        type = "dota_update_hero_select"
+        vsnd_files =
+        [
+            "sounds/music/yaskar_01/music/ui_hero_select.vsnd",
+        ]
+        volume = "1.0"
+        pitch_rand_min = "-0.05"
+        pitch_rand_max = "0.05"
+        pitch = "1.0"
+        soundlevel = "95.0"
+        event_type = "1.0"
+    }
 }

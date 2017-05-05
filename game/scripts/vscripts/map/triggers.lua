@@ -80,6 +80,18 @@ end
 --end
 
 function ZoneIn(trigger)
-    Debug('TriggersVerbose', trigger.activator:GetPlayerOwnerID(), 'zoning into', trigger.caller:GetName())
-    CharacterService:SetZone(trigger.activator, trigger.caller:GetName())
+    local hero = trigger.activator
+    local zone = trigger.caller:GetName()
+
+    -- We don't care about zone in of the wisp
+    if hero:GetUnitName() == DUMMY_HERO then return end
+
+    if hero.currentZone ~= zone then
+        Debug('Triggers', 'PlayerID ', hero:GetPlayerOwnerID(), 'zoning into', zone)
+        Event:Trigger('ZoneIn', {
+            hero = hero,
+            zone = zone
+        })
+        hero.currentZone = zone
+    end
 end

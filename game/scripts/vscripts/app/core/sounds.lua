@@ -11,7 +11,7 @@ function Sounds:EmitSoundOnClient(playerID, sound)
         CustomGameEventManager:Send_ServerToPlayer(player, "emit_client_sound", { sound = sound })
         return true
     else
-        print('ERROR - Sounds : No player with ID', playerID)
+        Debug('Sounds', 'ERROR - Sounds : No player with ID', playerID)
     end
     return false
 end
@@ -25,7 +25,7 @@ function Sounds:Start(sound, PlayerID)
         CustomGameEventManager:Send_ServerToPlayer(player, 'emit_client_sound_start', { sound = sound })
         return true
     else
-        print('ERROR - Sounds : No player with ID', PlayerID)
+        Debug('Sounds', 'ERROR - Sounds : No player with ID', PlayerID)
     end
     return false
 end
@@ -38,7 +38,7 @@ function Sounds:Stop(sound, PlayerID)
         CustomGameEventManager:Send_ServerToPlayer(player, 'emit_client_sound_stop', { sound = sound })
         return true
     else
-        print('ERROR - Sounds : No player with ID', PlayerID)
+        Debug('Sounds', 'ERROR - Sounds : No player with ID', PlayerID)
     end
     return false
 end

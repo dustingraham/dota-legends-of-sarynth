@@ -19,6 +19,9 @@ function PlayerService:OnConnectFull(event)
 
     self.players[event.PlayerID] = Player(event.PlayerID)
     self.players[event.PlayerID]:Load()
+
+    -- Music
+    Music:Play('Music.Pick', event.PlayerID)
 end
 
 function PlayerService:Set(PlayerID, key, value)

@@ -122,9 +122,6 @@ function CharacterService:OnEntityKilled(event)
     end
 end
 
-function CharacterService:SetZone(hero, zone)
-    hero.currentZone = zone
-end
 function CharacterService:OnHeroDeath(e, event)
     local hero = event.hero
     Debug('CharacterService', 'OnHeroDeath', hero:GetName())
@@ -247,7 +244,7 @@ function CharacterService:OnHeroPick(e, event)
     --Containers:SetDefaultInventory(hero, hero.customInventory)
 
     -- Entering world.
-    GameRules:GetGameModeEntity():EmitSound('jboberg_01.music.ui_hero_select')
+    -- GameRules:GetGameModeEntity():EmitSound('jboberg_01.music.ui_hero_select')
     -- GameRules:GetGameModeEntity():EmitSound('jboberg_01.stinger.radiant_win');
     -- Sounds:EmitSoundOnClient(0, 'jboberg_01.stinger.radiant_win')
 

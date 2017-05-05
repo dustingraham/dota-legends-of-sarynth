@@ -1,7 +1,8 @@
 [b]v0.0.75[/b]
  • Added a shield deflection visual to Lumorase when she is attacked while protected by the Shard auras.
+ • Added more music diversity to the various zones.
  
- [b]v0.0.74[/b]
+[b]v0.0.74[/b]
  • Improved focus target handling. Should solve the problem where your spells were hitting one target, and your auto-attack was attacking a different target.
 
 [b]v0.0.73[/b]

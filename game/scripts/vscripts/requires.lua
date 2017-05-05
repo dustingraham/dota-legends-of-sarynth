@@ -11,6 +11,7 @@ for _,file in ipairs({
     'app/core/boot',
     'app/core/filters',
     'app/core/sounds',
+    'app/core/music',
 
     'app/maps/'..GetMapName(),
 

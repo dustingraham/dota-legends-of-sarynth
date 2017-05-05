@@ -46,7 +46,7 @@ function CharacterPick:OnCharacterPick(event)
 
     -- Sound + Music for Standard Game Pick
     EmitSoundOnClient('HeroPicker.Selected', PlayerResource:GetPlayer(event.PlayerID))
-    GameRules:GetGameModeEntity():EmitSound('jboberg_01.music.ui_hero_select')
+    --GameRules:GetGameModeEntity():EmitSound('jboberg_01.music.ui_hero_select')
 
     local player = PlayerService:GetPlayer(event.PlayerID)
     player:SetCurrentSlot(event.slotId)
@@ -72,9 +72,8 @@ function CharacterPick:OnCharacterLoad(event)
         return
     end
 
-    -- Sound + Music for Standard Game Pick
+    -- Sound for Standard Game Pick
     EmitSoundOnClient('HeroPicker.Selected', PlayerResource:GetPlayer(event.PlayerID))
-    GameRules:GetGameModeEntity():EmitSound('jboberg_01.music.ui_hero_select')
 
     Debug('CharacterPick', event.PlayerID, 'Loading slot...', event.slotId)
     local player = PlayerService:GetPlayer(event.PlayerID)
