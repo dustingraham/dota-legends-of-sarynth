@@ -32,6 +32,11 @@ private.kv
 content/materials/overviews/*
 game/materials/overviews/*
 game/resource/overviews/*
+game/screenshots
+game/server_log.txt
+game/rich_presence_persistent_data.txt
+game/demoheader.tmp
+game/*.soc
 
 #Github dump
 *.stackdump
