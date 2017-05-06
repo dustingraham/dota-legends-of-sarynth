@@ -3,7 +3,7 @@
 	_class = "CParticleSystemDefinition"
 	m_bShouldHitboxesFallbackToRenderBounds = false
 	m_nMaxParticles = 64
-	m_ConstantColor = [ 255, 251, 38, 255 ]
+	m_ConstantColor = [ 37, 92, 255, 255 ]
 	m_Renderers = 
 	[
 		{
@@ -71,7 +71,7 @@
 		},
 		{
 			_class = "C_OP_ColorInterpolate"
-			m_ColorFade = [ 240, 230, 140, 255 ]
+			m_ColorFade = [ 140, 225, 240, 255 ]
 			m_flFadeStartTime = 0.2
 			m_flFadeEndTime = 0.75
 		},
@@ -125,6 +125,21 @@
 		{
 			_class = "C_OP_ContinuousEmitter"
 			m_flEmitRate = 32.0
+		},
+	]
+	m_controlPointConfigurations = 
+	[
+		{
+			m_name = "preview"
+			m_drivers = 
+			[
+				{
+					m_iAttachType = "PATTACH_WORLDORIGIN"
+					m_vecOffset = [ 0.0, 0.0, 0.0 ]
+					m_angOffset = [ null, null, null ]
+					m_entityName = "self"
+				},
+			]
 		},
 	]
 }

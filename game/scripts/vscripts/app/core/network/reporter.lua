@@ -59,72 +59,17 @@ function Reporter:CreateReport(params)
 
 end
 
-function Reporter:GetItemsForHero(hero)
-    local items = {}
-    for slot,itemId in pairs(hero.inventory:GetAllItems()) do
-        local item = EntIndexToHScript(itemId)
-        items[slot] = item:GetName()
-    end
-    return items
-end
-
-function Reporter:GetQuestsForPlayer(PlayerID)
-    local key = 'player_'..PlayerID..'_quests'
-    local quests = {
-        completed = QuestService.playerCompleted[key],
-        progress = {}
-    }
-    if QuestService.playerQuests[key] then
-        for _,quest in pairs(QuestService.playerQuests[key]) do
-            local objectives = {}
-            for oid,objective in pairs(quest.objectives) do
-                table.insert(objectives, {
-                    oid = oid,
-                    current = objective.current,
-                    required = objective.required,
-                })
-            end
-            table.insert(quests.progress, {
-                id = quest.id,
-                objectives = objectives,
-            })
-        end
-    end
-    return quests
-end
-
--- local hero = PlayerResource:GetSelectedHeroEntity(0)
--- print(inspect(GetItemsForHero(hero)))
--- hero.customEquipment:AddItem(CreateItem('item_amulet_tier1', nil, nil), 4)
--- print(inspect(GetQuestsForPlayer(0)))
-
 function Reporter:PullCharacterReport(PlayerID)
     Debug('ReporterVerbose', 'Pulling character report.')
     local player = PlayerService:GetPlayer(PlayerID)
-    local hero = PlayerResource:GetSelectedHeroEntity(PlayerID)
     return {
         event_name = 'character_status',
         player_id_64 = tostring(PlayerResource:GetSteamID(PlayerID)),
         slot_id = player:GetSlotId(),
-        data = {
-            items = self:GetItemsForHero(hero),
-            quests = self:GetQuestsForPlayer(PlayerID),
-            experience = hero:GetCurrentXP(),
-            level = hero:GetLevel(),
-            gold = hero:GetGold(),
-            gametime = player:GetPriorGametime() + math.ceil(GameRules:GetGameTime()),
-            zone = hero.currentZone,
-        }
+        data = player:GetSaveData(),
     }
 end
 
--- if not PlayerResource then
---     Timers:CreateTimer(5, function()
---         Reporter:Report({})
---     end)
--- else
---     Reporter:Report({})
--- end
 REPORTER_REPORT = {
     hero_pick = true,
     hero_level_up = true,

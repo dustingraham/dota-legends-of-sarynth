@@ -27,6 +27,14 @@
         ]
         volume = "1.0"
     }
+    Event.UnlockTransport = {
+        type = "dota_src1_2d"
+        vsnd_files =
+        [
+            "sounds/ui/menu/tournament_open.vsnd",
+        ]
+        volume = "1.0"
+    }
 
     Music.Pick = {
         type = "dota_update_hero_select"

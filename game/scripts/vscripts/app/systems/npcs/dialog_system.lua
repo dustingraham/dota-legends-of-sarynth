@@ -3,19 +3,51 @@
 DialogSystem = DialogSystem or class({})
 
 function DialogSystem:Activate()
-    CustomGameEventManager:RegisterListener('questgiver_dialog_event', Dynamic_Wrap(DialogSystem, 'OnQuestDialogEvent', QuestGiver))
+    CustomGameEventManager:RegisterListener('dialog_event', Dynamic_Wrap(DialogSystem, 'OnDialogEvent', DialogSystem))
+    Filters:OnOrderFilter(Dynamic_Wrap(DialogSystem, 'OrderFilter'), DialogSystem)
 end
 
---print(PlayerResource:IsValidPlayerID(0))
---local client = PlayerResource:GetPlayer(0)
---local caster = PlayerResource:GetSelectedHeroEntity(0)
---EmitSoundOnClient('Hero_Phoenix.IcarusDive.Stop', client)
--- EmitSoundOn('beastmaster_beas_rare_02', caster)
+-- Close active dialog if exists.
+function DialogSystem:OrderFilter(event, order)
+    local hero = EntIndexToHScript(order.units['0'])
+    local player = hero:GetPlayerOwner()
+    if player.currentDialog then
+        CustomGameEventManager:Send_ServerToPlayer(player, 'dialog_close', {})
+        player.currentDialog = nil
+    end
+end
 
 function DialogSystem:StartTeleportDialog(hero, target)
     -- Can't trust the client, so we have to remember what's open.
     local player = hero:GetPlayerOwner()
     player.currentDialogTeleporter = target
+    player.currentDialog = 'Teleport'
+
+    -- Unlock if not unlocked
+    DeepPrintTable(hero.unlockedTeleports)
+    local alreadyUnlocked = hero.unlockedTeleports[target.spawn_name]
+    if not alreadyUnlocked then
+        hero.unlockedTeleports[target.spawn_name] = true
+        Sounds:EmitSoundOnClient(hero:GetPlayerOwnerID(), 'Event.UnlockTransport')
+        Http:ForceSave()
+    end
+
+    local allDestinations = {
+        teleport_tower_town = 'zone_name_zone_town',
+        teleport_tower_kobolds = 'zone_name_zone_kobolds',
+        teleport_tower_webbed = 'zone_name_zone_webbed',
+        teleport_tower_dark = 'zone_name_zone_dark',
+        teleport_tower_druids = 'zone_name_zone_druids',
+        teleport_tower_ice = 'zone_name_zone_ice',
+    }
+    local teleportOptions = {}
+    local hasOptions = false
+    for key,value in pairs(allDestinations) do
+        if key ~= target.spawn_name and hero.unlockedTeleports[key] then
+            hasOptions = true
+            teleportOptions[key] = value
+        end
+    end
 
     --local data = quest:GetStartData();
     --data.panelType = 'quest_start'
@@ -23,10 +55,13 @@ function DialogSystem:StartTeleportDialog(hero, target)
         spawn_name = target.spawn_name,
         unit_name = target:GetUnitName(),
         panelType = 'teleport',
+        justUnlocked = not alreadyUnlocked,
+        hasOptions = hasOptions,
+        teleportOptions = teleportOptions,
     })
 end
 
-function DialogSystem:StartDialog(hero, npc)
+function DialogSystem:StartQuestDialog(hero, npc)
     local handled = false
 
     -- Create a special NPC handler class defined in the spawn/unit definition.
@@ -57,6 +92,8 @@ function DialogSystem:CheckTurnIn(character, npc)
     -- Debug('DialogSystem', inspect(quest))
     local player = character:GetPlayerOwner()
     player.currentDialogQuest = quest
+    player.currentDialog = 'Quest'
+
     local data = quest:GetEndData();
     data.panelType = 'quest_complete'
     CustomGameEventManager:Send_ServerToPlayer(player, 'dialog_start', data)
@@ -71,12 +108,28 @@ function DialogSystem:CheckQuestAvailable(hero, npc)
     -- Can't trust the client, so we have to remember what's open.
     local player = hero:GetPlayerOwner()
     player.currentDialogQuest = quest
+    player.currentDialog = 'Quest'
 
     local data = quest:GetStartData();
     data.panelType = 'quest_start'
     CustomGameEventManager:Send_ServerToPlayer(player, 'dialog_start', data)
 
     return true
+end
+
+function DialogSystem:OnDialogEvent(event)
+    local player = PlayerResource:GetPlayer(event.PlayerID)
+    if player.currentDialog then
+        local callback = 'On'..player.currentDialog..'DialogEvent'
+        if DialogSystem[callback] then
+            DialogSystem[callback](self, event)
+        else
+            Debug('DialogSystem', 'Missing Dialog Callback', player.currentDialog)
+        end
+        player.currentDialog = false
+    else
+        Debug('DialogSystem', 'Player has no active dialog.')
+    end
 end
 
 function DialogSystem:OnQuestDialogEvent(event)
@@ -102,7 +155,66 @@ function DialogSystem:OnQuestDialogEvent(event)
         end
 
         -- Check if there is another quest action.
-        DialogSystem:StartDialog(player:GetAssignedHero(), npc)
+        DialogSystem:StartQuestDialog(player:GetAssignedHero(), npc)
+    end
+end
+
+function DialogSystem:OnTeleportDialogEvent(event)
+    local choice = event.result
+
+    if choice == 1 then
+        Debug('DialogSystem', 'Teleport accepted.')
+
+        -- Can't trust the client, so we have to remember what's open.
+        local player = PlayerResource:GetPlayer(event.PlayerID)
+        local target = player.currentDialogTeleporter
+        local hero = player:GetAssignedHero()
+        local destination = event.destination
+
+        -- Ensure they are allowed to go there.
+        if not hero.unlockedTeleports[destination] then
+            -- Consider logging potential cheat?
+            return
+        end
+
+        -- Ensure they have the monies
+
+        -- Go there!
+        hero:AddNewModifier(hero, nil, 'character_teleporting', {
+            from = target.spawn_name,
+            to   = destination
+        })
+
+        -- Take Monies!!
+
+        --if target.spawn_name == 'teleport_tower_town' then
+        --    hero:AddNewModifier(hero, nil, 'character_teleporting', {
+        --        from = 'teleport_tower_town',
+        --        to = 'teleport_tower_kobolds'
+        --    })
+        --elseif target.spawn_name == 'teleport_tower_kobolds' then
+        --    hero:AddNewModifier(hero, nil, 'character_teleporting', {
+        --        from = 'teleport_tower_kobolds',
+        --        to = 'teleport_tower_webbed'
+        --    })
+        --elseif target.spawn_name == 'teleport_tower_webbed' then
+        --    hero:AddNewModifier(hero, nil, 'character_teleporting', {
+        --        from = 'teleport_tower_webbed',
+        --        to = 'teleport_tower_dark'
+        --    })
+        --elseif target.spawn_name == 'teleport_tower_dark' then
+        --    hero:AddNewModifier(hero, nil, 'character_teleporting', {
+        --        from = 'teleport_tower_dark',
+        --        to = 'teleport_tower_town'
+        --    })
+        --elseif target.spawn_name == 'teleport_tower_ice' then
+        --    hero:AddNewModifier(hero, nil, 'character_teleporting', {
+        --        from = 'teleport_tower_ice',
+        --        to = 'teleport_tower_town'
+        --    })
+        --else
+        --    print('waaa')
+        --end
     end
 end
 

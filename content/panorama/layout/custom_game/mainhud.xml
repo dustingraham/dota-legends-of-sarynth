@@ -49,6 +49,12 @@
                 </Button>
             </Panel>
         </snippet>
+        <snippet name="TeleportOption">
+            <Button class="TeleportOption">
+                <Panel id="Indicator"/>
+                <Label id="Name" text="Kobold Whut"/>
+            </Button>
+        </snippet>
     </snippets>
     <Panel class="mainhud" hittest="false">
         
@@ -156,7 +162,7 @@
                 
                 <Label id="ObjectiveTitle" class="objective" text="OBJECTIVES"/>
                 <Label id="MainObjectives" class="objectives" html="true" />
-                
+                <Panel id="TeleportOptions"/>
                 <Label id="RewardsTitle" class="objective" text="REWARDS"/>
                 <Label id="MainRewards" class="objectives" html="true" />
                 <Image id="ItemRewardBlock" class="item-slot" src="file://{images}/window/item_slot_flat.png">
@@ -174,12 +180,13 @@
                 </Button>
                 <Button id="QuestDecline" class="button button-no" onactivate="QuestDialog(false)">
                     <Image src="file://{images}/window/button_red.png">
-                        <Label class="yes" text="Decline"/>
+                        <Label id="QuestDeclineText" class="yes" text="Decline"/>
                     </Image>
                 </Button>
             </Panel>
-            <Image class="quest-dialog-icon" src="file://{images}/window/window_icon_quest.png"/>
-            <!--<Image class="quest-dialog-icon" src="file://{images}/window/window_teleporter_icon.png"/>-->
+            <Image id="icon_quest_start" class="quest-dialog-icon" src="file://{images}/window/window_icon_quest.png"/>
+            <Image id="icon_quest_complete" class="quest-dialog-icon" src="file://{images}/window/window_icon_quest.png"/>
+            <Image id="icon_teleport" class="quest-dialog-icon" src="file://{images}/window/window_icon_teleport.png"/>
         </Panel>
     </Panel>
 </root>

@@ -1,7 +1,18 @@
 [b]v0.0.75[/b]
  • Added a shield deflection visual to Lumorase when she is attacked while protected by the Shard auras.
  • Added more music diversity to the various zones.
+ • Quest dialog will now auto-close when walking away, or taking some other action.
  
+[b]Manaflow Transporter (Teleporter)[/b]
+ • Transporter now allows selecting the destination.
+ • You will need to visit each transporter to unlock that waypoint.
+ 
+[b]Bugs[/b]
+ • Fix bug where Scar killed really quickly would error.
+ • Added missing description for teleport pads.
+ • Removed empty modifier from Scar.
+
+
 [b]v0.0.74[/b]
  • Improved focus target handling. Should solve the problem where your spells were hitting one target, and your auto-attack was attacking a different target.
 

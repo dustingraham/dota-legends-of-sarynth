@@ -90,3 +90,4 @@ LinkLuaModifier('warrior_stats', 'app/systems/characters/abilities/warrior/warri
 LinkLuaModifier('sorcerer_stats', 'app/systems/characters/abilities/sorcerer/sorcerer_stats', LUA_MODIFIER_MOTION_NONE)
 
 LinkLuaModifier('character_testmode', 'app/systems/characters/modifiers/character_testmode', LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier('character_teleporting', 'app/systems/characters/modifiers/character_teleporting', LUA_MODIFIER_MOTION_NONE)

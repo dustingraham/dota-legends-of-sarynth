@@ -83,6 +83,9 @@ end
 function Player:GetPriorQuests()
     return self.quests
 end
+function Player:GetKnownTeleports()
+    return self.teleports
+end
 function Player:LoadSlot(slotId)
     local key = 'player_'..self.PlayerID..'_characters'
     for _,data in pairs(PlayerTables:GetAllTableValues(key)) do
@@ -111,4 +114,58 @@ function Player:Load()
         -- DeepPrintTable(data)
         PlayerTables:SetTableValues(key, data)
     end)
+end
+
+-- local hero = PlayerResource:GetSelectedHeroEntity(0)
+-- print(inspect(GetItemsForHero(hero)))
+-- hero.customEquipment:AddItem(CreateItem('item_amulet_tier1', nil, nil), 4)
+-- print(inspect(GetQuestsForPlayer(0)))
+
+function Player:GetSaveData()
+    local hero = PlayerResource:GetSelectedHeroEntity(self.PlayerID)
+    print('returning save data...')
+    return {
+        items = self:GetItemsForHero(hero),
+        quests = self:GetQuestsForPlayer(self.PlayerID),
+        experience = hero:GetCurrentXP(),
+        level = hero:GetLevel(),
+        gold = hero:GetGold(),
+        gametime = self:GetPriorGametime() + math.ceil(GameRules:GetGameTime()),
+        zone = hero.currentZone,
+        teleports = hero.unlockedTeleports,
+    }
+end
+
+function Player:GetItemsForHero(hero)
+    local items = {}
+    for slot,itemId in pairs(hero.inventory:GetAllItems()) do
+        local item = EntIndexToHScript(itemId)
+        items[slot] = item:GetName()
+    end
+    return items
+end
+
+function Player:GetQuestsForPlayer(PlayerID)
+    local key = 'player_'..PlayerID..'_quests'
+    local quests = {
+        completed = QuestService.playerCompleted[key],
+        progress = {}
+    }
+    if QuestService.playerQuests[key] then
+        for _,quest in pairs(QuestService.playerQuests[key]) do
+            local objectives = {}
+            for oid,objective in pairs(quest.objectives) do
+                table.insert(objectives, {
+                    oid = oid,
+                    current = objective.current,
+                    required = objective.required,
+                })
+            end
+            table.insert(quests.progress, {
+                id = quest.id,
+                objectives = objectives,
+            })
+        end
+    end
+    return quests
 end

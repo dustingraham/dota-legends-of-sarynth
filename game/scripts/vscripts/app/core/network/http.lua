@@ -1,54 +1,9 @@
 ---
+--@author Sarynth
 --@type Http
-Http = Http or class({})
-
--- Http:Save({experience = 3000,level=99,items={'red_fish','blue_fish'}}, function(data)
---     print('Successfully saved!')
---     Http:Load(function(data)
---         print('Load Called Back')
---         DeepPrintTable(data)
---     end)
--- end)
-
----
---@function [parent=#Http] SendExample
---@param self
---@param #string data
-function Http:SendExample(data)
-
-    local settings = {
-        host = 'http://requestb.in/1c7am4o1'
-    }
-
-    local payload = {
-        alpha = 'beta',
-        gamma = 'normal'
-    }
-    local json = json.encode(payload)
-    print(json)
-
-    local request = CreateHTTPRequestScriptVM('POST', settings.host)
-    request:SetHTTPRequestRawPostBody('application/json', '{"beta":1}')
-    --request:SetHTTPRequestGetOrPostParameter('payload', json)
-    request:Send(function(response)
-        if response.StatusCode ~= 200 then
-            print('HTTP Status Error')
-            print(response.StatusCode or "nil")
-            return
-        end
-
-        if not response.Body then
-            print('HTTP Server Error')
-            print(response.Body or "nil")
-            return
-        end
-
-        print('Success')
-        -- local obj, pos, err = json.decode(res.Body, 1, nil)
-
-        -- callback(err, obj)
-    end)
-end
+Http = Http or class({
+    forceSave = false
+})
 
 ---
 --@function [parent=#Http] Send
@@ -113,34 +68,18 @@ function Http:Send(api, data, callback)
 end
 
 ---
---@function [parent=#Http] Save
---@param self
---@param #table data
---@param #function callback
-function Http:Save(data, callback)
-    Http:Send('/api/save', data, callback)
-end
-
----
---@function [parent=#Http] Load
---@param self
---@param #table data
---@param #function callback
-function Http:Load(data, callback)
-    Http:Send('/api/load', data, callback)
-end
-
-
----
 --@function [parent=#Http] SendReport
 --@param self
 --@param #table params
 function Http:SendReport(params)
     if DEBUG_SKIP_HTTP_REPORT then return end
-    -- Need to throttle sends.
-    -- Simple 30 second send pattern.
-    -- Add to a table.
+    -- Throttles sends to 30 seconds.
     table.insert(self.reports, params)
+end
+
+function Http:ForceSave()
+    if DEBUG_SKIP_HTTP_REPORT then return end
+    self.forceSave = true
 end
 
 function Http:ThrottledSendReport()
@@ -155,7 +94,7 @@ end
 function Http:Activate()
     self.reports = {}
     Timers:CreateTimer(function()
-        if #self.reports > 0 then
+        if #self.reports > 0 or self.forceSave then
             Debug('Http', 'Throttled Send Execute')
 
             -- If we're sending anything, add current character data
@@ -165,9 +104,9 @@ function Http:Activate()
                     table.insert(self.reports, Reporter:PullCharacterReport(PlayerID))
                 end
             end
-
             Http:ThrottledSendReport()
             self.reports = {}
+            self.forceSave = false
         end
 
         -- Every 30 seconds.

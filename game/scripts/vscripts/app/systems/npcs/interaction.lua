@@ -51,45 +51,16 @@ function Interaction:RangedAction(action)
     } ]]
 end
 
-LinkLuaModifier('character_teleporting', 'app/systems/characters/modifiers/character_teleporting', LUA_MODIFIER_MOTION_NONE)
-
 function Interaction:StartInteraction(action)
     -- Trigger quest pre-check for "report" type.
     QuestService:OnEntityInteract(action.unit, action.target)
     Debug('Interaction', 'StartInteraction')
     -- print(inspect(action, {depth = 2}))
 
-    -- TODO: Dialog.
-    --if action.target:GetUnitName() == 'teleport_pad' then
-    --    DialogSystem:StartTeleportDialog(action.unit, action.target)
-    --else
-    if action.target.spawn_name == 'teleport_tower_town' then
-        action.unit:AddNewModifier(action.unit, nil, 'character_teleporting', {
-            from = 'teleport_tower_town',
-            to = 'teleport_tower_kobolds'
-        })
-    elseif action.target.spawn_name == 'teleport_tower_kobolds' then
-        action.unit:AddNewModifier(action.unit, nil, 'character_teleporting', {
-            from = 'teleport_tower_kobolds',
-            to = 'teleport_tower_webbed'
-        })
-    elseif action.target.spawn_name == 'teleport_tower_webbed' then
-        action.unit:AddNewModifier(action.unit, nil, 'character_teleporting', {
-            from = 'teleport_tower_webbed',
-            to = 'teleport_tower_dark'
-        })
-    elseif action.target.spawn_name == 'teleport_tower_dark' then
-        action.unit:AddNewModifier(action.unit, nil, 'character_teleporting', {
-            from = 'teleport_tower_dark',
-            to = 'teleport_tower_town'
-        })
-    elseif action.target.spawn_name == 'teleport_tower_ice' then
-        action.unit:AddNewModifier(action.unit, nil, 'character_teleporting', {
-            from = 'teleport_tower_ice',
-            to = 'teleport_tower_town'
-        })
+    if action.target:GetUnitName() == 'teleport_pad' then
+        DialogSystem:StartTeleportDialog(action.unit, action.target)
     else
-        DialogSystem:StartDialog(action.unit, action.target)
+        DialogSystem:StartQuestDialog(action.unit, action.target)
     end
 end
 

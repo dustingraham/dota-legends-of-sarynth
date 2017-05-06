@@ -26,14 +26,49 @@ function OnDialogStart(data) {
     dialog.SetHasClass('hidden', false);
 }
 
-
 GameEvents.Subscribe('dialog_start', OnDialogStart);
+GameEvents.Subscribe('dialog_close', function()
+{
+    dialog.SetHasClass('hidden', true);
+});
+
+function UpdateBasics(panel, data)
+{
+    panel.FindChildrenWithClassTraverse('quest-dialog-icon').forEach(function(icon) {
+        icon.style.visibility = 'collapse';
+    });
+    panel.FindChildTraverse('icon_'+data.panelType).style.visibility = 'visible';
+
+    panel.FindChildTraverse('QuestMainTitle').text = data.title;
+    panel.FindChildTraverse('MainDialog').text = data.dialog_text;
+
+    panel.FindChildTraverse('TeleportOptions').RemoveAndDeleteChildren();
+}
 
 function UpdateTeleportDialog(data)
 {
     var panel = $.GetContextPanel();
-    panel.FindChildTraverse('QuestMainTitle').text = 'Manaflow Transporter';
-    panel.FindChildTraverse('MainDialog').text = 'Welcome to the Manaflow Transporter! You have unlocked this location as a transport destination option. As you explore new areas, be sure to unlock other locations in order to quickly navigate around the world.<br><br>Now, go forth and save the world!';
+    panel.selectedTeleport = false;
+
+    data.title = 'Manaflow Transporter';
+    var text = 'Welcome to the Manaflow Transporter!<br><br>';
+
+    if (data.justUnlocked)
+    {
+        text += '<span class="highlight">You have unlocked this location as a transport destination option.</span><br><br>';
+    }
+    if (!data.hasOptions)
+    {
+        text += 'As you explore new areas, be sure to unlock other locations in order to quickly navigate around the world.';
+    }
+    else
+    {
+        text += 'Where would you like to go?';
+    }
+
+    data.dialog_text = text;
+
+    UpdateBasics(panel, data);
 
     // Station unlocked!
     // Where would you like to flow today?
@@ -45,18 +80,104 @@ function UpdateTeleportDialog(data)
 
     $.Msg(data);
 
-    // Acknowledge.
-    panel.FindChildTraverse('QuestAcceptText').text = 'Okay!';
-    panel.FindChildTraverse('QuestDecline').style.visibility = 'collapse';
+    // Build Options
+    var $teleportOptions = $('#TeleportOptions');
+    if (data.hasOptions)
+    {
+        $teleportOptions.RemoveAndDeleteChildren();
+        QuestAccept('Go!', true, function()
+        {
+            // Ignore if no selection yet.
+            if (!panel.selectedTeleport) return;
+            $.Msg('Kick off teleport to: '+panel.selectedTeleport);
+            GameEvents.SendCustomGameEventToServer('dialog_event', {
+                result: true,
+                destination: panel.selectedTeleport
+            });
+            dialog.SetHasClass('hidden', true);
+        });
+
+        // panel.FindChildTraverse('QuestAccept').AddClass('disabled');
+        // panel.FindChildTraverse('QuestAcceptText').text = 'Go!';
+        // panel.FindChildTraverse('QuestAccept').SetPanelEvent('onactivate', function()
+        // {
+        //     $.Msg('Teleport On Activate');
+        // });
+        panel.FindChildTraverse('QuestDeclineText').text = 'Cancel';
+        panel.FindChildTraverse('QuestDecline').style.visibility = 'visible';
+
+        // Selection List
+        $.Each(data.teleportOptions, function(v, k)
+        {
+            $.Msg('K: '+k+' V: '+v+' T:'+$.Localize(v));
+            var $option = $.CreatePanel('Button', $teleportOptions, '');
+            $option.BLoadLayoutSnippet('TeleportOption');
+            $option.FindChildTraverse('Name').text = $.Localize(v);
+            $option.SetPanelEvent('onactivate', function() {
+                panel.selectedTeleport = k;
+                $.Each($teleportOptions.Children(), function($btn) {
+                    $btn.RemoveClass('checked');
+                });
+                $option.AddClass('checked');
+                panel.FindChildTraverse('QuestAccept').RemoveClass('disabled');
+            });
+        });
+        $teleportOptions.style.visibility = 'visible';
+    }
+    else
+    {
+        $teleportOptions.style.visibility = 'collapse';
+        panel.FindChildTraverse('QuestDecline').style.visibility = 'collapse';
+        QuestAccept('Okay!');
+        // panel.FindChildTraverse('QuestAcceptText').text = 'Okay!';
+        // panel.FindChildTraverse('QuestAccept').RemoveClass('disabled');
+        // panel.FindChildTraverse('QuestAccept').SetPanelEvent('onactivate', function()
+        // {
+        //     QuestDialog(true);
+        // });
+    }
 }
+
+function QuestAccept(title, disabled, callback)
+{
+    if (disabled === undefined) disabled = false;
+    if (callback === undefined) callback = function() {
+        QuestDialog(true);
+    };
+
+    var $accept = $('#QuestAccept');
+    $('#QuestAcceptText').text = title;
+    $accept.SetHasClass('disabled', disabled);
+    $accept.SetPanelEvent('onactivate', callback);
+}
+
+//
+// function TmpActivate(id)
+// {
+//     var $target = $('#TeleportOption'+id);
+//     $.Msg('TmpActivate : ' + id);
+//     if ($target.BHasClass('checked'))
+//     {
+//         return;
+//
+//         $.Msg('Removing...');
+//         $target.RemoveClass('checked');
+//     }
+//     else
+//     {
+//         $('#TeleportOption1').RemoveClass('checked');
+//         $('#TeleportOption2').RemoveClass('checked');
+//         $('#TeleportOption3').RemoveClass('checked');
+//
+//         $.Msg('Adding...');
+//         $target.AddClass('checked');
+//     }
+// }
 
 function UpdateQuestStartPanel(data)
 {
-    // $.Msg('[JS] Need to populate...');
-    // $.Msg(data);
     var panel = $.GetContextPanel();
-    panel.FindChildTraverse('QuestMainTitle').text = data.title;
-    panel.FindChildTraverse('MainDialog').text = data.dialog_text;
+    UpdateBasics(panel, data);
 
     var hide = true;
     var objectives = '';
@@ -94,20 +215,23 @@ function UpdateQuestStartPanel(data)
     }
 
     panel.FindChildTraverse('RewardsTitle').style.visibility = 'visible';
+    panel.FindChildTraverse('MainRewards').style.visibility = 'visible';
     panel.FindChildTraverse('MainRewards').text = rewards;
-
-    panel.FindChildTraverse('QuestAcceptText').text = 'Accept';
+    QuestAccept('Accept');
+    // panel.FindChildTraverse('QuestAcceptText').text = 'Accept';
+    // panel.FindChildTraverse('QuestAccept').RemoveClass('disabled');
+    // panel.FindChildTraverse('QuestAccept').SetPanelEvent('onactivate', function()
+    // {
+    //     QuestDialog(true);
+    // });
+    panel.FindChildTraverse('QuestDeclineText').text = 'Decline';
     panel.FindChildTraverse('QuestDecline').style.visibility = 'visible';
 }
 
 function UpdateQuestCompletePanel(data)
 {
-    // $.Msg('[JS] Need to populate...');
-    // $.Msg(data);
-
     var panel = $.GetContextPanel();
-    panel.FindChildTraverse('QuestMainTitle').text = data.title;
-    panel.FindChildTraverse('MainDialog').text = data.dialog_text;
+    UpdateBasics(panel, data);
 
     panel.FindChildTraverse('ObjectiveTitle').style.visibility = 'collapse';
     panel.FindChildTraverse('MainObjectives').style.visibility = 'collapse';
@@ -137,13 +261,19 @@ function UpdateQuestCompletePanel(data)
     panel.FindChildTraverse('RewardsTitle').style.visibility = 'visible';
     panel.FindChildTraverse('MainRewards').text = rewards;
 
-    panel.FindChildTraverse('QuestAcceptText').text = 'Complete';
+    QuestAccept('Complete');
+    // panel.FindChildTraverse('QuestAcceptText').text = 'Complete';
+    // panel.FindChildTraverse('QuestAccept').RemoveClass('disabled');
+    // panel.FindChildTraverse('QuestAccept').SetPanelEvent('onactivate', function()
+    // {
+    //     QuestDialog(true);
+    // });
     panel.FindChildTraverse('QuestDecline').style.visibility = 'collapse';
 }
 
 function QuestDialog(response) {
     // $.Msg('Dialog Response: ' + response)
-    GameEvents.SendCustomGameEventToServer('questgiver_dialog_event', { result: response });
+    GameEvents.SendCustomGameEventToServer('dialog_event', { result: response });
     dialog.SetHasClass('hidden', true);
 }
 
@@ -268,7 +398,7 @@ var InitQuestTableListener = function() {
                     }
                     else
                     {
-                        activeQuests[key] = BuildQuestBlock(params)
+                        activeQuests[key] = BuildQuestBlock(params);
                         $('#QuestProgressContainer').style.visibility = (Object.keys(activeQuests).length > 0) ? 'visible' : 'collapse';
                     }
                 });

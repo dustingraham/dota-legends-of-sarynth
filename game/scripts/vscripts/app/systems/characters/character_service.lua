@@ -192,17 +192,6 @@ function CharacterService:OnPlayerLevelUp(event)
         style = { color = "#ffcc00" }
     })
 
-    if not DEBUG_SKIP_HTTP_SAVE then
-        Debug('CharacterService', 'Saving for: ', hero:GetName())
-        Http:Save({
-                      steamId64 = tostring(PlayerResource:GetSteamID(hero:GetPlayerOwnerID())),
-                      hero = hero:GetName(),
-                      experience = hero:GetCurrentXP(),
-                  }, function(data)
-            Debug('CharacterService', 'Successfully saved!')
-        end)
-    end
-
     Event:Trigger('HeroLevelUp', {
         hero = hero
     })

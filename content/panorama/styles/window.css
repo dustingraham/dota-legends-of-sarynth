@@ -49,7 +49,9 @@
 .quest-dialog-primary .text .quote {
     font-style:italic;
 }
-
+.quest-dialog-primary .text .highlight {
+    color:#ffffb2;
+}
 .objective {
     margin-top:10px;
     color:gold;
@@ -96,6 +98,11 @@
 .button:active {
     wash-color:#aaaaaa;
 }
+.button.disabled {
+    saturation:0.0;
+    wash-color:#aaaaaa;
+}
+
 .button-yes {
     margin-left:55px;
 }
@@ -109,4 +116,52 @@
 }
 .button-yes Label {
     transform:translateX(3px);
+}
+
+/** Teleporter **/
+#TeleportOptions {
+    flow-children:down;
+    width:100%;
+}
+.TeleportOption {
+    width:100%;
+    flow-children:right;
+    font-size:18px;
+    margin-top:5px;
+    line-height:23px;
+}
+.TeleportOption #Name {
+    color:#a28a79;
+    margin-left:6px;
+    width:60%;
+}
+.TeleportOption #Indicator {
+    height:25px;
+    width:25px;
+    border:5px solid #302c29;
+    border-radius:100%;
+    background-color:#000000;
+    /* transition: background 0.25s linear 0s; */
+    /* transition: border 0.25s linear 0s; */
+    transition-property: border, background-color;
+    transition-duration: .1s, .25s;
+    transition-delay: 0s, 0s;
+    transition-timing-function: ease-in-out;
+    
+    /* transition-property: pre-transform-scale2d, opacity, border, background-color;
+        transition-duration: .24s, .24s , .1s, .24s;
+        transition-delay: 0s, 0s, 0s, 0s;
+        transition-timing-function: ease-in-out;*/
+}
+.TeleportOption.checked #Indicator {
+    border-color:#48423e;
+    background-color:#a28a79;
+}
+
+.TeleportOption:hover #Name {
+    color:#ffffff;
+    border-color:#776d66;
+}
+.TeleportOption:hover #Indicator {
+    border-color:#776d66;
 }

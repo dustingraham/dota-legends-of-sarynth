@@ -1,5 +1,5 @@
 ai_start_area_boss = ai_start_area_boss or class({})
-local ai = ai_start_area_boss
+local ai           = ai_start_area_boss
 
 function ai:DeclareFunctions()
     return {
@@ -22,9 +22,9 @@ end
 --     [ai.STATE_RETURN] = 'ActionReturn'
 -- ]
 
-ai.ACTION_IDLE = 'ActionIdle'
+ai.ACTION_IDLE           = 'ActionIdle'
 --ai.ACTION_AGGRO = 'ActionAggro'
-ai.ACTION_RETURN = 'ActionReturn'
+ai.ACTION_RETURN         = 'ActionReturn'
 
 ai.ACTION_FIGHT_STANDARD = 'ActionFightStandard'
 
@@ -42,22 +42,30 @@ if IsServer() then
     end
 end
 
-function ai:IsHIdden() return true end
+function ai:IsHidden() return true end
 
 function ai:GetModifierHealthRegenPercentage()
-    if self.state == ai.ACTION_RETURN then return 10.0 end
-    if self.state == ai.ACTION_IDLE then return 20.0 end
+    if self.state == ai.ACTION_RETURN then
+        return 10.0
+    end
+    if self.state == ai.ACTION_IDLE then
+        return 20.0
+    end
     return 0.0
 end
 
 function ai:OnAttackAllied(event)
     Debug('StartAreaBoss', 'OnAttackAllied PRE')
-    if self:GetParent() ~= event.target then return end
+    if self:GetParent() ~= event.target then
+        return
+    end
     Debug('StartAreaBoss', 'OnAttackAllied')
 end
 
 function ai:OnTakeDamage(event)
-    if self:GetParent() ~= event.unit then return end
+    if self:GetParent() ~= event.unit then
+        return
+    end
 
     if self.state == ai.ACTION_IDLE then
         Debug('StartAreaBoss', 'Aggroing due to Attacked')
@@ -67,7 +75,9 @@ function ai:OnTakeDamage(event)
 end
 
 function ai:OnDeath(event)
-    if self:GetParent() ~= event.unit then return end
+    if self:GetParent() ~= event.unit then
+        return
+    end
     Debug('StartAreaBoss', 'OnDeath')
     self:GetParent().spawn:OnDeath(self)
 
@@ -91,12 +101,12 @@ function ai:AbilityClawAttack()
     StartAnimation(self:GetParent(), {
         duration = 0.5,
         activity = ACT_DOTA_ATTACK,
-        rate = 1.5,
+        rate     = 1.5,
     })
     ParticleManager:ReleaseParticleIndex(ParticleManager:CreateParticle(
-        'particles/units/start/scar/claw.vpcf',
-        PATTACH_ABSORIGIN_FOLLOW,
-        self:GetParent()
+    'particles/units/start/scar/claw.vpcf',
+    PATTACH_ABSORIGIN_FOLLOW,
+    self:GetParent()
     ))
 
 end
@@ -111,23 +121,25 @@ function ai:StartFight()
     StartAnimation(self:GetParent(), {
         duration = 3.0,
         activity = ACT_DOTA_CAST_ABILITY_2,
-        rate = 0.35,
+        rate     = 0.35,
     })
     Timers:CreateTimer(3.0, function()
-        Debug('StartAreaBoss', 'Starting Attack')
-        self:GetParent():MoveToTargetToAttack(self.aggroTarget)
+        if not self:IsNull() and not self:GetParent():IsNull() then
+            Debug('StartAreaBoss', 'Starting Attack')
+            self:GetParent():MoveToTargetToAttack(self.aggroTarget)
+        end
     end)
 end
 
 function ai:ActionIdle()
     local units = FindUnitsInRadius(
-        self:GetParent():GetTeam(), self:GetParent():GetAbsOrigin(), nil,
-        self.aggroRange, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_ALL, DOTA_UNIT_TARGET_FLAG_NONE,
-        FIND_ANY_ORDER, false
+    self:GetParent():GetTeam(), self:GetParent():GetAbsOrigin(), nil,
+    self.aggroRange, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_ALL, DOTA_UNIT_TARGET_FLAG_NONE,
+    FIND_ANY_ORDER, false
     )
 
     --If one or more units were found, start attacking the first one
-    if #units > 0 then
+    if # units > 0 then
         Debug('StartAreaBoss', 'Aggroing due to Range')
         self.aggroTarget = units[1]
         self:StartFight()
@@ -170,7 +182,7 @@ function ai:ReviewAbilityDesire()
             local roll = math.random(100)
             if roll < self.castDesire then
                 --self:GetParent():CastAbilityOnTarget(self.aggroTarget, ability, -1)
-                self:GetParent():CastAbilityOnPosition(self.aggroTarget:GetAbsOrigin(), ability, -1)
+                self:GetParent():CastAbilityOnPosition(self.aggroTarget:GetAbsOrigin(), ability, - 1)
                 self.castDesire = 0
             else
                 self.castDesire = self.castDesire + 10
@@ -235,19 +247,19 @@ function ai:TransitionToReturn()
     self.aggroTarget = nil
 
     -- Remove all negative modifiers.
-    for _,modifier in pairs(self:GetParent():FindAllModifiers()) do
+    for _, modifier in pairs(self:GetParent():FindAllModifiers()) do
         if modifier ~= self then
             -- Proper Reset?
-            Debug('StartAreaBoss', 'Removing: '..modifier:GetName())
+            Debug('StartAreaBoss', 'Removing: ' .. modifier:GetName())
             modifier:Destroy()
         end
     end
 
-    local target = self:GetParent().spawn.spawnPoint + Vector(math.random(-64, 64), math.random(-64, 64))
+    local target = self:GetParent().spawn.spawnPoint + Vector(math.random(- 64, 64), math.random(- 64, 64))
     self:GetParent():MoveToPosition( target ) --Move back to the spawnpoint
     self.returnTarget = target
-    self.state = ai.ACTION_RETURN --Transition the state to the 'Returning' state(!)
-    self.returnTicks = 0
+    self.state        = ai.ACTION_RETURN --Transition the state to the 'Returning' state(!)
+    self.returnTicks  = 0
     Debug('StartAreaBoss', 'Returning')
 end
 
@@ -276,7 +288,7 @@ end
 
 function ai:TransitionToIdle()
     --Go into the idle state
-    self.state = ai.ACTION_IDLE
+    self.state       = ai.ACTION_IDLE
     self.returnTicks = nil
     Debug('StartAreaBoss', 'Idling')
 end
@@ -285,9 +297,11 @@ function ai:ActionIdleMove()
     -- 10% chance to move.
     -- local rand = math.random(0, 10)
     -- if rand < 10 then return end
-    if RollPercentage(80) then return end
+    if RollPercentage(80) then
+        return
+    end
 
     -- Move!
-    local target = self:GetParent().spawn.spawnPoint + Vector(math.random(-196, 196), math.random(-196, 196))
+    local target = self:GetParent().spawn.spawnPoint + Vector(math.random(- 196, 196), math.random(- 196, 196))
     self:GetParent():MoveToPosition(target)
 end

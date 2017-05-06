@@ -21,11 +21,17 @@ if DEBUG_SETTINGS then
     -- town kobolds ice webbed druids dark
     TEST_START_WAYPOINT = 'town'
     --TEST_START_START_BOSS = true
-    TEST_START_DARK_BOSS = true
+    --TEST_START_DARK_BOSS = true
     TEST_QUESTS_COMPLETE = {
         ['1005'] = 'start_area_report_to_town',
         -- ['1012'] ='kobolds_warchief',
     }
+    TEST_KNOWN_TELEPORTS = {
+        'teleport_tower_town',
+        'teleport_tower_webbed',
+        'teleport_tower_dark',
+    }
+
     TEST_SPAWN_ITEMS = true
     TEST_ADD_ITEMS = {
         'item_3172',
@@ -94,11 +100,9 @@ if DEBUG_SETTINGS then
         [12] = 'item_3179', -- shield
     }
     TEST_EQUIP_ITEMS = TEST_EQUIP_MAX_WARRIOR
-end
 
-DEBUG_SKIP_HTTP_REPORT = DEBUG_SETTINGS
-DEBUG_SKIP_HTTP_LOAD = DEBUG_SETTINGS or true
-DEBUG_SKIP_HTTP_SAVE = DEBUG_SETTINGS or true
+    DEBUG_SKIP_HTTP_REPORT = true
+end
 
 DEBUG_PRINT = true
 DEBUG_PRINT_SECTIONS = {

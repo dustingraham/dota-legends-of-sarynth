@@ -91,12 +91,14 @@ function CharacterPick:CreateCustomHeroForPlayer(PlayerID, character, isPrimary)
     local hero = PlayerResource:GetSelectedHeroEntity(PlayerID)
     local player = PlayerService:GetPlayer(PlayerID)
     if player:GetPriorZone() then
-        hero.currentZone = player:GetPriorZone()
-        local point = Entities:FindByName(nil, hero.currentZone..'_spawn_point')
+        -- Useless on wisp.
+        --hero.currentZone = player:GetPriorZone()
+        local point = Entities:FindByName(nil, player:GetPriorZone()..'_spawn_point')
         if point then
             hero:SetAbsOrigin(point:GetAbsOrigin())
         end
     end
+    -- NOTE: This is PRE-Replace!
 
     -- Replace dummy unit with actual character
     local heroName = 'npc_dota_hero_'..character
@@ -264,23 +266,6 @@ function CharacterPick:CreateCustomHeroForPlayer(PlayerID, character, isPrimary)
         ParticleManager:ReleaseParticleIndex(idx)
     end
 
-    -- Load Data
-    --if not DEBUG_SKIP_HTTP_LOAD then
-    --    Http:Load({
-    --                  steamId64 = tostring(PlayerResource:GetSteamID(event.PlayerID)),
-    --                  hero = hero:GetName(),
-    --              }, function(data)
-    --        Debug('CharacterPick', 'Player Loaded')
-    --        DeepPrintTable(data)
-    --        if data.experience then
-    --            local hero = PlayerResource:GetSelectedHeroEntity(event.PlayerID)
-    --            hero.isInitialLevel = true
-    --            hero:AddExperience(data.experience, 0, false, false)
-    --            hero.isInitialLevel = nil
-    --        end
-    --    end)
-    --end
-
     -- Level/Experience
     if player:GetPriorExperience() then
         hero.isInitialLevel = true
@@ -291,6 +276,25 @@ function CharacterPick:CreateCustomHeroForPlayer(PlayerID, character, isPrimary)
     -- Gold
     if player:GetPriorGold() ~= nil then
         hero:SetGold(player:GetPriorGold(), true)
+    end
+
+    -- Current Zone
+    if player:GetPriorZone() then
+        hero.currentZone = player:GetPriorZone()
+    end
+
+    -- Teleports
+    if player:GetKnownTeleports() then
+        hero.unlockedTeleports = player:GetKnownTeleports()
+    else
+        hero.unlockedTeleports = {}
+    end
+
+    -- TODO: TEST SERVICE ?
+    if TEST_KNOWN_TELEPORTS then
+        for _,teleport in pairs(TEST_KNOWN_TELEPORTS) do
+            hero.unlockedTeleports[teleport] = true
+        end
     end
 
     Event:Trigger('HeroPick', {
