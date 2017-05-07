@@ -101,8 +101,7 @@ function Quest:ApplyReward(hero)
 end
 
 function Quest:Accept()
-    -- self.PlayerID
-    -- local player = PlayerResource:GetPlayer(event.PlayerID)
+    Debug('Quest', 'Light off the start npc.')
     self:GetStartNpc():ParticleOffForPlayer(QuestService.questParticleName, self.PlayerID)
 
     -- Check for report to objectives.
@@ -116,8 +115,7 @@ function Quest:Accept()
 end
 
 function Quest:Complete()
-    -- self.PlayerID
-    -- local player = PlayerResource:GetPlayer(event.PlayerID)
+    Debug('Quest', 'Light off the end npc.')
     self:GetEndNpc():ParticleOffForPlayer(QuestService.questParticleName, self.PlayerID)
 end
 
@@ -219,7 +217,7 @@ function Quest:OnEntityKilled(npc_name)
     end
 end
 
-function Quest:OnInventoryChange(hero, item)
+function Quest:OnInventoryChange(hero)
     -- Check each objective.
     for _,objective in pairs(self.objectives) do
         -- Also checking that we lost items and no longer fill objective.
@@ -258,9 +256,17 @@ function Quest:OnEntityInteract(npc_name)
             end
             if npcMatch then
                 Debug('Quest', 'Reported to report target.')
-                self:GetEndNpc():ParticleOffForPlayer(QuestService.questParticleName, self.PlayerID)
                 objective.reported = true
+                -- Since the "report to" target is the same as the "turn in" target, this
+                -- is commented out until at some future time the targets are different.
+                --self:GetEndNpc():ParticleOffForPlayer(QuestService.questParticleName, self.PlayerID)
+                --if self:IsComplete() then
+                --    local player = PlayerResource:GetPlayer(self.PlayerID)
+                --    EmitSoundOnClient('powerup_06', player)
+                --    self:GetEndNpc():ParticleOnForPlayer(QuestService.questParticleName, self.PlayerID)
+                --end
             end
         end
     end
+
 end

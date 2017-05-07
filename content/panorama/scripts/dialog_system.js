@@ -119,13 +119,11 @@ function UpdateTeleportDialog(data)
     {
         $teleportOptions.style.visibility = 'collapse';
         panel.FindChildTraverse('QuestDecline').style.visibility = 'collapse';
-        QuestAccept('Okay!');
-        // panel.FindChildTraverse('QuestAcceptText').text = 'Okay!';
-        // panel.FindChildTraverse('QuestAccept').RemoveClass('disabled');
-        // panel.FindChildTraverse('QuestAccept').SetPanelEvent('onactivate', function()
-        // {
-        //     QuestDialog(true);
-        // });
+        QuestAccept('Okay!', false, function()
+        {
+            // Just acknowledging.
+            dialog.SetHasClass('hidden', true);
+        });
     }
 }
 
@@ -141,29 +139,6 @@ function QuestAccept(title, disabled, callback)
     $accept.SetHasClass('disabled', disabled);
     $accept.SetPanelEvent('onactivate', callback);
 }
-
-//
-// function TmpActivate(id)
-// {
-//     var $target = $('#TeleportOption'+id);
-//     $.Msg('TmpActivate : ' + id);
-//     if ($target.BHasClass('checked'))
-//     {
-//         return;
-//
-//         $.Msg('Removing...');
-//         $target.RemoveClass('checked');
-//     }
-//     else
-//     {
-//         $('#TeleportOption1').RemoveClass('checked');
-//         $('#TeleportOption2').RemoveClass('checked');
-//         $('#TeleportOption3').RemoveClass('checked');
-//
-//         $.Msg('Adding...');
-//         $target.AddClass('checked');
-//     }
-// }
 
 function UpdateQuestStartPanel(data)
 {
@@ -209,12 +184,7 @@ function UpdateQuestStartPanel(data)
     panel.FindChildTraverse('MainRewards').style.visibility = 'visible';
     panel.FindChildTraverse('MainRewards').text = rewards;
     QuestAccept('Accept');
-    // panel.FindChildTraverse('QuestAcceptText').text = 'Accept';
-    // panel.FindChildTraverse('QuestAccept').RemoveClass('disabled');
-    // panel.FindChildTraverse('QuestAccept').SetPanelEvent('onactivate', function()
-    // {
-    //     QuestDialog(true);
-    // });
+
     panel.FindChildTraverse('QuestDeclineText').text = 'Decline';
     panel.FindChildTraverse('QuestDecline').style.visibility = 'visible';
 }
@@ -250,33 +220,18 @@ function UpdateQuestCompletePanel(data)
     }
 
     panel.FindChildTraverse('RewardsTitle').style.visibility = 'visible';
+    panel.FindChildTraverse('MainRewards').style.visibility = 'visible';
     panel.FindChildTraverse('MainRewards').text = rewards;
 
     QuestAccept('Complete');
-    // panel.FindChildTraverse('QuestAcceptText').text = 'Complete';
-    // panel.FindChildTraverse('QuestAccept').RemoveClass('disabled');
-    // panel.FindChildTraverse('QuestAccept').SetPanelEvent('onactivate', function()
-    // {
-    //     QuestDialog(true);
-    // });
+
     panel.FindChildTraverse('QuestDecline').style.visibility = 'collapse';
 }
 
 function QuestDialog(response) {
-    // $.Msg('Dialog Response: ' + response)
     GameEvents.SendCustomGameEventToServer('dialog_event', { result: response });
     dialog.SetHasClass('hidden', true);
 }
-
-var toggle = false;
-function Toggle() {
-    dialog.SetHasClass('hidden', toggle);
-    toggle = !toggle;
-    //$.Schedule(1, Toggle);
-}
-
-//$.Schedule(10, Toggle);
-//Toggle();
 
 if ($.GetContextPanel().activeQuests === undefined)
 {
@@ -290,7 +245,7 @@ var BuildObjectivesHtml = function(objectives)
     var html = [];
     $.Each(objectives, function(o)
     {
-        var oHtml = ''
+        var oHtml = '';
         if (o.required > 1)
         {
             oHtml += o.current + '/' + o.required + ' ';

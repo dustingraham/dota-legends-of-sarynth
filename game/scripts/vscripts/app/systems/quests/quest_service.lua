@@ -26,7 +26,8 @@ function QuestService:OnHeroPick(e, event)
             quest:Accept()
             -- Apply Progress
             for _,objective in pairs(questProgress.objectives) do
-                if quest.objectives[objective.oid].action == 'kill' then
+                -- If collect or kill count, apply count.
+                if quest.objectives[objective.oid].action == 'kill' or quest.objectives[objective.oid].action == 'collect' then
                     quest.objectives[objective.oid].current = objective.current
                     if quest.objectives[objective.oid].required ~= objective.required then
                         -- Make note that they don't match. Not much we can do.
@@ -38,6 +39,7 @@ function QuestService:OnHeroPick(e, event)
                         )
                     end
                 end
+                -- TODO: Report to light...?
                 --if quest.objectives[objective.oid].action == 'report' then
                 --    if not quest.objectives[objective.oid].reported then
                 --
@@ -261,7 +263,7 @@ function QuestService:OnInventoryChange(e, event)
 
     Debug('QuestService', event.hero:GetName()..' item change '..event.item:GetAbilityName())
     for _,quest in pairs(quests) do
-        quest:OnInventoryChange(event.hero, event.item)
+        quest:OnInventoryChange(event.hero)
     end
 end
 
@@ -331,11 +333,20 @@ function QuestService:CheckForQuestsAvailable(PlayerID)
 
     local hero = PlayerResource:GetSelectedHeroEntity(PlayerID)
 
+    -- Check quests that the hero can acquire.
     for _,quest in pairs(QuestRepository.data) do
         if CheckRequirements(completedQuests, inProgressQuests, hero, quest) then
             Debug('QuestService', '['..quest.name..'] Available!')
             local npc = SpawnSystem:GetUnique(quest.start_entity)
             if npc then npc:ParticleOnForPlayer(QuestService.questParticleName, PlayerID) end
+        end
+    end
+    -- Check already completed quests
+    -- In case the quest is already completed.
+    for _,quest in pairs(inProgressQuests) do
+        if quest:IsComplete() then
+            Debug('Quest', 'Light on the end npc.')
+            quest:GetEndNpc():ParticleOnForPlayer(QuestService.questParticleName, quest.PlayerID)
         end
     end
 end

@@ -24,7 +24,6 @@ function DialogSystem:StartTeleportDialog(hero, target)
     player.currentDialog = 'Teleport'
 
     -- Unlock if not unlocked
-    DeepPrintTable(hero.unlockedTeleports)
     local alreadyUnlocked = hero.unlockedTeleports[target.spawn_name]
     if not alreadyUnlocked then
         hero.unlockedTeleports[target.spawn_name] = true
@@ -121,12 +120,13 @@ function DialogSystem:OnDialogEvent(event)
     local player = PlayerResource:GetPlayer(event.PlayerID)
     if player.currentDialog then
         local callback = 'On'..player.currentDialog..'DialogEvent'
+        -- We clear it out now, since the callback may set it again to chain quest dialogs.
+        player.currentDialog = nil
         if DialogSystem[callback] then
             DialogSystem[callback](self, event)
         else
             Debug('DialogSystem', 'Missing Dialog Callback', player.currentDialog)
         end
-        player.currentDialog = false
     else
         Debug('DialogSystem', 'Player has no active dialog.')
     end
