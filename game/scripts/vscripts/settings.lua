@@ -12,9 +12,9 @@ if DEBUG_SETTINGS then
     --TEST_PICK_HERO = 'bounty_hunter' -- Rogue
     --TEST_PICK_HERO = 'invoker'       -- Mage
     TEST_PICK_HERO = 'warlock'       -- Sorcerer
-    TEST_PICK_HERO_ALT = 'omniknight'
+    --TEST_PICK_HERO_ALT = 'omniknight'
 
-    TEST_DISABLE_FOG = true
+    --TEST_DISABLE_FOG = true
     TEST_START_LEVEL = 24
     --TEST_SUPERPATHEY = 750
     TEST_SUPERSTRONG = true
@@ -22,9 +22,9 @@ if DEBUG_SETTINGS then
     TEST_SUPERAGI = 4400
     TEST_SUPERINT = 4400
     -- town kobolds ice webbed druids dark
-    TEST_START_WAYPOINT = 'kobolds'
+    TEST_START_WAYPOINT = 'druids'
     --TEST_START_START_BOSS = true
-    TEST_START_DARK_BOSS = true
+    --TEST_START_DARK_BOSS = true
     TEST_QUESTS_COMPLETE = {
         ['1005'] = 'start_area_report_to_town',
         ['1012'] = 'kobolds_warchief',
