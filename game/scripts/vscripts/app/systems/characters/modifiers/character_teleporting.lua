@@ -20,15 +20,18 @@ end
 
 function character_teleporting:OnDestroy()
     if IsServer() then
-        self:GetCaster():ParticleOff('particles/transport_bird/transport_bird.vpcf')
-        --local hero = self:GetCaster()
-        local PlayerID = self:GetCaster():GetPlayerOwnerID()
-        --StartSoundEvent('ui.herochallenge_complete', self:GetCaster())
+        local hero = self:GetCaster()
+        local position = hero:GetAbsOrigin()
+        local PlayerID = hero:GetPlayerOwnerID()
+        hero:ParticleOff('particles/transport_bird/transport_bird.vpcf')
         Sounds:Start('ui.herochallenge_complete', PlayerID)
         Timers(0.25, function()
             Sounds:Stop('rune_idle_02', PlayerID)
+            -- Fix collision
+            ResolveNPCPositions(position, 300)
         end)
-        PlayerResource:SetCameraTarget(self:GetCaster():GetPlayerOwnerID(), nil)
+        -- Unlock camera
+        PlayerResource:SetCameraTarget(PlayerID, nil)
     end
 end
 
@@ -251,7 +254,6 @@ function character_teleporting:UpdateDirection()
     local currentPos = self:GetParent():GetAbsOrigin()
     if (currentPos - self.nextPos):Length2D() < (self.speed + 140) then
         -- Find Next Waypoint
-        local nextWaypoint
         for i,waypoint in ipairs(waypointGuide[self.teleport_from][self.teleport_to]) do
             if self.nextWaypoint == waypoint then
                 local nextI = i + 1

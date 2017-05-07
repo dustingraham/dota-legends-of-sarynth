@@ -11,6 +11,7 @@
  • Fix bug where Scar killed really quickly would error.
  • Added missing description for teleport pads.
  • Removed empty modifier from Scar.
+ • Fix bug where two players transporting to the same waypoint would get stuck together if the first one didn't move out of the way.
 
 
 [b]v0.0.74[/b]
