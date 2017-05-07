@@ -72,7 +72,7 @@ function character_teleporting:OnIntervalThink()
     caster:SetAbsOrigin(caster:GetAbsOrigin() + self.targetDir * self.speed)
 end
 
--- TownToIce
+-- From -> To
 local waypointGuide = {
     ['teleport_tower_ice'] = {
         ['teleport_tower_town'] = {

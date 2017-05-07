@@ -11,7 +11,7 @@ end
 function DialogSystem:OrderFilter(event, order)
     local hero = EntIndexToHScript(order.units['0'])
     local player = hero:GetPlayerOwner()
-    if player.currentDialog then
+    if player and player.currentDialog then
         CustomGameEventManager:Send_ServerToPlayer(player, 'dialog_close', {})
         player.currentDialog = nil
     end

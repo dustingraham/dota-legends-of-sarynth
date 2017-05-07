@@ -56,7 +56,7 @@
     visibility: collapse;
 }
 
-.BuffBlock .has_stacks #StackCount
+.BuffBlock.has_stacks #StackCount
 {
     visibility: visible;
 }

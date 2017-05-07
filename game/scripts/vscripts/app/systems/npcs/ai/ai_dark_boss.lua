@@ -1,7 +1,8 @@
-ai_dark_boss = ai_dark_boss or class({})
+ai_dark_boss = ai_dark_boss or class({
+    numShards = 0,
+})
 local ai = ai_dark_boss
 function ai:IsDebuff() return false end
-function ai:IsHidden() return true end
 
 if IsServer() then
     AiDarkBossActions(ai)
@@ -15,6 +16,7 @@ function ai:DeclareFunctions()
         MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT,
         MODIFIER_PROPERTY_MOVESPEED_BASE_OVERRIDE,
         MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT,
+        MODIFIER_PROPERTY_INCOMING_DAMAGE_PERCENTAGE,
     }
 end
 
@@ -82,6 +84,10 @@ function ai:GetModifierConstantHealthRegen()
     return 0
 end
 
+function ai:GetModifierIncomingDamage_Percentage()
+    return -60 * self.numShards
+end
+
 function ai:OnTakeDamage(event)
     if self:GetParent() ~= event.unit then return end
     if self:GetParent() == event.attacker then Debug('AiDarkBoss', 'Self ForceKill') return end
@@ -101,17 +107,19 @@ end
 
 function ai:ShieldFlash()
     local pIdx = ParticleManager:CreateParticle(
-        'particles/units/dark_plains/boss/shield_deflection.vpcf',
-        PATTACH_ABSORIGIN_FOLLOW,
-        self:GetParent()
+    'particles/units/dark_plains/boss/shield_deflection.vpcf',
+    PATTACH_ABSORIGIN_FOLLOW,
+    self:GetParent()
     )
     ParticleManager:SetParticleControl(pIdx, 0, self:GetParent():GetAbsOrigin())
     ParticleManager:ReleaseParticleIndex(pIdx)
 end
 
 function ai:GetTexture()
-    return 'forged_spirit_melting_strike'
+    return 'invoker_forge_spirit'
 end
+
+function ai:IsHidden() return self:GetStackCount() == 0 end
 
 function ai:UpdateShardCount()
     local count = 0
@@ -128,6 +136,7 @@ function ai:UpdateShardCount()
         count = count + 1
     end
     self.numShards = count
+    self:SetStackCount(count)
 end
 
 function ai:OnDeath(event)
@@ -299,10 +308,11 @@ function ai:FallbackAttackCheck()
     end
 end
 
-function ai:FindHeroes(range)
+function ai:FindHeroes(range, sourcePosition)
+    sourcePosition = sourcePosition or self:GetParent():GetAbsOrigin()
     return FindUnitsInRadius(
     self:GetParent():GetTeam(),
-    self:GetParent():GetAbsOrigin(),
+    sourcePosition,
     nil,
     range,
     DOTA_UNIT_TARGET_TEAM_ENEMY,

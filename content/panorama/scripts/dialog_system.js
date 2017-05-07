@@ -78,8 +78,6 @@ function UpdateTeleportDialog(data)
     panel.FindChildTraverse('MainRewards').style.visibility = 'collapse';
     panel.FindChildTraverse('RewardsTitle').style.visibility = 'collapse';
 
-    $.Msg(data);
-
     // Build Options
     var $teleportOptions = $('#TeleportOptions');
     if (data.hasOptions)
@@ -89,7 +87,6 @@ function UpdateTeleportDialog(data)
         {
             // Ignore if no selection yet.
             if (!panel.selectedTeleport) return;
-            $.Msg('Kick off teleport to: '+panel.selectedTeleport);
             GameEvents.SendCustomGameEventToServer('dialog_event', {
                 result: true,
                 destination: panel.selectedTeleport
@@ -97,19 +94,13 @@ function UpdateTeleportDialog(data)
             dialog.SetHasClass('hidden', true);
         });
 
-        // panel.FindChildTraverse('QuestAccept').AddClass('disabled');
-        // panel.FindChildTraverse('QuestAcceptText').text = 'Go!';
-        // panel.FindChildTraverse('QuestAccept').SetPanelEvent('onactivate', function()
-        // {
-        //     $.Msg('Teleport On Activate');
-        // });
         panel.FindChildTraverse('QuestDeclineText').text = 'Cancel';
         panel.FindChildTraverse('QuestDecline').style.visibility = 'visible';
 
         // Selection List
         $.Each(data.teleportOptions, function(v, k)
         {
-            $.Msg('K: '+k+' V: '+v+' T:'+$.Localize(v));
+            // $.Msg('K: '+k+' V: '+v+' T:'+$.Localize(v));
             var $option = $.CreatePanel('Button', $teleportOptions, '');
             $option.BLoadLayoutSnippet('TeleportOption');
             $option.FindChildTraverse('Name').text = $.Localize(v);

@@ -37,13 +37,16 @@ function CreatureSystem:OnModifierGainedFilter(event)
     end
 
     -- 2) If this is a summon, don't take armor.
-    if parent:GetUnitName() == 'dark_boss_summons' then
-        if event.params.name_const == 'armor_aura_effect' then
-            -- Don't take armor modifier.
-            Debug('CreatureSystem', 'Avoid armor aura on summons.')
-            return false
-        end
-    end
+    -- Stopped using this because auras suck and re-apply every frame if denied.
+    -- DG Suggested GetAuraEntityReject but would need lua modifier.
+    -- Still appears in the javascript buffs.
+    --if parent:GetUnitName() == 'dark_boss_summons' then
+    --    if event.params.name_const == 'shard_armor_aura_effect' then
+    --        -- Don't take armor modifier.
+    --        --Debug('CreatureSystem', 'Avoid armor aura on summons.')
+    --        return false
+    --    end
+    --end
 
     --if event.params.name_const == 'ai_basic_sheep' then return end
     --if event.params.name_const == 'ai_aggro_leash' then return end

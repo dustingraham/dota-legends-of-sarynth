@@ -118,6 +118,7 @@ function Boot:Precache(context)
         'soundevents/game_sounds_heroes/game_sounds_phoenix.vsndevts',
         'soundevents/game_sounds_heroes/game_sounds_shadowshaman.vsndevts',
         'soundevents/game_sounds_heroes/game_sounds_skywrath_mage.vsndevts',
+        'soundevents/game_sounds_heroes/game_sounds_techies.vsndevts',
         'soundevents/game_sounds_heroes/game_sounds_terrorblade.vsndevts',
         'soundevents/game_sounds_heroes/game_sounds_tusk.vsndevts',
         'soundevents/game_sounds_heroes/game_sounds_ursa.vsndevts',

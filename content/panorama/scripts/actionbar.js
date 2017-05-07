@@ -5,7 +5,7 @@
 if (!$.GetContextPanel().actionBarInit)
 {
     $.GetContextPanel().actionBarInit = true;
-    $.Msg('Action Bar Init');
+    //$.Msg('Action Bar Init');
 
     // Take abilities and move them into our own container.
     var Hud = $.GetContextPanel().GetParent().GetParent().GetParent();

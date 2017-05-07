@@ -78,6 +78,5 @@ end
 --Called when the projectile hits the target, params contains the params of the projectile plus a creation_time field.
 function OnProjectileHitUnit( params )
     params.Callback(params)
-    print( params.Caster:GetUnitName() .. '\'s particle hit target after ' ..
-    ( GameRules:GetGameTime() - params.creation_time ) .. ' seconds.' )
+    -- print( params.Caster:GetUnitName() .. '\'s particle hit target after ' .. ( GameRules:GetGameTime() - params.creation_time ) .. ' seconds.' )
 end

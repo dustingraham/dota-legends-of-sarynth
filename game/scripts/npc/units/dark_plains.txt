@@ -266,7 +266,7 @@
         "CombatClassDefend"         "DOTA_COMBAT_CLASS_DEFEND_BASIC"
         "UnitRelationshipClass"     "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
 
-        "Ability1" "dark_summon_buff"
+        //"Ability1" "dark_summon_buff"
 
         "StatusHealth"                "3672"
         "StatusHealthRegen"           "25.0"

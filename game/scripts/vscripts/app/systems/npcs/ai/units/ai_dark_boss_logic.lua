@@ -73,10 +73,12 @@ function AiDarkBossLogic(ai)
             self:FallbackAttackCheck()
         end
     end
+
     function ai:TransitionToEnergize()
         EmitSoundOn('death_prophet_dpro_pain_22', self:GetParent())
         self:TransitionTo(ai.ACTION_LINK_DESIRE)
     end
+
     function ai:DealDamage(target, damage, damageType, source)
         if not source then source = self:GetParent() end
         if not damageType then damageType = DAMAGE_TYPE_MAGICAL end
@@ -89,8 +91,6 @@ function AiDarkBossLogic(ai)
     end
 
     function ai:OnShardKilled(deadShard)
-        --self:UpdateStackCount()
-
         -- TODO: Explosion and damage? And, damage spot?
         -- TODO: Noise.
         ParticleManager:ReleaseParticleIndex(ParticleManager:CreateParticle(
@@ -98,30 +98,18 @@ function AiDarkBossLogic(ai)
             PATTACH_ABSORIGIN_FOLLOW,
             deadShard
         ))
-        -- Deal 1800 damage in 1000 radius.
-        for _,target in pairs(self:FindHeroes(1000)) do
+
+        local position = deadShard:GetAbsOrigin()
+        -- Deal 800 damage in 1000 radius.
+        for _,target in pairs(self:FindHeroes(1000, position)) do
             self:DealDamage(target, 800, DAMAGE_TYPE_MAGICAL, deadShard)
         end
-        -- Deal an extra 3200 damage in a 400 radius.
-        for _,target in pairs(self:FindHeroes(400)) do
+        -- Deal an extra 4800 damage in a 400 radius.
+        for _,target in pairs(self:FindHeroes(400, position)) do
             self:DealDamage(target, 4800, DAMAGE_TYPE_MAGICAL, deadShard)
         end
 
         self:UpdateShardCount()
-
-        --for _,shard in pairs(self.shards) do
-        --    if IsValidEntity(shard) and shard:IsAlive() then
-        --        Debug('AiDarkBoss', 'At least one shard is still alive...')
-        --        return
-        --    end
-        --end
-
-        -- All shards have died, transition to link desire.
-        -- IFF we are in the fight state.
-        --if self.state == ai.ACTION_FIGHT_STANDARD then
-        --    EmitSoundOn('death_prophet_dpro_pain_22', self:GetParent())
-        --    self:TransitionTo(ai.ACTION_LINK_DESIRE)
-        --end
     end
 
     -- Desires a link, walk to the sphere and start channeling once arrived.

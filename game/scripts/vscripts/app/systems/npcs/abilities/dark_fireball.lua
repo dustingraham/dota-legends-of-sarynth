@@ -7,7 +7,7 @@ function spell:OnAbilityPhaseStart()
         activity = ACT_DOTA_ATTACK,
         rate = 0.65
     })
-    --EmitSoundOn('Hero_Lycan.SummonWolves', self:GetCaster())
+    EmitSoundOn('death_prophet_dpro_anger_0'..RandomInt(1,9), self:GetCaster())
 
     --self:GetCaster():SetAbsOrigin(self:GetCaster():GetAbsOrigin()+Vector(0,0,60))
     return true
@@ -24,11 +24,14 @@ end
 
 function spell:OnSpellStart()
     local caster = self:GetCaster()
+    EmitSoundOn('Hero_DeathProphet.CarrionSwarm.Damage.Mortis', caster)
+
     Timers(0.45, function()
         if IsValidEntity(caster) and caster:IsAlive() then
             EndAnimation(caster)
         end
     end)
+
     local position = self:GetCursorPosition()
     local indicatorParticle = ParticleManager:CreateParticle('particles/effects/ground_indicator.vpcf', PATTACH_ABSORIGIN, self:GetCaster())
     ParticleManager:SetParticleControl(indicatorParticle, 0, position)
@@ -78,7 +81,7 @@ function spell:OnSpellStart()
                     damage_type = DAMAGE_TYPE_MAGICAL
                 })
             end
-
+            EmitSoundOnLocationWithCaster(params.TargetPosition, 'Hero_Techies.LandMine.Detonate', params.Caster)
         end,
     }
     DarkFireballCopyOfTrackingProjectile(params)
@@ -157,7 +160,7 @@ function DarkFireballCopyOfTrackingProjectile( params )
     --Fetch initial projectile location
     local projectile = caster:GetAttachmentOrigin( params.iSourceAttachment )
     projectile = projectile + caster:GetForwardVector() * 155
-    print(projectile)
+    --print(projectile)
     --Make the particle
     local particle = ParticleManager:CreateParticle( params.EffectName, PATTACH_CUSTOMORIGIN, caster)
 
@@ -192,8 +195,7 @@ function DarkFireballCopyOfTrackingProjectile( params )
 
             --Target has reached destination!
             params.Callback(params)
-            print( params.Caster:GetUnitName() .. '\'s particle hit target after ' ..
-            ( GameRules:GetGameTime() - params.creation_time ) .. ' seconds.' )
+            --print( params.Caster:GetUnitName() .. '\'s particle hit target after ' .. ( GameRules:GetGameTime() - params.creation_time ) .. ' seconds.' )
 
             --Stop the timer
             return nil

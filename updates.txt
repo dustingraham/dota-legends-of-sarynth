@@ -1,17 +1,24 @@
 [b]v0.0.75[/b]
- • Added a shield deflection visual to Lumorase when she is attacked while protected by the Shard auras.
  • Added more music diversity to the various zones.
  • Quest dialog will now auto-close when walking away, or taking some other action.
- 
+ • Buff bar now shows stacking buffs. Improved unit target buff bar so that it no longer redraws every frame.
+ • Fixed and added tooltips for unit target buff bar.
+
 [b]Manaflow Transporter (Teleporter)[/b]
  • Transporter now allows selecting the destination.
  • You will need to visit each transporter to unlock that waypoint.
+ • Added missing description for teleport pads. 
+ • Fix bug where two players transporting to the same waypoint would get stuck together if the first one didn't move out of the way.
  
+[b]Lumorase[/b]
+ • Added a shield deflection visual to Lumorase when she is attacked while protected by the Shard auras.
+ • Added sounds to dark fireball cast, and impact.
+ • Fixed bug where the explosion from Lumorase's Shard was centered around Lumorase, rather than the dead shard.
+ • Shard buff on Lumorase now indicates the increased damage mitigation.
+
 [b]Bugs[/b]
  • Fix bug where Scar killed really quickly would error.
- • Added missing description for teleport pads.
  • Removed empty modifier from Scar.
- • Fix bug where two players transporting to the same waypoint would get stuck together if the first one didn't move out of the way.
 
 
 [b]v0.0.74[/b]

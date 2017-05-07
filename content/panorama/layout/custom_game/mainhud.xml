@@ -44,7 +44,7 @@
                 >
                     <Panel id="Wipe" class="BuffBorder" />
                     <Image id="BuffImage" scaling="stretch-to-fit-y-preserve-aspect" />
-                    <Label id="StackCount" text="{d:stack_count}" />
+                    <Label id="StackCount"/>
                     <Panel id="CircularDuration" />
                 </Button>
             </Panel>

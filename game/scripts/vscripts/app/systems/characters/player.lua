@@ -123,7 +123,6 @@ end
 
 function Player:GetSaveData()
     local hero = PlayerResource:GetSelectedHeroEntity(self.PlayerID)
-    print('returning save data...')
     return {
         items = self:GetItemsForHero(hero),
         quests = self:GetQuestsForPlayer(self.PlayerID),
