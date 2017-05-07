@@ -38,12 +38,11 @@ if IsServer() then
 
         self.energyParticle = Entities:FindByName(nil, 'dark_barricade_particle')
 
-        -- TESTING
-        --self:ToggleWall(true)
-
         self.castDesire = 0
         self.testTicks = 0
         self.timeInState   = 0
+        self.outOfZoneAttacks = 0
+        self.noTargetsFound = 0
 
         --self:SetStackCount(0)
         self.numShards = 0
@@ -58,6 +57,7 @@ if IsServer() then
         self.leashRange = 2000
         self.passiveHealthRegen = Clamp(self:GetParent():GetMaxHealth() / 10, 0, 800)
         self:StartIntervalThink(self.intervalDuration)
+        Event:Listen('HeroDeath', Dynamic_Wrap(ai, 'OnHeroDeath'), self)
     end
 end
 
@@ -92,9 +92,21 @@ function ai:OnTakeDamage(event)
     if self:GetParent() ~= event.unit then return end
     if self:GetParent() == event.attacker then Debug('AiDarkBoss', 'Self ForceKill') return end
 
+    if event.attacker:IsRealHero() and event.attacker.currentZone ~= 'zone_dark_boss' then
+        -- Damage attacker.
+        Debug('AiDarkBoss', 'Hero not in zone.')
+        self.outOfZoneAttacks = self.outOfZoneAttacks + 1
+        self:DealDamage(
+            event.attacker,
+            self.outOfZoneAttacks * event.attacker:GetMaxHealth() / 10,
+            DAMAGE_TYPE_PURE
+        )
+    end
+
     if self.state == ai.ACTION_IDLE then
         Debug('AiDarkBoss', 'Aggroing due to Attacked')
         self.aggroTarget = event.attacker
+        self.rangedTarget = event.attacker
         self:StartFight()
     end
 
@@ -163,6 +175,23 @@ function ai:OnDeath(event)
     EmitSoundOn('death_prophet_dpro_defeat_04', self:GetParent())
 end
 
+function ai:OnHeroDeath(e, event)
+    if Encounter.InEncounter and Encounter.ai == self then
+        Debug('AiDarkBoss', 'Hero died, checking for other living targets.')
+        self:ReviewTargets()
+        if self.aggroTarget and self.aggroTarget:IsAlive() then
+            Debug('AiDarkBoss', 'Found a live one, continuing fight.')
+            Encounter:Log('Found a live one, continuing fight.')
+            self:AttackTarget()
+        else
+            Debug('AiDarkBoss', 'No living targets, ending encounter.')
+            Encounter:Log('No living targets, ending encounter.')
+            --self:OnEncounterEnd()
+            Encounter:End()
+        end
+    end
+end
+
 -- self:AbilityClawAttack()
 function ai:AbilityClawAttack()
     StartAnimation(self:GetParent(), {
@@ -177,70 +206,32 @@ function ai:AbilityClawAttack()
     ))
 
 end
+
 function ai:StartFight()
     Debug('AiDarkBoss', 'Starting fight state.')
-    self.state = ai.ACTION_FIGHT_STANDARD
-    self:ToggleWall(true)
-
-    Encounter:Start(self:GetParent(), self.aggroTarget, self)
 
     EmitSoundOn('death_prophet_dpro_spawn_03', self:GetParent())
-    self:GetParent():MoveToTargetToAttack(self.aggroTarget)
-    --StartAnimation(self:GetParent(), {
-    --    duration = 3.0,
-    --    activity = ACT_DOTA_CAST_ABILITY_2,
-    --    rate = 0.35,
-    --})
-    --Timers:CreateTimer(3.0, function()
-    --    Debug('AiDarkBoss', 'Starting Attack')
-    --    self:GetParent():MoveToTargetToAttack(self.aggroTarget)
-    --end)
+    self:ToggleWall(true)
 
-    --Timers:CreateTimer(5.0, function()
-    --    if self.state == ai.ACTION_FIGHT_STANDARD then
-    --        if not self:GetParent():IsNull() and self:GetParent():IsAlive() then
-    --            self:CreateShards()
-    --        end
-    --    end
-    --end)
+    -- TODO: Report all heroes in area.
+    Encounter:Start(self:GetParent(), self.aggroTarget, self)
+
+    self:TransitionTo(ai.ACTION_FIGHT_STANDARD)
+    self:AttackTarget()
 end
 
 function ai:ActionIdle()
-    --self.testTicks = self.testTicks + 1
-    --if self.testTicks > 5 then
-    --    --Debug('AiDarkBoss', 'Test Interval')
-    --    self.testTicks = 0
-    --end
-
-    local units = FindUnitsInRadius(
-    self:GetParent():GetTeam(), self:GetParent():GetAbsOrigin(), nil,
-    self.aggroRange, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_ALL, DOTA_UNIT_TARGET_FLAG_NONE,
-    FIND_ANY_ORDER, false
-    )
-
-    --If one or more units were found, start attacking the first one
+    --If one or more units are found in aggro range, start attacking the first one
+    local units = self:FindHeroes(self.aggroRange)
     if #units > 0 then
         Debug('AiDarkBoss', 'Aggroing due to Range')
         self.aggroTarget = units[1]
+        self.rangedTarget = units[1]
         self:StartFight()
         return true
     end
 
     self:ActionIdleMove()
-end
-
-function ai:ChargeAttack()
-    Timers:CreateTimer(8.0, function()
-        self:GetParent():Stop()
-        StartAnimation(self:GetParent(), {
-            duration = 2.0,
-            activity = ACT_DOTA_CAST_ABILITY_1,
-        })
-        EmitSoundOn('lycan_lycan_ability_howl_01', self:GetParent())
-        Timers:CreateTimer(2.0, function()
-            self:AbilityClawAttack()
-        end)
-    end)
 end
 
 function ai:ReviewAbilityDesire()
@@ -264,13 +255,13 @@ function ai:ReviewAbilityDesire()
         --print('IA', self:GetParent():IsAttacking())
         --print('CD ', ability:IsCooldownReady())
         --print('Mana', ability:IsOwnersManaEnough())
-        local distance = (self.aggroTarget:GetAbsOrigin() - self:GetParent():GetAbsOrigin()):Length2D()
+        local distance = (self.rangedTarget:GetAbsOrigin() - self:GetParent():GetAbsOrigin()):Length2D()
 
         if ability:IsFullyCastable() and distance > 250 then
             local roll = math.random(100)
             if roll < self.castDesire then
                 --self:GetParent():CastAbilityOnTarget(self.aggroTarget, ability, -1)
-                self:GetParent():CastAbilityOnPosition(self.aggroTarget:GetAbsOrigin(), ability, -1)
+                self:GetParent():CastAbilityOnPosition(self.rangedTarget:GetAbsOrigin(), ability, -1)
                 self.castDesire = 0
             else
                 self.castDesire = self.castDesire + 10
@@ -284,15 +275,15 @@ function ai:ReviewAbilityDesire()
             --  })
         else
             if not self:GetParent():IsAttacking() then
-                --print('DO IT: ', 'Go attack fool.')
-                self:GetParent():MoveToTargetToAttack( self.aggroTarget )
+                self:AttackTarget()
             end
         end
     end
-
 end
 
 function ai:AttackTarget()
+    -- Consider checking if state is "standard fight" otherwise bug may occur, where
+    -- during her link, if a hero dies, she begins to attack the remaining hero before link is over.
     self:GetParent():MoveToTargetToAttack(self.aggroTarget)
 end
 
@@ -303,7 +294,7 @@ function ai:FallbackAttackCheck()
     end
     self.fallbackCheck = self.fallbackCheck + 1
     if self.fallbackCheck > 5 then
-        self:GetParent():MoveToTargetToAttack(self.aggroTarget)
+        self:AttackTarget()
         self.fallbackCheck = nil
     end
 end
@@ -322,3 +313,4 @@ function ai:FindHeroes(range, sourcePosition)
     false
     )
 end
+

@@ -1,53 +1,60 @@
 
 DEBUG_SETTINGS = IsInToolsMode()
 -- Override if necessary...
-DEBUG_SETTINGS = false
+--DEBUG_SETTINGS = false
 
 -- TEST MODE
 if DEBUG_SETTINGS then
     -- Curronly only a single hero. Pick it!
     --TEST_PICK_HERO = 'windrunner'    -- Ranger
-    TEST_PICK_HERO = 'dragon_knight' -- Warrior
+    --TEST_PICK_HERO = 'dragon_knight' -- Warrior
     --TEST_PICK_HERO = 'omniknight'    -- Paladin
     --TEST_PICK_HERO = 'bounty_hunter' -- Rogue
     --TEST_PICK_HERO = 'invoker'       -- Mage
-    --TEST_PICK_HERO = 'warlock'       -- Sorcerer
-    --TEST_PICK_HERO_ALT = 'omniknight'
+    TEST_PICK_HERO = 'warlock'       -- Sorcerer
+    TEST_PICK_HERO_ALT = 'omniknight'
 
     TEST_DISABLE_FOG = true
     TEST_START_LEVEL = 24
-    --TEST_SUPERSTRONG = true
     --TEST_SUPERPATHEY = 750
+    TEST_SUPERSTRONG = true
+    TEST_SUPERSTR = 4800
+    TEST_SUPERAGI = 4400
+    TEST_SUPERINT = 4400
     -- town kobolds ice webbed druids dark
-    TEST_START_WAYPOINT = 'town'
+    TEST_START_WAYPOINT = 'kobolds'
     --TEST_START_START_BOSS = true
-    --TEST_START_DARK_BOSS = true
+    TEST_START_DARK_BOSS = true
     TEST_QUESTS_COMPLETE = {
         ['1005'] = 'start_area_report_to_town',
-        -- ['1012'] ='kobolds_warchief',
+        ['1012'] = 'kobolds_warchief',
+        ['1015'] = 'kobolds_report_to_webbed',
     }
     TEST_KNOWN_TELEPORTS = {
         'teleport_tower_town',
-        'teleport_tower_webbed',
+        --'teleport_tower_webbed',
         'teleport_tower_dark',
     }
 
-    TEST_SPAWN_ITEMS = true
+    --TEST_SPAWN_ITEMS = true
     TEST_ADD_ITEMS = {
         'item_3172',
         'item_3179',
         'item_3153',
-
+        'item_3127',
+        'item_3127',
+        'item_3127',
+        'item_3127',
         -- Set Equip
-        'item_3154',
-        'item_3155',
-        'item_3156',
-        'item_3157',
-        'item_3158',
-        'item_3159',
-        'item_3160',
-        'item_3161',
-        'item_3162',
+        --'item_3154',
+        --'item_3155',
+        --'item_3156',
+        --'item_3157',
+        --'item_3158',
+        --'item_3159',
+        --'item_3160',
+        --'item_3161',
+        --'item_3162',
     }
     TEST_EQUIP_ITEMS_6 = {
         --[1] = '', -- helm

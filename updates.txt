@@ -1,3 +1,10 @@
+[b]v0.0.76[/b]
+ • Add sound to Lumorase's Shard death.
+ • Lumorase no longer tolerates being attacked from outside of her area.
+ • Lumorase encounter now persists until all heroes in the area are dead.
+ • Lumorase targeting improved when fighting multiple heroes.
+ • Scar will now look for another target when the first target dies, rather than ending the encounter.
+
 [b]v0.0.75[/b]
  • Transport destinations can now be selected. See below.
  • Added more music diversity to the various zones.

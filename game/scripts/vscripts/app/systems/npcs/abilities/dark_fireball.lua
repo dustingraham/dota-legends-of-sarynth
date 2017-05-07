@@ -130,7 +130,7 @@ function spell:OnSpellStart()
 end
 
 function spell:GetCastRange()
-    return 1250
+    return 1400
 end
 function spell:GetMaxLevel()
     return 1

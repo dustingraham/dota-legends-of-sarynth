@@ -5,12 +5,12 @@
 Encounter = Encounter or class({})
 
 function Encounter:Activate()
-    Event:Listen('HeroDeath', Dynamic_Wrap(Encounter, 'OnHeroDeath'), self)
-    ListenToGameEvent('dota_player_used_ability', Dynamic_Wrap(Encounter, 'OnAbilityUsed'), self)
+    Event:Listen('HeroDeath', Dynamic_Wrap(Encounter, 'OnHeroDeath'), Encounter)
+    ListenToGameEvent('dota_player_used_ability', Dynamic_Wrap(Encounter, 'OnAbilityUsed'), Encounter)
 end
 
 function Encounter:Start(boss, hero, ai)
-    Debug('Encounter', 'Starting encounter')
+    Debug('Encounter', 'Starting encounter for:', boss:GetUnitName())
     self.boss = boss
     self.hero = hero -- TODO : ONE FOR NOW...
     self.ai = ai
@@ -83,14 +83,17 @@ function Encounter:LogBothHp(eventName)
     local herohp = string.format("%10s ",self.hero:GetHealth()..'/'..self.hero:GetMaxHealth())
     Encounter:Log('Health: '..bosshp..' Hero: '..herohp.. ' Event: '..eventName)
 end
+
 function Encounter:LogHp(target, name)
     -- target:GetName()
     Encounter:Log(name..' HP: '..target:GetHealth()..'/'..target:GetMaxHealth())
 end
+
 function Encounter:Log(str)
     local timeElapsed = math.ceil(GameRules:GetGameTime() - self.startTime)
     timeElapsed = string.format("%4s ",timeElapsed)
     table.insert(self.logs, '['..timeElapsed..'] '..str)
+    --Debug('Encounter', timeElapsed, str)
 end
 
 function Encounter:MoveBlockers(distance)
@@ -113,16 +116,17 @@ function Encounter:MoveBlockers(distance)
 end
 
 function Encounter:OnHeroDeath(e, event)
-    Debug('Encounter', 'Hero died, ending encounter.')
-    local hero = event.hero
-    if self.InEncounter then
-        self:End()
-    end
+    Debug('Encounter', 'Hero died, AI should handle.')
+    --local hero = event.hero
+    --if self.InEncounter then
+    --    Debug('Encounter', 'Hero died, ending encounter?')
+    --    --self:End()
+    --end
 end
 
 function Encounter:OnAbilityUsed(event)
     if not self.InEncounter then return end
-    local hero = PlayerResource:GetSelectedHeroEntity(event.PlayerID)
+    --local hero = PlayerResource:GetSelectedHeroEntity(event.PlayerID)
     -- hero:GetName()
     self:LogBothHp(event.abilityname)
     --self:Log('hero used ability: '..event.abilityname)

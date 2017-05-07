@@ -34,11 +34,13 @@ if IsServer() then
         self.state = ai.ACTION_IDLE
         Debug('StartAreaBoss', 'Idling OC')
         self.castDesire = 0
+        self.noTargetsFound = 0
         self.aggroRange = 850
         self.leashRange = 2000
         -- self.aggroRange = self:GetParent().spawn.spawnNode.AggroRange or 400
         -- self.leashRange = self:GetParent().spawn.spawnNode.LeashRange or 750
         self:StartIntervalThink(1.0)
+        Event:Listen('HeroDeath', Dynamic_Wrap(ai, 'OnHeroDeath'), self)
     end
 end
 
@@ -92,6 +94,22 @@ function ai:OnDeath(event)
     EmitSoundOn('Scar.Death', self:GetParent())
 end
 
+function ai:OnHeroDeath(e, event)
+    if Encounter.InEncounter and Encounter.ai == self then
+        Debug('StartAreaBoss', 'Hero died, checking for other living targets.')
+        self:ReviewTargets()
+        if self.aggroTarget and self.aggroTarget:IsAlive() then
+            Debug('StartAreaBoss', 'Found a live one, continuing fight.')
+            Encounter:Log('Found a live one, continuing fight.')
+            self:GetParent():MoveToTargetToAttack(self.aggroTarget)
+        else
+            Debug('StartAreaBoss', 'No living targets, ending encounter.')
+            Encounter:Log('No living targets, ending encounter.')
+            Encounter:End()
+        end
+    end
+end
+
 function ai:OnIntervalThink()
     Dynamic_Wrap(ai, self.state)(self)
 end
@@ -114,7 +132,7 @@ end
 function ai:StartFight()
     Debug('StartAreaBoss', 'Starting fight state.')
     self.state = ai.ACTION_FIGHT_STANDARD
-    Encounter:Start(self:GetParent(), self.aggroTarget)
+    Encounter:Start(self:GetParent(), self.aggroTarget, self)
 
     -- Howl and attack.
     EmitSoundOn('Hero_Lycan.Howl', self:GetParent())
@@ -204,21 +222,10 @@ function ai:ReviewAbilityDesire()
 
 end
 
---function ai:ActionAggro()
 function ai:ActionFightStandard()
-    --Check if the unit has walked outside its leash range
-    if ( self:GetParent().spawn.spawnPoint - self:GetParent():GetAbsOrigin() ):Length() > self.leashRange then
-        self:TransitionToReturn()
-        return true --Return to make sure no other code is executed in this state
-    end
-
-    -- TODO: Check for unit closer than target if target is running away.
-
-    --Check if the unit's target is still alive (self.aggroTarget will have to be set when transitioning into this state)
-    if not self.aggroTarget:IsAlive() then
-        -- TODO Look for another target in the area!!
-        self:TransitionToReturn()
-        return true --Return to make sure no other code is executed in this state
+    if not self:ReviewTargets() then
+        -- Nothing else to do here.
+        return
     end
 
     self:ReviewAbilityDesire()
@@ -245,6 +252,7 @@ end
 function ai:TransitionToReturn()
     -- Remove aggro target.
     self.aggroTarget = nil
+    self.noTargetsFound = 0
 
     -- Remove all negative modifiers.
     for _, modifier in pairs(self:GetParent():FindAllModifiers()) do
@@ -305,3 +313,74 @@ function ai:ActionIdleMove()
     local target = self:GetParent().spawn.spawnPoint + Vector(math.random(- 196, 196), math.random(- 196, 196))
     self:GetParent():MoveToPosition(target)
 end
+
+-- Return, either hero died, or... probably hero died.
+function ai:OnEncounterEnd()
+    -- Check that we are still alive.
+    if self:GetParent() and self:GetParent():IsAlive() then
+        Debug('StartAreaBoss', 'OnEncounterEnd -> TransitionToReturn')
+        self:TransitionToReturn()
+    end
+end
+
+function ai:ReviewTargets()
+    local currentPos = self:GetParent():GetAbsOrigin()
+    local foundAnyTargets = false
+    local closestRange
+    local closestHero
+    -- Closest target
+    for _,hero in pairs(self:FindHeroes(3000)) do
+        if hero.currentZone == 'zone_start_boss' then
+            if GridNav:CanFindPath(hero:GetAbsOrigin(), currentPos) then
+                local distance = (hero:GetAbsOrigin() - self:GetParent():GetAbsOrigin()):Length2D()
+                if not foundAnyTargets then
+                    foundAnyTargets = true
+                    closestRange = distance
+                    closestHero = hero
+                else
+                    if distance < closestRange then
+                        closestRange = distance
+                        closestHero = hero
+                    end
+                end
+            end
+        end
+        --Debug('StartAreaBoss', 'ReviewResult',
+        --    hero:GetUnitName(), hero.currentZone,
+        --    'At', (hero:GetAbsOrigin() - self:GetParent():GetAbsOrigin()):Length2D(),
+        --    'Can', GridNav:CanFindPath(hero:GetAbsOrigin(), self:GetParent():GetAbsOrigin())
+        --)
+    end
+    if foundAnyTargets then
+        if self.aggroTarget ~= closestHero then
+            Debug('StartAreaBoss', 'Found closer target to aggro, switch!')
+            self.aggroTarget = closestHero
+            self:GetParent():MoveToTargetToAttack(self.aggroTarget)
+        end
+    else
+        self.noTargetsFound = self.noTargetsFound + 1
+        if self.noTargetsFound > 5 then
+            Encounter:Log('No viable targets found for 5 ticks, ending encounter.')
+            --self:OnEncounterEnd()
+            Encounter:End()
+        end
+    end
+
+    return foundAnyTargets
+end
+
+function ai:FindHeroes(range, sourcePosition)
+    sourcePosition = sourcePosition or self:GetParent():GetAbsOrigin()
+    return FindUnitsInRadius(
+    self:GetParent():GetTeam(),
+    sourcePosition,
+    nil,
+    range,
+    DOTA_UNIT_TARGET_TEAM_ENEMY,
+    DOTA_UNIT_TARGET_ALL,
+    DOTA_UNIT_TARGET_FLAG_NONE,
+    FIND_ANY_ORDER,
+    false
+    )
+end
+

@@ -25,23 +25,31 @@ Energized:
 
 TODO: Make priestess path/phase through units when moving to the portal/particle.
  - MODIFIER_STATE_NO_UNIT_COLLISION
-TODO: Check that summon spawn position is gridnav safe.
 
 --]]
+
+---
+--@function [parent=#global] AiDarkBossLogic
+--@param AiDarkBoss ai
 function AiDarkBossLogic(ai)
-
-    -- Fight Starts, attack for 5 seconds.
+    ---
+    --@function [parent=#AiDarkBoss] ActionFightStandard
+    --@param self
     function ai:ActionFightStandard()
-        -- TODO: Check for unit closer than target if target is running away.
-
-        --Check if the unit's target is still alive (self.aggroTarget will have to be set when transitioning into this state)
-        if not self.aggroTarget:IsAlive() then
-            -- TODO Look for another target in the area!!
-            -- local alternate = self:FindClosestAggro
-            -- FindHeroesInArea (With our zone, or have attacked us.)
-            self:TransitionToReturn()
-            return true --Return to make sure no other code is executed in this state
+        -- Fight Starts, attack for 5 seconds.
+        -- Check for unit closer than target if target is running away.
+        if not self:ReviewTargets() then
+            -- No targets found, we're done here.
+            return true
         end
+
+        ----Check if the unit's target is still alive (self.aggroTarget will have to be set when transitioning into this state)
+        --if not self.aggroTarget:IsAlive() then
+        --    -- local alternate = self:FindClosestAggro
+        --    -- FindHeroesInArea (With our zone, or have attacked us.)
+        --    self:TransitionToReturn()
+        --    return true --Return to make sure no other code is executed in this state
+        --end
 
         self:ReviewAbilityDesire()
 
@@ -79,35 +87,25 @@ function AiDarkBossLogic(ai)
         self:TransitionTo(ai.ACTION_LINK_DESIRE)
     end
 
-    function ai:DealDamage(target, damage, damageType, source)
-        if not source then source = self:GetParent() end
-        if not damageType then damageType = DAMAGE_TYPE_MAGICAL end
-        ApplyDamage({
-                        victim = target,
-                        attacker = source,
-                        damage = damage,
-                        damage_type = damageType
-                    })
-    end
-
     function ai:OnShardKilled(deadShard)
-        -- TODO: Explosion and damage? And, damage spot?
-        -- TODO: Noise.
+        -- Consider leaving damaged earth
         ParticleManager:ReleaseParticleIndex(ParticleManager:CreateParticle(
-            'particles/units/heroes/hero_techies/techies_blast_off.vpcf',
-            PATTACH_ABSORIGIN_FOLLOW,
-            deadShard
+        'particles/units/heroes/hero_techies/techies_blast_off.vpcf',
+        PATTACH_ABSORIGIN_FOLLOW,
+        deadShard
         ))
 
-        local position = deadShard:GetAbsOrigin()
         -- Deal 800 damage in 1000 radius.
+        -- Deal an extra 4800 damage in a 400 radius.
+        local position = deadShard:GetAbsOrigin()
         for _,target in pairs(self:FindHeroes(1000, position)) do
             self:DealDamage(target, 800, DAMAGE_TYPE_MAGICAL, deadShard)
         end
-        -- Deal an extra 4800 damage in a 400 radius.
         for _,target in pairs(self:FindHeroes(400, position)) do
             self:DealDamage(target, 4800, DAMAGE_TYPE_MAGICAL, deadShard)
         end
+
+        EmitSoundOn('Hero_Techies.RemoteMine.Detonate', deadShard)
 
         self:UpdateShardCount()
     end
@@ -171,6 +169,7 @@ function AiDarkBossLogic(ai)
         self.energized = false
         self.hasLinked = false
         self.aggroTarget = nil
+        self.noTargetsFound = 0
         -- Reset projectile if needed.
         self:GetParent():SetRangedProjectileName('particles/econ/items/queen_of_pain/qop_navi_mace/queen_base_attack_navi_mace.vpcf')
 

@@ -61,9 +61,9 @@ function CustomMap:OnHeroPick(_, params)
         hero:SetBaseMoveSpeed(TEST_SUPERPATHEY)
     end
     if TEST_SUPERSTRONG then
-        hero:SetBaseStrength(2500)
-        hero:SetBaseAgility(2500)
-        hero:SetBaseIntellect(2500)
+        hero:SetBaseStrength(TEST_SUPERSTR)
+        hero:SetBaseAgility(TEST_SUPERAGI)
+        hero:SetBaseIntellect(TEST_SUPERINT)
         hero:CalculateStatBonus()
     end
     if TEST_START_START_BOSS then
@@ -72,6 +72,12 @@ function CustomMap:OnHeroPick(_, params)
     if TEST_START_DARK_BOSS then
         hero:SetAbsOrigin(Entities:FindByName(nil, 'zone_dark_boss_spawn_point'):GetAbsOrigin())
     end
+
+    -- Ensure moved heroes are not stuck together.
+    Timers(0.25, function()
+        -- Fix collision
+        ResolveNPCPositions(hero:GetAbsOrigin(), 300)
+    end)
 end
 
 if not CustomMap.initialized then
