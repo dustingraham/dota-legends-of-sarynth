@@ -373,6 +373,13 @@ local _CODE_TO_ANIMATION_TRANSLATE = {
     [369]="twinblade_run_injured",
     [370]="windwalk",
     [371]="light",
+    [372]="level1",
+    [373]="level2",
+    [374]="level3",
+    [375]="level4",
+    [376]="level5",
+    [377]="level6",
+    [378]="showcase",
 }
 
 function modifier_animation:OnCreated(keys)

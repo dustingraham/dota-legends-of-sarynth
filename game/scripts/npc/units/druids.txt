@@ -1,0 +1,191 @@
+"Units"
+{
+
+    "druids_creature"
+    {
+        "Model"                 "models/items/furion/treant/the_ancient_guardian_the_ancient_treants/the_ancient_guardian_the_ancient_treants.vmdl"
+        "BaseClass"             "npc_dota_creature"
+        "Level"                 "25"
+        "ModelScale"            "1.0"
+        "HealthBarOffset"       "170"
+
+        "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_GROUND"
+        "MovementSpeed"             "320"
+        "ArmorPhysical"             "10"
+        "AttackCapabilities"        "DOTA_UNIT_CAP_MELEE_ATTACK"
+
+        "AttackDamageMin"           "160"
+        "AttackDamageMax"           "196"
+        "AttackRate"                "1.25"
+        "AttackAnimationPoint"      "0.467"
+        "AttackRange"               "100"
+
+        "CombatClassAttack"         "DOTA_COMBAT_CLASS_ATTACK_BASIC"
+        "CombatClassDefend"         "DOTA_COMBAT_CLASS_DEFEND_BASIC"
+        "UnitRelationshipClass"     "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+
+        "StatusHealth"                "4472"
+        "StatusHealthRegen"           "20.0"
+
+        "BountyXP"                    "350"
+    }
+    "druids_creature_2"
+    {
+        "Model"                 "models/items/furion/treant/primeval_treant/primeval_treant.vmdl"
+        "BaseClass"             "npc_dota_creature"
+        "Level"                 "25"
+        "ModelScale"            "1.0"
+        "HealthBarOffset"       "170"
+
+        "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_GROUND"
+        "MovementSpeed"             "320"
+        "ArmorPhysical"             "10"
+        "AttackCapabilities"        "DOTA_UNIT_CAP_MELEE_ATTACK"
+
+        "AttackDamageMin"           "160"
+        "AttackDamageMax"           "196"
+        "AttackRate"                "1.25"
+        "AttackAnimationPoint"      "0.467"
+        "AttackRange"               "100"
+
+        "CombatClassAttack"         "DOTA_COMBAT_CLASS_ATTACK_BASIC"
+        "CombatClassDefend"         "DOTA_COMBAT_CLASS_DEFEND_BASIC"
+        "UnitRelationshipClass"     "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+
+        "StatusHealth"                "4472"
+        "StatusHealthRegen"           "20.0"
+
+        "BountyXP"                    "350"
+    }
+
+    "druids_ranged"
+    {
+        "Model"                 "models/items/furion/treant/furion_treant_nelum_red/furion_treant_nelum_red.vmdl"
+        "BaseClass"             "npc_dota_creature"
+        "Level"                 "20"
+        "ModelScale"            "1.0"
+        "HealthBarOffset"       "170"
+
+        "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_GROUND"
+        "MovementSpeed"             "320"
+        "ArmorPhysical"             "10"
+        "AttackCapabilities"        "DOTA_UNIT_CAP_RANGED_ATTACK"
+
+        "AttackDamageMin"            "460"
+        "AttackDamageMax"            "596"
+        "AttackRate"                "1.00"
+        "AttackAnimationPoint"      "0.50"
+        "AttackRange"               "500"
+
+        "ProjectileModel"           "particles/units/heroes/hero_furion/furion_base_attack.vpcf"
+        "ProjectileSpeed"           "900"
+
+        "CombatClassAttack"         "DOTA_COMBAT_CLASS_ATTACK_PIERCE"
+        "CombatClassDefend"         "DOTA_COMBAT_CLASS_DEFEND_BASIC"
+        "UnitRelationshipClass"     "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+
+        "StatusHealth"                "2472"
+        "StatusHealthRegen"           "12.5"
+
+        "BountyXP"                    "270"
+    }
+
+    "druids_ranged_2"
+    {
+        "Model"                 "models/items/furion/treant/eternalseasons_treant/eternalseasons_treant.vmdl"
+        "BaseClass"             "npc_dota_creature"
+        "Level"                 "20"
+        "ModelScale"            "1.0"
+        "HealthBarOffset"       "170"
+
+        "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_GROUND"
+        "MovementSpeed"             "320"
+        "ArmorPhysical"             "10"
+        "AttackCapabilities"        "DOTA_UNIT_CAP_RANGED_ATTACK"
+
+        "AttackDamageMin"            "460"
+        "AttackDamageMax"            "596"
+        "AttackRate"                "1.00"
+        "AttackAnimationPoint"      "0.50"
+        "AttackRange"               "500"
+
+        "ProjectileModel"           "particles/units/heroes/hero_furion/furion_base_attack.vpcf"
+        "ProjectileSpeed"           "900"
+
+        "CombatClassAttack"         "DOTA_COMBAT_CLASS_ATTACK_PIERCE"
+        "CombatClassDefend"         "DOTA_COMBAT_CLASS_DEFEND_BASIC"
+        "UnitRelationshipClass"     "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+
+        "StatusHealth"                "2472"
+        "StatusHealthRegen"           "12.5"
+
+        "BountyXP"                    "270"
+    }
+
+    "druids_bear"
+    {
+        "Model"                 "models/items/lone_druid/true_form/wolf_hunter_true_form/wolf_hunter_true_form.vmdl"
+        "BaseClass"             "npc_dota_creature"
+        "Level"                 "25"
+        "ModelScale"            "1.0"
+        "HealthBarOffset"       "170"
+
+        "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_GROUND"
+        "MovementSpeed"             "320"
+        "ArmorPhysical"             "10"
+        "AttackCapabilities"        "DOTA_UNIT_CAP_MELEE_ATTACK"
+
+        "AttackDamageMin"           "160"
+        "AttackDamageMax"           "196"
+        "AttackRate"                "1.25"
+        "AttackAnimationPoint"      "0.467"
+        "AttackRange"               "100"
+
+        "CombatClassAttack"         "DOTA_COMBAT_CLASS_ATTACK_BASIC"
+        "CombatClassDefend"         "DOTA_COMBAT_CLASS_DEFEND_BASIC"
+        "UnitRelationshipClass"     "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+
+        "StatusHealth"                "4472"
+        "StatusHealthRegen"           "20.0"
+
+        "BountyXP"                    "350"
+    }
+
+    "druids_tower"
+    {
+        "Model"                 "models/props_structures/tower_upgrade/tower_upgrade.vmdl"
+        "BaseClass"             "npc_dota_creature"
+        "Level"                 "25"
+        "ModelScale"            "1.0"
+        "HealthBarOffset"       "250"
+
+        "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_NONE"
+        "ArmorPhysical"             "10"
+        "AttackCapabilities"        "DOTA_UNIT_CAP_RANGED_ATTACK"
+
+        "AttackDamageMin"            "460"
+        "AttackDamageMax"            "596"
+        "AttackRate"                "1.00"
+        "AttackAnimationPoint"      "0.50"
+        "AttackRange"               "1500"
+
+        "ProjectileModel"           "particles/base_attacks/ranged_tower_good.vpcf"
+        "ProjectileSpeed"           "500"
+
+        "CombatClassAttack"         "DOTA_COMBAT_CLASS_ATTACK_PIERCE"
+        "CombatClassDefend"         "DOTA_COMBAT_CLASS_DEFEND_BASIC"
+        "UnitRelationshipClass"     "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+
+        "StatusHealth"                "2472"
+        "StatusHealthRegen"           "12.5"
+
+        "BountyXP"                    "270"
+
+        "precache"
+        {
+            "particle" "particles/world_tower/tower_upgrade/ti7_dire_tower_orb.vpcf"
+            "particle" "particles/world_tower/tower_upgrade/ti7_radiant_tower_orb.vpcf"
+            "particle" "particles/world_tower/tower_upgrade/ti7_radiant_tower_lvl11_orb.vpcf"
+        }
+    }
+}

@@ -6,3 +6,97 @@
 //-- Bear
 //models/items/lone_druid/true_form/wolf_hunter_true_form/wolf_hunter_true_form.vmdl
 //models/items/lone_druid/true_form/dark_wood_true_form/dark_wood_true_form.vmdl
+
+
+//-- Furion (Boss)
+//-- Enchantress (Boss)
+
+"Spawns"
+{
+    "druids_tower_1"
+    {
+        "SpawnPoints" "druids_tower_1"
+        "Creature" "druids_tower"
+        "OnInitSpawn" "1"
+        "MaxCount" "1"
+        "RespawnDelay" "15"
+        "Chance" "50"
+        //"Gesture" "ACT_DOTA_CAPTURE"
+        "AI" "ai_druids_tower"
+        "AggroRange" "450"
+        "LeashRange" "2150"
+    }
+    "spawn_druids_creature"
+    {
+        "SpawnPoints" "spawn_druids_creature_1,spawn_druids_creature_2,spawn_druids_creature_3,spawn_druids_creature_4,spawn_druids_creature_5,spawn_druids_creature_6,spawn_druids_creature_7"
+        "Creature" "druids_creature"
+        "OnInitSpawn" "4"
+        "MaxCount" "4"
+        "RespawnDelay" "15"
+        "Chance" "50"
+        "AI" "ai_aggro_leash"
+        "AggroRange" "450"
+        "LeashRange" "2150"
+        //"RandomScale" "1"
+        "SpawnPositionJitter" "1"
+    }
+
+    "spawn_druids_creature_2"
+    {
+        "SpawnPoints" "spawn_druids_creature_1,spawn_druids_creature_2,spawn_druids_creature_3,spawn_druids_creature_4,spawn_druids_creature_5,spawn_druids_creature_6,spawn_druids_creature_7"
+        "Creature" "druids_creature_2"
+        "OnInitSpawn" "4"
+        "MaxCount" "4"
+        "RespawnDelay" "15"
+        "Chance" "50"
+        "AI" "ai_aggro_leash"
+        "AggroRange" "450"
+        "LeashRange" "2150"
+        //"RandomScale" "1"
+        "SpawnPositionJitter" "1"
+    }
+
+    "spawn_druids_creature_ranged"
+    {
+        "SpawnPoints" "spawn_druids_creature_1,spawn_druids_creature_2,spawn_druids_creature_3,spawn_druids_creature_4,spawn_druids_creature_5,spawn_druids_creature_6,spawn_druids_creature_7"
+        "Creature" "druids_ranged"
+        "OnInitSpawn" "4"
+        "MaxCount" "4"
+        "RespawnDelay" "15"
+        "Chance" "50"
+        "AI" "ai_aggro_leash"
+        "AggroRange" "450"
+        "LeashRange" "2150"
+        //"RandomScale" "1"
+        "SpawnPositionJitter" "1"
+    }
+    "spawn_druids_creature_ranged_2"
+    {
+        "SpawnPoints" "spawn_druids_creature_1,spawn_druids_creature_2,spawn_druids_creature_3,spawn_druids_creature_4,spawn_druids_creature_5,spawn_druids_creature_6,spawn_druids_creature_7"
+        "Creature" "druids_ranged_2"
+        "OnInitSpawn" "4"
+        "MaxCount" "4"
+        "RespawnDelay" "15"
+        "Chance" "50"
+        "AI" "ai_aggro_leash"
+        "AggroRange" "450"
+        "LeashRange" "2150"
+        //"RandomScale" "1"
+        "SpawnPositionJitter" "1"
+    }
+
+    "spawn_druids_bear"
+    {
+        "SpawnPoints" "spawn_druids_bear_1,spawn_druids_bear_2"
+        "Creature" "druids_bear"
+        "OnInitSpawn" "2"
+        "MaxCount" "2"
+        "RespawnDelay" "15"
+        "Chance" "50"
+        "AI" "ai_aggro_leash"
+        "AggroRange" "450"
+        "LeashRange" "2150"
+        //"RandomScale" "1"
+        "SpawnPositionJitter" "1"
+    }
+}

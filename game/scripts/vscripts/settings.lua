@@ -8,16 +8,16 @@ if DEBUG_SETTINGS then
     -- Curronly only a single hero. Pick it!
     --TEST_PICK_HERO = 'windrunner'    -- Ranger
     --TEST_PICK_HERO = 'dragon_knight' -- Warrior
-    --TEST_PICK_HERO = 'omniknight'    -- Paladin
+    TEST_PICK_HERO = 'omniknight'    -- Paladin
     --TEST_PICK_HERO = 'bounty_hunter' -- Rogue
     --TEST_PICK_HERO = 'invoker'       -- Mage
-    TEST_PICK_HERO = 'warlock'       -- Sorcerer
+    --TEST_PICK_HERO = 'warlock'       -- Sorcerer
     --TEST_PICK_HERO_ALT = 'omniknight'
 
     --TEST_DISABLE_FOG = true
     TEST_START_LEVEL = 24
     --TEST_SUPERPATHEY = 750
-    TEST_SUPERSTRONG = true
+    --TEST_SUPERSTRONG = true
     TEST_SUPERSTR = 4800
     TEST_SUPERAGI = 4400
     TEST_SUPERINT = 4400
@@ -138,6 +138,7 @@ DEBUG_PRINT_SECTIONS = {
     AiBasicNpc        = true,
     AiWebbedQueen     = true,
     AiDarkBoss        = true,
+    AiDruidsTower     = true,
     StartAreaBoss     = true,
     Encounter         = true,
     Spawn             = false,

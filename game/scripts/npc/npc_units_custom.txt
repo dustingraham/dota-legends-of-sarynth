@@ -3,6 +3,7 @@
 #base "units\kobold.txt"
 #base "units\webbed_forest.txt"
 #base "units\dark_plains.txt"
+#base "units\druids.txt"
 #base "units\ice_cavern.txt"
 
 "DOTAUnits"
