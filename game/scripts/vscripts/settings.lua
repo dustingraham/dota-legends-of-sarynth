@@ -14,8 +14,8 @@ if DEBUG_SETTINGS then
     TEST_PICK_HERO = 'warlock'       -- Sorcerer
     --TEST_PICK_HERO_ALT = 'omniknight'
 
-    TEST_DISABLE_FOG = true
-    TEST_START_LEVEL = 28
+    --TEST_DISABLE_FOG = true
+    TEST_START_LEVEL = 25
 
     TEST_SUPERPATHEY = 1750
     TEST_SUPERPATHEY_FLIES = true
@@ -45,7 +45,7 @@ if DEBUG_SETTINGS then
 
     TEST_SPAWN_ITEMS = true
     TEST_ADD_ITEMS = {
-        'item_3172',
+        'item_3199',
         'item_3179',
         'item_3153',
         'item_3127',

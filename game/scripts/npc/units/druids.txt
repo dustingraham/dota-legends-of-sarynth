@@ -1,6 +1,5 @@
 "Units"
 {
-
     "druids_creature"
     {
         "Model"                 "models/items/furion/treant/the_ancient_guardian_the_ancient_treants/the_ancient_guardian_the_ancient_treants.vmdl"
@@ -10,12 +9,12 @@
         "HealthBarOffset"       "170"
 
         "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_GROUND"
-        "MovementSpeed"             "320"
+        "MovementSpeed"             "310"
         "ArmorPhysical"             "10"
         "AttackCapabilities"        "DOTA_UNIT_CAP_MELEE_ATTACK"
 
-        "AttackDamageMin"           "560"
-        "AttackDamageMax"           "596"
+        "AttackDamageMin"           "660"
+        "AttackDamageMax"           "796"
         "AttackRate"                "0.95"
         "AttackAnimationPoint"      "0.467"
         "AttackRange"               "100"
@@ -29,23 +28,23 @@
         "StatusHealth"                "4472"
         "StatusHealthRegen"           "20.0"
 
-        "BountyXP"                    "350"
+        "BountyXP"                    "265"
     }
     "druids_creature_2"
     {
         "Model"                 "models/items/furion/treant/primeval_treant/primeval_treant.vmdl"
         "BaseClass"             "npc_dota_creature"
-        "Level"                 "25"
+        "Level"                 "26"
         "ModelScale"            "1.0"
         "HealthBarOffset"       "170"
 
         "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_GROUND"
-        "MovementSpeed"             "320"
+        "MovementSpeed"             "310"
         "ArmorPhysical"             "10"
         "AttackCapabilities"        "DOTA_UNIT_CAP_MELEE_ATTACK"
 
-        "AttackDamageMin"           "660"
-        "AttackDamageMax"           "696"
+        "AttackDamageMin"           "760"
+        "AttackDamageMax"           "896"
         "AttackRate"                "0.90"
         "AttackAnimationPoint"      "0.467"
         "AttackRange"               "100"
@@ -59,24 +58,24 @@
         "StatusHealth"                "5472"
         "StatusHealthRegen"           "20.0"
 
-        "BountyXP"                    "350"
+        "BountyXP"                    "340"
     }
 
     "druids_ranged"
     {
         "Model"                 "models/items/furion/treant/eternalseasons_treant/eternalseasons_treant.vmdl"
         "BaseClass"             "npc_dota_creature"
-        "Level"                 "20"
+        "Level"                 "25"
         "ModelScale"            "1.0"
         "HealthBarOffset"       "170"
 
         "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_GROUND"
-        "MovementSpeed"             "320"
+        "MovementSpeed"             "340"
         "ArmorPhysical"             "10"
         "AttackCapabilities"        "DOTA_UNIT_CAP_RANGED_ATTACK"
 
-        "AttackDamageMin"            "760"
-        "AttackDamageMax"            "896"
+        "AttackDamageMin"            "860"
+        "AttackDamageMax"            "996"
         "AttackRate"                "1.30"
         "AttackAnimationPoint"      "0.50"
         "AttackRange"               "550"
@@ -92,24 +91,24 @@
         "StatusHealth"                "3472"
         "StatusHealthRegen"           "12.5"
 
-        "BountyXP"                    "270"
+        "BountyXP"                    "325"
     }
 
     "druids_ranged_2"
     {
         "Model"                 "models/items/furion/treant/furion_treant_nelum_red/furion_treant_nelum_red.vmdl"
         "BaseClass"             "npc_dota_creature"
-        "Level"                 "20"
+        "Level"                 "26"
         "ModelScale"            "1.0"
-        "HealthBarOffset"       "170"
+        "HealthBarOffset"       "230"
 
         "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_GROUND"
-        "MovementSpeed"             "320"
+        "MovementSpeed"             "330"
         "ArmorPhysical"             "10"
         "AttackCapabilities"        "DOTA_UNIT_CAP_RANGED_ATTACK"
 
-        "AttackDamageMin"            "1560"
-        "AttackDamageMax"            "1896"
+        "AttackDamageMin"            "1760"
+        "AttackDamageMax"            "2096"
         "AttackRate"                "1.90"
         "AttackAnimationPoint"      "0.50"
         "AttackRange"               "350"
@@ -125,16 +124,16 @@
         "StatusHealth"                "4472"
         "StatusHealthRegen"           "12.5"
 
-        "BountyXP"                    "270"
+        "BountyXP"                    "405"
     }
 
     "druids_protector_1"
     {
         "Model"                 "models/items/lone_druid/bear/dark_wood_bear/dark_wood_bear.vmdl"
         "BaseClass"             "npc_dota_creature"
-        "Level"                 "25"
+        "Level"                 "27"
         "ModelScale"            "1.0"
-        "HealthBarOffset"       "170"
+        "HealthBarOffset"       "190"
 
         "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_GROUND"
         "MovementSpeed"             "320"
@@ -154,30 +153,30 @@
         "CombatClassDefend"         "DOTA_COMBAT_CLASS_DEFEND_BASIC"
         "UnitRelationshipClass"     "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
 
-        "StatusHealth"                "14472"
+        "StatusHealth"                "18472"
         "StatusHealthRegen"           "20.0"
 
-        "BountyXP"                    "350"
+        "BountyXP"                    "680"
     }
     "druids_protector_2"
     {
         "Model"                 "models/items/lone_druid/bear/dark_wood_bear/dark_wood_bear.vmdl"
         "BaseClass"             "npc_dota_creature"
-        "Level"                 "25"
+        "Level"                 "27"
         "ModelScale"            "1.0"
-        "HealthBarOffset"       "170"
+        "HealthBarOffset"       "190"
 
         "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_GROUND"
         "MovementSpeed"             "320"
         "ArmorPhysical"             "10"
         "AttackCapabilities"        "DOTA_UNIT_CAP_MELEE_ATTACK"
 
-        "AttackDamageMin"           "160"
-        "AttackDamageMax"           "196"
+        "AttackDamageMin"           "3160"
+        "AttackDamageMax"           "3596"
         "AttackRate"                "1.25"
         "AttackAnimationPoint"      "0.43"
         "AttackRange"               "128"
-        "BoundsHullName"            "DOTA_HULL_SIZE_HUGE"
+        "BoundsHullName"            "DOTA_HULL_SIZE_HERO"
 
         "Glow"                      "particles/units/druids/protector/druids_protector_basic.vpcf"
 
@@ -185,29 +184,30 @@
         "CombatClassDefend"         "DOTA_COMBAT_CLASS_DEFEND_BASIC"
         "UnitRelationshipClass"     "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
 
-        "StatusHealth"                "4472"
+        "StatusHealth"                "18472"
         "StatusHealthRegen"           "20.0"
 
-        "BountyXP"                    "350"
+        "BountyXP"                    "680"
     }
     "druids_protector_3"
     {
         "Model"                 "models/items/lone_druid/bear/dark_wood_bear/dark_wood_bear.vmdl"
         "BaseClass"             "npc_dota_creature"
-        "Level"                 "25"
+        "Level"                 "27"
         "ModelScale"            "1.0"
-        "HealthBarOffset"       "170"
+        "HealthBarOffset"       "190"
 
         "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_GROUND"
         "MovementSpeed"             "320"
         "ArmorPhysical"             "10"
         "AttackCapabilities"        "DOTA_UNIT_CAP_MELEE_ATTACK"
 
-        "AttackDamageMin"           "160"
-        "AttackDamageMax"           "196"
+        "AttackDamageMin"           "3160"
+        "AttackDamageMax"           "3596"
         "AttackRate"                "1.25"
         "AttackAnimationPoint"      "0.43"
         "AttackRange"               "128"
+        "BoundsHullName"            "DOTA_HULL_SIZE_HERO"
 
         "Glow"                      "particles/units/druids/protector/druids_protector_basic.vpcf"
 
@@ -215,10 +215,10 @@
         "CombatClassDefend"         "DOTA_COMBAT_CLASS_DEFEND_BASIC"
         "UnitRelationshipClass"     "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
 
-        "StatusHealth"                "4472"
+        "StatusHealth"                "18472"
         "StatusHealthRegen"           "20.0"
 
-        "BountyXP"                    "350"
+        "BountyXP"                    "680"
     }
     "druids_bear"
     {
@@ -278,7 +278,7 @@
         "StatusHealth"                "40472"
         "StatusHealthRegen"           "20.0"
 
-        "BountyXP"                    "650"
+        "BountyXP"                    "850"
     }
 
     "druids_tower"
