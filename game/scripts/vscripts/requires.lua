@@ -76,6 +76,7 @@ for _,modifier in ipairs({
 }) do LinkLuaModifier(modifier, 'app/systems/npcs/ai/'..modifier, LUA_MODIFIER_MOTION_NONE) end
 for _,modifier in ipairs({
     'ai_druids_tower',
+    'ai_druids_boss',
     'ai_start_area_boss',
     'ai_webbed_queen',
     'ice_dungeon_boss3',

@@ -29,9 +29,10 @@ ai.ACTION_RETURN = 'ActionReturn'
 if IsServer() then
     function ai:OnCreated(keys)
         Debug('AiAggroLeash', 'OnCreated')
+        self:GetParent().ai = self
         self.state = ai.ACTION_IDLE
-        Debug('AiAggroLeash', 'Idling OC')
         self.castDesire = 0
+        self.callForHelp = self:GetParent().spawn.spawnNode.CallForHelp or 0
         self.aggroRange = self:GetParent().spawn.spawnNode.AggroRange or 400
         self.leashRange = self:GetParent().spawn.spawnNode.LeashRange or 750
         self.passiveHealthRegen = Clamp(self:GetParent():GetMaxHealth() / 10, 0, 800)
@@ -64,10 +65,51 @@ function ai:OnTakeDamage(event)
     if self:GetParent() ~= event.unit then return end
 
     if self.state == ai.ACTION_IDLE then
-        self:GetParent():MoveToTargetToAttack( event.attacker ) --Start attacking
-        self.aggroTarget = event.attacker
+        Debug('AiAggroLeash', 'AggroOnTarget due to OnTakeDamage')
+        self:AggroOnTarget(event.attacker)
+    end
+end
+
+function ai:AggroOnTarget(target)
+    --Start attacking
+    self:GetParent():MoveToTargetToAttack(target)
+    self.aggroTarget = target
+    self.state = ai.ACTION_AGGRO --State transition
+
+    -- self.callForHelp
+    -- IdleMove: 196 + 196 average move range
+    -- Spawn Jitter: 80 + 80
+    -- ~552. Create 600 "call for help" radius...
+    if self.callForHelp > 0 then
+        -- Call for help in radius
+        Debug('AiAggroLeash', 'Calling for help radius:', self.callForHelp)
+        local callForHelp = FindUnitsInRadius(
+        self:GetParent():GetTeam(), self:GetParent():GetAbsOrigin(), nil,
+        self.callForHelp, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_ALL, DOTA_UNIT_TARGET_FLAG_NONE,
+        FIND_ANY_ORDER, false
+        )
+        if #callForHelp then
+            for _,helper in ipairs(callForHelp) do
+                Debug('AiAggroLeash', 'Call to arms:', helper:GetUnitName())
+                if helper.ai then
+                    helper.ai:CallForHelp(target)
+                else
+                    Debug('AiAggroLeash', 'No AI found to ask...')
+                end
+            end
+        end
+    end
+end
+
+function ai:CallForHelp(target)
+    Debug('AiAggroLeash', 'Called by ally to help.')
+    if self.state == ai.ACTION_IDLE then
+        Debug('AiAggroLeash', 'Going to help!')
+        self:GetParent():MoveToTargetToAttack(target)
+        self.aggroTarget = target
         self.state = ai.ACTION_AGGRO --State transition
-        Debug('AiAggroLeash', 'Aggroing')
+    else
+        Debug('AiAggroLeash', 'Not idling...')
     end
 end
 
@@ -156,10 +198,8 @@ function ai:ActionIdle()
     )
     --If one or more units were found, start attacking the first one
     if #units > 0 then
-        self:GetParent():MoveToTargetToAttack( units[1] ) --Start attacking
-        self.aggroTarget = units[1]
-        self.state = ai.ACTION_AGGRO --State transition
-        Debug('AiAggroLeash', 'Aggroing')
+        Debug('AiAggroLeash', 'AggroOnTarget due to ActionIdle RadiusFind')
+        self:AggroOnTarget(units[1])
         return true
     end
 

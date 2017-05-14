@@ -1,3 +1,8 @@
+[b]v0.0.80[/b]
+ • Next area released, Druid Woods.
+ • Level cap raised to 28.
+ • Added a "call for help" feature to some of the new creatures.
+ 
 [b]v0.0.76[/b]
  • Add sound to Lumorase's Shard death.
  • Lumorase no longer tolerates being attacked from outside of her area.

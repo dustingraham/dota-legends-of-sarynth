@@ -50,6 +50,18 @@ function DungeonAreaEndTouch(trigger)
     trigger.activator:FindModifierByName('character_vision'):RestoreVision()
 end
 
+function DruidsBuildingStartTouch(trigger)
+    local roof = Entities:FindByName(nil, 'druids_building_roof')
+    roof:SetAbsOrigin(roof:GetAbsOrigin() - Vector(0,0,512))
+    local pos = Entities:FindByName(nil, 'zone_druids_boss_center'):GetAbsOrigin()
+    AddFOWViewer(trigger.activator:GetTeamNumber(), pos, 1024, 600, true)
+end
+
+function DruidsBuildingEndTouch(trigger)
+    local roof = Entities:FindByName(nil, 'druids_building_roof')
+    roof:SetAbsOrigin(roof:GetAbsOrigin() + Vector(0,0,512))
+end
+
 function StartBossAreaStartTouch(trigger)
     local pid = trigger.activator:GetPlayerOwnerID()
     -- print('Boss Start Touch: ', pid)

@@ -40,7 +40,7 @@ function CharacterService:GetExperienceLevelRequirements()
     -- L25: 34500
     -- L30: 60000
     local table = {}
-    for i = 1, 25 do
+    for i = 1, 28 do
         table[i] = 100 * (i - 1) + 50 * ((i - 1) * (i - 2))
         if i > 20 then table[i] = table[i] + (i - 19)*(i - 20) * 150 end
     end

@@ -26,9 +26,18 @@ function Boot:Precache(context)
         'particles/effects/loot_expire/loot_expire.vpcf',
 
         'particles/units/start/scar/claw.vpcf',
-
         'particles/dire_fx/bad_ancient_ambient.vpcf', -- Dark Boss Barricade
         'particles/units/dark_plains/boss/energy_pull/energy_pull.vpcf', -- Dark Boss Link
+
+        -- Druids
+        'particles/units/druids/protector/druids_protector_orb.vpcf',
+        'particles/units/druids/glow/druids_glow_red.vpcf',
+        'particles/units/druids/glow/druids_glow_blue.vpcf',
+        'particles/units/druids/glow/druids_glow_green.vpcf',
+        'particles/units/druids/glow/druids_glow_white.vpcf',
+        'particles/units/heroes/hero_jakiro/jakiro_dual_breath_fire_d.vpcf',
+        'particles/econ/courier/courier_dc/dccourier_angel_flame_trail.vpcf',
+        'particles/econ/courier/courier_dc/dccourier_devil_flame_trail.vpcf',
 
         -- Testing?
         'particles/units/heroes/hero_venomancer/venomancer_venomous_gale.vpcf',
@@ -139,10 +148,10 @@ function Boot:Precache(context)
 
     _G.GameItems = LoadKeyValues("scripts/items/items_game.txt")
     local heroes = LoadKeyValues("scripts/npc/npc_heroes_custom.txt")
-    local units = LoadKeyValues("scripts/npc/npc_units_custom.txt")
+    _G.GameUnits = LoadKeyValues("scripts/npc/npc_units_custom.txt")
     local cosmeticsParticles = {}
 
-    for name,unit in pairs(units) do
+    for name,unit in pairs(GameUnits) do
         PrecacheUnitByNameSync(name, context)
         Debug('Precache', 'Unit', name)
     end

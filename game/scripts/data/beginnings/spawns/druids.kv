@@ -6,8 +6,6 @@
 //-- Bear
 //models/items/lone_druid/true_form/wolf_hunter_true_form/wolf_hunter_true_form.vmdl
 //models/items/lone_druid/true_form/dark_wood_true_form/dark_wood_true_form.vmdl
-
-
 //-- Furion (Boss)
 //-- Enchantress (Boss)
 
@@ -16,87 +14,155 @@
     "druids_tower_1"
     {
         "SpawnPoints" "druids_tower_1"
+        "Protector" "druids_protector_1"
         "Creature" "druids_tower"
         "OnInitSpawn" "1"
         "MaxCount" "1"
-        "RespawnDelay" "15"
-        "Chance" "50"
-        //"Gesture" "ACT_DOTA_CAPTURE"
+        "SpawnAngle" "45"
         "AI" "ai_druids_tower"
-        "AggroRange" "450"
-        "LeashRange" "2150"
+        "IsNpc" "1"
+        "Unique" "1"
+    }
+    "druids_tower_2"
+    {
+        "SpawnPoints" "druids_tower_2"
+        "Protector" "druids_protector_2"
+        "Creature" "druids_tower"
+        "OnInitSpawn" "1"
+        "MaxCount" "1"
+        "SpawnAngle" "45"
+        "AI" "ai_druids_tower"
+        "IsNpc" "1"
+        "Unique" "1"
+    }
+    "druids_tower_3"
+    {
+        "SpawnPoints" "druids_tower_3"
+        "Protector" "druids_protector_3"
+        "Creature" "druids_tower"
+        "OnInitSpawn" "1"
+        "MaxCount" "1"
+        "SpawnAngle" "45"
+        "AI" "ai_druids_tower"
+        "IsNpc" "1"
+        "Unique" "1"
     }
     "spawn_druids_creature"
     {
-        "SpawnPoints" "spawn_druids_creature_1,spawn_druids_creature_2,spawn_druids_creature_3,spawn_druids_creature_4,spawn_druids_creature_5,spawn_druids_creature_6,spawn_druids_creature_7"
+        "SpawnPoints" "spawn_druids_creature_15,spawn_druids_creature_14,spawn_druids_creature_1,spawn_druids_creature_2,spawn_druids_creature_3,spawn_druids_creature_4,spawn_druids_creature_5,spawn_druids_creature_6,spawn_druids_creature_7,spawn_druids_creature_8,spawn_druids_creature_9,spawn_druids_creature_10,spawn_druids_creature_11,spawn_druids_creature_12,spawn_druids_creature_13"
         "Creature" "druids_creature"
-        "OnInitSpawn" "4"
-        "MaxCount" "4"
+        "OnInitSpawn" "9"
+        "MaxCount" "9"
         "RespawnDelay" "15"
         "Chance" "50"
         "AI" "ai_aggro_leash"
         "AggroRange" "450"
         "LeashRange" "2150"
-        //"RandomScale" "1"
         "SpawnPositionJitter" "1"
+        "CallForHelp" "550"
     }
-
     "spawn_druids_creature_2"
     {
-        "SpawnPoints" "spawn_druids_creature_1,spawn_druids_creature_2,spawn_druids_creature_3,spawn_druids_creature_4,spawn_druids_creature_5,spawn_druids_creature_6,spawn_druids_creature_7"
+        "SpawnPoints" "spawn_druids_creature_15,spawn_druids_creature_14,spawn_druids_creature_1,spawn_druids_creature_2,spawn_druids_creature_3,spawn_druids_creature_4,spawn_druids_creature_5,spawn_druids_creature_6,spawn_druids_creature_7,spawn_druids_creature_8,spawn_druids_creature_9,spawn_druids_creature_10,spawn_druids_creature_11,spawn_druids_creature_12,spawn_druids_creature_13"
         "Creature" "druids_creature_2"
-        "OnInitSpawn" "4"
-        "MaxCount" "4"
+        "OnInitSpawn" "8"
+        "MaxCount" "8"
         "RespawnDelay" "15"
         "Chance" "50"
         "AI" "ai_aggro_leash"
         "AggroRange" "450"
         "LeashRange" "2150"
-        //"RandomScale" "1"
         "SpawnPositionJitter" "1"
+        "CallForHelp" "550"
     }
-
     "spawn_druids_creature_ranged"
     {
-        "SpawnPoints" "spawn_druids_creature_1,spawn_druids_creature_2,spawn_druids_creature_3,spawn_druids_creature_4,spawn_druids_creature_5,spawn_druids_creature_6,spawn_druids_creature_7"
+        "SpawnPoints" "spawn_druids_creature_15,spawn_druids_creature_14,spawn_druids_creature_1,spawn_druids_creature_2,spawn_druids_creature_3,spawn_druids_creature_4,spawn_druids_creature_5,spawn_druids_creature_6,spawn_druids_creature_7,spawn_druids_creature_8,spawn_druids_creature_9,spawn_druids_creature_10,spawn_druids_creature_11,spawn_druids_creature_12,spawn_druids_creature_13"
         "Creature" "druids_ranged"
-        "OnInitSpawn" "4"
-        "MaxCount" "4"
+        "OnInitSpawn" "8"
+        "MaxCount" "8"
         "RespawnDelay" "15"
         "Chance" "50"
         "AI" "ai_aggro_leash"
         "AggroRange" "450"
         "LeashRange" "2150"
-        //"RandomScale" "1"
         "SpawnPositionJitter" "1"
+        "CallForHelp" "550"
     }
     "spawn_druids_creature_ranged_2"
     {
-        "SpawnPoints" "spawn_druids_creature_1,spawn_druids_creature_2,spawn_druids_creature_3,spawn_druids_creature_4,spawn_druids_creature_5,spawn_druids_creature_6,spawn_druids_creature_7"
+        "SpawnPoints" "spawn_druids_creature_15,spawn_druids_creature_14,spawn_druids_creature_1,spawn_druids_creature_2,spawn_druids_creature_3,spawn_druids_creature_4,spawn_druids_creature_5,spawn_druids_creature_6,spawn_druids_creature_7,spawn_druids_creature_8,spawn_druids_creature_9,spawn_druids_creature_10,spawn_druids_creature_11,spawn_druids_creature_12,spawn_druids_creature_13"
         "Creature" "druids_ranged_2"
-        "OnInitSpawn" "4"
-        "MaxCount" "4"
+        "OnInitSpawn" "6"
+        "MaxCount" "6"
         "RespawnDelay" "15"
         "Chance" "50"
         "AI" "ai_aggro_leash"
         "AggroRange" "450"
         "LeashRange" "2150"
-        //"RandomScale" "1"
+        "SpawnPositionJitter" "1"
+        "CallForHelp" "550"
+    }
+    "spawn_druids_protector_1"
+    {
+        "SpawnPoints" "druids_tower_1"
+        "Creature" "druids_protector_1"
+        "OnInitSpawn" "1"
+        "MaxCount" "1"
+        "RespawnDelay" "600"
+        "Chance" "50"
+        "AI" "ai_aggro_leash"
+        "AggroRange" "650"
+        "LeashRange" "1000"
         "SpawnPositionJitter" "1"
     }
-
+    "spawn_druids_protector_2"
+    {
+        "SpawnPoints" "druids_tower_2"
+        "Creature" "druids_protector_2"
+        "OnInitSpawn" "1"
+        "MaxCount" "1"
+        "RespawnDelay" "600"
+        "Chance" "50"
+        "AI" "ai_aggro_leash"
+        "AggroRange" "650"
+        "LeashRange" "1000"
+        "SpawnPositionJitter" "1"
+    }
+    "spawn_druids_protector_3"
+    {
+        "SpawnPoints" "druids_tower_3"
+        "Creature" "druids_protector_3"
+        "OnInitSpawn" "1"
+        "MaxCount" "1"
+        "RespawnDelay" "600"
+        "Chance" "50"
+        "AI" "ai_aggro_leash"
+        "AggroRange" "650"
+        "LeashRange" "1000"
+        "SpawnPositionJitter" "1"
+    }
     "spawn_druids_bear"
     {
-        "SpawnPoints" "spawn_druids_bear_1,spawn_druids_bear_2"
+        "SpawnPoints" "spawn_druids_bear_2"
         "Creature" "druids_bear"
-        "OnInitSpawn" "2"
-        "MaxCount" "2"
+        "OnInitSpawn" "0"
+        "MaxCount" "0"
         "RespawnDelay" "15"
         "Chance" "50"
         "AI" "ai_aggro_leash"
         "AggroRange" "450"
         "LeashRange" "2150"
-        //"RandomScale" "1"
+        "SpawnPositionJitter" "1"
+    }
+    "spawn_druids_boss"
+    {
+        "SpawnPoints" "spawn_druids_boss"
+        "Creature" "druids_boss"
+        "OnInitSpawn" "1"
+        "MaxCount" "1"
+        "RespawnDelay" "15"
+        "AI" "ai_druids_boss"
         "SpawnPositionJitter" "1"
     }
 }

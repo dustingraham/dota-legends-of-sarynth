@@ -98,9 +98,32 @@ function Spawn:Spawn(data)
         entity.spawn_name = data.spawn_name
     end
 
+    local unitData = GameUnits[data.Creature]
+    if unitData.Glow then
+        self:MakeGlow(entity, unitData.Glow)
+    end
+
     return entity
 end
 
-function Spawn:OnDeath()
+function Spawn:OnDeath(ai)
     self.spawnNode:OnDeath(self)
+    if ai and ai:GetParent() and ai:GetParent().GlowParticle then
+        Debug('Spawn', 'Releasing glow on death.')
+        local idx = ai:GetParent().GlowParticle
+        ParticleManager:DestroyParticle(idx, false)
+        ParticleManager:ReleaseParticleIndex(idx)
+    end
+end
+
+function Spawn:MakeGlow(entity, name)
+    entity.GlowParticle = ParticleManager:CreateParticle(name, PATTACH_OVERHEAD_FOLLOW, entity)
+
+    -- Attempt, but no attach_hitloc on bears....
+    --if name == 'particles/units/druids/protector/druids_protector_orb.vpcf' then
+    --    -- Special case attachments...
+    --    local idx = ParticleManager:CreateParticle(name, PATTACH_ABSORIGIN_FOLLOW, entity)
+    --    ParticleManager:SetParticleControlEnt(idx, 1, entity, PATTACH_POINT_FOLLOW, "attach_mouth", entity:GetAbsOrigin(), true)
+    --    entity.GlowParticle = idx
+    --else
 end

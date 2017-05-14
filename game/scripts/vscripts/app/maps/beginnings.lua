@@ -57,13 +57,17 @@ function CustomMap:OnHeroPick(_, params)
         hero.isInitialLevel = nil
     end
     if TEST_SUPERPATHEY then
-        hero:SetMoveCapability(DOTA_UNIT_CAP_MOVE_FLY)
+        if TEST_SUPERPATHEY_FLIES then
+            hero:SetMoveCapability(DOTA_UNIT_CAP_MOVE_FLY)
+        end
         hero:SetBaseMoveSpeed(TEST_SUPERPATHEY)
     end
     if TEST_SUPERSTRONG then
         hero:SetBaseStrength(TEST_SUPERSTR)
         hero:SetBaseAgility(TEST_SUPERAGI)
         hero:SetBaseIntellect(TEST_SUPERINT)
+        hero:SetBaseDamageMin(TEST_SUPERATK)
+        hero:SetBaseDamageMax(TEST_SUPERATK)
         hero:CalculateStatBonus()
     end
     if TEST_START_START_BOSS then
@@ -72,7 +76,9 @@ function CustomMap:OnHeroPick(_, params)
     if TEST_START_DARK_BOSS then
         hero:SetAbsOrigin(Entities:FindByName(nil, 'zone_dark_boss_spawn_point'):GetAbsOrigin())
     end
-
+    if TEST_START_DRUID_BOSS then
+        hero:SetAbsOrigin(Entities:FindByName(nil, 'zone_druids_boss_spawn_point'):GetAbsOrigin() + RandomVector(120))
+    end
     -- Ensure moved heroes are not stuck together.
     Timers(0.25, function()
         -- Fix collision
