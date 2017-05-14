@@ -21,7 +21,7 @@
         "objectives"
         {
             "01" {
-                "long_description" "Kill 12 corrupted Flora."
+                "long_description" "Kill 12 corrupted flora."
                 "description" "Corrupted Flora Slain"
                 "action" "kill"
                 "npc" "druids_creature,druids_creature_2,druids_ranged,druids_ranged_2"
@@ -46,7 +46,7 @@
         "end_entity" "npc_questgiver_druids_1"
         "requirements"
         {
-            //"quest" "druids_wildlife"
+            "quest" "druids_wildlife"
         }
         "start"
         {
@@ -84,6 +84,44 @@
         {
             //"gold" "10"
             "experience" "450"
+            //"item_choose"
+            //{
+            //    "01" "item_3129"
+            //}
+        }
+    }
+    "1630"
+    {
+        "name" "druids_boss"
+        "title" "Unbearable Atrocity"
+        "start_entity" "npc_questgiver_druids_1"
+        "end_entity" "npc_questgiver_druids_1"
+        "requirements"
+        {
+            "quest" "druids_towers"
+        }
+        "start"
+        {
+            "dialog" "Reclaiming the towers... Has unlocked the vault...<br><br>Once a peaceful druid, the ancient bear has become corrupted...<br><br>He must be slain, lest we lose all we have accomplished..."
+        }
+        "complete"
+        {
+            "dialog" "You have done it..."
+        }
+        "objectives"
+        {
+            "01" {
+                "long_description" "Slay the corrupted druid."
+                "description" "Corrupted Druid Slain"
+                "action" "kill"
+                "npc" "druids_boss"
+                "required" "1"
+            }
+        }
+        "rewards"
+        {
+            //"gold" "10"
+            "experience" "700"
             //"item_choose"
             //{
             //    "01" "item_3129"

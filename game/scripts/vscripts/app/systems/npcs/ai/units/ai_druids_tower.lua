@@ -8,6 +8,7 @@ ai.countUnlocked = 0
 function ai:OnCreated(keys)
     if IsServer() then
         Debug('AiDruidsTower', 'OnCreated')
+        self:GetParent().ai = self
         self.state = ai.ACTION_LOCKED
         self.protectorName = self:GetParent().spawn.spawnNode.Protector
         self:StartIntervalThink(1.0)

@@ -17,6 +17,17 @@ end
 
 function CustomMap:OnStateInGame()
     Debug('CustomMap', 'Beginnings In Game')
+
+    if TEST_DRUIDS_UNLOCKED then
+        local unit = SpawnSystem:GetUnique('druids_tower_1')
+        unit.ai.countUnlocked = 3
+        local door = Entities:FindByName(nil, 'druids_building_door')
+        door:SetAbsOrigin(door:GetAbsOrigin() - Vector(0,0,512))
+        -- Remove the simple obstructions
+        for _,obstruction in pairs(Entities:FindAllByName('druids_door_obstruction')) do
+            obstruction:SetEnabled(false, false)
+        end
+    end
 end
 
 function CustomMap:OnNpcSpawned(event)

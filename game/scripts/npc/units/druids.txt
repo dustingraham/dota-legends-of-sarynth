@@ -14,8 +14,8 @@
         "ArmorPhysical"             "10"
         "AttackCapabilities"        "DOTA_UNIT_CAP_MELEE_ATTACK"
 
-        "AttackDamageMin"           "160"
-        "AttackDamageMax"           "196"
+        "AttackDamageMin"           "560"
+        "AttackDamageMax"           "596"
         "AttackRate"                "0.95"
         "AttackAnimationPoint"      "0.467"
         "AttackRange"               "100"
@@ -44,8 +44,8 @@
         "ArmorPhysical"             "10"
         "AttackCapabilities"        "DOTA_UNIT_CAP_MELEE_ATTACK"
 
-        "AttackDamageMin"           "160"
-        "AttackDamageMax"           "196"
+        "AttackDamageMin"           "660"
+        "AttackDamageMax"           "696"
         "AttackRate"                "0.90"
         "AttackAnimationPoint"      "0.467"
         "AttackRange"               "100"
@@ -56,7 +56,7 @@
         "CombatClassDefend"         "DOTA_COMBAT_CLASS_DEFEND_BASIC"
         "UnitRelationshipClass"     "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
 
-        "StatusHealth"                "4472"
+        "StatusHealth"                "5472"
         "StatusHealthRegen"           "20.0"
 
         "BountyXP"                    "350"
@@ -75,11 +75,11 @@
         "ArmorPhysical"             "10"
         "AttackCapabilities"        "DOTA_UNIT_CAP_RANGED_ATTACK"
 
-        "AttackDamageMin"            "460"
-        "AttackDamageMax"            "596"
+        "AttackDamageMin"            "760"
+        "AttackDamageMax"            "896"
         "AttackRate"                "1.30"
         "AttackAnimationPoint"      "0.50"
-        "AttackRange"               "500"
+        "AttackRange"               "550"
 
         "ProjectileModel"           "particles/units/druids/druid_ranged_attack/druid_ranged_attack.vpcf"
         "ProjectileSpeed"           "700"
@@ -89,7 +89,7 @@
         "CombatClassDefend"         "DOTA_COMBAT_CLASS_DEFEND_BASIC"
         "UnitRelationshipClass"     "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
 
-        "StatusHealth"                "2472"
+        "StatusHealth"                "3472"
         "StatusHealthRegen"           "12.5"
 
         "BountyXP"                    "270"
@@ -108,11 +108,11 @@
         "ArmorPhysical"             "10"
         "AttackCapabilities"        "DOTA_UNIT_CAP_RANGED_ATTACK"
 
-        "AttackDamageMin"            "460"
-        "AttackDamageMax"            "596"
+        "AttackDamageMin"            "1560"
+        "AttackDamageMax"            "1896"
         "AttackRate"                "1.90"
         "AttackAnimationPoint"      "0.50"
-        "AttackRange"               "500"
+        "AttackRange"               "350"
 
         "ProjectileModel"           "particles/units/druids/druid_ranged_attack/druid_ranged_attack2.vpcf"
         "ProjectileSpeed"           "800"
@@ -122,7 +122,7 @@
         "CombatClassDefend"         "DOTA_COMBAT_CLASS_DEFEND_BASIC"
         "UnitRelationshipClass"     "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
 
-        "StatusHealth"                "2472"
+        "StatusHealth"                "4472"
         "StatusHealthRegen"           "12.5"
 
         "BountyXP"                    "270"
@@ -130,7 +130,7 @@
 
     "druids_protector_1"
     {
-        "Model"                 "models/items/lone_druid/bear/dark_wood_bear_brown/dark_wood_bear_brown.vmdl"
+        "Model"                 "models/items/lone_druid/bear/dark_wood_bear/dark_wood_bear.vmdl"
         "BaseClass"             "npc_dota_creature"
         "Level"                 "25"
         "ModelScale"            "1.0"
@@ -141,8 +141,8 @@
         "ArmorPhysical"             "10"
         "AttackCapabilities"        "DOTA_UNIT_CAP_MELEE_ATTACK"
 
-        "AttackDamageMin"           "160"
-        "AttackDamageMax"           "196"
+        "AttackDamageMin"           "3160"
+        "AttackDamageMax"           "3596"
         "AttackRate"                "1.25"
         "AttackAnimationPoint"      "0.43"
         "AttackRange"               "128"
@@ -154,7 +154,7 @@
         "CombatClassDefend"         "DOTA_COMBAT_CLASS_DEFEND_BASIC"
         "UnitRelationshipClass"     "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
 
-        "StatusHealth"                "4472"
+        "StatusHealth"                "14472"
         "StatusHealthRegen"           "20.0"
 
         "BountyXP"                    "350"
@@ -192,7 +192,7 @@
     }
     "druids_protector_3"
     {
-        "Model"                 "models/items/lone_druid/bear/dark_wood_bear_white/dark_wood_bear_white.vmdl"
+        "Model"                 "models/items/lone_druid/bear/dark_wood_bear/dark_wood_bear.vmdl"
         "BaseClass"             "npc_dota_creature"
         "Level"                 "25"
         "ModelScale"            "1.0"
@@ -256,17 +256,17 @@
         "BaseClass"             "npc_dota_creature"
         "Level"                 "28"
         "ModelScale"            "1.2"
-        "HealthBarOffset"       "170"
+        "HealthBarOffset"       "300"
 
         "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_GROUND"
         "MovementSpeed"             "320"
         "ArmorPhysical"             "10"
         "AttackCapabilities"        "DOTA_UNIT_CAP_MELEE_ATTACK"
 
-        "AttackDamageMin"           "160"
-        "AttackDamageMax"           "196"
+        "AttackDamageMin"           "5160"
+        "AttackDamageMax"           "6196"
         "AttackRate"                "1.25"
-        "AttackAnimationPoint"      "0.467"
+        "AttackAnimationPoint"      "0.33"
         "AttackRange"               "100"
 
         //"Glow"                      "particles/units/druids/glow/druids_glow_white.vpcf"

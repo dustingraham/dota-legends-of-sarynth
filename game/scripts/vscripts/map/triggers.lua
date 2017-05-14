@@ -55,6 +55,9 @@ function DruidsBuildingStartTouch(trigger)
     roof:SetAbsOrigin(roof:GetAbsOrigin() - Vector(0,0,512))
     local pos = Entities:FindByName(nil, 'zone_druids_boss_center'):GetAbsOrigin()
     AddFOWViewer(trigger.activator:GetTeamNumber(), pos, 1024, 600, true)
+
+    -- Also call the standard trigger.
+    ZoneIn(trigger)
 end
 
 function DruidsBuildingEndTouch(trigger)

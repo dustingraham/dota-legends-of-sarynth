@@ -28,8 +28,13 @@ for _,file in ipairs({
     'app/systems/inventory/inventory_service',
     'app/systems/inventory/inventory',
 
+    'app/systems/npcs/ai/units/ai_boss_actions',
     'app/systems/npcs/ai/units/ai_dark_boss_actions',
     'app/systems/npcs/ai/units/ai_dark_boss_logic',
+
+    'app/systems/npcs/ai/units/druids/ai_druids_boss_fire',
+    'app/systems/npcs/ai/units/druids/ai_druids_boss_logic',
+    'app/systems/npcs/ai/units/druids/ai_druids_boss_actions',
 
     'app/systems/npcs/ai_mixin',
     'app/systems/npcs/base_npc_creature',
@@ -81,6 +86,8 @@ for _,modifier in ipairs({
     'ai_webbed_queen',
     'ice_dungeon_boss3',
 }) do LinkLuaModifier(modifier, 'app/systems/npcs/ai/units/'..modifier, LUA_MODIFIER_MOTION_NONE) end
+
+LinkLuaModifier('ai_druids_boss', 'app/systems/npcs/ai/units/druids/ai_druids_boss', LUA_MODIFIER_MOTION_NONE)
 
 LinkLuaModifier('webbed_spidy_bubble_death_cloud', 'app/systems/npcs/abilities/webbed_spidy_bubble_death_cloud', LUA_MODIFIER_MOTION_NONE)
 

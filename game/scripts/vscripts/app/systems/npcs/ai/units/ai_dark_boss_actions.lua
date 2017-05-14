@@ -111,6 +111,7 @@ function AiDarkBossActions(ai)
         end
     end
 
+    -- TODO: Replace with ai_boss_actions
     function ai:ReviewTargets()
         local currentPos = self:GetParent():GetAbsOrigin()
         local foundAnyTargets = false
@@ -170,6 +171,7 @@ function AiDarkBossActions(ai)
         return foundAnyTargets
     end
 
+    -- TODO: Replace with ai_boss_actions
     function ai:DealDamage(target, damage, damageType, source)
         if not source then source = self:GetParent() end
         if not damageType then damageType = DAMAGE_TYPE_MAGICAL end

@@ -8,26 +8,30 @@ if DEBUG_SETTINGS then
     -- Curronly only a single hero. Pick it!
     --TEST_PICK_HERO = 'windrunner'    -- Ranger
     --TEST_PICK_HERO = 'dragon_knight' -- Warrior
-    TEST_PICK_HERO = 'omniknight'    -- Paladin
+    --TEST_PICK_HERO = 'omniknight'    -- Paladin
     --TEST_PICK_HERO = 'bounty_hunter' -- Rogue
     --TEST_PICK_HERO = 'invoker'       -- Mage
-    --TEST_PICK_HERO = 'warlock'       -- Sorcerer
+    TEST_PICK_HERO = 'warlock'       -- Sorcerer
     --TEST_PICK_HERO_ALT = 'omniknight'
 
     TEST_DISABLE_FOG = true
-    TEST_START_LEVEL = 24
+    TEST_START_LEVEL = 28
+
     TEST_SUPERPATHEY = 1750
     TEST_SUPERPATHEY_FLIES = true
+
     TEST_SUPERSTRONG = true
     TEST_SUPERATK = 15000
     TEST_SUPERSTR = 4800
     TEST_SUPERAGI = 4400
     TEST_SUPERINT = 4400
+
     -- town kobolds ice webbed druids dark
     TEST_START_WAYPOINT = 'druids'
     --TEST_START_START_BOSS = true
     --TEST_START_DARK_BOSS = true
-    TEST_START_DRUID_BOSS = true
+    --TEST_START_DRUID_BOSS = true
+    --TEST_DRUIDS_UNLOCKED = true
     TEST_QUESTS_COMPLETE = {
         ['1005'] = 'start_area_report_to_town',
         ['1012'] = 'kobolds_warchief',
@@ -39,7 +43,7 @@ if DEBUG_SETTINGS then
         'teleport_tower_dark',
     }
 
-    --TEST_SPAWN_ITEMS = true
+    TEST_SPAWN_ITEMS = true
     TEST_ADD_ITEMS = {
         'item_3172',
         'item_3179',
@@ -89,6 +93,16 @@ if DEBUG_SETTINGS then
         [11] = 'item_3153', -- weapon
         [12] = 'item_3142', -- shield
     }
+    TEST_EQUIP_ITEMS_25_SORC = {
+        [1] = 'item_3162', -- helm
+        [2] = 'item_3175', -- neck
+        [3] = 'item_3156', -- armor
+        [8] = 'item_3167', -- ring
+        [9] = 'item_3167', -- ring
+        [10] = 'item_3159', -- boots
+        [11] = 'item_3170', -- weapon
+        [12] = 'item_3142', -- shield
+    }
     TEST_EQUIP_ITEMS_MAX = {
         [1] = 'item_3138', -- helm
         [2] = 'item_3139', -- neck
@@ -109,7 +123,7 @@ if DEBUG_SETTINGS then
         [11] = 'item_3172', -- weapon
         [12] = 'item_3179', -- shield
     }
-    TEST_EQUIP_ITEMS = TEST_EQUIP_MAX_WARRIOR
+    TEST_EQUIP_ITEMS = TEST_EQUIP_ITEMS_25_SORC
 
     DEBUG_SKIP_HTTP_REPORT = true
 end
@@ -137,11 +151,12 @@ DEBUG_PRINT_SECTIONS = {
     AiBasic           = true,
     AiBasicSheep      = false,
     AiBasicAggro      = false,
-    AiAggroLeash      = true,
+    AiAggroLeash      = false,
     AiBasicNpc        = true,
     AiWebbedQueen     = true,
     AiDarkBoss        = true,
     AiDruidsTower     = true,
+    AiDruidsBoss      = true,
     StartAreaBoss     = true,
     Encounter         = true,
     Spawn             = false,
