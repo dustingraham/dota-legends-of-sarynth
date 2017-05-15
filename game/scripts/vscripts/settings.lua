@@ -12,15 +12,15 @@ if DEBUG_SETTINGS then
     --TEST_PICK_HERO = 'bounty_hunter' -- Rogue
     --TEST_PICK_HERO = 'invoker'       -- Mage
     TEST_PICK_HERO = 'warlock'       -- Sorcerer
-    --TEST_PICK_HERO_ALT = 'omniknight'
+    TEST_PICK_HERO_ALT = 'omniknight'
 
     --TEST_DISABLE_FOG = true
-    TEST_START_LEVEL = 25
+    TEST_START_LEVEL = 28
 
-    TEST_SUPERPATHEY = 1750
+    --TEST_SUPERPATHEY = 1750
     TEST_SUPERPATHEY_FLIES = true
 
-    TEST_SUPERSTRONG = true
+    --TEST_SUPERSTRONG = true
     TEST_SUPERATK = 15000
     TEST_SUPERSTR = 4800
     TEST_SUPERAGI = 4400
@@ -30,8 +30,8 @@ if DEBUG_SETTINGS then
     TEST_START_WAYPOINT = 'druids'
     --TEST_START_START_BOSS = true
     --TEST_START_DARK_BOSS = true
-    --TEST_START_DRUID_BOSS = true
-    --TEST_DRUIDS_UNLOCKED = true
+    TEST_START_DRUID_BOSS = true
+    TEST_DRUIDS_UNLOCKED = true
     TEST_QUESTS_COMPLETE = {
         ['1005'] = 'start_area_report_to_town',
         ['1012'] = 'kobolds_warchief',

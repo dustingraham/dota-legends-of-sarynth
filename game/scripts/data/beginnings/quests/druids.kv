@@ -34,7 +34,7 @@
             "experience" "1450"
             "item_choose"
             {
-                "01" "item_3185"
+                "01" "item_3185" // Flora Killer
             }
         }
     }
@@ -87,6 +87,44 @@
             "item_choose"
             {
                 "01" "item_3204" // Flora Faceguard
+            }
+        }
+    }
+    "1622"
+    {
+        "name" "druids_cuttings"
+        "title" "Flora Samples"
+        "start_entity" "npc_questgiver_druids_1"
+        "end_entity" "npc_questgiver_druids_1"
+        "requirements"
+        {
+            "quest" "druids_wildlife"
+        }
+        "start"
+        {
+            "dialog" "Cuttings...<br><br>We can find a way to cleanse the corrupted... please...<br><br>Bring cuttings..."
+        }
+        "complete"
+        {
+            "dialog" "We will start at once.... Thank you..."
+        }
+        "objectives"
+        {
+            "01" {
+                "long_description" "Collect 6 cuttings from the corrupted flora."
+                "description" "Corrupted Cuttings Collected"
+                "action" "collect"
+                "item" "item_3205"
+                "required" "6"
+            }
+        }
+        "rewards"
+        {
+            "gold" "105"
+            "experience" "1450"
+            "item_choose"
+            {
+                "01" "item_3206" // Studded Floral Amulet
             }
         }
     }

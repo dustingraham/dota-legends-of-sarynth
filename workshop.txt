@@ -21,13 +21,14 @@ We will move from alpha to beta release once the entire map has been unlocked, t
 Be forewarned, there will likely be a full wipe either when transitioning from alpha to beta, or beta to full release, or both times.
 
 [b][u]Credits[/u][/b]
- • DoctorGester - Amazing contributions in code, time, patience, and wisdom.
  • ModDota - The only reason any of this is possible. Thank you! (SinZ, Psychotic, Shush)
+ • DoctorGester - Amazing contributions in code, time, patience, and wisdom.
  • Arhowk - Excellent youtube tutorials on ModDota forums
  • Perry - Deep wealth of all knowledge. Very kind.
  • Dreoh - Help testing, and great inspiration, code assistance.
  • Toyoka - Particle inspiration and knowledge
  • Yunten - Valuable assistance with meshes and hitboxes.
+ • Alpha - Much appreciated assistance developing the lore.
  • BMD - Excellent timers library
  • Noya - Many dozens of valuable scripting posts on ModDota
  • Invalid Nick - [url=https://www.hiveworkshop.com/threads/core-assets-release.275239/]Released five beautiful house models[/url], sprinkled throughout.

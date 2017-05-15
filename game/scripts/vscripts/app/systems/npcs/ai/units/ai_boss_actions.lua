@@ -54,11 +54,11 @@ function AiBossActions(ai, zoneName, debugName)
         end
         if foundAnyTargets then
             if self.aggroTarget ~= closestHero then
-                Debug(debugName, 'Found closer target to aggro.')
+                self:Debug('Found closer target to aggro.')
                 self.aggroTarget = closestHero
             end
             if self.rangedTarget ~= furthestHero then
-                Debug(debugName, 'Found different ranged hero to target.')
+                self:Debug('Found different ranged hero to target.')
                 self.rangedTarget = furthestHero
             end
         else

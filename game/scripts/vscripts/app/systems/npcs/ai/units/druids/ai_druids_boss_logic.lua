@@ -43,6 +43,7 @@ function AiDruidsBossLogic(ai)
             return true
         end
 
+        self:AttackTarget()
         --...?
     end
 
