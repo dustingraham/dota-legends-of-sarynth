@@ -1,7 +1,7 @@
 
 DEBUG_SETTINGS = IsInToolsMode()
 -- Override if necessary...
---DEBUG_SETTINGS = false
+DEBUG_SETTINGS = false
 
 -- TEST MODE
 if DEBUG_SETTINGS then
@@ -12,7 +12,7 @@ if DEBUG_SETTINGS then
     --TEST_PICK_HERO = 'bounty_hunter' -- Rogue
     --TEST_PICK_HERO = 'invoker'       -- Mage
     TEST_PICK_HERO = 'warlock'       -- Sorcerer
-    TEST_PICK_HERO_ALT = 'omniknight'
+    --TEST_PICK_HERO_ALT = 'omniknight'
 
     --TEST_DISABLE_FOG = true
     TEST_START_LEVEL = 28
@@ -104,14 +104,14 @@ if DEBUG_SETTINGS then
         [12] = 'item_3142', -- shield
     }
     TEST_EQUIP_ITEMS_MAX = {
-        [1] = 'item_3138', -- helm
-        [2] = 'item_3139', -- neck
+        [1] = 'item_3191', -- helm
+        [2] = 'item_3176', -- neck
         [3] = 'item_3152', -- armor
-        [8] = 'item_kobold_amulet_unique', -- ring
-        [9] = 'item_kobold_amulet_unique', -- ring
+        [8] = 'item_3195', -- ring
+        [9] = 'item_3195', -- ring
         [10] = 'item_3129', -- boots
-        [11] = 'item_3153', -- weapon
-        [12] = 'item_3142', -- shield
+        [11] = 'item_3188', -- weapon
+        [12] = 'item_3179', -- shield
     }
     TEST_EQUIP_MAX_WARRIOR = {
         [1] = 'item_3160', -- helm
@@ -123,7 +123,7 @@ if DEBUG_SETTINGS then
         [11] = 'item_3172', -- weapon
         [12] = 'item_3179', -- shield
     }
-    TEST_EQUIP_ITEMS = TEST_EQUIP_ITEMS_25_SORC
+    TEST_EQUIP_ITEMS = TEST_EQUIP_ITEMS_MAX
 
     DEBUG_SKIP_HTTP_REPORT = true
 end

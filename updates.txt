@@ -1,8 +1,10 @@
 [b]v0.0.80[/b]
- • Next area released, Druid Woods.
+ • Next area released, Druid Woods! Corruption abounds in the depths of the misty enchanted forest.
+ • New items, quests, creatures, and a boss fight.
  • Level cap raised to 28.
- • Added a "call for help" feature to some of the new creatures.
- 
+ • Added a creature "call for help" feature. Webbed Forest, Dark Plains, and Druid Woods are affected. Proceed with caution.
+ • Slightly reduced armor from all items by 1 or 2.
+
 [b]v0.0.76[/b]
  • Add sound to Lumorase's Shard death.
  • Lumorase no longer tolerates being attacked from outside of her area.
