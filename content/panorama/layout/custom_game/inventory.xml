@@ -22,7 +22,7 @@
     </snippets>
     <Panel class="inventoryhud" hittest="false">
         <Panel id="InventoryDialog" class="inventory-container hide">
-            <Image class="inventory-dialog" src="file://{images}/inventory/window.png">
+            <Image id="DialogImage" class="inventory-dialog" src="file://{images}/inventory/window.png">
                 <Panel class="left inventory">
                     <Label id="HeroClassLabel" class="TitleFont classname" text="Warrior"/>
                     <Label id="HeroLevelLabel" class="levelLabel" text="Level 13"/>

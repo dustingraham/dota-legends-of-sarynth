@@ -296,6 +296,7 @@
 .shop-dialog .left.shop {
     padding-left:15px;
     width:50%;
+    flow-children:down;
 }
 .shop-dialog .left.shop #ForSaleLabel {
     margin-top:85px;
@@ -304,10 +305,10 @@
     margin-top:0;
 }
 .shop-dialog .left.shop #BuyBackLabel {
-    margin-top:90px;
+    margin-top:10px;
 }
 .shop-dialog .left.shop #BuyBack {
-    margin-top:50px;
+    margin-top:10px;
 }
 .shop-dialog .right #ShopBackpack {
     margin-top:80px;

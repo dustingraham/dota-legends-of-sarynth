@@ -166,6 +166,10 @@ var inventory = {
         // ItemShowTooltip();
         //var itemName = Abilities.GetAbilityName( m_Item );
         //$.DispatchEvent( "DOTAShowAbilityTooltipForEntityIndex", $.GetContextPanel(), itemName, m_QueryUnit );
+    },
+    OnContextMenu: function(panel, thing)
+    {
+        $.Msg('Right clicked.');
     }
 };
 
@@ -245,13 +249,13 @@ var BuildItemBlock = function(attachTo, slotId, slotType)
     //panel.tmp = panelId;
 
     $.RegisterEventHandler('Activated', panel, inventory.ActivateItem);
+    $.RegisterEventHandler('ContextMenu', panel, inventory.OnContextMenu);
     $.RegisterEventHandler('DragStart', panel, inventory.OnDragStart);
     $.RegisterEventHandler('DragEnd', panel, inventory.OnDragEnd );
     $.RegisterEventHandler('DragEnter', panel, function(_, dragged) { inventory.OnDragEnter(panel, dragged); });
     $.RegisterEventHandler('DragDrop', panel, function(_, dragged) { inventory.OnDragDrop(panel, dragged); });
     $.RegisterEventHandler('DragLeave', panel, function(_, dragged) { inventory.OnDragLeave(panel, dragged); });
     //panel.SetPanelEvent('onmouseover', inventory.OnMouseOver);
-
     // item_kobold_weapon_2
     //panel.SetItem( -1, params.contID, params.id, $.GetContextPanel() );
 };
@@ -288,27 +292,44 @@ for (i = 0; i <= 5; i++) {
     }
 }
 
-// // Five rows of six for shop.
-// for (i = 0; i <= 5; i++) {
-//     var row = $.CreatePanel('Panel', $shopForSale, 'forsale-row' + i);
-//     row.AddClass('backpack-panel-group');
-//     for (var j = 1; j <= 6; j++) {
-//         // Offset by 12.
-//         var slotId = 100 + j + i * 6;
-//         BuildItemBlock(row, slotId, 0);
-//     }
-// }
-// // Five rows of six for shop.
-// for (i = 0; i <= 0; i++) {
-//     var row = $.CreatePanel('Panel', $shopBuyBack, 'buyback-row' + i);
-//     row.AddClass('backpack-panel-group');
-//     for (var j = 1; j <= 6; j++) {
-//         // Offset by 12.
-//         var slotId = 150 + j + i * 6;
-//         BuildItemBlock(row, slotId, 0);
-//     }
-// }
+var MakeShopDialog = function()
+{
+    // Testing:
+    $('#InventoryDialog').SetHasClass('hide', false);
 
+    // Convert to shop dialog.
+    $('#DialogImage').SetHasClass('shop-dialog', true);
+
+    // Five rows of six for shop.
+    for (i = 0; i <= 5; i++) {
+        var row = $.CreatePanel('Panel', $shopForSale, 'forsale-row' + i);
+        row.AddClass('backpack-panel-group');
+        for (var j = 1; j <= 6; j++) {
+            // Offset by 12.
+            var slotId = 100 + j + i * 6;
+            BuildItemBlock(row, slotId, 0);
+        }
+    }
+    // Five rows of six for shop.
+    for (i = 0; i <= 0; i++) {
+        var row = $.CreatePanel('Panel', $shopBuyBack, 'buyback-row' + i);
+        row.AddClass('backpack-panel-group');
+        for (var j = 1; j <= 6; j++) {
+            // Offset by 12.
+            var slotId = 150 + j + i * 6;
+            BuildItemBlock(row, slotId, 0);
+        }
+    }
+};
+
+var DebutTestShop = false;
+if (DebutTestShop) {
+    MakeShopDialog();
+}
+else
+{
+    $('#DialogImage').SetHasClass('shop-dialog', false);
+}
 
 var colorMap = {
     // Special based on level.
@@ -373,7 +394,12 @@ var InventoryTableChange = function(tableName, changes, deletions) {
 var PlayerTables = GameUI.CustomUIConfig().PlayerTables;
 var playerId = Game.GetLocalPlayerID();
 var playerTableKey = 'player_items_'+playerId;
-PlayerTables.SubscribeNetTableListener(playerTableKey, InventoryTableChange);
+if ($.GetContextPanel().OldListenerId !== undefined)
+{
+    // If we reload JS, we re-subscribe...
+    PlayerTables.UnsubscribeNetTableListener($.GetContextPanel().OldListenerId);
+}
+$.GetContextPanel().OldListenerId = PlayerTables.SubscribeNetTableListener(playerTableKey, InventoryTableChange);
 
 // var rarity = Abilities.GetSpecialValueFor(m_Item, 'rarity');
 // $.GetContextPanel().SetHasClass('item_rarity_junk', !isEmpty && rarity == 1);
