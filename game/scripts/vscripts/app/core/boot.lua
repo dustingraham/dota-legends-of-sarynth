@@ -229,7 +229,7 @@ function Boot:InitGameRules()
     GameRules:LockCustomGameSetupTeamAssignment(true)
     GameRules:EnableCustomGameSetupAutoLaunch(true)
 
-    GameRules:SetPostGameTime(60)
+    GameRules:SetPostGameTime(15)
 
     -- Trees
     GameRules:SetTreeRegrowTime(30)

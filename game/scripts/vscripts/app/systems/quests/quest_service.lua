@@ -151,8 +151,20 @@ function QuestService:OnQuestComplete(quest)
             duration = 15,
             style = { color = "#cccccc" }
         })
+        if END_IN_WIN then
+            GameRules:SetGameWinner(DOTA_TEAM_GOODGUYS)
+        end
     end
-
+    if quest.id == '1410' and END_IN_WIN then
+        Notifications:Top(self.aggroTarget:GetPlayerOwnerID(), {
+            text = 'Congratulations! Game will end in 10 seconds.',
+            duration = 20,
+            style = { color = "#b21d00" }
+        })
+        Timers:CreateTimer(10, function()
+            GameRules:SetGameWinner(DOTA_TEAM_GOODGUYS)
+        end)
+    end
     -- Check if any quests open up now.
     QuestService:CheckForQuestsAvailable(quest.PlayerID)
 end
