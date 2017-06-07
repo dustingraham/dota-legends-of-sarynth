@@ -1,23 +1,23 @@
 
 DEBUG_SETTINGS = IsInToolsMode()
 -- Override if necessary...
-DEBUG_SETTINGS = false
+--DEBUG_SETTINGS = false
 
 END_IN_WIN = true
 
 -- TEST MODE
 if DEBUG_SETTINGS then
     -- Curronly only a single hero. Pick it!
-    --TEST_PICK_HERO = 'windrunner'    -- Ranger
+    TEST_PICK_HERO = 'windrunner'    -- Ranger
     --TEST_PICK_HERO = 'dragon_knight' -- Warrior
     --TEST_PICK_HERO = 'omniknight'    -- Paladin
     --TEST_PICK_HERO = 'bounty_hunter' -- Rogue
     --TEST_PICK_HERO = 'invoker'       -- Mage
-    TEST_PICK_HERO = 'warlock'       -- Sorcerer
+    --TEST_PICK_HERO = 'warlock'       -- Sorcerer
     --TEST_PICK_HERO_ALT = 'omniknight'
 
     --TEST_DISABLE_FOG = true
-    TEST_START_LEVEL = 28
+    TEST_START_LEVEL = 21
 
     TEST_SUPERPATHEY = 1750
     TEST_SUPERPATHEY_FLIES = true
@@ -29,7 +29,7 @@ if DEBUG_SETTINGS then
     TEST_SUPERINT = 4400
 
     -- town kobolds ice webbed druids dark
-    TEST_START_WAYPOINT = 'druids'
+    TEST_START_WAYPOINT = 'town'
     --TEST_START_START_BOSS = true
     --TEST_START_DARK_BOSS = true
     --TEST_START_DRUID_BOSS = true
