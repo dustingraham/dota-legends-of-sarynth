@@ -101,6 +101,16 @@ function ai:OnDeath(event)
             end)
         end)
     end)
+    if END_IN_WIN and self.aggroTarget and QuestService:CheckIfCompleted(self.aggroTarget:GetPlayerOwnerID(), '1630') then
+        Notifications:Top(self.aggroTarget:GetPlayerOwnerID(), {
+            text = 'Congratulations! Game will end in 10 seconds.',
+            duration = 20,
+            style = { color = "#b21d00" }
+        })
+        Timers:CreateTimer(12, function()
+            GameRules:SetGameWinner(DOTA_TEAM_GOODGUYS)
+        end)
+    end
 end
 
 function ai:OnHeroDeath(e, event)
