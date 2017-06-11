@@ -1247,8 +1247,10 @@
     {
         "ID" "3128"
         "BaseClass" "item_broadsword"
-        "Model" "models/props_winter/egg.vmdl"
-        "Effect" "particles/generic_gameplay/dropped_item.vpcf"
+        // Valve apparently broke the hitbox for the egg or something.
+        // "Model" "models/props_winter/egg.vmdl"
+        "Model" "models/props_gameplay/rune_doubledamage01.vmdl"
+        "Effect" "particles/environment/webbed/essence/essence_dropped_item.vpcf"
         "AbilityTextureName" "custom/spider_egg"
         "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
         "ItemCost" "10"
@@ -1281,6 +1283,7 @@
         "ItemStackable" "1"
         "ItemPermanent" "1"
         "ItemBaseLevel" "0"
+        "CustomEffect" "1"
     }
     "item_3129"
     {
