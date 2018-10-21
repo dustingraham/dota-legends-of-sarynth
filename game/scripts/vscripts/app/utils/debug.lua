@@ -7,12 +7,29 @@ function Debug(section, ...)
     if not DEBUG_PRINT_ALL and not DEBUG_PRINT_SECTIONS[section] then return end
 
     section = string.format("%17s ", section)
-    local message = '['..section..'] ' .. table.concat({...}, ' ')
+    local message = '['..section..'] ' .. CustomToString(...)
     if IsDedicatedServer() then
         CustomGameEventManager:Send_ServerToAllClients("debug_print", { content = message })
     else
         print(message)
     end
+end
+
+---
+-- Since table.concat({...}, ' ') did not work when a boolean was passed,
+-- this little wrapper will convert all the args to string and join them.
+-- @param ...
+--
+function CustomToString(...)
+    local n = select('#', ...)
+    local parts = {}
+
+    for i = 1, n do
+        local v = tostring(select(i, ...))
+        table.insert(parts, v)
+    end
+
+    return table.concat(parts, ' ')
 end
 
 -- For serious debugging.
