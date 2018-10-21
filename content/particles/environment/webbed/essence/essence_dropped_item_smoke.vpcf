@@ -2,7 +2,7 @@
 {
 	_class = "CParticleSystemDefinition"
 	m_bShouldHitboxesFallbackToRenderBounds = false
-	m_nMaxParticles = 16
+	m_nMaxParticles = 32
 	m_ConstantColor = [ 3, 161, 19, 255 ]
 	m_Renderers = 
 	[
@@ -10,7 +10,7 @@
 			_class = "C_OP_RenderSprites"
 			m_nSequenceCombineMode = "SEQUENCE_COMBINE_MODE_USE_SEQUENCE_0"
 			m_bAdditive = true
-			m_hTexture = resource:"materials/particle/auras/aura_shivas.vtex"
+			m_hTexture = resource:"materials/particle/basic_smoke.vtex"
 			m_nOrientationType = 2
 		},
 	]
@@ -58,8 +58,8 @@
 		},
 		{
 			_class = "C_INIT_RandomRadius"
-			m_flRadiusMax = 62.0
-			m_flRadiusMin = 40.0
+			m_flRadiusMax = 80.0
+			m_flRadiusMin = 60.0
 		},
 		{
 			_class = "C_INIT_RandomRotation"
@@ -79,7 +79,8 @@
 		},
 		{
 			_class = "C_INIT_CreateOnModel"
-			m_flHitBoxScale = 0.1
+			m_flHitBoxScale = 0.5
+			m_vecDirectionBias = [ 0.0, 0.0, 1.0 ]
 		},
 		{
 			_class = "C_INIT_RandomColor"
@@ -88,15 +89,15 @@
 		},
 		{
 			_class = "C_INIT_RandomAlpha"
-			m_nAlphaMin = 100
-			m_nAlphaMax = 128
+			m_nAlphaMin = 125
+			m_nAlphaMax = 200
 		},
 	]
 	m_Emitters = 
 	[
 		{
 			_class = "C_OP_ContinuousEmitter"
-			m_flEmitRate = 8.0
+			m_flEmitRate = 24.0
 		},
 	]
 	m_controlPointConfigurations = 

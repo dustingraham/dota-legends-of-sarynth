@@ -1,3 +1,4 @@
+/* global $, Game, GameUI, GameEvents */
 
 // May want a clock later...?
 GameUI.SetDefaultUIEnabled( DotaDefaultUIElement_t.DOTA_DEFAULT_UI_TOP_TIMEOFDAY, false );
@@ -95,7 +96,10 @@ GameEvents.Subscribe('emit_client_sound_stop', function(event)
     Game.StopSound(GameEvents.soundIds[event.sound]);
 });
 
-
+GameEvents.Subscribe('debug_print', function(event)
+{
+    $.Msg(event.content);
+});
 
 // (function() {
 //     var currentParent = panel.GetParent();

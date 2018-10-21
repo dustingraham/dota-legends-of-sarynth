@@ -5,9 +5,14 @@ function Log(severity, section, ...) Debug(severity, section, ...) end
 function Debug(section, ...)
     if not DEBUG_PRINT then return end
     if not DEBUG_PRINT_ALL and not DEBUG_PRINT_SECTIONS[section] then return end
-    
+
     section = string.format("%17s ", section)
-    print('['..section..'] ', ...)
+    local message = '['..section..'] ' .. table.concat({...}, ' ')
+    if IsDedicatedServer() then
+        CustomGameEventManager:Send_ServerToAllClients("debug_print", { content = message })
+    else
+        print(message)
+    end
 end
 
 -- For serious debugging.

@@ -24,8 +24,11 @@ function Boot:Precache(context)
 
         -- Game Effects
         'particles/effects/loot_expire/loot_expire.vpcf',
+        'particles/transport_bird/transport_bird.vpcf',
 
         'particles/units/start/scar/claw.vpcf',
+        'particles/units/start/scar/claw_swipe.vpcf',
+        'particles/units/start/scar/scar_ground/scar_ground.vpcf',
         'particles/dire_fx/bad_ancient_ambient.vpcf', -- Dark Boss Barricade
         'particles/units/dark_plains/boss/energy_pull/energy_pull.vpcf', -- Dark Boss Link
 

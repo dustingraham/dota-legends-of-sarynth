@@ -1,0 +1,44 @@
+"G:\games\Steam\steamapps\common\dota 2 beta\game\bin\win64\dota2.exe" -addon legends -tools -addon legends
+
+----
+
+Feedback
+
+- Better documentation.
+
+- Some way to test dedicated servers on local machine. Important since there are differences between dedicated server and local machine running the game. Such as missed precached assets look fine on local machine, but are missing in dedicated server.
+
+- Change log for editor/tools/addons.
+
+----
+Console in live game.
+ Add -console to launch command shortcut.
+----
+Hard Links (Junctions)
+
+G:\dotadev\sarynth>mklink /J game "G:\games\Steam\steamapps\common\dota 2 beta\game\dota_addons\sarynth"
+Junction created for game <<===>> G:\games\Steam\steamapps\common\dota 2 beta\game\dota_addons\sarynth
+
+G:\dotadev\sarynth>mklink /J content "G:\games\Steam\steamapps\common\dota 2 beta\content\dota_addons\sarynth"
+Junction created for content <<===>> G:\games\Steam\steamapps\common\dota 2 beta\content\dota_addons\sarynth
+----
+
+Legendary Heroes
+ - Heroes and heroines, all striving for glory.
+
+Epic Adventurers
+Glorious Pioneers
+Majestic Champions
+Dazzling Trailblazers
+Awe-Inspiring Wanderers
+
+Receive a weekly in-game loot box with potions and other goodies.
+Plus, everything found in Awe-Inspiring Wanderers.
+
+https://www.patreon.com/edit/tiers
+----
+
+TODOs:
+- Right click on item in inventory to equip it.
+- Flash inventory icon until user opens it for the first item. (Any new item?)
+- Display last save time. (Quit and Save button?)

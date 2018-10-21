@@ -1,3 +1,14 @@
+[b]v0.0.82[/b]
+ • Fixed save games, load and save should work again.
+ • Fix scar ground particle.
+ • Fix teleportation bird particle.
+ • Investigating multi-player issue.
+ • Some improvements to work on dedicated servers.
+
+[b]v0.0.81[/b]
+ • The spider egg was unable to be targeted, replaced with spider essence.
+ • Set "win" condition after defeating dark boss, and the druid boss.
+
 [b]v0.0.80[/b]
  • Next area released, Druid Woods! Corruption abounds in the depths of the misty enchanted forest.
  • New items, quests, creatures, and a boss fight.
@@ -57,7 +68,7 @@
  • Fix bug where picking up inventory beyond max capacity would disappear.
  • Normalized dropped item effects to be more consistent.
  • Potential fix for inability to pick up a nearby item.
- 
+
 [b]v0.0.71b[/b]
  • Fix bug where Dark Priestess Lumorase death would not unlock the exit.
 
@@ -69,7 +80,7 @@
  • Dark Kite Shield now properly adds strength.
  • Reduced excessive drop rate of Dark Talisman and Dark Ornamental Chain.
  • Krumendi's Footwear now properly named. (Thanks Montezuma)
- 
+
 [b]v0.0.70[/b]
  • New area released! Dark Plains. New quests, items, creatures, and fights.
  • Level cap raised to 25.
@@ -98,7 +109,7 @@
  • Some minor terrascaping. (Doodads, trees, lights, plants.)
 [b]Items[/b]
  • Overseer's Sigil reclassified as legendary. (The only in the game at this point.)
- • Reinforced Shield removed +10 stat bonus that was unintended. Armor reduced from +6 to +4, health bonus reduced from +650 to +450. 
+ • Reinforced Shield removed +10 stat bonus that was unintended. Armor reduced from +6 to +4, health bonus reduced from +650 to +450.
 [b]Bugs[/b]
  • Poison cloud left from bubble spider will no longer block pathing.
  • Cleaned up warning messages for overly large hp/mp regeneration for creeps and heroes.
@@ -145,7 +156,7 @@
  • Fixed bug where reward item was sometimes not shown on quest turn in.
  • Fixed overlap of focus target toggle on 16x10 and 4x3 aspect ratios.
  • Gold now saves properly.
- 
+
 [b]v0.0.4[/b]
  • Created custom inventory system.
  • Added a loot expiration timer. Grab that loot within 60 seconds! It will start burning in the last 20 seconds.
@@ -170,13 +181,13 @@
  • Fix small bug with popupnumbers not releasing particle indexes.
  • Adjust items to not be killable. Was causing crash.
  • Fix bug with mobs re-aggro after hero respawn.
- 
+
 v0.0.3
  • Created better respawn locations. Dying in kobold area will no longer send you back to the start area.
  • Remember prior zone on next load. (Since this is a new value, it is initialized to the start zone for all characters.)
  • Added tooltips to most buffs.
  • Potential fix for an issue with auto-attack on first spawn.
- 
+
 v0.0.2
  • Added support for "report to" type quests.
  • Unlocked town + kobolds area.
@@ -188,4 +199,3 @@ v0.0.2
  • Added a note after the final quest is turned in, mentioning end of released content. (After defeating the kobold warchief.)
  • Fixed issue with quest dialog displaying a placeholder image when no item reward was available for the quest.
  • Fix a bug where an NPC with two quests wouldn't indicate a second quest was available after accepting the first.
- 
