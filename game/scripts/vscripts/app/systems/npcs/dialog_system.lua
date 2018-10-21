@@ -9,6 +9,10 @@ end
 
 -- Close active dialog if exists.
 function DialogSystem:OrderFilter(event, order)
+    -- Parameter type mismatch in game.
+    -- Seems likely due to multiplayer issue.
+    if not order or not order.units or not order.units['0'] then return end
+
     local hero = EntIndexToHScript(order.units['0'])
     local player = hero:GetPlayerOwner()
     if player and player.currentDialog then

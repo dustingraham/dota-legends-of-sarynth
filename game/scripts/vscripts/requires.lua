@@ -90,6 +90,7 @@ for _,modifier in ipairs({
 LinkLuaModifier('ai_druids_boss', 'app/systems/npcs/ai/units/druids/ai_druids_boss', LUA_MODIFIER_MOTION_NONE)
 
 LinkLuaModifier('webbed_spidy_bubble_death_cloud', 'app/systems/npcs/abilities/webbed_spidy_bubble_death_cloud', LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier('druids_boss_fire', 'app/systems/npcs/abilities/druids_boss_fire', LUA_MODIFIER_MOTION_NONE)
 
 LinkLuaModifier('character_vision', 'app/systems/characters/modifiers/character_vision', LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier('character_passive_regen', 'app/systems/characters/modifiers/character_passive_regen', LUA_MODIFIER_MOTION_NONE)

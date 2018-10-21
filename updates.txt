@@ -1,3 +1,7 @@
+[b]v0.0.83[/b]
+ • Changed druids boss fire damage to show a debuff.
+ • Fixed minor bug thrown when hero is not picked yet.
+
 [b]v0.0.82[/b]
  • Fixed save games, load and save should work again.
  • Fix scar ground particle.

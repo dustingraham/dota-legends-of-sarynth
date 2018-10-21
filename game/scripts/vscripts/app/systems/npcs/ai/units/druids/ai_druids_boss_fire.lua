@@ -53,20 +53,20 @@ function AiDruidsBossFire(ai)
         end
         if allLit and not self.allLit then
             self.allLit = self.fireTicks
-            print('ALL LIT at: ', self.fireTicks)
+            --self:Debug('ALL LIT at: ', self.fireTicks)
         end
     end
 
     function ai:FireRandomSingle()
         local pick = RandomInt(1,6)
-        --print('TRY FIRE ', pick)
+        --self:Debug('TRY FIRE ', pick)
         if self.fireStates[pick] == 1 then
             -- Flame is idle, let's make it burn.
             self:FlameState(pick, 2)
             self.fireActions[pick] = self.fireTicks + ai.WARNING_TIME
         else
             -- Already burning...
-            --print('Picked flame is not idle... state:', self.fireStates[pick])
+            --self:Debug('Picked flame is not idle... state:', self.fireStates[pick])
         end
     end
 
@@ -83,9 +83,7 @@ function AiDruidsBossFire(ai)
             if state == 3 then
                 local pos = Entities:FindByName(nil, 'druids_boss_flame'..id):GetAbsOrigin()
                 for _,target in pairs(self:FindHeroes(350, pos)) do
-                    self:DealDamage(target, 1000)
-                    -- TODO: Noise for fire damage? Other indicator? Burn around screen edge?
-                    PopupDamage(target, 1000)
+                    target:AddNewModifier(self:GetParent(), nil, 'druids_boss_fire', {duration = 2})
                 end
             end
         end
@@ -100,7 +98,7 @@ function AiDruidsBossFire(ai)
             self:FlameState(id, 1)
             self.fireActions[id] = nil
         else
-            print('ERROR Unexpected state: ', state)
+            self:Debug('ERROR Unexpected state: ', state)
         end
     end
 

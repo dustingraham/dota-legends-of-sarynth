@@ -37,8 +37,34 @@ Plus, everything found in Awe-Inspiring Wanderers.
 
 https://www.patreon.com/edit/tiers
 ----
+Bugs:
+- Multiplayer - They said they picked sorcerer. But it did not create the hero for them.
+
+[   PanoramaScript       ]: [            Event ] [ERROR] Callback scripts/vscripts/app/systems/npcs/dialog_system.lua:12: Parameter type mismatch
+[   PanoramaScript       ]: stack traceback:
+[   PanoramaScript       ]: 	scripts/vscripts/app/core/event.lua:62: in function <scripts/vscripts/app/core/event.lua:61>
+[   PanoramaScript       ]: 	[C]: in function 'EntIndexToHScript'
+[   PanoramaScript       ]: 	scripts/vscripts/app/systems/npcs/dialog_system.lua:12: in function <scripts/vscripts/app/systems/npcs/dialog_system.lua:11>
+[   PanoramaScript       ]: 	[C]: in function 'xpcall'
+[   PanoramaScript       ]: 	scripts/vscripts/app/core/event.lua:58: in function <scripts/vscripts/app/core/event.lua:45>
+[   PanoramaScript       ]:
+
+
+----
 
 TODOs:
+- Delete save slot. (Multiple requests.)
+
+- Display last save time. (Quit and Save button?)
+
+- Implement shop vendor for selling items.
+
 - Right click on item in inventory to equip it.
 - Flash inventory icon until user opens it for the first item. (Any new item?)
-- Display last save time. (Quit and Save button?)
+- Display debuff when standing in fire in druid fight.
+- Druid should say more things. Perhaps charge at player.
+- Fix sword orientation in druid room.
+- Southwest druid tower did not open correctly.
+- Tower opening animation is jerky.
+
+- High level archer fires too fast, normal attack questionably more powerful than using skills.
