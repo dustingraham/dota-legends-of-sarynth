@@ -150,6 +150,21 @@ function Boot:Precache(context)
     PrecacheItemByNameSync('item_amulet_tier2', context)
     PrecacheItemByNameSync('item_amulet_tier3', context)
 
+    for _,name in ipairs({
+        'item_broadsword_tier1',
+        'item_broadsword_tier2',
+        'item_broadsword_tier3',
+        'item_amulet_tier1',
+        'item_amulet_tier2',
+        'item_amulet_tier3',
+        'item_amulet_scar',
+        'item_3191',
+        'item_3132',
+        'item_3129',
+        'item_kobold_weapon_2'
+    }) do PrecacheItemByNameSync(name, context) end
+    Debug('Boot', 'Precached Items')
+
     _G.GameItems = LoadKeyValues("scripts/items/items_game.txt")
     local heroes = LoadKeyValues("scripts/npc/npc_heroes_custom.txt")
     _G.GameUnits = LoadKeyValues("scripts/npc/npc_units_custom.txt")

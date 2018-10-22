@@ -1,3 +1,8 @@
+[b]v0.0.83b[/b]
+ • Fix inventory not being visible on dedicated server player load.
+ • Added more debugging statements for dedicated server debugging.
+ • Still working on multi-player issue.
+
 [b]v0.0.83[/b]
  • Changed druids boss fire damage to show a debuff.
  • Fixed minor bug thrown when hero is not picked yet.

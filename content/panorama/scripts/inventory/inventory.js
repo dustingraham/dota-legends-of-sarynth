@@ -348,9 +348,6 @@ var PlaceAllItems = function(items)
 {
     $.Each(items, function(eid, slot)
     {
-        // $.Msg('Slot is: '+slot);
-        // $.Msg('Level is: '+Abilities.GetLevel(eid));
-
         var itemName = Abilities.GetAbilityName(eid);
         var colorId = Items.GetItemColor(eid);
         if (colorId === -1)
@@ -360,6 +357,7 @@ var PlaceAllItems = function(items)
 
         var rarityClass = colorMap[colorId];
         AddItem(slot, eid, itemName, rarityClass);
+        $.Msg('Slot is: '+slot+' Item: '+itemName);
     });
 };
 
@@ -373,7 +371,7 @@ function isEmptyObject(obj) {
 }
 
 var InventoryTableChange = function(tableName, changes, deletions) {
-    // $.Msg('PlayerTableUpdate happened: '+tableName);
+    $.Msg('PlayerTableUpdate happened: '+tableName);
     if (!isEmptyObject(deletions))
     {
         //$.Msg('Deletions happened.');
@@ -385,8 +383,7 @@ var InventoryTableChange = function(tableName, changes, deletions) {
     }
     if (!isEmptyObject(changes))
     {
-        //$.Msg('Changes happened.');
-        //$.Msg(changes);
+        $.Msg('Changes happened: ', changes);
         PlaceAllItems(changes);
     }
 };
@@ -411,13 +408,28 @@ $.GetContextPanel().OldListenerId = PlayerTables.SubscribeNetTableListener(playe
 // $.GetContextPanel().SetHasClass('item_rarity_legendary', !isEmpty && rarity == 7);
 
 // Retrieve values on the client
-//$.Msg(playerTableKey);
+$.Msg(playerTableKey);
 var currentValues = PlayerTables.GetAllTableValues(playerTableKey);
 if (currentValues)
 {
-    //$.Msg('Placing known entities.');
+    $.Msg('Placing known entities.');
     PlaceAllItems(currentValues);
 }
+
+// reload_inventory
+// Some race condition that I do not yet understand. When the player first loads,
+// They can not find Abilities.GetAbilityName, then a couple seconds later, they do.
+// So this is a forced race condition delayed reload just to get players able to see
+// their inventory...
+GameEvents.Subscribe('reload_inventory', function(event)
+{
+    var currentValues = PlayerTables.GetAllTableValues(playerTableKey);
+    if (currentValues)
+    {
+        $.Msg('Reload Inventory, placing known entities.');
+        PlaceAllItems(currentValues);
+    }
+});
 
 function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
