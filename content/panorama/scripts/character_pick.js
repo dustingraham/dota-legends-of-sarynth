@@ -165,6 +165,7 @@ function ReplaceCharacterBlock(data)
     panel.FindChildTraverse('LoadCharacterButton').SetHasClass('hide', false);
     panel.FindChildTraverse('LoadCharacterButton').SetPanelEvent('onactivate', function()
     {
+        $.Msg('[JS] LoadCharacter!')
         GameEvents.SendCustomGameEventToServer('character_load', {
             slotId: data.slot_id
         });

@@ -2,6 +2,16 @@
 --@type CharacterPick
 CharacterPick = CharacterPick or class({})
 
+function CharacterPick:Activate()
+    Debug('CharacterPick', 'Activated!')
+
+    -- May need to unregister this... to prevent abuse?
+    ListenToGameEvent('player_connect_full', Dynamic_Wrap(CharacterPick, 'OnConnectFull'), self)
+
+    CustomGameEventManager:RegisterListener('character_pick', Dynamic_Wrap(CharacterPick, 'OnCharacterPick'))
+    CustomGameEventManager:RegisterListener('character_load', Dynamic_Wrap(CharacterPick, 'OnCharacterLoad'))
+end
+
 function CharacterPick:TestMapPickAll(heroReal)
     Debug('CharacterPick', 'Picking all for test map.')
 
@@ -42,7 +52,12 @@ end
 -- This is currently the "create" character for new slots.
 function CharacterPick:OnCharacterPick(event)
     local hero = PlayerResource:GetSelectedHeroEntity(event.PlayerID)
-    if hero:GetName() ~= DUMMY_HERO then Debug('CharacterPick', 'Already selected hero...') return end
+    if hero:GetName() ~= DUMMY_HERO then
+        Debug('CharacterPick', 'Unable to create. Already selected hero...')
+        return
+    end
+
+    Debug('CharacterPick', 'OnCharacterPick PID:', event.PlayerID)
 
     -- Sound + Music for Standard Game Pick
     EmitSoundOnClient('HeroPicker.Selected', PlayerResource:GetPlayer(event.PlayerID))
@@ -66,16 +81,17 @@ function CharacterPick:OnCharacterLoad(event)
     local hero = PlayerResource:GetSelectedHeroEntity(event.PlayerID)
     if hero:GetName() ~= DUMMY_HERO then
         -- Seems to be common doubleclick issue of some sort.
-        Debug('CharacterPick', 'Attempt by: ', event.PlayerID)
-        Debug('CharacterPick', 'For Slot: ', event.slotId)
-        Debug('CharacterPick', 'Already selected hero...')
+        Debug('CharacterPick', 'Attempt by PID:', event.PlayerID)
+        Debug('CharacterPick', 'For SlotID:', event.slotId)
+        Debug('CharacterPick', 'Unable to load. Already selected hero...')
         return
     end
+
+    Debug('CharacterPick', 'OnCharacterLoad PID:', event.PlayerID, 'Loading SlotID:', event.slotId)
 
     -- Sound for Standard Game Pick
     EmitSoundOnClient('HeroPicker.Selected', PlayerResource:GetPlayer(event.PlayerID))
 
-    Debug('CharacterPick', event.PlayerID, 'Loading slot...', event.slotId)
     local player = PlayerService:GetPlayer(event.PlayerID)
     player:LoadSlot(event.slotId)
 
@@ -311,7 +327,7 @@ end
 
 -- On Reconnect (?)
 function CharacterPick:OnConnectFull(event)
-    --Debug('CharacterPick', 'OnConnectFull PlayerID: ', event.PlayerID)
+    Debug('CharacterPick', 'OnConnectFull PID:', event.PlayerID)
     --DeepPrintTable(event)
     local hero = PlayerResource:GetSelectedHeroEntity(event.PlayerID)
     if hero and hero:GetName() ~= DUMMY_HERO then
@@ -323,9 +339,5 @@ end
 
 if not CharacterPick.initialized then
     CharacterPick.initialized = true
-    -- May need to unregister this... to prevent abuse?
-    ListenToGameEvent('player_connect_full', Dynamic_Wrap(CharacterPick, 'OnConnectFull'), CharacterPick)
-
-    CustomGameEventManager:RegisterListener('character_pick', Dynamic_Wrap(CharacterPick, 'OnCharacterPick'))
-    CustomGameEventManager:RegisterListener('character_load', Dynamic_Wrap(CharacterPick, 'OnCharacterLoad'))
+    Event:Listen('Activate', Dynamic_Wrap(CharacterPick, 'Activate'), CharacterPick)
 end

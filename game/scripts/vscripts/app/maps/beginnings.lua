@@ -33,6 +33,7 @@ end
 function CustomMap:OnNpcSpawned(event)
     local npc = EntIndexToHScript(event.entindex)
     if npc:IsRealHero() then
+        Debug('CustomMap', 'OnNpcSpawned:', npc:GetUnitName(), 'PID:', npc:GetPlayerOwnerID())
         -- Potential fix for auto-attack issue. Unable to reproduce.
         npc:Stop()
         if npc.bFirstSpawned == nil then

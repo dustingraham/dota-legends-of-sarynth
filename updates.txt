@@ -1,6 +1,8 @@
 [b]v0.0.83[/b]
  • Changed druids boss fire damage to show a debuff.
  • Fixed minor bug thrown when hero is not picked yet.
+ • Reworked some character selection logic to possibly solve multi-player issue.
+ • Added additional network debugging for multi-player issue.
 
 [b]v0.0.82[/b]
  • Fixed save games, load and save should work again.
