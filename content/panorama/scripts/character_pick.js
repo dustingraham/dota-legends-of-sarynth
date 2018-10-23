@@ -71,7 +71,7 @@ var LoadExtraSlots = function()
 function ConfirmClassPick()
 {
     $.Msg('[JS] Picked '+selectedClass);
-
+    
     GameEvents.SendCustomGameEventToServer('character_pick', {
         character: selectedClass,
         slotId: selectedSlot
@@ -165,7 +165,9 @@ function ReplaceCharacterBlock(data)
     panel.FindChildTraverse('LoadCharacterButton').SetHasClass('hide', false);
     panel.FindChildTraverse('LoadCharacterButton').SetPanelEvent('onactivate', function()
     {
-        $.Msg('[JS] LoadCharacter!')
+        $.Msg('[JS] LoadCharacter!');
+        $.Msg('[JS] For slot id: ', data.slot_id);
+    
         GameEvents.SendCustomGameEventToServer('character_load', {
             slotId: data.slot_id
         });

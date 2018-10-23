@@ -51,13 +51,13 @@ end
 ---
 -- This is currently the "create" character for new slots.
 function CharacterPick:OnCharacterPick(event)
+    Debug('CharacterPick', 'OnCharacterPick PID:', event.PlayerID)
+
     local hero = PlayerResource:GetSelectedHeroEntity(event.PlayerID)
     if hero:GetName() ~= DUMMY_HERO then
         Debug('CharacterPick', 'Unable to create. Already selected hero...')
         return
     end
-
-    Debug('CharacterPick', 'OnCharacterPick PID:', event.PlayerID)
 
     -- Sound + Music for Standard Game Pick
     EmitSoundOnClient('HeroPicker.Selected', PlayerResource:GetPlayer(event.PlayerID))
@@ -78,16 +78,16 @@ end
 ---
 -- Used for character load by slot.
 function CharacterPick:OnCharacterLoad(event)
-    local hero = PlayerResource:GetSelectedHeroEntity(event.PlayerID)
-    if hero:GetName() ~= DUMMY_HERO then
+    Debug('CharacterPick', 'OnCharacterLoad PID:', event.PlayerID, 'Loading SlotID:', event.slotId)
+
+    local heroName = PlayerResource:GetSelectedHeroName(event.PlayerID)
+    if heroName ~= DUMMY_HERO then
         -- Seems to be common doubleclick issue of some sort.
         Debug('CharacterPick', 'Attempt by PID:', event.PlayerID)
         Debug('CharacterPick', 'For SlotID:', event.slotId)
         Debug('CharacterPick', 'Unable to load. Already selected hero...')
         return
     end
-
-    Debug('CharacterPick', 'OnCharacterLoad PID:', event.PlayerID, 'Loading SlotID:', event.slotId)
 
     -- Sound for Standard Game Pick
     EmitSoundOnClient('HeroPicker.Selected', PlayerResource:GetPlayer(event.PlayerID))
@@ -125,7 +125,7 @@ function CharacterPick:CreateCustomHeroForPlayer(PlayerID, character, isPrimary)
         hero:SetAbsOrigin(hero:GetAbsOrigin())
     else
         -- TODO: Probably won't work idk.
-        Debug('CharacterPick', 'Create Hero', heroName)
+        Debug('CharacterPick', 'Create Secondary Hero', heroName)
         hero = CreateHeroForPlayer(heroName, PlayerResource:GetPlayer(PlayerID))
         hero:SetControllableByPlayer(PlayerID, false)
         hero:SetAbsOrigin(hero:GetAbsOrigin())
@@ -328,7 +328,21 @@ end
 -- On Reconnect (?)
 function CharacterPick:OnConnectFull(event)
     Debug('CharacterPick', 'OnConnectFull PID:', event.PlayerID)
-    --DeepPrintTable(event)
+
+    local playerEntity = EntIndexToHScript(event.index + 1)
+    if not IsValidEntity(playerEntity) then
+        Debug('CharacterPick', 'Detected invalid entity for player.')
+        return
+    end
+
+    PrintTable(event)
+
+    local id = event.PlayerID
+    if id == -1 then
+        Debug('CharacterPick', 'Detected invalid PlayerID for player.')
+        return
+    end
+
     local hero = PlayerResource:GetSelectedHeroEntity(event.PlayerID)
     if hero and hero:GetName() ~= DUMMY_HERO then
         Debug('CharacterPick', 'Possible reconnect.')

@@ -1,3 +1,7 @@
+[b]v0.0.84[/b]
+ • Fixed multiplayer! Days of debugging, finally solved. Thank you all for your patience.
+ • Fixed name of spawn location near druid boss.
+
 [b]v0.0.83b[/b]
  • Fix inventory not being visible on dedicated server player load.
  • Added more debugging statements for dedicated server debugging.

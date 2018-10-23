@@ -11,7 +11,7 @@ function PlayerService:Activate()
 end
 
 function PlayerService:OnConnectFull(event)
-    Debug('PlayerService', 'OnConnectFull PlayerID: ', event.PlayerID)
+    Debug('PlayerService', 'OnConnectFull PID: ', event.PlayerID)
     -- DeepPrintTable(event)
 
     -- TODO: Recall setting.
