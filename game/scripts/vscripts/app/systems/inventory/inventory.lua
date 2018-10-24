@@ -81,15 +81,6 @@ function Inventory:constructor(hero)
     self.tableName = 'player_items_'..hero:GetPlayerOwnerID()
     PlayerTables:CreateOrSubscribe(self.tableName, {}, {hero:GetPlayerOwnerID()})
     Debug('Inventory', 'Created PlayerTable: ', self.tableName)
-
-    -- Some weird race condition, where the game client does not know what the items
-    -- are by EID at load. But they do 5 seconds later. :( Hack to fix this race condition
-    -- if/until/when I can understand why it fails.
-    local PlayerID = hero:GetPlayerOwnerID()
-    Timers:CreateTimer(5, function()
-        Debug('Inventory', 'Race Condition Callback!')
-        CustomGameEventManager:Send_ServerToPlayer(PlayerResource:GetPlayer(PlayerID), 'reload_inventory', {})
-    end)
 end
 
 function Inventory:AddItem(item, slotId)

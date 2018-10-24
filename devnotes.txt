@@ -68,3 +68,6 @@ TODOs:
 - Tower opening animation is jerky.
 
 - High level archer fires too fast, normal attack questionably more powerful than using skills.
+
+- Should show "ending in 10 seconds" to both(all) players.
+- Remove disconnected hero after some time. (Do not allow other players to select or use.)

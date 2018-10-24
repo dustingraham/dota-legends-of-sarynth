@@ -1,3 +1,6 @@
+[b]v0.0.85[/b]
+ • Slight improvement to initial inventory load logic.
+
 [b]v0.0.84[/b]
  • Fixed multiplayer! Days of debugging, finally solved. Thank you all for your patience.
  • Fixed name of spawn location near druid boss.

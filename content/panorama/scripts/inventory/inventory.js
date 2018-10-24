@@ -409,24 +409,12 @@ $.GetContextPanel().OldListenerId = PlayerTables.SubscribeNetTableListener(playe
 
 // Retrieve values on the client
 $.Msg(playerTableKey);
-var currentValues = PlayerTables.GetAllTableValues(playerTableKey);
-if (currentValues)
-{
-    $.Msg('Placing known entities.');
-    PlaceAllItems(currentValues);
-}
-
-// reload_inventory
-// Some race condition that I do not yet understand. When the player first loads,
-// They can not find Abilities.GetAbilityName, then a couple seconds later, they do.
-// So this is a forced race condition delayed reload just to get players able to see
-// their inventory...
-GameEvents.Subscribe('reload_inventory', function(event)
-{
+$.Schedule(1, function() {
+    // Without the delay, something fails.
     var currentValues = PlayerTables.GetAllTableValues(playerTableKey);
     if (currentValues)
     {
-        $.Msg('Reload Inventory, placing known entities.');
+        $.Msg('Placing known entities.');
         PlaceAllItems(currentValues);
     }
 });
