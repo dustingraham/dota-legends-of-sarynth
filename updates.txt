@@ -1,4 +1,5 @@
 [b]v0.0.85[/b]
+ • Created ability to delete character saves.
  • Slight improvement to initial inventory load logic.
 
 [b]v0.0.84[/b]

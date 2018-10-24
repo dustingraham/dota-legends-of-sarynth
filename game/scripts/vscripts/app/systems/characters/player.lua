@@ -111,15 +111,23 @@ end
 function Player:Load()
     SaveLoad:FetchCharacters(self, function(data)
         local key = 'player_'..self.PlayerID..'_characters'
-        -- DeepPrintTable(data)
+        --DeepPrintTable(data)
         PlayerTables:SetTableValues(key, data)
     end)
 end
 
--- local hero = PlayerResource:GetSelectedHeroEntity(0)
--- print(inspect(GetItemsForHero(hero)))
--- hero.customEquipment:AddItem(CreateItem('item_amulet_tier1', nil, nil), 4)
--- print(inspect(GetQuestsForPlayer(0)))
+function Player:Reload()
+    SaveLoad:FetchCharacters(self, function(data)
+        -- Figure out existing.
+        local key = 'player_'..self.PlayerID..'_characters'
+        for k, v in pairs(PlayerTables:GetAllTableValues(key)) do
+            -- Bad, but functional...
+            PlayerTables:DeleteTableKey(key, k)
+        end
+
+        PlayerTables:SetTableValues(key, data)
+    end)
+end
 
 function Player:GetSaveData()
     local hero = PlayerResource:GetSelectedHeroEntity(self.PlayerID)

@@ -39,6 +39,63 @@
     opacity:1.0;
 }
 
+/* ********************** */
+/* Confirm Delete Dialog */
+#ConfirmationOverlay {
+    height:100%;
+    width:100%;
+    z-index:2;
+    
+    background-color:#000000;
+    
+    transition-property: opacity;
+    transition-duration: 0.4s;
+    opacity:0.0;
+}
+#DeleteConfirmBox {
+    z-index:3;
+    align:center center;
+    transition-property: position, opacity;
+    transition-duration: 0.25s;
+    transition-timing-function: ease-in-out;
+    position:-2% -20% 0;
+    opacity:0.0;
+}
+#DeleteCharacterButton {
+    transition-property:saturation;
+    transition-duration: 2s;
+    saturation:1.0;
+}
+.delete-confirm {
+    height:100%;
+    width:100%;
+}
+#DeleteCharacterButton {
+    align:right bottom;
+    margin-right:20px;
+    margin-bottom:15px;
+}
+#CancelDeleteButton {
+    align:left bottom;
+    margin-left:15px;
+    margin-bottom:15px;
+}
+.ConfirmDeleteText {
+    color: #cb5154;
+    text-shadow:1px 1px 4px 2.0 #444444c0;
+    font-size:22px;
+    margin-top:18px;
+    margin-left:33px;
+}
+.ConfirmDeleteDetail {
+    color:#c0c0c0;
+    margin-top:60px;
+    margin-left:40px;
+    margin-right:40px;
+    font-size:18px;
+    width:420px;
+}
+
 /* ****************************************************************************************** */
 /* Existing Character Select Screen */
 .character-details {
@@ -114,6 +171,11 @@
     align:right bottom;
     margin-right:20px;
     margin-bottom:20px;
+}
+.character-details #DeleteCharacterButton {
+    align:right top;
+    margin-right:20px;
+    margin-top:30px;
 }
 
 /* ****************************************************************************************** */

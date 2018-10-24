@@ -59,6 +59,9 @@ TODOs:
 
 - Implement shop vendor for selling items.
 
+- Toyoka: btw @Sarynth  loot sometimes drops down to inaccessible places, for instnce https://i.imgur.com/xNUbrM2.png
+
+
 - Right click on item in inventory to equip it.
 - Flash inventory icon until user opens it for the first item. (Any new item?)
 - Display debuff when standing in fire in druid fight.

@@ -10,6 +10,7 @@ function CharacterPick:Activate()
 
     CustomGameEventManager:RegisterListener('character_pick', Dynamic_Wrap(CharacterPick, 'OnCharacterPick'))
     CustomGameEventManager:RegisterListener('character_load', Dynamic_Wrap(CharacterPick, 'OnCharacterLoad'))
+    CustomGameEventManager:RegisterListener('character_delete', Dynamic_Wrap(CharacterPick, 'OnCharacterDelete'))
 end
 
 function CharacterPick:TestMapPickAll(heroReal)
@@ -73,6 +74,21 @@ function CharacterPick:OnCharacterPick(event)
         player:GetCharacterHeroName(),
         true
     )
+end
+
+---
+-- Used to delete character.
+function CharacterPick:OnCharacterDelete(event)
+    Debug('CharacterPick', 'OnCharacterDelete PID:', event.PlayerID, 'Deleting SlotID:', event.slotId)
+
+    SaveLoad:DeleteCharacter(event, function(data)
+        local player = PlayerResource:GetPlayer(event.PlayerID);
+        CustomGameEventManager:Send_ServerToPlayer(player, 'character_deleted', data)
+
+        -- Can probably just modify it ourselves...
+        local myPlayer = PlayerService:GetPlayer(event.PlayerID)
+        myPlayer:Reload()
+    end)
 end
 
 ---

@@ -11,6 +11,11 @@
             <Panel class="character-details">
                 <Image class="character-details-window" src="file://{images}/character_pick/character_pick_character_panel.png">
                     <Label id="CharacterDetailsInfo" html="true" text="Create a character"/>
+                    <Button id="DeleteCharacterButton" class="button button-no hide">
+                        <Image src="file://{images}/window/button_red.png">
+                            <Label class="no" text="DELETE"/>
+                        </Image>
+                    </Button>
                     <Button id="LoadCharacterButton" class="button button-yes hide">
                         <Image src="file://{images}/window/button_green.png">
                             <Label class="yes" text="LOAD"/>
@@ -31,8 +36,30 @@
                 </Image>
             </Panel>
         </snippet>
+        <snippet name="DeleteConfirm">
+            <Panel class="delete-confirm" hittest="false">
+                <Panel id="ConfirmationOverlay" onactivate="" />
+                <Panel id="DeleteConfirmBox">
+                    <Image class="character-details-window" src="file://{images}/character_pick/character_pick_character_panel.png">
+                        <Label class="TitleFont ConfirmDeleteText" text="WARNING: Deleting Character"/>
+                        <Label class="ConfirmDeleteDetail" text="Once you delete this character, it can not be recovered. Please confirm you want to do this."/>
+                        <Button id="DeleteCharacterButton" class="button button-no">
+                            <Image src="file://{images}/window/sml_button_red.png">
+                                <Label id="ConfirmDeleteText" class="no" text="CONFIRM DELETE"/>
+                            </Image>
+                        </Button>
+                        <Button id="CancelDeleteButton" class="button button-yes">
+                            <Image src="file://{images}/window/button_blue.png">
+                                <Label class="yes" text="CANCEL"/>
+                            </Image>
+                        </Button>
+                    </Image>
+                </Panel>
+            </Panel>
+        </snippet>
     </snippets>
     <Panel class="CharacterPickMainPanel" hittest="false">
+        <Image src="file://{images}/window/sml_button_red.png" class="hide"/>
         <Panel id="LoadingOverlay" />
         <Panel id="CharacterPanelContainer" hittest="false">
             <DOTAScenePanel class="background-scene" map="backgrounds/character_pick" camera="cam" always-cache-composition-layer="true"/>

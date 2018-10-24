@@ -19,3 +19,12 @@ function SaveLoad:FetchCharacters(player, callback)
         steamId64 = tostring(PlayerResource:GetSteamID(player.PlayerID))
     }, callback)
 end
+
+function SaveLoad:DeleteCharacter(event, callback)
+    Http:Send('/api/save/delete', {
+        steamId64 = tostring(PlayerResource:GetSteamID(event.PlayerID)),
+        data = {
+            slotId = event.slotId
+        }
+    }, callback)
+end

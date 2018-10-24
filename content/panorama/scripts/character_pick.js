@@ -19,6 +19,62 @@ var charUnitNames = {
     Sorcerer: 'npc_dota_hero_warlock'
 };
 
+// Still a horribad jitter.
+// Need to rework this to delete just the one slot.
+// PlayerTables can/should just delete the one key.
+function PurgeAndRecreate()
+{
+    // Delete all existing blocks.
+    $.Each($.GetContextPanel().FindChildrenWithClassTraverse('character-details'), function (panel) {
+        panel.DeleteAsync(0);
+    });
+    
+    $('#WelcomeScreen').RemoveClass('double-slots');
+    
+    // Sync we use DeleteAsync above...
+    $.Schedule(0.03, function() {
+        // Build the first 3 blocks.
+        for (var i = 0; i < 3; i++)
+        {
+            BuildCharacterBlock(i);
+        }
+        
+        // If the server is slow to respond.
+        // TODO: Display a "loading" symbol until this data is available.
+        var PlayerTables = GameUI.CustomUIConfig().PlayerTables;
+        var playerId = Game.GetLocalPlayerID();
+        var playerTableKey = 'player_'+playerId+'_characters';
+        $.Each(PlayerTables.GetAllTableValues(playerTableKey), function(data)
+        {
+            ReplaceCharacterBlock(data);
+        });
+    });
+}
+
+var throttleStarted = false;
+var throttleWait = false;
+
+function ThrottleCall(callback, recursive)
+{
+    // If we have not started, let's start a timer.
+    if (!throttleStarted || recursive) {
+        throttleStarted = true;
+        $.Schedule(0.5, function() {
+            // Ready to go!
+            if (!throttleWait) {
+                throttleStarted = false;
+                callback();
+            } else {
+                throttleWait = false;
+                ThrottleCall(callback, true);
+            }
+        });
+    } else {
+        // Called again, ensure we wait.
+        throttleWait = true;
+    }
+}
+
 var InitCharacterPickListeners = function() {
     var PlayerTables = GameUI.CustomUIConfig().PlayerTables;
     var playerId = Game.GetLocalPlayerID();
@@ -31,15 +87,7 @@ var InitCharacterPickListeners = function() {
             playerTableKey,
             function(tableName, changes, deletions) {
                 $.Msg('[JS] Table Change: '+tableName);
-                //$.Msg(JSON.stringify(changes));
-                //$.Msg(JSON.stringify(deletions));
-
-                // If the server is slow to respond.
-                // TODO: Display a "loading" symbol until this data is available.
-                $.Each(PlayerTables.GetAllTableValues(playerTableKey), function(data)
-                {
-                    ReplaceCharacterBlock(data);
-                });
+                ThrottleCall(PurgeAndRecreate);
             });
     }
 
@@ -67,6 +115,20 @@ var LoadExtraSlots = function()
         }
     }
 };
+
+// function ResetAllSlots()
+// {
+//     var $welcomeScreen = $('#WelcomeScreen');
+//     if ($welcomeScreen.BHasClass('double-slots'))
+//     {
+//         // If user has 3 characters, build 3 more.
+//         $welcomeScreen.RemoveClass('double-slots');
+//         for (var i = 3; i < 6; i++)
+//         {
+//             BuildCharacterBlock(i);
+//         }
+//     }
+// }
 
 function ConfirmClassPick()
 {
@@ -114,11 +176,77 @@ function PickBack()
         transit = 1.2;
     });
 }
+
+function OnCharacterDeleted(event)
+{
+    $.Msg('Async callback delete.');
+    $.Schedule(1, function()
+    {
+        var dialog = $('#ConfirmDialog');
+        
+        dialog.FindChildTraverse('DeleteConfirmBox').style.opacity = '0.0';
+        dialog.FindChildTraverse('DeleteConfirmBox').style.position = '2% -20% 0';
+        dialog.FindChildTraverse('ConfirmationOverlay').style.opacity = '0.0';
+    
+        $.Schedule(1, function() {
+            dialog.DeleteAsync(0);
+        });
+    });
+}
+
+function BuildConfirmDialog(slot_id)
+{
+    $.Msg('Creating panel.');
+    var panel = $.CreatePanel('Panel', $.GetContextPanel(), 'ConfirmDialog');
+    panel.BLoadLayoutSnippet('DeleteConfirm');
+    
+    panel.FindChildTraverse('DeleteCharacterButton').SetPanelEvent('onactivate', function() {
+        $.Msg('Delete confirmed!');
+        Game.EmitSound('HeroPicker.Selected');
+        
+        GameEvents.SendCustomGameEventToServer('character_delete', {
+            slotId: slot_id
+        });
+        
+        panel.FindChildTraverse('DeleteCharacterButton').style.saturation = '0.4';
+        panel.FindChildTraverse('ConfirmDeleteText').text = 'WORKING...';
+    });
+    
+    panel.FindChildTraverse('CancelDeleteButton').SetPanelEvent('onactivate', function() {
+        $.Msg('Cancelled delete.');
+        Game.EmitSound('ui.store_back');
+        
+        panel.FindChildTraverse('DeleteConfirmBox').style.opacity = '0.0';
+        panel.FindChildTraverse('DeleteConfirmBox').style.position = '2% -20% 0';
+        panel.FindChildTraverse('ConfirmationOverlay').style.opacity = '0.0';
+        
+        $.Schedule(1, function() {
+            panel.DeleteAsync(0);
+        });
+    });
+    
+    panel.FindChildTraverse('DeleteConfirmBox').style.position = '0 0 0';
+    panel.FindChildTraverse('DeleteConfirmBox').style.opacity = '1.0';
+    panel.FindChildTraverse('ConfirmationOverlay').style.opacity = '0.9';
+    
+    return panel;
+}
+
 function CharacterTest()
 {
-    //$.Msg('Testing character.');
+    if (undefined !== $.GetContextPanel().dialog_panel)
+    {
+        // Delete panel?
+        $.Msg('Deleting panel.');
+        $.GetContextPanel().dialog_panel.DeleteAsync(0);
+        $.GetContextPanel().dialog_panel = undefined;
+    }
+    
+    $.GetContextPanel().dialog_panel = BuildConfirmDialog(1);
     //$.DispatchEvent("DOTAGlobalSceneFireEntityInput", "MapPortrait", "ranger_entity_alt", 'spawn', 0);
 }
+
+//CharacterTest();
 
 function ReplaceCharacterBlock(data)
 {
@@ -127,10 +255,10 @@ function ReplaceCharacterBlock(data)
     // Count to 3 slots. If they have 3 full, show next row.
     playerSaveSlotCount = playerSaveSlotCount + 1;
     if (playerSaveSlotCount >= 3) LoadExtraSlots();
-
+    
     var slotIdKey = 'slotId'+data.slot_id;
     var panel = $('#'+slotIdKey);
-
+    
     // Set Gameplay Time
     var minutes = Math.ceil(data.gametime / 60);
     var hours = Math.ceil(minutes / 60);
@@ -162,11 +290,21 @@ function ReplaceCharacterBlock(data)
     panel.FindChildTraverse('CharacterDetailsPortrait').heroname = charUnitNames[data.character];
 
     panel.FindChildTraverse('CreateCharacterButton').SetHasClass('hide', true);
+    
+    panel.FindChildTraverse('DeleteCharacterButton').SetHasClass('hide', false);
+    panel.FindChildTraverse('DeleteCharacterButton').SetPanelEvent('onactivate', function()
+    {
+        $.Msg('[JS] DeleteCharacter Prompt!');
+        Game.EmitSound('ui.profile_open');
+        BuildConfirmDialog(data.slot_id);
+    });
+    
     panel.FindChildTraverse('LoadCharacterButton').SetHasClass('hide', false);
     panel.FindChildTraverse('LoadCharacterButton').SetPanelEvent('onactivate', function()
     {
         $.Msg('[JS] LoadCharacter!');
         $.Msg('[JS] For slot id: ', data.slot_id);
+        Game.EmitSound('ui.store_common');
     
         GameEvents.SendCustomGameEventToServer('character_load', {
             slotId: data.slot_id
@@ -212,7 +350,7 @@ function BuildCharacterBlock (slotId)
 if (false) {
 
     $.Schedule(2, function () {
-        $.Each($.GetContextPanel().FindChildrenWithClassTraverse('character-info-wrapper'), function (panel) {
+        $.Each($.GetContextPanel().FindChildrenWithClassTraverse('character-details'), function (panel) {
             panel.DeleteAsync(0);
         });
     });
@@ -317,6 +455,7 @@ function CheckSceneLoad()
 CheckSceneLoad();
 
 GameEvents.Subscribe('character_picked', OnCharacterPicked);
+GameEvents.Subscribe('character_deleted', OnCharacterDeleted);
 
 var panel = $.GetContextPanel();
 if (!panel.dashboardButton)
