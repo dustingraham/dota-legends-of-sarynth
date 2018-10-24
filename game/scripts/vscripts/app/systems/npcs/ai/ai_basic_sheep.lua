@@ -15,10 +15,12 @@ if IsServer() then
     end
 end
 
+function ai_basic_sheep:IsHidden() return true end
+
 function ai_basic_sheep:OnAttacked(event)
     if self:GetParent() ~= event.target then return end
     Debug('AiBasicSheep', 'OnAttacked')
-    
+
     if self.lastHitTick > 8 then
         self.lastHitTick = 0
         EmitSoundOn('Hero_ShadowShaman.SheepHex.Target', event.target)
@@ -37,14 +39,14 @@ end
 
 function ai_basic_sheep:OnIntervalThink()
     self.lastHitTick = self.lastHitTick + 1
-    
+
     -- Debug('AiBasicSheep', 'OnThink')
-    
+
     -- 10% chance to move.
     if RollPercentage(90) then return end
-    
+
     -- Move!
     local target = self:GetParent().spawn.spawnPoint + Vector(math.random(-256, 256), math.random(-256, 256))
     self:GetParent():MoveToPosition(target)
-    
+
 end

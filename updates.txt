@@ -1,6 +1,7 @@
 [b]v0.0.85[/b]
  • Created ability to delete character saves.
  • Slight improvement to initial inventory load logic.
+ • Hide logic modifier on sheep.
 
 [b]v0.0.84[/b]
  • Fixed multiplayer! Days of debugging, finally solved. Thank you all for your patience.
