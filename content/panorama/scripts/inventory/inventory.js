@@ -3,7 +3,18 @@ var GetPanel = function(panel)
     // $.Msg('---');
     // $.Msg('Panel Find Attempt');
     // $.Msg(panel);
-
+    // $.Msg('Type: ', typeof panel);
+    // $.Msg('PanelType: ', panel.paneltype);
+    
+    if (typeof panel === 'object')
+    {
+        // Presently, all known cases are simply the button between the panel and dota image.
+        if (panel.paneltype === 'Button')
+        {
+            panel = panel.GetParent();
+        }
+    }
+    
     // If numeric, prepend slot prefix.
     if (typeof panel === 'number')
     {
@@ -28,17 +39,26 @@ var $equipment = $('#Equipment');
 var $shopForSale = $('#ForSale');
 var $shopBuyBack = $('#BuyBack');
 
+var IsShopping = function()
+{
+    return $('#DialogImage').BHasClass('shop-dialog');
+};
+
 var inventory = {
     panels: {},
     ActivateItem: function()
     {
         $.Msg('No Activation');
     },
+    /**
+     * @return {boolean}
+     */
     OnDragStart: function(panel, dragCallbacks)
     {
         panel = GetPanel(panel);
         if (panel.BHasClass('empty'))
         {
+            $.Msg(panel);
             // Nothing to do here.
             return true;
         }
@@ -80,6 +100,9 @@ var inventory = {
         panel.AddClass('dragging_from');
         return true;
     },
+    /**
+     * @return {boolean}
+     */
     OnDragEnd: function(panelId, draggedPanel)
     {
         // $.Msg('Drag End: '+panelId);
@@ -103,6 +126,9 @@ var inventory = {
 
         return true;
     },
+    /**
+     * @return {boolean}
+     */
     OnDragEnter: function(panel, draggedPanel)
     {
         // $.Msg('Drag Enter: '+panel.panelId);
@@ -110,13 +136,20 @@ var inventory = {
         // $.Msg('Drag Drrrg Type: '+draggedPanel.slotType);
 
         panel.AddClass('potential_drop_target');
-        if (panel.slotType > 0 && panel.slotType !== draggedPanel.slotType)
+        // Not a viable drop target.
+        // Gear type but gear type does not match.
+        if (panel.slotType >= ITEM_SLOT_GEAR_MIN &&
+            panel.slotType <= ITEM_SLOT_GEAR_MAX &&
+            panel.slotType !== draggedPanel.slotType)
         {
             panel.AddClass('bad_drag_target');
         }
-
+    
         return true;
     },
+    /**
+     * @return {boolean}
+     */
     OnDragDrop: function(panel, draggedPanel)
     {
         draggedPanel.foundDestination = true;
@@ -126,12 +159,16 @@ var inventory = {
             // Dropped on self, nothing to do.
             return true;
         }
+        
         // If they dropped on an invalid slot.
-        if (panel.slotType > 0 && panel.slotType !== draggedPanel.slotType)
+        // Gear type but gear type does not match.
+        if (panel.slotType >= ITEM_SLOT_GEAR_MIN &&
+            panel.slotType <= ITEM_SLOT_GEAR_MAX &&
+            panel.slotType !== draggedPanel.slotType)
         {
             return true;
         }
-
+        
         var targetItemName = panel.FindChildTraverse('TheItemImage').itemname;
         var targetRare = panel.tmpRare;
         var targetEid = panel.eid;
@@ -139,12 +176,26 @@ var inventory = {
         var draggedEid = draggedPanel.originalPanel.eid;
         var draggedItemName = draggedPanel.itemname;
 
-        // Containers_OnDragFrom
-        GameEvents.SendCustomGameEventToServer('Inventory_OnDragDrop', {
-            slotFrom:draggedPanel.originalPanel.panelId,
-            slotTo:panel.panelId
-        });
-
+        // Server should make the determination that this is a sell, not client.
+        if (panel.slotType === ITEM_SLOT_BUYBACK)
+        {
+            // Dropping into buyback area. Sell it.
+            // For drag and drop, we will let the user pick the target slot.
+            GameEvents.SendCustomGameEventToServer('Inventory_OnDragDrop', {
+                slotFrom:draggedPanel.originalPanel.panelId,
+                slotTo:panel.panelId
+            });
+        }
+        else
+        {
+            // Normal swap/move.
+            // Containers_OnDragFrom
+            GameEvents.SendCustomGameEventToServer('Inventory_OnDragDrop', {
+                slotFrom:draggedPanel.originalPanel.panelId,
+                slotTo:panel.panelId
+            });
+        }
+        
         // JS SWAP!
         // RemoveItem(panel.panelId);
         // RemoveItem(draggedPanel.originalPanel.panelId);
@@ -167,9 +218,26 @@ var inventory = {
         //var itemName = Abilities.GetAbilityName( m_Item );
         //$.DispatchEvent( "DOTAShowAbilityTooltipForEntityIndex", $.GetContextPanel(), itemName, m_QueryUnit );
     },
-    OnContextMenu: function(panel, thing)
+    OnContextMenu: function(panel)
     {
-        $.Msg('Right clicked.');
+        panel = GetPanel(panel);
+        if (panel.BHasClass('empty'))
+        {
+            // Nothing to do here.
+            return;
+        }
+        
+        if (IsShopping())
+        {
+            GameEvents.SendCustomGameEventToServer('Inventory_OnRightClickShopping', {
+                slotFrom:panel.panelId
+            });
+            //BuySellItem(panel);
+        }
+        else
+        {
+            $.Msg('Right clicked. TODO: Equip.');
+        }
     }
 };
 
@@ -205,35 +273,6 @@ var RemoveItem = function(panel)
     panel.currentRarity = false;
 };
 
-var panelSlotTypes = {
-    1: 3, // Helm
-    2: 4, // Neck
-    3: 5, // Chest
-    // 4 reserved sholders
-    // 5 reserved gloves
-    // 6 reserved pants
-    // 7 reserved belt
-    8: 11, // ring1
-    9: 11, // ring2
-    10: 10, // boots
-    11: 1, // weapon
-    12: 2 // offhand
-};
-
-// Item Data Slot Types
-// 0  = non-equipment
-// 1  = weapon
-// 2  = offhand
-// 3  = Helm
-// 4  = Neck
-// 5  = Chest
-// 6  = sholders
-// 7  = gloves
-// 8  = pants
-// 9  = belt
-// 10 = boots
-// 11 = ring
-
 var BuildItemBlock = function(attachTo, slotId, slotType)
 {
     var panelId = 'slot' + slotId;
@@ -264,8 +303,6 @@ var BuildItemBlock = function(attachTo, slotId, slotType)
 $backpack.RemoveAndDeleteChildren();
 $equipment.RemoveAndDeleteChildren();
 
-$shopForSale.RemoveAndDeleteChildren();
-$shopBuyBack.RemoveAndDeleteChildren();
 
 // Equipment panels.
 var BuildEquipmentPanel = function(position, start, end)
@@ -288,47 +325,8 @@ for (i = 0; i <= 5; i++) {
     for (var j = 1; j <= 6; j++) {
         // Offset by 12.
         var slotId = 12 + j + i * 6;
-        BuildItemBlock(row, slotId, 0);
+        BuildItemBlock(row, slotId, ITEM_SLOT_INVENTORY);
     }
-}
-
-var MakeShopDialog = function()
-{
-    // Testing:
-    $('#InventoryDialog').SetHasClass('hide', false);
-
-    // Convert to shop dialog.
-    $('#DialogImage').SetHasClass('shop-dialog', true);
-
-    // Five rows of six for shop.
-    for (i = 0; i <= 5; i++) {
-        var row = $.CreatePanel('Panel', $shopForSale, 'forsale-row' + i);
-        row.AddClass('backpack-panel-group');
-        for (var j = 1; j <= 6; j++) {
-            // Offset by 12.
-            var slotId = 100 + j + i * 6;
-            BuildItemBlock(row, slotId, 0);
-        }
-    }
-    // Five rows of six for shop.
-    for (i = 0; i <= 0; i++) {
-        var row = $.CreatePanel('Panel', $shopBuyBack, 'buyback-row' + i);
-        row.AddClass('backpack-panel-group');
-        for (var j = 1; j <= 6; j++) {
-            // Offset by 12.
-            var slotId = 150 + j + i * 6;
-            BuildItemBlock(row, slotId, 0);
-        }
-    }
-};
-
-var DebutTestShop = false;
-if (DebutTestShop) {
-    MakeShopDialog();
-}
-else
-{
-    $('#DialogImage').SetHasClass('shop-dialog', false);
 }
 
 var colorMap = {
@@ -357,7 +355,7 @@ var PlaceAllItems = function(items)
 
         var rarityClass = colorMap[colorId];
         AddItem(slot, eid, itemName, rarityClass);
-        $.Msg('Slot is: '+slot+' Item: '+itemName);
+        //$.Msg('Slot is: '+slot+' Item: '+itemName);
     });
 };
 
@@ -371,7 +369,7 @@ function isEmptyObject(obj) {
 }
 
 var InventoryTableChange = function(tableName, changes, deletions) {
-    $.Msg('PlayerTableUpdate happened: '+tableName);
+    //$.Msg('PlayerTableUpdate happened: '+tableName);
     if (!isEmptyObject(deletions))
     {
         //$.Msg('Deletions happened.');
@@ -383,9 +381,13 @@ var InventoryTableChange = function(tableName, changes, deletions) {
     }
     if (!isEmptyObject(changes))
     {
-        $.Msg('Changes happened: ', changes);
+        //$.Msg('Changes happened: ', changes);
         PlaceAllItems(changes);
     }
+    
+    // Update gold when inventory changes in case something was sold.
+    $.GetContextPanel().FindChildTraverse('HeroGoldLabel').text = numberWithCommas(Players.GetGold(playerId));
+    $.DispatchEvent( "DOTAHideAbilityTooltip", $.GetContextPanel() );
 };
 
 var PlayerTables = GameUI.CustomUIConfig().PlayerTables;
@@ -409,13 +411,27 @@ $.GetContextPanel().OldListenerId = PlayerTables.SubscribeNetTableListener(playe
 
 // Retrieve values on the client
 $.Msg(playerTableKey);
-$.Schedule(1, function() {
+$.Schedule(2, function() {
     // Without the delay, something fails.
     var currentValues = PlayerTables.GetAllTableValues(playerTableKey);
     if (currentValues)
     {
         $.Msg('Placing known entities.');
         PlaceAllItems(currentValues);
+    } else {
+        $.Schedule(4, function() {
+            // Without the delay, something fails.
+            var currentValues = PlayerTables.GetAllTableValues(playerTableKey);
+            if (currentValues)
+            {
+                $.Msg('Placing known entities.');
+                PlaceAllItems(currentValues);
+            }
+            else
+            {
+                $.Msg('Failed to refresh initial inventory.');
+            }
+        });
     }
 });
 
@@ -425,24 +441,24 @@ function numberWithCommas(x) {
 
 Game.KeyInventoryToggle = function()
 {
-    $('#InventoryDialog').ToggleClass('hide');
-
-    // Update text fields.
-    var panel = $.GetContextPanel();
-    var playerId = Game.GetLocalPlayerID();
-    var heroId = Players.GetPlayerHeroEntityIndex(playerId);
-    var heroName = unitNamesToClass[Entities.GetUnitName(heroId)];
-
-    panel.FindChildTraverse('HeroClassLabel').text = heroName;
-    panel.FindChildTraverse('HeroLevelLabel').text = 'Level '+Entities.GetLevel(heroId);
-    panel.FindChildTraverse('HeroGoldLabel').text = numberWithCommas(Players.GetGold(playerId));
-};
-
-var unitNamesToClass= {
-    npc_dota_hero_dragon_knight: 'Warrior',
-    npc_dota_hero_omniknight: 'Paladin',
-    npc_dota_hero_bounty_hunter: 'Rogue',
-    npc_dota_hero_windrunner: 'Ranger',
-    npc_dota_hero_invoker: 'Mage',
-    npc_dota_hero_warlock: 'Sorcerer'
+    var $dialog = $('#InventoryDialog');
+    
+    // If the dialog WAS hidden, do some updates before showing it.
+    if ($dialog.BHasClass('hide')) {
+        // Ensure the shop flag is false.
+        $('#DialogImage').SetHasClass('shop-dialog', false);
+        
+        // Update text fields.
+        var panel = $.GetContextPanel();
+        var playerId = Game.GetLocalPlayerID();
+        var heroId = Players.GetPlayerHeroEntityIndex(playerId);
+        var heroName = unitNamesToClass[Entities.GetUnitName(heroId)];
+        
+        panel.FindChildTraverse('HeroClassLabel').text = heroName;
+        panel.FindChildTraverse('HeroLevelLabel').text = 'Level ' + Entities.GetLevel(heroId);
+        panel.FindChildTraverse('HeroGoldLabel').text = numberWithCommas(Players.GetGold(playerId));
+    }
+    
+    // Toggle visibility of dialog.
+    $dialog.ToggleClass('hide');
 };

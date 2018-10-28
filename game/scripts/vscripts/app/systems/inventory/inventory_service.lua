@@ -49,6 +49,7 @@ function InventoryService:Activate()
     --CustomGameEventManager:RegisterListener("InventoryService_OnLeftClick", Dynamic_Wrap(InventoryService, "InventoryService_OnLeftClick"))
     --CustomGameEventManager:RegisterListener("InventoryService_OnRightClick", Dynamic_Wrap(InventoryService, "InventoryService_OnRightClick"))
 
+    CustomGameEventManager:RegisterListener("Inventory_OnRightClickShopping", Dynamic_Wrap(InventoryService, 'OnRightClickShopping'))
     CustomGameEventManager:RegisterListener("Inventory_OnDragDrop", Dynamic_Wrap(InventoryService, 'OnDragDrop'))
     CustomGameEventManager:RegisterListener("Inventory_OnDragWorld", Dynamic_Wrap(InventoryService, 'OnDragWorld'))
 
@@ -152,7 +153,14 @@ function InventoryService:OnDragDrop(event)
     Debug('InventoryService', 'OnDragDrop')
     -- DeepPrintTable(event)
     local hero = PlayerResource:GetSelectedHeroEntity(event.PlayerID)
-    hero.inventory:SwapSlots(event.slotFrom, event.slotTo)
+    hero.inventory:SwapSlotRequest(event.slotFrom, event.slotTo)
+end
+
+function InventoryService:OnRightClickShopping(event)
+    Debug('InventoryService', 'OnRightClickShopping')
+    -- DeepPrintTable(event)
+    local hero = PlayerResource:GetSelectedHeroEntity(event.PlayerID)
+    hero.inventory:RightClickShopping(event.slotFrom, event.slotTo)
 end
 
 function InventoryService:OrderFilter(event, order)

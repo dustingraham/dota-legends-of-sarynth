@@ -276,6 +276,12 @@ function ReplaceCharacterBlock(data)
         playtime = data.gametime + ' seconds';
     }
 
+    if (!panel)
+    {
+        $.Msg('Panel missing Key: '+slotIdKey+' ID: '+data.slot_id);
+        $.Msg(data);
+    }
+    
     panel.FindChildTraverse('CharacterDetailsInfo').text =
         'Level: <span class="detail">'+data.level+'</span><br>' +
         (data.zone ? ('Location: <span class="detail">'+$.Localize('zone_name_'+data.zone)+'</span><br>') : '') +

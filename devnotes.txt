@@ -62,6 +62,7 @@ TODOs:
 - Toyoka: btw @Sarynth  loot sometimes drops down to inaccessible places, for instnce https://i.imgur.com/xNUbrM2.png
 
 
+- Make teleport pads sparkle if they have not been discovered by current player.
 - Right click on item in inventory to equip it.
 - Flash inventory icon until user opens it for the first item. (Any new item?)
 - Display debuff when standing in fire in druid fight.

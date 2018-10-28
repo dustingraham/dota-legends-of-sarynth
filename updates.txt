@@ -1,3 +1,7 @@
+[b]v0.0.86[/b]
+ • Added shopkeeper in town. Items can be sold now!
+ • Expanded initial inventory load attempts.
+
 [b]v0.0.85[/b]
  • Created ability to delete character saves.
  • Slight improvement to initial inventory load logic.

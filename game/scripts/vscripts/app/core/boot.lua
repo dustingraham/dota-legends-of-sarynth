@@ -141,6 +141,7 @@ function Boot:Precache(context)
         'soundevents/voscripts/game_sounds_vo_beastmaster.vsndevts',
         'soundevents/voscripts/game_sounds_vo_death_prophet.vsndevts',
         'soundevents/voscripts/game_sounds_vo_lone_druid.vsndevts',
+        'soundevents/voscripts/game_sounds_vo_pudge.vsndevts',
         'soundevents/voscripts/game_sounds_vo_lycan.vsndevts',
         'soundevents/sarynth.vsndevts',
     }

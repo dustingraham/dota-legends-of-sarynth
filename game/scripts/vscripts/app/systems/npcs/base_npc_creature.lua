@@ -59,6 +59,9 @@ function creature:ParticleOnForPlayer(name, pid)
         self,
         PlayerResource:GetPlayer(pid)
     )
+    -- Don't recall why setting the Ent is also useful/important?
+    -- Errors on the shopkeeper since it does not have attach_hitloc
+    -- Not a major deal, but perhaps figure it out.
     ParticleManager:SetParticleControlEnt(self.playerParticles[name][pid], 0, self, PATTACH_POINT_FOLLOW, "attach_hitloc", self:GetAbsOrigin(), true)
 end
 

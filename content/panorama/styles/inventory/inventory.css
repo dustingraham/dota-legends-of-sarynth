@@ -307,6 +307,10 @@
 .shop-dialog .left.shop #BuyBackLabel {
     margin-top:10px;
 }
+.shop-dialog .left.shop #BuyBackWarning {
+    margin-top:10px;
+    font-size:14px;
+}
 .shop-dialog .left.shop #BuyBack {
     margin-top:10px;
 }

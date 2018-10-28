@@ -59,6 +59,8 @@ function Interaction:StartInteraction(action)
 
     if action.target:GetUnitName() == 'teleport_pad' then
         DialogSystem:StartTeleportDialog(action.unit, action.target)
+    elseif action.target:GetUnitName() == 'npc_town_shopkeeper' then
+        ShopSystem:StartShopDialog(action.unit, action.target)
     else
         -- TODO: Concept. "Bind" interaction listeners to dialogs. Bind based on target.
         -- Then when interacting with that target, it'll call the appropriate system.

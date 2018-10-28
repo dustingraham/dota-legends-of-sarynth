@@ -88,10 +88,12 @@ function Quest:ApplyReward(hero)
     end
     if self.rewards.gold then
         hero:ModifyGold(self.rewards.gold, true, DOTA_ModifyGold_Unspecified)
-        PopupGoldGain(hero, self.rewards.gold)
+        --PopupGoldGain(hero, self.rewards.gold)
+        SendOverheadEventMessage(hero:GetPlayerOwner(), OVERHEAD_ALERT_GOLD, hero, self.rewards.gold, hero:GetPlayerOwner())
     end
     if self.rewards.item_choose then
         local item = CreateItem(self.rewards.item_choose['01'], nil, nil)
+        -- TODO: Player may not have enough room. This returns false...
         InventoryService:AddItem(hero, item)
         if hero.firstQuestItem == nil then
             hero.firstQuestItem = true

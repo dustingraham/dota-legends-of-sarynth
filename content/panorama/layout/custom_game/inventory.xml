@@ -4,7 +4,9 @@
         <include src="file://{resources}/styles/inventory/inventory.css" />
     </styles>
     <scripts>
+        <include src="file://{resources}/scripts/inventory/defines.js" />
         <include src="file://{resources}/scripts/inventory/inventory.js" />
+        <include src="file://{resources}/scripts/inventory/shop.js" />
     </scripts>
     <snippets>
         <snippet name="ItemBlock">
@@ -34,6 +36,7 @@
                     <Panel id="ForSale" class="backpack-container"/>
                     <Label id="BuyBackLabel" class="TitleFont classname" text="Buy Back (Recently Sold)"/>
                     <Panel id="BuyBack" class="backpack-container"/>
+                    <Label id="BuyBackWarning" class="TitleFont classname" text="Vendor only pays 90% of estimated item value."/>
                 </Panel>
                 <Panel class="right">
                     <Label id="ShopBackpack" class="TitleFont classname" text="Backpack"/>
@@ -41,7 +44,7 @@
                     <Panel id="Backpack" class="backpack-container"/>
                     <Panel class="gold-coins">
                         <Image src="file://{images}/inventory/gold_coins.png"/>
-                        <Label id="HeroGoldLabel" class="MonoNumbersFont gold-count" text="23,917"/>
+                        <Label id="HeroGoldLabel" class="MonoNumbersFont gold-count" text="999,999"/>
                     </Panel>
                 </Panel>
             </Image>
