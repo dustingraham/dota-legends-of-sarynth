@@ -9,7 +9,7 @@ QuestService = QuestService or class({}, {
 function QuestService:Activate()
     ListenToGameEvent('entity_killed', Dynamic_Wrap(QuestService, 'OnEntityKilled'), QuestService)
     Event:Listen('InventoryAdd', Dynamic_Wrap(QuestService, 'OnInventoryChange'), QuestService)
-    Event:Listen('InventoryDrop', Dynamic_Wrap(QuestService, 'OnInventoryChange'), QuestService)
+    Event:Listen('InventoryRemove', Dynamic_Wrap(QuestService, 'OnInventoryChange'), QuestService)
     Event:Listen('HeroPick', Dynamic_Wrap(QuestService, 'OnHeroPick'), QuestService)
     Event:Listen('HeroLevelUp', Dynamic_Wrap(QuestService, 'OnHeroLevelUp'), QuestService)
 end

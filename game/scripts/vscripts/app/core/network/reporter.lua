@@ -16,7 +16,10 @@ function Reporter:Activate(params)
     Event:Listen('HeroPick', Dynamic_Wrap(Reporter, 'OnHeroPick'), Reporter)
     Event:Listen('HeroLevelUp', Dynamic_Wrap(Reporter, 'OnHeroLevelUp'), Reporter)
     Event:Listen('HeroDeath', Dynamic_Wrap(Reporter, 'OnHeroDeath'), Reporter)
-    Event:Listen('HeroItemAcquire', Dynamic_Wrap(Reporter, 'OnHeroItemAcquire'), Reporter)
+
+    Event:Listen('InventoryAdd', Dynamic_Wrap(Reporter, 'OnInventoryAdd'), Reporter)
+    Event:Listen('InventoryRemove', Dynamic_Wrap(Reporter, 'OnInventoryRemove'), Reporter)
+
     Event:Listen('HeroStartedQuest', Dynamic_Wrap(Reporter, 'OnHeroStartedQuest'), Reporter)
     Event:Listen('HeroCompletedQuest', Dynamic_Wrap(Reporter, 'OnHeroCompletedQuest'), Reporter)
     Event:Listen('HeroKilledCreature', Dynamic_Wrap(Reporter, 'OnHeroKilledCreature'), Reporter)
@@ -30,7 +33,8 @@ Event:BindActivate(Reporter)
      - Player Level Up (+Save)
      - Player Quest (Start, Objective, Complete, TurnIn)
      - Player Kill Mob (Queue every 30 sec?)
-     - Player Receive Item (Queue every 30 sec?)
+     - Player Adds Item to Inventory
+     - Player Removes Item from Inventory
 ]]
 
 function Reporter:CreateReport(params)
@@ -118,12 +122,32 @@ function Reporter:OnHeroDeath(e, event)
     })
 end
 
-function Reporter:OnHeroItemAcquire(e, event)
-    Debug('Reporter', 'OnHeroItemAcquire')
+-- Pick up from world, buyback, or buy
+function Reporter:OnInventoryAdd(e, event)
+    -- Don't record items created on load
+    if event.item.initialCreate then
+        event.item.initialCreate = nil
+        return
+    end
+
+    Debug('Reporter', 'OnInventoryAdd')
     Debug('Reporter', 'Hero: ', event.hero:GetName())
     Debug('Reporter', 'Item: ', event.item:GetAbilityName())
     self:CreateReport({
-        event_name = 'hero_item_acquire',
+        event_name = 'hero_inventory_add',
+        player_id = event.hero:GetPlayerOwnerID(),
+        hero_name = event.hero:GetName(),
+        item_name = event.item:GetAbilityName(),
+    })
+end
+
+-- Drop to world or sell.
+function Reporter:OnInventoryRemove(e, event)
+    Debug('Reporter', 'OnInventoryRemove')
+    Debug('Reporter', 'Hero: ', event.hero:GetName())
+    Debug('Reporter', 'Item: ', event.item:GetAbilityName())
+    self:CreateReport({
+        event_name = 'hero_inventory_remove',
         player_id = event.hero:GetPlayerOwnerID(),
         hero_name = event.hero:GetName(),
         item_name = event.item:GetAbilityName(),

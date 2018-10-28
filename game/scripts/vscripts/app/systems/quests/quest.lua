@@ -93,8 +93,11 @@ function Quest:ApplyReward(hero)
     end
     if self.rewards.item_choose then
         local item = CreateItem(self.rewards.item_choose['01'], nil, nil)
+
         -- TODO: Player may not have enough room. This returns false...
-        InventoryService:AddItem(hero, item)
+        hero.inventory:PickupItem(item)
+
+        -- TODO: Trigger "open" of backpack, or glimmer of "N" icon.
         if hero.firstQuestItem == nil then
             hero.firstQuestItem = true
             -- hero.customInventory:Open(hero:GetPlayerOwnerID())

@@ -19,7 +19,6 @@ function CharacterService:Activate()
     -- Boot.mode:SetModifyExperienceFilter(Dynamic_Wrap(CharacterService, 'ExperienceFilter'), CharacterService)
     Filters:OnModifyExperienceFilter(Dynamic_Wrap(CharacterService, 'ExperienceFilter'), CharacterService)
 
-    Event:Listen('HeroItemAcquire', Dynamic_Wrap(CharacterService, 'OnHeroItemAcquire'), CharacterService)
     Event:Listen('HeroPick', Dynamic_Wrap(CharacterService, 'OnHeroPick'), CharacterService)
     Event:Listen('HeroDeath', Dynamic_Wrap(CharacterService, 'OnHeroDeath'), CharacterService)
 end
@@ -200,132 +199,42 @@ end
 function CharacterService:OnHeroPick(e, event)
     local hero = event.hero
 
+    -- Create Inventory
     hero.inventory = Inventory(hero)
 
-    -- This separation is purely for the IDE formatting...
-    --local invenDef = {
-    --    -- layout = {6,6,6},
-    --    layout = {6,6,6,6,6,6},
-    --    position = "220px 120px 0px",
-    --    entity = hero,
-    --    headerText = "#Container_Backpack",
-    --    pids = {hero:GetPlayerOwnerID()},
-    --    OnDragWorld = true,
-    --    AddItemFilter = Dynamic_Wrap(CharacterService, 'ContainerItemFilter'),
-    --}
-    --hero.customInventory = Containers:CreateContainer(invenDef)
-    --
-    --local equipDef = {
-    --    layout = {2,2,2},
-    --    position = "20px 120px 0px",
-    --    entity = hero,
-    --    headerText = "#Container_Equipment",
-    --    pids = {hero:GetPlayerOwnerID()},
-    --    OnDragWorld = true,
-    --    equipment = true,
-    --    AddItemFilter = Dynamic_Wrap(CharacterService, 'ContainerItemFilter'),
-    --}
-    --hero.customEquipment = Containers:CreateContainer(equipDef)
-    --
-    ---- Default to open equipment on load.
-    --hero.customEquipment:Open(hero:GetPlayerOwnerID())
-    ---- Picked up items go into inventory.
-    --Containers:SetDefaultInventory(hero, hero.customInventory)
-
-    -- Entering world.
-    -- GameRules:GetGameModeEntity():EmitSound('jboberg_01.music.ui_hero_select')
-    -- GameRules:GetGameModeEntity():EmitSound('jboberg_01.stinger.radiant_win');
-    -- Sounds:EmitSoundOnClient(0, 'jboberg_01.stinger.radiant_win')
-
     -- Load Items Equipment/Inventory
-    -- TODO TODO
-
     local items = event.player:GetPriorItems()
     if items then
         if items.equipment then
             -- Old style.
             Debug('CharacterService', 'Loading old item style.')
             for _,itemDef in pairs(items.equipment) do
-                hero.inventory:AddItem(CreateItem(itemDef.name, hero, hero))
+                hero.inventory:CreateItem(itemDef.name)
             end
             for _,itemDef in pairs(items.inventory) do
-                hero.inventory:AddItem(CreateItem(itemDef.name, hero, hero))
+                hero.inventory:CreateItem(itemDef.name)
             end
         else
             -- New style.
             Debug('CharacterService', 'Loading new item style.')
             for slotId,itemName in pairs(items) do
-                hero.inventory:AddItem(CreateItem(itemName, hero, hero), slotId)
+                hero.inventory:CreateItem(itemName, slotId)
             end
         end
     end
 
     -- Items for testing.
     if IsInToolsMode() and TEST_SPAWN_ITEMS and TEST_EQUIP_ITEMS then
-        for slot,itemName in pairs(TEST_EQUIP_ITEMS) do
-            hero.inventory:AddItem(CreateItem(itemName, nil, nil), slot)
+        for slotId,itemName in pairs(TEST_EQUIP_ITEMS) do
+            hero.inventory:CreateItem(itemName, slotId)
         end
     end
     if IsInToolsMode() and TEST_SPAWN_ITEMS and TEST_ADD_ITEMS then
         for _,itemName in pairs(TEST_ADD_ITEMS) do
-            hero.inventory:AddItem(CreateItem(itemName, nil, nil), nil)
+            hero.inventory:CreateItem(itemName)
         end
     end
     --TestQuest(hero)
-end
-
-function CharacterService:ContainerItemFilter(item, slot)
-    -- self == container
-    if not item.alreadyKnown then
-        item.alreadyKnown = true
-
-        Event:Trigger('HeroItemAcquire', {
-            hero = self:GetEntity(),
-            item = item,
-        })
-    end
-    return true
-end
-
-function CharacterService:OnInventoryOpen(event)
-    local hero = PlayerResource:GetSelectedHeroEntity(event.PlayerID)
-    -- This is actually a toggle...
-    local c = hero.customInventory
-    if c:IsOpen(event.PlayerID) then
-        c:Close(event.PlayerID)
-    else
-        c:Open(event.PlayerID)
-        c.hasOpened = true
-    end
-end
-
-function CharacterService:OnInventoryClose(event)
-    local hero = PlayerResource:GetSelectedHeroEntity(event.PlayerID)
-    local c = hero.customInventory
-    if c:IsOpen(event.PlayerID) then
-        c:Close(event.PlayerID)
-    end
-end
-
-function CharacterService:OnInventoryToggle(event)
-    local hero = PlayerResource:GetSelectedHeroEntity(event.PlayerID)
-    local c = hero[event.container]
-    if c:IsOpen(event.PlayerID) then
-        c:Close(event.PlayerID)
-    else
-        c:Open(event.PlayerID)
-        c.hasOpened = true
-    end
-end
-
-function CharacterService:OnHeroItemAcquire(e, event)
-    local hero = event.hero
-    -- This is actually a toggle...
-    local c = event.hero.customInventory
-    if not c.hasOpened then
-        c:Open(event.hero:GetPlayerOwnerID())
-        c.hasOpened = true
-    end
 end
 
 if not CharacterService.initialized then

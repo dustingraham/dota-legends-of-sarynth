@@ -13,9 +13,6 @@ function ShopSystem:Activate()
         self.ShopSystem = {}
         return
     end
-
-    -- Event:Listen('InventoryAdd', Dynamic_Wrap(ShopSystem, 'OnInventoryChange'), ShopSystem)
-    -- Event:Listen('InventoryDrop', Dynamic_Wrap(ShopSystem, 'OnInventoryChange'), ShopSystem)
 end
 
 function ShopSystem:StartShopDialog(hero, target)

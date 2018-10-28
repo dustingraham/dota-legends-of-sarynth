@@ -145,7 +145,7 @@ DEBUG_PRINT_SECTIONS = {
     QuestGiver        = true,
     Quest             = false,
     Spells            = true,
-    Sounds            = true,
+    Sounds            = false,
     Music             = true,
     OrderFilter       = true,
     CharacterService  = true,
@@ -177,5 +177,6 @@ DEBUG_PRINT_SECTIONS = {
     PrintTable        = true,
     InventoryService  = true,
     Inventory         = true,
+    InventoryDebug    = false,
 }
 DEBUG_PRINT_ALL = false

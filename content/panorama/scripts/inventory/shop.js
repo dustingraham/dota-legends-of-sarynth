@@ -64,31 +64,7 @@ MakeShopDialog();
 
 GameEvents.Subscribe('shop_start', function()
 {
-    $.Msg("Subscribe is activated.");
-    
     // May need to populate current NPC's items.
     // For now, only one shopkeepa.
-    
-    //dialog.SetHasClass('hidden', true);
     ShowShopDialog();
 });
-
-// var BuySellItem = function(panel)
-// {
-//     // Check whether we can/should?
-//     // If it is unsellable, do nothing.
-//     // Quest item, or other flag?
-//
-//     $.Msg('Right clicked. Shopping; sell it!');
-//
-//     // We do want to sell it. Figure out where it will move.
-//     // First slot on the left, shift others if needed.
-//
-//     // SlotTo is false, forcing server to decide where to move it.
-//     // For drag and drop, we will let the user pick the target slot.
-//     GameEvents.SendCustomGameEventToServer('Inventory_OnSell', {
-//         slotFrom:panel.panelId
-//     });
-//
-//     // Give gold. Make sound. Make particle/visual.
-// };

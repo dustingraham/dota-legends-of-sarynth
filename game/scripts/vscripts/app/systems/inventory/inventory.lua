@@ -112,7 +112,16 @@ function Inventory:FindOpenBackpackSlot()
     return nil
 end
 
-function Inventory:AddItem(item, slotId)
+-- Used during character load
+function Inventory:CreateItem(itemName, slotId)
+    local item = CreateItem(itemName, self.hero, self.hero)
+    -- Prevent recording the acquire event during load.
+    item.initialCreate = true
+    self:PickupItem(item, slotId)
+end
+
+-- Consider getting a unique token from server for legendary items.
+function Inventory:PickupItem(item, slotId)
     item = ResolveItem(item)
     local itemid = item:GetEntityIndex()
     local itemname = item:GetAbilityName()
@@ -308,7 +317,7 @@ end
 function Inventory:ShiftSlots(slotId, minShift, maxShift, errorIfFull)
     local item = self:GetItemInSlot(slotId)
     if not item then
-        Debug('Inventory', 'Target slot is empty, no need to shift.', slotId)
+        Debug('InventoryDebug', 'Target slot is empty, no need to shift.', slotId)
         return true
     end
 
@@ -325,7 +334,7 @@ function Inventory:ShiftSlots(slotId, minShift, maxShift, errorIfFull)
             Debug('Inventory', 'Erroring, slots are full!')
             return false
         else
-            Debug('Inventory', 'Last slot will be overwritten.')
+            Debug('InventoryDebug', 'Last slot will be overwritten.')
             -- TODO: RemoveSelf on item?
             -- We were successful, returning true.
             return true
@@ -340,11 +349,11 @@ function Inventory:ShiftSlots(slotId, minShift, maxShift, errorIfFull)
     if nextItem then
         self:ShiftSlots(nextSlotId, minShift, maxShift, errorIfFull)
     else
-        Debug('Inventory', 'Next slot is empty')
+        Debug('InventoryDebug', 'Next slot is empty')
     end
 
     -- Swap current item into next slot, since it is empty.
-    Debug('Inventory', 'Moving this one down', nextSlotId)
+    Debug('InventoryDebug', 'Moving this one down', nextSlotId)
     self:SwapSlots(slotId, nextSlotId)
 
     -- Success
@@ -575,7 +584,7 @@ function Inventory:DropToWorld(fromSlotId, position)
 
     -- Place it in the world
     CreateItemOnPositionSync(position, fromItem)
-    Event:Trigger('InventoryDrop', {
+    Event:Trigger('InventoryRemove', {
         hero = self.hero,
         item = fromItem
     })
@@ -614,7 +623,7 @@ function Inventory:RemoveItemInSlot(slotId)
         RemovePassives(self.hero, item)
     end
 
-    Event:Trigger('InventoryDrop', {
+    Event:Trigger('InventoryRemove', {
         hero = self.hero,
         item = item
     })

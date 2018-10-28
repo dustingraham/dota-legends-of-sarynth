@@ -171,9 +171,9 @@ function InventoryService:OrderFilter(event, order)
     end
 end
 
-function InventoryService:AddItem(hero, item)
+function InventoryService:PickupItem(hero, item)
     --print('Adding '..item:GetName()..' to '..hero:GetName())
-    return hero.inventory:AddItem(item)
+    return
 end
 
 function InventoryService:OrderFilterPickupItem(event, order)
@@ -181,15 +181,6 @@ function InventoryService:OrderFilterPickupItem(event, order)
     --DeepPrintTable(event)
     --DeepPrintTable(order)
     --print('=---=')
-
-    -- For now, ranged pickup lol!
-    --local hero = EntIndexToHScript(order.units["0"])
-    --local physItem = EntIndexToHScript(order.entindex_target)
-    --if not physItem then return false end
-    --local item = physItem:GetContainedItem()
-    --if item and InventoryService:AddItem(hero, item) then
-    --    physItem:RemoveSelf()
-    --end
 
     if order.units['0'] then
         InventoryService.rangedActions[order.units["0"]] = nil
@@ -220,7 +211,7 @@ function InventoryService:OrderFilterPickupItem(event, order)
         callback = function(action)
             if IsValidEntity(physItem) then
                 local item = physItem:GetContainedItem()
-                if item and InventoryService:AddItem(hero, item) then
+                if item and hero.inventory:PickupItem(item) then
                     physItem:RemoveSelf()
                 end
             end
