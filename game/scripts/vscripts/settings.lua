@@ -16,7 +16,7 @@ if DEBUG_SETTINGS then
     --TEST_PICK_HERO = 'warlock'       -- Sorcerer
     --TEST_PICK_HERO_ALT = 'omniknight'
 
-    --TEST_DISABLE_FOG = true
+    TEST_DISABLE_FOG = true
     TEST_START_LEVEL = 21
 
     TEST_SUPERPATHEY = 1750
@@ -29,7 +29,7 @@ if DEBUG_SETTINGS then
     TEST_SUPERINT = 4400
 
     -- town kobolds ice webbed druids dark
-    TEST_START_WAYPOINT = 'town'
+    TEST_START_WAYPOINT = 'ice'
     --TEST_START_START_BOSS = true
     --TEST_START_DARK_BOSS = true
     --TEST_START_DRUID_BOSS = true
@@ -136,9 +136,10 @@ DEBUG_PRINT = true
 DEBUG_PRINT_SECTIONS = {
     AddonGameMode     = true,
     Boot              = true,
+    BootDebug         = false,
     Precache          = false,
     Http              = true,
-    CharacterPick     = true,
+    CharacterPick     = false,
     PlayerService     = true,
     CustomMap         = true,
     QuestService      = false,
@@ -146,7 +147,7 @@ DEBUG_PRINT_SECTIONS = {
     Quest             = false,
     Spells            = true,
     Sounds            = false,
-    Music             = true,
+    Music             = false,
     OrderFilter       = true,
     CharacterService  = true,
     Reporter          = false,
@@ -174,7 +175,6 @@ DEBUG_PRINT_SECTIONS = {
     Event             = true,
     Filters           = false,
     Interaction       = true,
-    PrintTable        = true,
     InventoryService  = true,
     Inventory         = true,
     InventoryDebug    = false,

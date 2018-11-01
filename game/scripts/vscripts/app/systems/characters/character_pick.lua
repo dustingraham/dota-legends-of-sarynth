@@ -3,7 +3,7 @@
 CharacterPick = CharacterPick or class({})
 
 function CharacterPick:Activate()
-    Debug('CharacterPick', 'Activated!')
+    Debug('BootDebug', 'CharacterPick', 'Activated')
 
     -- May need to unregister this... to prevent abuse?
     ListenToGameEvent('player_connect_full', Dynamic_Wrap(CharacterPick, 'OnConnectFull'), self)
@@ -343,15 +343,13 @@ end
 
 -- On Reconnect (?)
 function CharacterPick:OnConnectFull(event)
-    Debug('CharacterPick', 'OnConnectFull PID:', event.PlayerID)
+    Debug('CharacterPick', 'OnConnectFull PID:', event.PlayerID, inspect(event))
 
     local playerEntity = EntIndexToHScript(event.index + 1)
     if not IsValidEntity(playerEntity) then
         Debug('CharacterPick', 'Detected invalid entity for player.')
         return
     end
-
-    PrintTable(event)
 
     local id = event.PlayerID
     if id == -1 then

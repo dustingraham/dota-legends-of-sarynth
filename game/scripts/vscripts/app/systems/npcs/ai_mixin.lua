@@ -1,4 +1,8 @@
+print('Loading global')
+
 function AiMixin(ai)
+    print('Executing AI Mixin....')
+
     -- Hurray for Arhowk
     function ai:GetAngle(unit, target)
         local sourceAngle = unit:GetForwardVector()

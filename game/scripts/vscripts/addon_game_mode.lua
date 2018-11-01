@@ -1,7 +1,7 @@
 require('requires')
 
 function Precache(context)
-    Boot:Precache(context)
+    PrecacheExecute(context)
 end
 
 function Activate()

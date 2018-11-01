@@ -1,6 +1,8 @@
 ai_webbed_queen = ai_webbed_queen or class({}, nil, ai_core)
 local ai = ai_webbed_queen
-AiMixin(ai)
+if IsServer() then
+    AiMixin(ai)
+end
 
 function ai:DeclareFunctions()
     return {
@@ -10,6 +12,8 @@ function ai:DeclareFunctions()
         --MODIFIER_PROPERTY_HEALTH_REGEN_PERCENTAGE,
     }
 end
+
+print('test -- script is reloading')
 
 -- ai.STATE_IDLE = 0
 -- ai.STATE_AGGRO = 10
@@ -111,6 +115,7 @@ end
 function ai:StartFight()
     Debug('AiWebbedQueen', 'Starting fight state.')
     self.state = ai.ACTION_FIGHT_STANDARD
+
     --Encounter:Start(self:GetParent(), self.aggroTarget)
 
     self:AnimatedFace(self.aggroTarget, function()
@@ -349,23 +354,71 @@ function volly(args)
     end
 end
 
+function BossMechanic(params)
+
+end
 
 function ai:ActionPoison()
-    if self.timeInState == 1 then
-        print('Lets do something interesting...')
+    --if self.timeInState == 1 then
+    if self.timeInState % 4 == 1 then
+        print('[Action] Poison')
         -- self:GetParent():Stop()
+
+        self:GetParent():FaceTowards(self.aggroTarget:GetAbsOrigin())
+
+        -- Create Particle For Everyone
+        local sPart = 'particles/targeting/thick_line.vpcf'
+        local idx = ParticleManager:CreateParticle(sPart, PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
+
+        -- Should clamp to max distance of particle
+        local targetPoint = self.aggroTarget:GetAbsOrigin()
+        local diff = targetPoint - self:GetParent():GetAbsOrigin()
+        local toPoint = self:GetParent():GetAbsOrigin() + diff:Normalized() * 1600
+        ParticleManager:SetParticleControl(idx, 1, toPoint)
+
+        -- Width
+        ParticleManager:SetParticleControl(idx, 2, Vector(120, 0, 0))
+        Timers(2.0, function()
+            Timers(1.2, function()
+                ParticleManager:DestroyParticle(idx, false)
+                ParticleManager:ReleaseParticleIndex(idx)
+            end)
+
+            for i = 0, 2, 1 do
+                Projectile({
+                    owner = self:GetParent(),
+                    target = self.aggroTarget,
+                    targetPoint = toPoint,
+                    speed = 1000 + 400 * i,
+                    distance = 1600,
+                    damage = 300,
+
+                    graphics = "particles/testing/venomancer_venomous_gale_concept.vpcf",
+                    onHit = function(projectile, target)
+                        ApplyDamage({
+                            victim = target,
+                            attacker = self:GetParent(),
+                            damage = 1000,
+                            damage_type = DAMAGE_TYPE_PURE
+                        })
+                    end
+                }):Activate()
+            end
+
+            -- self.pAbility:EndCooldown()
+            -- self:GetParent():CastAbilityOnTarget(self.aggroTarget, self.pAbility, -1)
+        end)
 
         --self.aggroTarget:FaceTowards(self:GetParent():GetAbsOrigin())
         --self:GetParent():FaceTowards(self.aggroTarget:GetAbsOrigin())
-        self:GetParent():CastAbilityOnTarget(self.aggroTarget, self.pAbility, -1)
-        Timers(1.00, function()
-            self.pAbility:EndCooldown()
-            self:GetParent():CastAbilityOnTarget(self.aggroTarget, self.pAbility, -1)
-        end)
-        Timers(2.0, function()
-            self.pAbility:EndCooldown()
-            self:GetParent():CastAbilityOnTarget(self.aggroTarget, self.pAbility, -1)
-        end)
+--        Timers(1.00, function()
+--            self.pAbility:EndCooldown()
+--            self:GetParent():CastAbilityOnTarget(self.aggroTarget, self.pAbility, -1)
+--        end)
+--        Timers(2.0, function()
+--            self.pAbility:EndCooldown()
+--            self:GetParent():CastAbilityOnTarget(self.aggroTarget, self.pAbility, -1)
+--        end)
 
         --ExecuteOrderFromTable({
         --    UnitIndex = self:GetParent():entindex(),
@@ -429,7 +482,8 @@ end
 function ai:ActionFightStandard()
 
     -- After 5 seconds, do a thing.
-    if self.timeInState >= 9 then
+    -- if self.timeInState >= 9 then
+    if self.timeInState >= 1 then
         self:TransitionToPoison()
         return true
     end

@@ -41,6 +41,13 @@ function CustomMap:OnHeroPick(_, params)
     if DEBUG_SETTINGS then
         hero:AddNewModifier(hero, nil, 'character_testmode', nil)
     end
+    if TEST_START_LEVEL then
+        hero.isInitialLevel = true
+        local expTable = CharacterService:GetExperienceLevelRequirements()
+        local expNeeded = expTable[TEST_START_LEVEL]
+        hero:AddExperience(expNeeded, 0, false, false)
+        hero.isInitialLevel = nil
+    end
     if TEST_SUPERPATHEY then
         hero:SetMoveCapability(DOTA_UNIT_CAP_MOVE_FLY)
         hero:SetBaseMoveSpeed(TEST_SUPERPATHEY)

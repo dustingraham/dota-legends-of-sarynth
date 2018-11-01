@@ -88,7 +88,7 @@ TrackingProjectiles = TrackingProjectiles or class({})
 
 
 function TrackingProjectiles:Projectile( params )
-    --PrintTable(params)
+    --DeepPrintTable(params)
     local target = params.hTarget
     local caster = params.hCaster
     local speed = params.iMoveSpeed

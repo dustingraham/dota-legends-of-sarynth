@@ -49,6 +49,14 @@ function PrintTable(table)
     Debug('PrintTable', inspect(table))
 end
 
+function WrapException(callback, ...)
+    local status, err = pcall(callback, ...)
+
+    if not status then
+        print(err)
+    end
+end
+
 -- Already exists.
 --function Clamp(val, lower, upper)
 --    assert(val and lower and upper, "Missing params in math.Clamp")

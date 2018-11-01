@@ -186,11 +186,11 @@
         "Model"                 "models/heroes/broodmother/broodmother.vmdl"
         "BaseClass"             "npc_dota_creature"
         "Level"                 "18"
-        "ModelScale"            "0.90"
-        "HealthBarOffset"       "160"
+        "ModelScale"            "1.70"
+        "HealthBarOffset"       "220"
 
         "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_GROUND"
-        "MovementSpeed"             "320"
+        "MovementSpeed"             "300"
         "ArmorPhysical"             "10"
         "AttackCapabilities"        "DOTA_UNIT_CAP_MELEE_ATTACK"
 
@@ -198,7 +198,7 @@
         "AttackDamageMax"            "1596"
         "AttackRate"                "1.35"
         "AttackAnimationPoint"      "0.50"
-        "AttackRange"               "100"
+        "AttackRange"               "140"
 
         "CombatClassAttack"         "DOTA_COMBAT_CLASS_ATTACK_BASIC"
         "CombatClassDefend"         "DOTA_COMBAT_CLASS_DEFEND_BASIC"

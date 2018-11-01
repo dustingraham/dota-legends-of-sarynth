@@ -74,3 +74,37 @@ function creature:ParticleOffForPlayer(name, pid)
     ParticleManager:ReleaseParticleIndex(self.playerParticles[name][pid])
     self.playerParticles[name][pid] = nil
 end
+
+function creature:FindEnemyUnitsInRadius(position, radius, hData)
+    if not self:IsNull() then
+        local team = self:GetTeamNumber()
+        local data = hData or {}
+        local iTeam = data.team or DOTA_UNIT_TARGET_TEAM_ENEMY
+        local iType = data.type or DOTA_UNIT_TARGET_ALL
+        local iFlag = data.flag or DOTA_UNIT_TARGET_FLAG_NONE
+        local iOrder = data.order or FIND_ANY_ORDER
+        return FindUnitsInRadius(team, position, nil, radius, iTeam, iType, iFlag, iOrder, false)
+    else return {} end
+end
+
+function creature:FindFriendlyUnitsInRadius(position, radius, hData)
+    local team = self:GetTeamNumber()
+    local data = hData or {}
+    local iTeam = DOTA_UNIT_TARGET_TEAM_FRIENDLY
+    local iType = data.type or DOTA_UNIT_TARGET_ALL
+    local iFlag = data.flag or DOTA_UNIT_TARGET_FLAG_NONE
+    local iOrder = data.order or FIND_ANY_ORDER
+    return FindUnitsInRadius(team, position, nil, radius, iTeam, iType, iFlag, iOrder, false)
+end
+
+function creature:FindAllUnitsInRadius(position, radius, hData)
+    local team = self:GetTeamNumber()
+    local data = hData or {}
+    local iTeam = data.team or DOTA_UNIT_TARGET_TEAM_BOTH
+    local iType = data.type or DOTA_UNIT_TARGET_ALL
+    local iFlag = data.flag or DOTA_UNIT_TARGET_FLAG_NONE
+    local iOrder = data.order or FIND_ANY_ORDER
+    return FindUnitsInRadius(team, position, nil, radius, iTeam, iType, iFlag, iOrder, false)
+end
+
+

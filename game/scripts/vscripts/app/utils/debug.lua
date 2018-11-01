@@ -53,3 +53,5 @@ function DebugAllCalls()
         debug.sethook(nil, "c")
     end
 end
+
+Debug('BootDebug', 'Debug Initialized')
