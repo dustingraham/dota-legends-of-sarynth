@@ -31,12 +31,16 @@ function Projectile:constructor(params)
 
     self.target = params.target
 
-    -- Computed
+    -- Want targetPoint since hero can move away from where the line is drawn.
     --local direction = self.target:GetAbsOrigin()
     local direction = params.targetPoint
     direction = direction - self.caster:GetAbsOrigin()
     direction.z = 0.0
     direction = direction:Normalized()
+
+    -- TODO...
+    self.startPoint = self.caster:GetAbsOrigin()
+    self.finalDestination = self.caster:GetAbsOrigin() + direction:Normalized() * self.distance
 
     -- TODO: Get Facing if direction is nil.
     self.angle = direction
@@ -60,7 +64,7 @@ function Projectile:Update()
     -- Check for hit.
     local targets = self.owner:FindEnemyUnitsInRadius(pos, self.width / 2)
     for _, target in ipairs(targets) do
-        if not self.hitList[target] then
+        if self.constantDamage or not self.hitList[target] then
             self.hitList[target] = true
             WrapException(function(target)
                 self:onHit(target)
@@ -76,7 +80,7 @@ function Projectile:Update()
     -- Destroying newly created particles needs to wait 2 frames.
     self.isNew = self.isNew - 1
 
-    if self.isNew < -20 then
+    if (self.startPoint - pos):Length2D() > self.distance or self.isNew < -3000 then
         self:Destroy()
     end
 

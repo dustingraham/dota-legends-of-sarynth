@@ -358,7 +358,128 @@ function BossMechanic(params)
 
 end
 
+function ai:MakeLine(length, width, duration, targetPoint)
+    local sPart = 'particles/targeting/thick_line.vpcf'
+    local idx = ParticleManager:CreateParticle(sPart, PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
+
+    -- Should clamp to max distance of particle
+    local diff = targetPoint - self:GetParent():GetAbsOrigin()
+    local toPoint = self:GetParent():GetAbsOrigin() + diff:Normalized() * length
+    ParticleManager:SetParticleControl(idx, 1, toPoint)
+
+    -- Width
+    ParticleManager:SetParticleControl(idx, 2, Vector(width, 0, 0))
+    Timers(duration, function()
+        ParticleManager:DestroyParticle(idx, false)
+        ParticleManager:ReleaseParticleIndex(idx)
+    end)
+end
+
 function ai:ActionPoison()
+    -- DEMO every 1 second in 12, triple spray at once.
+    if false and self.timeInState % 15 == 1 then
+        print('[Action] Triple Poison')
+        self:GetParent():FaceTowards(self.aggroTarget:GetAbsOrigin())
+
+        -- Create Particle For Everyone
+        local targetPoint = self.aggroTarget:GetAbsOrigin()
+        self:MakeLine(1600, 120, 3.2, targetPoint)
+
+        Timers(2.0, function()
+            for i = 0, 2, 1 do
+                Projectile({
+                    owner = self:GetParent(),
+                    target = self.aggroTarget,
+                    targetPoint = targetPoint,
+                    speed = 1000 + 400 * i,
+                    distance = 800 + 400 * i,
+                    damage = 1000,
+
+                    graphics = "particles/testing/venomancer_venomous_gale_concept.vpcf",
+                    onHit = function(projectile, target)
+                        ApplyDamage({
+                            victim = target,
+                            attacker = self:GetParent(),
+                            damage = 1000,
+                            damage_type = DAMAGE_TYPE_PURE
+                        })
+                    end
+                }):Activate()
+            end
+        end)
+    end
+
+    -- DEMO every 5 second in 12, single huge blast
+    if self.timeInState % 5 == 1 then
+        print('[Action] Huge Blast')
+        self:GetParent():FaceTowards(self.aggroTarget:GetAbsOrigin())
+
+        -- Create Particle For Everyone
+        local targetPoint = self.aggroTarget:GetAbsOrigin()
+        self:MakeLine(2000, 180, 5, targetPoint)
+
+        Timers(1.0, function()
+            Projectile({
+                owner = self:GetParent(),
+                target = self.aggroTarget,
+                targetPoint = targetPoint,
+                speed = 600,
+                distance = 2000,
+                damage = 1000,
+                width = 220,
+                constantDamage = true,
+
+                graphics = "particles/testing/bad_ancient_ambient_test.vpcf",
+                onHit = function(projectile, target)
+                    ApplyDamage({
+                        victim = target,
+                        attacker = self:GetParent(),
+                        damage = 1000,
+                        damage_type = DAMAGE_TYPE_PURE
+                    })
+                end
+            }):Activate()
+        end)
+    end
+
+    -- DEMO every 9 second in 12, multiple small in sequence.
+    if false and self.timeInState % 15 == 9 then
+        print('[Action] Multiple Small')
+        self:GetParent():FaceTowards(self.aggroTarget:GetAbsOrigin())
+
+        local distance = 1200
+
+        -- Create Particle For Everyone
+        for i = 0, 9, 1 do
+            Timers(i * 0.4, function()
+                local targetPoint = self.aggroTarget:GetAbsOrigin()
+                self:MakeLine(1600, 40, 2, targetPoint)
+                Timers(1.5, function()
+                    Projectile({
+                        owner = self:GetParent(),
+                        target = self.aggroTarget,
+                        targetPoint = targetPoint,
+                        speed = 2400,
+                        distance = 1600,
+                        damage = 500,
+
+                        graphics = "particles/testing/energized_attack_concept.vpcf",
+                        onHit = function(projectile, target)
+                            ApplyDamage({
+                                victim = target,
+                                attacker = self:GetParent(),
+                                damage = 800,
+                                damage_type = DAMAGE_TYPE_PURE
+                            })
+                        end
+                    }):Activate()
+                end)
+            end)
+        end
+    end
+end
+
+function ai:PreDemoActionPoison()
     --if self.timeInState == 1 then
     if self.timeInState % 4 == 1 then
         print('[Action] Poison')
@@ -429,6 +550,7 @@ function ai:ActionPoison()
 
     end
 end
+
 function ai:xActionPoison()
     print('Time to poison:', self.timeInState)
 
