@@ -61,3 +61,21 @@ function ai:AnimatedFace(target, callback)
         end)
     end
 end
+
+function ai:FindHeroes(range, sourcePosition)
+
+    print('AICORE: ', self.THEKEK)
+
+    sourcePosition = sourcePosition or self:GetParent():GetAbsOrigin()
+    return FindUnitsInRadius(
+        self:GetParent():GetTeam(),
+        sourcePosition,
+        nil,
+        range,
+        DOTA_UNIT_TARGET_TEAM_ENEMY,
+        DOTA_UNIT_TARGET_ALL,
+        DOTA_UNIT_TARGET_FLAG_NONE,
+        FIND_ANY_ORDER,
+        false
+    )
+end

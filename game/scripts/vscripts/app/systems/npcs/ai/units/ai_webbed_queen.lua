@@ -377,7 +377,7 @@ end
 
 function ai:ActionPoison()
     -- DEMO every 1 second in 12, triple spray at once.
-    if false and self.timeInState % 15 == 1 then
+    if self.timeInState % 15 == 1 then
         print('[Action] Triple Poison')
         self:GetParent():FaceTowards(self.aggroTarget:GetAbsOrigin())
 
@@ -410,7 +410,7 @@ function ai:ActionPoison()
     end
 
     -- DEMO every 5 second in 12, single huge blast
-    if self.timeInState % 5 == 1 then
+    if self.timeInState % 15 == 5 then
         print('[Action] Huge Blast')
         self:GetParent():FaceTowards(self.aggroTarget:GetAbsOrigin())
 
@@ -425,10 +425,8 @@ function ai:ActionPoison()
                 targetPoint = targetPoint,
                 speed = 600,
                 distance = 2000,
-                damage = 1000,
                 width = 220,
                 constantDamage = true,
-
                 graphics = "particles/testing/bad_ancient_ambient_test.vpcf",
                 onHit = function(projectile, target)
                     ApplyDamage({
@@ -443,7 +441,7 @@ function ai:ActionPoison()
     end
 
     -- DEMO every 9 second in 12, multiple small in sequence.
-    if false and self.timeInState % 15 == 9 then
+    if self.timeInState % 15 == 9 then
         print('[Action] Multiple Small')
         self:GetParent():FaceTowards(self.aggroTarget:GetAbsOrigin())
 

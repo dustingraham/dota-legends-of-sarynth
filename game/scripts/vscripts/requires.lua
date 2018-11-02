@@ -39,9 +39,13 @@ for _,file in ipairs({
     'app/systems/inventory/inventory_service',
     'app/systems/inventory/inventory',
 
+    'app/systems/npcs/ai/ai_core',
     'app/systems/npcs/ai/units/ai_boss_actions',
     'app/systems/npcs/ai/units/ai_dark_boss_actions',
     'app/systems/npcs/ai/units/ai_dark_boss_logic',
+
+    'app/systems/npcs/ai/units/spider_queen/ai_spider_queen',
+    'app/systems/npcs/ai/units/spider_queen/spider_queen_abilities',
 
     'app/systems/npcs/ai/units/druids/ai_druids_boss_fire',
     'app/systems/npcs/ai/units/druids/ai_druids_boss_logic',
@@ -96,7 +100,7 @@ for _,modifier in ipairs({
 }) do LinkLuaModifier(modifier, 'app/systems/npcs/ai/units/'..modifier, LUA_MODIFIER_MOTION_NONE) end
 
 LinkLuaModifier('ai_druids_boss', 'app/systems/npcs/ai/units/druids/ai_druids_boss', LUA_MODIFIER_MOTION_NONE)
--- LinkLuaModifier('ai_spider_queen', 'app/systems/npcs/ai/units/spider_queen/ai_spider_queen', LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier('ai_spider_queen', 'app/systems/npcs/ai/units/spider_queen/ai_spider_queen', LUA_MODIFIER_MOTION_NONE)
 
 LinkLuaModifier('webbed_spidy_bubble_death_cloud', 'app/systems/npcs/abilities/webbed_spidy_bubble_death_cloud', LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier('druids_boss_fire', 'app/systems/npcs/abilities/druids_boss_fire', LUA_MODIFIER_MOTION_NONE)
