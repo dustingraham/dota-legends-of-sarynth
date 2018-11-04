@@ -13,7 +13,6 @@ function AiBase:GetEntity()
 end
 
 function AiBase:IsIdle()
-    print('StateCheck: ', AiBase.ACTION_IDLE, self.state)
     return self.state == AiBase.ACTION_IDLE
 end
 

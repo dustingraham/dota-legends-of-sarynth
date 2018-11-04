@@ -9,7 +9,6 @@ function ai:SummonWolfSpider()
     local caster = self:GetEntity()
 
     -- Stop moving/attacking and start animation.
-    EmitSoundOn('death_prophet_dpro_laugh_012', caster)
     caster:Stop()
     StartAnimation(self:GetEntity(), {
         duration = 1.8,
@@ -18,6 +17,7 @@ function ai:SummonWolfSpider()
     })
 
     Timers(1.3, function()
+        EmitSoundOn('Hero_Broodmother.SpawnSpiderlingsImpact', caster)
         local spider = self:CreateSpider()
         table.insert(self.spiders, spider)
     end)
@@ -86,6 +86,7 @@ function ai:ExecutePoisonBloom()
     -- Poison Cloud and Damage Bursts
     Timers(2, function()
         -- Burn
+        EmitSoundOn('venomancer_venm_ability_nova_19', caster)
         local noxiousParticle = ParticleManager:CreateParticle('particles/units/webbed/noxious_cloud.vpcf',
             PATTACH_CUSTOMORIGIN,
             self:GetEntity())
@@ -134,17 +135,18 @@ function ai:FireTriplicate()
     self:MakeLine({
         length = 1600,
         width = 120,
-        duration = 2.4,
+        duration = 2.2,
         targetPoint = targetPoint
     })
 
-    Timers(1.7, function()
+    Timers(1.5, function()
         if caster:IsNull() then return end
         StartAnimation(caster, {
             duration = 1.2,
             activity = ACT_DOTA_CAST_ABILITY_1,
             rate = 1.0,
         })
+        EmitSoundOn('Hero_Broodmother.SpawnSpiderlings', caster)
         Timers(1.2, function()
             self.isBusy = false
         end)
@@ -157,13 +159,12 @@ function ai:FireTriplicate()
                 speed = 1000 + 400 * i,
                 distance = 800 + 400 * i,
                 width = 120,
-                damage = 1000,
                 graphics = "particles/testing/venomancer_venomous_gale_concept.vpcf",
-                onHit = function(projectile, target)
+                onHit = function(_, target)
                     ApplyDamage({
                         victim = target,
                         attacker = caster,
-                        damage = math.random(1700, 2200),
+                        damage = math.random(1700, 2400),
                         damage_type = DAMAGE_TYPE_PURE
                     })
                 end

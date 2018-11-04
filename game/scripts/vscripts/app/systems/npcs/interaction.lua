@@ -94,7 +94,6 @@ function Interaction:OrderFilter(event, order)
             callback = function(action)
                 Debug('Interaction', 'Arrived at move target.')
                 action.unit:Stop()
-
                 action.unit:Hold()
                 action.unit:Interrupt()
 

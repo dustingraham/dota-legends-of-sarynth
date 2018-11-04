@@ -53,7 +53,11 @@ end
 --@param self
 --@param #table order
 function Filters:OrderFilter(order)
-    -- Debug('Filters', 'OrderFilter Fired')
+    Debug('Filters', 'OrderFilter Fired')
+--    Debug('Filters', '-------------------------------------------------------')
+--    Debug('Filters', 'Type:', order.order_type, ORDERS[order.order_type])
+--    Debug('Filters', 'Queue:', order.queue)
+
     return Event:Trigger('FilterOrderFilter', order)
 end
 

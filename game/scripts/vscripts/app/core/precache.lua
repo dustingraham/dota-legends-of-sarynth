@@ -139,10 +139,12 @@ function PrecacheExecute(context)
         'soundevents/music/jboberg_01/soundevents_music.vsndevts',
         'soundevents/music/jboberg_01/soundevents_stingers.vsndevts',
         'soundevents/voscripts/game_sounds_vo_beastmaster.vsndevts',
+        'soundevents/voscripts/game_sounds_vo_broodmother.vsndevts',
         'soundevents/voscripts/game_sounds_vo_death_prophet.vsndevts',
         'soundevents/voscripts/game_sounds_vo_lone_druid.vsndevts',
         'soundevents/voscripts/game_sounds_vo_pudge.vsndevts',
         'soundevents/voscripts/game_sounds_vo_lycan.vsndevts',
+        'soundevents/voscripts/game_sounds_vo_venomancer.vsndevts',
         'soundevents/sarynth.vsndevts',
     }
     for _,name in ipairs(sounds) do PrecacheResource('soundfile', name, context) end

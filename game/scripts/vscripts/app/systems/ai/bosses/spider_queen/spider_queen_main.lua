@@ -8,14 +8,14 @@ AiSystem:Register(ai)
 
 Spider Queen
 ------------
-At 0 seconds and every 60 seconds.
+At 0 seconds and every 40 seconds.
 - Summons two wolf spiders.
 
 Regular Attacks
 Spits Triplicate Poison (Random 6 - 15 seconds)
 If enemy 300 - 2000 distance detected: fires single poison splash. (Random 10-20 seconds.)
 
-At 30 seconds, then every 60 seconds.
+At 20 seconds, then every 40 seconds.
 - Stops attacking, then does large AOE poison cloud that fades quickly.
 
 
@@ -45,7 +45,7 @@ function ai:constructor(entity)
     self.leashRange = 2000
     self.timeInState = 0
     self.timeSinceSummon = 0
-    self.timeSinceBloom = 30
+    self.timeSinceBloom = 20
     self.spiders = {}
 
     self.startLocation = self:GetEntity():GetAbsOrigin()
@@ -70,7 +70,7 @@ function ai:StartFight(attacker)
     self:TransitionTo(ai.ACTION_SUMMON)
 
     -- Howl and attack.
-    --EmitSoundOn('Hero_Lycan.Howl', self:GetEntity())
+    EmitSoundOn('broodmother_broo_kill_01', self:GetEntity())
 end
 
 function ai:ActionSummon()
@@ -126,21 +126,21 @@ function ai:ActionAttack()
 
     -- TODO: Check desire to fire single at ranged.
 
-    -- At 30 seconds, then each 60 seconds.
-    if self.timeSinceBloom > 60 then
+    -- At 20 seconds, then each 40 seconds.
+    if self.timeSinceBloom > 40 then
         self:TransitionTo(ai.ACTION_BLOOM)
         return
     end
 
-    -- At 0 seconds, then each 60 seconds.
-    if self.timeSinceSummon > 60 then
+    -- At 0 seconds, then each 40 seconds.
+    if self.timeSinceSummon > 40 then
         self:TransitionTo(ai.ACTION_SUMMON)
         return
     end
 end
 
 function ai:CheckTriplicateAttack()
-    if self.timeInState % 8 == 2 then
+    if self.timeInState % 8 == 3 then
         self:FireTriplicate()
     end
 end
@@ -284,12 +284,13 @@ end
 function ai:OnDeath()
     getbase(ai).OnDeath(self)
 
-    -- if self:GetEntity() ~= event.unit then return end
     self:Debug('OnDeath')
     self:GetEntity().spawn:OnDeath(self)
 
     Encounter:Log('Boss died, ending encounter.')
     Encounter:End()
+
+    EmitSoundOn('broodmother_broo_death_03', self:GetEntity())
 
     -- Takes a slight second for him to fall backwards.
     local pos = self:GetEntity():GetAbsOrigin()
@@ -330,16 +331,4 @@ function ai:OnAttackAllied(event)
     self:Debug('OnAttackAllied PRE')
     if self:GetEntity() ~= event.target then return end
     self:Debug('OnAttackAllied')
-end
-
--- Modifier -- Won't work.
-function ai:OnTakeDamage(event)
-    self:Debug('Someone or something took damage?')
-    if self:GetEntity() ~= event.unit then return end
-
-    if self.state == ai.ACTION_IDLE then
-        self:Debug('Aggroing due to Attacked')
-        self.aggroTarget = event.attacker
-        self:StartFight()
-    end
 end

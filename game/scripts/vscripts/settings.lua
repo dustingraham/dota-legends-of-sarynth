@@ -29,7 +29,7 @@ if DEBUG_SETTINGS then
     TEST_SUPERINT = 4400
 
     -- town kobolds ice webbed druids dark
-    TEST_START_WAYPOINT = 'ice'
+    TEST_START_WAYPOINT = 'town'
     --TEST_START_START_BOSS = true
     --TEST_START_DARK_BOSS = true
     --TEST_START_DRUID_BOSS = true
@@ -43,7 +43,7 @@ if DEBUG_SETTINGS then
     }
     TEST_KNOWN_TELEPORTS = {
         'teleport_tower_town',
-        --'teleport_tower_webbed',
+        'teleport_tower_webbed',
         'teleport_tower_dark',
     }
 

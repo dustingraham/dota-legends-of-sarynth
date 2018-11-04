@@ -33,10 +33,13 @@ function FocusTarget:OrderFilter(event, order)
             local caster = ability:GetCaster()
             local target = Wrappers.GetFocusTarget(caster)
             if target then
-                ability.customTargetCasting = true
                 Debug('FocusTarget', 'Doing the rightful, queue manipulation.')
+                ability.customTargetCasting = true
                 -- Alternative queue clear...?
-                caster:Stop()
+
+                -- Issuing a stop order caused horrible user experience for multi-clicking targets.
+                --caster:Stop()
+
                 -- Clear out current attack queue if possible.
                 --ExecuteOrderFromTable({
                 --      OrderType    = DOTA_UNIT_ORDER_ATTACK_TARGET,
@@ -44,6 +47,7 @@ function FocusTarget:OrderFilter(event, order)
                 --      TargetIndex  = target:entindex(),
                 --      Queue        = false
                 --  })
+
                 -- Do the rightful
                 ExecuteOrderFromTable({
                       OrderType    = DOTA_UNIT_ORDER_CAST_TARGET,

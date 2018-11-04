@@ -72,19 +72,21 @@ function TrySetDelayedFocusTarget() {
 // Handle Right Button events
 function OnRightButtonPressed()
 {
-    // $.Msg("OnRightButtonPressed")
+    // Double clicking sends two presses the second time, with identical game times.
+    // $.Msg(Game.Time(), "] OnRightButtonPressed")
 
     var iPlayerID = Players.GetLocalPlayer();
-    var mainSelected = Players.GetLocalPlayerPortraitUnit();
     var hero = Players.GetPlayerHeroEntityIndex( iPlayerID );
-    var heroName = Entities.GetUnitName(hero);
-    // $.Msg(heroName)
 
-    //var mainSelectedName = Entities.GetUnitName( mainSelected );
     var cursor = GameUI.GetCursorPosition();
     var mouseEntities = GameUI.FindScreenEntities( cursor );
-    //mouseEntities = mouseEntities.filter( function(e) { return e.entityIndex != mainSelected; } )
 
+    // Misc Reference.
+    //var heroName = Entities.GetUnitName(hero);
+    // $.Msg(heroName)
+    //var mainSelected = Players.GetLocalPlayerPortraitUnit();
+    //var mainSelectedName = Entities.GetUnitName( mainSelected );
+    //mouseEntities = mouseEntities.filter( function(e) { return e.entityIndex != mainSelected; } )
     //var pressedShift = GameUI.IsShiftDown();
 
     for ( var e of mouseEntities )
@@ -98,22 +100,31 @@ function OnRightButtonPressed()
                 //QueueBehavior : OrderQueueBehavior_t.DOTA_ORDER_QUEUE_NEVER,
                 //ShowEffects : false
             });
+            
             return true;
         }
 
         if (Entities.IsEnemy(entityIndex))
         {
             SetFocusTarget(entityIndex);
-            Game.PrepareUnitOrders({
-                UnitIndex : hero,
-                OrderType : dotaunitorder_t.DOTA_UNIT_ORDER_STOP
-            });
+            
+            // For a while, we did not want to start attacking...
+            // Removing this did not seem to affect gameplay.
+            // Removed since we were having issues with rapidly right-clicking target,
+            // or rapidly clicking a spell.
+            // Game.PrepareUnitOrders({
+            //     UnitIndex : hero,
+            //     OrderType : dotaunitorder_t.DOTA_UNIT_ORDER_STOP
+            // });
+            
             return false;
         }
 
+        // Reference material. Eventually want to right-click to open a gate, or right-click to
+        // open a rewards treasure chest.
+        //
         // else if (IsShop (entityIndex) || IsHarvest (entityIndex) || IsBank(entityIndex)) {
         //     $.Msg('Shop Harvest Bank');
-
         //     var order = {
         //         UnitIndex : hero,
         //         TargetIndex : entityIndex,
@@ -121,21 +132,15 @@ function OnRightButtonPressed()
         //         QueueBehavior : OrderQueueBehavior_t.DOTA_ORDER_QUEUE_NEVER,
         //         ShowEffects : false
         //     };
-
         //     Game.PrepareUnitOrders( order );
-
         //     return true;
         // } else if (IsSwitch (entityIndex)) {
-
         //     GameEvents.SendCustomGameEventToServer( "interactable", { pID: iPlayerID, unit: hero, target: entityIndex })
-
         //     return true;
         // }else if (IsNPC(entityIndex)){
         //     $.Msg("Unit is an NPC")
         //     $.Msg("Unit name is " +Entities.GetUnitName(entityIndex))
-
         //     GameEvents.SendCustomGameEventToServer( "npc_interact", { pID: iPlayerID, unit: hero, target: entityIndex })
-
         //     return true;
         // }else if (IsPotionFountain(entityIndex)){
         //     GameEvents.SendCustomGameEventToServer( "potion_refill", { pID: iPlayerID, unit: hero, target: entityIndex })
@@ -150,11 +155,12 @@ function OnRightButtonPressed()
         // }
     }
 
+    // Reference concept.
     // if (GameUI.IsAltDown() && heroName == "npc_dota_hero_rattletrap"){
     //     GameEvents.SendCustomGameEventToServer( "gunner_remove_target", { pID: iPlayerID, unit: hero })
     // }
 
-    //$.Msg('Default behavior');
+    // $.Msg('Default behavior');
     return false;
 }
 
