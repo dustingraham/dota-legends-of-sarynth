@@ -6,6 +6,7 @@ AiSystem = AiSystem or class({}, {
 function AiSystem:Activate()
     ListenToGameEvent('entity_killed', Dynamic_Wrap(AiSystem, 'OnEntityKilled'), AiSystem)
     Filters:OnModifierGainedFilter(Dynamic_Wrap(AiSystem, 'OnModifierGainedFilter'), AiSystem)
+    Event:Listen('HeroDeath', Dynamic_Wrap(AiSystem, 'OnHeroDeath'), AiSystem)
     self:StartThinker()
 end
 Event:BindActivate(AiSystem)
@@ -26,11 +27,24 @@ function AiSystem:StartThinker()
     end)
 end
 
+function AiSystem:OnHeroDeath(event)
+    self:Debug('OnHeroDeath')
+
+    for i = #self.ai_table, 1, -1 do
+        WrapException(function(i)
+            self.ai_table[i]:OnHeroDeath(event.params)
+        end, i)
+    end
+end
+
 function AiSystem:OnEntityKilled(event)
     local killed = EntIndexToHScript(event.entindex_killed);
     if killed.ai then
-        killed.ai:OnDeath()
-        self:RemoveAi(killed.ai)
+        -- Check if this is a "new" AI.
+        if instanceof(killed.ai, AiBase) then
+            killed.ai:OnDeath()
+            self:RemoveAi(killed.ai)
+        end
     end
     --local killed_name = killed:GetUnitName();
     --DeepPrintTable(event)

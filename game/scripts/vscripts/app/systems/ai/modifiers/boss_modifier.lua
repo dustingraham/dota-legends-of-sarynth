@@ -8,7 +8,7 @@ function mod:DeclareFunctions()
     return {
         -- MODIFIER_EVENT_ON_DEATH,
         MODIFIER_EVENT_ON_TAKEDAMAGE,
-        -- MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT,
+        MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT,
         -- MODIFIER_PROPERTY_MOVESPEED_BASE_OVERRIDE,
         -- MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT,
         -- MODIFIER_PROPERTY_INCOMING_DAMAGE_PERCENTAGE,
@@ -28,4 +28,9 @@ function mod:OnTakeDamage(event)
         ai:Debug('Aggroing due to Attacked')
         ai:StartFight(event.attacker)
     end
+end
+
+function mod:GetModifierConstantHealthRegen()
+    local ai = self:GetParent().ai
+    return ai and ai:GetHealthRegen() or 0
 end

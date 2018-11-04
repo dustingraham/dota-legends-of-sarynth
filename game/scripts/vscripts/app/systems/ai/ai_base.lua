@@ -17,6 +17,8 @@ function AiBase:IsIdle()
     return self.state == AiBase.ACTION_IDLE
 end
 
+function AiBase:OnHeroDeath() end
+
 function AiBase:FindHeroes(range, sourcePosition)
     if self:GetEntity():IsNull() then return {} end
     sourcePosition = sourcePosition or self:GetEntity():GetAbsOrigin()

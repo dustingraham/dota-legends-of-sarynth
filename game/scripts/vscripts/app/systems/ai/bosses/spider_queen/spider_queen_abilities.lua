@@ -1,5 +1,6 @@
-SpiderQueen = SpiderQueen or class({}, nil, AiBase)
+--SpiderQueen = SpiderQueen or class({}, nil, AiBase)
 local ai = SpiderQueen
+if not ai then error('Must require main first.') end
 
 function ai:SummonWolfSpider()
     self.isBusy = true
@@ -17,7 +18,8 @@ function ai:SummonWolfSpider()
     })
 
     Timers(1.3, function()
-        self:CreateSpider()
+        local spider = self:CreateSpider()
+        table.insert(self.spiders, spider)
     end)
 
     Timers(1.8, function()
@@ -58,7 +60,7 @@ function ai:ExecutePoisonBloom()
     self:Debug('Execute Poison Bloom')
 
     local caster = self:GetEntity()
-    local spellRadius = 800
+    local spellRadius = 700
     local targetLocation = self:GetEntity():GetAbsOrigin()
 
     -- Stop moving/attacking and start animation.
