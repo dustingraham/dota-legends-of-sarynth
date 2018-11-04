@@ -83,6 +83,8 @@ function ai:ExecutePoisonBloom()
         ParticleManager:ReleaseParticleIndex(targetingParticle)
     end)
 
+    -- TODO: If dies, need to cancel. True for all of these.
+
     -- Poison Cloud and Damage Bursts
     Timers(2, function()
         -- Burn
@@ -99,7 +101,8 @@ function ai:ExecutePoisonBloom()
                 position = targetLocation,
                 radius = spellRadius,
                 damage = math.random(1700, 2200),
-                damageType = DAMAGE_TYPE_PURE
+                damageType = DAMAGE_TYPE_PURE,
+                soundFx = 'Hero_VenomancerWard.ProjectileImpact'
             })
             bursts = bursts + 1
             if bursts < 5 then return 0.75 end
@@ -139,8 +142,10 @@ function ai:FireTriplicate()
         targetPoint = targetPoint
     })
 
+    -- TODO: If dies, need to cancel. True for all of these.
+
     Timers(1.5, function()
-        if caster:IsNull() then return end
+        if caster:IsNull() or not caster:IsAlive() then return end
         StartAnimation(caster, {
             duration = 1.2,
             activity = ACT_DOTA_CAST_ABILITY_1,
@@ -151,6 +156,7 @@ function ai:FireTriplicate()
             self.isBusy = false
         end)
 
+        local soundFired = false
         for i = 0, 2, 1 do
             Projectile({
                 owner = caster,
@@ -161,6 +167,11 @@ function ai:FireTriplicate()
                 width = 120,
                 graphics = "particles/testing/venomancer_venomous_gale_concept.vpcf",
                 onHit = function(_, target)
+                    -- Fire the sound once per ability execution.
+                    if not soundFired then
+                        soundFired = true
+                        EmitSoundOn('Hero_Venomancer.VenomousGaleImpact', target)
+                    end
                     ApplyDamage({
                         victim = target,
                         attacker = caster,

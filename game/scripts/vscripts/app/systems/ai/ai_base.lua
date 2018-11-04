@@ -40,10 +40,12 @@ function AiBase:DamageRadius(params)
     local damage = params.damage or 100
     local damageType = params.damageType or DAMAGE_TYPE_MAGICAL
     local source = params.source or self:GetEntity()
-    local popup = params.popup or false
     for _,target in pairs(self:FindHeroes(radius, pos)) do
         self:DealDamage(target, damage, damageType, source)
-        if popup then
+        if params.soundFx then
+            EmitSoundOn(params.soundFx, target)
+        end
+        if params.popup then
             PopupDamage(target, damage)
         end
     end

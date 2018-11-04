@@ -135,6 +135,7 @@ function PrecacheExecute(context)
         'soundevents/game_sounds_heroes/game_sounds_tusk.vsndevts',
         'soundevents/game_sounds_heroes/game_sounds_ursa.vsndevts',
         'soundevents/game_sounds_heroes/game_sounds_vengefulspirit.vsndevts',
+        'soundevents/game_sounds_heroes/game_sounds_venomancer.vsndevts',
         'soundevents/game_sounds_heroes/game_sounds_zuus.vsndevts',
         'soundevents/music/jboberg_01/soundevents_music.vsndevts',
         'soundevents/music/jboberg_01/soundevents_stingers.vsndevts',
