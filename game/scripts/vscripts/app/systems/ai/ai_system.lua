@@ -5,6 +5,7 @@ AiSystem = AiSystem or class({}, {
 
 function AiSystem:Activate()
     ListenToGameEvent('entity_killed', Dynamic_Wrap(AiSystem, 'OnEntityKilled'), AiSystem)
+    Filters:OnModifierGainedFilter(Dynamic_Wrap(AiSystem, 'OnModifierGainedFilter'), AiSystem)
     self:StartThinker()
 end
 Event:BindActivate(AiSystem)
@@ -12,9 +13,9 @@ Event:BindActivate(AiSystem)
 
 function AiSystem:OnThink()
     for i = #self.ai_table, 1, -1 do
-        -- WrapException
-
-        self.ai_table[i]:OnThink()
+        WrapException(function(i)
+            self.ai_table[i]:OnThink()
+        end, i)
     end
 end
 
@@ -62,4 +63,38 @@ end
 
 function AiSystem:Register(ai)
     self.registered[ai.name] = ai
+end
+
+
+
+function AiSystem:OnModifierGainedFilter(event)
+    local parent = EntIndexToHScript(event.params.entindex_parent_const)
+
+    -- 1) If this is the boss, don't take stuns.
+    if parent:IsBoss() then
+        local stuns = {
+            ranger_concussion = true,
+            mage_ice_shocked = true,
+            rogue_incapacitated = true,
+            sorcerer_blasted = true,
+            warrior_bashed = true,
+        }
+        if stuns[event.params.name_const] then
+            -- self:Debug('Stun Aversion')
+            return false
+        end
+    end
+
+    --if event.params.name_const == 'ai_basic_sheep' then return end
+    --if event.params.name_const == 'ai_aggro_leash' then return end
+
+    -- DeepPrintTable(event)
+
+    --local hero = PlayerResource:GetSelectedHeroEntity(event.PlayerID)
+
+    return true
+end
+
+function AiSystem:Debug(...)
+    Debug('AiSystem', ...)
 end

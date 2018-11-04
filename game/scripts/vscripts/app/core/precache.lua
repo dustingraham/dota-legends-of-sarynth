@@ -27,6 +27,10 @@ function PrecacheExecute(context)
         'particles/dire_fx/bad_ancient_ambient.vpcf', -- Dark Boss Barricade
         'particles/units/dark_plains/boss/energy_pull/energy_pull.vpcf', -- Dark Boss Link
 
+        -- Spiders
+        'particles/targeting/aoe_danger.vpcf',
+        'particles/units/webbed/spider_spawn_poof.vpcf',
+
         -- Druids
         'particles/units/druids/protector/druids_protector_orb.vpcf',
         'particles/units/druids/glow/druids_glow_red.vpcf',

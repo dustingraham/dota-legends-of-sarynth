@@ -198,7 +198,7 @@
         "AttackDamageMax"            "1596"
         "AttackRate"                "1.35"
         "AttackAnimationPoint"      "0.50"
-        "AttackRange"               "140"
+        "AttackRange"               "280"
 
         "CombatClassAttack"         "DOTA_COMBAT_CLASS_ATTACK_BASIC"
         "CombatClassDefend"         "DOTA_COMBAT_CLASS_DEFEND_BASIC"

@@ -44,12 +44,13 @@ function Projectile:constructor(params)
 
     -- TODO: Get Facing if direction is nil.
     self.angle = direction
+    self.width = (params.width or self.width)
 
     self.position = self.caster:GetAbsOrigin()
     -- self:SetPos(self.from)
 
     self.velocity = self.speed * direction
-    print('Constructively constructing: ', self.uuid)
+    -- print('Constructively constructing: ', self.uuid)
 end
 
 function Projectile:Update()
@@ -70,7 +71,7 @@ function Projectile:Update()
                 self:onHit(target)
             end, target)
         else
-            print('Already hit by: ', self.uuid)
+            -- print('Already hit by: ', self.uuid)
         end
     end
 

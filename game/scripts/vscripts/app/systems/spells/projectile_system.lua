@@ -12,7 +12,7 @@ Event:BindActivate(ProjectileSystem)
 
 function ProjectileSystem:AddProjectile(projectile)
     table.insert(self.projectiles, projectile)
-    print('We added a thing')
+    --print('We added a thing')
 end
 
 function ProjectileSystem:UpdateAll()
@@ -24,7 +24,7 @@ function ProjectileSystem:UpdateAll()
                 projectile:Update()
             else
                 table.remove(self.projectiles, i)
-                print('We removed a thing')
+                -- print('We removed a thing')
             end
         end, projectile, i)
     end

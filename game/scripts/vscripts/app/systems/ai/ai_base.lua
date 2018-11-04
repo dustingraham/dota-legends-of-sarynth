@@ -1,5 +1,6 @@
 AiBase = AiBase or class({}, {
-    name = 'AiBase'
+    name = 'AiBase',
+    ACTION_IDLE = 'ActionIdle'
 })
 
 function AiBase:constructor(entity)
@@ -11,6 +12,10 @@ function AiBase:GetEntity()
     return self.entity
 end
 
+function AiBase:IsIdle()
+    print('StateCheck: ', AiBase.ACTION_IDLE, self.state)
+    return self.state == AiBase.ACTION_IDLE
+end
 
 function AiBase:FindHeroes(range, sourcePosition)
     if self:GetEntity():IsNull() then return {} end
@@ -26,6 +31,32 @@ function AiBase:FindHeroes(range, sourcePosition)
         FIND_ANY_ORDER,
         false
     )
+end
+
+function AiBase:DamageRadius(params)
+    local pos = params.position or self:GetEntity():GetAbsOrigin()
+    local radius = params.radius or 100
+    local damage = params.damage or 100
+    local damageType = params.damageType or DAMAGE_TYPE_MAGICAL
+    local source = params.source or self:GetEntity()
+    local popup = params.popup or false
+    for _,target in pairs(self:FindHeroes(radius, pos)) do
+        self:DealDamage(target, damage, damageType, source)
+        if popup then
+            PopupDamage(target, damage)
+        end
+    end
+end
+
+function AiBase:DealDamage(target, damage, damageType, source)
+    if not source then source = self:GetEntity() end
+    if not damageType then damageType = DAMAGE_TYPE_MAGICAL end
+    ApplyDamage({
+        victim = target,
+        attacker = source,
+        damage = damage,
+        damage_type = damageType
+    })
 end
 
 function AiBase:OnDeath()

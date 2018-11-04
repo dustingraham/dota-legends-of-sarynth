@@ -7,6 +7,9 @@ function creature:CheckNpc()
     print('Checked: Creature', self:GetName(), self:GetClassname(), self:GetUnitName())
 end
 
+function creature:IsBoss()
+    return self.isBoss
+end
 
 -- Reference concept.
 --

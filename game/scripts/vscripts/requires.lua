@@ -102,6 +102,8 @@ for _,modifier in ipairs({
     'ice_dungeon_boss3',
 }) do LinkLuaModifier(modifier, 'app/systems/npcs/ai/units/'..modifier, LUA_MODIFIER_MOTION_NONE) end
 
+LinkLuaModifier('boss_modifier', 'app/systems/ai/modifiers/boss_modifier', LUA_MODIFIER_MOTION_NONE)
+
 LinkLuaModifier('ai_druids_boss', 'app/systems/npcs/ai/units/druids/ai_druids_boss', LUA_MODIFIER_MOTION_NONE)
 -- LinkLuaModifier('ai_spider_queen', 'app/systems/npcs/ai/units/spider_queen/ai_spider_queen', LUA_MODIFIER_MOTION_NONE)
 
