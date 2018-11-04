@@ -76,7 +76,7 @@ function InventoryService:Activate()
         return 0.03
     end)
 
-    Debug('InventoryService', 'Activated')
+    Debug('BootDebug', 'InventoryService', 'Activated')
 end
 
 function InventoryService:LoadItemData()

@@ -1,20 +1,32 @@
 -- Standard Required Files
 for _,file in ipairs({
 
-    -- Event first, needed for activation bindings.
+    -- Settings
+    'settings',
+
+    -- Utilities
+    'app/utils/debug',
+    'app/utils/helpers',
+    'app/utils/md5',
+
+    -- Events first, needed for activation bindings.
     'app/core/event',
 
+    -- Core
     'app/core/network/errors',
     'app/core/network/http',
     'app/core/network/reporter',
     'app/core/network/throttle',
+    'app/core/precache',
     'app/core/boot',
     'app/core/filters',
     'app/core/sounds',
     'app/core/music',
 
+    -- Map specific
     'app/maps/'..GetMapName(),
 
+    'app/systems/system',
     'app/systems/characters/abilities/wrappers',
 
     'app/systems/characters/character_pick',
@@ -28,6 +40,12 @@ for _,file in ipairs({
     'app/systems/inventory/inventory_service',
     'app/systems/inventory/inventory',
 
+    'app/systems/ai/ai_system',
+    'app/systems/ai/ai_base',
+    'app/systems/ai/bosses/spider_queen/spider_queen_main',
+    'app/systems/ai/bosses/spider_queen/spider_queen_abilities',
+
+    'app/systems/npcs/ai/ai_core',
     'app/systems/npcs/ai/units/ai_boss_actions',
     'app/systems/npcs/ai/units/ai_dark_boss_actions',
     'app/systems/npcs/ai/units/ai_dark_boss_logic',
@@ -54,20 +72,16 @@ for _,file in ipairs({
     'app/systems/quests/quest_system',
     'app/systems/quests/quest',
 
-    'app/utils/debug',
-    'app/utils/helpers',
-    'app/utils/md5',
+    'app/systems/spells/projectile_system',
+    'app/systems/spells/projectile',
 
     'vendor/barebones/animations',
-    -- 'vendor/barebones/containers',
     'vendor/barebones/notifications',
     'vendor/barebones/playertables',
     'vendor/barebones/timers',
     'vendor/inspect',
     'vendor/popupnumbers',
     'vendor/tracking_projectile',
-
-    'settings',
 
 }) do require(file) end
 
@@ -88,7 +102,10 @@ for _,modifier in ipairs({
     'ice_dungeon_boss3',
 }) do LinkLuaModifier(modifier, 'app/systems/npcs/ai/units/'..modifier, LUA_MODIFIER_MOTION_NONE) end
 
+LinkLuaModifier('boss_modifier', 'app/systems/ai/modifiers/boss_modifier', LUA_MODIFIER_MOTION_NONE)
+
 LinkLuaModifier('ai_druids_boss', 'app/systems/npcs/ai/units/druids/ai_druids_boss', LUA_MODIFIER_MOTION_NONE)
+-- LinkLuaModifier('ai_spider_queen', 'app/systems/npcs/ai/units/spider_queen/ai_spider_queen', LUA_MODIFIER_MOTION_NONE)
 
 LinkLuaModifier('webbed_spidy_bubble_death_cloud', 'app/systems/npcs/abilities/webbed_spidy_bubble_death_cloud', LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier('druids_boss_fire', 'app/systems/npcs/abilities/druids_boss_fire', LUA_MODIFIER_MOTION_NONE)
@@ -102,3 +119,5 @@ LinkLuaModifier('sorcerer_stats', 'app/systems/characters/abilities/sorcerer/sor
 
 LinkLuaModifier('character_testmode', 'app/systems/characters/modifiers/character_testmode', LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier('character_teleporting', 'app/systems/characters/modifiers/character_teleporting', LUA_MODIFIER_MOTION_NONE)
+
+Debug('BootDebug', 'Requires Complete')

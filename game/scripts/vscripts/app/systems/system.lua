@@ -1,0 +1,2 @@
+System = System or class({})
+

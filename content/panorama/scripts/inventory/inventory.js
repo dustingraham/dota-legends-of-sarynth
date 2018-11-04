@@ -412,6 +412,7 @@ $.GetContextPanel().OldListenerId = PlayerTables.SubscribeNetTableListener(playe
 // Retrieve values on the client
 $.Msg(playerTableKey);
 $.Schedule(2, function() {
+    // TODO: After character is completely loaded, fire event (might be one already) to run the below.
     // Without the delay, something fails.
     var currentValues = PlayerTables.GetAllTableValues(playerTableKey);
     if (currentValues)

@@ -7,7 +7,7 @@ PlayerService = PlayerService or class({}, {
 function PlayerService:Activate()
     ListenToGameEvent('player_connect_full', Dynamic_Wrap(PlayerService, 'OnConnectFull'), PlayerService)
     CustomGameEventManager:RegisterListener('settings_focus_target', Dynamic_Wrap(PlayerService, 'OnSettingsFocusTarget', PlayerService))
-    Debug('PlayerService', 'Listening')
+    Debug('BootDebug', 'PlayerService', 'Activated')
 end
 
 function PlayerService:OnConnectFull(event)

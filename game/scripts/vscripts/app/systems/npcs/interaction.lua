@@ -36,7 +36,7 @@ function Interaction:Activate()
         return 0.03
     end)
     Filters:OnOrderFilter(Dynamic_Wrap(Interaction, 'OrderFilter'), Interaction)
-    Debug('Interaction', 'Activated')
+    Debug('BootDebug', 'Interaction', 'Activated')
 end
 
 ---

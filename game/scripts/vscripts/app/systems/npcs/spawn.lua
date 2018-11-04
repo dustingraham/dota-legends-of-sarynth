@@ -83,7 +83,11 @@ function Spawn:Spawn(data)
 
     -- TODO: Source from unit data, override with spawn data.
     if data.AI then
-        entity:AddNewModifier(entity, nil, data.AI, nil)
+        if data.AI == 'SpiderQueen' then
+            AiSystem:OnSpawn(entity, data.AI)
+        else
+            entity:AddNewModifier(entity, nil, data.AI, nil)
+        end
     end
 
     if data.Cosmetics then
@@ -108,7 +112,7 @@ end
 
 function Spawn:OnDeath(ai)
     self.spawnNode:OnDeath(self)
-    if ai and ai:GetParent() and ai:GetParent().GlowParticle then
+    if ai and ai.GetParent and ai:GetParent() and ai:GetParent().GlowParticle then
         Debug('Spawn', 'Releasing glow on death.')
         local idx = ai:GetParent().GlowParticle
         ParticleManager:DestroyParticle(idx, false)

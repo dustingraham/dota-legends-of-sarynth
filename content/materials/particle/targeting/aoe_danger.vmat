@@ -1,0 +1,12 @@
+// THIS FILE IS AUTO-GENERATED
+
+Layer0
+{
+	shader "projected_dota.vfx"
+
+	//---- Color ----
+	TextureColor "[1.000000 1.000000 1.000000 1.000000]"
+
+	//---- Translucency ----
+	TextureTranslucency "materials/particle/targeting/aoe_danger_trans.png"
+}

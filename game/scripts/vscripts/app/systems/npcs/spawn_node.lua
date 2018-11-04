@@ -19,7 +19,7 @@ SpawnNode = SpawnNode or class({
 function SpawnNode:constructor(key, params)
     self.spawn_name = key
     self.Spawns = {}
-    
+
     TableMerge(self, params)
     self.SpawnPoints = Split(self.SpawnPoints)
     self.RoamPath = Split(self.RoamPath)
@@ -60,7 +60,7 @@ function SpawnNode:OnDeath(spawn)
         for k,v in ipairs(self.Spawns) do
             if spawn == v then
                 table.remove(self.Spawns, k)
-                break;
+                break
             end
         end
     end)

@@ -1,6 +1,8 @@
 ai_webbed_queen = ai_webbed_queen or class({}, nil, ai_core)
 local ai = ai_webbed_queen
-AiMixin(ai)
+if IsServer() then
+    AiMixin(ai)
+end
 
 function ai:DeclareFunctions()
     return {
@@ -10,6 +12,8 @@ function ai:DeclareFunctions()
         --MODIFIER_PROPERTY_HEALTH_REGEN_PERCENTAGE,
     }
 end
+
+print('test -- script is reloading')
 
 -- ai.STATE_IDLE = 0
 -- ai.STATE_AGGRO = 10
@@ -111,6 +115,7 @@ end
 function ai:StartFight()
     Debug('AiWebbedQueen', 'Starting fight state.')
     self.state = ai.ACTION_FIGHT_STANDARD
+
     --Encounter:Start(self:GetParent(), self.aggroTarget)
 
     self:AnimatedFace(self.aggroTarget, function()
@@ -349,23 +354,190 @@ function volly(args)
     end
 end
 
+function BossMechanic(params)
+
+end
+
+function ai:MakeLine(length, width, duration, targetPoint)
+    local sPart = 'particles/targeting/thick_line.vpcf'
+    local idx = ParticleManager:CreateParticle(sPart, PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
+
+    -- Should clamp to max distance of particle
+    local diff = targetPoint - self:GetParent():GetAbsOrigin()
+    local toPoint = self:GetParent():GetAbsOrigin() + diff:Normalized() * length
+    ParticleManager:SetParticleControl(idx, 1, toPoint)
+
+    -- Width
+    ParticleManager:SetParticleControl(idx, 2, Vector(width, 0, 0))
+    Timers(duration, function()
+        ParticleManager:DestroyParticle(idx, false)
+        ParticleManager:ReleaseParticleIndex(idx)
+    end)
+end
 
 function ai:ActionPoison()
-    if self.timeInState == 1 then
-        print('Lets do something interesting...')
+    -- DEMO every 1 second in 12, triple spray at once.
+    if self.timeInState % 15 == 1 then
+        print('[Action] Triple Poison')
+        self:GetParent():FaceTowards(self.aggroTarget:GetAbsOrigin())
+
+        -- Create Particle For Everyone
+        local targetPoint = self.aggroTarget:GetAbsOrigin()
+        self:MakeLine(1600, 120, 3.2, targetPoint)
+
+        Timers(2.0, function()
+            for i = 0, 2, 1 do
+                Projectile({
+                    owner = self:GetParent(),
+                    target = self.aggroTarget,
+                    targetPoint = targetPoint,
+                    speed = 1000 + 400 * i,
+                    distance = 800 + 400 * i,
+                    damage = 1000,
+
+                    graphics = "particles/testing/venomancer_venomous_gale_concept.vpcf",
+                    onHit = function(projectile, target)
+                        ApplyDamage({
+                            victim = target,
+                            attacker = self:GetParent(),
+                            damage = 1000,
+                            damage_type = DAMAGE_TYPE_PURE
+                        })
+                    end
+                }):Activate()
+            end
+        end)
+    end
+
+    -- DEMO every 5 second in 12, single huge blast
+    if self.timeInState % 15 == 5 then
+        print('[Action] Huge Blast')
+        self:GetParent():FaceTowards(self.aggroTarget:GetAbsOrigin())
+
+        -- Create Particle For Everyone
+        local targetPoint = self.aggroTarget:GetAbsOrigin()
+        self:MakeLine(2000, 180, 5, targetPoint)
+
+        Timers(1.0, function()
+            Projectile({
+                owner = self:GetParent(),
+                target = self.aggroTarget,
+                targetPoint = targetPoint,
+                speed = 600,
+                distance = 2000,
+                width = 220,
+                constantDamage = true,
+                graphics = "particles/testing/bad_ancient_ambient_test.vpcf",
+                onHit = function(projectile, target)
+                    ApplyDamage({
+                        victim = target,
+                        attacker = self:GetParent(),
+                        damage = 1000,
+                        damage_type = DAMAGE_TYPE_PURE
+                    })
+                end
+            }):Activate()
+        end)
+    end
+
+    -- DEMO every 9 second in 12, multiple small in sequence.
+    if self.timeInState % 15 == 9 then
+        print('[Action] Multiple Small')
+        self:GetParent():FaceTowards(self.aggroTarget:GetAbsOrigin())
+
+        local distance = 1200
+
+        -- Create Particle For Everyone
+        for i = 0, 9, 1 do
+            Timers(i * 0.4, function()
+                local targetPoint = self.aggroTarget:GetAbsOrigin()
+                self:MakeLine(1600, 40, 2, targetPoint)
+                Timers(1.5, function()
+                    Projectile({
+                        owner = self:GetParent(),
+                        target = self.aggroTarget,
+                        targetPoint = targetPoint,
+                        speed = 2400,
+                        distance = 1600,
+                        damage = 500,
+
+                        graphics = "particles/testing/energized_attack_concept.vpcf",
+                        onHit = function(projectile, target)
+                            ApplyDamage({
+                                victim = target,
+                                attacker = self:GetParent(),
+                                damage = 800,
+                                damage_type = DAMAGE_TYPE_PURE
+                            })
+                        end
+                    }):Activate()
+                end)
+            end)
+        end
+    end
+end
+
+function ai:PreDemoActionPoison()
+    --if self.timeInState == 1 then
+    if self.timeInState % 4 == 1 then
+        print('[Action] Poison')
         -- self:GetParent():Stop()
+
+        self:GetParent():FaceTowards(self.aggroTarget:GetAbsOrigin())
+
+        -- Create Particle For Everyone
+        local sPart = 'particles/targeting/thick_line.vpcf'
+        local idx = ParticleManager:CreateParticle(sPart, PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
+
+        -- Should clamp to max distance of particle
+        local targetPoint = self.aggroTarget:GetAbsOrigin()
+        local diff = targetPoint - self:GetParent():GetAbsOrigin()
+        local toPoint = self:GetParent():GetAbsOrigin() + diff:Normalized() * 1600
+        ParticleManager:SetParticleControl(idx, 1, toPoint)
+
+        -- Width
+        ParticleManager:SetParticleControl(idx, 2, Vector(120, 0, 0))
+        Timers(2.0, function()
+            Timers(1.2, function()
+                ParticleManager:DestroyParticle(idx, false)
+                ParticleManager:ReleaseParticleIndex(idx)
+            end)
+
+            for i = 0, 2, 1 do
+                Projectile({
+                    owner = self:GetParent(),
+                    target = self.aggroTarget,
+                    targetPoint = toPoint,
+                    speed = 1000 + 400 * i,
+                    distance = 1600,
+                    damage = 300,
+
+                    graphics = "particles/testing/venomancer_venomous_gale_concept.vpcf",
+                    onHit = function(projectile, target)
+                        ApplyDamage({
+                            victim = target,
+                            attacker = self:GetParent(),
+                            damage = 1000,
+                            damage_type = DAMAGE_TYPE_PURE
+                        })
+                    end
+                }):Activate()
+            end
+
+            -- self.pAbility:EndCooldown()
+            -- self:GetParent():CastAbilityOnTarget(self.aggroTarget, self.pAbility, -1)
+        end)
 
         --self.aggroTarget:FaceTowards(self:GetParent():GetAbsOrigin())
         --self:GetParent():FaceTowards(self.aggroTarget:GetAbsOrigin())
-        self:GetParent():CastAbilityOnTarget(self.aggroTarget, self.pAbility, -1)
-        Timers(1.00, function()
-            self.pAbility:EndCooldown()
-            self:GetParent():CastAbilityOnTarget(self.aggroTarget, self.pAbility, -1)
-        end)
-        Timers(2.0, function()
-            self.pAbility:EndCooldown()
-            self:GetParent():CastAbilityOnTarget(self.aggroTarget, self.pAbility, -1)
-        end)
+--        Timers(1.00, function()
+--            self.pAbility:EndCooldown()
+--            self:GetParent():CastAbilityOnTarget(self.aggroTarget, self.pAbility, -1)
+--        end)
+--        Timers(2.0, function()
+--            self.pAbility:EndCooldown()
+--            self:GetParent():CastAbilityOnTarget(self.aggroTarget, self.pAbility, -1)
+--        end)
 
         --ExecuteOrderFromTable({
         --    UnitIndex = self:GetParent():entindex(),
@@ -376,6 +548,7 @@ function ai:ActionPoison()
 
     end
 end
+
 function ai:xActionPoison()
     print('Time to poison:', self.timeInState)
 
@@ -429,7 +602,8 @@ end
 function ai:ActionFightStandard()
 
     -- After 5 seconds, do a thing.
-    if self.timeInState >= 9 then
+    -- if self.timeInState >= 9 then
+    if self.timeInState >= 1 then
         self:TransitionToPoison()
         return true
     end

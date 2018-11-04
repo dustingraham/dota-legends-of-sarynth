@@ -1,4 +1,4 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:vpcf10:version{b5ef673d-0450-4fb0-a91b-bacae6864827} -->
 {
 	_class = "CParticleSystemDefinition"
 	m_bShouldHitboxesFallbackToRenderBounds = false
@@ -11,6 +11,7 @@
 			_class = "C_OP_RenderSprites"
 			m_nSequenceCombineMode = "SEQUENCE_COMBINE_MODE_USE_SEQUENCE_0"
 			m_hTexture = resource:"materials/particle/smoke/static/static_smoke.vtex"
+			m_nOrientationType = 2
 		},
 	]
 	m_Operators = 
@@ -42,20 +43,12 @@
 	m_Initializers = 
 	[
 		{
-			_class = "C_INIT_RandomRadius"
-			m_flRadiusMax = 150.0
-			m_flRadiusMin = 75.0
-		},
-		{
 			_class = "C_INIT_RandomLifeTime"
 			m_fLifetimeMin = 1.5
 			m_fLifetimeMax = 2.0
 		},
 		{
 			_class = "C_INIT_RandomRotation"
-		},
-		{
-			_class = "C_INIT_RandomYawFlip"
 		},
 		{
 			_class = "C_INIT_RandomRotationSpeed"
@@ -66,11 +59,6 @@
 			_class = "C_INIT_CreateWithinSphere"
 			m_vecDistanceBias = [ 1.0, 1.0, 0.0 ]
 			m_fRadiusMax = 75.0
-		},
-		{
-			_class = "C_INIT_PositionPlaceOnGround"
-			m_flOffset = 3.0
-			m_CollisionGroupName = "DEBRIS"
 		},
 		{
 			_class = "C_INIT_RandomColor"
@@ -84,17 +72,24 @@
 			m_nAlphaMax = 200
 		},
 		{
+			_class = "C_INIT_RandomYawFlip"
+		},
+		{
+			_class = "C_INIT_PositionPlaceOnGround"
+			m_flOffset = 3.0
+			m_CollisionGroupName = "DEBRIS"
+		},
+		{
 			_class = "C_INIT_PositionOffset"
 			m_OffsetMax = [ 0.0, 0.0, 40.0 ]
 		},
 		{
-			_class = "C_INIT_DistanceToCPInit"
-			m_bScaleInitialRange = true
-			m_flOutputMax = 0.25
-			m_flOutputMin = 1.0
-			m_nFieldOutput = 7
-			m_flInputMax = 250.0
-			m_flInputMin = 150.0
+			_class = "C_INIT_RemapCPtoScalar"
+			m_nCPInput = 1
+			m_flInputMin = 20.0
+			m_flInputMax = 2000.0
+			m_flOutputMin = 20.0
+			m_flOutputMax = 2000.0
 		},
 	]
 	m_Emitters = 
@@ -119,4 +114,6 @@
 			]
 		},
 	]
+	m_nBehaviorVersion = 6
+	m_nFirstMultipleOverride_BackwardCompat = 7
 }

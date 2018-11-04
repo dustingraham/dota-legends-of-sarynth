@@ -131,6 +131,7 @@ function ai:OnDeath(event)
         entity
         )
         ParticleManager:SetParticleControl( noxiousParticle, 0, position )
+        ParticleManager:SetParticleControl( noxiousParticle, 1, Vector(150, 0, 0))
         --ParticleManager:ReleaseParticleIndex(particle)
 
         -- Death Splat

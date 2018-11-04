@@ -1,0 +1,12 @@
+// THIS FILE IS AUTO-GENERATED
+
+Layer0
+{
+	shader "projected_dota.vfx"
+
+	//---- Color ----
+	TextureColor "materials/particle/targeting/thick_line.png"
+
+	//---- Translucency ----
+	TextureTranslucency "materials/default/default_trans.tga"
+}
