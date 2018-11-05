@@ -135,6 +135,12 @@
 .actionbar-button:hover {
     wash-color:#ffffff;
 }
+
+#ActionBarFocus {
+    margin-right:140px;
+    margin-bottom:12px;
+    padding-left:20px;
+}
 #ActionBarEquipment {
     margin-right:85px;
     margin-bottom:15px;
@@ -144,7 +150,8 @@
     margin-right:60px;
     margin-bottom:3px;
 }
-#ActionBarEquipmentHotkey {
+
+.ActionBarHotkey {
     color:#927561;
     border:1px solid #927561;
     border-radius:3px;

@@ -12,18 +12,31 @@ function WrapFunction(name) {
     };
 }
 
-Game.AddCommand("+CustomGameInventory", WrapFunction("CustomOnPressedInventory"), "", 0);
-Game.AddCommand("-CustomGameInventory", WrapFunction("CustomOnReleasedInventory"), "", 0);
+function CCKBind(key, funcName) {
+    Game.CreateCustomKeyBind(key, funcName);
+    Game.AddCommand(funcName, WrapFunction(funcName), '', 0);
+}
 
-Game.CreateCustomKeyBind('n', 'KeyInventoryToggle');
-Game.AddCommand('KeyInventoryToggle', WrapFunction('KeyInventoryToggle'), '', 0);
+CCKBind('n', 'KeyInventoryToggle');
+CCKBind('p', 'KeyFocusToggle');
 
+//CCKBind('j', 'KeySomethingToggle');
 
+// Game.CreateCustomKeyBind('n', 'KeyInventoryToggle');
+// Game.AddCommand('KeyInventoryToggle', WrapFunction('KeyInventoryToggle'), '', 0);
+//
+// Game.CreateCustomKeyBind('j', 'KeyFocusToggle');
+// Game.AddCommand('KeyFocusToggle', WrapFunction('KeyFocusToggle'), '', 0);
 
 // Game.CreateCustomKeyBind("h", "+npress");
 // Game.AddCommand( "+npress", function() {
 //     $.Msg("n up");
+//     $.Msg('alt: ', GameUI.IsAltDown());
 // }, "", 0 );
 // Game.AddCommand( "-npress", function() {
 //     $.Msg("n down");
+//     $.Msg('alt: ', GameUI.IsAltDown());
 // }, "", 0 );
+
+// Game.AddCommand("+CustomGameInventory", WrapFunction("CustomOnPressedInventory"), "", 0);
+// Game.AddCommand("-CustomGameInventory", WrapFunction("CustomOnReleasedInventory"), "", 0);

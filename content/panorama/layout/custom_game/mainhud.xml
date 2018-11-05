@@ -125,7 +125,12 @@
             </Panel>
             <Button id="ActionBarEquipment" class="actionbar-button" onactivate="Game.KeyInventoryToggle()">
                 <Image src="file://{images}/actionbar1/action_bar_button_equipment.png" />
-                <Label id="ActionBarEquipmentHotkey" class="" text="N"/>
+                <Label id="ActionBarEquipmentHotkey" class="ActionBarHotkey" text="N"/>
+            </Button>
+            <Button id="ActionBarFocus" class="actionbar-button" onactivate="Game.KeyFocusToggle()">
+                <Image id="ActionBarFocusOff" src="file://{images}/actionbar1/action_bar_focus_target_off.png" />
+                <Image id="ActionBarFocusOn" src="file://{images}/actionbar1/action_bar_focus_target.png" />
+                <Label id="ActionBarFocusHotkey" class="ActionBarHotkey" text="P"/>
             </Button>
             <!--<Button id="ActionBarBackpack" class="hide actionbar-button" onactivate="ActionBarButton('customInventory')">-->
                 <!--<Image src="file://{images}/actionbar1/action_bar_button_backpack.png" />-->
@@ -145,13 +150,6 @@
                 <Panel id="QuestBlocks" class="quest-progress-blocks" />
             </Panel>
             <Image class="quest-progress-bot-bar" src="file://{images}/quest/quest-bar-bot.png" />
-        </Panel>
-        
-        <Panel id="ToggleFocusTarget" class="on">
-            <Image class="toggle-focus-target on" src="file://{images}/settings/focus_target_toggle_on.png" />
-            <Image class="toggle-focus-target on hover" src="file://{images}/settings/focus_target_toggle_on_hover.png" />
-            <Image class="toggle-focus-target off" src="file://{images}/settings/focus_target_toggle_off.png" />
-            <Image class="toggle-focus-target off hover" src="file://{images}/settings/focus_target_toggle_off_hover.png" />
         </Panel>
         
         <!-- To become a snippet -->
