@@ -1,3 +1,8 @@
+# GH Pages
+.bundle/
+_site/
+vendor/
+
 # Cache crap that Valve autogenerates
 *.bin
 
