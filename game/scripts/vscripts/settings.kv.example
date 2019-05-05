@@ -1,7 +1,0 @@
-"Settings"
-{
-    "host" "http://www.url.com"
-    "host_dev" "http://url.dev"
-
-    "key" "key"
-}
